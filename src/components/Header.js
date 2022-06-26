@@ -4,16 +4,17 @@ import { FcComments } from "react-icons/fc";
 
 const Header = () =>{
   return(
-    <div className='Header_container'>
+    <nav className='Header'>
+      <div className='Header_logo'>
+        <a href="##" > LOGO</a> 
+      </div>
 
-    <div className='Header_LOGO'>LOGO</div>
-
-    <div className='Header_Right_container'>
-      <div className='Header_profile'></div>
-      nickname <FcComments className='Header_icon'></FcComments>
-    </div>
-
-    </div>
+      <ul className='Header_right'>
+        <li className='Header_profile'></li>
+        <li>닉네임</li>
+        <div className='Header_icon'><FcComments></FcComments></div>
+      </ul>
+    </nav>
   )
 }
 

@@ -4,33 +4,64 @@ body{
   margin: 0px;
 }
 
-.Header_container{
-  border: 1px solid black;
-  height: 60px;
-  max-width: 100%;  
+.Header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e8eaf6;
+}
+
+.Header_logo{
+  margin-left: 20px;
+}
+
+.Header_logo > a {
+  text-decoration: none;
+  color: black;
+  padding: 8px 12px;
+  font-size: 30px;
+}
+
+.Header_right > li {
+  padding: 8px 12px;
+  font-size: 25px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+}
+
+.Header_right{
+  display: flex;
+  list-style: none;
+  margin-right: 30px;
 }
 
 .Header_profile{
-  border-radius: 50%;
-  width:50px;
-  height: 50px;
   border: 1px solid black;
-  margin-right: 15px;
-}
-
-.Header_Right_container{
-  display: flex;
-  align-items: center;
-}
-
-.Header_LOGO{
-  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .Header_icon{
   font-size: 40px;
-  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+ /* 헤더바 모바일 처리 */
+@media screen and (max-width:768px){
+  .Header_logo{
+    margin:0px;
+  }
+
+  .Header_right{
+    margin: 0px;
+  }
+
+  .Header_profile{
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
 }
