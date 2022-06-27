@@ -117,7 +117,7 @@ const LoginTitle = styled.h1`
 const SocialLogin = styled.a`
   border-radius: 4px;
   display: inline-flex;
-  color: ##22211a;
+  color: #22211a;
   width: 60%;
   height: 30px;
   background-color: #fee501;
@@ -191,15 +191,7 @@ const FormGroup = styled.div`
   }
 `
 
-const FindPassword = styled.a`
-  color: #767676;
-  transition: color 0.1s ease-in-out, fill 0.1s ease-in-out, opacity 0.1s ease-in-out;
-  text-decoration: underline;
 
-  &:hover {
-    color: #111111;
-  }
-`
 
 const LoginBtn = styled.button`
   height: 44px;
@@ -222,10 +214,7 @@ const LoginBtn = styled.button`
   }
 `
 
-const Question = styled.p`
-  display: inline-block;
-  margin: 0;
-`
+
 
 const JoinLink = styled.a`
   color: #767676;

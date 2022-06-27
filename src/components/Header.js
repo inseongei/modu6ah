@@ -1,5 +1,5 @@
 import React from 'react'
-import '../App.css'
+import '../shared/App.css'
 import { FcComments } from "react-icons/fc"; 
 import styled from 'styled-components';
 

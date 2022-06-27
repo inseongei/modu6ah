@@ -1,7 +1,7 @@
 import React from 'react'
 import SimpleImageSlider from "react-simple-image-slider";
 import styled from 'styled-components';
-import '../../App.css'
+import '../../shared/App.css'
 
 const Swiper = () => {
     const imageData =[
