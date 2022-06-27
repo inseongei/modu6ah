@@ -20,7 +20,7 @@ const Header = () =>{
 }
 
 
-// Header 컴포넌의 스타일 코드 
+// Header 컴포넌트의 스타일 코드 
 const HeaderNav = styled.nav`
   display: flex;
   justify-content: space-between;

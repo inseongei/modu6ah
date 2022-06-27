@@ -1,5 +1,6 @@
 import React from 'react'
 import SimpleImageSlider from "react-simple-image-slider";
+import styled from 'styled-components';
 import '../../App.css'
 
 const Swiper = () => {
@@ -11,7 +12,7 @@ const Swiper = () => {
 
 
   return (
-  <div className='IMGS'>
+  <IMGS>
     <SimpleImageSlider
         width={'100%'}
         height={'35%'}
@@ -20,11 +21,17 @@ const Swiper = () => {
         autoPlay={true}
         autoPlayDelay={3.0}
       />
-  </div>
+  </IMGS>
 
   )
 
 }
 
+
+const IMGS = styled.div`
+    @media screen and (max-width:768px){
+      margin-top: 83px;
+  }
+`
 
 export default Swiper
