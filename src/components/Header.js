@@ -12,7 +12,7 @@ const Header = () =>{
 
       <HeaderRight>
         <Profile></Profile>
-        <Li>닉네임</Li>
+        <Li>로그인</Li>
         <HeaderIcon><FcComments></FcComments></HeaderIcon>
       </HeaderRight>
     </HeaderNav>
@@ -25,11 +25,11 @@ const HeaderNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e8eaf6;
+  background-color: #fffde7;
 
   @media screen and (max-width:768px){
     padding:10px;
-    background-color: #e8eaf6;
+    background-color: #fffde7;
   }
 `
 
