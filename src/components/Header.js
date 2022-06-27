@@ -26,6 +26,11 @@ const HeaderNav = styled.nav`
   justify-content: space-between;
   align-items: center;
   background-color: #e8eaf6;
+
+  @media screen and (max-width:768px){
+    padding:10px;
+    background-color: #e8eaf6;
+  }
 `
 
 const HeaderLogo = styled.div`
