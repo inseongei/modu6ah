@@ -4,7 +4,7 @@ import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 
-function SignUp() {
+function LogIn() {
   const navigate = useNavigate();
 
   return (
@@ -12,10 +12,10 @@ function SignUp() {
       <Grid height="100vh" overflowY="hidden">
         <Grid maxWidth="1320px" height="100%" margin="0 auto" padding="0 12px">
           <Container>
-            <Grid height="590px">
+            <Grid height="550px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
-                  <LoginTitle>SignUp</LoginTitle>
+                  <LoginTitle>Login</LoginTitle>
                 </Grid>
                 <form>
                     <FormGroup>
@@ -32,22 +32,7 @@ function SignUp() {
                       </Grid>
                     </FormGroup>
                     <FormGroup>
-                    <Grid margin="0 -32px; 0">
-                        <label className='form-label'>닉네임</label>
-                        </Grid>
-                      <Grid margin="0 20% 0">
-                      <input
-                        className="form-input"
-                        type="password"
-                        name="password"
-                        placeholder="닉네임을 입력하세요"
-                        maxLength="20"
-                        required
-                      ></input>
-                      </Grid>
-                      </FormGroup>
-                      <FormGroup>
-                      <Grid margin="0 -25px; 0">
+                    <Grid margin="0 -25px; 0">
                         <label className='form-label'>비밀번호</label>
                         </Grid>
                       <Grid margin="0 20% 0">
@@ -60,27 +45,31 @@ function SignUp() {
                         required
                       ></input>
                       </Grid>
-                      </FormGroup>
-                      <FormGroup>
-                      <Grid margin="0 -10px; 0">
-                        <label className='form-label'>비밀번호 체크</label>
-                        </Grid>
-                      <Grid margin="0 20% 0">
-                      <input
-                        className="form-input"
-                        type="password"
-                        name="password"
-                        placeholder="비밀번호를 한 번 더 입력하세요"
-                        maxLength="20"
-                        required
-                      ></input>
-                      </Grid>
                     </FormGroup>
                     <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
                       <LoginBtn type='submit'>
-                        회원가입
+                        로그인
                       </LoginBtn>
+                      </Grid>
+                      <Grid height="auto">
+                        <FormSeperator>OR</FormSeperator>
+                      </Grid>
+                      <Grid margin="32px 0 0 0" height="auto" align="center">
+                        <SocialLogin
+                          onClick={() => {
+                            window.location.href = "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A8080%252Fuser%252Fsignin%252Fkakao%26client_id%3D366bf4df105f7d1fb0c91cb6b4faeba0"
+                          }} >
+                          <RiKakaoTalkFill size="30" />
+                          <p>Login with KakaoTalk</p>
+                        </SocialLogin>
+                      </Grid>
+                     
+                      <Grid margin="42px 0 0 0" height="auto" align="center">
+                        <JoinLink>아이디 찾기 | &nbsp;</JoinLink>
+                        <JoinLink>비밀번호 찾기 | &nbsp;</JoinLink>
+                        <JoinLink onClick={() => 
+                          { navigate(`/signup`) }}>회원가입 &nbsp;</JoinLink>
                       </Grid>
                     </Grid>
                 </form>
@@ -248,4 +237,4 @@ const JoinLink = styled.a`
   }
 `
 
-export default SignUp;
+export default LogIn;
