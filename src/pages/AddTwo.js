@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Add2() {
+function AddTwo() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function Add2() {
   )
 }
 
-export default Add2
+export default AddTwo
