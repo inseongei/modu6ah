@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import axios from "axios"
 
-
-
 function LogIn() {
   const [email, setEmail] = useState("");
   
