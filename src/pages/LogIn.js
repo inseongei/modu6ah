@@ -4,10 +4,8 @@ import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { actionCreators as userActions} from "../redux/modules/user";
+// import { actionCreators as userActions} from "../redux/modules/user";
 import axios from "axios"
-
-
 
 function LogIn() {
   const [email, setEmail] = useState("");
