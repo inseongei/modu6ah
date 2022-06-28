@@ -1,11 +1,52 @@
-import React from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions} from "../redux/modules/user";
+import axios from "axios"
+
+
 
 function LogIn() {
+  const [email, setEmail] = useState("");
+  
   const navigate = useNavigate();
+
+  const email_ref = useRef(null);
+  const pw_ref = useRef(null);
+
+  const REST_API_KEY = "c5bc309928f794ef2cd0c4dde718d8e5"
+  const REDIRECT_URI = "https://localhost:3000/kakao"
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+  // const dispatch = useDispatch();
+
+  // const href = window.location.href;
+  // let params = new URL(document.URL).searchParams;
+  // let code = params.get("code");
+
+  // useEffect(async () => {
+  //     await dispatch(userActions.kakaoLogin(code));
+  // }, []);
+
+const login = (email, password) => {
+	const data = {
+		"email": email_ref.current.value,
+		"password": pw_ref.current.value
+	};
+	axios.post('http://localhost:5001/user', data)
+  .then(response => {
+		const { accessToken } = response.data;
+    // window.alert(`${email}님 환영합니다!`)
+		axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    navigate('/');
+	}).catch(error => {
+		alert("로그인을 다시 해주세요")
+      console.log(error.message);
+	});
+}
 
   return (
     <>
@@ -24,6 +65,7 @@ function LogIn() {
                       </Grid>
                       <Grid margin="0 20% 0">
                       <input
+                       ref={email_ref}
                         className='form-input'
                         name="userEmail"
                         placeholder="이메일을 입력하세요"
@@ -37,6 +79,7 @@ function LogIn() {
                         </Grid>
                       <Grid margin="0 20% 0">
                       <input
+                        ref={pw_ref}
                         className="form-input"
                         type="password"
                         name="password"
@@ -48,7 +91,9 @@ function LogIn() {
                     </FormGroup>
                     <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
-                      <LoginBtn type='submit'>
+                      <LoginBtn 
+                       onClick={login}
+                      type='submit'>
                         로그인
                       </LoginBtn>
                       </Grid>
@@ -57,9 +102,7 @@ function LogIn() {
                       </Grid>
                       <Grid margin="32px 0 0 0" height="auto" align="center">
                         <SocialLogin
-                          onClick={() => {
-                            window.location.href = "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A8080%252Fuser%252Fsignin%252Fkakao%26client_id%3D366bf4df105f7d1fb0c91cb6b4faeba0"
-                          }} >
+                          a href='https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Flocalhost%253A3000%252Fkakao%26client_id%3Dc5bc309928f794ef2cd0c4dde718d8e5'>
                           <RiKakaoTalkFill size="30" />
                           <p>Login with KakaoTalk</p>
                         </SocialLogin>
