@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Add() {
+function AddOne() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function Add() {
   )
 }
 
-export default Add
+export default AddOne;
