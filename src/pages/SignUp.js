@@ -1,11 +1,35 @@
-import React from 'react'
+import React,{useRef} from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function SignUp() {
+  const email_ref = useRef(null)
+    const nickname_ref = useRef(null)
+    const pw_ref =useRef(null)
+    const pwcheck_ref = useRef(null)
   const navigate = useNavigate();
+
+  const logout = () => {
+    axios.post("http://localhost:5001/user", {
+        "email": email_ref.current.value,
+        "nickname": nickname_ref.current.value,
+        "password": pw_ref.current.value,
+        "passwordCheck": pwcheck_ref.current.value
+    }).then(function (response) {
+        alert("회원가입을 축하합니다!")
+        navigate('/');
+        console.log(response)
+    })
+        .catch(function (error) {
+            alert("회원가입을 다시해주세요")
+            console.log(error);
+            console.log(error.response.data.errorMessage)
+        })
+}
+  
 
   return (
     <>
@@ -24,6 +48,7 @@ function SignUp() {
                       </Grid>
                       <Grid margin="0 20% 0">
                       <input
+                      ref={email_ref}
                         className='form-input'
                         name="userEmail"
                         placeholder="이메일을 입력하세요"
@@ -37,9 +62,9 @@ function SignUp() {
                         </Grid>
                       <Grid margin="0 20% 0">
                       <input
+                      ref={nickname_ref}
                         className="form-input"
-                        type="password"
-                        name="password"
+                        name="nickname"
                         placeholder="닉네임을 입력하세요"
                         maxLength="20"
                         required
@@ -52,6 +77,7 @@ function SignUp() {
                         </Grid>
                       <Grid margin="0 20% 0">
                       <input
+                      ref={pw_ref}
                         className="form-input"
                         type="password"
                         name="password"
@@ -67,6 +93,7 @@ function SignUp() {
                         </Grid>
                       <Grid margin="0 20% 0">
                       <input
+                      ref={pwcheck_ref}
                         className="form-input"
                         type="password"
                         name="password"
@@ -78,7 +105,9 @@ function SignUp() {
                     </FormGroup>
                     <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
-                      <LoginBtn type='submit'>
+                      <LoginBtn 
+                      onClick={logout}
+                      type='submit'>
                         회원가입
                       </LoginBtn>
                       </Grid>
