@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import DetailOne from '../pages/DetailOne';
 
 // pages
 import Main from "../pages/Main";
@@ -35,7 +36,7 @@ function App() {
       <Route  path="/manager" element={< ProfileManager />} />
       <Route  path="/bookmark" element={< BookMark />} />
       <Route  path="/chatlist" element={< ChatList />} />
-      <Route  path="/mainchat" element={< MainChat />} />
+      <Route  path="/mainchat" element={< MainChat />} /> */}
     </Routes>
     </>
   );

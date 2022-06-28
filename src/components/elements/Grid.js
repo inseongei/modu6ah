@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Grid = (props) => {
-  const { position, children, flex, align, width, padding, margin, _onClick, bg, height, overflowY, verticalAlign, alignItems, maxWidth, flexDirection, justifyContent, borderBottom, gap, overflowX } =
+  const { position, children, flex, align, width, padding, margin,bg, height, overflowY, verticalAlign, alignItems, maxWidth, flexDirection, justifyContent, borderBottom, gap, overflowX } =
     props
   const styles = {
     flex: flex,
