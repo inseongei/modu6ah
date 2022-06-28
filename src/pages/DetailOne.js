@@ -107,15 +107,4 @@ const Detail = styled.div`
 }
 `
 
-
-
-
-
-
-
-
-
-
-
-
-export default DetailOne
+export default DetailOne;
