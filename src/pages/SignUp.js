@@ -1,6 +1,7 @@
 import React,{useRef} from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
+
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
@@ -154,40 +155,6 @@ const LoginTitle = styled.h1`
   margin: 0 0 8px 0;
 `
 
-const SocialLogin = styled.a`
-  border-radius: 4px;
-  display: inline-flex;
-  color: ##22211a;
-  width: 60%;
-  height: 30px;
-  background-color: #fee501;
-  justify-content: center;
-  align-items: center;
-  padding: 9px 0;
-  font-weight: 500;
-  border: 1px solid transparent;
-  cursor: pointer;
-
-
-  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
-
-  svg {
-    margin-right: 8px;
-  }
-
-  &:hover {
-    background-color: #ffdd00;
-  }
-`
-
-const FormSeperator = styled.p`
-  display: block;
-  margin: auto;
-  font-size: 12px;
-  text-transform: uppercase;
-  text-align: center;
-  margin: 24px 0;
-`
 
 const FormGroup = styled.div`
   margin-bottom: 24px;
@@ -231,15 +198,6 @@ const FormGroup = styled.div`
   }
 `
 
-const FindPassword = styled.a`
-  color: #767676;
-  transition: color 0.1s ease-in-out, fill 0.1s ease-in-out, opacity 0.1s ease-in-out;
-  text-decoration: underline;
-
-  &:hover {
-    color: #111111;
-  }
-`
 
 const LoginBtn = styled.button`
   height: 44px;
@@ -262,19 +220,5 @@ const LoginBtn = styled.button`
   }
 `
 
-const Question = styled.p`
-  display: inline-block;
-  margin: 0;
-`
-
-const JoinLink = styled.a`
-  color: #767676;
-  transition: color 0.1s ease-in-out, fill 0.1s ease-in-out, opacity 0.1s ease-in-out;
-  cursor: pointer;
-
-  &:hover {
-    color: #111111;
-  }
-`
 
 export default SignUp;
