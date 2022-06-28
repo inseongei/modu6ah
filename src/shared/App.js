@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import DetailOne from '../pages/DetailOne';
 
 // pages
 import Main from "../pages/Main";
@@ -22,7 +21,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route  path="/" element={< DetailOne/>} />
+    <Route  path="/" element={< Main />} />
       <Route  path="/login" element={< LogIn />} />
       <Route  path="/signup" element={< SignUp />} />     
       <Route  path="/recruit" element={< Recruit />} /> 
@@ -36,7 +35,7 @@ function App() {
       <Route  path="/manager" element={< ProfileManager />} />
       <Route  path="/bookmark" element={< BookMark />} />
       <Route  path="/chatlist" element={< ChatList />} />
-      <Route  path="/mainchat" element={< MainChat />} /> */}
+      <Route  path="/mainchat" element={< MainChat />} /> 
     </Routes>
     </>
   );
