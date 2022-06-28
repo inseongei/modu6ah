@@ -4,7 +4,6 @@ import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { actionCreators as userActions} from "../redux/modules/user";
 import axios from "axios"
 
 
@@ -17,25 +16,15 @@ function LogIn() {
   const email_ref = useRef(null);
   const pw_ref = useRef(null);
 
-  const REST_API_KEY = "c5bc309928f794ef2cd0c4dde718d8e5"
-  const REDIRECT_URI = "https://localhost:3000/kakao"
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const KEY = "	acfa8f0aa39ce35a812be07e604dabed"
 
-  // const dispatch = useDispatch();
-
-  // const href = window.location.href;
-  // let params = new URL(document.URL).searchParams;
-  // let code = params.get("code");
-
-  // useEffect(async () => {
-  //     await dispatch(userActions.kakaoLogin(code));
-  // }, []);
 
 const login = (email, password) => {
 	const data = {
 		"email": email_ref.current.value,
 		"password": pw_ref.current.value
 	};
+
 	axios.post('http://localhost:5001/user', data)
   .then(response => {
 		const { accessToken } = response.data;
