@@ -29,6 +29,7 @@ function SignUp() {
             console.log(error.message)
         })
 }
+
   return (
     <>
       <Grid height="100vh" overflowY="hidden">
@@ -62,8 +63,7 @@ function SignUp() {
                       ref={nickname_ref}
                         className="form-input"
                         placeholder="닉네임을 입력하세요"
-                        maxLength="20"
-                        required
+                        maxLength="20"                      
                       ></input>
                       </Grid>
                       </FormGroup>
@@ -77,8 +77,7 @@ function SignUp() {
                         className="form-input"
                         type="password"
                         placeholder="비밀번호를 입력하세요"
-                        maxLength="20"
-                        required
+                        maxLength="20"   
                       ></input>
                       </Grid>
                       </FormGroup>
@@ -92,16 +91,13 @@ function SignUp() {
                         className="form-input"
                         type="password"
                         placeholder="비밀번호를 한 번 더 입력하세요"
-                        maxLength="20"
-                        required
+                        maxLength="20"                  
                       ></input>
                       </Grid>
                     </FormGroup>
                     <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
-                      <LoginBtn 
-                      onClick={logout}
-                      type='submit'>
+                      <LoginBtn onClick={SignupAxios} >
                         회원가입
                       </LoginBtn>
                       </Grid>

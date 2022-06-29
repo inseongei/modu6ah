@@ -4,10 +4,11 @@ import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-// import { actionCreators as userActions} from "../redux/modules/user";
 import axios from "axios"
+import Cookies from 'universal-cookie';
 
 function LogIn() {
+  const cookies = new Cookies();
   const [email, setEmail] = useState("");
   
   const navigate = useNavigate();
@@ -15,31 +16,23 @@ function LogIn() {
   const email_ref = useRef(null);
   const pw_ref = useRef(null);
 
-  const REST_API_KEY = "c5bc309928f794ef2cd0c4dde718d8e5"
-  const REDIRECT_URI = "https://localhost:3000/kakao"
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const CLIENT_ID = "f13a9cf57960a3a3400f0e425b8848f3";
+  const REDIRECT_URI =  "http://localhost:3000";
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
-  // const dispatch = useDispatch();
-
-  // const href = window.location.href;
-  // let params = new URL(document.URL).searchParams;
-  // let code = params.get("code");
-
-  // useEffect(async () => {
-  //     await dispatch(userActions.kakaoLogin(code));
-  // }, []);
 
 const login = (email, password) => {
 	const data = {
 		"email": email_ref.current.value,
 		"password": pw_ref.current.value
 	};
-	axios.post('http://localhost:5001/user', data)
+
+	axios.post('http://dlckdals04.shop/api/users/signin', data)
   .then(response => {
-		const { accessToken } = response.data;
-    // window.alert(`${email}님 환영합니다!`)
-		axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    navigate('/');
+    console.log(response)
+    // navigate('/')
+    // cookies.set('accessToken',response.data.accessToken)
+    alert('안녕')
 	}).catch(error => {
 		alert("로그인을 다시 해주세요")
       console.log(error.message);
@@ -56,7 +49,7 @@ const login = (email, password) => {
                 <Grid align="center" height="100px" margin="0 0 32 0">
                   <LoginTitle>Login</LoginTitle>
                 </Grid>
-                <form>
+                <div>
                     <FormGroup>
                     <Grid margin="0 -32px; 0">
                       <label className='form-label'>이메일</label>
@@ -99,8 +92,7 @@ const login = (email, password) => {
                         <FormSeperator>OR</FormSeperator>
                       </Grid>
                       <Grid margin="32px 0 0 0" height="auto" align="center">
-                        <SocialLogin
-                          a href='https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Flocalhost%253A3000%252Fkakao%26client_id%3Dc5bc309928f794ef2cd0c4dde718d8e5'>
+                        <SocialLogin href={KAKAO_AUTH_URL}>
                           <RiKakaoTalkFill size="30" />
                           <p>Login with KakaoTalk</p>
                         </SocialLogin>
@@ -113,7 +105,7 @@ const login = (email, password) => {
                           { navigate(`/signup`) }}>회원가입 &nbsp;</JoinLink>
                       </Grid>
                     </Grid>
-                </form>
+                </div>
               </Grid>
             </Grid>
           </Container>

@@ -2,8 +2,10 @@ import React from 'react'
 import '../shared/App.css'
 import { FcComments } from "react-icons/fc"; 
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () =>{
+  const navigate = useNavigate();
   return(
     <HeaderNav>
       <HeaderLogo>
@@ -12,7 +14,7 @@ const Header = () =>{
 
       <HeaderRight>
         <Profile></Profile>
-        <Li>로그인</Li>
+        <Li onClick={()=>{navigate('/Login')}}>로그인</Li>
         <HeaderIcon><FcComments></FcComments></HeaderIcon>
       </HeaderRight>
     </HeaderNav>
@@ -81,6 +83,7 @@ const Li = styled.li`
   font-size: 25px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `
 
 const HeaderIcon = styled.div`
