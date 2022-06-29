@@ -1,36 +1,33 @@
 import React,{useRef} from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
-
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 function SignUp() {
   const email_ref = useRef(null)
-    const nickname_ref = useRef(null)
-    const pw_ref =useRef(null)
-    const pwcheck_ref = useRef(null)
-  const navigate = useNavigate();
+  const nickname_ref = useRef(null)
+  const pw_ref =useRef(null)
+  const pwcheck_ref = useRef(null)
 
-  const logout = () => {
-    axios.post("http://localhost:5001/user", {
-        "email": email_ref.current.value,
-        "nickname": nickname_ref.current.value,
-        "password": pw_ref.current.value,
-        "passwordCheck": pwcheck_ref.current.value
-    }).then(function (response) {
-        alert("회원가입을 축하합니다!")
-        navigate('/');
-        console.log(response)
+
+const SignupAxios = () =>{
+
+  axios.post('http://dlckdals04.shop/api/users/signup',{
+    email: email_ref.current.value,
+    nickname: nickname_ref.current.value,
+    password: pw_ref.current.value,
+    passwordCheck: pwcheck_ref.current.value
+  }).then((response)=>{
+      alert('테스트')
+      console.log(response)
     })
-        .catch(function (error) {
-            alert("회원가입을 다시해주세요")
-            console.log(error);
-            console.log(error.response.data.errorMessage)
-        })
-}
-  
+    .catch((response)=>{
+      alert('테스트')
+      console.log(response)
+    })
+  }
 
   return (
     <>
@@ -42,7 +39,7 @@ function SignUp() {
                 <Grid align="center" height="100px" margin="0 0 32 0">
                   <LoginTitle>SignUp</LoginTitle>
                 </Grid>
-                <form>
+                <div>
                     <FormGroup>
                     <Grid margin="0 -32px; 0">
                       <label className='form-label'>이메일</label>
@@ -51,9 +48,7 @@ function SignUp() {
                       <input
                       ref={email_ref}
                         className='form-input'
-                        name="userEmail"
-                        placeholder="이메일을 입력하세요"
-                        required
+                        placeholder="이메일을 입력하세요"                      
                       ></input>
                       </Grid>
                     </FormGroup>
@@ -67,8 +62,7 @@ function SignUp() {
                         className="form-input"
                         name="nickname"
                         placeholder="닉네임을 입력하세요"
-                        maxLength="20"
-                        required
+                        maxLength="20"                      
                       ></input>
                       </Grid>
                       </FormGroup>
@@ -83,8 +77,7 @@ function SignUp() {
                         type="password"
                         name="password"
                         placeholder="비밀번호를 입력하세요"
-                        maxLength="20"
-                        required
+                        maxLength="20"   
                       ></input>
                       </Grid>
                       </FormGroup>
@@ -99,21 +92,18 @@ function SignUp() {
                         type="password"
                         name="password"
                         placeholder="비밀번호를 한 번 더 입력하세요"
-                        maxLength="20"
-                        required
+                        maxLength="20"                  
                       ></input>
                       </Grid>
                     </FormGroup>
                     <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
-                      <LoginBtn 
-                      onClick={logout}
-                      type='submit'>
+                      <LoginBtn onClick={SignupAxios} >
                         회원가입
                       </LoginBtn>
                       </Grid>
                     </Grid>
-                </form>
+                </div>
               </Grid>
             </Grid>
           </Container>

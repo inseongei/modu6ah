@@ -43,7 +43,9 @@ const Header = styled.div`
 
   li {
     padding:10px 15px 10px 15px;
-    color: #263238;
+    color: black;
+    font-weight:700;
+    background-color: #4db6ac;
     margin-right: 20px;
     border: 2px solid #26a69a;
     border-radius:15px;
@@ -82,8 +84,9 @@ const Header = styled.div`
       width: 100%;
       padding: 15px;
       text-align: center;
-      border: 2px solid #26a69a;
+      border: 2px solid #c8e6c9;
       border-radius: 0px;
+      background-color:#c8e6c9;
     }
 
     .toggle {
