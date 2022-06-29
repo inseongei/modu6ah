@@ -1,7 +1,6 @@
 import React,{useRef} from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
-
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
@@ -14,24 +13,22 @@ function SignUp() {
   const navigate = useNavigate();
 
   const logout = () => {
-    axios.post("http://localhost:5001/user", {
+    axios.post("http://dlckdals04.shop/api/users/signup", {
         "email": email_ref.current.value,
         "nickname": nickname_ref.current.value,
         "password": pw_ref.current.value,
-        "passwordCheck": pwcheck_ref.current.value
+        "passwordCheck": pwcheck_ref.current.value,
     }).then(function (response) {
         alert("회원가입을 축하합니다!")
         navigate('/');
-        console.log(response)
+        console.log(response) 
     })
         .catch(function (error) {
             alert("회원가입을 다시해주세요")
             console.log(error);
-            console.log(error.response.data.errorMessage)
+            console.log(error.message)
         })
 }
-  
-
   return (
     <>
       <Grid height="100vh" overflowY="hidden">
@@ -42,7 +39,7 @@ function SignUp() {
                 <Grid align="center" height="100px" margin="0 0 32 0">
                   <LoginTitle>SignUp</LoginTitle>
                 </Grid>
-                <form>
+                <div>
                     <FormGroup>
                     <Grid margin="0 -32px; 0">
                       <label className='form-label'>이메일</label>
@@ -51,7 +48,6 @@ function SignUp() {
                       <input
                       ref={email_ref}
                         className='form-input'
-                        name="userEmail"
                         placeholder="이메일을 입력하세요"
                         required
                       ></input>
@@ -65,7 +61,6 @@ function SignUp() {
                       <input
                       ref={nickname_ref}
                         className="form-input"
-                        name="nickname"
                         placeholder="닉네임을 입력하세요"
                         maxLength="20"
                         required
@@ -81,7 +76,6 @@ function SignUp() {
                       ref={pw_ref}
                         className="form-input"
                         type="password"
-                        name="password"
                         placeholder="비밀번호를 입력하세요"
                         maxLength="20"
                         required
@@ -97,7 +91,6 @@ function SignUp() {
                       ref={pwcheck_ref}
                         className="form-input"
                         type="password"
-                        name="password"
                         placeholder="비밀번호를 한 번 더 입력하세요"
                         maxLength="20"
                         required
@@ -113,7 +106,7 @@ function SignUp() {
                       </LoginBtn>
                       </Grid>
                     </Grid>
-                </form>
+                </div>
               </Grid>
             </Grid>
           </Container>
