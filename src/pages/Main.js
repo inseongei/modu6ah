@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import Grid from '../components/elements/Grid';
 import Header from '../components/Header'
 import Swiper from '../components/main/Swiper'
-import SCard from '../components/SCard'
-import LCard from '../components/LCard'
+import SCard from '../components/cards/SCard'
+import LCard from '../components/cards/LCard'
 
 const Main = () => {
   const navigate = useNavigate();
