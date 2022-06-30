@@ -216,19 +216,18 @@ const FormGroup = styled.div`
   }
 `
 
-
-
 const LoginBtn = styled.button`
   height: 44px;
   font-size: 15px;
   width: 60%;
   color: #ffffff;
-  background-color: #111111;
+  background-color: #A58646;
   text-align: center;
-  vertical-align: middle;
-  padding: 9px 18px;
-  border-radius: 4px;
+  border-radius: 10px;
   touch-action: manipulation;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
   cursor: pointer;
 
 
@@ -238,8 +237,6 @@ const LoginBtn = styled.button`
     pointer-events: none;
   }
 `
-
-
 
 const JoinLink = styled.a`
   color: #767676;
