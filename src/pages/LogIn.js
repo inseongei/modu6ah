@@ -39,7 +39,7 @@ function LogIn() {
       <Grid height="100vh" overflowY="hidden">
         <Grid maxWidth="1320px" height="100%" margin="0 auto" padding="0 12px">
           <Container>
-            <Grid height="750px">
+            <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
                 <Logo>
@@ -163,10 +163,9 @@ const SocialLogin = styled.a`
   display: inline-flex;
   color: #22211a;
   width: 60%;
-  height: 30px;
+  height: 50px;
   background-color: #fee501;
   justify-content: center;
-  align-items: center;
   padding: 9px 0;
   font-weight: 500;
   border: 1px solid transparent;
@@ -175,6 +174,9 @@ const SocialLogin = styled.a`
 
   transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
 
+  p {
+    margin-top: 3px;
+  }
   svg {
     margin-right: 8px;
   }
@@ -220,7 +222,7 @@ const FormGroup = styled.div`
     background-color: transparent;
     background-image: none;
     box-sizing: ${(props) => props.boxSizing};
-    border: 1px solid #767676;
+    border: 1px solid #E4E4E4;
     border-radius: 4px;
     -webkit-transition: border-color ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s;
