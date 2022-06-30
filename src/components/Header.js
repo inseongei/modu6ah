@@ -77,7 +77,7 @@ const Header = () => {
 // 헤더 스타일 코드 
 const Headers = styled.div`
   max-width: 100%;
-  height:100px;
+  height:75px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,8 +85,9 @@ const Headers = styled.div`
 
   .logo {
     margin: 16px 16px 16px 23px;
-    font-size: 2rem;
-    color: #F6BD41;
+    font-size: 20px;
+    font-weight: 700;
+    color: #F4B03E;
   }
   .logo_container{
     display:flex;
@@ -120,11 +121,14 @@ const Headers = styled.div`
   
   .header__menulist > li{
     cursor: pointer;
+    font-weight:700;
+    font-size:20px;
   }
 
   .header__menulist > li:hover{
     transform: scale(1.30);
     color:#6B4E16;
+    
   }
 
   .header__left {
@@ -132,7 +136,8 @@ const Headers = styled.div`
   }
 
   .nick{
-    font-size:17px;
+    font-size:20px;
+    font-weight: 700;
     color: #3C3C3C;
   }
 
@@ -148,19 +153,20 @@ const Headers = styled.div`
 
   .profile{
     width:50px;
-    height: 80px;
-    border-radius:40%;
+    height: 50px;
+    border-radius:50%;
   }
 
   .profile > img {
-    width:100%;
-    height:100%;
-    border-radius:40%;
+    width:35px;
+    height: 35px;
   }
 
 
   .LogoOut{
-    font-size:17px;
+    font-size:20px;
+    font-weight:700;
+    color:#3C3C3C;
     cursor: pointer;
   }
 
@@ -248,13 +254,14 @@ const Headers = styled.div`
 const ChatBox = styled.div`
   width:23%;
   height:40vh;
-  position:sticky;
+  position:absolute;
   left:68%;
   display: ${(props) => (props.chatBox ? "flex" : "none")};
   background-color:#F6BD41;
 
   .box{
     display:flex;
+
     flex-direction:column;
     background-color:#E4E4E4;
   }
