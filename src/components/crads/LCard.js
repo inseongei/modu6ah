@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { PlaceData } from '../shared/placedata';
+import { PlaceData } from '../../shared/placedata';
 
 function LCard() {
 
