@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
+import logo from '../images/logo.png'
+import profile from '../images/profile.png'
 
 const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
@@ -24,7 +26,7 @@ const Header = () => {
       </div>
 
       <div className="logo_container">
-        <div className="logo_img"><img src="../images/logo.png" alt="로고"/></div> 
+        <div className="logo_img"><img src={logo} alt="로고"/></div> 
         <div className="logo">모두의 육아</div> 
       </div>
 
@@ -51,7 +53,7 @@ const Header = () => {
           setchatBox(!chatBox);
         }}></GoBell></li>
         <li className="profile">
-          <img src="../images/profile.png" alt="프로필"/>
+          <img src={profile} alt="프로필"/>
         </li>
         <li className="nick">nickname</li>
         <li className="MyPage">마이페이지</li>
@@ -94,7 +96,11 @@ const Headers = styled.div`
   .logo_img{
     width:40px;
     height: 40px;
-    border:1px solid black;
+  }
+
+  .logo_img > img {
+    width:40px;
+    height: 40px;
   }
 
   .header__menulist {
@@ -141,10 +147,15 @@ const Headers = styled.div`
   }
 
   .profile{
-    width:47px;
-    height: 70px;
-    border:1px solid black;
-    border-radius:50%;
+    width:50px;
+    height: 80px;
+    border-radius:40%;
+  }
+
+  .profile > img {
+    width:100%;
+    height:100%;
+    border-radius:40%;
   }
 
 
