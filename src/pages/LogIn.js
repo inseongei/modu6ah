@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components';
-import Grid from '../elements/Grid';
+import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
