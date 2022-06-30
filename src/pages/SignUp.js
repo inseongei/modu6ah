@@ -1,7 +1,7 @@
-import React,{useRef, useState} from 'react'
+import React,{ useState} from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
-import { RiKakaoTalkFill } from 'react-icons/ri';
+// import { RiKakaoTalkFill } from 'react-icons/ri';
 import { Navigate } from 'react-router-dom';
 import axios from "axios";
 
