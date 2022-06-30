@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
 import logo from '../images/logo.png'
 import profile from '../images/profile.png'
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
   const [isToggled, setIsToggled] = useState(false);
   const [userToggled, setUserToggled] = useState(false);
   const [chatBox , setchatBox] = useState(false)
-
-
+  const navigate = useNavigate();
 
 
 
@@ -27,8 +27,11 @@ const Header = () => {
       {!isToggled ? <GoThreeBars className="icon"></GoThreeBars>  : <GoX className="icon"></GoX>}
       </div>
 
-      <div className="logo_container">
-        <div className="logo_img"><img src={logo} alt="로고"/></div> 
+      <div className="logo_container"
+          onClick={() => 
+          { navigate(`/`) }}>
+        <div className="logo_img">
+            <img src={logo} alt="로고"/></div> 
         <div className="logo">모두의 육아</div> 
       </div>
 
@@ -44,9 +47,12 @@ const Header = () => {
 
       {/* 메뉴 리스트 */}
       <ul className="header__menulist">
-        <li>같이해요</li>
-        <li>추천해요</li>
-        <li>육아템 리뷰</li>
+        <li onClick={() => 
+         { navigate(`/recruit`) }}>같이해요</li>
+        <li onClick={() => 
+         { navigate(`/place`) }}>추천해요</li>
+        <li onClick={() => 
+         { navigate(`/review`) }}>육아템 리뷰</li>
       </ul>
 
       {/* User 메뉴 리스트 */}
@@ -95,6 +101,7 @@ const Headers = styled.div`
     display:flex;
     align-items:center;
     margin-left: 10px;
+    cursor: pointer;
   }
   .logo_img{
     width:40px;
@@ -116,6 +123,7 @@ const Headers = styled.div`
 
   .bell{
     font-size:35px;
+    cursor: pointer;
   }
 
   .MyPage{
@@ -292,4 +300,4 @@ const ChatBox = styled.div`
 `
 
 
-export default Header
+export default Header;
