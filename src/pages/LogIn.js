@@ -1,102 +1,116 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useDispatch } from "react-redux";
-import axios from "axios"
-import Cookies from 'universal-cookie';
+import { Navigate } from 'react-router-dom';
+import axios from "axios";
+import logo from '../images/logo.png';
+import Header from "../components/Header"
 
-function LogIn() {
-  const cookies = new Cookies();
+function SignUp() {
   const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
   const [password, setPw] = useState("");
-  const navigate = useNavigate();
+  const [passwordCheck, setPwCheck] = useState("");
+  const [navigate, setNavigate] = useState(false);
 
-  const submit =  e => {
+  const submit = e => {
     e.preventDefault();
 
-     axios.post("http://dlckdals04.shop/api/users/signin", {
-      email, password
-    })
-  .then(response => {
-    console.log(response.data)
-    cookies.set('accessToken', response.data.accessToken)
-    alert('안녕')
-    navigate('/');
-	}).catch(error => {
-		alert("로그인을 다시 해주세요")
-      console.log(error.message);
-	});
-}
+    axios.post("http://dlckdals04.shop/api/users/signup", {
+      email, nickname, password, passwordCheck
+    });
+
+    setNavigate(true);
+
+  }
+
+  if (navigate) {
+    return <Navigate to="/login" />
+  }
 
   return (
     <>
+    <Header/>
       <Grid height="100vh" overflowY="hidden">
         <Grid maxWidth="1320px" height="100%" margin="0 auto" padding="0 12px">
           <Container>
-            <Grid height="550px">
+            <Grid height="750px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
-                  <LoginTitle>Login</LoginTitle>
+                  <Logo>
+                    <div className="logo_img"
+                      onClick={() => { navigate(`/`) }}
+                    ><img src={logo} alt="로고" /></div>
+                    <div className="logo">모두의 육아</div>
+                  </Logo>
                 </Grid>
                 <form onSubmit={submit}>
-                    <FormGroup>
+                  <FormGroup>
                     <Grid margin="0 -32px; 0">
                       <label className='form-label'>이메일</label>
-                      </Grid>
-                      <Grid margin="0 20% 0">
+                    </Grid>
+                    <Grid margin="0 20% 0">
                       <input
-                        onChange={ e => setEmail(e.target.value)}
+                        onChange={e => setEmail(e.target.value)}
                         className='form-input'
-                        name="userEmail"
                         placeholder="이메일을 입력하세요"
                         required
                       ></input>
-                      </Grid>
-                    </FormGroup>
-                    <FormGroup>
-                    <Grid margin="0 -25px; 0">
-                        <label className='form-label'>비밀번호</label>
-                        </Grid>
-                      <Grid margin="0 20% 0">
+                    </Grid>
+                  </FormGroup>
+                  <FormGroup>
+                    <Grid margin="0 -32px; 0">
+                      <label className='form-label'>닉네임</label>
+                    </Grid>
+                    <Grid margin="0 20% 0">
                       <input
-                        onChange={ e => setPw(e.target.value)}
+                        onChange={e => setNickname(e.target.value)}
+                        className="form-input"
+                        placeholder="닉네임을 입력하세요"
+                        maxLength="20"
+                        required
+                      ></input>
+                    </Grid>
+                  </FormGroup>
+                  <FormGroup>
+                    <Grid margin="0 -25px; 0">
+                      <label className='form-label'>비밀번호</label>
+                    </Grid>
+                    <Grid margin="0 20% 0">
+                      <input
+                        onChange={e => setPw(e.target.value)}
                         className="form-input"
                         type="password"
-                        name="password"
                         placeholder="비밀번호를 입력하세요"
                         maxLength="20"
                         required
                       ></input>
-                      </Grid>
-                    </FormGroup>
-                    <Grid height="auto">
-                    <Grid margin="0 20% 0" height="auto">
-                      <LoginBtn 
-                      //  onClick={login}
-                      type='submit'>
-                        로그인
-                      </LoginBtn>
-                      </Grid>
-                      <Grid height="auto">
-                        <FormSeperator>OR</FormSeperator>
-                      </Grid>
-                      <Grid margin="32px 0 0 0" height="auto" align="center">
-                        <SocialLogin 
-                        href='http://dlckdals04.shop/api/users/kakao'>
-                          <RiKakaoTalkFill size="30" />
-                          <p>Login with KakaoTalk</p>
-                        </SocialLogin>
-                      </Grid>
-                     
-                      <Grid margin="42px 0 0 0" height="auto" align="center">
-                        <JoinLink>아이디 찾기 | &nbsp;</JoinLink>
-                        <JoinLink>비밀번호 찾기 | &nbsp;</JoinLink>
-                        <JoinLink onClick={() => 
-                          { navigate(`/signup`) }}>회원가입 &nbsp;</JoinLink>
-                      </Grid>
                     </Grid>
+                  </FormGroup>
+                  <FormGroup>
+                    <Grid margin="0 -10px; 0">
+                      <label className='form-label'>비밀번호 체크</label>
+                    </Grid>
+                    <Grid margin="0 20% 0">
+                      <input
+                        onChange={e => setPwCheck(e.target.value)}
+                        className="form-input"
+                        type="password"
+                        placeholder="비밀번호를 한 번 더 입력하세요"
+                        maxLength="20"
+                        required
+                      ></input>
+                    </Grid>
+                  </FormGroup>
+                  <Grid height="auto">
+                    <Grid margin="0 20% 0" height="auto">
+                      <LoginBtn
+                        type='submit'>
+                        회원가입
+                      </LoginBtn>
+                    </Grid>
+                  </Grid>
                 </form>
               </Grid>
             </Grid>
@@ -133,46 +147,23 @@ const Container = styled.div`
   }
 `
 
-const LoginTitle = styled.h1`
-  font-size: 28px;
-  font-weight: bold;
-  margin: 0 0 8px 0;
+const Logo = styled.h1`
+ display:flex;
+ align-items: center;
+ justify-content: center;
+
+ .logo_img > img {
+   width: 60px;
+ }
+
+ .logo {
+   margin-left: 15px;
+   color: #F4B03E;
+   font-size: 35px;
+ }
+ }
 `
 
-const SocialLogin = styled.a`
-  border-radius: 4px;
-  display: inline-flex;
-  color: #22211a;
-  width: 60%;
-  height: 30px;
-  background-color: #fee501;
-  justify-content: center;
-  align-items: center;
-  padding: 9px 0;
-  font-weight: 500;
-  border: 1px solid transparent;
-  cursor: pointer;
-  text-decoration: none;
-
-  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
-
-  svg {
-    margin-right: 8px;
-  }
-
-  &:hover {
-    background-color: #ffdd00;
-  }
-`
-
-const FormSeperator = styled.p`
-  display: block;
-  margin: auto;
-  font-size: 12px;
-  text-transform: uppercase;
-  text-align: center;
-  margin: 24px 0;
-`
 
 const FormGroup = styled.div`
   margin-bottom: 24px;
@@ -195,13 +186,13 @@ const FormGroup = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px;
+    height: 45px;
     width: 60%;
     padding: 6px 12px;
     background-color: transparent;
     background-image: none;
     box-sizing: ${(props) => props.boxSizing};
-    border: 1px solid #767676;
+    border: 1px solid #E4E4E4;
     border-radius: 4px;
     -webkit-transition: border-color ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s;
@@ -216,19 +207,20 @@ const FormGroup = styled.div`
   }
 `
 
+
 const LoginBtn = styled.button`
-  height: 44px;
-  font-size: 15px;
-  width: 60%;
-  color: #ffffff;
-  background-color: #A58646;
-  text-align: center;
-  border-radius: 10px;
-  touch-action: manipulation;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid transparent;
-  cursor: pointer;
+height: 65px;
+font-size: 15px;
+width: 60%;
+color: #ffffff;
+background-color: #A58646;
+text-align: center;
+border-radius: 40px;
+touch-action: manipulation;
+justify-content: center;
+align-items: center;
+border: 1px solid transparent;
+cursor: pointer;
 
 
   :disabled {
@@ -238,14 +230,5 @@ const LoginBtn = styled.button`
   }
 `
 
-const JoinLink = styled.a`
-  color: #767676;
-  transition: color 0.1s ease-in-out, fill 0.1s ease-in-out, opacity 0.1s ease-in-out;
-  cursor: pointer;
 
-  &:hover {
-    color: #111111;
-  }
-`
-
-export default LogIn;
+export default SignUp;
