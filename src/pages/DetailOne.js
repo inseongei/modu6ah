@@ -9,8 +9,7 @@ const DetailOne = () => {
   return (
     <>
     <Header/>
-    <Categories/>
-    <Detail>
+    {/* <Detail>
         <div className='First_header'> 
             <div className='Second_header'>
             <div>프로필</div>
@@ -49,7 +48,7 @@ const DetailOne = () => {
 
 
     </Detail>
-    <Comment/>
+    <Comment/> */}
     </>
   )
 }

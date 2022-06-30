@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import DetailOne from '../pages/DetailOne';
 
 // pages
-import Main from "../pages/Main";
+// import Main from "../pages/Main";
 // import LogIn from "../pages/LogIn";
 // import SignUp from "../pages/SignUp";
 // import Recruit from "../pages/Recruit";
