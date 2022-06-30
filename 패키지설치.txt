@@ -13,3 +13,5 @@ yarn add redux-thunk    :: 리덕스 미들웨어 패키지
 yarn add axios  ::   axios 패키지 설치
 
 npm install universal-cookie	:: 쿠키 저장 패키지
+
+yarn add firebase :: firebase 
