@@ -23,9 +23,9 @@ function App() {
     <>
     <Routes>
 
-      <Route  path="/" element={<DetailOne/>} />
-      <Route  path="/login" element={< LogIn />} />
-      <Route  path="/signup" element={< SignUp />} />     
+      <Route  path="/" element={<Main/>} />
+      {/* <Route  path="/login" element={< LogIn />} />
+      <Route  path="/signup" element={< SignUp />} />      */}
       {/* <Route  path="/recruit" element={< Recruit />} /> 
       <Route  path="/place" element={< Place />} /> 
       <Route  path="/review" element={< Review />} /> 

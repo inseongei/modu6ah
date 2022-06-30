@@ -1,5 +1,4 @@
 import React from 'react'
-import Categories from '../components/Categories'
 import Header from '../components/Header'
 import '../shared/App.css'
 import styled from 'styled-components'
@@ -12,7 +11,6 @@ const DetailOne = () => {
   return (
     <>
     <Header/>
-    <Categories/>
     <Detail>
         <div className='First_header'> 
             <div className='Second_header'>

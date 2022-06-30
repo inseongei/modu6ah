@@ -1,7 +1,7 @@
 import React from 'react'
+import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Swiper from '../components/main/Swiper'
-import Categories from '../components/Categories'
 
 
 const Main = () => {
@@ -10,9 +10,8 @@ const Main = () => {
   return (
     <div>
       <Header/>
-      <Categories/>
-      <Swiper/>
-
+      {/* <Swiper/> */}
+    <Footer/>
 
 
     </div>
