@@ -2,9 +2,9 @@ import { Routes, Route } from 'react-router-dom';
 import DetailOne from '../pages/DetailOne';
 
 // pages
-// import Main from "../pages/Main";
-// import LogIn from "../pages/LogIn";
-// import SignUp from "../pages/SignUp";
+import Main from "../pages/Main";
+import LogIn from "../pages/LogIn";
+import SignUp from "../pages/SignUp";
 // import Recruit from "../pages/Recruit";
 // import Place from "../pages/Place";
 // import Review from "../pages/Review";
@@ -23,8 +23,8 @@ function App() {
     <>
     <Routes>
       <Route  path="/" element={< DetailOne/>} />
-      {/* <Route  path="/login" element={< LogIn />} />
-      <Route  path="/signup" element={< SignUp />} />     
+      <Route  path="/login" element={< LogIn />} />
+      {/* <Route  path="/signup" element={< SignUp />} />     
       <Route  path="/recruit" element={< Recruit />} /> 
       <Route  path="/place" element={< Place />} /> 
       <Route  path="/review" element={< Review />} /> 
