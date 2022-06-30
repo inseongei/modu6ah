@@ -17,7 +17,6 @@ const Footer = () => {
         <div>Front-End : 김숙영 , 정인성</div>
         <div>designer : 서혜빈</div>
         </div>
-
         <div className='mine'> Copyright 2022. 모두의 육아 all rights reserved.</div>
         </div>
     </FooterContainer>
