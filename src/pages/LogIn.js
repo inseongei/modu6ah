@@ -6,9 +6,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import axios from "axios"
 import Cookies from 'universal-cookie';
-import logo from '../images/logo.png';
-import Header from "../components/Header"
-
 
 function LogIn() {
   const cookies = new Cookies();
@@ -35,19 +32,13 @@ function LogIn() {
 
   return (
     <>
-    <Header/>
       <Grid height="100vh" overflowY="hidden">
         <Grid maxWidth="1320px" height="100%" margin="0 auto" padding="0 12px">
           <Container>
-            <Grid height="750px">
+            <Grid height="550px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
-                <Logo>
-                    <div className="logo_img"
-                      onClick={() => { navigate(`/`) }}
-                    ><img src={logo} alt="로고" /></div>
-                    <div className="logo">모두의 육아</div>
-                  </Logo>
+                  <LoginTitle>Login</LoginTitle>
                 </Grid>
                 <form onSubmit={submit}>
                     <FormGroup>
@@ -83,6 +74,7 @@ function LogIn() {
                     <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
                       <LoginBtn 
+                      //  onClick={login}
                       type='submit'>
                         로그인
                       </LoginBtn>
@@ -141,21 +133,10 @@ const Container = styled.div`
   }
 `
 
-const Logo = styled.h1`
- display:flex;
- align-items: center;
- justify-content: center;
-
- .logo_img > img {
-   width: 60px;
- }
-
- .logo {
-   margin-left: 15px;
-   color: #F4B03E;
-   font-size: 35px;
- }
- }
+const LoginTitle = styled.h1`
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
 `
 
 const SocialLogin = styled.a`
