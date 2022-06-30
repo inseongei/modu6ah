@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components';
-import Grid from '../components/elements/Grid';
+import Grid from '../elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import axios from "axios"
 import Cookies from 'universal-cookie';
@@ -10,29 +10,20 @@ import Cookies from 'universal-cookie';
 function LogIn() {
   const cookies = new Cookies();
   const [email, setEmail] = useState("");
-  
+  const [password, setPw] = useState("");
   const navigate = useNavigate();
 
-  const email_ref = useRef(null);
-  const pw_ref = useRef(null);
+  const submit =  e => {
+    e.preventDefault();
 
-  const CLIENT_ID = "f13a9cf57960a3a3400f0e425b8848f3";
-  const REDIRECT_URI =  "http://localhost:3000";
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
-
-const login = (email, password) => {
-	const data = {
-		"email": email_ref.current.value,
-		"password": pw_ref.current.value
-	};
-
-	axios.post('http://dlckdals04.shop/api/users/signin', data)
+     axios.post("http://dlckdals04.shop/api/users/signin", {
+      email, password
+    })
   .then(response => {
-    console.log(response)
-    // navigate('/')
-    // cookies.set('accessToken',response.data.accessToken)
+    console.log(response.data)
+    cookies.set('accessToken', response.data.accessToken)
     alert('안녕')
+    navigate('/');
 	}).catch(error => {
 		alert("로그인을 다시 해주세요")
       console.log(error.message);
@@ -49,14 +40,14 @@ const login = (email, password) => {
                 <Grid align="center" height="100px" margin="0 0 32 0">
                   <LoginTitle>Login</LoginTitle>
                 </Grid>
-                <div>
+                <form onSubmit={submit}>
                     <FormGroup>
                     <Grid margin="0 -32px; 0">
                       <label className='form-label'>이메일</label>
                       </Grid>
                       <Grid margin="0 20% 0">
                       <input
-                       ref={email_ref}
+                        onChange={ e => setEmail(e.target.value)}
                         className='form-input'
                         name="userEmail"
                         placeholder="이메일을 입력하세요"
@@ -70,7 +61,7 @@ const login = (email, password) => {
                         </Grid>
                       <Grid margin="0 20% 0">
                       <input
-                        ref={pw_ref}
+                        onChange={ e => setPw(e.target.value)}
                         className="form-input"
                         type="password"
                         name="password"
@@ -83,7 +74,7 @@ const login = (email, password) => {
                     <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
                       <LoginBtn 
-                       onClick={login}
+                      //  onClick={login}
                       type='submit'>
                         로그인
                       </LoginBtn>
@@ -92,7 +83,8 @@ const login = (email, password) => {
                         <FormSeperator>OR</FormSeperator>
                       </Grid>
                       <Grid margin="32px 0 0 0" height="auto" align="center">
-                        <SocialLogin href={KAKAO_AUTH_URL}>
+                        <SocialLogin 
+                        href='http://dlckdals04.shop/api/users/kakao'>
                           <RiKakaoTalkFill size="30" />
                           <p>Login with KakaoTalk</p>
                         </SocialLogin>
@@ -105,7 +97,7 @@ const login = (email, password) => {
                           { navigate(`/signup`) }}>회원가입 &nbsp;</JoinLink>
                       </Grid>
                     </Grid>
-                </div>
+                </form>
               </Grid>
             </Grid>
           </Container>
@@ -160,7 +152,7 @@ const SocialLogin = styled.a`
   font-weight: 500;
   border: 1px solid transparent;
   cursor: pointer;
-
+  text-decoration: none;
 
   transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
 
@@ -224,19 +216,18 @@ const FormGroup = styled.div`
   }
 `
 
-
-
 const LoginBtn = styled.button`
   height: 44px;
   font-size: 15px;
   width: 60%;
   color: #ffffff;
-  background-color: #111111;
+  background-color: #A58646;
   text-align: center;
-  vertical-align: middle;
-  padding: 9px 18px;
-  border-radius: 4px;
+  border-radius: 10px;
   touch-action: manipulation;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
   cursor: pointer;
 
 
@@ -246,8 +237,6 @@ const LoginBtn = styled.button`
     pointer-events: none;
   }
 `
-
-
 
 const JoinLink = styled.a`
   color: #767676;
