@@ -1,167 +1,158 @@
 import React from 'react'
 import Header from '../components/Header'
-import '../shared/App.css'
 import styled from 'styled-components'
-import Comment from '../components/Comment'
-import { FcComments } from "react-icons/fc"; 
-import Footer from '../components/Footer'
 
 const DetailOne = () => {
-
   return (
     <>
     <Header/>
     <Detail>
-        <div className='First_header'> 
-            <div className='Second_header'>
-            <div className='Detail_profile'></div>
-            <div>게시글 작성자</div>
-            <div><FcComments className='Detail_icon'></FcComments></div>
+        <div className='toggle'>
+            <input type="checkbox"/> 모집중
+        </div>
+        <div className='one_container'>
+            <div className='one_box'>
+                <div> 제목  <span>블루베리 농장 체험</span></div>
+                <div>날짜  <span>2022-06-30(목)</span></div>
+                <div>시간  <span>15:00</span></div>
+                <div>위치  <span>블루베리팜 수원점</span></div>
+                <div>연령대  <span className='span_position'>5~10세</span></div>
+            </div>
+            <div className='two_box'>
+            <div className='three_box'>
+            <div className='Detail_profile'>프로필사진</div>
+
+            <div className="Detail_username">
+            <div className="username">안양길동맘</div>
+            <div className='btn_box'>
+                <button>1:1문의하기</button>
+                <button>신청하기</button>
+            </div>
+            </div>
             </div>
 
-            <div>
-                <div>모집상태 : 모집중 </div>
+            <div className='four_box'>
+            블루베리 농장 체험 가려는데 거리가 멀어 운전 가능한 학부모님 찾습니다~
+            현재 안양에 거주 중이라 근처 가까운 곳에서 뵈었으면 좋겠습니다.
+            육아 스타일: 강하게 키웁니다
+            준비물: 물티슈
+            입장료: 성인 15000원 / 아동 8000원
             </div>
 
-            <div>
-                <button className='Detail_insert'>수정</button>
-                <button className='Detail_delete'>삭제</button>
-            </div>
-
-        </div>
-
-        <div className='Detail_title'>
-            <h1> 타이틀</h1>
-        </div>
-
-        <div className='third_header'>
-            <div className='Detail_img'>사진</div>
-
-            <div className='Detail_information'>
-
-            <div>날짜 : <span>2022-06-28</span></div>
-            <div>시간 : <span>07~19시</span></div>
-            <div>장소 : <span>서울 / 서초구</span></div>
 
             </div>
         </div>
-
-        <div className='Detail_content'>
-            <span> 내용:</span>
-            <span className='commentBox'></span>
-             
-        </div>
-
-
     </Detail>
-    <Comment/>
-    <Footer/>
     </>
   )
 }
 
-
-
-// 모집게시판 상세 페이지 스타일 코드
-
 const Detail = styled.div`
-.First_header{
+    border:1px solid black;
+
+
+.toggle{
+    border:1px solid black;
+    height: 100px;
+}
+
+.one_container{
     display:flex;
-    justify-content:space-around;
-    width: 100%;
+}
+
+.one_box{
+    border:1px solid black;
+    width:50%;
+    height:50vh;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    font-size : 25px;
+    
+}
+
+.one_box > div {
+    margin:30px 0px 0px 70px;
+}
+
+
+.span_position{
+    position:relative;
+    right:23px;
+}
+.one_box > div >span{
+    border:2px solid #E4E4E4;
+    display:inline-block;
+    width:30vw;
+    padding:10px;
+    margin-left: 30px;
+}
+
+.btn_box{
+    display:flex;
     align-items:center;
-    height: 50px;
-    border: 1px solid black;
+    justify-content:center;
 }
 
-.Second_header{
+.btn_box > button {
+    width:236px;
+    height:48px;
+    margin-left:13px;
+    background-color:white;
+    font-size:20px;
+}
+
+
+.two_box{
+    border:1px solid black;
+    width:50%;
+    height:50vh;
+}
+
+.three_box{
+    border:1px solid black;
+    height:30%;
     display:flex;
-    align-items: center;
 }
 
-.Detail_title{
-    border: 1px solid black;
-    text-align: center;
-}
-
-.Detail_icon{
-    font-size:40px;
-}
-
-.Detail_insert{
-    margin-right: 20px;
-    background-color:#5c6bc0;
-    border: 2px solid #5c6bc0;
-    width:80px;
-    border-radius:20px;
-    font-weight: 700;
-    font-size:20px;
-    height:40px;
-}
-
-.Detail_delete{
-    margin-right: 20px;
-    border-radius:20px;
-    background-color:#f48fb1;
-    border: 2px solid #f48fb1;
-    width:80px;
-    font-weight: 700;
-    font-size:20px;
-    height:40px;
-}
-
-.third_header{
-    display: flex;
-    border: 1px solid black;
-    height:70vh;
-}
-
-.Detail_img{
-    width:40%;
-    height:60vh;
+.four_box{
+    padding:20px;
     border:1px solid black;
-    border-radius:20px;
-    margin:30px 0px 0px 50px;
-}
-
-.commentBox{
-    width:80%;
-    border:1px solid black;
-    border-radius:20px;
-    height:20%;
-    margin-left:30px;
+    height:70%;
+    width:70%;
+    margin:auto;
+    word-break:normal;
 }
 
 .Detail_profile{
-    width:50px;
-    height:50px;
+    width:144px;
+    height: 144px;
+    border-radius:50%;
     border:1px solid black;
-    border-radius: 50%;
-}
-
-.Detail_information{
-    width:50%;
-    height:50vh;
-    display: flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    margin:30px 0px 0px 50px;
-}
-
-.Detail_information > div > span {
-    width: 300px;
-    border-bottom : 1px solid black;
-}
-
-.Detail_content{
-    border:1px solid black;
-    width:100%;
-    height:20vh;
     display:flex;
-    align-items: center;
-    justify-content: center;
+    align-items:center;
+    justify-content:center;
+}
+
+.Detail_username{
+    border:1px solid black;
+    width: 70%;
+}
+
+.username{
+    height: 50%;
+    display:flex;
+    align-items:center;
+    margin-left:30px;
+    border:1px solid black;
+    font-size:33px;
+
+}
+
+.btn_box{
+    border:1px solid black;
+    height:50%;
 }
 `
 
-export default DetailOne;
+export default DetailOne

@@ -10,28 +10,7 @@ const Footer = () => {
   return (
     <FooterContainer>
         <div className='Footer_main'>
-            <div className='icon_box'>
-            <a href='https://github.com/Maiowol/Forkids_Project'><FaGithub></FaGithub></a> &nbsp;
-            <a href='https://github.com/changmin97/forkidsProject'><FaGithub></FaGithub></a> &nbsp;
-            <a href='https://www.figma.com/file/6oxe17NH1VuhHdZxdj9X9N/항해99'><FaFigma></FaFigma></a> &nbsp;
-            <a href='##'><FaStore></FaStore></a> &nbsp;
-            
-            </div>
 
-            <div>
-                Front-End : 김숙영, 정인성
-            </div>
-
-            <div className='position'>
-                Back-End : 이창민, 조세림,안재훈
-            </div>
-
-            <div>
-                designer : 서혜빈
-            </div>
-            <span className='mine'>
-                Copyright 2022. 모두의육아 all right reserved.
-            </span>
         </div>
     </FooterContainer>
   )
@@ -40,8 +19,10 @@ const Footer = () => {
 const FooterContainer = styled.footer`
     width: 100%; 
     color:#3C3C3C;
-    height: 173px;
-    background-color: #E4E4E4;
+    height: 130px;
+    background-color: #3C3C3C;
+    position: relative;
+    transform: translateY(1100%);
 
 .Footer_main{
     padding-top:10px;

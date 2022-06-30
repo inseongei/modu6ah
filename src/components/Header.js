@@ -111,6 +111,7 @@ const Headers = styled.div`
     display: flex;
     font-size:17px;
     color: #A58646;
+    margin-top:10px;
   }
 
   .bell{
@@ -119,6 +120,7 @@ const Headers = styled.div`
 
   .MyPage{
     display:none;
+    font-size:20px;
   }
   
   .header__menulist > li{
@@ -147,6 +149,7 @@ const Headers = styled.div`
     list-style: none;
     display: flex;
     margin-right:30px;
+    margin-top:10px;
   }
 
   .header__right div {
@@ -205,7 +208,11 @@ const Headers = styled.div`
       flex-direction: column;
       width: 100%;
       margin:0px;
-      background-color: #F6BD41;
+      z-index: 1;
+      position: relative;
+      bottom: 10px;
+      padding:0px 0px 0px 20px;
+      background-color: #E4E4E4;
     }
 
     .header__menulist {
@@ -213,30 +220,38 @@ const Headers = styled.div`
       flex-direction: column;
       width: 100%;
       margin:0px;
-      background-color: #F6BD41;
+      position: relative;
+      bottom: 5px;
+      z-index: 1;
+      background-color: #E4E4E4;
     }
 
     .header__menulist li,
     .header__right li {
       margin: 1rem 0;
       padding: 0;
+      color: #3C3C3C;
     }
 
     .header__menulist li:hover{
-      transform: scale(1.05);
-      color:#6B4E16;
+      transform: scale(1.00);
+      color: #3C3C3C;
     }
 
     .MyPage{
       display:block;
+      font-size:20px;
+      font-weight: 700;
     }
 
     .toggle {
       display: block;
+      margin:0px;
     }
 
     .user {
       display: block;
+      margin: 0px;
     }
 
     .profile{
@@ -258,12 +273,12 @@ const ChatBox = styled.div`
   height:40vh;
   position:absolute;
   left:68%;
+  z-index: 1;
   display: ${(props) => (props.chatBox ? "flex" : "none")};
   background-color:#F6BD41;
 
   .box{
     display:flex;
-
     flex-direction:column;
     background-color:#E4E4E4;
   }

@@ -5,3 +5,10 @@ body{
   font-family: 'Noto Sans KR', sans-serif;
   margin:0px;
 }
+
+
+
+/* 부트 스트랩 캐러셀 높이 스타일 */
+.d-block{
+  height: 409px;
+}

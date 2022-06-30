@@ -10,8 +10,8 @@ const Main = () => {
   return (
     <div>
       <Header/>
-      {/* <Swiper/> */}
-    <Footer/>
+      <Swiper/>
+      <Footer/>
 
 
     </div>

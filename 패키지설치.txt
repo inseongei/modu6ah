@@ -15,3 +15,5 @@ yarn add axios  ::   axios 패키지 설치
 npm install universal-cookie	:: 쿠키 저장 패키지
 
 yarn add firebase :: firebase 
+
+npm install react-bootstrap bootstrap :: 리액트 부트스트랩 
