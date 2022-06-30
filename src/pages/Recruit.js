@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 //  elements & components
 import Grid from '../components/elements/Grid';
 import Header from '../components/Header';
-import SCard from '../components/SCard';
+import SCard from '../components/cards/SCard';
 
 function Recruit() {
 

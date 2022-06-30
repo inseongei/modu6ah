@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import { RecruitData } from '../shared/recruitdata';
+import { RecruitData } from '../../shared/recruitdata';
 
 
 function SCard() {
