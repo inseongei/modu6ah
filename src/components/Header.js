@@ -153,8 +153,8 @@ const Headers = styled.div`
   }
 
   .profile > img {
-    width:50px;
-    height: 80px;
+    width:100%;
+    height:100%;
     border-radius:40%;
   }
 

@@ -1,37 +1,32 @@
-import React,{useRef} from 'react'
+import React,{useRef, useState} from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
-
 import { RiKakaoTalkFill } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import axios from "axios";
 
 function SignUp() {
-  const email_ref = useRef(null)
-    const nickname_ref = useRef(null)
-    const pw_ref =useRef(null)
-    const pwcheck_ref = useRef(null)
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [password, setPw] = useState("");
+  const [passwordCheck, setPwCheck] = useState("");
+  const [navigate, setNavigate] = useState(false);
 
-  const logout = () => {
-    axios.post("http://localhost:5001/user", {
-        "email": email_ref.current.value,
-        "nickname": nickname_ref.current.value,
-        "password": pw_ref.current.value,
-        "passwordCheck": pwcheck_ref.current.value
-    }).then(function (response) {
-        alert("회원가입을 축하합니다!")
-        navigate('/');
-        console.log(response)
-    })
-        .catch(function (error) {
-            alert("회원가입을 다시해주세요")
-            console.log(error);
-            console.log(error.response.data.errorMessage)
-        })
-}
+  const submit = e => {
+    e.preventDefault();
+
+      axios.post("http://dlckdals04.shop/api/users/signup", {
+      email, nickname, password, passwordCheck
+    });
+
+    setNavigate(true);
   
+  }
 
+  if (navigate) {
+    return <Navigate to="/login"/>
+  }
+  
   return (
     <>
       <Grid height="100vh" overflowY="hidden">
@@ -42,16 +37,15 @@ function SignUp() {
                 <Grid align="center" height="100px" margin="0 0 32 0">
                   <LoginTitle>SignUp</LoginTitle>
                 </Grid>
-                <form>
+                <form onSubmit={submit}>
                     <FormGroup>
                     <Grid margin="0 -32px; 0">
                       <label className='form-label'>이메일</label>
                       </Grid>
                       <Grid margin="0 20% 0">
                       <input
-                      ref={email_ref}
+                      onChange={ e => setEmail(e.target.value)}
                         className='form-input'
-                        name="userEmail"
                         placeholder="이메일을 입력하세요"
                         required
                       ></input>
@@ -63,9 +57,8 @@ function SignUp() {
                         </Grid>
                       <Grid margin="0 20% 0">
                       <input
-                      ref={nickname_ref}
+                      onChange={ e => setNickname(e.target.value)}
                         className="form-input"
-                        name="nickname"
                         placeholder="닉네임을 입력하세요"
                         maxLength="20"
                         required
@@ -78,10 +71,9 @@ function SignUp() {
                         </Grid>
                       <Grid margin="0 20% 0">
                       <input
-                      ref={pw_ref}
+                     onChange={ e => setPw(e.target.value)}
                         className="form-input"
                         type="password"
-                        name="password"
                         placeholder="비밀번호를 입력하세요"
                         maxLength="20"
                         required
@@ -94,10 +86,9 @@ function SignUp() {
                         </Grid>
                       <Grid margin="0 20% 0">
                       <input
-                      ref={pwcheck_ref}
+                      onChange={ e => setPwCheck(e.target.value)}
                         className="form-input"
                         type="password"
-                        name="password"
                         placeholder="비밀번호를 한 번 더 입력하세요"
                         maxLength="20"
                         required
@@ -107,7 +98,7 @@ function SignUp() {
                     <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
                       <LoginBtn 
-                      onClick={logout}
+                      // onClick={logout}
                       type='submit'>
                         회원가입
                       </LoginBtn>

@@ -5,3 +5,13 @@ yarn add react-icons --save	   :: 리엑트 아이콘 패키지
 yarn add styled-components      :: 스타일 컴포넌트 패키지
 
 yarn add react-simple-image-slider      :: 사진 슬라이더 패키지
+
+yarn add redux react-redux  :: 리덕스 패키지
+
+yarn add redux-thunk    :: 리덕스 미들웨어 패키지
+
+yarn add axios  ::   axios 패키지 설치
+
+npm install universal-cookie	:: 쿠키 저장 패키지
+
+yarn add firebase :: firebase 
