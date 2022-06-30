@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 import LogIn from "../pages/LogIn";
 import DetailOne from "../pages/DetailOne"
 import SignUp from "../pages/SignUp";
-import Llooiinn from '../components/main/Llooiinn';
 // import Recruit from "../pages/Recruit";
 // import Place from "../pages/Place";
 // import Review from "../pages/Review";
