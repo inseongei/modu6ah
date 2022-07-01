@@ -40,7 +40,7 @@ function App() {
       <Route  path="/bookmark" element={< BookMark />} />
       <Route  path="/chatlist" element={< ChatList />} />
       <Route  path="/mainchat" element={< MainChat />} /> 
-        //이쪽 모달은 추후에 삭제 예정
+        {/* 이쪽 모달은 추후에 삭제 예정 */}
       <Route  path="/welcome" element={< WelcomeModal />} /> 
       <Route  path="/edit" element={< EditModalOne />} /> 
 

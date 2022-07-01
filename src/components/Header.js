@@ -4,6 +4,7 @@ import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
 import logo from '../images/logo.png'
 import profile from '../images/profile.png'
 import { useNavigate } from "react-router-dom";
+import { removeCookie } from "../shared/Cookie";
 
 const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
@@ -12,7 +13,10 @@ const Header = () => {
   const [chatBox , setchatBox] = useState(false)
   const navigate = useNavigate();
 
-
+  const logoOut = () =>{
+    removeCookie('accessToken')
+    navigate('/')
+  }
 
 
   return (
@@ -66,7 +70,7 @@ const Header = () => {
         </li>
         <li className="nick">nickname</li>
         <li className="MyPage">마이페이지</li>
-        <li className="LogoOut">로그아웃</li>
+        <li className="LogoOut" onClick={logoOut}>로그아웃</li>
       </ul>
     </Headers>
 

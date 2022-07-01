@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../components/Header'
 import styled from 'styled-components'
 import dog from '../images/dog.jpg'
+import { getCookie } from "../shared/Cookie";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import io from "socket.io-client";
@@ -17,10 +18,6 @@ const DetailOne = () => {
         setOn('모집완료');
       };
 
- 
-
-
-
 
 
       const GoChat = () =>{
@@ -30,7 +27,7 @@ const DetailOne = () => {
 
         const token = localStorage.getItem("token")
         axios.post('http://13.125.188.9/api/chats/rooms/1',null,{
-            headers : { Authorization : "Bearer " + `${token}`}
+            headers : { Authorization: `Bearer ${getCookie("accessToken")}`}
         })
         .then((res)=>{
             console.log(res)
