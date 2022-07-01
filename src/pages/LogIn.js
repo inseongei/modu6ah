@@ -6,6 +6,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import axios from "axios"
 import Cookies from 'universal-cookie';
+import logo from '../images/logo.png';
+import Header from "../components/Header"
 
 function LogIn() {
   const cookies = new Cookies();
@@ -16,7 +18,7 @@ function LogIn() {
   const submit =  e => {
     e.preventDefault();
 
-     axios.post("http://13.125.188.9/api/users/signin", {
+     axios.post("http://dlckdals04.shop/api/users/signin", {
       email, password
     })
   .then(response => {
@@ -33,13 +35,19 @@ function LogIn() {
 
   return (
     <>
+    <Header/>
       <Grid height="100vh" overflowY="hidden">
         <Grid maxWidth="1320px" height="100%" margin="0 auto" padding="0 12px">
           <Container>
-            <Grid height="550px">
+            <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
-                  <LoginTitle>Login</LoginTitle>
+                <Logo>
+                    <div className="logo_img"
+                      onClick={() => { navigate(`/`) }}
+                    ><img src={logo} alt="로고" /></div>
+                    <div className="logo">모두의 육아</div>
+                  </Logo>
                 </Grid>
                 <form onSubmit={submit}>
                     <FormGroup>
@@ -75,7 +83,6 @@ function LogIn() {
                     <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
                       <LoginBtn 
-                      //  onClick={login}
                       type='submit'>
                         로그인
                       </LoginBtn>
@@ -134,10 +141,21 @@ const Container = styled.div`
   }
 `
 
-const LoginTitle = styled.h1`
-  font-size: 28px;
-  font-weight: bold;
-  margin: 0 0 8px 0;
+const Logo = styled.h1`
+ display:flex;
+ align-items: center;
+ justify-content: center;
+
+ .logo_img > img {
+   width: 60px;
+ }
+
+ .logo {
+   margin-left: 15px;
+   color: #F4B03E;
+   font-size: 35px;
+ }
+ }
 `
 
 const SocialLogin = styled.a`
@@ -145,10 +163,9 @@ const SocialLogin = styled.a`
   display: inline-flex;
   color: #22211a;
   width: 60%;
-  height: 30px;
+  height: 50px;
   background-color: #fee501;
   justify-content: center;
-  align-items: center;
   padding: 9px 0;
   font-weight: 500;
   border: 1px solid transparent;
@@ -157,6 +174,9 @@ const SocialLogin = styled.a`
 
   transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
 
+  p {
+    margin-top: 3px;
+  }
   svg {
     margin-right: 8px;
   }
@@ -202,7 +222,7 @@ const FormGroup = styled.div`
     background-color: transparent;
     background-image: none;
     box-sizing: ${(props) => props.boxSizing};
-    border: 1px solid #767676;
+    border: 1px solid #E4E4E4;
     border-radius: 4px;
     -webkit-transition: border-color ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s;

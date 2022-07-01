@@ -7,6 +7,7 @@ import Figma from '../images/Figma.png'
 
 
 
+
 const Footer = () => {
   return (
     <FooterContainer>
@@ -162,6 +163,7 @@ a{
     margin-left:40px;
 }
 }
+
 
 `
 

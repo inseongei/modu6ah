@@ -7,3 +7,4 @@ const DetailTwo = () => {
 }
 
 export default DetailTwo
+
