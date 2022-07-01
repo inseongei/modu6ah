@@ -16,26 +16,32 @@ import BookMark from "../pages/BookMark";
 import ChatList from "../pages/ChatList";
 import MainChat from "../pages/MainChat";
 import Main from '../pages/Main'
-
+import WelcomeModal from '../modal/WelcomeModal';
+import EditModalOne from '../modal/EditModalOne';
 
 function App() {
   return (
     <>
     <Routes>
-      <Route  path="/" element={<DetailOne/>} />
+      <Route  path="/" element={<Main />} />
       <Route  path="/login" element={< LogIn />} />
       <Route  path="/signup" element={< SignUp />} />     
       <Route  path="/recruit" element={< Recruit />} /> 
       <Route  path="/place" element={< Place />} /> 
       <Route  path="/review" element={< Review />} /> 
-      <Route  path="/AddOne" element={< AddOne />} />
+      <Route  path="/addone" element={< AddOne />} />
       <Route  path="/addtwo" element={< AddTwo />} />
-      <Route  path="/DetailTwo" element={< DetailTwo />} />
-      <Route  path="/mypage" element={< MyPage />} />
+      <Route  path="/detailone" element={< DetailOne />} />
+      <Route  path="/detailtwo" element={< DetailTwo />} />
+      <Route  path="/mypage" element={< Mypage />} />
       <Route  path="/manager" element={< ProfileManager />} />
       <Route  path="/bookmark" element={< BookMark />} />
       <Route  path="/chatlist" element={< ChatList />} />
       <Route  path="/mainchat" element={< MainChat />} /> 
+        //이쪽 모달은 추후에 삭제 예정
+      <Route  path="/welcome" element={< WelcomeModal />} /> 
+      <Route  path="/edit" element={< EditModalOne />} /> 
+
     </Routes>
     </>
   );
