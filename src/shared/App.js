@@ -10,19 +10,20 @@ import Review from "../pages/Review";
 import AddOne from "../pages/AddOne";
 import AddTwo from "../pages/AddTwo";
 import DetailTwo from "../pages/DetailTwo"; 
-import Mypage from "../pages/MyPage";
+import MyPage from "../pages/MyPage";
 import ProfileManager from "../pages/ProfileManager";
 import BookMark from "../pages/BookMark";
 import ChatList from "../pages/ChatList";
 import MainChat from "../pages/MainChat";
 import Main from '../pages/Main'
+import Chat from '../components/Chat'
 
 
 function App() {
   return (
     <>
     <Routes>
-      <Route  path="/" element={<Main/>} />
+      <Route  path="/" element={<DetailOne/>} />
       <Route  path="/login" element={< LogIn />} />
       <Route  path="/signup" element={< SignUp />} />     
       <Route  path="/recruit" element={< Recruit />} /> 
@@ -31,11 +32,12 @@ function App() {
       <Route  path="/AddOne" element={< AddOne />} />
       <Route  path="/addtwo" element={< AddTwo />} />
       <Route  path="/DetailTwo" element={< DetailTwo />} />
-      <Route  path="/mypage" element={< Mypage />} />
+      <Route  path="/mypage" element={< MyPage />} />
       <Route  path="/manager" element={< ProfileManager />} />
       <Route  path="/bookmark" element={< BookMark />} />
       <Route  path="/chatlist" element={< ChatList />} />
       <Route  path="/mainchat" element={< MainChat />} /> 
+      <Route  path="/chat" element={< Chat />} /> 
     </Routes>
     </>
   );

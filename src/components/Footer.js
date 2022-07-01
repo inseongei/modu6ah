@@ -152,23 +152,16 @@ a{
 .name{
     display:none;
 }
-
 .react{
     display:none;
 }
-
 .icon_box{
     margin-bottom:30px;
 }
-    
 .one_container{
     margin-left:40px;
 }
 }
-
-
-
-
 
 `
 
