@@ -14,6 +14,7 @@ const Header = () => {
 
 
 
+
   return (
     <>
     <Headers isToggled={isToggled} userToggled={userToggled}>
@@ -300,4 +301,6 @@ const ChatBox = styled.div`
 `
 
 
-export default Header;
+
+export default Header
+

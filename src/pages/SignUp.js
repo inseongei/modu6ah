@@ -16,19 +16,20 @@ function SignUp() {
 
   const submit = e => {
     e.preventDefault();
-
     axios.post("http://dlckdals04.shop/api/users/signup", {
       email, nickname, password, passwordCheck
     });
 
     setNavigate(true);
-
   }
-
   if (navigate) {
     return <Navigate to="/login" />
   }
 
+  if (navigate) {
+    return <Navigate to="/login"/>
+  }
+  
   return (
     <>
     <Header/>
@@ -46,13 +47,14 @@ function SignUp() {
                   </Logo>
                 </Grid>
                 <form onSubmit={submit}>
-                  <FormGroup>
+                    <FormGroup>
+
                     <Grid margin="0 -32px; 0">
                       <label className='form-label'>이메일</label>
                     </Grid>
                     <Grid margin="0 20% 0">
                       <input
-                        onChange={e => setEmail(e.target.value)}
+                      onChange={ e => setEmail(e.target.value)}
                         className='form-input'
                         placeholder="이메일을 입력하세요"
                         required
@@ -65,7 +67,7 @@ function SignUp() {
                     </Grid>
                     <Grid margin="0 20% 0">
                       <input
-                        onChange={e => setNickname(e.target.value)}
+                      onChange={ e => setNickname(e.target.value)}
                         className="form-input"
                         placeholder="닉네임을 입력하세요"
                         maxLength="20"
@@ -79,7 +81,7 @@ function SignUp() {
                     </Grid>
                     <Grid margin="0 20% 0">
                       <input
-                        onChange={e => setPw(e.target.value)}
+                     onChange={ e => setPw(e.target.value)}
                         className="form-input"
                         type="password"
                         placeholder="비밀번호를 입력하세요"
@@ -94,7 +96,7 @@ function SignUp() {
                     </Grid>
                     <Grid margin="0 20% 0">
                       <input
-                        onChange={e => setPwCheck(e.target.value)}
+                      onChange={ e => setPwCheck(e.target.value)}
                         className="form-input"
                         type="password"
                         placeholder="비밀번호를 한 번 더 입력하세요"
@@ -105,8 +107,9 @@ function SignUp() {
                   </FormGroup>
                   <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
-                      <LoginBtn
-                        type='submit'>
+                      <LoginBtn 
+                      // onClick={logout}
+                      type='submit'>
                         회원가입
                       </LoginBtn>
                     </Grid>

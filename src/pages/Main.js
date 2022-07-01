@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../components/Footer'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
@@ -31,6 +32,7 @@ const Main = () => {
         <button>게시글 더 보기</button>
       </div>
     </div>
+      <Footer/>
   )
 }
 

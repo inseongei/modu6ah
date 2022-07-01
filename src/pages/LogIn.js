@@ -9,7 +9,6 @@ import Cookies from 'universal-cookie';
 import logo from '../images/logo.png';
 import Header from "../components/Header"
 
-
 function LogIn() {
   const cookies = new Cookies();
   const [email, setEmail] = useState("");
@@ -25,6 +24,7 @@ function LogIn() {
   .then(response => {
     console.log(response.data)
     cookies.set('accessToken', response.data.accessToken)
+    localStorage.setItem('token',response.data.accessToken)
     alert('안녕')
     navigate('/');
 	}).catch(error => {
