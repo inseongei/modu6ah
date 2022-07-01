@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/Header'
-import MyPageChatList from '../components/MyPageChatList'
-import Chat from '../components/Chat'
+import MyPageChatList from '../components/MyPage/MyPageChatList'
+import MyPageChat from '../components/MyPage/MyPageChat'
 
 function MyPage() {
   return (
@@ -22,7 +22,7 @@ function MyPage() {
       <div className='List'>
         <MyPageChatList/>
       </div>
-      <div className='Chat'><Chat/></div>
+      <div className='Chat'><MyPageChat/></div>
     </Container>
     </>
   )

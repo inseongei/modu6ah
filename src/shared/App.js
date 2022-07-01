@@ -16,7 +16,6 @@ import BookMark from "../pages/BookMark";
 import ChatList from "../pages/ChatList";
 import MainChat from "../pages/MainChat";
 import Main from '../pages/Main'
-import Chat from '../components/Chat'
 
 
 function App() {
@@ -37,7 +36,6 @@ function App() {
       <Route  path="/bookmark" element={< BookMark />} />
       <Route  path="/chatlist" element={< ChatList />} />
       <Route  path="/mainchat" element={< MainChat />} /> 
-      <Route  path="/chat" element={< Chat />} /> 
     </Routes>
     </>
   );
