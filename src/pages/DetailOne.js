@@ -4,6 +4,9 @@ import styled from 'styled-components'
 import dog from '../images/dog.jpg'
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
+import io from "socket.io-client";
+
+const socket = io.connect("http://13.125.188.9")
 
 
 const DetailOne = () => {
@@ -14,23 +17,25 @@ const DetailOne = () => {
         setOn('모집완료');
       };
 
-
-     
-
+ 
 
 
 
 
 
       const GoChat = () =>{
-        // navigate('/Chat')
+        navigate('/MyPage')
+
+     
 
         const token = localStorage.getItem("token")
-        axios.post('http://13.125.188.9/api/chats/rooms/2',null,{
+        axios.post('http://13.125.188.9/api/chats/rooms/1',null,{
             headers : { Authorization : "Bearer " + `${token}`}
         })
         .then((res)=>{
             console.log(res)
+            const roomId = res.data.roomId
+            socket.emit("join_room", roomId);
         })
         .catch((err)=>{
             console.log(err)

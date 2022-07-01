@@ -16,9 +16,10 @@ function SignUp() {
 
   const submit = e => {
     e.preventDefault();
-    axios.post("http://dlckdals04.shop/api/users/signup", {
+    axios.post("http://13.125.188.9/api/users/signup", {
       email, nickname, password, passwordCheck
     });
+
 
     setNavigate(true);
   }

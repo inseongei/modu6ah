@@ -62,7 +62,7 @@ const Header = () => {
           setchatBox(!chatBox);
         }}></GoBell></li>
         <li className="profile">
-          <img src={profile} alt="프로필"/>
+          <a href="/MyPage"><img src={profile} alt="프로필"/></a>
         </li>
         <li className="nick">nickname</li>
         <li className="MyPage">마이페이지</li>
@@ -72,7 +72,7 @@ const Header = () => {
 
     <ChatBox chatBox= {chatBox}>
       <div className="box">
-        <div className="ChatBox"> ㅎㅇ</div>
+        <div className="ChatBox"></div>
       </div>
     </ChatBox>
     </>
@@ -171,7 +171,7 @@ const Headers = styled.div`
     border-radius:50%;
   }
 
-  .profile > img {
+  .profile > a> img {
     width:35px;
     height: 35px;
   }

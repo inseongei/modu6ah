@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import Header from '../components/Header'
 import MyPageChatList from '../components/MyPage/MyPageChatList'
 import MyPageChat from '../components/MyPage/MyPageChat'
+import io from "socket.io-client";
+
+const socket = io.connect("http://13.125.188.9")
 
 function MyPage() {
   return (
