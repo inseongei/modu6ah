@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import axios from "axios"
 
 const MyPageChatList = () => {
-    const token = localStorage.getItem("token")
 
     // // 페이지가 로드될 때 해당 user의 채팅 리스트를 불러온다
     // React.useEffect(()=>{

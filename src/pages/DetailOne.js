@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import io from "socket.io-client";
 
-const socket = io.connect("http://13.125.188.9")
+
 
 
 const DetailOne = () => {
@@ -18,19 +18,15 @@ const DetailOne = () => {
         setOn('모집완료');
       };
 
-
-
       const GoChat = () =>{
         navigate('/MyPage')
-
-     
-
         const token = localStorage.getItem("token")
         axios.post('http://13.125.188.9/api/chats/rooms/1',null,{
             headers : { Authorization: `Bearer ${getCookie("accessToken")}`}
         })
         .then((res)=>{
             console.log(res)
+            const socket = io.connect("http://13.125.188.9")
             const roomId = res.data.roomId
             socket.emit("join_room", roomId);
         })

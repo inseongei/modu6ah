@@ -15,8 +15,6 @@ const Chat = (socket, username, room) => {
   // }, [socket]);
 
 
-
-
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
@@ -34,6 +32,10 @@ const Chat = (socket, username, room) => {
       setCurrentMessage("");
     }
   };
+
+
+
+
 
 
 
