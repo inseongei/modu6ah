@@ -1,34 +1,58 @@
 import React from 'react'
 import styled from 'styled-components'
 import io from "socket.io-client";
+import { getCookie } from '../../shared/Cookie'
+import { useParams } from "react-router-dom";
+import axios from 'axios';
+import { data } from 'autoprefixer';
 
-const socket = io.connect("http://13.125.188.9"); 
 
-const Chat = (socket, username, room) => {
+const MyPageChat = () => {
+  const socket = io.connect("http://13.124.155.104")
+  let { roomId } = useParams();
   const [currentMessage, setCurrentMessage] = React.useState("");
   const [messageList, setMessageList] = React.useState([]);
+  const [realtime, setRealtime] = React.useState([]);
+  const nickname = getCookie('nickname')
 
-  // React.useEffect(() => {
-  //   socket.on("receive_message", (data) => {
-  //     setMessageList((list) => [...list, data]); 
-  //   });
-  // }, [socket]);
 
+  React.useEffect(() => {
+    socket.on("receive_message", (data) => {
+      setRealtime((list) => [...list, data]); 
+    },); 
+  
+
+    axios.get('http://13.124.155.104/api/chats/messages/' + roomId,
+    { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+    .then((res)=>{
+      console.log(res.data.chatMessageList)
+      setMessageList(res.data.chatMessageList)
+    })
+  },[]);
+
+  // socket.on("receive_message",(data)=>{
+  //   console.log(data)
+  // })
+
+
+
+  
 
   const sendMessage = async () => {
+    const socket = io.connect("http://13.124.155.104")
     if (currentMessage !== "") {
       const messageData = {
-        room: room,
-        author: username,
+        roomId: roomId,
+        senderNick: nickname,
         message: currentMessage,
         time:
           new Date(Date.now()).getHours() +
           ":" +
           new Date(Date.now()).getMinutes(),
       };
-
+      console.log(messageData)
       await socket.emit("send_message", messageData);
-      setMessageList((list) => [...list, messageData]);
+      setRealtime((list) => [...list, messageData]);
       setCurrentMessage("");
     }
   };
@@ -52,21 +76,19 @@ const Chat = (socket, username, room) => {
 
 
 
-
-
-        {messageList.map((messageContent)=>{
+        {realtime.map((message,idx)=>{
           return(
-            <div className='ChatBar' id={username === messageContent.author ? "you" : "other"}>
+            <div className='ChatBar' key={idx}>
             <div className='profile'>
               <div className='profile_one'></div>
             </div>
             <div className='two_container'>
-              <div className='two_one'>{messageContent.author}</div>
+              <div className='two_one'>{message.nickname}</div>
               <div className='two_two'>
-                <div className='longBox'>{messageContent.message}</div>
+                <div className='longBox'>{message.message}</div>
               </div>
             </div>
-            <div className='three_container'>{messageContent.time}</div>
+            <div className='three_container'>{message.time}</div>
             </div>
           )
         })}
@@ -74,19 +96,11 @@ const Chat = (socket, username, room) => {
 
 
 
-
-
-
-
-
-
         <div className='InputBox'>
           <input type="text" value={currentMessage} onChange={(event) => {setCurrentMessage(event.target.value);}} 
-        onKeyPress={(event) => {event.key === "Enter" && sendMessage();}}/>
+          onKeyPress={(event) => {event.key === "Enter" && sendMessage();}}/>
           <span onClick={sendMessage}>보내기</span>
         </div>
-
-
       </div>
     </ChatContainer>
   )
@@ -144,12 +158,13 @@ height: 100%;
   border:1px solid #A8A8A8;
   border-radius:20px;
   height: 100%;
+  padding:15px;
 }
 
 .InputBox > span{
   border:none;
   position: relative;
-  right:63px;
+  right:103px;
   background-color: #fff;
   color:#6B4E16;
   font-weight:700;
@@ -208,4 +223,4 @@ height: 100%;
 }
 
 `
-export default Chat
+export default MyPageChat

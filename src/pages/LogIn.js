@@ -16,12 +16,13 @@ function LogIn() {
   const submit =  e => {
     e.preventDefault();
 
-     axios.post("http://13.125.188.9/api/users/signin", {
+     axios.post("http://13.124.155.104/api/users/signin", {
       email, password
     })
   .then(response => {
     console.log(response.data)
     setCookie('accessToken',response.data.accessToken)
+    setCookie('nickname',response.data.nickname)
     alert('안녕')
     navigate('/');
 	}).catch(error => {

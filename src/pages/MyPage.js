@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import Header from '../components/Header'
 import MyPageChatList from '../components/MyPage/MyPageChatList'
 import MyPageChat from '../components/MyPage/MyPageChat'
-import io from "socket.io-client";
 import MyPageMenu from '../components/MyPage/MyPageMenu'
 
-const socket = io.connect("http://13.125.188.9")
+
 
 function MyPage() {
   return (
@@ -42,6 +41,9 @@ display:flex;
   height:91vh;
   border-radius:15px;
   border:2px solid #E4E4E4;;
+  display: flex;
+  flex-direction:column;
+  overflow:auto;
 }
 .Chat{
   width:50%;

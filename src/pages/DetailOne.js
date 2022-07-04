@@ -6,34 +6,37 @@ import { getCookie } from "../shared/Cookie";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import io from "socket.io-client";
+import MyPageChat from '../components/MyPage/MyPageChat';
 
 
 
 
 const DetailOne = () => {
     const navigate = useNavigate();
-    const [on, setOn] = React.useState("모집중")
+    const [on, setOn] = React.useState(false)
 
+    // 모집중 , 모집완료 상태 변경하기 
     const inputChange = () => {
-        setOn('모집완료');
+        setOn(!on);
       };
 
-      const GoChat = () =>{
-        navigate('/MyPage')
-        const token = localStorage.getItem("token")
-        axios.post('http://13.125.188.9/api/chats/rooms/1',null,{
-            headers : { Authorization: `Bearer ${getCookie("accessToken")}`}
-        })
-        .then((res)=>{
-            console.log(res)
-            const socket = io.connect("http://13.125.188.9")
-            const roomId = res.data.roomId
-            socket.emit("join_room", roomId);
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-      }
+
+    // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
+    const GoChat = () =>{     
+    axios.post('http://13.124.155.104/api/chats/rooms/1',null,{
+        headers : { Authorization: `Bearer ${getCookie("accessToken")}`}
+    })
+    .then((res)=>{
+        console.log(res)
+        const socket = io.connect("http://13.124.155.104")
+        const roomId = res.data.roomId
+        socket.emit("join_room", roomId);
+        navigate('/MyPage/' + roomId )
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+    }
 
 
   return (
@@ -42,7 +45,7 @@ const DetailOne = () => {
     <Detail>
         <div className='toggle'>
             <input type="checkbox" id="chk1"/><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
-            <h1> {on}</h1>
+            <h1> {!on ? "모집중":"모집완료"}</h1>
 
         </div>
         <div className='one_container'>
@@ -51,7 +54,7 @@ const DetailOne = () => {
                 <div>날짜  <span>2022-06-30(목)</span></div>
                 <div>시간  <span>15:00</span></div>
                 <div>위치  <span>블루베리팜 수원점</span></div>
-                <div>연령대  <span className='span_position'>5~10세</span></div>
+                <div>연령  <span>5~10세</span></div>
             </div>
             <div className='two_box'>
             <div className='three_box'>
@@ -127,10 +130,7 @@ label {
 }
 
 
-.span_position{
-    position:relative;
-    right:23px;
-}
+
 .one_box > div >span{
     border:2px solid #E4E4E4;
     display:inline-block;
@@ -138,6 +138,8 @@ label {
     padding:10px;
     margin-left: 30px;
 }
+
+
 
 .btn_box{
     display:flex;

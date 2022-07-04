@@ -213,7 +213,7 @@ const Headers = styled.div`
     font-size:35px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1075px) {
     flex-wrap: wrap;
 
     .header__right {
@@ -279,7 +279,67 @@ const Headers = styled.div`
       display:none;
     }
   }
+
+
+
 `
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const ChatBox = styled.div`
   width:23%;

@@ -25,7 +25,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route  path="/" element={<BookMark />} />
+      <Route  path="/" element={<Main />} />
       <Route  path="/login" element={< LogIn />} />
       <Route  path="/signup" element={< SignUp />} />     
       <Route  path="/recruit" element={< Recruit />} /> 
@@ -35,6 +35,7 @@ function App() {
       <Route  path="/addtwo" element={< AddTwo />} />
       <Route  path="/detailone" element={< DetailOne />} />
       <Route  path="/detailtwo" element={< DetailTwo />} />
+      <Route  path="/mypage/:roomId" element={< MyPage />} />
       <Route  path="/mypage" element={< MyPage />} />
       <Route  path="/manager" element={< ProfileManager />} />
       <Route  path="/bookmark" element={< BookMark />} />
