@@ -18,7 +18,7 @@ const MyPageChatList = () => {
     },[])
 
     const JoinChatroom = () =>{
-    const socket = io.connect("http://13.124.155.104")
+    const socket = io.connect("http://13.124.212.159")
     // const roomId = Data.roomId
     // socket.emit("join_room", roomId);
     // navigate('/MyPage/' + roomId )

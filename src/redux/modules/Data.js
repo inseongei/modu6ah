@@ -16,7 +16,7 @@ export function GetChatList(ChatList){
 // middleware --> 미들웨어 /  
 export const GetChatListAxios = () =>{
     return function (dispatch){
-        axios.get('http://13.124.155.104/api/chats/rooms',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+        axios.get('http://13.124.212.159/api/chats/rooms',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
         .then((res)=>{
             dispatch(GetChatList(res))
         }).catch((err)=>{

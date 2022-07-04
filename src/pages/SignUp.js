@@ -16,7 +16,7 @@ function SignUp() {
 
   const submit = e => {
     e.preventDefault();
-    axios.post("http://13.124.155.104/api/users/signup", {
+    axios.post("http://13.124.212.159/api/users/signup", {
       email, nickname, password, passwordCheck
     });
 

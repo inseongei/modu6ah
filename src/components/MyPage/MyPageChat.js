@@ -8,10 +8,11 @@ import { data } from 'autoprefixer';
 
 
 const MyPageChat = () => {
-  const socket = io.connect("http://13.124.155.104")
+  const socket = io.connect("http://13.124.212.159")
   let { roomId } = useParams();
   const [currentMessage, setCurrentMessage] = React.useState("");
   const [messageList, setMessageList] = React.useState([]);
+  const [fiterRoom,setfiterRoom] = React.useState([]);
   const [realtime, setRealtime] = React.useState([]);
   const nickname = getCookie('nickname')
 
@@ -22,7 +23,8 @@ const MyPageChat = () => {
     },); 
   
 
-    axios.get('http://13.124.155.104/api/chats/messages/' + roomId,
+
+    axios.get('http://13.124.212.159/api/chats/messages/' + roomId,
     { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
     .then((res)=>{
       console.log(res.data.chatMessageList)
@@ -30,16 +32,13 @@ const MyPageChat = () => {
     })
   },[]);
 
-  // socket.on("receive_message",(data)=>{
-  //   console.log(data)
-  // })
 
 
 
   
 
   const sendMessage = async () => {
-    const socket = io.connect("http://13.124.155.104")
+    const socket = io.connect("http://13.124.212.159")
     if (currentMessage !== "") {
       const messageData = {
         roomId: roomId,
@@ -52,7 +51,7 @@ const MyPageChat = () => {
       };
       console.log(messageData)
       await socket.emit("send_message", messageData);
-      setRealtime((list) => [...list, messageData]);
+      // setRealtime((list) => [...list, messageData]);
       setCurrentMessage("");
     }
   };

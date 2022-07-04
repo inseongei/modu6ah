@@ -23,12 +23,12 @@ const DetailOne = () => {
 
     // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
     const GoChat = () =>{     
-    axios.post('http://13.124.155.104/api/chats/rooms/1',null,{
+    axios.post('http://13.124.212.159/api/chats/rooms/1',null,{
         headers : { Authorization: `Bearer ${getCookie("accessToken")}`}
     })
     .then((res)=>{
         console.log(res)
-        const socket = io.connect("http://13.124.155.104")
+        const socket = io.connect("http://13.124.212.159")
         const roomId = res.data.roomId
         socket.emit("join_room", roomId);
         navigate('/MyPage/' + roomId )
