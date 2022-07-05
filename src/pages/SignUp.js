@@ -1,130 +1,316 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from "react";
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
-import { RiKakaoTalkFill } from 'react-icons/ri';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import logo from '../images/logo.png';
 import Header from "../components/Header"
+import { FormGroup } from "react-bootstrap";
 
-function SignUp() {
-  const [email, setEmail] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [password, setPw] = useState("");
-  const [passwordCheck, setPwCheck] = useState("");
-  const [navigate, setNavigate] = useState(false);
+const SignUp = () => {
+    const [email, setEmail] = useState("");
+    const [nickname, setNickname] = useState("");
+    const [password, setPw] = useState("");
+    const [passwordCheck, setPwCheck] = useState("");
+    const [navigate, setNavigate] = useState(false);
 
-  const submit = e => {
-    e.preventDefault();
-    axios.post("http://dlckdals04.shop/api/users/signup", {
-      email, nickname, password, passwordCheck
-    });
+    // 오류 메세지 상태저장
+    const [emailMessage, setEmailMessage] = useState(null);
+    const [nicknameMessage, setNicknameMessage] = useState(null);
+    const [passwordMessage, setPasswordMessage] = useState(null);
+    const [passwordConfirmMessage, setPasswordConfirmMessage] = useState(null);
+    const [OverlapEmailMessage, setOverlapEmailMessage] = useState("");
+    const [OverlapNicknameMessage, setOverlapNicknameMessage] = useState("");
 
-    setNavigate(true);
-  }
-  if (navigate) {
-    return <Navigate to="/login" />
-  }
+    // 유효성 검사
+    const [isEmail, setIsEmail] = useState(false);
+    const [OverlapEmail, checkOverlapEmail] = useState(false);
+    const [OverLapNickName, checkOverlapNickName] = useState(false);
+    const [isNickname, setIsNickname] = useState(false);
+    const [isPassword, setIsPassword] = useState(false);
+    const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 
-  if (navigate) {
-    return <Navigate to="/login"/>
-  }
-  
-  return (
-    <>
-    <Header/>
-      <Grid height="100vh" overflowY="hidden">
-        <Grid maxWidth="1320px" height="100%" margin="0 auto" padding="0 12px">
-          <Container>
-            <Grid height="750px">
-              <Grid maxWidth="550px" margin="0 auto">
-                <Grid align="center" height="100px" margin="0 0 32 0">
-                  <Logo>
-                    <div className="logo_img"
-                      onClick={() => { navigate(`/`) }}
-                    ><img src={logo} alt="로고" /></div>
-                    <div className="logo">모두의 육아</div>
-                  </Logo>
+    // 이메일 검사 
+    const onChangeEmail = (event) => {
+        const emailRegEx =
+            /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        const emailCurrent = event.target.value;
+        setEmail(event.target.value);
+
+        if (!emailRegEx.test(emailCurrent)) {
+            setEmailMessage("이메일 형식으로 입력해주세요.");
+            setIsEmail(false);
+        } else if (email === "") {
+            checkOverlapEmail(false);
+            setEmailMessage("이메일을 입력해주세요");
+
+        } else {
+            setEmailMessage("사용 가능한 이메일입니다.");
+            setIsEmail(true);
+        }
+    };
+
+    // 닉네임 검사
+    const onChangeNickname = (event) => {
+        const nickRegEx = /^[0-9a-zA-Z]{2,10}$/;
+        const nicknameCurrent = event.target.value;
+        setNickname(nicknameCurrent);
+        if (!nickRegEx.test(nicknameCurrent)) {
+            setNicknameMessage(
+                "닉네임은 한글, 영문 대/소문자, 숫자 2~10자리여야 합니다."
+            );
+            setIsNickname(false);
+        } else {
+            setNicknameMessage("사용 가능한 닉네임입니다.");
+            setIsNickname(true);
+            setNickname(event.target.value);
+        }
+    };
+
+    // 패스워드 검사
+    const onChangePassword = (event) => {
+        // const passwordRegEx = /^(?=.*\\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/;
+        const passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,16}$/
+        // /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
+        const passwordCurrent = event.target.value;
+        setPw(passwordCurrent);
+        if (!passwordRegEx.test(passwordCurrent)) {
+            setPasswordMessage("비밀번호는 한글, 영문 대/소문자, 4~16자리여야 합니다.");
+            setIsPassword(false);
+        } else {
+            setPasswordMessage("사용 가능한 비밀번호입니다.");
+            setIsPassword(true);
+            setPw(event.target.value);
+        }
+    };
+
+    // 패스워드 확인 검사
+    const onChangePasswordConfirm = (event) => {
+        const passwordConfirmCurrent = event.target.value;
+        setPwCheck(passwordConfirmCurrent);
+        if (password === passwordConfirmCurrent) {
+            setPasswordConfirmMessage("비밀번호가 일치합니다.");
+            setIsPasswordConfirm(true);
+        } else {
+            setPasswordConfirmMessage("비밀번호가 틀립니다. 다시 확인해주세요!");
+            setIsPasswordConfirm(false);
+        }
+    };
+
+    // Email 중복 체크
+    // const onClickEmailConfirm = async () => {
+    //     if (email === "") {
+    //         checkOverlapEmail(false);
+    //         setEmailMessage("Please input your email.");
+    //     }
+
+    //     if (isEmail) {
+    //         await axios
+    //             .get(`${SERVER_ADDRESS}/checkId/${email}`)
+    //             .then((response) => {
+    //                 if (response.data.response) {
+    //                     checkOverlapEmail(true);
+    //                     setOverlapEmailMessage("This is the email you can sign up for.");
+    //                 } else {
+    //                     checkOverlapEmail(false);
+    //                     setIsEmail(false);
+    //                     setEmailMessage("This is the registered email.");
+    //                 }
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err);
+    //                 checkOverlapEmail(false);
+    //                 setEmailMessage("Please input your email.");
+    //             });
+    //     } else {
+
+    //     }
+    // };
+
+    // Nick name 중복체크
+    // const onClickNickNameConfirm = async () => {
+    //     if (nickname === "") {
+    //         console.log(nickname);
+    //         checkOverlapNickName(false);
+    //         setNicknameMessage("Please input your Nickname.");
+    //     }
+    //     if (isNickname) {
+    //         await axios
+    //             .get(`${SERVER_ADDRESS}/checkNickname/${nickname}`)
+    //             .then((response) => {
+    //                 if (response.data.response) {
+    //                     checkOverlapNickName(true);
+    //                     setOverlapNicknameMessage(
+    //                         "This is the Nickname you can sign up for."
+    //                     );
+    //                 } else {
+    //                     checkOverlapNickName(false);
+    //                     setIsNickname(false);
+    //                     setNicknameMessage("This is the registered Nickname.");
+    //                 }
+    //             })
+    //             .catch((err) => {
+    //                 checkOverlapNickName(false);
+    //                 setNicknameMessage("Please input your email.");
+    //             });
+    //     } else {
+
+    //     }
+    // };
+
+
+    // 회원 등록하기
+    const register = e => {
+        e.preventDefault();
+        axios.post("http://dlckdals04.shop/api/users/signup", {
+            email, nickname, password, passwordCheck
+        });
+        setNavigate(true);
+    }
+    if (navigate) {
+        window.alert(`${nickname}님! 회원가입을 축하드립니다.`);
+        return <Navigate to="/login" />
+    } 
+
+    return (
+        <>
+            <Header />
+            <Grid height="100vh" overflowY="hidden">
+                <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+                    <Container>
+                        <Grid height="700px">
+                            <Grid maxWidth="550px" margin="0 auto">
+                                <Logo>
+                                    <div className="logo_img"
+                                        onClick={() => { navigate(`/`) }} >
+                                        <img src={logo} alt="로고" /></div>
+                                    <div className="logo">모두의 육아</div>
+                                </Logo>
+                                <form onSubmit={register}>
+                                <Box>
+                                    {/* 이메일 */}
+                                    <label className='form-label'>이메일</label>
+                                    <div className="formbox">
+                                        <input
+                                            onChange={onChangeEmail}
+                                            type="text"
+                                            className='form-input'
+                                            placeholder="이메일을 입력하세요"
+                                        ></input>
+                                        {/* <label className="id_button" onClick={onClickEmailConfirm} >
+                                    Check
+                                </label> */}
+                                    </div>
+                                    <div className="message_div">
+                                        {OverlapEmail ? (
+                                            <span className="print_message" style={{ color: "#5493f1" }}>
+                                                {OverlapEmailMessage}
+                                            </span>
+                                        ) : email.length > 0 ? (
+                                            <span
+                                                className="print_message"
+                                                style={{ color: isEmail ? "#5493f1" : "#ff2626" }}
+                                            >
+                                                {emailMessage}
+                                            </span>
+                                        ) : (
+                                            <span className="print_message" style={{ color: "#ff2626" }}>
+                                                {emailMessage}
+                                            </span>
+                                        )}
+                                    </div>
+
+
+                                    {/* 닉네임 */}
+                                    <label className='form-label'>닉네임</label>
+                                    <div className="formbox">
+                                        <input
+                                            onChange={onChangeNickname}
+                                            type="text"
+                                            className="form-input"
+                                            placeholder="닉네임을 입력하세요"
+                                        ></input>
+                                        {/* <label className="id_button" onClick={onClickNickNameConfirm}>
+                                    Check
+                                </label> */}
+                                    </div>
+                                    <div className="message">
+                                        {OverLapNickName ? (
+                                            <span className="print_message" style={{ color: "#5493f1" }}>
+                                                {OverlapNicknameMessage}
+                                            </span>
+                                        ) : nickname.length > 0 ? (
+                                            <span
+                                                className="print_message"
+                                                style={{ color: isNickname ? "#5493f1" : "#ff2626" }}
+                                            >
+                                                {nicknameMessage}
+                                            </span>
+                                        ) : (
+                                            <span className="print_message" style={{ color: "#ff2626" }}>
+                                                {nicknameMessage}
+                                            </span>
+                                        )}
+                                    </div>
+
+
+                                    {/* 비밀번호 */}
+                                    <label className='form-label'>비밀번호</label>
+                                    <input
+                                        onChange={onChangePassword}
+                                        type="password"
+                                        className="form-input"
+                                        placeholder="비밀번호를 입력하세요"
+                                    ></input>
+                                    <div className="message">
+                                        {password.length > 0 && (
+                                            <span
+                                                className="print_message"
+                                                style={{ color: isPassword ? "#5493f1" : "#ff2626" }}
+                                            >
+                                                {passwordMessage}
+                                            </span>
+                                        )}
+                                    </div>
+
+
+                                    {/* 비밀번호 확인 */}
+                                    <label className='form-label'>비밀번호 체크</label>
+                                    <input
+
+                                        onChange={onChangePasswordConfirm}
+                                        type="password"
+                                        className="form-input"
+                                        placeholder="비밀번호를 한 번 더 입력하세요"
+                                    ></input>
+                                    <div className="message_Passworddiv">
+                                        {passwordCheck.length > 0 && (
+                                            <span
+                                                className="print_message"
+                                                style={{ color: isPasswordConfirm ? "#5493f1" : "#ff2626" }}
+                                            >
+                                                {passwordConfirmMessage}
+                                            </span>
+                                        )}
+                                    </div>
+                                </Box>
+                                <Grid height="auto">
+                                    <Grid margin="15px 32%" height="auto">
+                                        <LoginBtn type="submit">
+                                            회원가입
+                                        </LoginBtn>
+                                    </Grid>
+                                </Grid>
+                                </form>
+                            </Grid>
+                        </Grid>
+                    </Container>
                 </Grid>
-                <form onSubmit={submit}>
-                    <FormGroup>
-
-                    <Grid margin="0 -32px; 0">
-                      <label className='form-label'>이메일</label>
-                    </Grid>
-                    <Grid margin="0 20% 0">
-                      <input
-                      onChange={ e => setEmail(e.target.value)}
-                        className='form-input'
-                        placeholder="이메일을 입력하세요"
-                        required
-                      ></input>
-                    </Grid>
-                  </FormGroup>
-                  <FormGroup>
-                    <Grid margin="0 -32px; 0">
-                      <label className='form-label'>닉네임</label>
-                    </Grid>
-                    <Grid margin="0 20% 0">
-                      <input
-                      onChange={ e => setNickname(e.target.value)}
-                        className="form-input"
-                        placeholder="닉네임을 입력하세요"
-                        maxLength="20"
-                        required
-                      ></input>
-                    </Grid>
-                  </FormGroup>
-                  <FormGroup>
-                    <Grid margin="0 -25px; 0">
-                      <label className='form-label'>비밀번호</label>
-                    </Grid>
-                    <Grid margin="0 20% 0">
-                      <input
-                     onChange={ e => setPw(e.target.value)}
-                        className="form-input"
-                        type="password"
-                        placeholder="비밀번호를 입력하세요"
-                        maxLength="20"
-                        required
-                      ></input>
-                    </Grid>
-                  </FormGroup>
-                  <FormGroup>
-                    <Grid margin="0 -10px; 0">
-                      <label className='form-label'>비밀번호 체크</label>
-                    </Grid>
-                    <Grid margin="0 20% 0">
-                      <input
-                      onChange={ e => setPwCheck(e.target.value)}
-                        className="form-input"
-                        type="password"
-                        placeholder="비밀번호를 한 번 더 입력하세요"
-                        maxLength="20"
-                        required
-                      ></input>
-                    </Grid>
-                  </FormGroup>
-                  <Grid height="auto">
-                    <Grid margin="0 20% 0" height="auto">
-                      <LoginBtn 
-                      // onClick={logout}
-                      type='submit'>
-                        회원가입
-                      </LoginBtn>
-                    </Grid>
-                  </Grid>
-                </form>
-              </Grid>
             </Grid>
-          </Container>
-        </Grid>
-      </Grid>
-    </>
-  )
-}
+        </>
+    );
+};
 
-// &nbsp; 공백없는 줄바꿈 
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -133,19 +319,32 @@ const Container = styled.div`
   justify-content: center;
   margin-top: 5px;
 
-  .has-error {
-    .form-label {
-      color: #e25c3d;
-    }
-    .form-input {
-      border: 1px solid #e25c3d;
-      &:focus {
-        border: 1px solid #e25c3d;
-      }
-    }
-    .email-validation {
-      font-size: 12px;
-      color: #e25c3d;
+  .form-label {
+      margin-top: 10px;
+
+  }
+
+  .form-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    width: 80%;
+    padding: 6px 12px;
+    background-color: transparent;
+    background-image: none;
+    box-sizing: ${(props) => props.boxSizing};
+    border: 1px solid #E4E4E4;
+    border-radius: 4px;
+    -webkit-transition: border-color ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s;
+    cursor: text;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+
+    &:focus {
+      border: 1px solid #111111;
+      outline: none;
     }
   }
 `
@@ -166,55 +365,10 @@ const Logo = styled.h1`
  }
  }
 `
-
-
-const FormGroup = styled.div`
-  margin-bottom: 24px;
- 
-  .form-label {
-    display: inline-flex;
-    -webkit-box-align: baseline;
-    -webkit-align-items: baseline;
-    -ms-flex-align: baseline;
-    align-items: baseline;
-    width: 60%;
-    justify-content: center;
-    max-width: 100%;
-    margin-bottom: 6px;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
-
-  .form-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 45px;
-    width: 60%;
-    padding: 6px 12px;
-    background-color: transparent;
-    background-image: none;
-    box-sizing: ${(props) => props.boxSizing};
-    border: 1px solid #E4E4E4;
-    border-radius: 4px;
-    -webkit-transition: border-color ease-in-out 0.15s;
-    transition: border-color ease-in-out 0.15s;
-    cursor: text;
-    box-sizing: border-box;
-    
-
-    &:focus {
-      border: 1px solid #111111;
-      outline: none;
-    }
-  }
-`
-
-
 const LoginBtn = styled.button`
-height: 65px;
+height: 55px;
 font-size: 15px;
-width: 60%;
+width: 40%;
 color: #ffffff;
 background-color: #A58646;
 text-align: center;
@@ -225,13 +379,15 @@ align-items: center;
 border: 1px solid transparent;
 cursor: pointer;
 
-
   :disabled {
     opacity: 0.7;
     cursor: not-allowed;
     pointer-events: none;
   }
 `
+const Box = styled.div`
+margin: 40px 0px 0px 110px;
+`;
 
 
 export default SignUp;
