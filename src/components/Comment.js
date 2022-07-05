@@ -29,6 +29,7 @@ const comment = () => {
 
 const CommentBox = styled.div`
     margin-top:30px;
+
 .comment_section{
     display: flex;
     justify-content: space-between;
@@ -36,7 +37,9 @@ const CommentBox = styled.div`
     height:60px;
     margin-top: 85px;
     margin-left: 70px;
+
 }
+
 .title {
     font-size: 25px;
    
@@ -49,6 +52,7 @@ const CommentBox = styled.div`
     }
     
 } 
+
 .btn{
     width: 10%;
     height: 30px;
@@ -66,17 +70,20 @@ const CommentBox = styled.div`
     margin-top: 30px;
     display:flex;
 }
+
 .chat {
   width: 770px;
   height: 50px;
   display:flex;
 }
+
 .profile{
     width: 50px;
     height:50px;
     border-radius:50%;
     border:1px solid black;
   }
+
   .name{
     display: flex;
     justify-content:center;
@@ -84,10 +91,12 @@ const CommentBox = styled.div`
     font-family: 'Noto Sans KR';
     margin-left: 10px;
   }
+
   .comment_box {
     margin-top:14px;
     margin-left: 30px;
   }
+
   .delete{
     width: 20%;
     height: 10px;
@@ -99,6 +108,8 @@ const CommentBox = styled.div`
     border: 0;
     outline: 0;
   }
+
+
 `
 
 
