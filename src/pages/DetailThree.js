@@ -7,7 +7,7 @@ import Comment from '../components/Comment'
 
 
 
-const DetailTwo = () => {
+const DetailThree = () => {
 
 
 
@@ -30,15 +30,14 @@ const DetailTwo = () => {
           <div className='TwoBox'>
 
             <div className='title'>
-              <p>국립생태공원</p>
-              <span><FaStar className='icon'></FaStar></span>
-              <span className='starScore'> 4.0점</span>
+              <p>어린이스마트폰</p>
+              <span className='starScore'> 가전제품</span>
             </div>
 
-            <div className='location'><p><GrLocation></GrLocation>서울특별시 성수동 어쩌구 1004번지</p></div>
+            <div className='location'><p><GrLocation></GrLocation>www.gmarket.com/kidsphone</p></div>
 
             <div className='info'>
-              <div className='profile'>ㅎㅇ</div>
+              <div className='profile'>사진</div>
               <p className='nickname'>5세맘육아왕</p>
             </div>
           </div>
@@ -46,10 +45,6 @@ const DetailTwo = () => {
           <div className='ThreeBox'>
             <div className='fourBox'>
               <p>내용</p>
-              <div className='btnBox'>
-                <button className='ParkBtn'>주차가능</button>
-                <button className='KidBtn'>예스키즈존</button>
-              </div>
             </div>
           </div>
 
@@ -144,6 +139,7 @@ const Container = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  margin-left: 15px;
 }
 
 .location{
@@ -246,5 +242,5 @@ height: 80%;
 
 `
 
-export default DetailTwo
+export default DetailThree;
 

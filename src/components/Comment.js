@@ -5,10 +5,15 @@ import styled from 'styled-components'
 const comment = () => {
   return (
     <CommentBox>
+
+
         <div className='comment_section'> 
-            <div className='title'>댓글 <input type="text"/></div>
-        <button className='btn'>등록</button>
+        <div className='h1Box'><h1>댓글</h1></div>
+        <div className='inputBox'><input type="text"/></div>
+        <div className='btnBox'><button className='btn'>등록</button></div>
         </div>
+
+
         <div className='box'>
             <div className='chat'>
             <div className='first'>
@@ -37,36 +42,78 @@ margin-top:30px;
 
 .comment_section{
     display: flex;
-    justify-content: space-between;
-    width:90%;
+    justify-content: center;
+    width:60%;
     height:60px;
-    margin-top: 85px;
-    margin-left: 70px;
-
+    margin: 30px auto 0px;
 }
 
-.title {
-    font-size: 25px;
-   
-    input { 
-        border: 1px solid #E4E4E4;
-        border-radius: 30px;
-        margin-left: 35px;
-        height: 50px;
-        width: 70%;
-    }
-    
-} 
+
+.h1Box{
+    width:15%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h1Box > h1{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+}
+.inputBox{
+    width:70%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.inputBox > input{
+    width:100%;
+    border: 1px solid #E4E4E4;
+    height: 40px;
+    border-radius: 300px;
+}
+
+.btnBox{
+    width:15%;
+    display:flex;
+    justify-content: center;
+    align-items: center;  
+}
 
 .btn{
-    width: 10%;
-    height: 30px;
-    border-radius: 30px;
-    color: #22211a;
-    background-color: #F4B03E;
-    margin-top: 7px;
-    padding-bottom: 30px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    background: #F4B03E;
+    border-radius: 300px;
+    width:100%;
+    color: #FFFFFF;
+    margin-left:30px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .box{
     width: 90vh;
     height: 80vh;
@@ -113,7 +160,6 @@ margin-top:30px;
     border: 0;
     outline: 0;
   }
-
 
 `
 
