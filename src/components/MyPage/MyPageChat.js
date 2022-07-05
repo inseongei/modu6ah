@@ -12,24 +12,32 @@ const MyPageChat = () => {
   let { roomId } = useParams();
   const [currentMessage, setCurrentMessage] = React.useState("");
   const [messageList, setMessageList] = React.useState([]);
-  const [fiterRoom,setfiterRoom] = React.useState([]);
+  const [RoomMessage,setRoomMessage] = React.useState([]);
   const [realtime, setRealtime] = React.useState([]);
   const nickname = getCookie('nickname')
 
 
   React.useEffect(() => {
     socket.on("receive_message", (data) => {
-      setRealtime((list) => [...list, data]); 
+        if(roomId === data.roomId){
+          setRealtime((list) => [...list, data]); 
+        } else{
+          setRoomMessage((list)=>[...list, data])
+        }
     },); 
-  
 
 
-    axios.get('http://13.124.212.159/api/chats/messages/' + roomId,
-    { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
-    .then((res)=>{
-      console.log(res.data.chatMessageList)
-      setMessageList(res.data.chatMessageList)
-    })
+
+
+    // axios.get('http://13.124.212.159/api/chats/messages/' + roomId,
+    // { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+    // .then((res)=>{
+    //   console.log(res.data.chatMessageList)
+    //   setMessageList(res.data.chatMessageList)
+    // })
+
+
+
   },[]);
 
 
@@ -51,7 +59,6 @@ const MyPageChat = () => {
       };
       console.log(messageData)
       await socket.emit("send_message", messageData);
-      // setRealtime((list) => [...list, messageData]);
       setCurrentMessage("");
     }
   };
