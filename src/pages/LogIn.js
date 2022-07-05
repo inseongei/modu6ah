@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 import {setCookie } from "../shared/Cookie";
 import logo from '../images/logo.png';
@@ -35,7 +35,7 @@ function LogIn() {
     <>
     <Header/>
       <Grid height="100vh" overflowY="hidden">
-        <Grid maxWidth="1320px" height="100%" margin="0 auto" padding="0 12px">
+        <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
           <Container>
             <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
@@ -56,7 +56,7 @@ function LogIn() {
                       <input
                         onChange={ e => setEmail(e.target.value)}
                         className='form-input'
-                        name="userEmail"
+                        name="email"
                         placeholder="이메일을 입력하세요"
                         required
                       ></input>
@@ -181,6 +181,7 @@ const SocialLogin = styled.a`
 
   &:hover {
     background-color: #ffdd00;
+    color: black;
   }
 `
 
@@ -249,7 +250,6 @@ const LoginBtn = styled.button`
   border: 1px solid transparent;
   cursor: pointer;
 
-
   :disabled {
     opacity: 0.7;
     cursor: not-allowed;
@@ -261,6 +261,7 @@ const JoinLink = styled.a`
   color: #767676;
   transition: color 0.1s ease-in-out, fill 0.1s ease-in-out, opacity 0.1s ease-in-out;
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     color: #111111;
