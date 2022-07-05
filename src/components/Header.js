@@ -4,7 +4,7 @@ import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
 import logo from '../images/logo.png'
 import profile from '../images/profile.png'
 import { useNavigate } from "react-router-dom";
-import { removeCookie } from "../shared/Cookie";
+import { removeCookie,getCookie } from "../shared/Cookie";
 
 const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
@@ -12,15 +12,80 @@ const Header = () => {
   const [userToggled, setUserToggled] = useState(false);
   const [chatBox , setchatBox] = useState(false)
   const navigate = useNavigate();
+  const UserCheck = getCookie('accessToken')
+
+
+  const Login = () =>{
+    navigate('/Login')
+  }
+
 
   const logoOut = () =>{
     removeCookie('accessToken')
+    removeCookie('nickname')
     navigate('/')
+    alert('로그아웃 되셨습니다')
   }
 
 
   return (
     <>
+
+    {/* 로그인할때의 헤더 ============================================================================== */}
+
+
+    {!UserCheck ?
+    <Headers isToggled={isToggled} userToggled={userToggled}>
+    {/* 햄버거 버튼(bar) */}
+    <div
+      className="toggle"
+      onClick={() => {
+        setIsToggled(!isToggled);
+      }}
+    >
+    {!isToggled ? <GoThreeBars className="icon"></GoThreeBars>  : <GoX className="icon"></GoX>}
+    </div>
+
+    <div className="logo_container"
+        onClick={() => 
+        { navigate(`/`) }}>
+      <div className="logo_img">
+          <img src={logo} alt="로고"/></div> 
+      <div className="logo">모두의 육아</div> 
+    </div>
+
+    {/* User 버튼 */}
+    <div
+      className="user"
+      onClick={() => {
+        setUserToggled(!userToggled);
+      }}
+    >
+    {!userToggled ? <GoPerson className="icon"></GoPerson> : <GoX className="icon"></GoX>}
+    </div>
+
+    {/* 메뉴 리스트 */}
+    <ul className="header__menulist">
+      <li onClick={() => 
+       { navigate(`/recruit`) }}>같이해요</li>
+      <li onClick={() => 
+       { navigate(`/place`) }}>추천해요</li>
+      <li onClick={() => 
+       { navigate(`/review`) }}>육아템 리뷰</li>
+    </ul>
+
+    {/* User 메뉴 리스트 */}
+    <ul className="header__right">
+      <li className="LogoOut" onClick={Login}>로그인</li>
+    </ul>
+  </Headers>
+    
+    
+    
+    :
+    
+    // 로그인했을때의 헤더 ==============================================================================
+    
     <Headers isToggled={isToggled} userToggled={userToggled}>
       {/* 햄버거 버튼(bar) */}
       <div
@@ -73,7 +138,9 @@ const Header = () => {
         <li className="LogoOut" onClick={logoOut}>로그아웃</li>
       </ul>
     </Headers>
-
+     
+    }
+    
     <ChatBox chatBox= {chatBox}>
       <div className="box">
         <div className="ChatBox"></div>

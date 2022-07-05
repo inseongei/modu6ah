@@ -39,6 +39,7 @@ const DetailOne = () => {
     }
 
 
+
     return (
         <>
             <Header />
@@ -85,6 +86,7 @@ const DetailOne = () => {
             </Detail>
         </>
     )
+
 }
 
 const Detail = styled.div`
@@ -209,7 +211,7 @@ label {
     display:none;
 }
 
-input{
+.inputToggle{
     position:absolute;
     // left:-1000%;
     }

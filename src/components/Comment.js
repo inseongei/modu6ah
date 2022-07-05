@@ -37,6 +37,7 @@ const CommentBox = styled.div`
     height:60px;
     margin-top: 85px;
     margin-left: 70px;
+
 }
 
 .title {
@@ -61,7 +62,6 @@ const CommentBox = styled.div`
     margin-top: 7px;
     padding-bottom: 30px;
 }
-
 .box{
     width: 90vh;
     height: 80vh;
@@ -108,6 +108,7 @@ const CommentBox = styled.div`
     border: 0;
     outline: 0;
   }
+
 
 `
 
