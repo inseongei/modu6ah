@@ -2,94 +2,91 @@ import React from 'react'
 import Header from '../components/Header'
 import styled from 'styled-components'
 import dog from '../images/dog.jpg'
+import { getCookie } from "../shared/Cookie";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
+import io from "socket.io-client";
+import MyPageChat from '../components/MyPage/MyPageChat';
+import Comment from '../components/Comment';
 
 
 const DetailOne = () => {
     const navigate = useNavigate();
-    const [on, setOn] = React.useState("모집중")
+    const [on, setOn] = React.useState(false)
 
+    // 모집중 , 모집완료 상태 변경하기 
     const inputChange = () => {
-        setOn('모집완료');
-      };
+        setOn(!on);
+    };
 
 
-     
-
-
-
-
-
-
-      const GoChat = () =>{
-        // navigate('/Chat')
-
-        const token = localStorage.getItem("token")
-        axios.post('http://13.125.188.9/api/chats/rooms/2',null,{
-            headers : { Authorization : "Bearer " + `${token}`}
+    // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
+    const GoChat = () => {
+        axios.post('http://13.124.212.159/api/chats/rooms/1', null, {
+            headers: { Authorization: `Bearer ${getCookie("accessToken")}` }
         })
-        .then((res)=>{
-            console.log(res)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-      }
+            .then((res) => {
+                console.log(res)
+                const socket = io.connect("http://13.124.212.159")
+                const roomId = res.data.roomId
+                socket.emit("join_room", roomId);
+                navigate('/MyPage/' + roomId)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
 
-  return (
-    <>
-    <Header/>
-    <Detail>
-        <div className='toggle'>
-            <input type="checkbox" id="chk1"/><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
-            <h1> {on}</h1>
+    return (
+        <>
+            <Header />
+            <Detail>
+                <div className='toggle'>
+                    <input type="checkbox" id="chk1" /><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
+                    <h1> {!on ? "모집중" : "모집완료"}</h1>
 
-        </div>
-        <div className='one_container'>
-            <div className='one_box'>
-                <div> 제목  <span>블루베리 농장 체험</span></div>
-                <div>날짜  <span>2022-06-30(목)</span></div>
-                <div>시간  <span>15:00</span></div>
-                <div>위치  <span>블루베리팜 수원점</span></div>
-                <div>연령대  <span className='span_position'>5~10세</span></div>
-            </div>
-            <div className='two_box'>
-            <div className='three_box'>
-            <div className='Detail_profile'>
-                <img src={dog} alt="프로필"/>
-            </div>
+                </div>
+                <div className='one_container'>
+                    <div className='one_box'>           
+                        <div>제목  <span>블루베리 농장 체험</span></div>
+                        <div>날짜  <span>2022-06-30(목)</span></div>
+                        <div>시간  <span>15:00</span></div>
+                        <div>위치  <span>블루베리팜 수원점</span></div>
+                        <div>연령  <span>5~10세</span></div>
+                    </div>
+                    <div className='two_box'>
+                        <div className='three_box'>
+                            <div className='Detail_profile'>
+                                <img src={dog} alt="프로필" />
+                            </div>
 
-            <div className="Detail_username">
-            <div className="username">안양길동맘</div>
-            <div className='btn_box'>
-                <button onClick={GoChat}>1:1문의하기</button>
-                <button>신청하기</button>
-            </div>
-            </div>
-            </div>
+                            <div className="Detail_username">
+                                <div className="username">안양길동맘</div>
+                                <div className='btn_box'>
+                                    <button onClick={GoChat}>1:1문의하기</button>
+                                    <button>신청하기</button>
+                                   
+                                </div>
+                            </div>
+                        </div>
 
-            <div className='four_box'>
-            블루베리 농장 체험 가려는데 거리가 멀어 운전 가능한 학부모님 찾습니다~
-            현재 안양에 거주 중이라 근처 가까운 곳에서 뵈었으면 좋겠습니다.
-            육아 스타일: 강하게 키웁니다
-            준비물: 물티슈
-            입장료: 성인 15000원 / 아동 8000원
-            </div>
-
-
-            </div>
-        </div>
-    </Detail>
-    </>
-  )
+                        <div className='four_box'>
+                            블루베리 농장 체험 가려는데 거리가 멀어 운전 가능한 학부모님 찾습니다~
+                            현재 안양에 거주 중이라 근처 가까운 곳에서 뵈었으면 좋겠습니다.
+                            육아 스타일: 강하게 키웁니다
+                            준비물: 물티슈
+                            입장료: 성인 15000원 / 아동 8000원
+                        </div>
+                    </div>
+                </div>
+                <Comment/>
+            </Detail>
+        </>
+    )
 }
 
 const Detail = styled.div`
-
-
-
 .toggle{
     margin-left: 20px;
     display:flex;
@@ -108,7 +105,6 @@ label {
 }
 
 .one_box{
-
     width:50%;
     height:50vh;
     display:flex;
@@ -129,17 +125,16 @@ label {
 }
 
 
-.span_position{
-    position:relative;
-    right:23px;
-}
+
 .one_box > div >span{
-    border:2px solid #E4E4E4;
+    border: 1px solid #E4E4E4;
     display:inline-block;
     width:30vw;
     padding:10px;
     margin-left: 30px;
 }
+
+
 
 .btn_box{
     display:flex;
@@ -215,7 +210,7 @@ label {
 
 input{
     position:absolute;
-    left:-1000%;
+    // left:-1000%;
     }
 
 label{
