@@ -18,6 +18,7 @@ import MainChat from "../pages/MainChat";
 import Main from '../pages/Main'
 import WelcomeModal from '../modal/WelcomeModal';
 import EditModalOne from '../modal/EditModalOne';
+import DetailThree from '../pages/DetailThree';
 
 
 
@@ -25,7 +26,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route  path="/" element={<DetailTwo />} />
+      <Route  path="/" element={<DetailThree />} />
       <Route  path="/login" element={< LogIn />} />
       <Route  path="/signup" element={< SignUp />} />     
       <Route  path="/recruit" element={< Recruit />} /> 

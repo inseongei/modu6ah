@@ -10,7 +10,6 @@ import MyPageChat from '../components/MyPage/MyPageChat';
 import Comment from '../components/Comment';
 
 
-
 const DetailOne = () => {
     const navigate = useNavigate();
     const [on, setOn] = React.useState(false)
@@ -37,7 +36,6 @@ const DetailOne = () => {
                 console.log(err)
             })
     }
-
 
 
     return (
@@ -86,7 +84,6 @@ const DetailOne = () => {
             </Detail>
         </>
     )
-
 }
 
 const Detail = styled.div`
@@ -211,10 +208,6 @@ label {
     display:none;
 }
 
-.inputToggle{
-    position:absolute;
-    // left:-1000%;
-    }
 
 label{
     position:relative;
