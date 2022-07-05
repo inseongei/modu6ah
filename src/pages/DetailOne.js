@@ -44,7 +44,7 @@ const DetailOne = () => {
     <Header/>
     <Detail>
         <div className='toggle'>
-            <input type="checkbox" id="chk1"/><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
+            <input type="checkbox" id="chk1" className='inputToggle'/><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
             <h1> {!on ? "모집중":"모집완료"}</h1>
 
         </div>
@@ -79,7 +79,7 @@ const DetailOne = () => {
             입장료: 성인 15000원 / 아동 8000원
             </div>
 
-
+            <input type="text"/>ㅎㅇ
             </div>
         </div>
     </Detail>
@@ -213,7 +213,7 @@ label {
     display:none;
 }
 
-input{
+.inputToggle{
     position:absolute;
     left:-1000%;
     }
