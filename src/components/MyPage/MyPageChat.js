@@ -12,7 +12,6 @@ const MyPageChat = () => {
   let { roomId } = useParams();
   const [currentMessage, setCurrentMessage] = React.useState("");
   const [messageList, setMessageList] = React.useState([]);
-  const [RoomMessage,setRoomMessage] = React.useState([]);
   const [realtime, setRealtime] = React.useState([]);
   const nickname = getCookie('nickname')
 
@@ -22,19 +21,19 @@ const MyPageChat = () => {
         if(roomId === data.roomId){
           setRealtime((list) => [...list, data]); 
         } else{
-          setRoomMessage((list)=>[...list, data])
+          return null;
         }
     },); 
 
 
 
 
-    // axios.get('http://13.124.212.159/api/chats/messages/' + roomId,
-    // { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
-    // .then((res)=>{
-    //   console.log(res.data.chatMessageList)
-    //   setMessageList(res.data.chatMessageList)
-    // })
+    axios.get('http://13.124.212.159/api/chats/messages/' + roomId,
+    { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+    .then((res)=>{
+      console.log(res.data.chatMessageList)
+      setRealtime(res.data.chatMessageList)
+    })
 
 
 
