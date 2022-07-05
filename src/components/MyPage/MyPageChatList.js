@@ -6,52 +6,53 @@ import { useDispatch} from "react-redux"
 import {GetChatListAxios} from '../../redux/modules/Data'
 import {useSelector} from "react-redux";
 import io from "socket.io-client";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+const socket = io.connect("http://13.124.212.159")
 
 const MyPageChatList = () => {
+    let { roomId } = useParams();
+
+
+
     const dispatch = useDispatch();
-    const Data = useSelector((state)=> state.Data.list);
-
-
-    // 페이지가 로드될 때 해당 user의 채팅 리스트를 불러온다
     React.useEffect(()=>{
-        dispatch(GetChatListAxios());       
-    },[])
+      dispatch(GetChatListAxios());       
+  },[])
+  
+  
+  const Data = useSelector((state)=> state.Data.list);
+  
+    const navigate = useNavigate();
 
-    const JoinChatroom = () =>{
-    const socket = io.connect("http://13.124.212.159")
-    // const roomId = Data.roomId
-    // socket.emit("join_room", roomId);
-    // navigate('/MyPage/' + roomId )
-    }
-
-
-
-
-
-
-
+  console.log(Data)
 
     return (
             <>
             {Data&&Data.map((Data,idx)=>{
                 return(
-                <ChatList key={idx} onClick={JoinChatroom}>
-                <div className='profile_container' >
+                <ChatList key={idx}>
+                <div className='profile_container' onClick={()=>{
+                    navigate('/MyPage/' + Data.roomId)
+                    socket.emit("join_room",Data.roomId)
+                    window.location.reload()
+                }} >
                 <div className='profile'></div>
                 </div>
                 <div>
-                <div className='name_container'>{Data.nickname}</div>
+                <div className='name_container'>{Data.postNickname}</div>
                 <div className='content'>
                 <span className='say'>대화내용</span>
                 <span className='bell'>
                     <span className='number'>1</span>
                 </span>
-            </div>
-    
-            </div>
-            </ChatList>
+                </div>
+                </div>
+                </ChatList>
                 )
             })}
+      
             </> 
             
 
