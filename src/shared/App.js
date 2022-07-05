@@ -19,6 +19,8 @@ import Main from '../pages/Main'
 import WelcomeModal from '../modal/WelcomeModal';
 import EditModalOne from '../modal/EditModalOne';
 
+
+
 function App() {
   return (
     <>
@@ -33,12 +35,13 @@ function App() {
       <Route  path="/addtwo" element={< AddTwo />} />
       <Route  path="/detailone" element={< DetailOne />} />
       <Route  path="/detailtwo" element={< DetailTwo />} />
-      <Route  path="/mypage" element={< Mypage />} />
+      <Route  path="/mypage/:roomId" element={< MyPage />} />
+      <Route  path="/mypage" element={< MyPage />} />
       <Route  path="/manager" element={< ProfileManager />} />
       <Route  path="/bookmark" element={< BookMark />} />
       <Route  path="/chatlist" element={< ChatList />} />
       <Route  path="/mainchat" element={< MainChat />} /> 
-        //이쪽 모달은 추후에 삭제 예정
+        {/* 이쪽 모달은 추후에 삭제 예정 */}
       <Route  path="/welcome" element={< WelcomeModal />} /> 
       <Route  path="/edit" element={< EditModalOne />} /> 
 

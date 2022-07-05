@@ -13,7 +13,7 @@ const SignUp = () => {
     const [password, setPw] = useState("");
     const [passwordCheck, setPwCheck] = useState("");
     const [navigate, setNavigate] = useState(false);
-
+    
     // 오류 메세지 상태저장
     const [emailMessage, setEmailMessage] = useState(null);
     const [nicknameMessage, setNicknameMessage] = useState(null);
