@@ -1,14 +1,14 @@
 import React from 'react'
-import Footer from '../components/Footer'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-
+import Cookies from 'universal-cookie';
 //  elements & components
 import Grid from '../components/elements/Grid';
 import Header from '../components/Header'
 import Swiper from '../components/main/Swiper'
 import SCard from '../components/cards/SCard'
 import LCard from '../components/cards/LCard'
+import Footer from '../components/Footer'
 
 const Main = () => {
   const navigate = useNavigate();
@@ -31,8 +31,9 @@ const Main = () => {
         <SCard />
         <button>게시글 더 보기</button>
       </div>
-    </div>
       <Footer/>
+    </div>
+
   )
 }
 

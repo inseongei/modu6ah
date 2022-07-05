@@ -1,15 +1,14 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
-import Cookies from 'universal-cookie';
+import {setCookie } from "../shared/Cookie";
 import logo from '../images/logo.png';
 import Header from "../components/Header"
 
 function LogIn() {
-  const cookies = new Cookies();
   const [email, setEmail] = useState("");
   const [password, setPw] = useState("");
   const navigate = useNavigate();
@@ -17,13 +16,13 @@ function LogIn() {
   const submit =  e => {
     e.preventDefault();
 
-     axios.post("http://dlckdals04.shop/api/users/signin", {
+     axios.post("http://13.124.212.159/api/users/signin", {
       email, password
     })
   .then(response => {
     console.log(response.data)
-    cookies.set('accessToken', response.data.accessToken)
-    localStorage.setItem('token',response.data.accessToken)
+    setCookie('accessToken',response.data.accessToken)
+    setCookie('nickname',response.data.nickname)
     alert('안녕')
     navigate('/');
 	}).catch(error => {
@@ -154,7 +153,7 @@ const Logo = styled.h1`
    color: #F4B03E;
    font-size: 35px;
  }
- }
+ 
 `
 
 const SocialLogin = styled.a`

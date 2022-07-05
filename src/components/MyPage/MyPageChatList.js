@@ -1,44 +1,70 @@
 import React from 'react'
 import styled from 'styled-components'
 import axios from "axios"
+import { getCookie } from '../../shared/Cookie'
+import { useDispatch} from "react-redux"
+import {GetChatListAxios} from '../../redux/modules/Data'
+import {useSelector} from "react-redux";
+import io from "socket.io-client";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+const socket = io.connect("http://13.124.212.159")
 
 const MyPageChatList = () => {
-    const token = localStorage.getItem("token")
-
-    // // 페이지가 로드될 때 해당 user의 채팅 리스트를 불러온다
-    // React.useEffect(()=>{
-    //     axios.get('http://13.125.188.9/api/chats/rooms',{
-    //     headers : { Authorization : "Bearer " + `${token}`}
-    //     })
-    // })
+    let { roomId } = useParams();
 
 
 
+    const dispatch = useDispatch();
+    React.useEffect(()=>{
+      dispatch(GetChatListAxios());       
+  },[])
+  
+  
+  const Data = useSelector((state)=> state.Data.list);
+  
+    const navigate = useNavigate();
+
+  console.log(Data)
+
+    return (
+            <>
+            {Data&&Data.map((Data,idx)=>{
+                return(
+                <ChatList key={idx}>
+                <div className='profile_container' onClick={()=>{
+                    navigate('/MyPage/' + Data.roomId)
+                    socket.emit("join_room",Data.roomId)
+                    window.location.reload()
+                }} >
+                <div className='profile'></div>
+                </div>
+                <div>
+                <div className='name_container'>{Data.postNickname}</div>
+                <div className='content'>
+                <span className='say'>대화내용</span>
+                <span className='bell'>
+                    <span className='number'>1</span>
+                </span>
+                </div>
+                </div>
+                </ChatList>
+                )
+            })}
+      
+            </> 
+            
+
+      )
 
 
 
 
 
-  return (
-    <ChatList>
-        <div className='profile_container'>
-        <div className='profile'></div>
-        </div>
 
 
-        <div>
 
-        <div className='name_container'> 안양길동맘</div>
-        <div className='content'>
-            <span className='say'>대화내용</span>
-            <span className='bell'>
-                <span className='number'>1</span>
-            </span>
-        </div>
-
-        </div>
-    </ChatList>
-  )
 }
 
 const ChatList = styled.div`
@@ -48,21 +74,19 @@ const ChatList = styled.div`
     width:100%;
     height:10%;
     margin-top:10px;
-
 .profile{
     width:70px;
     height:70px;
     border-radius:50%;
     border: 1px solid black;
+    margin-right: 10px;
 }
-
 .profile_container{
     width:30%;
     display:flex;
     justify-content:center;
     align-items:center;
 }
-
 .name_container{
     width:100%;
     height: 50%;
@@ -74,7 +98,6 @@ const ChatList = styled.div`
     display:flex;
     align-items:center;
 }
-
 .content{
     width:20vw;
     height: 50%;
@@ -86,7 +109,6 @@ const ChatList = styled.div`
     font-size: 12px;
     line-height: 17px;
 }
-
 .bell{
     width:35px;
     height: 35px;
@@ -94,8 +116,9 @@ const ChatList = styled.div`
     background-color:#F4B03E;
     border:none;
     margin-right: 15px;
+    position:relative;
+    bottom: 10px;
 }
-
 .say{
     font-family: 'Noto Sans KR';
     font-style: normal;
@@ -105,7 +128,6 @@ const ChatList = styled.div`
     display:flex;
     align-items:center;
 }
-
 .number{
     display:flex;
     height:100%;
