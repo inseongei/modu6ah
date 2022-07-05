@@ -10,7 +10,7 @@ import Review from "../pages/Review";
 import AddOne from "../pages/AddOne";
 import AddTwo from "../pages/AddTwo";
 import DetailTwo from "../pages/DetailTwo"; 
-import Mypage from "../pages/MyPage";
+import MyPage from "../pages/MyPage";
 import ProfileManager from "../pages/ProfileManager";
 import BookMark from "../pages/BookMark";
 import ChatList from "../pages/ChatList";
@@ -38,7 +38,6 @@ function App() {
       <Route  path="/bookmark" element={< BookMark />} />
       <Route  path="/chatlist" element={< ChatList />} />
       <Route  path="/mainchat" element={< MainChat />} /> 
-
         //이쪽 모달은 추후에 삭제 예정
       <Route  path="/welcome" element={< WelcomeModal />} /> 
       <Route  path="/edit" element={< EditModalOne />} /> 

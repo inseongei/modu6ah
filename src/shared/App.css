@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+
 
 body{
   font-family: 'Noto Sans KR', sans-serif;
   margin:0px;
 }
 
+/* 부트 스트랩 캐러셀 높이 스타일 */
 .d-block{
   height: 409px;
 }
+
+

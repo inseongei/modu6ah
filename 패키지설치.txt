@@ -15,3 +15,10 @@ yarn add axios  ::   axios 패키지 설치
 npm install universal-cookie	:: 쿠키 저장 패키지
 
 yarn add firebase :: firebase 
+
+npm install react-bootstrap bootstrap :: 리액트 부트스트랩 
+
+yarn add socket.io-client   :: 소켓 라이브러리
+
+yarn add react-scroll-to-bottom :: 스크롤바 라이브러리
+

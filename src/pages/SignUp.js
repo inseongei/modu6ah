@@ -7,7 +7,6 @@ import logo from '../images/logo.png';
 import Header from "../components/Header"
 import { FormGroup } from "react-bootstrap";
 
-
 const SignUp = () => {
     const [email, setEmail] = useState("");
     const [nickname, setNickname] = useState("");

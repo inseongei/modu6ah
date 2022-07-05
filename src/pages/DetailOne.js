@@ -1,14 +1,51 @@
 import React from 'react'
 import Header from '../components/Header'
 import styled from 'styled-components'
+import dog from '../images/dog.jpg'
+import { useNavigate } from 'react-router-dom'
+import axios from "axios"
+
 
 const DetailOne = () => {
+    const navigate = useNavigate();
+    const [on, setOn] = React.useState("모집중")
+
+    const inputChange = () => {
+        setOn('모집완료');
+      };
+
+
+     
+
+
+
+
+
+
+      const GoChat = () =>{
+        // navigate('/Chat')
+
+        const token = localStorage.getItem("token")
+        axios.post('http://13.125.188.9/api/chats/rooms/2',null,{
+            headers : { Authorization : "Bearer " + `${token}`}
+        })
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+      }
+
+
   return (
     <>
     <Header/>
     <Detail>
         <div className='toggle'>
-            <input type="checkbox"/> 모집중
+            <input type="checkbox" id="chk1"/><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
+            <h1> {on}</h1>
+
         </div>
         <div className='one_container'>
             <div className='one_box'>
@@ -20,12 +57,14 @@ const DetailOne = () => {
             </div>
             <div className='two_box'>
             <div className='three_box'>
-            <div className='Detail_profile'>프로필사진</div>
+            <div className='Detail_profile'>
+                <img src={dog} alt="프로필"/>
+            </div>
 
             <div className="Detail_username">
             <div className="username">안양길동맘</div>
             <div className='btn_box'>
-                <button>1:1문의하기</button>
+                <button onClick={GoChat}>1:1문의하기</button>
                 <button>신청하기</button>
             </div>
             </div>
@@ -48,12 +87,20 @@ const DetailOne = () => {
 }
 
 const Detail = styled.div`
-    border:1px solid black;
+
 
 
 .toggle{
-    border:1px solid black;
+    margin-left: 20px;
+    display:flex;
     height: 100px;
+}
+
+label {
+    margin-top:15px;
+}
+.toggle > h1{
+    margin:20px 0px 0px 50px;
 }
 
 .one_container{
@@ -61,7 +108,7 @@ const Detail = styled.div`
 }
 
 .one_box{
-    border:1px solid black;
+
     width:50%;
     height:50vh;
     display:flex;
@@ -73,6 +120,12 @@ const Detail = styled.div`
 
 .one_box > div {
     margin:30px 0px 0px 70px;
+}
+
+.Detail_profile > img {
+    width:144px;
+    height:144px;
+    border-radius:50%;
 }
 
 
@@ -104,23 +157,24 @@ const Detail = styled.div`
 
 
 .two_box{
-    border:1px solid black;
     width:50%;
     height:50vh;
 }
 
 .three_box{
-    border:1px solid black;
     height:30%;
     display:flex;
 }
 
 .four_box{
     padding:20px;
-    border:1px solid black;
     height:70%;
-    width:70%;
-    margin:auto;
+    width:80%;
+    border:2px solid #E4E4E4;
+    border-radius:15px;
+    font-size:20px;
+    font-weight:400;
+    margin-top:40px;
     word-break:normal;
 }
 
@@ -128,14 +182,13 @@ const Detail = styled.div`
     width:144px;
     height: 144px;
     border-radius:50%;
-    border:1px solid black;
-    display:flex;
+    /* display:flex; */
     align-items:center;
+    display:block;
     justify-content:center;
 }
 
 .Detail_username{
-    border:1px solid black;
     width: 70%;
 }
 
@@ -144,15 +197,59 @@ const Detail = styled.div`
     display:flex;
     align-items:center;
     margin-left:30px;
-    border:1px solid black;
     font-size:33px;
+    width: 100%;
 
 }
 
 .btn_box{
-    border:1px solid black;
+
     height:50%;
 }
+
+
+
+.off{
+    display:none;
+}
+
+input{
+    position:absolute;
+    left:-1000%;
+    }
+
+label{
+    position:relative;
+    display:block;
+    width:200px;
+    height: 60px;
+    background:#A58646;
+    border-radius:60px;
+    transition: background .4s;
+} 
+
+label:after{
+    content:"";
+    position: absolute;
+    left:7.5px;
+    top:50%;
+    width: 45px;
+    height: 45px;
+    border-radius:100%;
+    background-color:#fff;
+    transform: translateY(-50%);
+    box-shadow:1px 3px 4px rgba(0,0,0.1);
+    transition: all .4s; 
+
+}
+
+input:checked + label:after {
+left:calc(100% - 52.5px);
+}
+input:checked + label{background-color:#6B4E16;}
+
+label span {display:none;}
+
 `
 
 export default DetailOne
