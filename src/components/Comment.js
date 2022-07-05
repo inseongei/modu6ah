@@ -28,7 +28,12 @@ const comment = () => {
 }
 
 const CommentBox = styled.div`
-    margin-top:30px;
+*{
+  max-width: 100%;
+  height: auto;
+}
+
+margin-top:30px;
 
 .comment_section{
     display: flex;

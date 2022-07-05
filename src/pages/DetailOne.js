@@ -10,7 +10,6 @@ import MyPageChat from '../components/MyPage/MyPageChat';
 import Comment from '../components/Comment';
 
 
-
 const DetailOne = () => {
     const navigate = useNavigate();
     const [on, setOn] = React.useState(false)

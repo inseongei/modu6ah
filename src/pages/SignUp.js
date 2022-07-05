@@ -92,7 +92,7 @@ const SignUp = () => {
             setPasswordConfirmMessage("비밀번호가 일치합니다.");
             setIsPasswordConfirm(true);
         } else {
-            setPasswordConfirmMessage("비밀번호가 틀립니다. 다시 확인해주세요!");
+            setPasswordConfirmMessage("비밀번호 확인란이 일치하지 않습니다.");
             setIsPasswordConfirm(false);
         }
     };
