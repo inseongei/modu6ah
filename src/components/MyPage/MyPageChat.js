@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { getCookie } from '../../shared/Cookie'
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { data } from 'autoprefixer';
+import ScrollToBottom from "react-scroll-to-bottom";
 
 
 const MyPageChat = () => {
@@ -15,9 +15,12 @@ const MyPageChat = () => {
   const [realtime, setRealtime] = React.useState([]);
   const nickname = getCookie('nickname')
 
+  console.log(realtime)
+ 
 
   React.useEffect(() => {
     socket.on("receive_message", (data) => {
+      console.log(data)
         if(roomId === data.roomId){
           setRealtime((list) => [...list, data]); 
         } else{
@@ -35,7 +38,9 @@ const MyPageChat = () => {
       setRealtime(res.data.chatMessageList)
     })
 
-
+    return () => {
+      socket.close();
+    }
 
   },[]);
 
@@ -80,7 +85,7 @@ const MyPageChat = () => {
         </div>
 
 
-
+        <ScrollToBottom>
         {realtime.map((message,idx)=>{
           return(
             <div className='ChatBar' key={idx}>
@@ -88,7 +93,7 @@ const MyPageChat = () => {
               <div className='profile_one'></div>
             </div>
             <div className='two_container'>
-              <div className='two_one'>{message.nickname}</div>
+              <div className='two_one'>{message.senderNick}</div>
               <div className='two_two'>
                 <div className='longBox'>{message.message}</div>
               </div>
@@ -97,6 +102,7 @@ const MyPageChat = () => {
             </div>
           )
         })}
+        </ScrollToBottom>
 
 
 

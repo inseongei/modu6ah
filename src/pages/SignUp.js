@@ -363,7 +363,6 @@ const Logo = styled.h1`
    color: #F4B03E;
    font-size: 35px;
  }
- }
 `
 const LoginBtn = styled.button`
 height: 55px;
