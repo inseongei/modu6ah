@@ -61,31 +61,26 @@ const DetailThree = () => {
 const Container = styled.div`
   width:100%;
   height: 100vh;
-  border:1px solid black;
 
 .OneBox{
   margin: 80px auto;
   width:80%;
   height: 70vh;
-  border:1px solid black;
   display:flex;
 }
 
 .OnePicture{
   width:50%;
   height: 70vh;
-  border:1px solid black;
 }
 
 .OneContent{
   width:50%;
   height: 70vh;
-  border:1px solid black;
 }
 
 .Big{
   height: 60%;
-  border:1px solid black;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -93,7 +88,6 @@ const Container = styled.div`
 
 .small{
   height: 40%;
-  border:1px solid black;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -101,17 +95,14 @@ const Container = styled.div`
 
 .TwoBox{
   height: 45%;
-  border:1px solid black;
 }
 
 .TwoBox > div{
   height: 33.5%;
-  border:1px solid black;
 }
 
 .ThreeBox{
   height: 55%;
-  border:1px solid black;
   display:flex;
   align-items:center;
   justify-content:center;

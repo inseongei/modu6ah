@@ -19,6 +19,8 @@ import Main from '../pages/Main'
 import WelcomeModal from '../modal/WelcomeModal';
 import EditModalOne from '../modal/EditModalOne';
 import DetailThree from '../pages/DetailThree';
+import ReviewDetail from '../pages/ReviewDetail'
+import ItemDetail from '../pages/ItemDetail'
 
 
 
@@ -26,7 +28,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route  path="/" element={<DetailThree />} />
+      <Route  path="/" element={<ReviewDetail />} />
       <Route  path="/login" element={< LogIn />} />
       <Route  path="/signup" element={< SignUp />} />     
       <Route  path="/recruit" element={< Recruit />} /> 
