@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import io from "socket.io-client";
 import MyPageChat from '../components/MyPage/MyPageChat';
-
+import Comment from '../components/Comment';
 
 
 
@@ -79,9 +79,9 @@ const DetailOne = () => {
             입장료: 성인 15000원 / 아동 8000원
             </div>
 
-            <input type="text"/>ㅎㅇ
             </div>
         </div>
+        <Comment/>
     </Detail>
     </>
   )
