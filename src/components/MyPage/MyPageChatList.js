@@ -24,6 +24,7 @@ const MyPageChatList = () => {
   
   const Data = useSelector((state)=> state.Data.list);
   
+  
     const navigate = useNavigate();
 
   console.log(Data)
