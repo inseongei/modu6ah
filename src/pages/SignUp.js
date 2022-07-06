@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import Grid from '../components/elements/Grid';
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from '../images/logo.png';
 import Header from "../components/Header"
 import { FormGroup } from "react-bootstrap";
 
 const SignUp = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [nickname, setNickname] = useState("");
     const [password, setPw] = useState("");
     const [passwordCheck, setPwCheck] = useState("");
-    const [navigate, setNavigate] = useState(false);
-    
+
     // 오류 메세지 상태저장
     const [emailMessage, setEmailMessage] = useState(null);
     const [nicknameMessage, setNicknameMessage] = useState(null);
@@ -97,80 +97,23 @@ const SignUp = () => {
         }
     };
 
-    // Email 중복 체크
-    // const onClickEmailConfirm = async () => {
-    //     if (email === "") {
-    //         checkOverlapEmail(false);
-    //         setEmailMessage("Please input your email.");
-    //     }
-
-    //     if (isEmail) {
-    //         await axios
-    //             .get(`${SERVER_ADDRESS}/checkId/${email}`)
-    //             .then((response) => {
-    //                 if (response.data.response) {
-    //                     checkOverlapEmail(true);
-    //                     setOverlapEmailMessage("This is the email you can sign up for.");
-    //                 } else {
-    //                     checkOverlapEmail(false);
-    //                     setIsEmail(false);
-    //                     setEmailMessage("This is the registered email.");
-    //                 }
-    //             })
-    //             .catch((err) => {
-    //                 console.log(err);
-    //                 checkOverlapEmail(false);
-    //                 setEmailMessage("Please input your email.");
-    //             });
-    //     } else {
-
-    //     }
-    // };
-
-    // Nick name 중복체크
-    // const onClickNickNameConfirm = async () => {
-    //     if (nickname === "") {
-    //         console.log(nickname);
-    //         checkOverlapNickName(false);
-    //         setNicknameMessage("Please input your Nickname.");
-    //     }
-    //     if (isNickname) {
-    //         await axios
-    //             .get(`${SERVER_ADDRESS}/checkNickname/${nickname}`)
-    //             .then((response) => {
-    //                 if (response.data.response) {
-    //                     checkOverlapNickName(true);
-    //                     setOverlapNicknameMessage(
-    //                         "This is the Nickname you can sign up for."
-    //                     );
-    //                 } else {
-    //                     checkOverlapNickName(false);
-    //                     setIsNickname(false);
-    //                     setNicknameMessage("This is the registered Nickname.");
-    //                 }
-    //             })
-    //             .catch((err) => {
-    //                 checkOverlapNickName(false);
-    //                 setNicknameMessage("Please input your email.");
-    //             });
-    //     } else {
-
-    //     }
-    // };
-
-
     // 회원 등록하기
-    const register = e => {
+    const register = (e) => {
         e.preventDefault();
-        axios.post("http://dlckdals04.shop/api/users/signup", {
+        axios.post("http://13.124.212.159/api/users/signup", {
             email, nickname, password, passwordCheck
-        });
-        setNavigate(true);
+        })
+        .then((response) => {
+            alert(`${nickname}님! 회원가입을 축하드립니다.`)
+            navigate('/login');
+            console.log(response)
+        })
+            .catch((error) => {
+                alert("회원가입을 다시해주세요")
+                console.log(error);
+                console.log(error.response.data.Message)
+            })
     }
-    if (navigate) {
-        window.alert(`${nickname}님! 회원가입을 축하드립니다.`);
-        return <Navigate to="/login" />
-    } 
 
     return (
         <>
@@ -187,120 +130,120 @@ const SignUp = () => {
                                     <div className="logo">모두의 육아</div>
                                 </Logo>
                                 <form onSubmit={register}>
-                                <Box>
-                                    {/* 이메일 */}
-                                    <label className='form-label'>이메일</label>
-                                    <div className="formbox">
-                                        <input
-                                            onChange={onChangeEmail}
-                                            type="text"
-                                            className='form-input'
-                                            placeholder="이메일을 입력하세요"
-                                        ></input>
-                                        {/* <label className="id_button" onClick={onClickEmailConfirm} >
+                                    <Box>
+                                        {/* 이메일 */}
+                                        <label className='form-label'>이메일</label>
+                                        <div className="formbox">
+                                            <input
+                                                onChange={onChangeEmail}
+                                                type="text"
+                                                className='form-input'
+                                                placeholder="이메일을 입력하세요"
+                                            ></input>
+                                            {/* <label className="id_button" onClick={onClickEmailConfirm} >
                                     Check
                                 </label> */}
-                                    </div>
-                                    <div className="message_div">
-                                        {OverlapEmail ? (
-                                            <span className="print_message" style={{ color: "#5493f1" }}>
-                                                {OverlapEmailMessage}
-                                            </span>
-                                        ) : email.length > 0 ? (
-                                            <span
-                                                className="print_message"
-                                                style={{ color: isEmail ? "#5493f1" : "#ff2626" }}
-                                            >
-                                                {emailMessage}
-                                            </span>
-                                        ) : (
-                                            <span className="print_message" style={{ color: "#ff2626" }}>
-                                                {emailMessage}
-                                            </span>
-                                        )}
-                                    </div>
+                                        </div>
+                                        <div className="message_div">
+                                            {OverlapEmail ? (
+                                                <span className="print_message" style={{ color: "#5493f1" }}>
+                                                    {OverlapEmailMessage}
+                                                </span>
+                                            ) : email.length > 0 ? (
+                                                <span
+                                                    className="print_message"
+                                                    style={{ color: isEmail ? "#5493f1" : "#ff2626" }}
+                                                >
+                                                    {emailMessage}
+                                                </span>
+                                            ) : (
+                                                <span className="print_message" style={{ color: "#ff2626" }}>
+                                                    {emailMessage}
+                                                </span>
+                                            )}
+                                        </div>
 
 
-                                    {/* 닉네임 */}
-                                    <label className='form-label'>닉네임</label>
-                                    <div className="formbox">
+                                        {/* 닉네임 */}
+                                        <label className='form-label'>닉네임</label>
+                                        <div className="formbox">
+                                            <input
+                                                onChange={onChangeNickname}
+                                                type="text"
+                                                className="form-input"
+                                                placeholder="닉네임을 입력하세요"
+                                            ></input>
+                                            {/* <label className="id_button" onClick={onClickNickNameConfirm}>
+                                    Check
+                                </label> */}
+                                        </div>
+                                        <div className="message">
+                                            {OverLapNickName ? (
+                                                <span className="print_message" style={{ color: "#5493f1" }}>
+                                                    {OverlapNicknameMessage}
+                                                </span>
+                                            ) : nickname.length > 0 ? (
+                                                <span
+                                                    className="print_message"
+                                                    style={{ color: isNickname ? "#5493f1" : "#ff2626" }}
+                                                >
+                                                    {nicknameMessage}
+                                                </span>
+                                            ) : (
+                                                <span className="print_message" style={{ color: "#ff2626" }}>
+                                                    {nicknameMessage}
+                                                </span>
+                                            )}
+                                        </div>
+
+
+                                        {/* 비밀번호 */}
+                                        <label className='form-label'>비밀번호</label>
                                         <input
-                                            onChange={onChangeNickname}
-                                            type="text"
+                                            onChange={onChangePassword}
+                                            type="password"
                                             className="form-input"
-                                            placeholder="닉네임을 입력하세요"
+                                            placeholder="비밀번호를 입력하세요"
                                         ></input>
-                                        {/* <label className="id_button" onClick={onClickNickNameConfirm}>
-                                    Check
-                                </label> */}
-                                    </div>
-                                    <div className="message">
-                                        {OverLapNickName ? (
-                                            <span className="print_message" style={{ color: "#5493f1" }}>
-                                                {OverlapNicknameMessage}
-                                            </span>
-                                        ) : nickname.length > 0 ? (
-                                            <span
-                                                className="print_message"
-                                                style={{ color: isNickname ? "#5493f1" : "#ff2626" }}
-                                            >
-                                                {nicknameMessage}
-                                            </span>
-                                        ) : (
-                                            <span className="print_message" style={{ color: "#ff2626" }}>
-                                                {nicknameMessage}
-                                            </span>
-                                        )}
-                                    </div>
+                                        <div className="message">
+                                            {password.length > 0 && (
+                                                <span
+                                                    className="print_message"
+                                                    style={{ color: isPassword ? "#5493f1" : "#ff2626" }}
+                                                >
+                                                    {passwordMessage}
+                                                </span>
+                                            )}
+                                        </div>
 
 
-                                    {/* 비밀번호 */}
-                                    <label className='form-label'>비밀번호</label>
-                                    <input
-                                        onChange={onChangePassword}
-                                        type="password"
-                                        className="form-input"
-                                        placeholder="비밀번호를 입력하세요"
-                                    ></input>
-                                    <div className="message">
-                                        {password.length > 0 && (
-                                            <span
-                                                className="print_message"
-                                                style={{ color: isPassword ? "#5493f1" : "#ff2626" }}
-                                            >
-                                                {passwordMessage}
-                                            </span>
-                                        )}
-                                    </div>
+                                        {/* 비밀번호 확인 */}
+                                        <label className='form-label'>비밀번호 체크</label>
+                                        <input
 
-
-                                    {/* 비밀번호 확인 */}
-                                    <label className='form-label'>비밀번호 체크</label>
-                                    <input
-
-                                        onChange={onChangePasswordConfirm}
-                                        type="password"
-                                        className="form-input"
-                                        placeholder="비밀번호를 한 번 더 입력하세요"
-                                    ></input>
-                                    <div className="message_Passworddiv">
-                                        {passwordCheck.length > 0 && (
-                                            <span
-                                                className="print_message"
-                                                style={{ color: isPasswordConfirm ? "#5493f1" : "#ff2626" }}
-                                            >
-                                                {passwordConfirmMessage}
-                                            </span>
-                                        )}
-                                    </div>
-                                </Box>
-                                <Grid height="auto">
-                                    <Grid margin="15px 32%" height="auto">
-                                        <LoginBtn type="submit">
-                                            회원가입
-                                        </LoginBtn>
+                                            onChange={onChangePasswordConfirm}
+                                            type="password"
+                                            className="form-input"
+                                            placeholder="비밀번호를 한 번 더 입력하세요"
+                                        ></input>
+                                        <div className="message_Passworddiv">
+                                            {passwordCheck.length > 0 && (
+                                                <span
+                                                    className="print_message"
+                                                    style={{ color: isPasswordConfirm ? "#5493f1" : "#ff2626" }}
+                                                >
+                                                    {passwordConfirmMessage}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </Box>
+                                    <Grid height="auto">
+                                        <Grid margin="15px 32%" height="auto">
+                                            <LoginBtn type="submit">
+                                                회원가입
+                                            </LoginBtn>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
                                 </form>
                             </Grid>
                         </Grid>
