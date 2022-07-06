@@ -44,5 +44,5 @@ export const RecruitData = [
         age: '5세- 7세',
         createdAt: '등록날짜 자동등록',
     },
-   
+ 
 ]
