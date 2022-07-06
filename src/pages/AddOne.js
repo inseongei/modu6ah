@@ -10,6 +10,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import {ko} from 'date-fns/esm/locale';
 
+
 const AddOne = () => {
   const navigate = useNavigate();
   const [on, setOn] = useState(false)
@@ -18,7 +19,6 @@ const AddOne = () => {
   const inputChange = () => {
     setOn(!on);
   };
-
 
   // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
@@ -39,12 +39,15 @@ const AddOne = () => {
 
   const [startDate, setStartDate] = useState(new Date());
 
-   
+  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+ 
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
 
     return (
       <>
         <Header />
-  
         <Detail>
           <div className='toggle'>
             <input type="checkbox" id="chk1" /><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
@@ -54,14 +57,18 @@ const AddOne = () => {
             <div className='add_input'>
               <div><strong>제목</strong> <input type="text" /></div>
               <div><strong>날짜</strong>
+           
               <SDatePicker
                   selected={startDate}
                   onChange={date => setStartDate(date)}
                   locale={ko}
                   dateFormat="yyyy년 MM월 dd일"
                 />
+                </div>
+             
+              <div><strong>시간</strong> 
+              
               </div>
-              <div><strong>시간</strong> <input type="text" /></div>
               <div><strong>위치</strong> <input type="text" /></div>
               <div><strong>연령</strong> <input type="text" /></div>
             </div>
@@ -76,7 +83,6 @@ const AddOne = () => {
         </Detail>
       </>
     )
-
 };
 
 const Detail = styled.div`
@@ -89,6 +95,7 @@ const Detail = styled.div`
 label {
     margin-top:15px;
 }
+
 .toggle > h1{
     margin:20px 0px 0px 50px;
 }
@@ -107,17 +114,17 @@ label {
 }
 
 .add_input > div {
-  display: flex;
     margin:50px 0px 0px 70px;
 }
 
 .add_input > div >input{
     border: 1px solid #E4E4E4;
     border-radius: 10px;
-    display:inline-block;
-    width:450px;
-    padding:10px;
+    display: inline-block;
+    width: 450px;
+    padding: 10px;
     margin-left: 30px;
+
     outline: none;
 }
 
@@ -139,6 +146,7 @@ textarea {
     outline: none;
     resize: vertical; /* 상하만 가능 */
 }
+
 
 .Detail_profile{
     width:144px;
@@ -206,9 +214,10 @@ label span {display:none;}
 const SDatePicker = styled(DatePicker)`
 border: 1px solid #E4E4E4;
 border-radius: 10px;
-width:450px;
-padding:10px;
-display: inline-block;
+width: 450px;
+padding: 10px;
+
+
 `;
 
 const Btn = styled.div`
