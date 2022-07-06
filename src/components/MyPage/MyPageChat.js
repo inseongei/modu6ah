@@ -15,8 +15,10 @@ const MyPageChat = () => {
   const [realtime, setRealtime] = React.useState([]);
   const nickname = getCookie('nickname')
 
+
   console.log(realtime)
  
+  
 
   React.useEffect(() => {
     socket.on("receive_message", (data) => {
