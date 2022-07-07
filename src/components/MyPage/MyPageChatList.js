@@ -9,7 +9,7 @@ import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const socket = io.connect("http://13.124.212.159")
+const socket = io.connect("http://13.125.241.180")
 
 const MyPageChatList = () => {
     let { roomId } = useParams();

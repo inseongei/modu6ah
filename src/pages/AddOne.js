@@ -22,12 +22,12 @@ const AddOne = () => {
 
   // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
-    axios.post('http://13.124.212.159/api/chats/rooms/1', null, {
+    axios.post('http://13.125.241.180/api/chats/rooms/1', null, {
       headers: { Authorization: `Bearer ${getCookie("accessToken")}` }
     })
       .then((res) => {
         console.log(res)
-        const socket = io.connect("http://13.124.212.159")
+        const socket = io.connect("http://13.125.241.180")
         const roomId = res.data.roomId
         socket.emit("join_room", roomId);
         navigate('/MyPage/' + roomId)
@@ -67,6 +67,7 @@ const AddOne = () => {
                 </div>
              
               <div><strong>시간</strong> 
+              <input type="text" />
               
               </div>
               <div><strong>위치</strong> <input type="text" /></div>
@@ -212,10 +213,13 @@ label span {display:none;}
 `
 
 const SDatePicker = styled(DatePicker)`
-border: 1px solid #E4E4E4;
-border-radius: 10px;
-width: 450px;
-padding: 10px;
+    border: 1px solid #E4E4E4;
+    border-radius: 10px;
+    display: inline-block;
+    width: 450px;
+    padding: 10px;
+    margin-left: 30px;
+    outline: none;
 
 
 `;
@@ -238,6 +242,10 @@ margin-left: 16px;
   padding-bottom: 30px;
   border: 0;
   outline: 0;
+}
+
+#chk1 {
+  display:none;
 }
 
 .add{

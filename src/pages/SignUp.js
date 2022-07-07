@@ -97,7 +97,7 @@ const SignUp = () => {
     // 회원 등록하기
     const register = (e) => {
         e.preventDefault();
-        axios.post("http://13.124.212.159/api/users/signup", {
+        axios.post("http://13.125.241.180/api/users/signup", {
             email, nickname, password, passwordCheck
         })
         .then((response) => {

@@ -1,18 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Header from '../components/Header'
 import styled from 'styled-components'
 import dog from '../images/dog.jpg'
-import { getCookie } from "../shared/Cookie";
+import { getCookie } from '../shared/Cookie'
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import io from "socket.io-client";
 import MyPageChat from '../components/MyPage/MyPageChat';
 import Comment from '../components/Comment';
+import {useDispatch, useSelector} from "react-redux";
+import ChatRoom from '../modal/ChatRoom';
+import {CreateRoomAxios} from '../redux/modules/Data'
 
 
 const DetailOne = () => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const [on, setOn] = React.useState(false)
+    const [roomId, setRoomId] = React.useState()
 
     // 모집중 , 모집완료 상태 변경하기 
     const inputChange = () => {
@@ -20,21 +26,33 @@ const DetailOne = () => {
     };
 
 
+
+
+
     // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
     const GoChat = () => {
-        axios.post('http://13.124.212.159/api/chats/rooms/1', null, {
-            headers: { Authorization: `Bearer ${getCookie("accessToken")}` }
+        setModalIsOpen(true)
+        axios.post('http://13.125.241.180/api/chats/rooms/1',null,{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+        .then((res)=>{
+            const socket = io.connect("http://13.125.241.180")
+            const RoomId = res.data.roomId
+            console.log(RoomId)
+            setRoomId(RoomId)
+            // localStorage.setItem('RoomId',RoomId)
+            socket.emit("join_room", RoomId);
+            console.log(res)
         })
-            .then((res) => {
-                console.log(res)
-                const socket = io.connect("http://13.124.212.159")
-                const roomId = res.data.roomId
-                socket.emit("join_room", roomId);
-                navigate('/MyPage/' + roomId)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        .catch((err)=>{
+            console.log(err)
+        })
+
+
+
+
+
+
+
+
     }
 
 
@@ -43,7 +61,7 @@ const DetailOne = () => {
             <Header />
             <Detail>
                 <div className='toggle'>
-                    <input type="checkbox" id="chk1" /><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
+                    <input type="checkbox" id="chk1"  /><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
                     <h1> {!on ? "모집중" : "모집완료"}</h1>
 
                 </div>
@@ -82,6 +100,12 @@ const DetailOne = () => {
                 </div>
                 <Comment/>
             </Detail>
+
+
+            <ChatRoom  open = {modalIsOpen} onClose={()=>setModalIsOpen(false)} roomId ={roomId}/>
+
+
+
         </>
     )
 }
@@ -134,6 +158,10 @@ label {
     margin-left: 30px;
 }
 
+.toggle >input {
+    display:none;
+}
+
 
 
 .btn_box{
@@ -155,6 +183,8 @@ label {
     width:50%;
     height:50vh;
 }
+
+
 
 .three_box{
     height:30%;
@@ -212,8 +242,8 @@ label {
 label{
     position:relative;
     display:block;
-    width:200px;
-    height: 60px;
+    width:100px;
+    height: 45px;
     background:#A58646;
     border-radius:60px;
     transition: background .4s;

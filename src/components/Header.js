@@ -3,12 +3,15 @@ import styled from "styled-components";
 import { HiChevronDown } from "react-icons/hi";
 import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
 import { BsChatDotsFill } from "react-icons/bs";
+import { useDispatch , useSelector} from "react-redux"
+import axios from 'axios';
 
 import logo from '../images/logo.png'
 import profile from '../images/profile.png'
 import { useNavigate } from "react-router-dom";
 import { removeCookie,getCookie } from "../shared/Cookie";
 import ChatListModal from "../modal/ChatListModal";
+import {GetChatListAxios} from '../redux/modules/Data'
 
 const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
@@ -17,6 +20,7 @@ const Header = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const UserCheck = getCookie('accessToken')
+  const dispatch = useDispatch();
 
 
   const Login = () =>{
@@ -29,6 +33,18 @@ const Header = () => {
     removeCookie('nickname')
     navigate('/')
     alert('로그아웃 되셨습니다')
+  }
+
+  const messageBtn = () =>{
+    setModalIsOpen(true)
+    dispatch(GetChatListAxios()); 
+    
+    // axios.get('http://13.125.241.180/api/chats/rooms',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+    // .then((res)=>{
+    //     console.log(res)
+    // }).catch((err)=>{
+    //     console.log(err)s
+    // })
   }
 
 
@@ -131,7 +147,7 @@ const Header = () => {
 
       {/* User 메뉴 리스트 */}
       <ul className="header__right">
-        <li className="bell"><BsChatDotsFill onClick={()=>setModalIsOpen(true)}></BsChatDotsFill></li>
+        <li className="bell"><BsChatDotsFill onClick={messageBtn}></BsChatDotsFill></li>
         <li className="profile">
           <img src={profile} alt="프로필"/>
         </li>

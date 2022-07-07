@@ -8,7 +8,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 
 
 const MyPageChat = () => {
-  const socket = io.connect("http://13.124.212.159")
+  const socket = io.connect("http://13.125.241.180")
   let { roomId } = useParams();
   const [currentMessage, setCurrentMessage] = React.useState("");
   const [messageList, setMessageList] = React.useState([]);
@@ -33,7 +33,7 @@ const MyPageChat = () => {
 
 
 
-    axios.get('http://13.124.212.159/api/chats/messages/' + roomId,
+    axios.get('http://13.125.241.180/api/chats/messages/' + roomId,
     { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
     .then((res)=>{
       console.log(res.data.chatMessageList)
@@ -52,7 +52,7 @@ const MyPageChat = () => {
   
 
   const sendMessage = async () => {
-    const socket = io.connect("http://13.124.212.159")
+    const socket = io.connect("http://13.125.241.180")
     if (currentMessage !== "") {
       const messageData = {
         roomId: roomId,
