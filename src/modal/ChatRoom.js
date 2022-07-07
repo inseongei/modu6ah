@@ -20,7 +20,7 @@ const ChatListModal = ({open,onClose}) => {
 
 
     <ScrollToBottom className='message-containerTwo'>
-    <div className='RoomChatList'>
+    <div className='RoomChatList animate__animated animate__fadeInDown'>
         <div className='RoomChat'>
         <div className='RoomImg'>
         <div className='RoomProfile'>
@@ -52,6 +52,6 @@ const ChatListModal = ({open,onClose}) => {
   )
 }
 
-
+Modal.setAppElement('#root')
 export default ChatListModal
 

@@ -5,18 +5,19 @@ import '../shared/App.css'
 import logo from '../images/logo.png'
 import ScrollToBottom from "react-scroll-to-bottom";
 import ChatRoom from './ChatRoom'
+import 'animate.css';
 
 const ChatListModal = ({open,onClose}) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     if(!open) return null
   return (
-    <Modal isOpen={true} className="ChatList">
+    <Modal isOpen={true} className="ChatList animate__animated animate__backInUp">
     <div className='One'>
         <span className='ChatLogo'><img src={logo} alt="로고"/></span>
         <span className='ChatTitle'>Nickname님의 채팅내역</span>
         <button onClick={onClose}>X</button>
     </div>
-
+    
 
     {/* 대화창 리스트 */}
 
@@ -44,6 +45,6 @@ const ChatListModal = ({open,onClose}) => {
   )
 }
 
-
+Modal.setAppElement('#root')
 export default ChatListModal
 

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { HiChevronDown } from "react-icons/hi";
 import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
+import { BsChatDotsFill } from "react-icons/bs";
+
 import logo from '../images/logo.png'
 import profile from '../images/profile.png'
 import { useNavigate } from "react-router-dom";
@@ -12,7 +14,6 @@ const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
   const [isToggled, setIsToggled] = useState(false);
   const [userToggled, setUserToggled] = useState(false);
-  const [chatBox , setChatBox] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const UserCheck = getCookie('accessToken')
@@ -130,11 +131,9 @@ const Header = () => {
 
       {/* User 메뉴 리스트 */}
       <ul className="header__right">
-        <li className="bell"><GoBell onClick={()=>setModalIsOpen(true)}></GoBell></li>
+        <li className="bell"><BsChatDotsFill onClick={()=>setModalIsOpen(true)}></BsChatDotsFill></li>
         <li className="profile">
-          <img src={profile} alt="프로필" onClick={() => {
-          setChatBox(!chatBox);
-        }}/>
+          <img src={profile} alt="프로필"/>
         </li>
 
         <ChatListModal open = {modalIsOpen} onClose={()=>setModalIsOpen(false)}/>
@@ -159,19 +158,7 @@ const Header = () => {
         <li className="LogoOut" onClick={logoOut}>로그아웃</li>
       </ul>
     </Headers>
-     
     }
-    <ChatBox chatBox= {chatBox}>
-      <div className="box">
-        <div className="boxOne">
-          <span>프로필 관리</span>
-        </div>
-        <div className="boxTwo">
-          <span>북마크 관리</span>
-        </div>
-      </div>
-    </ChatBox>
-  
     </>
 
 
@@ -311,6 +298,7 @@ a {
   .bell{
     font-size:35px;
     cursor: pointer;
+    transform: scaleX(-1);
   }
 
   .MyPage{
