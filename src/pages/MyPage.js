@@ -12,13 +12,6 @@ function MyPage() {
     <>
     <Header/>
     <Container>
-    <div className='Menu'>
-    <MyPageMenu/>
-    </div>
-
-      <div className='List'>
-        <MyPageChatList/>
-      </div>
       <div className='Chat'><MyPageChat/></div>
     </Container>
     </>
@@ -28,25 +21,8 @@ function MyPage() {
 
 const Container = styled.div`
 display:flex;
-.Menu{
-  width:25%;
-  height:91vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
-.List{
-  width:25%;
-  height:91vh;
-  border-radius:15px;
-  border:2px solid #E4E4E4;;
-  display: flex;
-  flex-direction:column;
-  overflow:auto;
-}
 .Chat{
-  width:50%;
+  width:100%;
   height:91vh;
 }
 

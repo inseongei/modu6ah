@@ -104,7 +104,6 @@ const Logo = styled.h1`
    color: #F4B03E;
    font-size: 35px;
  }
- }
 `
 
 const SubTitle = styled.h3`

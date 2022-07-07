@@ -2,34 +2,38 @@ import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/Header'
 import MyPageMenu from '../components/MyPage/MyPageMenu'
+import { useNavigate } from "react-router-dom";
 
-
-const ProfileManager = () => {
+const ProfileInsert = () => {
+    const navigate = useNavigate();
   return (
     <>
     <Header/>
     <Profile>
       <div className='ProfileContainer'>
-      <div className='title'>프로필관리</div>
+      <div className='title'>프로필수정</div>
       <div className='ProfileInfo'>
-        <div className='ProfileImg'><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGJhYnl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="사진"/></div>
+        <div className='ProfileImg'><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGJhYnl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="사진"/>
+        <input type="file"/>
+        </div>
         <div className='TwoBox'>
           <div>
             <span> 닉네임 </span>
-            <div className='inputBox'> 3살 길동이</div>
+            <div className='inputBox'></div>
           </div>
           <div>
             <span> 이메일 </span>
-            <div className='inputBox'>gildong@test.com</div>
+            <div className='inputBox'></div>
           </div>
 
           <div>
             <span> 소개란 </span>
-            <div className='inputBigBox'> 튜브타고 물놀이하는거 완전 좋아~♬</div>
+            <div><input type="text" className='inputBigBox' placeholder='나를 소개해주세요 !'/></div>
           </div>
 
           <div className='btn'>
-            <button><a href='/ProfileInsert'>프로필 수정</a></button>
+            <button onClick={()=>{navigate('/manager')}}> 취소</button>
+            <button> 수정 완료</button>
           </div>
 
 
@@ -73,6 +77,8 @@ height:92vh;
   padding:50px;
 }
 
+
+
 .ProfileImg{
   width: 170px;
   height:170px;
@@ -87,11 +93,6 @@ height:92vh;
   height:40px;
   background: #F5F5F5;
   margin-bottom: 15px;
-  padding:7px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
 }
 
 span{
@@ -109,20 +110,21 @@ span{
   border: 1px solid #E4E4E4;
   border-radius: 10px;
   width: 22vw;
-  height:265px;
+  padding:40px;
+  margin: 0px;
   background: #F5F5F5;
-  padding:7px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-
 }
 
 .btn{
   width: 100%;
   margin-top:20px;
   text-align: right;
+  display:flex;
+  justify-content: space-around;
+}
+
+input{
+    margin-top: 15px;
 }
 
 .btn > button {
@@ -131,6 +133,12 @@ span{
   width:35%;
   height: 35px;
   border:none;
+  color:white;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
 }
 
 img{
@@ -139,18 +147,7 @@ img{
   background-size:cover;
 }
 
-a{
-  color:white;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  text-decoration:none;
-}
-
-
 
 `
 
-export default ProfileManager
+export default ProfileInsert;

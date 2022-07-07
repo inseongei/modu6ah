@@ -17,7 +17,7 @@ const Main = () => {
     <div>
       <Header />
       <Swiper />
-      <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+      <Grid>
   
           <div className='recruit'>
             <Title>같이해요</Title>

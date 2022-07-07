@@ -15,7 +15,6 @@ function LogIn() {
 
   const submit =  e => {
     e.preventDefault();
-
      axios.post("http://13.124.212.159/api/users/signin", {
       email, password
     })

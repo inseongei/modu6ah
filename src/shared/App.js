@@ -23,14 +23,14 @@ import ReviewDetail from '../pages/ReviewDetail'
 import ItemDetail from '../pages/ItemDetail'
 import ItemInsert from '../pages/ItemInsert'
 import ReviewInsert from '../pages/ReviewInsert'
-
+import ProfileInsert from '../pages/ProfileInsert'
 
 
 function App() {
   return (
     <>
     <Routes>
-      <Route  path="/" element={<ReviewInsert />} />
+      <Route  path="/" element={<Main />} />
       <Route  path="/login" element={< LogIn />} />
       <Route  path="/signup" element={< SignUp />} />     
       <Route  path="/recruit" element={< Recruit />} /> 
@@ -46,6 +46,7 @@ function App() {
       <Route  path="/bookmark" element={< BookMark />} />
       <Route  path="/chatlist" element={< ChatList />} />
       <Route  path="/mainchat" element={< MainChat />} /> 
+      <Route  path="/ProfileInsert" element={< ProfileInsert />} /> 
         {/* 이쪽 모달은 추후에 삭제 예정 */}
       <Route  path="/welcome" element={< WelcomeModal />} /> 
       <Route  path="/edit" element={< EditModalOne />} /> 

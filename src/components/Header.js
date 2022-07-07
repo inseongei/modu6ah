@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { HiChevronDown } from "react-icons/hi";
 import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
 import logo from '../images/logo.png'
 import profile from '../images/profile.png'
 import { useNavigate } from "react-router-dom";
 import { removeCookie,getCookie } from "../shared/Cookie";
+import ChatListModal from "../modal/ChatListModal";
 
 const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
   const [isToggled, setIsToggled] = useState(false);
   const [userToggled, setUserToggled] = useState(false);
-  const [chatBox , setchatBox] = useState(false)
+  const [chatBox , setChatBox] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const UserCheck = getCookie('accessToken')
 
@@ -127,25 +130,48 @@ const Header = () => {
 
       {/* User 메뉴 리스트 */}
       <ul className="header__right">
-        <li className="bell"><GoBell onClick={() => {
-          setchatBox(!chatBox);
-        }}></GoBell></li>
+        <li className="bell"><GoBell onClick={()=>setModalIsOpen(true)}></GoBell></li>
         <li className="profile">
-          <a href="/MyPage"><img src={profile} alt="프로필"/></a>
+          <img src={profile} alt="프로필" onClick={() => {
+          setChatBox(!chatBox);
+        }}/>
         </li>
-        <li className="nick">nickname</li>
+
+        <ChatListModal open = {modalIsOpen} onClose={()=>setModalIsOpen(false)}/>
+
+
+
+        <li className="accordion">
+          <input type="checkbox" id="answer01"/>
+          <label htmlFor="answer01"> Nickname<em><HiChevronDown></HiChevronDown></em></label>
+          <div className="menu">
+            <div className="menuOne"><a href="/manager"><p>프로필관리</p></a></div>
+            <div className="menuTwo"><a href="/bookmark"><p>북마크관리</p></a></div>
+          </div>
+        </li>
+
+
+
+
+
+
         <li className="MyPage">마이페이지</li>
         <li className="LogoOut" onClick={logoOut}>로그아웃</li>
       </ul>
     </Headers>
      
     }
-    
     <ChatBox chatBox= {chatBox}>
       <div className="box">
-        <div className="ChatBox"></div>
+        <div className="boxOne">
+          <span>프로필 관리</span>
+        </div>
+        <div className="boxTwo">
+          <span>북마크 관리</span>
+        </div>
       </div>
     </ChatBox>
+  
     </>
 
 
@@ -163,6 +189,95 @@ const Headers = styled.div`
   align-items: center;
   color: #3C3C3C;
 
+
+  input[id*="answer"]{
+    display:none;
+  }
+  input[id*="answer"] + label {
+    display:block;
+    padding:20px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+  }
+
+  input[id*="answer"] + label + div{
+    max-height: 0;
+    transition: all .35s;
+    overflow:hidden;
+    background-color:#FFFFFF;
+    font-size:11px;
+    position: absolute;
+    top:62px;
+  }
+
+  input[id*="answer"] + label + div span {
+    display: inline-block;
+  }
+
+  input[id*="answer"]:checked + label + div {
+    max-height: 500px;
+    position: absolute;
+    top:68px;
+  } 
+
+.accordion{
+  display:flex;
+  flex-direction:column;
+}
+
+.menu{
+  display:flex;
+  flex-direction:column;
+  z-index: 2;
+  border-radius: 20px;
+  width:190px;
+  height: 130px;
+}
+
+.menuOne{
+  height: 50%;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 29px;
+}
+
+.menuTwo{
+  height: 50%;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 29px;
+}
+
+
+a {
+  text-decoration: none;
+  color:#A8A8A8;
+}
+
+.menuOne > a > p:hover{
+  color:#6B4E16;
+}
+
+.menuTwo > a > p:hover{
+  color:#6B4E16;
+}
+
+
   .logo {
     margin: 16px 16px 16px 23px;
     font-size: 20px;
@@ -179,10 +294,10 @@ const Headers = styled.div`
     width:40px;
     height: 40px;
   }
-
-  .logo_img > img {
+  img {
     width:40px;
     height: 40px;
+    cursor: pointer;
   }
 
   .header__menulist {
@@ -240,6 +355,7 @@ const Headers = styled.div`
     width:50px;
     height: 50px;
     border-radius:50%;
+    margin:auto;
   }
 
   .profile > a> img {
@@ -279,6 +395,8 @@ const Headers = styled.div`
   .icon{
     font-size:35px;
   }
+
+
 
   @media screen and (max-width: 1075px) {
     flex-wrap: wrap;
@@ -347,89 +465,96 @@ const Headers = styled.div`
     }
   }
 
-
-
 `
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const ChatBox = styled.div`
-  width:23%;
+  width:12vw;
   height:40vh;
   position:absolute;
-  left:68%;
+  left:78%;
   z-index: 1;
-  display: ${(props) => (props.chatBox ? "flex" : "none")};
-  background-color:#F6BD41;
+  visibility: ${(props) => (props.chatBox ? "visibility" : "hidden")};
+ 
+  
 
   .box{
     display:flex;
     flex-direction:column;
-    background-color:#E4E4E4;
+    border-radius: 30px;
+    height: 200px;
+    width:12vw;
+    border: 1px solid white;
+    background-color:white;
+    transition: all 0.3s;
+
   }
 
-  .ChatBox{
+  .boxOne{
+    width:100%;
+    height: 50%;
+    border-bottom: 1px solid white;
     display:flex;
-    height: 100px;
-    width:23vw;
-    border:1px solid black;
+    align-items:center;
+    justify-content:center;
   }
+
+  .boxTwo{
+    width:100%;
+    height: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .boxOne > span {
+    color:white;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    color: #6B4E16;
+    cursor: pointer;
+  }
+
+  .boxTwo > span {
+    color:white;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    color: #6B4E16;
+    cursor: pointer;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 `
+
+
 
 
 
