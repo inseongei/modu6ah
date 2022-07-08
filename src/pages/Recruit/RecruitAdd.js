@@ -26,6 +26,19 @@ const AddOne = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const addPost = () => {
+    const post_data = {
+      title,
+      content,
+      date,
+      time,
+      place,
+      age
+    }
+    dispatch(createPostDB(post_data));
+    console.log(post_data);
+  }
+
   // 모집중 , 모집완료 상태 변경하기 
   const inputChange = () => {
     setOn(!on);
@@ -46,20 +59,6 @@ const AddOne = () => {
       .catch((err) => {
         console.log(err)
       })
-  }
-
-
-  const addPost = () => {
-    const post_data = {
-      title,
-      content,
-      date,
-      time,
-      place,
-      age
-    }
-    dispatch(createPostDB(post_data));
-    console.log(post_data);
   }
 
   return (
@@ -334,4 +333,3 @@ margin-left: 170px;
 `;
 
 export default AddOne
-
