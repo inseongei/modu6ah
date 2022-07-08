@@ -1,10 +1,10 @@
 import React from 'react'
-import Header from '../components/Header'
+import Header from '../../components/main/Header'
 import styled from 'styled-components'
 
 
 
-const ReviewDetail = () => {
+const ItemDetail = () => {
   return (
     <>
     <Header/>
@@ -29,15 +29,16 @@ const ReviewDetail = () => {
             </div>
 
             <div className='position'>
-            <span> 위치</span>
+            <span> 주소</span>
             <input type="text"/>
             </div>
 
             <div className='position'>
-            <span> 별점</span>
-            <span> ⭐⭐⭐⭐⭐</span>
-            <span>4.0점</span>
+            <span> 종류</span>
+            <input type="text"/>
             </div>
+
+
 
         </div>
 
@@ -47,10 +48,6 @@ const ReviewDetail = () => {
             <div className='contentBox'> 
             <span className='content'>내용</span>
             <div>
-            <span className='btnList'>
-                <button className='ParkBtn'> 주차가능</button>
-                <button className='KidBtn'> 예스키즈존</button>
-            </span>
             </div>
 
             </div>
@@ -229,19 +226,8 @@ margin-right: 80px;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 `
 
 
 
-export default ReviewDetail
+export default ItemDetail

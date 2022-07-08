@@ -3,6 +3,8 @@ import axios from 'axios';
 import { getCookie } from '../../shared/Cookie'
 import io from "socket.io-client";
 
+const socket = io.connect("http://13.125.241.180")
+
 // Actions      --> 저장변수 = 프로젝트명 / 모듈 명 (리듀서 명) / 액션 
 const GET = 'ChatList/GET'
 const CREATE = 'CreateRoom/CREATE'
@@ -16,15 +18,15 @@ export function GetChatList(ChatList){
     return{type:GET,ChatList}
 }
 
-export function CreateRoom(RoomId){
-    return{type:CREATE,RoomId}
+export function CreateRoom(res){
+    return{type:CREATE,res}
 }
 
 
 // middleware --> 미들웨어 /  
 export const GetChatListAxios = () =>{
     return function (dispatch){
-        axios.get('http://13.125.241.180/api/chats/rooms',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+        axios.get('http://13.125.241.180/api/chats/rooms/',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
         .then((res)=>{
             console.log(res)
             dispatch(GetChatList(res))
@@ -34,21 +36,39 @@ export const GetChatListAxios = () =>{
     }
 }
 
-export const CreateRoomAxios = () =>{
-    return function (dispatch){
-        axios.post('http://13.125.241.180/api/chats/rooms/1',null,{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
-        .then((res)=>{
-            const socket = io.connect("http://13.125.241.180")
-            const RoomId = res.data.RoomId
-            socket.emit("join_room", RoomId);
-            console.log(res)
-            dispatch(CreateRoom(RoomId))
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-    }
-}
+// export const CreateRoomAxios = () =>{
+//     return function (dispatch){
+//         axios.post('http://13.125.241.180/api/chats/rooms/2',null,{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+//         .then((res)=>{
+//             console.log(res)
+//             const RoomId = res.data.roomId
+//             console.log(RoomId)
+//             socket.emit("join_room", RoomId);
+//             dispatch(CreateRoom(RoomId))
+//         })
+//         .catch((err)=>{
+//             console.log(err)
+//         })
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -60,7 +80,7 @@ export default function ChatListData(state = initialState , action= {}){
     console.log(action)
     switch (action.type){
         case 'ChatList/GET' : {
-            return {...state,list:action.ChatList.data}
+            return {state:action.ChatList}
         }
         case 'CreateRoom/CREATE' : {
             return {RoomId:action.RoomId};

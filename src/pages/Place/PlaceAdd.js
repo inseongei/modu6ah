@@ -1,13 +1,12 @@
 import React from 'react'
 import Header from '../components/Header'
 import styled from 'styled-components'
-import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 import Comment from '../components/Comment'
 
 
 
-const DetailThree = () => {
+const PlaceAdd = () => {
 
 
 
@@ -233,5 +232,5 @@ height: 80%;
 
 `
 
-export default DetailThree;
+export default PlaceAdd;
 

@@ -9,9 +9,9 @@ import axios from 'axios';
 import logo from '../images/logo.png'
 import profile from '../images/profile.png'
 import { useNavigate } from "react-router-dom";
-import { removeCookie,getCookie } from "../shared/Cookie";
-import ChatListModal from "../modal/ChatListModal";
-import {GetChatListAxios} from '../redux/modules/Data'
+import { removeCookie,getCookie } from "../../shared/Cookie";
+import ChatListModal from "../../modal/Chat/ChatListModal";
+import {GetChatListAxios} from '../../redux/modules/Data'
 
 const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
@@ -37,7 +37,7 @@ const Header = () => {
 
   const messageBtn = () =>{
     setModalIsOpen(true)
-    dispatch(GetChatListAxios()); 
+    // dispatch(GetChatListAxios()); 
     
     // axios.get('http://13.125.241.180/api/chats/rooms',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
     // .then((res)=>{

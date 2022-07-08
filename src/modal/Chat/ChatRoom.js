@@ -7,31 +7,68 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import {useSelector} from "react-redux"
 import io from "socket.io-client";
 import { getCookie } from '../shared/Cookie'
+import axios from 'axios';
 
 
 const socket = io.connect("http://13.125.241.180")
 
 
-const ChatListModal = ({open,onClose,roomId}) => {
+const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting}) => {
     const input_Ref = React.useRef()
+    console.log(NowRoom)
     const nickname = getCookie('nickname')
+    const [NowChat, setNowChat] = React.useState([]);
     const [realtime, setRealtime] = React.useState([]);
-    // const [currentMessage, setCurrentMessage] = React.useState("");
-    console.log(roomId)
-    console.log(realtime)
+  console.log(BeforeChatting)
+
 
     React.useEffect(() => {
+
         socket.on("receive_message", (data) => {
-        setRealtime((list) => [...list, data]);
+          console.log(data)
+          if(NowRoom === data.roomId){
+            setNowChat((list)=>[...list,data]);
+          } else{
+            return null;
+          }
           console.log(data)
         },); 
+
+
+
+
+
+
+
+
+
+
+        return () => {
+          socket.close();
+        }
+
+
+
+
+
+
     },[]);
 
+
+
+    console.log(NowChat)
+
+
+
+
+
+
+    console.log(realtime)
 
     const sendMessage = async () => {
         // if (currentMessage !== "") {
           const messageData = {
-            roomId: roomId,
+            roomId: NowRoom,
             senderNick: nickname,
             message: input_Ref.current.value,
             time:
@@ -39,8 +76,10 @@ const ChatListModal = ({open,onClose,roomId}) => {
               ":" +
               new Date(Date.now()).getMinutes(),
           };
-          console.log(messageData)
+          
           await socket.emit("send_message", messageData);
+          setNowChat((list)=>[...list,messageData]);
+          console.log(messageData)
         // }
       };
 
@@ -66,7 +105,7 @@ const ChatListModal = ({open,onClose,roomId}) => {
 
     <ScrollToBottom className='message-containerTwo'>
     <div className='RoomChatList animate__animated animate__zoomIn'>
-        {realtime.map((data,idx)=>{
+        {BeforeChatting&&BeforeChatting.map((data,idx)=>{
             return(
                 <div className='RoomChat' key={idx}>
                 <div className='RoomImg'>
@@ -83,6 +122,26 @@ const ChatListModal = ({open,onClose,roomId}) => {
             )
         })}
 
+
+        {NowChat&& NowChat.map((data,idx)=>{
+          return(
+            <div className='RoomChat' key={idx}>
+            <div className='RoomImg'>
+            <div className='RoomProfile'>
+                {/* 사진 */}
+            </div>
+            </div>
+            <div className='RoomContent'>
+                <div className='RoomName'>{data.senderNick}</div>
+                <div className='ChatRoomInput'>{data.message}</div>
+            </div>
+            <div className='RoomTime'>{data.time}</div>
+            </div>
+        )
+        })}
+
+
+    
 
     </div>
     </ScrollToBottom>
@@ -103,5 +162,5 @@ const ChatListModal = ({open,onClose,roomId}) => {
 }
 
 Modal.setAppElement('#root')
-export default ChatListModal
+export default ChatRoom
 

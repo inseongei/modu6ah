@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components';
 
 //  elements & components
-import Grid from '../components/elements/Grid';
-import Header from '../components/Header';
+import Grid from '../../components/elements/Grid';
+import Header from '../../components/main/Header';
 
 function Place() {
   return (

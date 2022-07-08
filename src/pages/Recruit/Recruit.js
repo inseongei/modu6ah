@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 //  elements & components
-import Grid from '../components/elements/Grid';
-import Header from '../components/Header';
-import SCard from '../components/cards/SCard';
+import Grid from '../../components/elements/Grid';
+import Header from '../../components/main/Header';
+import SCard from '../../components/cards/SCard';
 
 function Recruit() {
 

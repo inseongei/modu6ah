@@ -11,7 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import {ko} from 'date-fns/esm/locale';
 
 
-const AddOne = () => {
+const RecruitAdd = () => {
   const navigate = useNavigate();
   const [on, setOn] = useState(false)
 
@@ -263,4 +263,4 @@ margin-left: 16px;
 }
 `;
 
-export default AddOne
+export default RecruitAdd

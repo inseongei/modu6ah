@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import Grid from '../components/elements/Grid';
+import Grid from '../../components/elements/Grid';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from '../images/logo.png';

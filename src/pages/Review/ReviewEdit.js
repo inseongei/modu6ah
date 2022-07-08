@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 
 
-const ItemInsert = () => {
+const ReviewEdit = () => {
   return (
     <>
     <Header/>
@@ -230,4 +230,4 @@ margin-right: 80px;
 
 
 
-export default ItemInsert;
+export default ReviewEdit;

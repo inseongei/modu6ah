@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 
 
-const ItemDetail = () => {
+const ReviewDetail = () => {
   return (
     <>
     <Header/>
@@ -29,16 +29,15 @@ const ItemDetail = () => {
             </div>
 
             <div className='position'>
-            <span> 주소</span>
+            <span> 위치</span>
             <input type="text"/>
             </div>
 
             <div className='position'>
-            <span> 종류</span>
-            <input type="text"/>
+            <span> 별점</span>
+            <span> ⭐⭐⭐⭐⭐</span>
+            <span>4.0점</span>
             </div>
-
-
 
         </div>
 
@@ -48,8 +47,11 @@ const ItemDetail = () => {
             <div className='contentBox'> 
             <span className='content'>내용</span>
             <div>
+            <span className='btnList'>
+                <button className='ParkBtn'> 주차가능</button>
+                <button className='KidBtn'> 예스키즈존</button>
+            </span>
             </div>
-
             </div>
         </div>
     </div>
@@ -226,8 +228,19 @@ margin-right: 80px;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 `
 
 
 
-export default ItemDetail
+export default ReviewDetail
