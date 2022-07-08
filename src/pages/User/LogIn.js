@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import styled from 'styled-components';
-import Grid from '../components/elements/Grid';
+import Grid from '../../components/elements/Grid';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
-import {setCookie } from "../shared/Cookie";
-import logo from '../images/logo.png';
-import Header from "../components/Header"
+import {setCookie } from "../../shared/Cookie";
+import logo from '../../images/logo.png';
+import Header from "../../components/main/Header"
 
 function LogIn() {
   const [email, setEmail] = useState("");
@@ -15,14 +15,14 @@ function LogIn() {
 
   const submit =  e => {
     e.preventDefault();
-     axios.post("http://13.125.241.180/api/users/signin", {
+     axios.post("http://dlckdals04.shop/api/users/signin", {
       email, password
     })
   .then(response => {
     console.log(response.data)
     setCookie('accessToken',response.data.accessToken)
     setCookie('nickname',response.data.nickname)
-    alert('안녕')
+    alert('로그인 되었습니다')
     navigate('/');
 	}).catch(error => {
 		alert("로그인을 다시 해주세요")

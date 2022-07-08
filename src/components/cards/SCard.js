@@ -2,35 +2,48 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
-import { RecruitData } from '../../shared/recruitdata';
 import { BsBookmark } from "react-icons/bs";
+import { useSelector, useDispatch } from 'react-redux';
+import { loadPostDB } from '../../redux/modules/post';
+
 
 function SCard() {
     const navigate = useNavigate();
+    const post = useSelector(state => state.post.list);
+    console.log(post);
+
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        dispatch(loadPostDB());
+    }, [])
+
     return (
         <>
             <Container>
-                {RecruitData.map((item, index) => (
-                        <div className='card' 
-                        key={index}>
-                            {/* 카드 위쪽 아이콘 */}
-                            <div className='card-top'>
-                                <p>모집완료</p>
-                                <BsBookmark className='icon'/>
-                            </div>
-                            {/* 카드 타이틀 */}
-                            <div className='title'>
-                                <h1>{item.title}</h1>
-                            </div>
-                            {/* 카드 내용물 */}
-                            <div className='card-bottom'>
-                                <p>{item.createdAt}</p>
-                                <p>{item.time}</p>
-                                <p>{item.place}</p>
-                                <p>{item.age}</p>
-                            </div>
+                {post.recruitPosts&&post.recruitPosts.map((item, index) => (
+                    <div className='card'
+                        key={index}
+                        onClick={() => {
+                            navigate('/detailone' + item.recruitPostId
+                            )
+                        }}>
+                        {/* 카드 위쪽 아이콘 */}
+                        <div className='card-top'>
+                            <p>모집완료</p>
+                            <BsBookmark className='icon' />
                         </div>
+                        {/* 카드 타이틀 */}
+                        <div className='title'>
+                            <h1>{item.title}</h1>
+                        </div>
+                        {/* 카드 내용물 */}
+                        <div className='card-bottom'>
+                            <p>{item.createdAt}</p>
+                            <p>{item.time}</p>
+                            <p>{item.place}</p>
+                            <p>{item.age}</p>
+                        </div>
+                    </div>
                 ))}
             </Container>
         </>

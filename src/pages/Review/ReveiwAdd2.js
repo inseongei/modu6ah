@@ -1,10 +1,8 @@
 import React from 'react'
+import Header from '../../components/Header'
 import styled from 'styled-components'
 
-import Header from '../../components/main/Header'
-
-const ItemInsert = () => {
-
+const ItemDetail = () => {
   return (
     <>
     <Header/>
@@ -58,7 +56,7 @@ const ItemInsert = () => {
 
     <div className='btnBox'>
         <button>취소</button>
-        <button>수정완료</button>
+        <button>등록하기</button>
     </div>
 
 
@@ -229,4 +227,5 @@ margin-right: 80px;
 `
 
 
-export default ItemInsert;
+
+export default ItemDetail

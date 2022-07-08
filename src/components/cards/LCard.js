@@ -3,15 +3,22 @@ import React from 'react'
 import styled from 'styled-components';
 import { PlaceData } from '../../shared/placedata';
 import { MdOutlinePlace } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 function LCard() {
-
+ const navigate = useNavigate();
+ 
     return (
         <>
             <Container>
                 {PlaceData.map((item,index) => (
                     <div className='card' 
-                    key={index}>
+                    key={index}
+                    onClick={() => {
+                        navigate('/placedetail' 
+                        // + item.placePostId
+                        )
+                    }}>
                         {/* 카드 왼쪽 '이미지' */}
                         <div className='card-left'>
                             <div className='image'>
@@ -58,17 +65,17 @@ border: 1px solid lightgray;
 box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.09);
 cursor: pointer;
 overflow: hidden;
-width: 980px;
-height: 400px;
+width: 1217px;
+height: 380px;
 display: flex;
 flex-direction: row;
 }
 
 .card-left {
     display: flex;
-    width: 500px;
-    height: 360px;
-    margin: 20px 0px 0px 30px;
+    width: 445px;
+    height: 315px;
+    margin: 30px 0px 0px 40px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -89,7 +96,7 @@ flex-direction: row;
     display: flex;
     flex-direction: column;
     margin-top: 40px;
-    margin-left: 40px;
+    margin-left: 70px;
 }
 
 .title {

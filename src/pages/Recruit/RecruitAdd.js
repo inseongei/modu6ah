@@ -1,19 +1,30 @@
 import React, { useState } from 'react'
-import Header from '../components/Header'
+import Header from '../../components/main/Header'
 import styled from 'styled-components'
-import { getCookie } from "../shared/Cookie";
+import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import io from "socket.io-client";
-import MyPageChat from '../components/MyPage/MyPageChat';
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
-import {ko} from 'date-fns/esm/locale';
+import { ko } from 'date-fns/esm/locale';
+import { useDispatch } from 'react-redux';
+import { createPostDB } from '../../redux/modules/post';
+import Grid from '../../components/elements/Grid';
+import Footer from '../../components/main/Footer';
 
 
-const RecruitAdd = () => {
-  const navigate = useNavigate();
+const AddOne = () => {
   const [on, setOn] = useState(false)
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState('');
+  const [place, setPlace] = useState('');
+  const [age, setAge] = useState('');
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // 모집중 , 모집완료 상태 변경하기 
   const inputChange = () => {
@@ -37,85 +48,146 @@ const RecruitAdd = () => {
       })
   }
 
-  const [startDate, setStartDate] = useState(new Date());
 
-  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
- 
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
+  const addPost = () => {
+    const post_data = {
+      title,
+      content,
+      date,
+      time,
+      place,
+      age
+    }
+    dispatch(createPostDB(post_data));
+    console.log(post_data);
+  }
 
-    return (
-      <>
-        <Header />
-        <Detail>
-          <div className='toggle'>
-            <input type="checkbox" id="chk1" /><label htmlFor="chk1" onClick={inputChange}><span>선택</span></label>
-            <h1> {!on ? "모집중" : "모집완료"}</h1>
-          </div>
-          <div className='container'>
-            <div className='add_input'>
-              <div><strong>제목</strong> <input type="text" /></div>
-              <div><strong>날짜</strong>
-           
-              <SDatePicker
-                  selected={startDate}
-                  onChange={date => setStartDate(date)}
-                  locale={ko}
-                  dateFormat="yyyy년 MM월 dd일"
-                />
-                </div>
-             
-              <div><strong>시간</strong> 
-              <input type="text" />
-              
-              </div>
-              <div><strong>위치</strong> <input type="text" /></div>
-              <div><strong>연령</strong> <input type="text" /></div>
+  return (
+    <>
+      <Header />
+      <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+      <Detail>
+        <div className='container'>
+          <div className='add_input'>
+            <div className='toggle'>
+              <input className='inputbox'type="checkbox" id="chk1" />
+              <label htmlFor="chk1" 
+              onClick={inputChange}>
+                <span>선택</span>
+              </label>
+              <p> {!on ? "모집중" : "모집완료"}</p>
             </div>
-            <div className='box'>
-              <textarea />
-              <Btn>
-                <button className='delete'>취소</button>
-                <button className='add'>등록하기</button>
-              </Btn>
+            <div style={{ marginBottom: "5px" }}>
+              <strong>제목</strong>
+              <input
+                onChange={e =>
+                  setTitle(e.target.value)}
+                type="text"
+              />
+            </div>
+            <div className='date'
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}>
+              <Monat>날짜</Monat>
+              <DatePicker
+                customInput={<Input />}
+                selected={date}
+                onChange={date =>
+                  setDate(date)}
+                locale={ko}
+                dateFormat="yyyy년 MM월 dd일"
+              />
+            </div>
+            <div>
+              <strong>시간</strong>
+              <input
+                type="text"
+                onChange={e =>
+                  setTime(e.target.value)}
+              />
+            </div>
+            <div>
+              <strong>위치</strong>
+              <input
+                onChange={e =>
+                  setPlace(e.target.value)}
+                type="text"
+              /></div>
+            <div>
+              <strong>연령</strong>
+              <input
+                onChange={e =>
+                  setAge(e.target.value)}
+                type="text" />
             </div>
           </div>
-        </Detail>
-      </>
-    )
+          <div className='box'>
+            <textarea
+              onChange={e =>
+                setContent(e.target.value)}
+            />
+            <Btn>
+              <button 
+              className='btn'
+              onClick={() => 
+                { navigate(`/recruit`) }}
+              > 
+              취소 </button>
+              <button 
+              className='btn'
+                onClick={addPost}
+                > 
+                등록하기</button>
+            </Btn>
+          </div>
+        </div>
+      </Detail>
+      </Grid> 
+      <Footer />
+    </>
+  )
 };
 
 const Detail = styled.div`
 .toggle{
-    margin-left: 20px;
-    display:flex;
-    height: 100px;
+
+    margin-left: 150px;
+    margin-top: 60px;
+    display: flex;
 }
 
 label {
-    margin-top:15px;
+    margin-top: 15px;
 }
 
-.toggle > h1{
-    margin:20px 0px 0px 50px;
+.toggle > p{
+    margin:20px 0px 0px 30px;
+    font-size: 20px;
 }
 
 .container{
     display:flex;
+    margin-top: 30px;
 }
 
 .add_input{
-    width:50%;
-    height:50vh;
+    width:600px;
+
     display:flex;
     justify-content:center;
     flex-direction:column;
     font-size : 25px;
+
+    box-sizing: border-box;
+    margin-left: 40px;
 }
 
 .add_input > div {
-    margin:50px 0px 0px 70px;
+    margin:50px 0px 0px 10px;
+    object-fit: cover;
+
 }
 
 .add_input > div >input{
@@ -133,12 +205,21 @@ label {
   margin-top: 8%;
     width:50%;
     height:60vh;
+
+    margin-left: 40px;
+}
+
+strong{
+  padding-top: 30px;
+
 }
 
 textarea {
     padding:20px;
-    height:60%;
-    width:80%;
+
+    margin-top: 73px;
+    height 500px;
+    width: 610px;
     border:1px solid #E4E4E4;
     border-radius:10px;
     font-size:20px;
@@ -173,28 +254,28 @@ textarea {
 
 }
 
-input{
+.inputbox{
     position:absolute;
-    // left:-1000%;
+    left:-1000%;
     }
 
 label{
-    position:relative;
-    display:block;
-    width:200px;
-    height: 60px;
-    background:#A58646;
-    border-radius:60px;
+    position: relative;
+    display: block;
+    width: 80px;
+    height: 35px;
+    background: #A58646;
+    border-radius: 60px;
     transition: background .4s;
 } 
 
 label:after{
     content:"";
     position: absolute;
-    left:7.5px;
-    top:50%;
-    width: 45px;
-    height: 45px;
+    left: 0px;
+    top: 48%;
+    width: 40px;
+    height: 40px;
     border-radius:100%;
     background-color:#fff;
     transform: translateY(-50%);
@@ -204,7 +285,7 @@ label:after{
 }
 
 input:checked + label:after {
-left:calc(100% - 52.5px);
+left:calc(100% - 40.5px);
 }
 input:checked + label{background-color:#6B4E16;}
 
@@ -212,25 +293,32 @@ label span {display:none;}
 
 `
 
-const SDatePicker = styled(DatePicker)`
-    border: 1px solid #E4E4E4;
-    border-radius: 10px;
-    display: inline-block;
-    width: 450px;
-    padding: 10px;
-    margin-left: 30px;
-    outline: none;
 
+const Monat = styled.div`
+display: flex;
+width: 50px;
+height: 60px;
+margin-right: 29px;
+padding-top: 13px;
+font-weight: bold;
+`;
 
+const Input = styled.input` 
+border: 1px solid #E4E4E4;
+border-radius: 10px;
+width: 450px;
+padding: 10px;
+display: flex;
+margin-bottom: 10px;
 `;
 
 const Btn = styled.div`
 display: flex;
-align-items:center;
-justify-content:center;
-margin-left: 16px;
+margin-right: -250px;
+margin-left: 170px;
 
-.delete{
+
+.btn{
   width: 30%;
   height: 30px;
   border-radius: 20px;
@@ -238,29 +326,12 @@ margin-left: 16px;
   background-color: #3C3C3C;
   margin-top: 20px;
   margin-right: 10px;
-  padding-top: 6px;
-  padding-bottom: 30px;
-  border: 0;
-  outline: 0;
-}
-
-#chk1 {
-  display:none;
-}
-
-.add{
-  width: 30%;
-  height: 30px;
-  border-radius: 20px;
-  color: white;
-  background-color: #3C3C3C;
-  margin-top: 20px;
-  margin-right: 10px;
-   padding-top: 6px;
-  padding-bottom: 30px;
+  padding-top: 9px;
+  padding-bottom: 33px;
   border: 0;
   outline: 0;
 }
 `;
 
-export default RecruitAdd
+export default AddOne
+

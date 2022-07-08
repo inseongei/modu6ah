@@ -1,11 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import {FaGithub} from "react-icons/fa";
-import '../shared/App.css'
-import Figma from '../images/Figma.png'
-
-
-
+import '../../shared/App.css'
+import Figma from '../../images/Figma.png'
 
 
 const Footer = () => {
@@ -61,6 +58,7 @@ const FooterContainer = styled.footer`
     color:white;
     padding:10px;
     height: 130px;
+
     background-color: #3C3C3C;
     position: relative;
     transform: translateY(500%);

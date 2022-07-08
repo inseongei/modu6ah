@@ -1,12 +1,21 @@
+
 import React,{useState} from 'react'
-import Header from '../components/Header'
 import styled from 'styled-components'
-import dog from '../images/dog.jpg'
-import { getCookie } from '../shared/Cookie'
 import axios from "axios"
 import io from "socket.io-client";
-import Comment from '../components/Comment';
 import OneToOneChat from '../modal/OneToOneChat'
+import Header from '../../components/main/Header'
+import dog from '../../images/dog.jpg'
+import { getCookie } from "../../shared/Cookie";
+import { useLocation, useNavigate } from 'react-router-dom'
+import Comment from '../../components/elements/Comment';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+    loadPostDB,
+    deletePostDB
+} from '../../redux/modules/post';
+import { MdOutlinePlace } from "react-icons/md";
+import Grid from '../../components/elements/Grid';
 
 
 const RecruitDetail = () => {
@@ -16,6 +25,21 @@ const RecruitDetail = () => {
 
     // 모집중 , 모집완료 상태 변경하기 
     const inputChange = () => {setOn(!on);};
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+
+    const post = useSelector(state => state.post.list);
+    console.log(post);
+
+    React.useEffect(() => {
+        dispatch(loadPostDB());
+    }, [])
+
+
+
+
 
 
     // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
@@ -103,6 +127,7 @@ const Detail = styled.div`
     height: 100px;
 }
 
+
 label {
     margin-top:15px;
 }
@@ -122,7 +147,6 @@ label {
     justify-content:center;
     flex-direction:column;
     font-size : 25px;
-    
 }
 
 .one_box > div {
@@ -187,10 +211,12 @@ label {
     width:144px;
     height: 144px;
     border-radius:50%;
+
     align-items:center;
     display:block;
     justify-content:center;
 }
+
 
 .Detail_username{
     width: 70%;

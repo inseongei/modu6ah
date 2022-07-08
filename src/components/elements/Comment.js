@@ -1,33 +1,62 @@
 import React from 'react'
 import styled from 'styled-components'
-
-
 const comment = () => {
+  // const [comment, setComment] = useState('');
+
+  // const dispatch = useDispatch();
+
+  // const addComment = () = {
+  //   const comment_data = {
+
+  //   }
+  // }
+
   return (
     <CommentBox>
-
-
-        <div className='comment_section'> 
-        <div className='h1Box'><h1>댓글</h1></div>
-        <div className='inputBox'><input type="text"/></div>
-        <div className='btnBox'><button className='btn'>등록</button></div>
+      <div className='comment_section'>
+        <div className='h1Box'>
+          <h1>댓글</h1>
         </div>
-
-
-        <div className='box'>
-            <div className='chat'>
-            <div className='first'>
-              <div className='profile'></div>
-            </div>
-            <div className='name'>닉네임</div>
-            <div className='comment_box'>
-                <div className='comment'>댓글을 달아주세요</div>
-                <div className='date'>2022.07.05 14:00</div>
-            </div>
-           
-            </div>
-             <button className='delete'>삭제</button>
+        <div className='inputBox'>
+          <input 
+          type="text"
+          // onChange={e =>
+          //   setComment(e.target.value)}
+             />
         </div>
+        <div className='btnBox'>
+          <button className='btn'
+          >
+            등록
+          </button>
+        </div>
+      </div>
+
+
+      <div className='box'>
+        <div className='chat'>
+            <div className='profile'/>
+          <div className='name'
+          >
+            닉네임
+          </div>
+          <div className='comment_box'>
+            <div className='comment'
+            >
+              댓글을 달아주세요
+            </div>
+            <div className='date'
+            >
+              2022.07.05 14:00
+            </div>
+          </div>
+
+        </div>
+        <button className='delete'
+        >
+          삭제
+        </button>
+      </div>
     </CommentBox>
   )
 }
@@ -45,7 +74,7 @@ margin-top:30px;
     justify-content: center;
     width:60%;
     height:60px;
-    margin: 30px auto 0px;
+    margin-left: 110px;
 }
 
 
@@ -62,13 +91,16 @@ margin-top:30px;
     font-weight: 700;
     font-size: 26px;
     line-height: 31px;
+    margin-top: 10px;
 }
 .inputBox{
-    width:70%;
+    width:100%;
     display:flex;
     justify-content: center;
     align-items: center;
+    margin-left: 6px;
 }
+
 .inputBox > input{
     width:100%;
     border: 1px solid #E4E4E4;
@@ -77,10 +109,10 @@ margin-top:30px;
 }
 
 .btnBox{
-    width:15%;
+    width:25%;
+    height: 30px;
     display:flex;
-    justify-content: center;
-    align-items: center;  
+    margin-top: 16px;
 }
 
 .btn{
@@ -91,26 +123,10 @@ margin-top:30px;
     line-height: 19px;
     background: #F4B03E;
     border-radius: 300px;
-    width:100%;
+    width: 100%;
     color: #FFFFFF;
     margin-left:30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -118,7 +134,7 @@ margin-top:30px;
     width: 90vh;
     height: 80vh;
     // border: 1px solid lightgray;
-    margin:0 auto;
+    margin-left: 210px;
     margin-top: 30px;
     display:flex;
 }
@@ -142,23 +158,27 @@ margin-top:30px;
     align-items:center;
     font-family: 'Noto Sans KR';
     margin-left: 10px;
+    margin-top: 38px;
   }
 
   .comment_box {
-    margin-top:14px;
+    margin-top:28px;
     margin-left: 30px;
   }
 
   .delete{
-    width: 20%;
-    height: 10px;
+    width: 13%;
+    height: 30px;
     border-radius: 20px;
     color: white;
     background-color: #E4E4E4;
-    margin-top: 20px;
-    padding-bottom: 23px;
+    margin-top: 42px;
+    padding-bottom: 24px;
+    padding-top: 2px;
     border: 0;
     outline: 0;
+
+
   }
 
 `

@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { HiChevronDown } from "react-icons/hi";
-import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
 import { BsChatDotsFill } from "react-icons/bs";
 import { useDispatch , useSelector} from "react-redux"
 import axios from 'axios';
-
-import logo from '../images/logo.png'
-import profile from '../images/profile.png'
-import { useNavigate } from "react-router-dom";
-import { removeCookie,getCookie } from "../../shared/Cookie";
 import ChatListModal from "../../modal/Chat/ChatListModal";
 import {GetChatListAxios} from '../../redux/modules/Data'
+import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
+import logo from '../../images/logo.png';
+import profile from '../../images/profile.png'
+import { useNavigate } from "react-router-dom";
+import { removeCookie,getCookie } from "../../shared/Cookie";
 
 const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
@@ -21,6 +20,7 @@ const Header = () => {
   const navigate = useNavigate();
   const UserCheck = getCookie('accessToken')
   const dispatch = useDispatch();
+
 
 
   const Login = () =>{
@@ -35,6 +35,7 @@ const Header = () => {
     alert('로그아웃 되셨습니다')
   }
 
+
   const messageBtn = () =>{
     setModalIsOpen(true)
     // dispatch(GetChatListAxios()); 
@@ -46,6 +47,7 @@ const Header = () => {
     //     console.log(err)s
     // })
   }
+
 
 
   return (
@@ -146,7 +148,7 @@ const Header = () => {
       </ul>
 
       {/* User 메뉴 리스트 */}
-      <ul className="header__right">
+      <ul className="header__right"> 
         <li className="bell"><BsChatDotsFill onClick={messageBtn}></BsChatDotsFill></li>
         <li className="profile">
           <img src={profile} alt="프로필"/>
@@ -170,11 +172,14 @@ const Header = () => {
 
 
 
+
         <li className="MyPage">마이페이지</li>
         <li className="LogoOut" onClick={logoOut}>로그아웃</li>
       </ul>
     </Headers>
+
     }
+
     </>
 
 
@@ -191,7 +196,6 @@ const Headers = styled.div`
   justify-content: space-between;
   align-items: center;
   color: #3C3C3C;
-
 
   input[id*="answer"]{
     display:none;
@@ -281,6 +285,7 @@ a {
 }
 
 
+
   .logo {
     margin: 16px 16px 16px 23px;
     font-size: 20px;
@@ -301,6 +306,7 @@ a {
     width:40px;
     height: 40px;
     cursor: pointer;
+
   }
 
   .header__menulist {
@@ -315,6 +321,7 @@ a {
     font-size:35px;
     cursor: pointer;
     transform: scaleX(-1);
+
   }
 
   .MyPage{
@@ -360,6 +367,7 @@ a {
     height: 50px;
     border-radius:50%;
     margin:auto;
+
   }
 
   .profile > a> img {
@@ -399,8 +407,6 @@ a {
   .icon{
     font-size:35px;
   }
-
-
 
   @media screen and (max-width: 1075px) {
     flex-wrap: wrap;
@@ -468,6 +474,7 @@ a {
       display:none;
     }
   }
+
 
 `
 
@@ -556,9 +563,60 @@ const ChatBox = styled.div`
 
 
 
+
+
+
 `
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const ChatBox = styled.div`
+  width:23%;
+  height:40vh;
+  position:absolute;
+  left:68%;
+  z-index: 1;
+  display: ${(props) => (props.chatBox ? "flex" : "none")};
+  background-color:#F6BD41;
+
+  .box{
+    display:flex;
+    flex-direction:column;
+    background-color:#E4E4E4;
+  }
+
+  .ChatBox{
+    display:flex;
+    height: 100px;
+    width:23vw;
+    border:1px solid black;
+  }
+`
 
 
 

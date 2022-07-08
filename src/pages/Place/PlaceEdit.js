@@ -1,10 +1,8 @@
 import React from 'react'
-import Header from '../components/Header'
+import Header from '../../components/main/Header'
 import styled from 'styled-components'
 
-
-
-const ReviewInsert = () => {
+const PlaceEdit = () => {
   return (
     <>
     <Header/>
@@ -226,22 +224,7 @@ height: 45px;
 margin-right: 80px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 `
 
+export default PlaceEdit;
 
-
-export default ReviewInsert;

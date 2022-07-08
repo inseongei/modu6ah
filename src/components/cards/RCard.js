@@ -3,13 +3,21 @@ import React from 'react'
 import styled from 'styled-components';
 import { Reviewdata } from '../../shared/reviewdata';
 import { MdOutlinePlace } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 function RCard() {
+    const navigate = useNavigate();
     return (
         <Container>
             {Reviewdata.map((item,index) => (
                 <div className='card' 
-                key={index}>
+                key={index}
+                     onClick={() => {
+                        navigate('/reviewdetail' 
+                        // + item.placePostId
+                        )
+                    }}>
+                
                     {/* 카드 위쪽 '타이틀' */}
                     <div className='card-top'>
                         <h3>{item.title}</h3>
@@ -36,8 +44,8 @@ function RCard() {
 
 const Container = styled.div`
 display: grid;
-grid-template-columns: repeat(auto-fit,480px);
-gap: 3em;
+grid-template-columns: repeat(auto-fit,500px);
+gap: 3.5em;
 justify-content: center;
 align-items: center;
 // background-color: lightgray;
@@ -50,7 +58,7 @@ border: 1px solid lightgray;
 box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.09);
 cursor: pointer;
 overflow: hidden;
-height: 600px;
+height: 668px;
 }
 
 .card-top {
@@ -72,7 +80,7 @@ a {
 
 .card-body {
     width: 460px;
-    margin-left: 8px;
+    margin-left: 19px;
 }
 
 .image{

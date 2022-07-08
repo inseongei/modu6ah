@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import Grid from '../../components/elements/Grid';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import logo from '../images/logo.png';
-import Header from "../components/Header"
+import logo from '../../images/logo.png';
+import Header from "../../components/main/Header"
+import { FormGroup } from "react-bootstrap";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const SignUp = () => {
     const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 
     // 이메일 검사 
-     const onChangeEmail = (event) => {
+    const onChangeEmail = (event) => {
         const emailRegEx =
             /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         const emailCurrent = event.target.value;
@@ -68,7 +69,9 @@ const SignUp = () => {
 
     // 패스워드 검사
     const onChangePassword = (event) => {
+        // const passwordRegEx = /^(?=.*\\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/;
         const passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,16}$/
+        // /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
         const passwordCurrent = event.target.value;
         setPw(passwordCurrent);
         if (!passwordRegEx.test(passwordCurrent)) {
@@ -97,7 +100,9 @@ const SignUp = () => {
     // 회원 등록하기
     const register = (e) => {
         e.preventDefault();
-        axios.post("http://13.125.241.180/api/users/signup", {
+        axios.post(
+            "http://dlckdals04.shop/api/users/signup", 
+        {
             email, nickname, password, passwordCheck
         })
         .then((response) => {
@@ -111,7 +116,6 @@ const SignUp = () => {
                 console.log(error.response.data.Message)
             })
     }
-
 
 
     return (
@@ -139,21 +143,27 @@ const SignUp = () => {
                                                 className='form-input'
                                                 placeholder="이메일을 입력하세요"
                                             ></input>
+                                            {/* <label className="id_button" onClick={onClickEmailConfirm} >
+                                    Check
+                                </label> */}
                                         </div>
                                         <div className="message_div">
                                             {OverlapEmail ? (
-                                                <span className="print_message" style={{ color: "#5493f1" }}>
+                                                <span className="print_message" 
+                                                style={{ color: "#5493f1" }}>
                                                     {OverlapEmailMessage}
                                                 </span>
                                             ) : email.length > 0 ? (
                                                 <span
                                                     className="print_message"
-                                                    style={{ color: isEmail ? "#5493f1" : "#ff2626" }}
+                                                    style={{ color: isEmail ?
+                                                         "#5493f1" : "#ff2626" }}
                                                 >
                                                     {emailMessage}
                                                 </span>
                                             ) : (
-                                                <span className="print_message" style={{ color: "#ff2626" }}>
+                                                <span className="print_message"
+                                                 style={{ color: "#ff2626" }}>
                                                     {emailMessage}
                                                 </span>
                                             )}
@@ -169,21 +179,28 @@ const SignUp = () => {
                                                 className="form-input"
                                                 placeholder="닉네임을 입력하세요"
                                             ></input>
+                                            {/* <label className="id_button" onClick={onClickNickNameConfirm}>
+                                    Check
+                                </label> */}
                                         </div>
                                         <div className="message">
                                             {OverLapNickName ? (
-                                                <span className="print_message" style={{ color: "#5493f1" }}>
+                                                <span className="print_message"
+                                                 style={{ color: "#5493f1" }}>
                                                     {OverlapNicknameMessage}
                                                 </span>
                                             ) : nickname.length > 0 ? (
                                                 <span
                                                     className="print_message"
-                                                    style={{ color: isNickname ? "#5493f1" : "#ff2626" }}
+                                                    style={{ color: isNickname ? 
+                                                        "#5493f1" : "#ff2626" }}
                                                 >
                                                     {nicknameMessage}
                                                 </span>
                                             ) : (
-                                                <span className="print_message" style={{ color: "#ff2626" }}>
+
+                                                <span className="print_message"
+                                                 style={{ color: "#ff2626" }}>
                                                     {nicknameMessage}
                                                 </span>
                                             )}
@@ -202,7 +219,8 @@ const SignUp = () => {
                                             {password.length > 0 && (
                                                 <span
                                                     className="print_message"
-                                                    style={{ color: isPassword ? "#5493f1" : "#ff2626" }}
+                                                    style={{ color: isPassword ? 
+                                                        "#5493f1" : "#ff2626" }}
                                                 >
                                                     {passwordMessage}
                                                 </span>
@@ -223,7 +241,8 @@ const SignUp = () => {
                                             {passwordCheck.length > 0 && (
                                                 <span
                                                     className="print_message"
-                                                    style={{ color: isPasswordConfirm ? "#5493f1" : "#ff2626" }}
+                                                    style={{ color: isPasswordConfirm ? 
+                                                        "#5493f1" : "#ff2626" }}
                                                 >
                                                     {passwordConfirmMessage}
                                                 </span>

@@ -1,15 +1,15 @@
 import React from 'react'
-import Header from '../../components/main/Header'
+// style
 import styled from 'styled-components'
 import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
-import Comment from '../../components/elements/Comment'
 
-
+// elements & components
+import Header from '../../components/main/Header';
+import Place from './Place';
+import Comment from '../../components/elements/Comment';
 
 const PlaceDetail = () => {
-
-
 
   return (
     <>
@@ -232,8 +232,6 @@ height: 80%;
   margin-right:10px;
   border: 1px solid black;
 }
-
-
 
 `
 

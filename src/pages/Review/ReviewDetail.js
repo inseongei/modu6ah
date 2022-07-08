@@ -1,208 +1,207 @@
 import React from 'react'
-import Header from '../components/Header'
 import styled from 'styled-components'
+import { FaStar } from "react-icons/fa";
+import { GrLocation } from "react-icons/gr";
 
-
+import Header from '../../components/main/Header'
+import Comment from '../../components/elements/Comment'
 
 const ReviewDetail = () => {
+
   return (
     <>
     <Header/>
-    <Review>
-
-    <div className='reviewC'>
-    <div className='images'><div className='title'>대표이미지</div></div>
-    <div className='imageBox'>
-        <div className='img'></div>
-        <div className='img'></div>
-        <div className='img'></div>
-        <div className='img'></div>
-        <div className='img'></div>
-    </div>
-
-
-    <div className='mainBox'>
-        <div className='one'>
-            <div className='position'>
-            <span> 제목</span>
-            <input type="text"/>
-            </div>
-
-            <div className='position'>
-            <span> 위치</span>
-            <input type="text"/>
-            </div>
-
-            <div className='position'>
-            <span> 별점</span>
-            <span> ⭐⭐⭐⭐⭐</span>
-            <span>4.0점</span>
-            </div>
-
+    <Container>
+      <div className='OneBox'>
+        <div className='OnePicture'>
+        <div className='Big'><div className='BigPicture'></div></div>
+        <div className='small'>
+          <div className='smallPicture'></div>
+          <div className='smallPicture'></div>
+          <div className='smallPicture'></div>
+          <div className='smallPicture'></div>
+        </div>
         </div>
 
+        <div className='OneContent'>
+          <div className='TwoBox'>
 
+            <div className='title'>
+              <p>어린이스마트폰</p>
+              <span className='starScore'> 가전제품</span>
+            </div>
 
-        <div className='two'>
-            <div className='contentBox'> 
-            <span className='content'>내용</span>
-            <div>
-            <span className='btnList'>
-                <button className='ParkBtn'> 주차가능</button>
-                <button className='KidBtn'> 예스키즈존</button>
-            </span>
+            <div className='location'><p><GrLocation></GrLocation>www.gmarket.com/kidsphone</p></div>
+
+            <div className='info'>
+              <div className='profile'>사진</div>
+              <p className='nickname'>5세맘육아왕</p>
             </div>
+          </div>
+
+          <div className='ThreeBox'>
+            <div className='fourBox'>
+              <p>내용</p>
             </div>
+          </div>
+
         </div>
-    </div>
-
-
-
-    <div className='btnBox'>
-        <button>취소</button>
-        <button>등록하기</button>
-    </div>
-
-
-    </div>
-
-    
-    </Review>
-
+      </div>
+    </Container>
+    <Comment/>
     </>
+    
   )
-  
 }
 
-const Review = styled.div`
-.reviewC{
-    width:100%;
-    height: 93vh;
+
+const Container = styled.div`
+  width:100%;
+  height: 100vh;
+
+.OneBox{
+  margin: 80px auto;
+  width:80%;
+  height: 70vh;
+  display:flex;
+}
+
+.OnePicture{
+  width:50%;
+  height: 70vh;
+}
+
+.OneContent{
+  width:50%;
+  height: 70vh;
+}
+
+.Big{
+  height: 60%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.small{
+  height: 40%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.TwoBox{
+  height: 45%;
+}
+
+.TwoBox > div{
+  height: 33.5%;
+}
+
+.ThreeBox{
+  height: 55%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .title{
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 31px;
-    padding:10px;
-    margin-left:160px;
+  display:flex;
+  align-items:center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+  padding:30px;
 }
 
-.images{
-    width:90%;
-    height: 5%;
-    margin:auto; 
+.icon{
+  color:#fdd835;
+  margin-left:30px;
 }
 
-.imageBox{
-    width:90%;
-    margin:auto;
-    height: 30%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.starScore{
+  color: #A8A8A8;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-left: 15px;
 }
 
-.mainBox{
-    width:90%;
-    height: 59%;
-    margin:auto;
-    display:flex;
+.location{
+  display: flex;
+  align-items: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 30px;
 }
 
-.btnBox{
-    width:90%;
-    margin:auto;
-    height: 5%;
-    display:flex;
-    justify-content: flex-end;
+.info{
+  display:flex;
+  align-items:center;
+  padding: 30px;
 }
 
-.one{
-    width:40%;
+.profile{
+  border:1px solid black;
+  width:70px;
+  height:70px;
+  border-radius: 50%;
 }
 
-.two{
-    width:60%;
-    display:flex;
-    justify-content: center;
-    align-items:center;
+.nickname{
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 29px;
+margin-left:30px;
 }
 
-.img{
-    width:300px;
-    height:250px;
-    border: 1px solid #E4E4E4;
-    border-radius: 10px;
-    margin-left: 25px;
+.fourBox{
+  border: 2px solid #E4E4E4;
+  border-radius: 10px;
+  width:80%;
+  height:90%;
 }
 
-.one > div >span {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 31px;
+.fourBox > p {
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+width:100%;
+height: 80%;
 }
 
-.one > div > input {
-    border: 1px solid #E4E4E4;
-    border-radius: 10px;
-    width:50%;
-    height: 50px;
-}
-
-.position{
-    margin:50px 0px 30px 30px;
-}
-
-.position >span{
-    margin-right: 30px;
-}
-
-.contentBox{
-    width:75%;
-    height: 90%;
-    border: 1px solid #E4E4E4;
-    border-radius: 10px;
-    display:flex;
-    flex-direction: column;
-    justify-content:space-between;
-}
-
-.contentBox > span {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-}
-
-.content{
-    padding:20px;
-}
-
-.btnList{
-    display:flex;
-    justify-content:space-around;
-    margin-bottom:10px;
+.fourBox > div{
+  width:100%;
+  height: 20%;
 }
 
 .ParkBtn{
-  width:20%;
+  width:30%;
   height: 50%;
   border-radius:15px;
   font-size: 17px;
   color:#263238;
   border: none;
   background-color:#ffa000;
+}
 
+.btnBox{
+  display:flex;
+  justify-content:space-around;
 }
 
 .KidBtn{
-  width:20%;
+  width:30%;
   height: 50%;
   border-radius:15px;
   font-size: 17px;
@@ -211,36 +210,24 @@ const Review = styled.div`
   background-color:#c5e1a5; 
 }
 
-.btnBox > button{
-background: #3C3C3C;
-border-radius: 30px;
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 24px;
-color:white;
-width:10%;
-height: 45px;
-margin-right: 80px;
+.BigPicture{
+  border:1px solid black;
+  width:70%;
+  height:90%;
+  border-radius: 30px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.smallPicture{
+  border:1px solid black;
+  width:200px;
+  height:170px;
+  border-radius: 30px;
+  margin-left:15px;
+  margin-right:10px;
+}
 
 `
 
+export default ReviewDetail;
 
 
-export default ReviewDetail
