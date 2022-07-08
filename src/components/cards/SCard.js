@@ -9,10 +9,10 @@ import { loadPostDB } from '../../redux/modules/post';
 
 function SCard() {
     const navigate = useNavigate();
-    const post = useSelector(state => state.post.list);
-    console.log(post);
-
     const dispatch = useDispatch();
+    
+    const post = useSelector(state => state.post.list);
+
     React.useEffect(() => {
         dispatch(loadPostDB());
     }, [])
@@ -20,11 +20,12 @@ function SCard() {
     return (
         <>
             <Container>
-                {post.recruitPosts&&post.recruitPosts.map((item, index) => (
+                {post.recruitPosts&&
+                post.recruitPosts.map((item, index) => (
                     <div className='card'
                         key={index}
                         onClick={() => {
-                            navigate('/detailone' + item.recruitPostId
+                            navigate('/recruitdetail/' + item.recruitPostId
                             )
                         }}>
                         {/* 카드 위쪽 아이콘 */}
