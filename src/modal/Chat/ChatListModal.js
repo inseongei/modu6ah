@@ -1,8 +1,8 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import '../shared/App.css'
-import logo from '../images/logo.png'
+import '../../shared/App.css'
+import logo from '../../images/logo.png'
 import ScrollToBottom from "react-scroll-to-bottom";
 import ChatRoom from './ChatRoom'
 import 'animate.css';

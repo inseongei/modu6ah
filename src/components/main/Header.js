@@ -595,30 +595,6 @@ const ChatBox = styled.div`
 
 
 
-const ChatBox = styled.div`
-  width:23%;
-  height:40vh;
-  position:absolute;
-  left:68%;
-  z-index: 1;
-  display: ${(props) => (props.chatBox ? "flex" : "none")};
-  background-color:#F6BD41;
-
-  .box{
-    display:flex;
-    flex-direction:column;
-    background-color:#E4E4E4;
-  }
-
-  .ChatBox{
-    display:flex;
-    height: 100px;
-    width:23vw;
-    border:1px solid black;
-  }
-`
-
-
 
 export default Header
 

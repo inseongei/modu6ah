@@ -1,7 +1,7 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import '../shared/App.css'
+import '../../shared/App.css'
 import { BiLogOut } from "react-icons/bi";
 import ScrollToBottom from "react-scroll-to-bottom";
 import {useSelector} from "react-redux"
