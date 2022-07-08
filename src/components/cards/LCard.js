@@ -56,7 +56,6 @@ gap: 3em;
 justify-content: center;
 align-items: center;
 font-family: 'Noto Sans KR';
-// background-color: lightgray;
 
 
 .card {

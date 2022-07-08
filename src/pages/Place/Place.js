@@ -27,6 +27,7 @@ function Place() {
   )
 }
 
+
 const Container = styled.div`
 font-family: 'Noto Sans KR';
 

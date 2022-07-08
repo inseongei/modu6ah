@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 
 // pages
 import Main from '../pages/Main'
-
 import LogIn from '../pages/User/LogIn';
 import SignUp from "../pages/User/SignUp";
 
@@ -62,8 +61,7 @@ function App() {
       {/* <Route  path="/mypage" element={< MyPage />} /> */}
       <Route  path="/manager" element={< ProfileManager />} />
       <Route  path="/bookmark" element={< BookMark />} />
-    
-       
+
         {/* 이쪽 모달은 추후에 삭제 예정 */}
       <Route  path="/welcome" element={< WelcomeModal />} />
 

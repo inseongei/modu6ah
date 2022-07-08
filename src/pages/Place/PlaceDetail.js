@@ -1,5 +1,4 @@
 import React from 'react'
-
 // style
 import styled from 'styled-components'
 import { FaStar } from "react-icons/fa";
@@ -233,6 +232,8 @@ height: 80%;
   margin-right:10px;
   border: 1px solid black;
 }
+
 `
+
 export default PlaceDetail
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 const comment = () => {
   // const [comment, setComment] = useState('');
 
@@ -78,6 +77,7 @@ margin-top:30px;
     margin-left: 110px;
 }
 
+
 .h1Box{
     width:15%;
     display:flex;
@@ -129,6 +129,7 @@ margin-top:30px;
 }
 
 
+
 .box{
     width: 90vh;
     height: 80vh;
@@ -177,8 +178,10 @@ margin-top:30px;
     border: 0;
     outline: 0;
 
+
   }
 
 `
+
 
 export default comment

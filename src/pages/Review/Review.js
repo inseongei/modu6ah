@@ -65,4 +65,5 @@ cursor: pointer;
 border: 1px solid transparent;
  `;
 
+
 export default Place;

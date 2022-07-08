@@ -6,7 +6,7 @@ import '../../shared/App.css';
 const Swiper = () => {
   return (
     <Item>
-      <Carousel>
+      <Carousel controls={false} fade={true} interval={2500}>
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -36,11 +36,16 @@ const Swiper = () => {
 }
 
 const Item = styled.div`
+z-index: -1;
+position: relative;
+
 img {
-  widht: 100%;
+  width: 100%;
   height: 550px;
   object-fit: cover;
 }
+
+
 `;
 
 export default Swiper

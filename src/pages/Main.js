@@ -18,10 +18,12 @@ const Main = () => {
     <div>
       <Header />
       <Swiper />
+
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
         <Container>
             <Title>같이해요</Title> 
             <div className='subtitle'>
+
             <SubTitle>다양한 공동육아 프로그램를 둘러보고,
               참여를 신청해요 </SubTitle>
             <Btn onClick={() => 

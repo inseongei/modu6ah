@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Header from '../../components/main/Header'
 
 const ItemInsert = () => {
+
   return (
     <>
     <Header/>
@@ -226,7 +227,6 @@ margin-right: 80px;
 
 
 `
-
 
 
 export default ItemInsert;

@@ -223,6 +223,8 @@ width:10%;
 height: 45px;
 margin-right: 80px;
 }
+
 `
 
 export default PlaceEdit;
+

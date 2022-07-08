@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 
@@ -230,4 +229,5 @@ height: 80%;
 `
 
 export default ReviewDetail;
+
 

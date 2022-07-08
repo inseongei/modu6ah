@@ -1,3 +1,4 @@
+
 // 모집 게시글 페이지
 import React from 'react'
 import styled from 'styled-components';
@@ -23,9 +24,11 @@ function Recruit() {
           </div>
          <SCard/>
       </Container>
+
     </div>
   )
 }
+
 
 
 const Container = styled.div`
@@ -64,6 +67,7 @@ padding: 10px 15px;
 cursor: pointer;
 border: 1px solid transparent;
  `;
+
 
 
 export default Recruit

@@ -117,6 +117,7 @@ const SignUp = () => {
             })
     }
 
+
     return (
         <>
             <Header />
@@ -197,6 +198,7 @@ const SignUp = () => {
                                                     {nicknameMessage}
                                                 </span>
                                             ) : (
+
                                                 <span className="print_message"
                                                  style={{ color: "#ff2626" }}>
                                                     {nicknameMessage}

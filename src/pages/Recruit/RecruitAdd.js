@@ -33,12 +33,12 @@ const AddOne = () => {
 
   // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
-    axios.post('http://13.124.212.159/api/chats/rooms/1', null, {
+    axios.post('http://13.125.241.180/api/chats/rooms/1', null, {
       headers: { Authorization: `Bearer ${getCookie("accessToken")}` }
     })
       .then((res) => {
         console.log(res)
-        const socket = io.connect("http://13.124.212.159")
+        const socket = io.connect("http://13.125.241.180")
         const roomId = res.data.roomId
         socket.emit("join_room", roomId);
         navigate('/MyPage/' + roomId)
@@ -47,6 +47,7 @@ const AddOne = () => {
         console.log(err)
       })
   }
+
 
   const addPost = () => {
     const post_data = {
@@ -151,6 +152,7 @@ const AddOne = () => {
 
 const Detail = styled.div`
 .toggle{
+
     margin-left: 150px;
     margin-top: 60px;
     display: flex;
@@ -172,10 +174,12 @@ label {
 
 .add_input{
     width:600px;
+
     display:flex;
     justify-content:center;
     flex-direction:column;
     font-size : 25px;
+
     box-sizing: border-box;
     margin-left: 40px;
 }
@@ -183,6 +187,7 @@ label {
 .add_input > div {
     margin:50px 0px 0px 10px;
     object-fit: cover;
+
 }
 
 .add_input > div >input{
@@ -192,6 +197,7 @@ label {
     width: 450px;
     padding: 10px;
     margin-left: 30px;
+
     outline: none;
 }
 
@@ -199,15 +205,18 @@ label {
   margin-top: 8%;
     width:50%;
     height:60vh;
+
     margin-left: 40px;
 }
 
 strong{
   padding-top: 30px;
+
 }
 
 textarea {
     padding:20px;
+
     margin-top: 73px;
     height 500px;
     width: 610px;
@@ -242,6 +251,7 @@ textarea {
     margin-left:30px;
     font-size:33px;
     width: 100%;
+
 }
 
 .inputbox{
@@ -283,6 +293,7 @@ label span {display:none;}
 
 `
 
+
 const Monat = styled.div`
 display: flex;
 width: 50px;
@@ -323,3 +334,4 @@ margin-left: 170px;
 `;
 
 export default AddOne
+
