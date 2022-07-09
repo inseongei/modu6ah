@@ -80,10 +80,10 @@ cursor: pointer;
 }
 
 .card-top p {
-    margin: 0px 0px 8px 4px;
+    margin: 0px 0px 4px 4px;
     background-color: #F4B03E;
     border-radius: 20px;
-    padding: 6px 15px 4px 15px;
+    padding: 6px 15px 7px 15px;
     color: white;
 } 
 
