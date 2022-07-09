@@ -1,8 +1,8 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import '../shared/App.css'
-import logo from '../images/logo.png'
+import '../../shared/App.css'
+import logo from '../../images/logo.png'
 import ScrollToBottom from "react-scroll-to-bottom";
 import ChatRoom from './ChatRoom'
 import 'animate.css';
@@ -17,53 +17,23 @@ import io from "socket.io-client";
 const socket = io.connect("http://13.125.241.180")
 
 const ChatListModal = ({open,onClose}) => {
+    const MyNickname = getCookie('nickname')
     const navigate = useNavigate();
     const nickname = getCookie('nickname')
     const [ChatList,setChatList] = React.useState('')
-    const [NowRoom,setNowRoom] = React.useState()
+    const [NowRoom,setNowRoom] = React.useState([])
+    const [realroom,setrealroom] = React.useState()
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [BeforeChatting,setBeforeChatting] = useState()
-
-    console.log(ChatList)
-
-
-
-
-
-
-
-
-
-  const Data = useSelector((state)=> state.Data);
-
-  console.log(Data)
   
     React.useEffect(()=>{
         axios.get('http://13.125.241.180/api/chats/rooms',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
         .then((res)=>{
-            console.log(res.data.chatRoomList)
             setChatList(res.data.chatRoomList)
         }).catch((err)=>{
             console.log(err)
         })
     },[])
-
-    console.log(ChatList)
-
-    const BeforeChat = () =>{
-                ChatList.map((data)=>{
-            return(
-                axios.get('http://13.125.241.180/api/chats/messages/' + data.roomId,
-                { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
-                .then((res)=>{
-                  console.log(res.data.chatMessageList)
-                  socket.emit("join_room",NowRoom)  
-                  setBeforeChatting(res.data.chatMessageList)
-                })
-            )
-        })
-       
-    }
 
 
 
@@ -82,32 +52,43 @@ const ChatListModal = ({open,onClose}) => {
     {/* 대화창 리스트 */}
 
     <ScrollToBottom className='message-container'>
-        {ChatList&& ChatList.map((data,idx)=>{
+            <div className='ChatListContainer'> 
+              {ChatList&& ChatList.map((data,idx)=>{
             return(
-            <div className='ChatListContainer' key ={idx} onClick={()=>{
+            <div className='List' key ={idx} onClick={()=>{
                 setModalIsOpen(true)
                 socket.emit("join_room",data.roomId)
-                setNowRoom(data.roomId)
-             }}> 
-            <div className='List' onClick={BeforeChat}>
+                axios.get('http://13.125.241.180/api/chats/messages/' + data.roomId,{
+                    headers: { Authorization: `Bearer ${getCookie("accessToken")}`}
+                    })
+                .then((res)=>{
+                    console.log(res.data.chatMessageList)
+                    setNowRoom(res.data.chatMessageList)
+                    setrealroom(data.roomId)
+                })
+             }}>
                 <div className='ChatImg'><div className='ChatImgOne'></div></div>
                 <div className='ChatInfo'>
-                    <div className='ChatName'>{data.postNickname}</div>
+                    
+                   {MyNickname === data.postNickname ? <div className='ChatName'> {data.nickname} </div>:
+                   <div className='ChatName'> {data.postNickname} </div>}
+                    
                     <div className='ChatContent'>준비중</div>
                     <div className='ChatDate'>{data.createdAt}</div>
                 </div>
                 <div className='ChatBell'><span>1</span></div>
             </div>
+                       )
+                    })}
             </div>
-            )
-        })}
+ 
 
     </ScrollToBottom>  
 
 
 
 
-    <ChatRoom open = {modalIsOpen} onClose={()=>setModalIsOpen(false)} NowRoom={NowRoom} BeforeChatting = {BeforeChatting}/>
+    <ChatRoom open = {modalIsOpen} onClose={()=>setModalIsOpen(false)} NowRoom={NowRoom} BeforeChatting = {BeforeChatting} socket={socket} realroom={realroom}/>
 
 
      </Modal>

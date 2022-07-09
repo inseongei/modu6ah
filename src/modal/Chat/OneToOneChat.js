@@ -1,51 +1,69 @@
 import React,{ useState } from 'react'
+import styled from 'styled-components';
 import Modal from 'react-modal';
-import '../shared/App.css'
+import '../../shared/App.css'
 import { BiLogOut } from "react-icons/bi";
 import ScrollToBottom from "react-scroll-to-bottom";
+import {useSelector} from "react-redux"
 import io from "socket.io-client";
-import { getCookie } from '../shared/Cookie'
+import { getCookie } from '../../shared/Cookie'
+import axios from 'axios';
 
 
-const socket = io.connect("http://13.125.241.180")
-
-
-const OneToOneChat = ({open,onClose,roomId}) => {
+const OneToOneChat = ({open,onClose,socket}) => {
     const input_Ref = React.useRef()
     const nickname = getCookie('nickname')
-    const [realtime, setRealtime] = useState([]);
-    const [currentMessage, setCurrentMessage] = React.useState("");
+    const [NowChat, setNowChat] = React.useState([]);
+    const [roomId, setRoomId] = React.useState();
+    const [realtime,setRealtime] = React.useState()
+
+
+    const sendMessage = async () => {
+      // if (currentMessage !== "") {
+        const messageData = {
+          roomId: roomId,
+          senderNick: nickname,
+          message: input_Ref.current.value,
+          time:
+            new Date(Date.now()).getHours() +
+            ":" +
+            new Date(Date.now()).getMinutes(),
+        };
+        
+        await socket.emit("send_message", messageData);
+        // setNowChat((list)=>[...list,messageData]);
+        console.log(messageData)
+      // }
+    };
 
 
     React.useEffect(() => {
-        socket.on("receive_message", (data) => {
-          if(roomId === data.roomId){
-            setRealtime((list) => [...list, data]);
-          } else{
-            return null;
-          }}); 
-    },[]);
+    socket.on("test", (data) => {
+      console.log(data)
+      setRoomId(data);
+    },); 
+    },[socket]);
+
+
+    React.useEffect(() => {
+
+      socket.off('receive_message').on('receive_message',(data)=>{
+      setNowChat((list) => [...list, data])
+          console.log(data )
+     })
+   },[]);
 
 
 
-    
-    const sendMessage = async () => {
-      setCurrentMessage(input_Ref.current.value)
-        if (currentMessage !== "") {
-          const messageData = {
-            roomId: roomId,
-            senderNick: nickname,
-            message: input_Ref.current.value,
-            time:
-              new Date(Date.now()).getHours() +
-              ":" +
-              new Date(Date.now()).getMinutes(),
-          };
-          await socket.emit("send_message", messageData);
-          setRealtime((list) => [...list, messageData]);
-        }
-        setCurrentMessage('')
-      };
+
+
+
+
+
+
+
+
+
 
 
 
@@ -69,23 +87,25 @@ const OneToOneChat = ({open,onClose,roomId}) => {
 
     <ScrollToBottom className='message-containerTwo'>
     <div className='RoomChatList animate__animated animate__zoomIn'>
-        {realtime.map((data,idx)=>{
-            return(
-                <div className='RoomChat' key={idx}>
-                <div className='RoomImg'>
-                <div className='RoomProfile'>
-                    {/* 사진 */}
-                </div>
-                </div>
-                <div className='RoomContent'>
-                    <div className='RoomName'>{data.senderNick}</div>
-                    <div className='ChatRoomInput'>{data.message}</div>
-                </div>
-                <div className='RoomTime'>{data.time}</div>
-                </div>
-            )
+        {NowChat&& NowChat.map((data,idx)=>{
+          return(
+            <div className='RoomChat' key={idx}>
+            <div className='RoomImg'>
+            <div className='RoomProfile'>
+                {/* 사진 */}
+            </div>
+            </div>
+            <div className='RoomContent'>
+                <div className='RoomName'>{data.senderNick}</div>
+                <div className='ChatRoomInput'>{data.message}</div>
+            </div>
+            <div className='RoomTime'>{data.time}</div>
+            </div>
+        )
         })}
 
+
+    
 
     </div>
     </ScrollToBottom>

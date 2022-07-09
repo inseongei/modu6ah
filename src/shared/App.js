@@ -23,6 +23,7 @@ import ReviewAdd from '../pages/Review/ReviewAdd';
 import RecruitEdit from '../pages/Recruit/RecruitEdit';
 import PlaceEdit from '../pages/Place/PlaceEdit';
 import ReviewEdit from '../pages/Review/ReviewEdit'
+import ProfileInsert from '../pages/MyPage/ProfileInsert'
 
 //마이 페이지
 import ProfileManager from "../pages/MyPage/ProfileManager";
@@ -43,6 +44,7 @@ function App() {
       <Route  path="/recruit" element={< Recruit />} /> 
       <Route  path="/recruitadd" element={< RecruitAdd />} />
       {/* <Route  path="/detailone/:recruitPostId" element={< DetailOne />} /> */}
+      <Route  path="/recruitdetail/:recruitPostId" element={< RecruitDetail />} />
       <Route  path="/recruitdetail" element={< RecruitDetail />} />
       <Route  path="/editone" element={< RecruitEdit />} />
 {/* 장소 추천 */}
@@ -61,6 +63,8 @@ function App() {
       {/* <Route  path="/mypage" element={< MyPage />} /> */}
       <Route  path="/manager" element={< ProfileManager />} />
       <Route  path="/bookmark" element={< BookMark />} />
+      <Route  path="/ProfileInsert" element={< ProfileInsert />} />
+      
 
         {/* 이쪽 모달은 추후에 삭제 예정 */}
       <Route  path="/welcome" element={< WelcomeModal />} />

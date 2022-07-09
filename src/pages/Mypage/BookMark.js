@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import Header from '../../components/main/Header'
-import MyPageMenu from '../../components/MyPage/MyPageMenu'
 import { FaBookmark } from "react-icons/fa";
+import Header from '../../components/main/Header';
 
 const BookMark = () => {
   return (
@@ -11,7 +10,7 @@ const BookMark = () => {
     <Book>
 
     <div className='Menu'>
-    <MyPageMenu/>
+    {/* <MyPageMenu/> */}
     </div>
 
     <div className='Bookmark'>
