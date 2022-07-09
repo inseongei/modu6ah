@@ -29,20 +29,20 @@ export function updatePost(post_list) {
   return { type: UPDATE, post_list };
 }
 
-export function deletePost(post_list) {
-  return { type: DELETE, post_list };
+export function deletePost() {
+  return { type: DELETE, };
 }
 
 // middleware
-export const createPostDB = (post_data) => {
+export const createPostDB = async (post_data) => {
   const post = post_data;
-  return async function (dispatch) {
+  return function (dispatch) {
     axios.post(`http://dlckdals04.shop/api/recruits`, post,
       { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } })
       .then((response) => {
         // console.log(response.data);
         dispatch(createPost(response.data))
-        window.alert('게시물 작성이 성공했습니다.')
+        window.alert('게시물 작성을 성공했습니다.')
         window.location.href = "/recruit"
       }).catch((error) => {
         // console.log(error.message);
@@ -55,7 +55,6 @@ export const loadPostDB = () => {
   return function (dispatch) {
     axios.get(
       `http://dlckdals04.shop/api/recruits`
-      // ' http://localhost:5001/posts'
     )
       .then((response) => {
         console.log(response.data);
@@ -65,8 +64,6 @@ export const loadPostDB = () => {
 };
 
 export const detailPostDB = (recruitPostId) => {
-  // console.log(recruitPostId, '아이디 확인')
-
   return function (dispatch) {
     axios.get(
       'http://dlckdals04.shop/api/recruits/' + recruitPostId
@@ -77,6 +74,28 @@ export const detailPostDB = (recruitPostId) => {
       }).catch((response) => {
         console.log(response);
       });
+  };
+};
+
+export const updatePostDB = ( recruitPostId, newPost) => {
+  console.log(newPost)
+  return function (dispatch) {
+    axios
+    .put(`http://dlckdals04.shop/api/recruits/` + recruitPostId,
+    newPost,
+    {
+      headers:
+        { Authorization: `Bearer ${getCookie("accessToken")}` }
+    })
+          .then((res) => {
+              console.log(res.data.post);
+              dispatch(updatePost(recruitPostId, res.data.post));
+              alert("수정이 완료되었습니다.");
+              window.location.href = "/recruit"
+          })
+          .catch((error) => {
+              alert("게시글 수정 에러!");
+          });
   };
 };
 
@@ -94,7 +113,7 @@ export const deletePostDB = (recruitPostId) => {
         window.location.href = "/recruit"
       })
       .catch((error) => {
-        alert('게시글 삭제 권한이 없습니다.')
+        alert('게시글을 삭제할 권한이 없습니다.')
       });
   };
 };
@@ -105,7 +124,7 @@ export default function reducer(state = initialState, action = {}) {
   // console.log(action)
   switch (action.type) {
     case "post/LOAD": {
-      console.log(action.post_list.data);
+      // console.log(action.post_list.data);
       return { list: action.post_list.data };
     }
 
@@ -123,8 +142,8 @@ export default function reducer(state = initialState, action = {}) {
       return { list: new_list };
     }
     case "post/DELETE": {
-      const empty_post_list = [];
-      return { list: empty_post_list };
+      const empty_list = [];
+      return { list: empty_list };
     }
 
     default:
