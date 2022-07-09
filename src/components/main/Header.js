@@ -19,6 +19,7 @@ const Header = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const UserCheck = getCookie('accessToken')
+  const nickname = getCookie('nickname')
   const dispatch = useDispatch();
 
 
@@ -160,7 +161,7 @@ const Header = () => {
 
         <li className="accordion">
           <input type="checkbox" id="answer01"/>
-          <label htmlFor="answer01"> Nickname<em><HiChevronDown></HiChevronDown></em></label>
+          <label htmlFor="answer01"> {nickname}<em><HiChevronDown></HiChevronDown></em></label>
           <div className="menu">
             <div className="menuOne"><a href="/manager"><p>프로필관리</p></a></div>
             <div className="menuTwo"><a href="/bookmark"><p>북마크관리</p></a></div>

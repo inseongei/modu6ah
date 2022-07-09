@@ -12,7 +12,6 @@ function SCard() {
     const navigate = useNavigate();
     let { recruitPostId } = useParams();
     const post = useSelector(state => state.post.list);
-    console.log(post);
 
     const dispatch = useDispatch();
     React.useEffect(() => {

@@ -25,49 +25,17 @@ const ChatListModal = ({open,onClose}) => {
     const [realroom,setrealroom] = React.useState()
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [BeforeChatting,setBeforeChatting] = useState()
-
-    // console.log(ChatList)
-
-
-
-
-
-
-
-
-
-//   const Data = useSelector((state)=> state.Data);
-
-//   console.log(Data)
   
     React.useEffect(()=>{
         axios.get('http://13.125.241.180/api/chats/rooms',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
         .then((res)=>{
-           console.log(res)
             setChatList(res.data.chatRoomList)
         }).catch((err)=>{
             console.log(err)
         })
     },[])
 
-    // console.log(ChatList)
 
-    const BeforeChat = () =>{
-                ChatList.map((data)=>{
-            return(
-                axios.get('http://13.125.241.180/api/chats/messages/' + data.roomId,
-                { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
-                .then((res)=>{
-                  console.log(res.data.chatMessageList)
-                  socket.emit("join_room",NowRoom)  
-                  setBeforeChatting(res.data.chatMessageList)
-                })
-            )
-        })
-       
-    }
-
-    console.log(ChatList)
 
 
 
@@ -84,9 +52,10 @@ const ChatListModal = ({open,onClose}) => {
     {/* 대화창 리스트 */}
 
     <ScrollToBottom className='message-container'>
-        {ChatList&& ChatList.map((data,idx)=>{
+            <div className='ChatListContainer'> 
+              {ChatList&& ChatList.map((data,idx)=>{
             return(
-            <div className='ChatListContainer' key ={idx} onClick={()=>{
+            <div className='List' key ={idx} onClick={()=>{
                 setModalIsOpen(true)
                 socket.emit("join_room",data.roomId)
                 axios.get('http://13.125.241.180/api/chats/messages/' + data.roomId,{
@@ -97,8 +66,7 @@ const ChatListModal = ({open,onClose}) => {
                     setNowRoom(res.data.chatMessageList)
                     setrealroom(data.roomId)
                 })
-             }}> 
-            <div className='List' onClick={BeforeChat}>
+             }}>
                 <div className='ChatImg'><div className='ChatImgOne'></div></div>
                 <div className='ChatInfo'>
                     
@@ -110,9 +78,10 @@ const ChatListModal = ({open,onClose}) => {
                 </div>
                 <div className='ChatBell'><span>1</span></div>
             </div>
+                       )
+                    })}
             </div>
-            )
-        })}
+ 
 
     </ScrollToBottom>  
 

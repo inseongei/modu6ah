@@ -49,9 +49,9 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
             senderNick: nickname,
             message: input_Ref.current.value,
             time:
-              new Date(Date.now()).getHours() +
-              ":" +
-              new Date(Date.now()).getMinutes(),
+              new Date(Date.now()).getHours() + '시 ' +
+              +
+              new Date(Date.now()).getMinutes()+ '분',
           };
           await socket.emit("send_message", messageData);
           // setNowChat((list) => [...list, messageData]);
@@ -61,16 +61,15 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
       };
 
 
-      console.log(NowChat)
-
-      console.log(NowRoom)
-
 
     if(!open) return null
   return (
     <Modal isOpen={true} className="ChatList">
     <div className='RoomOne'>
-        <div className='RoomFake'></div>
+        <div className='RoomFake'>
+          <div className='me'><div className='who'>나</div>  <div className='circlePosition'><div className='circle'></div></div> </div>
+          <div className='you'><div className='who'>상대</div><div className='circlePosition'><div className='circle2'></div></div></div>
+        </div>
         <div className='RoomDate'> 2022년 06월 30일 목요일</div>
     <button onClick={onClose}><BiLogOut className='icon'></BiLogOut></button>
     </div>
@@ -83,18 +82,18 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
     <div className='RoomChatList animate__animated animate__zoomIn'>
         {NowRoom&&NowRoom.map((data,idx)=>{
             return(
-                <div className='RoomChat' key={idx}>
-                <div className='RoomImg'>
-                <div className='RoomProfile'>
-                    {/* 사진 */}
-                </div>
-                </div>
-                <div className='RoomContent'>
-                    <div className='RoomName'>{data.senderNick}</div>
-                    <div className='ChatRoomInput'>{data.message}</div>
-                </div>
-                <div className='RoomTime'>{data.createdAt}</div>
-                </div>
+              <div className='RoomChat' key={idx}>
+              <div className='RoomImg'>
+              <div className='RoomProfile'>
+                  {/* 사진 */}
+              </div>
+              </div>
+              <div className='RoomContent'>
+                  <div className={nickname === data.senderNick ? 'RoomName' :'RoomNameX'}>{data.senderNick}</div>
+                  <div className={nickname === data.senderNick ? 'ChatRoomInput' :'ChatRoomInputX'}>{data.message}</div>
+              </div>
+              <div className='RoomTime'>{data.createdAt}</div>
+              </div>
             )
         })}
 
