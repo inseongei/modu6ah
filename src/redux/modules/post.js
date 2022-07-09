@@ -25,10 +25,6 @@ export function detailPost(post_list) {
   return { type: DETAIL, post_list };
 }
 
-export function detailPost(post_list) {
-  return { type: DETAIL, post_list };
-}
-
 export function updatePost(post_list) {
   return { type: UPDATE, post_list };
 }
