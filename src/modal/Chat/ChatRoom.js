@@ -19,29 +19,17 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
     const [NowChat, setNowChat] = React.useState([]);
     const [realtime, setRealtime] = React.useState([]);
     const [room, setRoom] = React.useState();
-    console.log(NowRoom)
-    console.log(realroom)
-
-  // const set = new Set(NowChat)
-
-
-
 
     React.useEffect(() => {
-      socket.on('receive_message',(data)=>{
-          setNowChat((list) => [...list, data]);
-          console.log(data)
+
+      socket.off('receive_message').on('receive_message',(data)=>{
+      setNowChat((list) => [...list, data])
+          console.log(data )
      })
-   },[socket]);
+   },[]);
 
 
 
-   React.useEffect(() => {
-    socket.on("test", (data) => {
-      console.log(data)
-      setRoom(data);
-    },); 
-},[socket]);
 
 
 
@@ -66,7 +54,7 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
               new Date(Date.now()).getMinutes(),
           };
           await socket.emit("send_message", messageData);
-          setNowChat((list) => [...list, messageData]);
+          // setNowChat((list) => [...list, messageData]);
           console.log(messageData)
 
         // }
@@ -75,7 +63,7 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
 
       console.log(NowChat)
 
-
+      console.log(NowRoom)
 
 
     if(!open) return null
@@ -105,7 +93,7 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
                     <div className='RoomName'>{data.senderNick}</div>
                     <div className='ChatRoomInput'>{data.message}</div>
                 </div>
-                <div className='RoomTime'>{data.time}</div>
+                <div className='RoomTime'>{data.createdAt}</div>
                 </div>
             )
         })}

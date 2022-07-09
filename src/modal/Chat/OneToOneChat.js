@@ -38,54 +38,23 @@ const OneToOneChat = ({open,onClose,socket}) => {
 
 
     React.useEffect(() => {
-
-      const receive = (data) => {
-        console.log(data)
-        setNowChat(list=>[...list,data]);
-      }
-
-      socket.on("test", (data) => {
-        console.log(data)
-        setRoomId(data);
-      },); 
+    socket.on("test", (data) => {
+      console.log(data)
+      setRoomId(data);
+    },); 
+    },[socket]);
 
 
-      socket.on("receive_message",receive); 
+    React.useEffect(() => {
 
-      return()=>{
-        socket.off("receive_message",receive)
-      }
-
-  
-        
-  
-  },[socket]);
-
-
-// id 찾기
-  // list.fineIndex((item) => item.id === data.id )
-
-  // if (index === -1) {}
-  
-  // Object.assing(item[index], data)
-  
-  // if (index !== -1)
+      socket.off('receive_message').on('receive_message',(data)=>{
+      setNowChat((list) => [...list, data])
+          console.log(data )
+     })
+   },[]);
 
 
 
-
-
-
-
-  //   React.useEffect(() => {
-  //     socket.on("test", (data) => {
-  //       console.log(data)
-  //       setRoomId(data);
-  //     },); 
-  // },[socket]);
-    
-
-   
 
 
 

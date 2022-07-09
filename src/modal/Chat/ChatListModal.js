@@ -67,7 +67,7 @@ const ChatListModal = ({open,onClose}) => {
        
     }
 
-
+    console.log(ChatList)
 
 
 
@@ -101,9 +101,10 @@ const ChatListModal = ({open,onClose}) => {
             <div className='List' onClick={BeforeChat}>
                 <div className='ChatImg'><div className='ChatImgOne'></div></div>
                 <div className='ChatInfo'>
-                    <div className='ChatName'> 
-                    {MyNickname === data.nickname ? data.nickname : data.SenderNick} 
-                    </div>
+                    
+                   {MyNickname === data.postNickname ? <div className='ChatName'> {data.nickname} </div>:
+                   <div className='ChatName'> {data.postNickname} </div>}
+                    
                     <div className='ChatContent'>준비중</div>
                     <div className='ChatDate'>{data.createdAt}</div>
                 </div>
