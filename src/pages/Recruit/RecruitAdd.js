@@ -13,6 +13,7 @@ import { createPostDB } from '../../redux/modules/post';
 import Grid from '../../components/elements/Grid';
 import Footer from '../../components/main/Footer';
 
+const socket = io.connect("http://13.125.241.180")
 
 const AddOne = () => {
   const [on, setOn] = useState(false)
@@ -38,7 +39,6 @@ const AddOne = () => {
     })
       .then((res) => {
         console.log(res)
-        const socket = io.connect("http://13.125.241.180")
         const roomId = res.data.roomId
         socket.emit("join_room", roomId);
         navigate('/MyPage/' + roomId)
@@ -216,9 +216,8 @@ strong{
 
 textarea {
     padding:20px;
-
     margin-top: 73px;
-    height 500px;
+    height:500px;
     width: 610px;
     border:1px solid #E4E4E4;
     border-radius:10px;

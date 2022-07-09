@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { BsBookmark } from "react-icons/bs";
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from "react-router-dom";
 import { loadPostDB } from '../../redux/modules/post';
 
 
 function SCard() {
     const navigate = useNavigate();
+    let { recruitPostId } = useParams();
     const post = useSelector(state => state.post.list);
     console.log(post);
 
@@ -24,7 +26,7 @@ function SCard() {
                     <div className='card'
                         key={index}
                         onClick={() => {
-                            navigate('/detailone' + item.recruitPostId
+                            navigate('/recruitdetail/'+ item.recruitPostId
                             )
                         }}>
                         {/* 카드 위쪽 아이콘 */}

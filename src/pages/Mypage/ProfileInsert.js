@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../../components/main/Header'
-import MyPageMenu from '../../components/MyPage/MyPageMenu'
 import { useNavigate } from "react-router-dom";
 
 const ProfileInsert = () => {

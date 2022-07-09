@@ -17,14 +17,16 @@ import io from "socket.io-client";
 const socket = io.connect("http://13.125.241.180")
 
 const ChatListModal = ({open,onClose}) => {
+    const MyNickname = getCookie('nickname')
     const navigate = useNavigate();
     const nickname = getCookie('nickname')
     const [ChatList,setChatList] = React.useState('')
-    const [NowRoom,setNowRoom] = React.useState()
+    const [NowRoom,setNowRoom] = React.useState([])
+    const [realroom,setrealroom] = React.useState()
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [BeforeChatting,setBeforeChatting] = useState()
 
-    console.log(ChatList)
+    // console.log(ChatList)
 
 
 
@@ -34,21 +36,21 @@ const ChatListModal = ({open,onClose}) => {
 
 
 
-  const Data = useSelector((state)=> state.Data);
+//   const Data = useSelector((state)=> state.Data);
 
-  console.log(Data)
+//   console.log(Data)
   
     React.useEffect(()=>{
         axios.get('http://13.125.241.180/api/chats/rooms',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
         .then((res)=>{
-            console.log(res.data.chatRoomList)
+           console.log(res)
             setChatList(res.data.chatRoomList)
         }).catch((err)=>{
             console.log(err)
         })
     },[])
 
-    console.log(ChatList)
+    // console.log(ChatList)
 
     const BeforeChat = () =>{
                 ChatList.map((data)=>{
@@ -87,12 +89,21 @@ const ChatListModal = ({open,onClose}) => {
             <div className='ChatListContainer' key ={idx} onClick={()=>{
                 setModalIsOpen(true)
                 socket.emit("join_room",data.roomId)
-                setNowRoom(data.roomId)
+                axios.get('http://13.125.241.180/api/chats/messages/' + data.roomId,{
+                    headers: { Authorization: `Bearer ${getCookie("accessToken")}`}
+                    })
+                .then((res)=>{
+                    console.log(res.data.chatMessageList)
+                    setNowRoom(res.data.chatMessageList)
+                    setrealroom(data.roomId)
+                })
              }}> 
             <div className='List' onClick={BeforeChat}>
                 <div className='ChatImg'><div className='ChatImgOne'></div></div>
                 <div className='ChatInfo'>
-                    <div className='ChatName'>{data.postNickname}</div>
+                    <div className='ChatName'> 
+                    {MyNickname === data.nickname ? data.nickname : data.SenderNick} 
+                    </div>
                     <div className='ChatContent'>준비중</div>
                     <div className='ChatDate'>{data.createdAt}</div>
                 </div>
@@ -107,7 +118,7 @@ const ChatListModal = ({open,onClose}) => {
 
 
 
-    <ChatRoom open = {modalIsOpen} onClose={()=>setModalIsOpen(false)} NowRoom={NowRoom} BeforeChatting = {BeforeChatting}/>
+    <ChatRoom open = {modalIsOpen} onClose={()=>setModalIsOpen(false)} NowRoom={NowRoom} BeforeChatting = {BeforeChatting} socket={socket} realroom={realroom}/>
 
 
      </Modal>

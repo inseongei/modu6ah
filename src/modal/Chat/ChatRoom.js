@@ -6,33 +6,42 @@ import { BiLogOut } from "react-icons/bi";
 import ScrollToBottom from "react-scroll-to-bottom";
 import {useSelector} from "react-redux"
 import io from "socket.io-client";
-import { getCookie } from '../shared/Cookie'
+import { getCookie } from '../../shared/Cookie'
 import axios from 'axios';
+import { data } from 'autoprefixer';
 
 
-const socket = io.connect("http://13.125.241.180")
 
 
-const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting}) => {
+const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) => {
     const input_Ref = React.useRef()
-    console.log(NowRoom)
     const nickname = getCookie('nickname')
     const [NowChat, setNowChat] = React.useState([]);
     const [realtime, setRealtime] = React.useState([]);
-  console.log(BeforeChatting)
+    const [room, setRoom] = React.useState();
+    console.log(NowRoom)
+    console.log(realroom)
+
+  // const set = new Set(NowChat)
+
+
 
 
     React.useEffect(() => {
-
-        socket.on("receive_message", (data) => {
+      socket.on('receive_message',(data)=>{
+          setNowChat((list) => [...list, data]);
           console.log(data)
-          if(NowRoom === data.roomId){
-            setNowChat((list)=>[...list,data]);
-          } else{
-            return null;
-          }
-          console.log(data)
-        },); 
+     })
+   },[socket]);
+
+
+
+   React.useEffect(() => {
+    socket.on("test", (data) => {
+      console.log(data)
+      setRoom(data);
+    },); 
+},[socket]);
 
 
 
@@ -43,32 +52,12 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting}) => {
 
 
 
-        return () => {
-          socket.close();
-        }
 
 
-
-
-
-
-    },[]);
-
-
-
-    console.log(NowChat)
-
-
-
-
-
-
-    console.log(realtime)
-
-    const sendMessage = async () => {
+    const sendMessage = async() =>  {
         // if (currentMessage !== "") {
           const messageData = {
-            roomId: NowRoom,
+            roomId: realroom,
             senderNick: nickname,
             message: input_Ref.current.value,
             time:
@@ -76,16 +65,15 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting}) => {
               ":" +
               new Date(Date.now()).getMinutes(),
           };
-          
           await socket.emit("send_message", messageData);
-          setNowChat((list)=>[...list,messageData]);
+          setNowChat((list) => [...list, messageData]);
           console.log(messageData)
+
         // }
       };
 
 
-
-
+      console.log(NowChat)
 
 
 
@@ -105,7 +93,7 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting}) => {
 
     <ScrollToBottom className='message-containerTwo'>
     <div className='RoomChatList animate__animated animate__zoomIn'>
-        {BeforeChatting&&BeforeChatting.map((data,idx)=>{
+        {NowRoom&&NowRoom.map((data,idx)=>{
             return(
                 <div className='RoomChat' key={idx}>
                 <div className='RoomImg'>
@@ -123,7 +111,7 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting}) => {
         })}
 
 
-        {NowChat&& NowChat.map((data,idx)=>{
+        {NowChat&&NowChat.map((data,idx)=>{
           return(
             <div className='RoomChat' key={idx}>
             <div className='RoomImg'>
@@ -161,6 +149,5 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting}) => {
   )
 }
 
-Modal.setAppElement('#root')
 export default ChatRoom
 
