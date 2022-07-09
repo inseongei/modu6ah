@@ -101,7 +101,7 @@ const SignUp = () => {
     const register = (e) => {
         e.preventDefault();
         axios.post(
-            "http://dlckdals04.shop/api/users/signup", 
+            "http://13.125.241.180/api/users/signup", 
         {
             email, nickname, password, passwordCheck
         })

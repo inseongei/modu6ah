@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { BsBookmark } from "react-icons/bs";
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from "react-router-dom";
 import { loadPostDB } from '../../redux/modules/post';
 
 
 function SCard() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
+    let { recruitPostId } = useParams();
     
     const post = useSelector(state => state.post.list);
 

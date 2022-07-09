@@ -19,6 +19,7 @@ const Header = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const UserCheck = getCookie('accessToken')
+  const nickname = getCookie('nickname')
   const dispatch = useDispatch();
 
 
@@ -160,7 +161,7 @@ const Header = () => {
 
         <li className="accordion">
           <input type="checkbox" id="answer01"/>
-          <label htmlFor="answer01"> Nickname<em><HiChevronDown></HiChevronDown></em></label>
+          <label htmlFor="answer01"> {nickname}<em><HiChevronDown></HiChevronDown></em></label>
           <div className="menu">
             <div className="menuOne"><a href="/manager"><p>프로필관리</p></a></div>
             <div className="menuTwo"><a href="/bookmark"><p>북마크관리</p></a></div>
@@ -593,30 +594,6 @@ const ChatBox = styled.div`
 
 
 
-
-
-const ChatBox = styled.div`
-  width:23%;
-  height:40vh;
-  position:absolute;
-  left:68%;
-  z-index: 1;
-  display: ${(props) => (props.chatBox ? "flex" : "none")};
-  background-color:#F6BD41;
-
-  .box{
-    display:flex;
-    flex-direction:column;
-    background-color:#E4E4E4;
-  }
-
-  .ChatBox{
-    display:flex;
-    height: 100px;
-    width:23vw;
-    border:1px solid black;
-  }
-`
 
 
 

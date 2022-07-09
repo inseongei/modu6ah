@@ -14,14 +14,37 @@ import {
     deletePostDB
 } from '../../redux/modules/post';
 import { MdOutlinePlace } from "react-icons/md";
+import {detailPostDB} from '../../redux/modules/post'
 import Grid from '../../components/elements/Grid';
 
+const socket = io.connect("http://13.125.241.180")  // 1 . 소켓 서버 연결
+
+
 const RecruitDetail = () => {
+    const nickname = getCookie('nickname')
+    console.log(nickname)
     const [modalIsOpen, setModalIsOpen] = useState(false);  // 모달창 열고 닫는 State 값
     const [on, setOn] = useState(false)     // 상세페이지의 모집중/모집완료 토글버튼 State 값
-    const [roomId, setRoomId] = useState()  //  서버로 부터 받은 roomId state로 저장
-    const [state, setState] = useState("")
+
+    // const [roomId, setRoomId] = useState()  //  서버로 부터 받은 roomId state로 저장
+    const [state, setState] = React.useState("")
     let { recruitPostId } = useParams();
+    const [RroomId,setRroomId] = React.useState()
+
+
+    React.useEffect(() => {
+        axios
+          .get("http://dlckdals04.shop/api/recruits/" + recruitPostId)
+          .then((response) => {
+            setState(response.data.recruitDetails);
+            console.log(response.data.recruitDetails);
+          })
+          .catch((response) => {
+            console.log(response);
+          });
+      }, []);
+    
+      console.log(state)
 
     // 모집중 , 모집완료 상태 변경하기 
     const inputChange = () => { setOn(!on); };
@@ -29,7 +52,10 @@ const RecruitDetail = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+
     const detail = useSelector(state => state.post.list);
+    const post = useSelector(state => state);
+    console.log(post);
 
     React.useEffect(() => {
         dispatch(detailPostDB(recruitPostId));
@@ -39,22 +65,23 @@ const RecruitDetail = () => {
         dispatch(deletePostDB(recruitPostId));
     };
 
-    // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
+   // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
     const GoChat = () => {
-        axios.post('http://13.125.241.180/api/chats/rooms/2',   // 2 대신 postId로 구현하여야 함 [임시로 지정해 놓은것] ★★★★★
-            '', // post 요청이지만 데이터값 포함하지않아도 됌
-            { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } })     // 쿠키에 저장된 accessToken 헤더에 같이 넣어주기
-            .then((res) => {  // 성공했을 시 success
-                const socket = io.connect("http://13.125.241.180")  // 1 . 소켓 서버 연결
-                const roomId = res.data.roomId                      // 2 . response로 넘겨준 roomId 를 roomId 라는 변수에 저장
-                setRoomId(roomId)                                   // 3 . 서버에서 받은 roomId 를 state에 저장 ( 1:1 대화창에 넘겨주기 위함)
-                socket.emit("join_room", roomId);                   // 4 . "join_room" 이라는 경로에 저장해둔 roomId를 넘겨줌
-                setModalIsOpen(true)                                // 5 . 방 생성에 성공했을 시 1:1 대화창 열기
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+
+        axios.post('http://13.125.241.180/api/chats/rooms/' + recruitPostId ,null,{
+        headers: { Authorization: `Bearer ${getCookie("accessToken")}`}
+        })
+        .then((res)=>{
+            console.log(res)
+            const roomId = res.data.roomId
+            socket.emit("join_room", roomId);
+            setModalIsOpen(true) 
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     }
+
     
     return (
         <>
@@ -142,6 +169,11 @@ const RecruitDetail = () => {
                     <Comment />
                 </Detail>
             </Grid>
+            <OneToOneChat
+open={modalIsOpen}  // 모달창 열기
+onClose={()=>setModalIsOpen(false)} // 모달창 닫기
+socket={socket}
+/> 
         </>
     )
 }
@@ -252,6 +284,7 @@ label span {display:none;}
 
 .detail_profile{
     border-radius:50%;
+
     /* display:flex; */
     align-items:center;
     display:block;

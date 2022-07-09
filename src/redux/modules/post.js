@@ -25,6 +25,10 @@ export function detailPost(post_list) {
   return { type: DETAIL, post_list };
 }
 
+export function detailPost(post_list) {
+  return { type: DETAIL, post_list };
+}
+
 export function updatePost(post_list) {
   return { type: UPDATE, post_list };
 }
@@ -57,7 +61,7 @@ export const loadPostDB = () => {
       `http://dlckdals04.shop/api/recruits`
     )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(loadPost(response));
       });
   };

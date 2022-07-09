@@ -74,7 +74,6 @@ export const GetChatListAxios = () =>{
 
 // Reducer
 export default function ChatListData(state = initialState , action= {}){
-    console.log(action)
     switch (action.type){
         case 'ChatList/GET' : {
             return {state:action.ChatList}
