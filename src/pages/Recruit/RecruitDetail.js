@@ -14,7 +14,6 @@ import {
     deletePostDB
 } from '../../redux/modules/post';
 import { MdOutlinePlace } from "react-icons/md";
-import {detailPostDB} from '../../redux/modules/post'
 import Grid from '../../components/elements/Grid';
 
 const socket = io.connect("http://13.125.241.180")  // 1 . 소켓 서버 연결

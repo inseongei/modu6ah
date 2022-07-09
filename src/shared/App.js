@@ -23,7 +23,6 @@ import ReviewAdd from '../pages/Review/ReviewAdd';
 import RecruitEdit from '../pages/Recruit/RecruitEdit';
 import PlaceEdit from '../pages/Place/PlaceEdit';
 import ReviewEdit from '../pages/Review/ReviewEdit'
-import ProfileInsert from '../pages/MyPage/ProfileInsert'
 
 //마이 페이지
 import ProfileManager from "../pages/MyPage/ProfileManager";
