@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/esm/locale';
 import { FaStar } from "react-icons/fa";
+import { AiOutlineFileImage } from "react-icons/ai";
 
 //elements & components
 import Header from '../../components/main/Header'
@@ -27,8 +28,29 @@ function PlaceAdd() {
   const [time, setTime] = useState('');
   const [place, setPlace] = useState('');
   const [age, setAge] = useState('');
+  const [imageSrc, setImageSrc] = useState('')
+  const image_ref = useState(null)
 
   const navigate = useNavigate();
+
+  // 이미지 미리보기
+  const encodeFileToBase64 = (fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        resolve();
+      };
+    });
+  }
+
+  // const handleForm = (e) => {
+  //   setPost({
+  //     ...post,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   return (
     <>
@@ -42,12 +64,24 @@ function PlaceAdd() {
                 대표이미지
               </div>
             </div>
+            <input type='file' 
+              ref={image_ref}
+                onChange={(e) => {
+                  encodeFileToBase64(e.target.files[0]);
+                }}
+                accept='image/jpg,image/png,image/jpeg,image/gif'
+                id='profile_img_upload' />
             <div className='imageBox'>
-              <div className='img'></div>
-              <div className='img'></div>
-              <div className='img'></div>
-              <div className='img'></div>
-              <div className='img'></div>
+              
+              {/* <label
+               for='profile_img_upload'>
+              <AiOutlineFileImage />
+              </label> */}
+                <div className='img'></div>
+                <div className='img'></div>
+                <div className='img'></div>
+                <div className='img'></div>
+                <div className='img'></div>
             </div>
             <div className='mainBox'>
               <div className='card-left'>
@@ -66,27 +100,26 @@ function PlaceAdd() {
                 </div>
               </div>
               <div className='card-right'>
-              <textarea/>
-                    {/* <span className='btnList'>
+                <textarea />
+                {/* <span className='btnList'>
                       <button className='ParkBtn'> 주차가능</button>
                       <button className='KidBtn'> 예스키즈존</button>
-                    </span> */}     
+                    </span> */}
               </div>
-              
+
             </div>
             <Btn>
-            <button 
-            className='btn'
-            onClick={() => 
-              { navigate(`/`) }}
-            > 
-            취소 </button>
-            <button 
-            className='btn'
+              <button
+                className='btn'
+                onClick={() => { navigate(`/`) }}
+              >
+                취소 </button>
+              <button
+                className='btn'
               // onClick={addPost}
-              > 
-              등록하기</button>
-          </Btn>
+              >
+                등록하기</button>
+            </Btn>
           </div>
         </Place>
       </Grid>
