@@ -283,7 +283,6 @@ label span {display:none;}
 
 .detail_profile{
     border-radius:50%;
-
     /* display:flex; */
     align-items:center;
     display:block;
