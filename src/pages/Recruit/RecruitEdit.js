@@ -8,7 +8,6 @@ import io from "socket.io-client";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/esm/locale';
-import swal from 'sweetalert';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePostDB } from '../../redux/modules/post';
@@ -225,7 +224,7 @@ strong{
 textarea {
     padding:20px;
     margin-top: 73px;
-    height 500px;
+    height: 500px;
     width: 610px;
     border:1px solid #E4E4E4;
     border-radius:10px;
