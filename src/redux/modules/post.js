@@ -100,7 +100,7 @@ export const updatePostDB = ( recruitPostId, newPost) => {
   };
 };
 
-export const deletePostDB = (recruitPostId) => {
+export const deletePostDB = (recruitPostId, navigate) => {
   return function (dispatch) {
     axios
       .delete('http://dlckdals04.shop/api/recruits/' + recruitPostId,
@@ -111,7 +111,7 @@ export const deletePostDB = (recruitPostId) => {
       .then((response) => {
         dispatch(deletePost(response.data));
         alert('삭제가 완료되었습니다.')
-        window.location.href = "/recruit"
+        navigate('/recruit')
       })
       .catch((error) => {
         alert('게시글을 삭제할 권한이 없습니다.')
