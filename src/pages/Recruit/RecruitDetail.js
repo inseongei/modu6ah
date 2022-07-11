@@ -21,7 +21,9 @@ const socket = io.connect("http://13.125.241.180")  // 1 . 소켓 서버 연결
 
 const RecruitDetail = () => {
     const nickname = getCookie('nickname')
-    // console.log(nickname)
+    const token = getCookie('accessToken')
+    console.log(nickname)
+
     const [modalIsOpen, setModalIsOpen] = useState(false);  // 모달창 열고 닫는 State 값
     const [on, setOn] = useState(false)     // 상세페이지의 모집중/모집완료 토글버튼 State 값
 
@@ -52,8 +54,7 @@ const RecruitDetail = () => {
     const dispatch = useDispatch();
 
     const detail = useSelector(state => state.post.list);
-    // console.log(detail);
-
+    
     React.useEffect(() => {
         dispatch(detailPostDB(recruitPostId));
     }, [])
@@ -148,19 +149,23 @@ const RecruitDetail = () => {
                                 <div className='content'>
 
                                 </div>
-                                <Btn>
-                                    <button
-                                        className='btn'
-                                        onClick={() => 
-                                            { navigate(`/recruitedit/` + detail.recruitPostId)  }}
-                                    >
-                                        수정하기</button>
-                                    <button
-                                        className='btn'
-                                    onClick={deletePosting}
-                                    >
-                                        삭제하기</button>
-                                </Btn>
+                                
+                            {nickname === detail.nickname ? 
+                            <Btn>
+                                <button className='btn' onClick={() =>  
+                                { navigate(`/recruitedit/` + detail.recruitPostId)  }}
+                                >
+                                수정하기</button>
+                                <button className='btn' 
+                                onClick={deletePosting}
+                                >
+                                삭제하기</button>  
+                            </Btn>  
+                            :
+                            <BtnTwo>
+                            <button className='btn'onClick={GoChat}> 1:1문의하기 </button>  
+                            </BtnTwo>   
+                            }
                             </div>
                         </div>
                     </>
@@ -282,6 +287,7 @@ label span {display:none;}
 
 .detail_profile{
     border-radius:50%;
+
     /* display:flex; */
     align-items:center;
     display:block;
@@ -328,6 +334,29 @@ const Btn = styled.div`
       border: 0;
       outline: 0;
     }
-    `;
+
+
+    `
+
+const BtnTwo = styled.div`
+    width:80%;
+    display: flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    .btn{
+      width: 30%;
+      height: 30px;
+      border-radius: 20px;
+      color: white;
+      background-color: #3C3C3C;
+      margin-top: 20px;
+      margin-right: 10px;
+      padding-top: 9px;
+      padding-bottom: 33px;
+      border: 0;
+      outline: 0;
+    }
+`
 
 export default RecruitDetail
