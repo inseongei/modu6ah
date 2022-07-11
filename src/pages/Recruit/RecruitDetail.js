@@ -21,7 +21,7 @@ const socket = io.connect("http://13.125.241.180")  // 1 . 소켓 서버 연결
 
 const RecruitDetail = () => {
     const nickname = getCookie('nickname')
-    console.log(nickname)
+    // console.log(nickname)
     const [modalIsOpen, setModalIsOpen] = useState(false);  // 모달창 열고 닫는 State 값
     const [on, setOn] = useState(false)     // 상세페이지의 모집중/모집완료 토글버튼 State 값
 
@@ -51,10 +51,8 @@ const RecruitDetail = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-
     const detail = useSelector(state => state.post.list);
-    const post = useSelector(state => state);
-    console.log(post);
+    // console.log(detail);
 
     React.useEffect(() => {
         dispatch(detailPostDB(recruitPostId));
@@ -153,7 +151,8 @@ const RecruitDetail = () => {
                                 <Btn>
                                     <button
                                         className='btn'
-                                        onClick={() => { navigate(`/editone`) }}
+                                        onClick={() => 
+                                            { navigate(`/recruitedit/` + detail.recruitPostId)  }}
                                     >
                                         수정하기</button>
                                     <button
