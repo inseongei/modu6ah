@@ -31,7 +31,7 @@ const PlaceDetail = () => {
 
             <div className='title'>
               <p>국립생태공원</p>
-              <span><FaStar className='icon'></FaStar></span>
+              <span><FaStar className='icon'/></span>
               <span className='starScore'> 4.0점</span>
             </div>
 
@@ -236,4 +236,3 @@ height: 80%;
 `
 
 export default PlaceDetail
-
