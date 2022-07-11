@@ -23,14 +23,11 @@ import { createPostDB } from '../../redux/modules/post';
 function PlaceAdd() {
 
   const [title, setTitle] = useState('');
+  const [region, setRegion] = useState('');
   const [content, setContent] = useState('');
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState('');
-  const [place, setPlace] = useState('');
-  const [age, setAge] = useState('');
-  const [imageSrc, setImageSrc] = useState('')
+  const [imageSrc, setImageSrc] = useState([]);
   const image_ref = useState(null)
-  const [ selectedFiles, setSelectedFiles ] = useState([]);
+  
 
   const navigate = useNavigate();
 
@@ -59,10 +56,9 @@ function PlaceAdd() {
 		// console.log(e.target.files[])
 		if (e.target.files) {
 			const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
-
 			// console.log("filesArray: ", filesArray);
 
-			setSelectedFiles((prevImages) => prevImages.concat(filesArray));
+			setImageSrc((prevImages) => prevImages.concat(filesArray));
 			Array.from(e.target.files).map(
 				(file) => URL.revokeObjectURL(file) // avoid memory leak
 			);
@@ -100,7 +96,7 @@ function PlaceAdd() {
               <AiOutlineFileImage />
               </label>
               <div className='img'>
-              {renderPhotos(selectedFiles)}
+              {renderPhotos(imageSrc)}
               </div>
               
             </div>
@@ -182,7 +178,7 @@ const Place = styled.div`
 }
 
 .imageBox{
-  min-height: 100%;
+  min-height: 210px;
   max-height: auto;
   width: 100%;
   background-color: lightgray;
