@@ -30,6 +30,7 @@ function PlaceAdd() {
   const [age, setAge] = useState('');
   const [imageSrc, setImageSrc] = useState('')
   const image_ref = useState(null)
+  const [ selectedFiles, setSelectedFiles ] = useState([]);
 
   const navigate = useNavigate();
 
@@ -54,6 +55,27 @@ function PlaceAdd() {
     setHoverValue(undefined)
   }
 
+  const handleImageChange = (e) => {
+		// console.log(e.target.files[])
+		if (e.target.files) {
+			const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
+
+			// console.log("filesArray: ", filesArray);
+
+			setSelectedFiles((prevImages) => prevImages.concat(filesArray));
+			Array.from(e.target.files).map(
+				(file) => URL.revokeObjectURL(file) // avoid memory leak
+			);
+		}
+	};
+
+	const renderPhotos = (source) => {
+		console.log('source: ', source);
+		return source.map((photo) => {
+			return <img src={photo} alt="" key={photo} />;
+		});
+	};
+
   return (
     <>
       <Header />
@@ -68,22 +90,19 @@ function PlaceAdd() {
             </div>
             <input type='file'
               ref={image_ref}
-              onChange={(e) => {
-                // encodeFileToBase64(e.target.files[0]);
-              }}
+              onChange={handleImageChange}
               accept='image/jpg,image/png,image/jpeg,image/gif'
-              id='profile_img_upload' />
+              id='profile_img_upload'
+              style={{display:'none'}} />
             <div className='imageBox'>
-
-              {/* <label
+              <label
                for='profile_img_upload'>
               <AiOutlineFileImage />
-              </label> */}
-              <div className='img'></div>
-              <div className='img'></div>
-              <div className='img'></div>
-              <div className='img'></div>
-              <div className='img'></div>
+              </label>
+              <div className='img'>
+              {renderPhotos(selectedFiles)}
+              </div>
+              
             </div>
             <div className='mainBox'>
               <div className='card-left'>
@@ -163,22 +182,39 @@ const Place = styled.div`
 }
 
 .imageBox{
-  width:90%;
-  margin:auto;
-  height: 30%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin-bottom: 30px;
+  min-height: 100%;
+  max-height: auto;
+  width: 100%;
+  background-color: lightgray;
+  margin-top:1rem ;
+   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: left; 
 }
 
-.img{
+.imageBox > label {
+  margin-left: 20px;
+}
+
+// .img{
+//   width:200px;
+//   height:220px;
+//   border: 1px solid #E4E4E4;
+//   border-radius: 10px;
+//   margin: 20px 0px 20px 40px;
+//   overflow: hidden;
+// }
+
+img{
+  // width: 100%;
+  // height: 100%;
+  // object-fit: cover;
   width:200px;
   height:220px;
   border: 1px solid #E4E4E4;
   border-radius: 10px;
-  margin-top: 30px;
-  margin-left: 40px;
+  margin: 20px 0px 20px 40px;
 }
 
 .images{
