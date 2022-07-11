@@ -60,7 +60,7 @@ const RecruitDetail = () => {
     }, [])
 
     const deletePosting = () => {
-        dispatch(deletePostDB(recruitPostId));
+        dispatch(deletePostDB(recruitPostId, navigate));
     };
 
    // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
