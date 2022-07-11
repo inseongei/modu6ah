@@ -13,31 +13,22 @@ import { data } from 'autoprefixer';
 
 
 
-const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) => {
+const ChatRoom = ({open,onClose,NowRoom,socket,realroom}) => {
     const input_Ref = React.useRef()
     const nickname = getCookie('nickname')
     const [NowChat, setNowChat] = React.useState([]);
     const [realtime, setRealtime] = React.useState([]);
     const [room, setRoom] = React.useState();
+    const imgurl = localStorage.getItem('img')
+    console.log(NowRoom)
 
     React.useEffect(() => {
 
       socket.off('receive_message').on('receive_message',(data)=>{
       setNowChat((list) => [...list, data])
-          console.log(data )
+          console.log(NowChat)
      })
    },[]);
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -45,6 +36,7 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
     const sendMessage = async() =>  {
         // if (currentMessage !== "") {
           const messageData = {
+            profileUrl : imgurl,
             roomId: realroom,
             senderNick: nickname,
             message: input_Ref.current.value,
@@ -54,11 +46,17 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
               new Date(Date.now()).getMinutes()+ '분',
           };
           await socket.emit("send_message", messageData);
-          // setNowChat((list) => [...list, messageData]);
           console.log(messageData)
 
         // }
       };
+
+
+      const OutRoom = () =>{
+        socket.emit("back",realroom)
+        onClose()
+        setNowChat([])
+      }
 
 
 
@@ -71,7 +69,7 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
           <div className='you'><div className='who'>상대</div><div className='circlePosition'><div className='circle2'></div></div></div>
         </div>
         <div className='RoomDate'> 2022년 06월 30일 목요일</div>
-    <button onClick={onClose}><BiLogOut className='icon'></BiLogOut></button>
+    <button onClick={OutRoom}><BiLogOut className='icon' ></BiLogOut></button>
     </div>
 
 
@@ -92,7 +90,7 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
                   <div className={nickname === data.senderNick ? 'RoomName' :'RoomNameX'}>{data.senderNick}</div>
                   <div className={nickname === data.senderNick ? 'ChatRoomInput' :'ChatRoomInputX'}>{data.message}</div>
               </div>
-              <div className='RoomTime'>{data.createdAt}</div>
+              <div className='RoomTime'>{data.time}</div>
               </div>
             )
         })}
@@ -107,8 +105,8 @@ const ChatRoom = ({open,onClose,roomId,NowRoom,BeforeChatting,socket,realroom}) 
             </div>
             </div>
             <div className='RoomContent'>
-                <div className='RoomName'>{data.senderNick}</div>
-                <div className='ChatRoomInput'>{data.message}</div>
+                <div className={nickname === data.senderNick ? 'RoomName' :'RoomNameX'}>{data.senderNick}</div>
+                <div className={nickname === data.senderNick ? 'ChatRoomInput' :'ChatRoomInputX'}>{data.message}</div>
             </div>
             <div className='RoomTime'>{data.time}</div>
             </div>
