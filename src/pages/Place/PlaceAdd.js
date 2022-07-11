@@ -33,24 +33,26 @@ function PlaceAdd() {
 
   const navigate = useNavigate();
 
-  // 이미지 미리보기
-  const encodeFileToBase64 = (fileBlob) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImageSrc(reader.result);
-        resolve();
-      };
-    });
+  const colors = {
+    orange: "#FFBA5A",
+    grey: "#a9a9a9"
+  };
+
+  const [currentValue, setCurrentValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(undefined);
+  const stars = Array(5).fill(0)
+
+  const handleClick = value => {
+    setCurrentValue(value)
   }
 
-  // const handleForm = (e) => {
-  //   setPost({
-  //     ...post,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
+  const handleMouseOver = newHoverValue => {
+    setHoverValue(newHoverValue)
+  };
+
+  const handleMouseLeave = () => {
+    setHoverValue(undefined)
+  }
 
   return (
     <>
@@ -64,24 +66,24 @@ function PlaceAdd() {
                 대표이미지
               </div>
             </div>
-            <input type='file' 
+            <input type='file'
               ref={image_ref}
-                onChange={(e) => {
-                  encodeFileToBase64(e.target.files[0]);
-                }}
-                accept='image/jpg,image/png,image/jpeg,image/gif'
-                id='profile_img_upload' />
+              onChange={(e) => {
+                // encodeFileToBase64(e.target.files[0]);
+              }}
+              accept='image/jpg,image/png,image/jpeg,image/gif'
+              id='profile_img_upload' />
             <div className='imageBox'>
-              
+
               {/* <label
                for='profile_img_upload'>
               <AiOutlineFileImage />
               </label> */}
-                <div className='img'></div>
-                <div className='img'></div>
-                <div className='img'></div>
-                <div className='img'></div>
-                <div className='img'></div>
+              <div className='img'></div>
+              <div className='img'></div>
+              <div className='img'></div>
+              <div className='img'></div>
+              <div className='img'></div>
             </div>
             <div className='mainBox'>
               <div className='card-left'>
@@ -93,9 +95,25 @@ function PlaceAdd() {
                   <strong>위치</strong>
                   <input type="text" />
                 </div>
-                <div className='position'>
-                  <strong> 별점</strong>
-                  <span> ⭐⭐⭐⭐⭐</span>
+
+                <div className='star'>
+                  <strong>별점</strong>
+                  {stars.map((_, index) => {
+                    return (
+                      <FaStar
+                        key={index}
+                        size={24}
+                        onClick={() => handleClick(index + 1)}
+                        onMouseOver={() => handleMouseOver(index + 1)}
+                        onMouseLeave={handleMouseLeave}
+                        color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                        style={{
+                          marginRight: 10,
+                          cursor: "pointer"
+                        }}
+                      />
+                    )
+                  })}
                   <span>4.0점</span>
                 </div>
               </div>
@@ -206,8 +224,13 @@ textarea {
     margin: 40px 0px 30px 30px;
 }
 
-.position > span{
-    margin-right: 30px;
+.star {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.star > strong {
+  margin-right: 15px;
 }
 `
 
