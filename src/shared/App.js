@@ -43,7 +43,7 @@ function App() {
         <Route path="/recruitadd" element={< RecruitAdd />} />
         <Route  path="/recruitdetail/:recruitPostId" element={< RecruitDetail />} />
         {/* <Route path="/recruitdetail" element={< RecruitDetail />} /> */}
-        <Route path="/recruit/:recruitPostId" element={< RecruitEdit />} />
+        <Route path="/recruitedit/:recruitPostId" element={< RecruitEdit />} />
         {/* 장소 추천 */}
         <Route path="/place" element={< Place />} />
         <Route path="/placeadd" element={< PlaceAdd />} />

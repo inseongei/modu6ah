@@ -23,6 +23,7 @@ const RecruitDetail = () => {
     const nickname = getCookie('nickname')
     const token = getCookie('accessToken')
     console.log(nickname)
+
     const [modalIsOpen, setModalIsOpen] = useState(false);  // 모달창 열고 닫는 State 값
     const [on, setOn] = useState(false)     // 상세페이지의 모집중/모집완료 토글버튼 State 값
 
@@ -52,11 +53,8 @@ const RecruitDetail = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-
     const detail = useSelector(state => state.post.list);
-    const post = useSelector(state => state);
-    console.log(post);
-    console.log(detail)
+    
     React.useEffect(() => {
         dispatch(detailPostDB(recruitPostId));
     }, [])
@@ -154,17 +152,20 @@ const RecruitDetail = () => {
                                 
                             {nickname === detail.nickname ? 
                             <Btn>
-                                <button className='btn' onClick={() => { navigate(`/editone`) }}>수정하기</button>
-                                <button className='btn' onClick={deletePosting}>삭제하기</button>  
+                                <button className='btn' onClick={() =>  
+                                { navigate(`/recruitedit/` + detail.recruitPostId)  }}
+                                >
+                                수정하기</button>
+                                <button className='btn' 
+                                onClick={deletePosting}
+                                >
+                                삭제하기</button>  
                             </Btn>  
                             :
                             <BtnTwo>
                             <button className='btn'onClick={GoChat}> 1:1문의하기 </button>  
                             </BtnTwo>   
                             }
-                                
-
-                                
                             </div>
                         </div>
                     </>
