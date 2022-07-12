@@ -15,7 +15,7 @@ function LogIn() {
 
   const submit =  e => {
     e.preventDefault();
-     axios.post("http://13.125.241.180/api/users/signin", {
+     axios.post("http://dlckdals04.shop/api/users/signin", {
       email, password
     })
   .then(response => {
