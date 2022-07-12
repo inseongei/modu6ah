@@ -19,7 +19,8 @@ function LogIn() {
       email, password
     })
   .then(response => {
-    console.log(response.data)
+    console.log(response.data.profileUrl)
+    localStorage.setItem('profileUrl',response.data.profileUrl)
     setCookie('accessToken',response.data.accessToken)
     setCookie('nickname',response.data.nickname)
     alert('로그인 되었습니다')

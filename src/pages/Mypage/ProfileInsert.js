@@ -65,7 +65,7 @@ const imageFileFB = async () => {
   .then((res)=>{
     console.log(res) 
     navigate('/manager')
-    localStorage.setItem('img',file_url)
+    localStorage.setItem('profileUrl',file_url)
      })
   .catch((err)=>console.log(err))
   }

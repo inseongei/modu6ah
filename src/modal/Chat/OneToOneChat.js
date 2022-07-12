@@ -23,6 +23,7 @@ const OneToOneChat = ({open,onClose,socket}) => {
         const messageData = {
           roomId: roomId,
           senderNick: nickname,
+          nickname : nickname,
           message: input_Ref.current.value,
           time:
           new Date(Date.now()).getHours() + '시 ' +

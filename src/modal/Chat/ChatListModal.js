@@ -26,9 +26,6 @@ const ChatListModal = ({open,onClose}) => {
 
     console.log(last)
 
-
-
-
     React.useEffect(()=>{
         axios.get('http://13.125.241.180/api/chats/rooms',{ headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
         .then((res)=>{
@@ -60,7 +57,7 @@ const ChatListModal = ({open,onClose}) => {
 
     <ScrollToBottom className='message-container'>
             <div className='ChatListContainer'> 
-            {ChatList&&ChatList.map((data,idx)=>{
+            {last&&last.map((data,idx)=>{
                 return(
                     <div className='List' key ={idx} onClick={()=>{
                         setModalIsOpen(true)
@@ -77,11 +74,11 @@ const ChatListModal = ({open,onClose}) => {
                         <div className='ChatImg'><div className='ChatImgOne'></div></div>
                         <div className='ChatInfo'>
                             
-                           {MyNickname === data.postNickname ? <div className='ChatName'> {data.nickname} </div>:
-                           <div className='ChatName'> {data.postNickname} </div>}
+                           
+                        <div className='ChatName'> {data.senderNick} </div>
 
-                            <div className='ChatContent'></div>
-                            <div className='ChatDate'>{data.createdAt}</div>
+                            <div className='ChatContent'>{data.message}</div>
+                            <div className='ChatDate'>{data.time}</div>
                         </div>
                         <div className='ChatBell'><span>1</span></div>
                     </div>

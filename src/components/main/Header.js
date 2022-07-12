@@ -8,7 +8,6 @@ import ChatListModal from "../../modal/Chat/ChatListModal";
 import {GetChatListAxios} from '../../redux/modules/Data'
 import { GoThreeBars,GoX,GoPerson,GoBell} from "react-icons/go";
 import logo from '../../images/logo.png';
-import profile from '../../images/profile.png'
 import { useNavigate } from "react-router-dom";
 import { removeCookie,getCookie } from "../../shared/Cookie";
 
@@ -21,7 +20,7 @@ const Header = () => {
   const UserCheck = getCookie('accessToken')
   const nickname = getCookie('nickname')
   const dispatch = useDispatch();
-  const Profile = localStorage.getItem('img')
+  const Profile = localStorage.getItem('profileUrl')
 
   const Login = () =>{
     navigate('/Login')
@@ -31,6 +30,7 @@ const Header = () => {
   const logoOut = () =>{
     removeCookie('accessToken')
     removeCookie('nickname')
+    localStorage.removeItem('profileUrl')
     navigate('/')
     alert('로그아웃 되셨습니다')
   }

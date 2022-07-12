@@ -38,6 +38,7 @@ const ChatRoom = ({open,onClose,NowRoom,socket,realroom}) => {
           const messageData = {
             profileUrl : imgurl,
             roomId: realroom,
+            nickname : nickname,
             senderNick: nickname,
             message: input_Ref.current.value,
             time:
