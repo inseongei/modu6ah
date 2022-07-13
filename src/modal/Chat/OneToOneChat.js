@@ -23,11 +23,12 @@ const OneToOneChat = ({open,onClose,socket}) => {
         const messageData = {
           roomId: roomId,
           senderNick: nickname,
+          nickname : nickname,
           message: input_Ref.current.value,
           time:
-            new Date(Date.now()).getHours() +
-            ":" +
-            new Date(Date.now()).getMinutes(),
+          new Date(Date.now()).getHours() + '시 ' +
+          +
+          new Date(Date.now()).getMinutes()+ '분',
         };
         
         await socket.emit("send_message", messageData);

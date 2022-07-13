@@ -31,7 +31,8 @@ function LogIn() {
   //로컬 로그인
   const submit = e => {
     e.preventDefault();
-    axios.post("http://dlckdals04.shop/api/users/signin", {
+    axios
+    .post("http://dlckdals04.shop/api/users/signin", {
       email, password
     })
       .then(response => {
