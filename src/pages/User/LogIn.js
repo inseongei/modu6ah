@@ -1,46 +1,66 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
-import Grid from '../../components/elements/Grid';
+import swal from 'sweetalert';
 import { RiKakaoTalkFill } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
-import axios from "axios"
-import {setCookie } from "../../shared/Cookie";
-import logo from '../../images/logo.png';
+
+
 import Header from "../../components/main/Header"
+import Grid from '../../components/elements/Grid';
+import logo from '../../images/logo.png';
+
+import axios from "axios"
+import { setCookie } from "../../shared/Cookie";
+import { useNavigate } from 'react-router-dom';
+import { REDIRECT_URI, REST_API_KEY } from '../../shared/kakaoData';
+import KaKaoMap from '../Place/KakaoMap';
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPw] = useState("");
   const navigate = useNavigate();
 
-  const submit =  e => {
+  //카카오톡 로그인
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+  const kakaoURL = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  }
+
+  //로컬 로그인
+  const submit = e => {
     e.preventDefault();
-     axios.post("http://dlckdals04.shop/api/users/signin", {
+    axios
+    .post("http://dlckdals04.shop/api/users/signin", {
       email, password
     })
-  .then(response => {
-    console.log(response.data.profileUrl)
-    localStorage.setItem('profileUrl',response.data.profileUrl)
-    setCookie('accessToken',response.data.accessToken)
-    setCookie('nickname',response.data.nickname)
-    alert('로그인 되었습니다')
-    navigate('/');
-	}).catch(error => {
-		alert("로그인을 다시 해주세요")
-      console.log(error.message);
-	});
-}
+      .then(response => {
+        console.log(response.data)
+        swal({
+          text: `로그인 성공!`,
+          icon: "success",
+          button: "확인",
+        });
+        setCookie('accessToken', response.data.accessToken)
+        setCookie('nickname', response.data.nickname)
+        navigate('/');
+      }).catch(error => {
+        alert("로그인을 다시 해주세요")
+        console.log(error.message);
+      });
+  }
 
   return (
     <>
-    <Header/>
+      <Header />
       <Grid height="100vh" overflowY="hidden">
         <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
           <Container>
             <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
-                <Logo>
+                  <Logo>
                     <div className="logo_img"
                       onClick={() => { navigate(`/`) }}
                     ><img src={logo} alt="로고" /></div>
@@ -48,27 +68,27 @@ function LogIn() {
                   </Logo>
                 </Grid>
                 <form onSubmit={submit}>
-                    <FormGroup>
+                  <FormGroup>
                     <Grid margin="0 -32px; 0">
                       <label className='form-label'>이메일</label>
-                      </Grid>
-                      <Grid margin="0 20% 0">
+                    </Grid>
+                    <Grid margin="0 20% 0">
                       <input
-                        onChange={ e => setEmail(e.target.value)}
+                        onChange={e => setEmail(e.target.value)}
                         className='form-input'
                         name="email"
                         placeholder="이메일을 입력하세요"
                         required
                       ></input>
-                      </Grid>
-                    </FormGroup>
-                    <FormGroup>
+                    </Grid>
+                  </FormGroup>
+                  <FormGroup>
                     <Grid margin="0 -25px; 0">
-                        <label className='form-label'>비밀번호</label>
-                        </Grid>
-                      <Grid margin="0 20% 0">
+                      <label className='form-label'>비밀번호</label>
+                    </Grid>
+                    <Grid margin="0 20% 0">
                       <input
-                        onChange={ e => setPw(e.target.value)}
+                        onChange={e => setPw(e.target.value)}
                         className="form-input"
                         type="password"
                         name="password"
@@ -76,33 +96,33 @@ function LogIn() {
                         maxLength="20"
                         required
                       ></input>
-                      </Grid>
-                    </FormGroup>
-                    <Grid height="auto">
+                    </Grid>
+                  </FormGroup>
+                  <Grid height="auto">
                     <Grid margin="0 20% 0" height="auto">
-                      <LoginBtn 
-                      type='submit'>
+                      <LoginBtn
+                        type='submit'>
                         로그인
                       </LoginBtn>
-                      </Grid>
-                      <Grid height="auto">
-                        <FormSeperator>OR</FormSeperator>
-                      </Grid>
-                      <Grid margin="32px 0 0 0" height="auto" align="center">
-                        <SocialLogin 
-                        href='http://dlckdals04.shop/api/users/kakao'>
-                          <RiKakaoTalkFill size="30" />
-                          <p>Login with KakaoTalk</p>
-                        </SocialLogin>
-                      </Grid>
-                     
-                      <Grid margin="42px 0 0 0" height="auto" align="center">
-                        <JoinLink>아이디 찾기 | &nbsp;</JoinLink>
-                        <JoinLink>비밀번호 찾기 | &nbsp;</JoinLink>
-                        <JoinLink onClick={() => 
-                          { navigate(`/signup`) }}>회원가입 &nbsp;</JoinLink>
-                      </Grid>
                     </Grid>
+                    <Grid height="auto">
+                      <FormSeperator>OR</FormSeperator>
+                    </Grid>
+                    <Grid margin="32px 0 0 0" height="auto" align="center">
+                      <SocialLogin
+                        onClick={kakaoURL}
+                      // href='http://dlckdals04.shop/api/users/kakao'
+                      >
+                        <RiKakaoTalkFill size="30" />
+                        <p>Login with KakaoTalk</p>
+                      </SocialLogin>
+                    </Grid>
+                    <Grid margin="42px 0 0 0" height="auto" align="center">
+                      <JoinLink>아이디 찾기 | &nbsp;</JoinLink>
+                      <JoinLink>비밀번호 찾기 | &nbsp;</JoinLink>
+                      <JoinLink onClick={() => { navigate(`/signup`) }}>회원가입 &nbsp;</JoinLink>
+                    </Grid>
+                  </Grid>
                 </form>
               </Grid>
             </Grid>
