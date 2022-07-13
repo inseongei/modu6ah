@@ -25,10 +25,12 @@ import PlaceEdit from '../pages/Place/PlaceEdit';
 import ReviewEdit from '../pages/Review/ReviewEdit'
 
 //마이 페이지
-import ProfileManager from '../pages/MyPage/ProfileManager'
-import ProfileInsert from '../pages/MyPage/ProfileInsert'
+import ProfileManager from '../pages/Mypage/ProfileManager'
+import ProfileInsert from '../pages/Mypage/ProfileInsert'
 
 import WelcomeModal from '../modal/WelcomeModal';
+import KaKaoMap from '../pages/Place/KakaoMap';
+import KakaoLogIn from '../pages/User/KakaoLogIn';
 
 function App() {
   return (
@@ -63,6 +65,8 @@ function App() {
 
         {/* 이쪽 모달은 추후에 삭제 예정 */}
         <Route path="/welcome" element={< WelcomeModal />} />
+        <Route path="/api/users/kakao/callback" element={< KakaoLogIn />} />
+        <Route path="/map" element={< KaKaoMap />} />
 
       </Routes>
     </>
