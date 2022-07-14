@@ -20,30 +20,39 @@ const PlaceDetail = () => {
     setCurrItem(datas.find((item) => item.id === id));
   };
 
+
   return (
     <>
       <Header />
       <Container>
-        <div className="Box">
-          <PhotoList datas={datas} currItem={currItem} onView={onView} />
-          <Content />
+        <div className='Box'>
+          <PhotoList
+            datas={datas}
+            currItem={currItem}
+            onView={onView}
+          />
+          <Content/>
         </div>
       </Container>
       <Comment />
     </>
-  );
-};
+
+  )
+}
+
 
 const Container = styled.div`
   width: 100%;
   height: 100vh;
 
-  .Box {
-    margin: 80px auto;
-    width: 80%;
-    height: 70vh;
-    display: flex;
-  }
-`;
+ 
+.Box{
+  margin: 80px auto;
+  width:80%;
+  height: 70vh;
+  display:flex;
+}
+`
+
 
 export default PlaceDetail;
