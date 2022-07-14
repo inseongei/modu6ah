@@ -19,6 +19,7 @@ const OneToOneChat = ({ open, onClose, socket }) => {
         roomId: roomId.roomId,
         receiverNick: roomId.receiverNick,
         profileUrl: Img_Url,
+        profileUrlTwo: roomId.profileUrlTwo,
         senderNick: nickname,
         message: input_Ref.current.value,
         time:

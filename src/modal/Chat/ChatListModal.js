@@ -65,8 +65,8 @@ const ChatListModal = ({ open, onClose }) => {
                     setModalIsOpen(true);
                     const Joindata = {
                       roomId: data.roomId,
-                      senderNick: data.nickname,
-                      receiverNick: data.postNickname,
+                      senderNick: data.senderNick,
+                      receiverNick: data.receiverNick,
                       profileUrlTwo: data.profileUrl,
                     };
                     socket.emit("join_room", Joindata);
@@ -92,8 +92,8 @@ const ChatListModal = ({ open, onClose }) => {
                       <img
                         src={
                           profileUrl === data.profileUrlTwo
-                            ? data.profileUrlTwo
-                            : data.profileUrl
+                            ? data.profileUrl
+                            : data.profileUrlTwo
                         }
                         alt="사진"
                       />

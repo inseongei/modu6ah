@@ -72,6 +72,7 @@ const RecruitDetail = () => {
           roomId: res.data.roomId,
           receiverNick: state.nickname,
           senderNick: nickname,
+          profileUrlTwo: state.profileUrl,
         };
         socket.emit("join_room", JoinData);
         setModalIsOpen(true);
