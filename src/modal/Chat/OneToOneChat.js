@@ -11,13 +11,15 @@ const OneToOneChat = ({ open, onClose, socket }) => {
   const nickname = getCookie("nickname");
   const [NowChat, setNowChat] = React.useState([]);
   const [roomId, setRoomId] = React.useState();
-  const Img_Url = localStorage.getItem("img");
+  const Img_Url = localStorage.getItem("profileUrl");
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        roomId: roomId,
+        roomId: roomId.roomId,
+        receiverNick: roomId.receiverNick,
         profileUrl: Img_Url,
+        profileUrlTwo: roomId.profileUrlTwo,
         senderNick: nickname,
         message: input_Ref.current.value,
         time:
@@ -38,6 +40,8 @@ const OneToOneChat = ({ open, onClose, socket }) => {
       setRoomId(data);
     });
   }, [socket]);
+
+  console.log(roomId);
 
   React.useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {

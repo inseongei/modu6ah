@@ -7,12 +7,12 @@ import { getCookie } from "../../shared/Cookie";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
-const ChatRoom = ({ open, onClose, NowRoom, socket, realroom, ChatList }) => {
+const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
   const input_Ref = React.useRef();
   const nickname = getCookie("nickname");
   const [NowChat, setNowChat] = React.useState([]);
   const [currentMessage, setCurrentMessage] = React.useState("");
-  const Img_Url = localStorage.getItem("img");
+  const Img_Url = localStorage.getItem("profileUrl");
   const [info, setinfo] = React.useState();
 
   console.log(NowChat);
@@ -65,20 +65,6 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom, ChatList }) => {
     <>
       <Modal isOpen={true} className="ChatList">
         <div className="RoomOne">
-          {/* <div className="RoomFake">
-            <div className="me">
-              <div className="who">나</div>
-              <div className="circlePosition">
-                <div className="circle"></div>
-              </div>
-            </div>
-            <div className="you">
-              <div className="who">상대</div>
-              <div className="circlePosition">
-                <div className="circle2"></div>
-              </div>
-            </div>
-          </div> */}
           <div className="RoomDate"></div>
           <button onClick={OutRoom}>
             <BiLogOut className="icon"></BiLogOut>
@@ -98,7 +84,7 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom, ChatList }) => {
                     </div>
                     <div className="RoomImg">
                       <div className="RoomProfile">
-                        <img src={data.profileUrl} alt="사진" />
+                        <img src={Img_Url} alt="사진" />
                       </div>
                     </div>
                   </div>
