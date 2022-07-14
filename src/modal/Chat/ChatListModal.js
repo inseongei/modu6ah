@@ -13,12 +13,12 @@ import io from "socket.io-client";
 const socket = io.connect("http://13.125.241.180");
 
 const ChatListModal = ({ open, onClose }) => {
-  const MyNickname = getCookie("nickname");
   const nickname = getCookie("nickname");
   const [ChatList, setChatList] = React.useState("");
   const [NowRoom, setNowRoom] = React.useState([]);
   const [realroom, setrealroom] = React.useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const profileUrl = localStorage.getItem("profileUrl");
 
   console.log(ChatList);
 
@@ -29,7 +29,7 @@ const ChatListModal = ({ open, onClose }) => {
       })
       .then((res) => {
         console.log(res);
-        setChatList(res.data.chatRoomList);
+        setChatList(res.data.lastChats);
       })
       .catch((err) => {
         console.log(err);
@@ -89,17 +89,24 @@ const ChatListModal = ({ open, onClose }) => {
                 >
                   <div className="ChatImg">
                     <div className="ChatImgOne">
-                      <img src={data.profileUrl} alt="사진" />
+                      <img
+                        src={
+                          profileUrl === data.profileUrlTwo
+                            ? data.profileUrlTwo
+                            : data.profileUrl
+                        }
+                        alt="사진"
+                      />
                     </div>
                   </div>
                   <div className="ChatInfo">
                     <div className="ChatName">
-                      {MyNickname === nickname
-                        ? data.nickname
-                        : data.postNickname}
+                      {data.receiverNick === nickname
+                        ? data.senderNick
+                        : data.receiverNick}
                     </div>
 
-                    <div className="ChatContent">{data.postTitle}</div>
+                    <div className="ChatContent">{data.message}</div>
                     <div className="ChatDate">{data.time}</div>
                   </div>
                   <div className="ChatBell">
@@ -118,7 +125,6 @@ const ChatListModal = ({ open, onClose }) => {
         onClose={() => setModalIsOpen(false)}
         NowRoom={NowRoom}
         socket={socket}
-        ChatList={ChatList}
         realroom={realroom}
       />
     </Modal>

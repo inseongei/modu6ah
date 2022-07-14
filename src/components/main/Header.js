@@ -27,7 +27,7 @@ const Header = () => {
   const UserCheck = getCookie("accessToken");
   const nickname = getCookie("nickname");
   const dispatch = useDispatch();
-  const Profile = localStorage.getItem("img");
+  const Profile = localStorage.getItem("profileUrl");
 
   const Login = () => {
     navigate("/Login");
@@ -36,6 +36,7 @@ const Header = () => {
   const logoOut = () => {
     removeCookie("accessToken");
     removeCookie("nickname");
+    localStorage.removeItem("profileUrl");
     navigate("/");
     alert("로그아웃 되셨습니다");
   };
@@ -72,9 +73,8 @@ const Header = () => {
     });
   }, []);
 
-  console.log(notify.length);
   const bell = localStorage.getItem("count");
-  console.log(bell);
+
   return (
     <>
       {/* 로그인할때의 헤더 ============================================================================== */}
