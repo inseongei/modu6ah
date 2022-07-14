@@ -27,7 +27,6 @@ import ReviewEdit from "../pages/Review/ReviewEdit";
 //마이 페이지
 import ProfileManager from "../pages/Mypage/ProfileManager";
 import ProfileInsert from "../pages/Mypage/ProfileInsert";
-
 import WelcomeModal from "../modal/WelcomeModal";
 // import KaKaoMap from '../pages/Place/KakaoMap';
 import KakaoLogIn from "../pages/User/KakaoLogIn";

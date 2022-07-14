@@ -48,6 +48,9 @@ function LogIn() {
             navigate("/");
           }
         });
+        setCookie("accessToken", response.data.accessToken);
+        setCookie("nickname", response.data.nickname);
+        navigate("/");
       })
       .catch((error) => {
         alert("로그인을 다시 해주세요");
