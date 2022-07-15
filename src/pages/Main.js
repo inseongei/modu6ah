@@ -34,37 +34,51 @@ const Main = () => {
 
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
         <Container>
-            <Title>같이해요</Title> 
+          <div className='card_title'>
+             <Title>체험 모집</Title> 
+             </div>
             <div className='subtitle'>
-
+            <div className='subcontent'>
             <SubTitle>다양한 공동육아 프로그램를 둘러보고,
-              참여를 신청해요 </SubTitle>
+              참여를 신청해요! </SubTitle>
+            
             <Btn onClick={() => 
             { navigate(`/recruit`) }}>더 보기</Btn>
+          </div>
           </div>
           <MainScard />
 
             <hr/>
+            <div className='card_title'>
             <Title style={{marginTop:"100px"}}
             >장소 추천</Title>  
+             </div>
             <div className='subtitle'>
-            <SubTitle>
-              아이들과 함께 출입이 가능한 장소들을 공유해요
+              <div className='subcontent'>
+                <SubTitle>
+            아이들과 함께 출입이 가능한 키즈존을 공유해요!
             </SubTitle>
+              
             <Btn onClick={() => 
             { navigate(`/place`) }}>더 보기</Btn>
+          </div>
           </div>
           <LCard />
 
            <hr/>
+           <div className='card_title'>
             <Title style={{marginTop:"100px"}}
             >육아템 리뷰</Title>
+             </div>
             <div className='subtitle'>
+            <div className='subcontent'>
+
             <SubTitle>
-              육아는 장비빨! 생생한 사용후기를 공유해요
+            유용한 육아 아이템들을 소개하고 추천해요!
             </SubTitle>
             <Btn onClick={() => 
             { navigate(`/review`) }}>더 보기</Btn>
+          </div>
           </div>
           <RCard />
         </Container>
@@ -76,16 +90,30 @@ const Main = () => {
 }
 
 const Container = styled.div`
-font-family: 'Noto Sans KR';
+font-family: 'Nanum Gothic';
+
+padding-left: 50px;
+padding-right: 50px;
+
+.card_title{
+  widht: 10px;
+  width: 960px;
+}
 
 .subtitle {
   display: flex;
+  margin-left: 171px;
+}
+
+.subcontent {
+  display: flex;
+  width: 970px;
   justify-content: space-between;
 }
 
 hr {
   color: #E4E4E4;
-  height: 2px;
+  height: 2.5px;
   margin-top: 100px;
 }
 `;
@@ -93,10 +121,10 @@ hr {
 
 const Title = styled.p`
 display: flex;
-font-size: 35px;
-font-weight: 700;
-margin-top: 120px;
-margin-left: 80px;
+font-size: 28px;
+font-weight: 750;
+margin-top: 95px;
+margin-left: 170px;
 margin-bottom: 0px;
 `
 
@@ -105,17 +133,20 @@ font-size: 20px;
 font-weight: 700;
 line-height: 29px;
 color: #6B4E16;
-margin-left: 80px;
+// margin-left: 171px;
 margin-bottom: 50px;
-padding-top: 15px;
+padding-top: 5px;
  `;
 
 const Btn = styled.button`
-margin-right: 80px;
 margin-bottom: 50px;
-padding: 10px 15px;
+padding: 10px 17px;
 cursor: pointer;
 border: 1px solid transparent;
+background: #3C3C3C;
+color: white;
+border-radius: 30px;
+font-weight: 700;
  `;
 
 export default Main
