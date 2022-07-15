@@ -37,7 +37,7 @@ const Header = () => {
     removeCookie("accessToken");
     removeCookie("nickname");
     localStorage.removeItem("profileUrl");
-    localStorage.removeItem('accessToken')
+    localStorage.removeItem("accessToken");
     navigate("/");
     alert("로그아웃 되셨습니다");
   };
@@ -394,18 +394,29 @@ const Headers = styled.div`
   .logo_img {
     width: 40px;
     height: 40px;
+    display: flex;
+    align-items: center;
   }
-  img {
-    width: 40px;
-    height: 40px;
+
+  .logo_img > img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
     cursor: pointer;
+  }
+  .bell > img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+  .bell > img:hover {
+    transform: scale(1.15);
   }
 
   .header__menulist {
     list-style: none;
     display: flex;
     font-size: 17px;
-    color: #a58646;
     margin-top: 10px;
   }
 
@@ -420,13 +431,19 @@ const Headers = styled.div`
   }
 
   .header__menulist > li {
+    font-family: "Nanum Gothic";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
     cursor: pointer;
+    color: #a58646;
     font-weight: 700;
     font-size: 20px;
   }
 
   .header__menulist > li:hover {
-    transform: scale(1.3);
+    transform: scale(1.15);
     color: #6b4e16;
   }
 

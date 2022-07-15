@@ -1,32 +1,37 @@
 // 메인 페이지
-import React from 'react'
-import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
-import Cookies from 'universal-cookie';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 //  elements & components
-import Grid from '../components/elements/Grid';
-import Header from '../components/main/Header'
-import Swiper from '../components/main/Swiper'
-import SCard from '../components/cards/SCard'
-import LCard from '../components/cards/LCard'
-import RCard from '../components/cards/RCard'
-import Footer from '../components/main/Footer'
-import axios from 'axios';
-import MainScard from '../components/cards/MainScard';
+import Grid from "../components/elements/Grid";
+import Header from "../components/main/Header";
+import Swiper from "../components/main/Swiper";
+import SCard from "../components/cards/SCard";
+import LCard from "../components/cards/LCard";
+import RCard from "../components/cards/RCard";
+import Footer from "../components/main/Footer";
+import axios from "axios";
+import MainScard from "../components/cards/MainScard";
 
 const Main = () => {
-
-
-  React.useEffect(()=>{
-    axios.get('http://dlckdals04.shop/api/main', { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-    .then((res)=>{console.log(res)})
-    .catch((err)=>{
-      console.log(err)
-    })
-  })
+  React.useEffect(() => {
+    axios
+      .get("http://dlckdals04.shop/api/main", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
   const navigate = useNavigate();
-  
+
   return (
     <div>
       <Header />
@@ -47,7 +52,6 @@ const Main = () => {
           </div>
           </div>
           <MainScard />
-
             <hr/>
             <div className='card_title'>
             <Title style={{marginTop:"100px"}}
@@ -64,7 +68,6 @@ const Main = () => {
           </div>
           </div>
           <LCard />
-
            <hr/>
            <div className='card_title'>
             <Title style={{marginTop:"100px"}}
@@ -72,7 +75,6 @@ const Main = () => {
              </div>
             <div className='subtitle'>
             <div className='subcontent'>
-
             <SubTitle>
             유용한 육아 아이템들을 소개하고 추천해요!
             </SubTitle>
@@ -82,12 +84,11 @@ const Main = () => {
           </div>
           <RCard />
         </Container>
-      </Grid> 
+      </Grid>
       <Footer />
     </div>
-
-  )
-}
+  );
+};
 
 const Container = styled.div`
 font-family: 'Nanum Gothic';
@@ -117,7 +118,6 @@ hr {
   margin-top: 100px;
 }
 `;
-
 
 const Title = styled.p`
 display: flex;
@@ -149,4 +149,4 @@ border-radius: 30px;
 font-weight: 700;
  `;
 
-export default Main
+export default Main;
