@@ -17,6 +17,13 @@ import MainScard from '../components/cards/MainScard';
 const Main = () => {
 
 
+  React.useEffect(()=>{
+    axios.get('http://dlckdals04.shop/api/main', { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
+    .then((res)=>{console.log(res)})
+    .catch((err)=>{
+      console.log(err)
+    })
+  })
 
   const navigate = useNavigate();
   
@@ -37,8 +44,8 @@ const Main = () => {
           </div>
           <MainScard />
 
-        
-            <Title style={{marginTop:"180px"}}
+            <hr/>
+            <Title style={{marginTop:"100px"}}
             >장소 추천</Title>  
             <div className='subtitle'>
             <SubTitle>
@@ -49,8 +56,8 @@ const Main = () => {
           </div>
           <LCard />
 
-          
-            <Title style={{marginTop:"180px"}}
+           <hr/>
+            <Title style={{marginTop:"100px"}}
             >육아템 리뷰</Title>
             <div className='subtitle'>
             <SubTitle>
@@ -74,6 +81,12 @@ font-family: 'Noto Sans KR';
 .subtitle {
   display: flex;
   justify-content: space-between;
+}
+
+hr {
+  color: #E4E4E4;
+  height: 2px;
+  margin-top: 100px;
 }
 `;
 

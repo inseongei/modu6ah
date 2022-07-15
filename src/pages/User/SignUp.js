@@ -128,17 +128,11 @@ const SignUp = () => {
           <Container>
             <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
-                <Logo>
-                  <div
-                    className="logo_img"
-                    onClick={() => {
-                      navigate(`/`);
-                    }}
-                  >
-                    <img src={logo} alt="로고" />
-                  </div>
-                  <div className="logo">모두의 육아</div>
-                </Logo>
+                <div className="Box">
+              <Grid align="center" height="50px">
+              <Title>회원가입</Title>
+              </Grid>
+
                 <form onSubmit={register}>
                   <Box>
                     {/* 이메일 */}
@@ -258,11 +252,12 @@ const SignUp = () => {
                     </div>
                   </Box>
                   <Grid height="auto">
-                    <Grid margin="15px 32%" height="auto">
+                    <Grid margin="10px 22% " height="auto">
                       <LoginBtn type="submit">회원가입</LoginBtn>
                     </Grid>
                   </Grid>
                 </form>
+                </div>
               </Grid>
             </Grid>
           </Container>
@@ -307,36 +302,35 @@ const Container = styled.div`
       outline: none;
     }
   }
-`;
+.Box {
+  box-sizing:border-box
+width: 500px;
+height: 783px;
 
-const Logo = styled.h1`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .logo_img > img {
-    width: 60px;
-  }
-
-  .logo {
-    margin-left: 15px;
-    color: #f4b03e;
-    font-size: 35px;
   }
 `;
+
+const Title = styled.h1`
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+`
+
 const LoginBtn = styled.button`
-  height: 55px;
+  height: 50px;
   font-size: 15px;
-  width: 40%;
+  width: 60%;
   color: #ffffff;
-  background-color: #a58646;
+  background-color: #3C3C3C;
   text-align: center;
-  border-radius: 40px;
+  border-radius: 10px;
+
   touch-action: manipulation;
   justify-content: center;
   align-items: center;
   border: 1px solid transparent;
   cursor: pointer;
+  margin-top: 40px;
 
   :disabled {
     opacity: 0.7;

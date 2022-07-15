@@ -18,7 +18,12 @@ import io from "socket.io-client";
 import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import { createPostDB } from '../../redux/modules/post';
+import { createCardDB } from '../../redux/modules/card';
+
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { db, storage } from "../../shared/firebase";
+import { getDownloadURL } from "firebase/storage";
+
 
 function PlaceAdd() {
 
@@ -27,9 +32,11 @@ function PlaceAdd() {
   const [content, setContent] = useState('');
   const [imageSrc, setImageSrc] = useState([]);
   const image_ref = useState(null)
-  
+  const image_link_ref = useState(null)
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
 
   const colors = {
     orange: "#FFBA5A",
@@ -53,24 +60,71 @@ function PlaceAdd() {
   }
 
   const handleImageChange = (e) => {
-		// console.log(e.target.files[])
-		if (e.target.files) {
-			const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
-			// console.log("filesArray: ", filesArray);
+    // console.log(e.target.files[])
 
-			setImageSrc((prevImages) => prevImages.concat(filesArray));
-			Array.from(e.target.files).map(
-				(file) => URL.revokeObjectURL(file) // avoid memory leak
-			);
-		}
-	};
+    const imageLists = e.target.files;
+    let imageUrlLists = [...imageSrc];
 
-	const renderPhotos = (source) => {
-		console.log('source: ', source);
-		return source.map((photo) => {
-			return <img src={photo} alt="" key={photo} />;
-		});
-	};
+    console.log(imageUrlLists)
+
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+
+      imageUrlLists.push(currentImageUrl);
+
+      console.log("filesArray: ", imageUrlLists);
+
+    }
+    if (imageUrlLists.length > 5) {
+      imageUrlLists = imageUrlLists.slice(0, 5);
+    }
+
+    setImageSrc(imageUrlLists);
+
+  };
+
+  //휴지통 아이콘 클릭시 이미지 삭제
+  const handleDeleteImage = (id) => {
+    setImageSrc(imageSrc.filter((_, index) => index !== id));
+  };
+
+  
+  const addPost = async (e) => {
+    
+  const upload_file = await uploadBytes(
+    ref(storage, `images/${image_ref.current.files[0].name}`),
+    image_ref.current.files[0]
+  );
+  console.log(upload_file); // ref 값을 가져옴
+
+  const file_url = await getDownloadURL(upload_file.ref);
+  console.log(file_url);
+  image_link_ref.current = { url: file_url };
+
+    axios.post("http://localhost:5001/posts",
+      {
+        title,
+        content,
+        region,
+        'image': image_ref.current?.url,
+
+      }, { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } })
+
+      .then(function (res) {
+        console.log(res.data);
+        window.alert('게시물 작성을 성공했습니다.')
+        console.log('게시물 성공')
+        window.location.href = "/place"
+
+      })
+      .catch((error) => {
+                  console.log(error.message);
+                  window.alert('게시물 작성이 실패했습니다.')
+                  window.location.href = "/placeadd"
+      })
+  }
+
+
 
   return (
     <>
@@ -90,26 +144,39 @@ function PlaceAdd() {
               onChange={handleImageChange}
               accept='image/jpg,image/png,image/jpeg,image/gif'
               id='profile_img_upload'
-              style={{display:'none'}} />
+              style={{ display: 'none' }}
+              multiple />
             <div className='imageBox'>
               <label
-               for='profile_img_upload'>
-              <AiOutlineFileImage />
+                for='profile_img_upload'>
+                <AiOutlineFileImage />
               </label>
-              <div className='img'>
+              {/* <div className='img'>
               {renderPhotos(imageSrc)}
-              </div>
-              
+              </div> */}
+              {/* 이미지 미리보기 */}
+              {imageSrc.map((image, id) => (
+                <div key={id}>
+                  <img src={image} alt={`${image}-${id}`} />
+                  <button onClick={() => handleDeleteImage(id)} >삭제</button>
+                </div>
+              ))}
             </div>
             <div className='mainBox'>
               <div className='card-left'>
                 <div className='position'>
                   <strong>제목</strong>
-                  <input type="text" />
+                  <input type="text"
+                    onChange={e =>
+                      setTitle(e.target.value)}
+                  />
                 </div>
                 <div className='position'>
                   <strong>위치</strong>
-                  <input type="text" />
+                  <input type="text"
+                    onChange={e =>
+                      setContent(e.target.value)}
+                  />
                 </div>
 
                 <div className='star'>
@@ -134,7 +201,10 @@ function PlaceAdd() {
                 </div>
               </div>
               <div className='card-right'>
-                <textarea />
+                <textarea
+                  onChange={e =>
+                    setRegion(e.target.value)}
+                />
                 {/* <span className='btnList'>
                       <button className='ParkBtn'> 주차가능</button>
                       <button className='KidBtn'> 예스키즈존</button>
@@ -150,7 +220,7 @@ function PlaceAdd() {
                 취소 </button>
               <button
                 className='btn'
-              // onClick={addPost}
+                onClick={addPost}
               >
                 등록하기</button>
             </Btn>
@@ -194,19 +264,19 @@ const Place = styled.div`
   margin-left: 20px;
 }
 
-// .img{
-//   width:200px;
-//   height:220px;
-//   border: 1px solid #E4E4E4;
-//   border-radius: 10px;
-//   margin: 20px 0px 20px 40px;
-//   overflow: hidden;
-// }
+.img{
+  width:200px;
+  height:220px;
+  border: 1px solid #E4E4E4;
+  border-radius: 10px;
+  margin: 20px 0px 20px 40px;
+  overflow: hidden;
+}
 
 img{
-  // width: 100%;
-  // height: 100%;
-  // object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   width:200px;
   height:220px;
   border: 1px solid #E4E4E4;
