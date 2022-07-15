@@ -65,7 +65,10 @@ function App() {
 
         {/* 이쪽 모달은 추후에 삭제 예정 */}
         <Route path="/welcome" element={<WelcomeModal />} />
-        <Route path="/api/users/kakao/callback" element={<KakaoLogIn />} />
+        <Route
+          path="http://dlckdals04.shop/api/users/kakao/callback"
+          element={<KakaoLogIn />}
+        />
         {/* <Route path="/map" element={< KaKaoMap />} /> */}
       </Routes>
     </>

@@ -57,7 +57,7 @@ const ProfileInsert = () => {
         { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } }
       )
       .then((res) => {
-        navigate("/manager");
+        navigate("/manager/" + nickname);
         localStorage.setItem("img", file_url);
       })
       .catch((err) => console.log(err));

@@ -36,67 +36,71 @@ function MainScard() {
                   <div className="card-top">
                     <p>모집완료</p>
                     {item.bookmarkStatus === true ? (
-                      <BsFillBookmarkFill
-                        className="checkIcon"
-                        onClick={() => {
-                          axios
-                            .put(
-                              "http://dlckdals04.shop/api/recruits/bookmark/" +
-                                item.recruitPostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${getCookie(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              Swal.fire({
-                                text: `북마크 해제`,
-                                icon: "success",
-                                confirmButtonText: "완료",
-                              }).then((result) => {
-                                if (result.isConfirmed) {
-                                  window.location.reload();
+                      <div className="iconBox">
+                        <BsFillBookmarkFill
+                          className="checkIcon"
+                          onClick={() => {
+                            axios
+                              .put(
+                                "http://dlckdals04.shop/api/recruits/bookmark/" +
+                                  item.recruitPostId,
+                                null,
+                                {
+                                  headers: {
+                                    Authorization: `Bearer ${getCookie(
+                                      "accessToken"
+                                    )}`,
+                                  },
                                 }
-                              });
-                            })
-                            .catch((err) => console.log(err));
-                        }}
-                      ></BsFillBookmarkFill>
+                              )
+                              .then((res) => {
+                                Swal.fire({
+                                  text: `북마크 해제`,
+                                  icon: "success",
+                                  confirmButtonText: "완료",
+                                }).then((result) => {
+                                  if (result.isConfirmed) {
+                                    window.location.reload();
+                                  }
+                                });
+                              })
+                              .catch((err) => console.log(err));
+                          }}
+                        ></BsFillBookmarkFill>
+                      </div>
                     ) : (
-                      <BsBookmark
-                        className="icon"
-                        onClick={() => {
-                          axios
-                            .put(
-                              "http://dlckdals04.shop/api/recruits/bookmark/" +
-                                item.recruitPostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${getCookie(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              Swal.fire({
-                                text: `북마크 등록`,
-                                icon: "success",
-                                confirmButtonText: "완료",
-                              }).then((result) => {
-                                if (result.isConfirmed) {
-                                  window.location.reload();
+                      <div className="iconBox">
+                        <BsBookmark
+                          className="icon"
+                          onClick={() => {
+                            axios
+                              .put(
+                                "http://dlckdals04.shop/api/recruits/bookmark/" +
+                                  item.recruitPostId,
+                                null,
+                                {
+                                  headers: {
+                                    Authorization: `Bearer ${getCookie(
+                                      "accessToken"
+                                    )}`,
+                                  },
                                 }
-                              });
-                            })
-                            .catch((err) => console.log(err));
-                        }}
-                      />
+                              )
+                              .then((res) => {
+                                Swal.fire({
+                                  text: `북마크 등록`,
+                                  icon: "success",
+                                  confirmButtonText: "완료",
+                                }).then((result) => {
+                                  if (result.isConfirmed) {
+                                    window.location.reload();
+                                  }
+                                });
+                              })
+                              .catch((err) => console.log(err));
+                          }}
+                        />
+                      </div>
                     )}
                   </div>
                   {/* 카드 타이틀 */}
@@ -144,7 +148,10 @@ const Container = styled.div`
     border-radius: 30px;
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
-    cursor: pointer;
+  }
+
+  .iconBox {
+    margin-left: 20px;
   }
 
   .card-top {
@@ -163,11 +170,11 @@ const Container = styled.div`
   }
 
   .icon {
-    border: black;
     margin-right: 60px;
     width: 34px;
     height: 34px;
     color: black;
+    cursor: pointer;
   }
 
   .colorIcon {
@@ -179,6 +186,7 @@ const Container = styled.div`
 
   .title {
     margin: 30px 10px 25px 33px;
+    cursor: pointer;
 
     h1 {
       font-size: 25px;
@@ -187,6 +195,7 @@ const Container = styled.div`
   }
 
   .card-bottom {
+    cursor: pointer;
     margin: 0px 0px 20px 30px;
   }
 
