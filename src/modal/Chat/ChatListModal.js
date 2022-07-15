@@ -10,7 +10,7 @@ import axios from "axios";
 import { BsTrash } from "react-icons/bs";
 import io from "socket.io-client";
 
-const socket = io.connect("http://13.125.241.180");
+const socket = io.connect("http://dlckdals04.shop");
 
 const ChatListModal = ({ open, onClose }) => {
   const nickname = getCookie("nickname");
@@ -19,12 +19,12 @@ const ChatListModal = ({ open, onClose }) => {
   const [realroom, setrealroom] = React.useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const profileUrl = localStorage.getItem("profileUrl");
-  const token = getCookie('accessToken')
+  const token = getCookie("accessToken");
   console.log(token);
 
   React.useEffect(() => {
     axios
-      .get("http://13.125.241.180/api/chats/rooms", {
+      .get("http://dlckdals04.shop/api/chats/rooms", {
         headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
       })
       .then((res) => {
@@ -36,29 +36,18 @@ const ChatListModal = ({ open, onClose }) => {
       });
   }, []);
 
-  const Delete = () =>{
+  const Delete = () => {
     axios
-      .put("http://13.125.241.180/api/chats/rooms/" + realroom,null, {
+      .put("http://dlckdals04.shop/api/chats/rooms/" + realroom, null, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        alert('방에 나갔습니다')
+        alert("방에 나갔습니다");
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-
-
-
-
-
-
-
-
-
-
-
+  };
 
   if (!open) return null;
 
@@ -96,7 +85,7 @@ const ChatListModal = ({ open, onClose }) => {
                     socket.emit("join_room", Joindata);
                     axios
                       .get(
-                        "http://13.125.241.180/api/chats/messages/" +
+                        "http://dlckdals04.shop/api/chats/messages/" +
                           data.roomId,
                         {
                           headers: {

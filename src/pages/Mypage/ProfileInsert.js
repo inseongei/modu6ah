@@ -24,8 +24,7 @@ const ProfileInsert = () => {
   const MyPage = useSelector((state) => state.Data.state);
   const [imageSrc, setImageSrc] = React.useState("");
 
-
-    console.log(MyPage)
+  console.log(MyPage);
   // 이미지 미리보기
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
@@ -54,11 +53,9 @@ const ProfileInsert = () => {
     console.log(file_url);
     fileInput.current = { url: file_url };
 
-
-
     await axios
       .put(
-        "http://13.125.241.180/api/mypage/update",
+        "http://dlckdals04.shop/api/mypage/update",
         { myComment: insert.current.value, profileUrl: fileInput.current?.url },
         { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } }
       )
