@@ -70,63 +70,67 @@ const ChatListModal = ({ open, onClose }) => {
           {ChatList &&
             ChatList.map((data, idx) => {
               return (
-                <div
-                  className="List"
-                  key={idx}
-                  onClick={() => {
-                    setModalIsOpen(true);
-                    const Joindata = {
-                      roomId: data.roomId,
-                      senderNick: data.senderNick,
-                      receiverNick: data.receiverNick,
-                      profileUrlTwo: data.profileUrl,
-                    };
-                    socket.emit("join_room", Joindata);
-                    axios
-                      .get(
-                        "http://dlckdals04.shop/api/chats/messages/" +
-                          data.roomId,
-                        {
-                          headers: {
-                            Authorization: `Bearer ${getCookie("accessToken")}`,
-                          },
-                        }
-                      )
-                      .then((res) => {
-                        console.log(res);
-                        setNowRoom(res.data.chatMessageList);
-                        setrealroom(data.roomId);
-                      });
-                  }}
-                >
-                  <div className="ChatImg">
-                    <div className="ChatImgOne">
-                      <img
-                        src={
-                          profileUrl === data.profileUrlTwo
-                            ? data.profileUrl
-                            : data.profileUrlTwo
-                        }
-                        alt="사진"
-                      />
+                data != null && (
+                  <div
+                    className="List"
+                    key={idx}
+                    onClick={() => {
+                      setModalIsOpen(true);
+                      const Joindata = {
+                        roomId: data.roomId,
+                        senderNick: data.senderNick,
+                        receiverNick: data.receiverNick,
+                        profileUrlTwo: data.profileUrl,
+                      };
+                      socket.emit("join_room", Joindata);
+                      axios
+                        .get(
+                          "http://dlckdals04.shop/api/chats/messages/" +
+                            data.roomId,
+                          {
+                            headers: {
+                              Authorization: `Bearer ${getCookie(
+                                "accessToken"
+                              )}`,
+                            },
+                          }
+                        )
+                        .then((res) => {
+                          console.log(res);
+                          setNowRoom(res.data.chatMessageList);
+                          setrealroom(data.roomId);
+                        });
+                    }}
+                  >
+                    <div className="ChatImg">
+                      <div className="ChatImgOne">
+                        <img
+                          src={
+                            profileUrl === data.profileUrlTwo
+                              ? data.profileUrl
+                              : data.profileUrlTwo
+                          }
+                          alt="사진"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="ChatInfo">
-                    <div className="ChatName">
-                      {data.receiverNick === nickname
-                        ? data.senderNick
-                        : data.receiverNick}
-                    </div>
+                    <div className="ChatInfo">
+                      <div className="ChatName">
+                        {data.receiverNick === nickname
+                          ? data.senderNick
+                          : data.receiverNick}
+                      </div>
 
-                    <div className="ChatContent">{data.message}</div>
-                    <div className="ChatDate">{data.time}</div>
+                      <div className="ChatContent">{data.message}</div>
+                      <div className="ChatDate">{data.time}</div>
+                    </div>
+                    <div className="ChatBell">
+                      <span>
+                        <BsTrash className="Trash"></BsTrash>
+                      </span>
+                    </div>
                   </div>
-                  <div className="ChatBell">
-                    <span>
-                      <BsTrash className="Trash"></BsTrash>
-                    </span>
-                  </div>
-                </div>
+                )
               );
             })}
         </div>

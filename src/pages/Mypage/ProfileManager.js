@@ -14,7 +14,7 @@ const ProfileManager = () => {
 
   React.useEffect(() => {
     dispatch(GetMyPageAxios(nickname));
-  });
+  },[]);
 
   const MyPage = useSelector((state) => state.Data.state);
 

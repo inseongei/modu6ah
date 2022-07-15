@@ -40,6 +40,7 @@ const Header = () => {
     localStorage.removeItem("accessToken");
     navigate("/");
     alert("로그아웃 되셨습니다");
+    window.location.reload();
   };
 
   const messageBtn = () => {
