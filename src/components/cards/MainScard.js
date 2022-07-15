@@ -19,8 +19,6 @@ function MainScard() {
 
   const post = useSelector((state) => state.Data.Profile);
 
-  console.log(post);
-
   if (!post) {
     return <div></div>;
   }
@@ -55,7 +53,6 @@ function MainScard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
                               Swal.fire({
                                 text: `북마크 해제`,
                                 icon: "success",
@@ -87,7 +84,6 @@ function MainScard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
                               Swal.fire({
                                 text: `북마크 등록`,
                                 icon: "success",

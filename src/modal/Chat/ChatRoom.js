@@ -15,8 +15,6 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
   const Img_Url = localStorage.getItem("profileUrl");
   const [info, setinfo] = React.useState();
 
-  console.log(NowChat);
-
   React.useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
       setNowChat((list) => [...list, data]);
@@ -40,7 +38,6 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
           "분",
       };
       await socket.emit("send_message", messageData);
-      console.log(messageData);
       setCurrentMessage("");
     }
   };
@@ -53,12 +50,9 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
 
   React.useEffect(() => {
     socket.on("test", (data) => {
-      console.log(data);
       setinfo(data);
     });
   }, [socket]);
-
-  console.log(info);
 
   if (!open) return null;
   return (

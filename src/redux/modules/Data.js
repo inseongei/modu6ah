@@ -44,7 +44,6 @@ export const GetMainAxois = () => {
         headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
       })
       .then((res) => {
-        console.log(res);
         dispatch(GetMain(res.data));
       });
   };

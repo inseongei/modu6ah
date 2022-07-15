@@ -129,134 +129,138 @@ const SignUp = () => {
             <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
                 <div className="Box">
-              <Grid align="center" height="50px">
-              <Title>회원가입</Title>
-              </Grid>
-
-                <form onSubmit={register}>
-                  <Box>
-                    {/* 이메일 */}
-                    <label className="form-label">이메일</label>
-                    <div className="formbox">
-                      <input
-                        onChange={onChangeEmail}
-                        type="text"
-                        className="form-input"
-                        placeholder="이메일을 입력하세요"
-                      ></input>
-                      {/* <label className="id_button" onClick={onClickEmailConfirm} >
-                                    Check
-                                </label> */}
-                    </div>
-                    <div className="message_div">
-                      {OverlapEmail ? (
-                        <span
-                          className="print_message"
-                          style={{ color: "#5493f1" }}
-                        >
-                          {OverlapEmailMessage}
-                        </span>
-                      ) : email.length > 0 ? (
-                        <span
-                          className="print_message"
-                          style={{ color: isEmail ? "#5493f1" : "#ff2626" }}
-                        >
-                          {emailMessage}
-                        </span>
-                      ) : (
-                        <span
-                          className="print_message"
-                          style={{ color: "#ff2626" }}
-                        >
-                          {emailMessage}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* 닉네임 */}
-                    <label className="form-label">닉네임</label>
-                    <div className="formbox">
-                      <input
-                        onChange={onChangeNickname}
-                        type="text"
-                        className="form-input"
-                        placeholder="닉네임을 입력하세요"
-                      ></input>
-                      {/* <label className="id_button" onClick={onClickNickNameConfirm}>
-                                    Check
-                                </label> */}
-                    </div>
-                    <div className="message">
-                      {OverLapNickName ? (
-                        <span
-                          className="print_message"
-                          style={{ color: "#5493f1" }}
-                        >
-                          {OverlapNicknameMessage}
-                        </span>
-                      ) : nickname.length > 0 ? (
-                        <span
-                          className="print_message"
-                          style={{ color: isNickname ? "#5493f1" : "#ff2626" }}
-                        >
-                          {nicknameMessage}
-                        </span>
-                      ) : (
-                        <span
-                          className="print_message"
-                          style={{ color: "#ff2626" }}
-                        >
-                          {nicknameMessage}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* 비밀번호 */}
-                    <label className="form-label">비밀번호</label>
-                    <input
-                      onChange={onChangePassword}
-                      type="password"
-                      className="form-input"
-                      placeholder="비밀번호를 입력하세요"
-                    ></input>
-                    <div className="message">
-                      {password.length > 0 && (
-                        <span
-                          className="print_message"
-                          style={{ color: isPassword ? "#5493f1" : "#ff2626" }}
-                        >
-                          {passwordMessage}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* 비밀번호 확인 */}
-                    <label className="form-label">비밀번호 체크</label>
-                    <input
-                      onChange={onChangePasswordConfirm}
-                      type="password"
-                      className="form-input"
-                      placeholder="비밀번호를 한 번 더 입력하세요"
-                    ></input>
-                    <div className="message_Passworddiv">
-                      {passwordCheck.length > 0 && (
-                        <span
-                          className="print_message"
-                          style={{
-                            color: isPasswordConfirm ? "#5493f1" : "#ff2626",
-                          }}
-                        >
-                          {passwordConfirmMessage}
-                        </span>
-                      )}
-                    </div>
-                  </Box>
-                  <Grid height="auto">
-                    <Grid margin="10px 22% " height="auto">
-                      <LoginBtn type="submit">회원가입</LoginBtn>
-                    </Grid>
+                  <Grid align="center" height="50px">
+                    <Title>회원가입</Title>
                   </Grid>
-                </form>
+
+                  <form onSubmit={register}>
+                    <Box>
+                      {/* 이메일 */}
+                      <label className="form-label">이메일</label>
+                      <div className="formbox">
+                        <input
+                          onChange={onChangeEmail}
+                          type="text"
+                          className="form-input"
+                          placeholder="이메일을 입력하세요"
+                        ></input>
+                        {/* <label className="id_button" onClick={onClickEmailConfirm} >
+                                    Check
+                                </label> */}
+                      </div>
+                      <div className="message_div">
+                        {OverlapEmail ? (
+                          <span
+                            className="print_message"
+                            style={{ color: "#5493f1" }}
+                          >
+                            {OverlapEmailMessage}
+                          </span>
+                        ) : email.length > 0 ? (
+                          <span
+                            className="print_message"
+                            style={{ color: isEmail ? "#5493f1" : "#ff2626" }}
+                          >
+                            {emailMessage}
+                          </span>
+                        ) : (
+                          <span
+                            className="print_message"
+                            style={{ color: "#ff2626" }}
+                          >
+                            {emailMessage}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* 닉네임 */}
+                      <label className="form-label">닉네임</label>
+                      <div className="formbox">
+                        <input
+                          onChange={onChangeNickname}
+                          type="text"
+                          className="form-input"
+                          placeholder="닉네임을 입력하세요"
+                        ></input>
+                        {/* <label className="id_button" onClick={onClickNickNameConfirm}>
+                                    Check
+                                </label> */}
+                      </div>
+                      <div className="message">
+                        {OverLapNickName ? (
+                          <span
+                            className="print_message"
+                            style={{ color: "#5493f1" }}
+                          >
+                            {OverlapNicknameMessage}
+                          </span>
+                        ) : nickname.length > 0 ? (
+                          <span
+                            className="print_message"
+                            style={{
+                              color: isNickname ? "#5493f1" : "#ff2626",
+                            }}
+                          >
+                            {nicknameMessage}
+                          </span>
+                        ) : (
+                          <span
+                            className="print_message"
+                            style={{ color: "#ff2626" }}
+                          >
+                            {nicknameMessage}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* 비밀번호 */}
+                      <label className="form-label">비밀번호</label>
+                      <input
+                        onChange={onChangePassword}
+                        type="password"
+                        className="form-input"
+                        placeholder="비밀번호를 입력하세요"
+                      ></input>
+                      <div className="message">
+                        {password.length > 0 && (
+                          <span
+                            className="print_message"
+                            style={{
+                              color: isPassword ? "#5493f1" : "#ff2626",
+                            }}
+                          >
+                            {passwordMessage}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* 비밀번호 확인 */}
+                      <label className="form-label">비밀번호 체크</label>
+                      <input
+                        onChange={onChangePasswordConfirm}
+                        type="password"
+                        className="form-input"
+                        placeholder="비밀번호를 한 번 더 입력하세요"
+                      ></input>
+                      <div className="message_Passworddiv">
+                        {passwordCheck.length > 0 && (
+                          <span
+                            className="print_message"
+                            style={{
+                              color: isPasswordConfirm ? "#5493f1" : "#ff2626",
+                            }}
+                          >
+                            {passwordConfirmMessage}
+                          </span>
+                        )}
+                      </div>
+                    </Box>
+                    <Grid height="auto">
+                      <Grid margin="10px 22% " height="auto">
+                        <LoginBtn type="submit">회원가입</LoginBtn>
+                      </Grid>
+                    </Grid>
+                  </form>
                 </div>
               </Grid>
             </Grid>
@@ -302,11 +306,10 @@ const Container = styled.div`
       outline: none;
     }
   }
-.Box {
-  box-sizing:border-box
-width: 500px;
-height: 783px;
-
+  .Box {
+    box-sizing: border-box;
+    width: 500px;
+    height: 783px;
   }
 `;
 
@@ -314,14 +317,14 @@ const Title = styled.h1`
   font-size: 28px;
   font-weight: bold;
   margin: 0 0 8px 0;
-`
+`;
 
 const LoginBtn = styled.button`
   height: 50px;
   font-size: 15px;
   width: 60%;
   color: #ffffff;
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
   text-align: center;
   border-radius: 10px;
 
