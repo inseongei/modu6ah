@@ -66,17 +66,7 @@ function LogIn() {
             <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
-                  <Logo>
-                    <div
-                      className="logo_img"
-                      onClick={() => {
-                        navigate(`/`);
-                      }}
-                    >
-                      <img src={logo} alt="로고" />
-                    </div>
-                    <div className="logo">모두의 육아</div>
-                  </Logo>
+                <LoginTitle>로그인</LoginTitle>
                 </Grid>
                 <form onSubmit={submit}>
                   <FormGroup>
@@ -173,21 +163,11 @@ const Container = styled.div`
   }
 `;
 
-const Logo = styled.h1`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .logo_img > img {
-    width: 60px;
-  }
-
-  .logo {
-    margin-left: 15px;
-    color: #f4b03e;
-    font-size: 35px;
-  }
-`;
+const LoginTitle = styled.h1`
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+`
 
 const SocialLogin = styled.a`
   border-radius: 4px;
@@ -274,7 +254,7 @@ const LoginBtn = styled.button`
   font-size: 15px;
   width: 60%;
   color: #ffffff;
-  background-color: #a58646;
+  background-color: #3C3C3C;
   text-align: center;
   border-radius: 10px;
   touch-action: manipulation;
