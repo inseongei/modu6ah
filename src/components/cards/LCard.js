@@ -69,7 +69,7 @@ border: none;
 box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
 cursor: pointer;
 overflow: hidden;
-width: 900px;
+width: 980px;
 height: 360px;
 display: flex;
 flex-direction: row;
@@ -79,7 +79,7 @@ flex-direction: row;
     display: flex;
     width: 460px;
     height: 300px;
-    margin: 20px 0px 0px 30px;
+    margin: 30px 0px 0px 39px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
