@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProfileManager = () => {
   const nickname = getCookie("nickname");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const MyPage = useSelector((state) => state.Data.state);
 
@@ -45,9 +45,13 @@ const ProfileManager = () => {
               <div className="btn">
                 {nickname !== MyPage.mypageGet.nickname ? null : (
                   <button>
-                    <div onClick={()=>{
-                      navigate('/profileinsert/'+nickname)
-                    }}>프로필 수정</div>
+                    <div
+                      onClick={() => {
+                        navigate("/profileinsert/" + nickname);
+                      }}
+                    >
+                      프로필 수정
+                    </div>
                   </button>
                 )}
               </div>
@@ -134,6 +138,7 @@ const Profile = styled.div`
     width: 35%;
     height: 35px;
     border: none;
+    color: #fff;
   }
   img {
     width: 170px;
