@@ -45,7 +45,7 @@ const Main = () => {
           <div className="subtitle">
             <div className="subcontent">
               <SubTitle>
-                다양한 공동육아 프로그램를 둘러보고, 참여를 신청해요!{" "}
+                다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!{" "}
               </SubTitle>
 
               <Btn

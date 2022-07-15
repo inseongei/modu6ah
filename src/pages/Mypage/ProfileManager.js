@@ -14,9 +14,11 @@ const ProfileManager = () => {
 
   React.useEffect(() => {
     dispatch(GetMyPageAxios(nickname));
-  },[]);
+  }, []);
 
   const MyPage = useSelector((state) => state.Data.state);
+
+  console.log(MyPage);
 
   // 마이페이지 화면 뷰
   if (!MyPage) {
@@ -53,6 +55,7 @@ const ProfileManager = () => {
                     <div
                       onClick={() => {
                         navigate("/profileinsert/" + nickname);
+                        dispatch(GetMyPageAxios(nickname));
                       }}
                     >
                       프로필 수정
