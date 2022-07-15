@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { REDIRECT_URI, REST_API_KEY } from '../../shared/kakaoData';
+import React, { useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { REDIRECT_URI, REST_API_KEY } from "../../shared/kakaoData";
 
 const KakaoLogIn = () => {
     const navigate = useNavigate();
@@ -57,4 +57,4 @@ const KakaoLogIn = () => {
 
 };
 
-export default KakaoLogIn
+export default KakaoLogIn;

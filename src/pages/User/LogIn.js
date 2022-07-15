@@ -43,14 +43,13 @@ function LogIn() {
           confirmButtonText: "확인",
         }).then((result) => {
           if (result.isConfirmed) {
-            setCookie("accessToken", response.data.accessToken);
-            setCookie("nickname", response.data.nickname);
             navigate("/");
           }
         });
-        setCookie("accessToken", response.data.accessToken);
-        setCookie("nickname", response.data.nickname);
-        navigate("/");
+        localStorage.setItem("profileUrl", response.data.profileUrl);
+        localStorage.setItem('accessToken',response.data.accessToken)
+        setCookie("accessToken", response.data.accessToken); // del
+        setCookie("nickname", response.data.nickname);  
       })
       .catch((error) => {
         alert("로그인을 다시 해주세요");

@@ -132,6 +132,7 @@ const SignUp = () => {
               <Grid align="center" height="50px">
               <Title>회원가입</Title>
               </Grid>
+
                 <form onSubmit={register}>
                   <Box>
                     {/* 이메일 */}
@@ -301,7 +302,6 @@ const Container = styled.div`
       outline: none;
     }
   }
-
 .Box {
   box-sizing:border-box
 width: 500px;
@@ -324,6 +324,7 @@ const LoginBtn = styled.button`
   background-color: #3C3C3C;
   text-align: center;
   border-radius: 10px;
+
   touch-action: manipulation;
   justify-content: center;
   align-items: center;
