@@ -13,7 +13,7 @@ import { detailPostDB, deletePostDB } from "../../redux/modules/post";
 import { MdOutlinePlace } from "react-icons/md";
 import Grid from "../../components/elements/Grid";
 
-const socket = io.connect("http://13.125.241.180"); // 1 . 소켓 서버 연결
+const socket = io.connect("http://dlckdals04.shop"); // 1 . 소켓 서버 연결
 
 const RecruitDetail = () => {
   const nickname = getCookie("nickname");
@@ -63,7 +63,7 @@ const RecruitDetail = () => {
   // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
     axios
-      .post("http://13.125.241.180/api/chats/rooms/" + recruitPostId, null, {
+      .post("http://dlckdals04.shop/api/chats/rooms/" + recruitPostId, null, {
         headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
       })
       .then((res) => {

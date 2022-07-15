@@ -134,26 +134,26 @@ function MainScard() {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, 380px);
-  // grid-template-columns: repeat(auto-fill, minmax(20%, auto));
-  gap: 3em;
+  // grid-template-columns: repeat(auto-fit, 380px);
+  grid-template-columns: repeat(auto-fill, minmax(24%, 100px));
+  gap: 2em;
   justify-content: center;
   align-items: center;
   width: 100%;
-  // background-color: lightgray;
 
   .card {
     display: flex;
     height: 100%;
     background: white;
     border-radius: 30px;
-    border: 1px solid lightgray;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.09);
+    border: none;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
+    cursor: pointer;
   }
 
   .card-top {
     display: flex;
-    margin: 40px 0px 0px 30px;
+    margin: 30px 0px 0px 30px;
     width: 100%;
     justify-content: space-between;
   }
@@ -167,26 +167,11 @@ const Container = styled.div`
   }
 
   .icon {
+    border: black;
     margin-right: 60px;
     width: 34px;
     height: 34px;
-    cursor: pointer;
-  }
-
-  .checkIcon {
-    margin-right: 60px;
-    width: 34px;
-    height: 34px;
-    cursor: pointer;
-    color: #6b4e16;
-  }
-
-  .checkIcon:hover {
-    transform: scale(1.13);
-  }
-
-  .icon:hover {
-    transform: scale(1.13);
+    color: black;
   }
 
   .colorIcon {
@@ -197,17 +182,34 @@ const Container = styled.div`
   }
 
   .title {
-    margin: 30px 10px 30px 33px;
-    cursor: pointer;
+    margin: 30px 10px 25px 33px;
+
+    h1 {
+      font-size: 25px;
+      font-weight: bold;
+    }
   }
 
   .card-bottom {
-    margin: 0px 0px 40px 30px;
-    cursor: pointer;
+    margin: 0px 0px 20px 30px;
   }
 
   .card-bottom p {
     margin: 0px 0px 8px 4px;
+  }
+
+  .checkIcon {
+    margin-right: 60px;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    color: #6b4e16;
+  }
+  .checkIcon:hover {
+    transform: scale(1.13);
+  }
+  .icon:hover {
+    transform: scale(1.13);
   }
 `;
 
