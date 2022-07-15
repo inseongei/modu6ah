@@ -66,7 +66,7 @@ const FooterContainer = styled.footer`
 
   background-color: #3c3c3c;
   position: relative;
-  transform: translateY(100%);
+  transform: translateY(300%);
   font-family: "Noto Sans KR";
 
   .one_container {

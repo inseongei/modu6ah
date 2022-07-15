@@ -27,6 +27,7 @@ const ChatListModal = ({ open, onClose }) => {
         headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
       })
       .then((res) => {
+        console.log(res);
         setChatList(res.data.lastChats);
       })
       .catch((err) => {
@@ -34,18 +35,18 @@ const ChatListModal = ({ open, onClose }) => {
       });
   }, []);
 
-  const Delete = () => {
-    axios
-      .put("http://dlckdals04.shop/api/chats/rooms/" + realroom, null, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        alert("방에 나갔습니다");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const Delete = () => {
+  //   axios
+  //     .put("http://dlckdals04.shop/api/chats/rooms/" + realroom, null, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //     .then((res) => {
+  //       alert("방에 나갔습니다");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   if (!open) return null;
 
@@ -92,6 +93,7 @@ const ChatListModal = ({ open, onClose }) => {
                         }
                       )
                       .then((res) => {
+                        console.log(res);
                         setNowRoom(res.data.chatMessageList);
                         setrealroom(data.roomId);
                       });
@@ -121,7 +123,7 @@ const ChatListModal = ({ open, onClose }) => {
                   </div>
                   <div className="ChatBell">
                     <span>
-                      <BsTrash className="Trash" onClick={Delete}></BsTrash>
+                      <BsTrash className="Trash"></BsTrash>
                     </span>
                   </div>
                 </div>

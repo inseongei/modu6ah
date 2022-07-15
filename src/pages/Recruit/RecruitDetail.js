@@ -48,6 +48,8 @@ const RecruitDetail = () => {
 
   const detail = useSelector((state) => state.post.list);
 
+  console.log(detail);
+
   React.useEffect(() => {
     dispatch(detailPostDB(recruitPostId));
   }, []);
@@ -122,7 +124,7 @@ const RecruitDetail = () => {
                 </div>
                 <div className="profile">
                   <div className="detail_profile">
-                    <img src={dog} alt="프로필" />
+                    <img src={detail.profileUrl} alt="프로필" />
                   </div>
                   <div className="detail_username">
                     <div className="username">{detail.nickname}</div>

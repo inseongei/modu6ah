@@ -128,14 +128,14 @@ const Header = () => {
                 navigate(`/recruit`);
               }}
             >
-              같이해요
+              체험 모집
             </li>
             <li
               onClick={() => {
                 navigate(`/place`);
               }}
             >
-              추천해요
+              장소 추천
             </li>
             <li
               onClick={() => {
@@ -204,14 +204,14 @@ const Header = () => {
                 navigate(`/recruit`);
               }}
             >
-              같이해요
+              체험 모집
             </li>
             <li
               onClick={() => {
                 navigate(`/place`);
               }}
             >
-              추천해요
+              장소 추천
             </li>
             <li
               onClick={() => {

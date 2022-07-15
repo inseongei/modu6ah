@@ -10,12 +10,17 @@ import { useNavigate } from "react-router-dom";
 const ProfileManager = () => {
   const nickname = getCookie("nickname");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(GetMyPageAxios(nickname));
+  });
 
   const MyPage = useSelector((state) => state.Data.state);
 
   // 마이페이지 화면 뷰
   if (!MyPage) {
-    return <div></div>;
+    return <div> 값이 없음</div>;
   }
   return (
     <>
