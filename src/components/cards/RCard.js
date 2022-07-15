@@ -50,7 +50,7 @@ function RCard() {
 
 const Container = styled.div`
 display: grid;
-grid-template-columns: repeat(auto-fit, 450px);
+grid-template-columns: repeat(auto-fit, 420px);
 gap: 3.6em;
 justify-content: center;
 align-items: center;
@@ -59,7 +59,8 @@ align-items: center;
 .card {
 background: white;
 border-radius: 30px;
-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.09);
+border: none;
+box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
 cursor: pointer;
 overflow: hidden;
 height: 570px;
@@ -68,6 +69,10 @@ height: 570px;
 .card-top {
     display: flex;
     margin: 30px 0px 0px 50px;
+
+    h3{
+        font-weight: 700;
+    }
 }
 
 .card-top p {
@@ -75,6 +80,7 @@ height: 570px;
  margin-top: 8px;
  margin-left: 10px;
  color: gray;
+ 
 }
 
 a {
@@ -82,8 +88,8 @@ a {
 }
 
 .card-body {
-    width: 390px;
-    margin-left: 29px;
+    width: 360px;
+    margin-left: 30px;
 }
 
 .image{
