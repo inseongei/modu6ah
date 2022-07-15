@@ -22,6 +22,7 @@ function SCard() {
     return (
         <>
             <Container>
+                
                 {post.recruitPosts&&
                 post.recruitPosts.map((item, index) => (
                     <div className='card'
@@ -54,9 +55,9 @@ function SCard() {
 }
 const Container = styled.div`
 display: grid;
-grid-template-columns: repeat(auto-fit, 380px);
-// grid-template-columns: repeat(auto-fill, minmax(20%, auto));
-gap: 3em;
+// grid-template-columns: repeat(auto-fit, 380px);
+grid-template-columns: repeat(auto-fill, minmax(25%, 180px));
+gap: 2em;
 justify-content: center;
 align-items: center;
 width: 100%;
