@@ -19,8 +19,8 @@ const ChatListModal = ({ open, onClose }) => {
   const [realroom, setrealroom] = React.useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const profileUrl = localStorage.getItem("profileUrl");
-
-  console.log(ChatList);
+  const token = getCookie('accessToken')
+  console.log(token);
 
   React.useEffect(() => {
     axios
@@ -35,6 +35,30 @@ const ChatListModal = ({ open, onClose }) => {
         console.log(err);
       });
   }, []);
+
+  const Delete = () =>{
+    axios
+      .put("http://13.125.241.180/api/chats/rooms/" + realroom,null, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        alert('방에 나갔습니다')
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   if (!open) return null;
 
@@ -111,7 +135,7 @@ const ChatListModal = ({ open, onClose }) => {
                   </div>
                   <div className="ChatBell">
                     <span>
-                      <BsTrash className="Trash"></BsTrash>
+                      <BsTrash className="Trash" onClick={Delete}></BsTrash>
                     </span>
                   </div>
                 </div>

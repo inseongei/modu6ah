@@ -31,7 +31,7 @@ function LogIn() {
   const submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://13.125.241.180/api/users/signin", {
+      .post("http://dlckdals04.shop/api/users/signin", {
         email,
         password,
       })
@@ -47,8 +47,9 @@ function LogIn() {
           }
         });
         localStorage.setItem("profileUrl", response.data.profileUrl);
-        setCookie("accessToken", response.data.accessToken);
-        setCookie("nickname", response.data.nickname);
+        localStorage.setItem('accessToken',response.data.accessToken)
+        setCookie("accessToken", response.data.accessToken); // del
+        setCookie("nickname", response.data.nickname);  
       })
       .catch((error) => {
         alert("로그인을 다시 해주세요");

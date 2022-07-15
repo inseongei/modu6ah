@@ -30,7 +30,7 @@ const RecruitDetail = () => {
 
   React.useEffect(() => {
     axios
-      .get("http://13.125.241.180/api/recruits/" + recruitPostId)
+      .get("http://dlckdals04.shop/api/recruits/" + recruitPostId)
       .then((response) => {
         setState(response.data.recruitDetails);
         console.log(response.data.recruitDetails);

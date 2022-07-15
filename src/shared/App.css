@@ -124,6 +124,7 @@ h4 {
 
 .ChatListContainer {
   border: 2px solid #d9d9d9;
+  /* box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1); */
   border-radius: 10px;
   width: 90%;
   height: 85%;
@@ -142,7 +143,7 @@ h4 {
 }
 
 .List:hover {
-  background-color: #e4e4e4;
+  border: 2px solid yellow;
 }
 
 .ChatImg {
@@ -195,14 +196,14 @@ h4 {
 }
 
 .ChatBell > span {
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f4b03e;
+  background-color: #E4E4E4;
   color: #ffffff;
   font-family: "Noto Sans KR";
   font-weight: 700;
@@ -212,11 +213,11 @@ h4 {
 }
 
 .ChatBell > span:hover {
-  background-color: #ef9a9a;
+  background-color: red;
 }
 
 .Trash {
-  font-size: 22px;
+  font-size: 19px;
 }
 
 .ChatName {

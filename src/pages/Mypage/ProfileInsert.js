@@ -12,8 +12,9 @@ import axios from "axios";
 import { setCookie } from "../../shared/Cookie";
 
 const ProfileInsert = () => {
+  const nickname = getCookie("nickname");
   React.useEffect(() => {
-    dispatch(GetMyPageAxios());
+    dispatch(GetMyPageAxios(nickname));
   }, []);
 
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const ProfileInsert = () => {
   const MyPage = useSelector((state) => state.Data.state);
   const [imageSrc, setImageSrc] = React.useState("");
 
+
+    console.log(MyPage)
   // 이미지 미리보기
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
@@ -50,6 +53,8 @@ const ProfileInsert = () => {
     const file_url = await getDownloadURL(upload_file.ref);
     console.log(file_url);
     fileInput.current = { url: file_url };
+
+
 
     await axios
       .put(
@@ -84,9 +89,9 @@ const ProfileInsert = () => {
                 />
               </div>
               <div>
-                {" "}
                 <input
                   type="file"
+                  multiple
                   id="input-file"
                   accept="img/*"
                   ref={fileInput}

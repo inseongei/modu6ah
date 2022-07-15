@@ -37,6 +37,7 @@ const Header = () => {
     removeCookie("accessToken");
     removeCookie("nickname");
     localStorage.removeItem("profileUrl");
+    localStorage.removeItem('accessToken')
     navigate("/");
     alert("로그아웃 되셨습니다");
   };

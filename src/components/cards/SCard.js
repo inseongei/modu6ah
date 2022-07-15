@@ -2,10 +2,12 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { BsBookmark } from "react-icons/bs";
+import { BsBookmark,BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { loadPostDB } from '../../redux/modules/post';
+import axios from 'axios';
+import {getCookie} from '../../shared/Cookie'
 
 
 function SCard() {
@@ -14,6 +16,8 @@ function SCard() {
     let { recruitPostId } = useParams();
     
     const post = useSelector(state => state.post.list);
+
+    console.log(post)
 
     React.useEffect(() => {
         dispatch(loadPostDB());
@@ -33,7 +37,14 @@ function SCard() {
                         {/* 카드 위쪽 아이콘 */}
                         <div className='card-top'>
                             <p>모집완료</p>
-                            <BsBookmark className='icon' />
+                            <BsBookmark className='icon' onClick={()=>{
+                                axios.put('http://dlckdals04.shop/api/recruits/bookmark/' + item.recruitPostId, null ,
+                                { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } })
+                                .then((res)=>{
+                                    console.log(res)
+                                    alert(res.data.message)
+                                }).catch((err)=> console.log(err))
+                            }}/>
                         </div>
                         {/* 카드 타이틀 */}
                         <div className='title'>
@@ -95,6 +106,13 @@ cursor: pointer;
     width:34px;
     height: 34px;
     color:black;
+}
+
+.colorIcon{
+    background-color:#f48fb1;
+    margin-right: 60px;
+    width:34px;
+    height: 34px;
 }
 
 .title {

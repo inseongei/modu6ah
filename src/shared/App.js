@@ -61,7 +61,7 @@ function App() {
         {/* <Route  path="/mypage/:roomId" element={< MyPage />} /> */}
         {/* <Route  path="/mypage" element={< MyPage />} /> */}
         <Route path="/manager/:nickname" element={<ProfileManager />} />
-        <Route path="/profileinsert" element={<ProfileInsert />} />
+        <Route path="/profileinsert/:nickname" element={<ProfileInsert />} />
 
         {/* 이쪽 모달은 추후에 삭제 예정 */}
         <Route path="/welcome" element={<WelcomeModal />} />
