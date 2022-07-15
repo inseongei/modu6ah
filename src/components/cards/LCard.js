@@ -53,22 +53,23 @@ function LCard() {
 }
 
 const Container = styled.div`
+font-family: 'Nanum Gothic';
+
 display: grid;
 grid-template-columns: repeat(auto-fit);
 gap: 3.5em;
 justify-content: center;
 align-items: center;
-font-family: 'Noto Sans KR';
 
 
 .card {
 background: white;
 border-radius: 30px;
-border: 1px solid lightgray;
-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.09);
+border: none;
+box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
 cursor: pointer;
 overflow: hidden;
-width: 1000px;
+width: 900px;
 height: 360px;
 display: flex;
 flex-direction: row;
@@ -76,8 +77,8 @@ flex-direction: row;
 
 .card-left {
     display: flex;
-    width: 450px;
-    height: 320px;
+    width: 460px;
+    height: 300px;
     margin: 20px 0px 0px 30px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -104,6 +105,10 @@ flex-direction: row;
 
 .title {
     display: flex;
+    
+    h3{
+        font-weight: 700;
+    }
 }
 
 .title p {
@@ -149,7 +154,7 @@ flex-direction: row;
   }
 
   .content { 
-      margin-right: 10px;
+      margin-right: 20px;
       width: 420px;
       height: 180px;
       box-sizing: border-box;
