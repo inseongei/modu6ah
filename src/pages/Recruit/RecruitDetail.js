@@ -124,7 +124,13 @@ const RecruitDetail = () => {
                 </div>
                 <div className="profile">
                   <div className="detail_profile">
-                    <img src={detail.profileUrl} alt="프로필" />
+                    <img
+                      src={detail.profileUrl}
+                      alt="프로필"
+                      onClick={() => {
+                        navigate("/manager/" + detail.nickname);
+                      }}
+                    />
                   </div>
                   <div className="detail_username">
                     <div className="username">{detail.nickname}</div>
@@ -274,6 +280,7 @@ const Detail = styled.div`
     height: 55px;
     border-radius: 50%;
     margin-left: 10px;
+    cursor: pointer;
   }
 
   .detail_profile {
