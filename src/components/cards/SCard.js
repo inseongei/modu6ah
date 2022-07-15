@@ -26,7 +26,6 @@ function SCard() {
     return (
         <>
             <Container>
-                
                 {post.recruitPosts&&
                 post.recruitPosts.map((item, index) => (
                     <div className='card'
@@ -67,12 +66,11 @@ function SCard() {
 const Container = styled.div`
 display: grid;
 // grid-template-columns: repeat(auto-fit, 380px);
-grid-template-columns: repeat(auto-fill, minmax(25%, 180px));
+grid-template-columns: repeat(auto-fill, minmax(24%, 100px));
 gap: 2em;
 justify-content: center;
 align-items: center;
 width: 100%;
-// background-color: lightgray;
 
 
 .card {
@@ -80,15 +78,14 @@ display: flex;
 height: 100%;
 background: white;
 border-radius: 30px;
-border: 1px solid lightgray;
-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.09);
+border: none;
+box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
 cursor: pointer;
-
 }
 
 .card-top {
     display:flex;
-    margin: 40px 0px 0px 30px;
+    margin: 30px 0px 0px 30px;
     width: 100%;
     justify-content: space-between;
 }
@@ -117,12 +114,16 @@ cursor: pointer;
 }
 
 .title {
-    margin: 30px 10px 30px 33px;
+    margin: 30px 10px 25px 33px;
 
+    h1 {
+        font-size: 25px;
+        font-weight: bold;
+    }
 }
 
 .card-bottom {
-    margin: 0px 0px 40px 30px;
+    margin: 0px 0px 20px 30px;
 }
 
 .card-bottom p {
