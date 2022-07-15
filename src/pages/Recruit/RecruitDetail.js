@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { detailPostDB, deletePostDB } from "../../redux/modules/post";
 import { MdOutlinePlace } from "react-icons/md";
 import Grid from "../../components/elements/Grid";
+import { GetMyPageAxios } from "../../redux/modules/Data";
 
 const socket = io.connect("http://dlckdals04.shop"); // 1 . 소켓 서버 연결
 
@@ -116,12 +117,7 @@ const RecruitDetail = () => {
               </div>
 
               <div className="card-right">
-                <div className="card-top">
-                  <h3> 블루베리 농장 </h3>
-                  <p>
-                    <MdOutlinePlace /> www.gmarket.com/kidsphone
-                  </p>
-                </div>
+                <div className="card-top"></div>
                 <div className="profile">
                   <div className="detail_profile">
                     <img
@@ -129,6 +125,7 @@ const RecruitDetail = () => {
                       alt="프로필"
                       onClick={() => {
                         navigate("/manager/" + detail.nickname);
+                        dispatch(GetMyPageAxios(detail.nickname));
                       }}
                     />
                   </div>
@@ -137,7 +134,7 @@ const RecruitDetail = () => {
                   </div>
                 </div>
 
-                <div className="content"></div>
+                <div className="content">{detail.content}</div>
 
                 {nickname === detail.nickname ? (
                   <Btn>

@@ -3,18 +3,12 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../../components/main/Header";
 import { getCookie } from "../../shared/Cookie";
-import { useDispatch, useSelector } from "react-redux";
-import { GetMyPageAxios } from "../../redux/modules/Data";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ProfileManager = () => {
   const nickname = getCookie("nickname");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(GetMyPageAxios(nickname));
-  },[]);
 
   const MyPage = useSelector((state) => state.Data.state);
 
