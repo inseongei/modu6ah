@@ -85,6 +85,7 @@ function PlaceAdd() {
               </div>
             </div>
             <input type='file'
+             multiple
               ref={image_ref}
               onChange={handleImageChange}
               accept='image/jpg,image/png,image/jpeg,image/gif'

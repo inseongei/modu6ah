@@ -5,9 +5,11 @@ import Header from "../../components/main/Header";
 import { getCookie } from "../../shared/Cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { GetMyPageAxios } from "../../redux/modules/Data";
+import { useNavigate } from "react-router-dom";
 
 const ProfileManager = () => {
   const nickname = getCookie("nickname");
+  const navigate = useNavigate()
 
   const MyPage = useSelector((state) => state.Data.state);
 
@@ -43,7 +45,9 @@ const ProfileManager = () => {
               <div className="btn">
                 {nickname !== MyPage.mypageGet.nickname ? null : (
                   <button>
-                    <a href="/ProfileInsert">프로필 수정</a>
+                    <div onClick={()=>{
+                      navigate('/profileinsert/'+nickname)
+                    }}>프로필 수정</div>
                   </button>
                 )}
               </div>
