@@ -15,7 +15,7 @@ import chat from "../../images/chat.png";
 import io from "socket.io-client";
 import { toast } from "react-toastify";
 import chatnew from "../../images/chatnew.png";
-const socket = io.connect("http://13.125.241.180");
+const socket = io.connect("http://dlckdals04.shop");
 
 const Header = () => {
   // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
@@ -55,7 +55,6 @@ const Header = () => {
 
   React.useEffect(() => {
     socket.off("notify").on("notify", (data) => {
-      console.log(data);
       if (nickname === data.senderNick) {
         return null;
       } else if (nickname !== data.receiverNick) {

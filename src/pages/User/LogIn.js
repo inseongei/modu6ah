@@ -35,7 +35,6 @@ function LogIn() {
         password,
       })
       .then((response) => {
-        console.log(response.data);
         Swal.fire({
           text: `로그인 성공!`,
           icon: "success",

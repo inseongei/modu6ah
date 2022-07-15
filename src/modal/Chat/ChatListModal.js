@@ -20,7 +20,6 @@ const ChatListModal = ({ open, onClose }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const profileUrl = localStorage.getItem("profileUrl");
   const token = getCookie("accessToken");
-  console.log(token);
 
   React.useEffect(() => {
     axios
@@ -28,7 +27,6 @@ const ChatListModal = ({ open, onClose }) => {
         headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
       })
       .then((res) => {
-        console.log(res);
         setChatList(res.data.lastChats);
       })
       .catch((err) => {
@@ -94,7 +92,6 @@ const ChatListModal = ({ open, onClose }) => {
                         }
                       )
                       .then((res) => {
-                        console.log(res);
                         setNowRoom(res.data.chatMessageList);
                         setrealroom(data.roomId);
                       });

@@ -18,7 +18,6 @@ const socket = io.connect("http://dlckdals04.shop"); // 1 . 소켓 서버 연결
 const RecruitDetail = () => {
   const nickname = getCookie("nickname");
   const token = getCookie("accessToken");
-  console.log(nickname);
 
   const [modalIsOpen, setModalIsOpen] = useState(false); // 모달창 열고 닫는 State 값
   const [on, setOn] = useState(false); // 상세페이지의 모집중/모집완료 토글버튼 State 값
@@ -33,14 +32,11 @@ const RecruitDetail = () => {
       .get("http://dlckdals04.shop/api/recruits/" + recruitPostId)
       .then((response) => {
         setState(response.data.recruitDetails);
-        console.log(response.data.recruitDetails);
       })
       .catch((response) => {
         console.log(response);
       });
   }, []);
-
-  console.log(state);
 
   // 모집중 , 모집완료 상태 변경하기
   const inputChange = () => {
@@ -67,7 +63,6 @@ const RecruitDetail = () => {
         headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
       })
       .then((res) => {
-        console.log(res);
         const JoinData = {
           roomId: res.data.roomId,
           receiverNick: state.nickname,
