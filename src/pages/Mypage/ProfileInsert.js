@@ -58,7 +58,7 @@ const ProfileInsert = () => {
       )
       .then((res) => {
         navigate("/manager/" + nickname);
-        localStorage.setItem("img", file_url);
+        localStorage.setItem("profileUrl", file_url);
       })
       .catch((err) => console.log(err));
   };

@@ -150,8 +150,7 @@ const RecruitDetail = () => {
                 ) : (
                   <BtnTwo>
                     <button className="btn" onClick={GoChat}>
-                      {" "}
-                      1:1문의하기{" "}
+                      1:1문의하기
                     </button>
                   </BtnTwo>
                 )}

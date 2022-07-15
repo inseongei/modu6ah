@@ -10,6 +10,8 @@ import SCard from "../../components/cards/SCard";
 import Footer from "../../components/main/Footer";
 
 function Recruit() {
+  const token = localStorage.getItem("accessToken");
+
   const navigate = useNavigate();
   return (
     <div>
@@ -24,13 +26,23 @@ function Recruit() {
           </div>
           <span>내가 하는 활동, 함께 할 팀원을 모집하고 싶다면?</span>
           <div className="button">
-            <Btn
-              onClick={() => {
-                navigate(`/recruitadd`);
-              }}
-            >
-              모집글 작성하기
-            </Btn>
+            {!token ? (
+              <Btn
+                onClick={() => {
+                  navigate(`/login`);
+                }}
+              >
+                모집글 작성하기
+              </Btn>
+            ) : (
+              <Btn
+                onClick={() => {
+                  navigate(`/recruitadd`);
+                }}
+              >
+                모집글 작성하기
+              </Btn>
+            )}
           </div>
         </TitleBox>
         <div className="card_box">
