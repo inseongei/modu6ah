@@ -50,7 +50,7 @@ function RCard() {
 
 const Container = styled.div`
 display: grid;
-grid-template-columns: repeat(auto-fit, 420px);
+grid-template-columns: repeat(auto-fit, 460px);
 gap: 3.6em;
 justify-content: center;
 align-items: center;
