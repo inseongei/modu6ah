@@ -65,19 +65,20 @@ font-family: 'Noto Sans KR';
 background: white;
 border-radius: 30px;
 border: 1px solid lightgray;
+box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.09);
 cursor: pointer;
 overflow: hidden;
-width: 800px;
-height: 300px;
+width: 1000px;
+height: 360px;
 display: flex;
 flex-direction: row;
 }
 
 .card-left {
     display: flex;
-    width: 350px;
-    height: 260px;
-    margin: 18px 0px 0px 40px;
+    width: 450px;
+    height: 320px;
+    margin: 20px 0px 0px 30px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -149,7 +150,7 @@ flex-direction: row;
 
   .content { 
       margin-right: 10px;
-      width: 300px;
+      width: 420px;
       height: 180px;
       box-sizing: border-box;
       overflow: hidden;
