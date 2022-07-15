@@ -18,7 +18,7 @@ import io from "socket.io-client";
 import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import { createCardDB } from '../../redux/modules/card';
+// import { createCardDB } from '../../redux/modules/card';
 
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../../shared/firebase";
@@ -145,7 +145,7 @@ function PlaceAdd() {
               accept='image/jpg,image/png,image/jpeg,image/gif'
               id='profile_img_upload'
               style={{ display: 'none' }}
-              multiple />
+               />
             <div className='imageBox'>
               <label
                 for='profile_img_upload'>
