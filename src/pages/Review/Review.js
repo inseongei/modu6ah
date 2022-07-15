@@ -23,10 +23,12 @@ function Review() {
             </SubTitle>
             </div>
             <span>내가 써본 육아템, 알려주고 싶다면?</span>
+            <div className='button' >
             <Btn onClick={() => 
             { navigate(`/reviewadd`) }}
             >
               후기 작성하기</Btn>
+              </div>
           </TitleBox>
           <div className='card_box'>
           <RCard />
@@ -38,7 +40,7 @@ function Review() {
 }
 
 const Container = styled.div`
-font-family: 'Noto Sans KR';
+font-family: 'Nanum Gothic';
 
 .subtitle {
   display: flex;
@@ -57,6 +59,13 @@ font-family: 'Noto Sans KR';
     padding-top: 70px;
     background-color: #F5F5F5;
   }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-bottom: 20px;
+    }
 `;
 
 const TitleBox = styled.div`
@@ -71,21 +80,21 @@ display: flex;
 justify-content: center;
 align-items:center;
 font-size: 35px;
-font-weight: 700;
+font-weight: 750;
 margin-bottom: 0px;
+color: #6B4E16;
 `
 
 const SubTitle = styled.p`
 font-size: 20px;
 font-weight: 700;
 line-height: 29px;
-color: #6B4E16;
+color: #3C3C3C;
 margin-bottom: 50px;
 padding-top: 15px;
  `;
 
 const Btn = styled.button`
-margin-left: 38.5%;
 height: 50px;
 font-size: 15px;
 width: 330px;

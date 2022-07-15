@@ -15,15 +15,17 @@ function Recruit() {
       <Header />
       <Container>
         <TitleBox>
-          <Title>같이해요</Title>
+          <Title>체험 모집</Title>
           <div className='subtitle'>
             <SubTitle>
               다양한 공동육아 프로그램를 둘러보고,
               참여를 신청해요!</SubTitle>
           </div>
           <span>내가 하는 활동, 함께 할 팀원을 모집하고 싶다면?</span>
+          <div className='button' >
           <Btn onClick={() => { navigate(`/recruitadd`) }}
           >모집글 작성하기</Btn>
+          </div>
         </TitleBox>
         <div className='card_box'>
           <SCard />
@@ -37,7 +39,7 @@ function Recruit() {
 
 
 const Container = styled.div`
-font-family: 'Noto Sans KR';
+font-family: 'Nanum Gothic';
 
 .subtitle {
   display: flex;
@@ -57,6 +59,12 @@ margin-bottom: 20px;
   background-color: #F5F5F5;
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  margin-bottom: 20px;
+  }
 `;
 
 const TitleBox = styled.div`
@@ -71,21 +79,21 @@ display: flex;
 justify-content: center;
 align-items:center;
 font-size: 35px;
-font-weight: 700;
+font-weight: 750;
 margin-bottom: 0px;
+color: #6B4E16;
 `
 
 const SubTitle = styled.p`
 font-size: 20px;
 font-weight: 700;
 line-height: 29px;
-color: #6B4E16;
+color: #3C3C3C;
 margin-bottom: 50px;
 padding-top: 15px;
  `;
 
 const Btn = styled.button`
-margin-left: 38.5%;
 height: 50px;
 font-size: 15px;
 width: 330px;
