@@ -23,19 +23,6 @@ const Main = () => {
     })
   })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   const navigate = useNavigate();
   return (
     <div>
@@ -54,8 +41,8 @@ const Main = () => {
           </div>
           <SCard />
 
-        
-            <Title style={{marginTop:"180px"}}
+            <hr/>
+            <Title style={{marginTop:"100px"}}
             >장소 추천</Title>  
             <div className='subtitle'>
             <SubTitle>
@@ -66,8 +53,8 @@ const Main = () => {
           </div>
           <LCard />
 
-          
-            <Title style={{marginTop:"180px"}}
+           <hr/>
+            <Title style={{marginTop:"100px"}}
             >육아템 리뷰</Title>
             <div className='subtitle'>
             <SubTitle>
@@ -91,6 +78,12 @@ font-family: 'Noto Sans KR';
 .subtitle {
   display: flex;
   justify-content: space-between;
+}
+
+hr {
+  color: #E4E4E4;
+  height: 2px;
+  margin-top: 100px;
 }
 `;
 
