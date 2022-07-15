@@ -125,6 +125,7 @@ const RecruitDetail = () => {
                       alt="프로필"
                       onClick={() => {
                         navigate("/manager/" + detail.nickname);
+                        dispatch(GetMyPageAxios(detail.nickname));
                       }}
                     />
                   </div>
