@@ -185,7 +185,7 @@ const Container = styled.div`
   }
 
   .title {
-    margin: 30px 10px 25px 33px;
+    padding: 30px 10px 25px 33px;
     cursor: pointer;
 
     h1 {
