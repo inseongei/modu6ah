@@ -12,31 +12,14 @@ import LCard from '../components/cards/LCard'
 import RCard from '../components/cards/RCard'
 import Footer from '../components/main/Footer'
 import axios from 'axios';
+import MainScard from '../components/cards/MainScard';
 
 const Main = () => {
-
-  React.useEffect(()=>{
-    axios.get('http://dlckdals04.shop/api/main', { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-    .then((res)=>{console.log(res)})
-    .catch((err)=>{
-      console.log(err)
-    })
-  })
-
-
-
-
-
-
-
-
-
-
-
 
 
 
   const navigate = useNavigate();
+  
   return (
     <div>
       <Header />
@@ -52,7 +35,7 @@ const Main = () => {
             <Btn onClick={() => 
             { navigate(`/recruit`) }}>더 보기</Btn>
           </div>
-          <SCard />
+          <MainScard />
 
         
             <Title style={{marginTop:"180px"}}
