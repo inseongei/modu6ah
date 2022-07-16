@@ -31,8 +31,6 @@ function MainScard() {
             return (
               item != null && (
                 <div className="card" key={idx}>
-                  {/* 카드 위쪽 아이콘 */}
-
                   <div className="card-top">
                     <p>모집완료</p>
                     {item.bookmarkStatus === true ? (
