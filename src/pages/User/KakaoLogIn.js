@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { REDIRECT_URI, REST_API_KEY } from "../../shared/kakaoData";
+import Swal from "sweetalert2";
+import { setCookie } from "../../shared/Cookie";
 
 const KakaoLogIn = () => {
   const navigate = useNavigate();
@@ -44,11 +46,22 @@ const KakaoLogIn = () => {
               user_name,
             })
             .then((res) => {
-              //   console.log(res);
-              localStorage.setItem("accessToken", res.data.accessToken);
-              localStorage.setItem("nickname", res.data.nickname);
-              alert("카카오 로그인 완료!");
-              navigate("/");
+              console.log(res);
+
+              Swal.fire({
+                text: `카카오톡 로그인에 성공했습니다`,
+                icon: "success",
+                confirmButtonText: "확인",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  localStorage.setItem("profileUrl", res.data.profileUrl);
+                  localStorage.setItem("accessToken", res.data.accessToken);
+                  setCookie("nickname", res.data.nickname);
+                  localStorage.setItem("nickname", res.data.nickname);
+                  navigate("/");
+                  window.location.reload();
+                }
+              });
             });
         })
         .catch((err) => console.log(err));

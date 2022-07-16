@@ -39,7 +39,9 @@ export const createPostDB = (post_data) => {
   return function (dispatch) {
     axios
       .post(`http://dlckdals04.shop/api/recruits`, post, {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       })
       .then((response) => {
         console.log(response.data);
