@@ -1,16 +1,67 @@
-import React from 'react'
+import axios from 'axios';
+import React,{useState} from 'react'
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components'
-const comment = () => {
-  // const [comment, setComment] = useState('');
+import { getCookie } from "../../shared/Cookie";
 
-  // const dispatch = useDispatch();
+const Comment = (props) => {
+  const [comment, setComment] = useState('');
+  const [state, setState] = useState('');
+  const nickname = getCookie("nickname");
 
-  // const addComment = () = {
-  //   const comment_data = {
+  const navigate = useNavigate();
+  let { recruitPostId, recruitCommentId } = useParams();
 
-  //   }
-  // }
+  
 
+  //댓글 작성
+  const addComment = () => {
+    const comment_data = {
+      comment, nickname
+    }
+    
+    axios.post('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments', comment_data
+                , 
+                 { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+                .then((res) => {
+                  console.log(res)
+                  window.alert('댓글 작성 성공')
+                })
+                .catch((err) => {
+                  // alert("로그인 후 이용 가능한 기능입니다.");
+                    console.log(err.response.data.message);
+                })
+  }
+
+  React.useEffect(() => {
+    axios.get('http://dlckdals04.shop/api/recruits/' + recruitPostId ,
+    { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
+    .then((res) => {
+      setState(res.data.recruitComments)
+      console.log(res.data.recruitComments)
+     })
+    .catch((err) => {
+      console.log(err)
+    });
+  }, []);
+
+  const deleteComment = (e) => {
+    console.log(e.target.id);
+      axios
+        .delete('http://dlckdals04.shop/api/recruits/'+ recruitPostId + '/comments/' + e.target.id, {
+          headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+        })
+        .then((response) => {
+          console.log(response);
+          alert("삭제가 완료되었습니다.");
+        })
+        .catch((error) => {
+          alert("게시글을 삭제할 권한이 없습니다.");
+          console.log(error)
+
+        });
+  };
   return (
     <CommentBox>
       <div className='comment_section'>
@@ -20,43 +71,62 @@ const comment = () => {
         <div className='inputBox'>
           <input 
           type="text"
-          // onChange={e =>
-          //   setComment(e.target.value)}
+          onChange={e =>
+            setComment(e.target.value)}
              />
         </div>
         <div className='btnBox'>
           <button className='btn'
+          onClick={addComment}
           >
             등록
           </button>
         </div>
       </div>
 
-
-      <div className='box'>
-        <div className='chat'>
-            <div className='profile'/>
-          <div className='name'
-          >
-            닉네임
-          </div>
-          <div className='comment_box'>
-            <div className='comment'
-            >
-              댓글을 달아주세요
-            </div>
-            <div className='date'
-            >
-              2022.07.05 14:00
-            </div>
-          </div>
-
-        </div>
-        <button className='delete'
-        >
-          삭제
-        </button>
-      </div>
+        {state && 
+        state.map((data, index) => {
+          console.log(data);
+          return (
+            
+            <div className='box'  
+            key={index}>
+            <div className='chat'>
+             <div className='profile'>
+               <div className="ProfileImg">
+                 <img src=
+                 {data.profileUrl} 
+                 alt="사진" />
+               </div>
+             </div>
+               
+             <div className='name'
+             >
+              {data.nickname}
+             </div>
+             <div className='comment_box'>
+               <div className='comment'
+               >
+                {data.comment}
+               </div>
+               <div className='date'
+               >
+                 {data.createdAt}
+               </div>
+             </div>
+   
+           </div>
+           <button 
+           id={data.recruitCommentId}
+           className='delete'
+           onClick={deleteComment}
+           >
+             삭제
+           </button>
+  </div>
+          )
+        })}
+       
     </CommentBox>
   )
 }
@@ -128,11 +198,8 @@ margin-top:30px;
     margin-left:30px;
 }
 
-
-
 .box{
     width: 90vh;
-    height: 80vh;
     // border: 1px solid lightgray;
     margin-left: 210px;
     margin-top: 30px;
@@ -144,6 +211,12 @@ margin-top:30px;
   height: 50px;
   display:flex;
 }
+
+.ProfileImg {
+    width: 170px;
+    height: 170px;
+    margin-right: 60px;
+  }
 
 .profile{
     width: 50px;
@@ -182,6 +255,4 @@ margin-top:30px;
   }
 
 `
-
-
-export default comment
+export default Comment
