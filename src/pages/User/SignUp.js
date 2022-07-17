@@ -294,7 +294,7 @@ const Container = styled.div`
     background-image: none;
     box-sizing: ${(props) => props.boxSizing};
     border: 1px solid #e4e4e4;
-    border-radius: 4px;
+    border-radius: 10px;
     -webkit-transition: border-color ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s;
     cursor: text;
@@ -302,7 +302,7 @@ const Container = styled.div`
     margin-bottom: 5px;
 
     &:focus {
-      border: 1px solid #111111;
+      border: 1px solid #F4B03E;
       outline: none;
     }
   }

@@ -8,6 +8,8 @@ import Grid from "../../components/elements/Grid";
 import Header from "../../components/main/Header";
 import SCard from "../../components/cards/SCard";
 import Footer from "../../components/main/Footer";
+import hand from '../../images/hand.png';
+
 
 function Recruit() {
   const token = localStorage.getItem("accessToken");
@@ -23,6 +25,9 @@ function Recruit() {
             <SubTitle>
               다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!
             </SubTitle>
+          </div>
+          <div className="image">
+          <img src={hand}/>
           </div>
           <span>내가 하는 활동, 함께 할 팀원을 모집하고 싶다면?</span>
           <div className="button">
@@ -68,15 +73,12 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    font-weight: 700;
   }
 
   .card_box {
-    /* height: 500px; */
-    padding: 75px;
+    padding-top: 70px;
     background-color: #f5f5f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .button {
@@ -91,6 +93,13 @@ const TitleBox = styled.div`
   background-color: white;
   padding-top: 50px;
   padding-bottom: 70px;
+  
+  .image {  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  } 
 `;
 
 const Title = styled.p`
@@ -108,7 +117,7 @@ const SubTitle = styled.p`
   font-weight: 700;
   line-height: 29px;
   color: #3c3c3c;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   padding-top: 15px;
 `;
 
