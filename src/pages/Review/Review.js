@@ -9,6 +9,8 @@ import Footer from "../../components/main/Footer";
 import RCard from "../../components/cards/RCard";
 import bottle from '../../images/bottle.png';
 
+
+
 import { useNavigate } from "react-router-dom";
 
 function Review() {
@@ -90,7 +92,7 @@ const TitleBox = styled.div`
   background-color: white;
   padding-top: 50px;
   padding-bottom: 70px;
-
+  
   .image {  
     display: flex;
     justify-content: center;

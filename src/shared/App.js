@@ -46,7 +46,6 @@ function App() {
           path="/recruitdetail/:recruitPostId"
           element={<RecruitDetail />}
         />
-        {/* <Route path="/recruitdetail" element={< RecruitDetail />} /> */}
         <Route path="/recruitedit/:recruitPostId" element={<RecruitEdit />} />
         {/* 장소 추천 */}
         <Route path="/place" element={<Place />} />
@@ -58,8 +57,6 @@ function App() {
         <Route path="/reviewadd" element={<ReviewAdd />} />
         <Route path="/reviewdetail" element={<ReviewDetail />} />
 
-        {/* <Route  path="/mypage/:roomId" element={< MyPage />} /> */}
-        {/* <Route  path="/mypage" element={< MyPage />} /> */}
         <Route path="/manager/:nickname" element={<ProfileManager />} />
         <Route path="/profileinsert/:nickname" element={<ProfileInsert />} />
 

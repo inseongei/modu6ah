@@ -10,6 +10,7 @@ import SCard from "../../components/cards/SCard";
 import Footer from "../../components/main/Footer";
 import hand from '../../images/hand.png';
 
+
 function Recruit() {
   const token = localStorage.getItem("accessToken");
 
@@ -92,7 +93,7 @@ const TitleBox = styled.div`
   background-color: white;
   padding-top: 50px;
   padding-bottom: 70px;
-
+  
   .image {  
     display: flex;
     justify-content: center;

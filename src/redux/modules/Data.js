@@ -3,7 +3,7 @@ import axios from "axios";
 import { getCookie } from "../../shared/Cookie";
 import io from "socket.io-client";
 
-const socket = io.connect("http://13.125.241.180");
+const socket = io.connect("http://dlckdals04.shop");
 
 // Actions      --> 저장변수 = 프로젝트명 / 모듈 명 (리듀서 명) / 액션
 const GET = "MyPage/GET";
@@ -40,11 +40,10 @@ export const GetMyPageAxios = (nickname) => {
 export const GetMainAxois = () => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/main",{
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` }
+      .get("http://dlckdals04.shop/api/main", {
+        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
       })
       .then((res) => {
-        console.log(res)
         dispatch(GetMain(res.data));
       });
   };

@@ -1,21 +1,27 @@
-import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import Header from "../../components/main/Header";
 import { getCookie } from "../../shared/Cookie";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
-import { useNavigate } from "react-router-dom";
 
 const ProfileManager = () => {
-  const nickname = getCookie("nickname");
-  const navigate = useNavigate()
-
+  // 사용 변수들 지정
+  const Mynickname = getCookie("nickname");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  let { nickname } = useParams();
   const MyPage = useSelector((state) => state.Data.state);
+
+  // 프로필 관리 리렌더링 될때 해당 파라미터값의 닉네임으로 재렌더링 시켜줌
+  React.useEffect(() => {
+    dispatch(GetMyPageAxios(nickname));
+  }, []);
 
   // 마이페이지 화면 뷰
   if (!MyPage) {
-    return <div></div>;
+    return <div> 값이 없음</div>;
   }
   return (
     <>
@@ -43,11 +49,15 @@ const ProfileManager = () => {
               </div>
 
               <div className="btn">
-                {nickname !== MyPage.mypageGet.nickname ? null : (
+                {Mynickname !== MyPage.mypageGet.nickname ? null : (
                   <button>
-                    <div onClick={()=>{
-                      navigate('/profileinsert/'+nickname)
-                    }}>프로필 수정</div>
+                    <div
+                      onClick={() => {
+                        navigate("/profileinsert/" + Mynickname);
+                      }}
+                    >
+                      프로필 수정
+                    </div>
                   </button>
                 )}
               </div>
@@ -134,6 +144,7 @@ const Profile = styled.div`
     width: 35%;
     height: 35px;
     border: none;
+    color: #fff;
   }
   img {
     width: 170px;

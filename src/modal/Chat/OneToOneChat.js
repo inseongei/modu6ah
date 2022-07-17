@@ -36,17 +36,13 @@ const OneToOneChat = ({ open, onClose, socket }) => {
 
   React.useEffect(() => {
     socket.on("test", (data) => {
-      console.log(data);
       setRoomId(data);
     });
   }, [socket]);
 
-  console.log(roomId);
-
   React.useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
       setNowChat((list) => [...list, data]);
-      console.log(data);
     });
   }, []);
 

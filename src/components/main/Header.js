@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { HiChevronDown } from "react-icons/hi";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 import ChatListModal from "../../modal/Chat/ChatListModal";
-import { GetChatListAxios } from "../../redux/modules/Data";
-import { GoThreeBars, GoX, GoPerson, GoBell } from "react-icons/go";
+import { GoThreeBars, GoX, GoPerson } from "react-icons/go";
 import logo from "../../images/logo.png";
-import profile from "../../images/profile.png";
 import { useNavigate } from "react-router-dom";
 import { removeCookie, getCookie } from "../../shared/Cookie";
 import { GetMyPageAxios } from "../../redux/modules/Data";
@@ -15,47 +12,64 @@ import chat from "../../images/chat.png";
 import io from "socket.io-client";
 import { toast } from "react-toastify";
 import chatnew from "../../images/chatnew.png";
-const socket = io.connect("http://13.125.241.180");
+import Swal from "sweetalert2";
+
+// 소켓서버 연결
+const socket = io.connect("http://dlckdals04.shop");
 
 const Header = () => {
-  // 모바일 처리시 메뉴 -> 버튼  처리 방식을  state :  true /  false로 관리
+  // 모바일처리시 메뉴 , 채팅모달 , 채팅알림 State
   const [isToggled, setIsToggled] = useState(false);
   const [userToggled, setUserToggled] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [notify, setNotify] = useState([]);
-  const navigate = useNavigate();
-  const UserCheck = getCookie("accessToken");
-  const nickname = getCookie("nickname");
+  // Hook 선언
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // 쿠키와 로컬스토리지에 있는 토큰,닉네임,프로필Url
+  const UserCheck = localStorage.getItem("accessToken");
+  const nickname = getCookie("nickname");
   const Profile = localStorage.getItem("profileUrl");
+  const bell = localStorage.getItem("count");
 
+  // 로그인 눌렀을때 로그인 페이지로 이동
   const Login = () => {
     navigate("/Login");
   };
 
+  // 로그아웃 눌렀을때 쿠키 (토큰 ,닉네임) , 로컬스토리지 (토큰,Url) 삭제후 새로고침
   const logoOut = () => {
-    removeCookie("accessToken");
-    removeCookie("nickname");
-    localStorage.removeItem("profileUrl");
-    localStorage.removeItem('accessToken')
-    navigate("/");
-    alert("로그아웃 되셨습니다");
+    Swal.fire({
+      text: `로그아웃하였습니다`,
+      icon: "success",
+      confirmButtonText: "확인",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        removeCookie("accessToken");
+        removeCookie("nickname");
+        localStorage.removeItem("profileUrl");
+        localStorage.removeItem("accessToken");
+        window.location.reload();
+      }
+    });
   };
 
+  // 메시지버튼 눌렀을 때 메시지 모달창open 알림횟수 삭제
   const messageBtn = () => {
     setModalIsOpen(true);
     localStorage.removeItem("count");
     setNotify([]);
   };
 
+  // 프로필 관리를 눌렀을 때 액션 디스패치
   const MyProfile = () => {
     navigate("/manager/" + nickname);
     dispatch(GetMyPageAxios(nickname));
   };
 
+  // 상대방이 보낸 메시지를 알림 이벤트 경로로 데이터를 받음
   React.useEffect(() => {
     socket.off("notify").on("notify", (data) => {
-      console.log(data);
       if (nickname === data.senderNick) {
         return null;
       } else if (nickname !== data.receiverNick) {
@@ -73,8 +87,6 @@ const Header = () => {
       }
     });
   }, []);
-
-  const bell = localStorage.getItem("count");
 
   return (
     <>
@@ -129,14 +141,14 @@ const Header = () => {
                 navigate(`/recruit`);
               }}
             >
-              같이해요
+              체험 모집
             </li>
             <li
               onClick={() => {
                 navigate(`/place`);
               }}
             >
-              추천해요
+              장소 추천
             </li>
             <li
               onClick={() => {
@@ -205,14 +217,14 @@ const Header = () => {
                 navigate(`/recruit`);
               }}
             >
-              같이해요
+              체험 모집
             </li>
             <li
               onClick={() => {
                 navigate(`/place`);
               }}
             >
-              추천해요
+              장소 추천
             </li>
             <li
               onClick={() => {
@@ -375,8 +387,16 @@ const Headers = styled.div`
     color: #6b4e16;
   }
 
+  .menuOne > div > p {
+    cursor: pointer;
+  }
+
   .menuTwo > div > p:hover {
     color: #6b4e16;
+  }
+
+  .menuTwo > div > p {
+    cursor: pointer;
   }
 
   .logo {
@@ -394,18 +414,29 @@ const Headers = styled.div`
   .logo_img {
     width: 40px;
     height: 40px;
+    display: flex;
+    align-items: center;
   }
-  img {
-    width: 40px;
-    height: 40px;
+
+  .logo_img > img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
     cursor: pointer;
+  }
+  .bell > img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+  .bell > img:hover {
+    transform: scale(1.15);
   }
 
   .header__menulist {
     list-style: none;
     display: flex;
     font-size: 17px;
-    color: #a58646;
     margin-top: 10px;
   }
 
@@ -420,13 +451,19 @@ const Headers = styled.div`
   }
 
   .header__menulist > li {
+    font-family: "Nanum Gothic";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
     cursor: pointer;
+    color: #a58646;
     font-weight: 700;
     font-size: 20px;
   }
 
   .header__menulist > li:hover {
-    transform: scale(1.3);
+    transform: scale(1.15);
     color: #6b4e16;
   }
 

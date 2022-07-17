@@ -203,7 +203,7 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #E4E4E4;
+  background-color: #e4e4e4;
   color: #ffffff;
   font-family: "Noto Sans KR";
   font-weight: 700;
@@ -245,7 +245,7 @@ h4 {
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 17px;
   color: #3c3c3c;
   float: right;

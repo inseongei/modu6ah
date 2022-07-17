@@ -7,6 +7,7 @@ import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import LCard from "../../components/cards/LCard";
 import activity from '../../images/activity.png';
+
 import { useNavigate } from "react-router-dom";
 
 function Place() {

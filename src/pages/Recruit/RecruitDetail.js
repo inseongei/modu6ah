@@ -12,13 +12,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { detailPostDB, deletePostDB } from "../../redux/modules/post";
 import { MdOutlinePlace } from "react-icons/md";
 import Grid from "../../components/elements/Grid";
+import { GetMyPageAxios } from "../../redux/modules/Data";
 
-const socket = io.connect("http://13.125.241.180"); // 1 . 소켓 서버 연결
+const socket = io.connect("http://dlckdals04.shop"); // 1 . 소켓 서버 연결
 
 const RecruitDetail = () => {
   const nickname = getCookie("nickname");
   const token = getCookie("accessToken");
-  console.log(nickname);
 
   const [modalIsOpen, setModalIsOpen] = useState(false); // 모달창 열고 닫는 State 값
   const [on, setOn] = useState(false); // 상세페이지의 모집중/모집완료 토글버튼 State 값
@@ -33,14 +33,11 @@ const RecruitDetail = () => {
       .get("http://dlckdals04.shop/api/recruits/" + recruitPostId)
       .then((response) => {
         setState(response.data.recruitDetails);
-        console.log(response.data.recruitDetails);
       })
       .catch((response) => {
         console.log(response);
       });
   }, []);
-
-  console.log(state);
 
   // 모집중 , 모집완료 상태 변경하기
   const inputChange = () => {
@@ -51,6 +48,8 @@ const RecruitDetail = () => {
   const dispatch = useDispatch();
 
   const detail = useSelector((state) => state.post.list);
+
+  console.log(detail);
 
   React.useEffect(() => {
     dispatch(detailPostDB(recruitPostId));
@@ -63,11 +62,10 @@ const RecruitDetail = () => {
   // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
     axios
-      .post("http://13.125.241.180/api/chats/rooms/" + recruitPostId, null, {
+      .post("http://dlckdals04.shop/api/chats/rooms/" + recruitPostId, null, {
         headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
       })
       .then((res) => {
-        console.log(res);
         const JoinData = {
           roomId: res.data.roomId,
           receiverNick: state.nickname,
@@ -119,22 +117,24 @@ const RecruitDetail = () => {
               </div>
 
               <div className="card-right">
-                <div className="card-top">
-                  <h3> 블루베리 농장 </h3>
-                  <p>
-                    <MdOutlinePlace /> www.gmarket.com/kidsphone
-                  </p>
-                </div>
+                <div className="card-top"></div>
                 <div className="profile">
                   <div className="detail_profile">
-                    <img src={dog} alt="프로필" />
+                    <img
+                      src={detail.profileUrl}
+                      alt="프로필"
+                      onClick={() => {
+                        navigate("/manager/" + detail.nickname);
+                        dispatch(GetMyPageAxios(detail.nickname));
+                      }}
+                    />
                   </div>
                   <div className="detail_username">
                     <div className="username">{detail.nickname}</div>
                   </div>
                 </div>
 
-                <div className="content"></div>
+                <div className="content">{detail.content}</div>
 
                 {nickname === detail.nickname ? (
                   <Btn>
@@ -153,8 +153,7 @@ const RecruitDetail = () => {
                 ) : (
                   <BtnTwo>
                     <button className="btn" onClick={GoChat}>
-                      {" "}
-                      1:1문의하기{" "}
+                      1:1문의하기
                     </button>
                   </BtnTwo>
                 )}
@@ -278,6 +277,7 @@ const Detail = styled.div`
     height: 55px;
     border-radius: 50%;
     margin-left: 10px;
+    cursor: pointer;
   }
 
   .detail_profile {
