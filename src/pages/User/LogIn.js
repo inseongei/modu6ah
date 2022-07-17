@@ -5,7 +5,6 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 
 import Header from "../../components/main/Header";
 import Grid from "../../components/elements/Grid";
-import logo from "../../images/logo.png";
 
 import axios from "axios";
 import { setCookie } from "../../shared/Cookie";
@@ -36,7 +35,6 @@ function LogIn() {
         password,
       })
       .then((response) => {
-        console.log(response.data);
         Swal.fire({
           text: `로그인 성공!`,
           icon: "success",
@@ -47,9 +45,9 @@ function LogIn() {
           }
         });
         localStorage.setItem("profileUrl", response.data.profileUrl);
-        localStorage.setItem('accessToken',response.data.accessToken)
+        localStorage.setItem("accessToken", response.data.accessToken);
         setCookie("accessToken", response.data.accessToken); // del
-        setCookie("nickname", response.data.nickname);  
+        setCookie("nickname", response.data.nickname);
       })
       .catch((error) => {
         alert("로그인을 다시 해주세요");
@@ -66,7 +64,7 @@ function LogIn() {
             <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
-                <LoginTitle>로그인</LoginTitle>
+                  <LoginTitle>로그인</LoginTitle>
                 </Grid>
                 <form onSubmit={submit}>
                   <FormGroup>
@@ -167,7 +165,7 @@ const LoginTitle = styled.h1`
   font-size: 28px;
   font-weight: bold;
   margin: 0 0 8px 0;
-`
+`;
 
 const SocialLogin = styled.a`
   border-radius: 4px;
@@ -236,14 +234,14 @@ const FormGroup = styled.div`
     background-image: none;
     box-sizing: ${(props) => props.boxSizing};
     border: 1px solid #e4e4e4;
-    border-radius: 4px;
+    border-radius: 10px;
     -webkit-transition: border-color ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s;
     cursor: text;
     box-sizing: border-box;
 
     &:focus {
-      border: 1px solid #111111;
+      border: 1px solid #F4B03E;
       outline: none;
     }
   }
@@ -254,7 +252,7 @@ const LoginBtn = styled.button`
   font-size: 15px;
   width: 60%;
   color: #ffffff;
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
   text-align: center;
   border-radius: 10px;
   touch-action: manipulation;
