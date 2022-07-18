@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
+import Header from "../../components/main/Header";
+import OneToOneChat from "../../modal/Chat/OneToOneChat";
+import Footer from "../../components/main/Footer";
+import Grid from "../../components/elements/Grid";
+import Comment from "../../components/elements/Comment";
+
 import axios from "axios";
 import io from "socket.io-client";
-import OneToOneChat from "../../modal/Chat/OneToOneChat";
-import Header from "../../components/main/Header";
-import dog from "../../images/dog.jpg";
+
 import { getCookie } from "../../shared/Cookie";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import Comment from "../../components/elements/Comment";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailPostDB, deletePostDB } from "../../redux/modules/post";
-import { MdOutlinePlace } from "react-icons/md";
-import Grid from "../../components/elements/Grid";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 
 const socket = io.connect("http://dlckdals04.shop"); // 1 . 소켓 서버 연결
@@ -168,6 +170,7 @@ const RecruitDetail = () => {
         onClose={() => setModalIsOpen(false)} // 모달창 닫기
         socket={socket}
       />
+      <Footer/>
     </>
   );
 };
