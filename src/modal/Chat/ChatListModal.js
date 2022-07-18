@@ -21,6 +21,7 @@ const ChatListModal = ({ open, onClose }) => {
   const profileUrl = localStorage.getItem("profileUrl");
   const token = getCookie("accessToken");
 
+  console.log(realroom)
   React.useEffect(() => {
     axios
       .get("http://dlckdals04.shop/api/chats/rooms", {
@@ -35,18 +36,35 @@ const ChatListModal = ({ open, onClose }) => {
       });
   }, []);
 
-  // const Delete = () => {
-  //   axios
-  //     .put("http://dlckdals04.shop/api/chats/rooms/" + realroom, null, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //     .then((res) => {
-  //       alert("방에 나갔습니다");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const Delete = () => {
+    axios
+      .put("http://dlckdals04.shop/api/chats/rooms/" + realroom, null, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        alert("방에 나갔습니다");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+      axios
+      .delete("http://dlckdals04.shop/api/chats/rooms/" + realroom,{
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        alert("방에 나갔습니다");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+
+      
+
+
+
+  };
 
   if (!open) return null;
 
@@ -126,7 +144,7 @@ const ChatListModal = ({ open, onClose }) => {
                     </div>
                     <div className="ChatBell">
                       <span>
-                        <BsTrash className="Trash"></BsTrash>
+                        <BsTrash className="Trash" onClick={Delete}></BsTrash>
                       </span>
                     </div>
                   </div>

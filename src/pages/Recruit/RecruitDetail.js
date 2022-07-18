@@ -76,7 +76,7 @@ const RecruitDetail = () => {
         setModalIsOpen(true);
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.response.data.message);
       });
   };
 
