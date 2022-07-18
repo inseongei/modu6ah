@@ -6,7 +6,7 @@ import Grid from "../../components/elements/Grid";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import LCard from "../../components/cards/LCard";
-import activity from '../../images/activity.png';
+// import activity from '../../images/activity.png';
 
 import { useNavigate } from "react-router-dom";
 
@@ -23,9 +23,7 @@ function Place() {
           <div className="subtitle">
             <SubTitle>아이들과 함께 출입이 가능한 장소들을 공유해요!</SubTitle>
           </div>
-          <div className="image">
-          <img src={activity}/>
-          </div>
+          <div className="image">{/* <img src={activity}/> */}</div>
           <span>내가 다녀온 장소, 추천하고 싶다면?</span>
           <div className="button">
             {!token ? (
@@ -91,12 +89,12 @@ const TitleBox = styled.div`
   padding-top: 50px;
   padding-bottom: 70px;
 
-  .image {  
+  .image {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-  } 
+  }
 `;
 
 const Title = styled.p`
