@@ -15,21 +15,6 @@ import axios from "axios";
 import MainScard from "../components/cards/MainScard";
 
 const Main = () => {
-  // React.useEffect(() => {
-  //   axios
-  //     .get("http://dlckdals04.shop/api/main", {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // });
-
   const navigate = useNavigate();
 
   return (
@@ -104,26 +89,21 @@ const Main = () => {
 
 const Container = styled.div`
   font-family: "Nanum Gothic";
-
   padding-left: 50px;
   padding-right: 50px;
-
   .card_title {
     widht: 10px;
     width: 960px;
   }
-
   .subtitle {
     display: flex;
     margin-left: 171px;
   }
-
   .subcontent {
     display: flex;
     width: 970px;
     justify-content: space-between;
   }
-
   hr {
     color: #e4e4e4;
     height: 2.5px;

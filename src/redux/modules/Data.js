@@ -8,6 +8,7 @@ const socket = io.connect("http://dlckdals04.shop");
 // Actions      --> 저장변수 = 프로젝트명 / 모듈 명 (리듀서 명) / 액션
 const GET = "MyPage/GET";
 const MainGET = "Main/GET";
+const RecruitGET = "Recruit/GET";
 
 // State 초기값
 let initialState = {};
@@ -19,6 +20,10 @@ export function GetMyPage(MyPage) {
 
 export function GetMain(Profile) {
   return { type: MainGET, Profile };
+}
+
+export function GetRecruit(Recruit) {
+  return { type: RecruitGET, Recruit };
 }
 
 // middleware --> 미들웨어 /
@@ -49,6 +54,18 @@ export const GetMainAxois = () => {
   };
 };
 
+export const GetRecruitAxois = () => {
+  return function (dispatch) {
+    axios
+      .get("http://dlckdals04.shop/api/recruits", {
+        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+      })
+      .then((res) => {
+        dispatch(GetRecruit(res.data));
+      });
+  };
+};
+
 // Reducer
 export default function Data(state = initialState, action = {}) {
   switch (action.type) {
@@ -57,6 +74,9 @@ export default function Data(state = initialState, action = {}) {
     }
     case "Main/GET": {
       return { Profile: action.Profile };
+    }
+    case "Recruit/GET": {
+      return { Recruit: action.Recruit };
     }
     default:
       return state;
