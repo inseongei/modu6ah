@@ -23,7 +23,9 @@ function Place() {
           <div className="subtitle">
             <SubTitle>아이들과 함께 출입이 가능한 장소들을 공유해요!</SubTitle>
           </div>
-          <div className="image">{/* <img src={activity}/> */}</div>
+          <div className="image">
+             <img src={activity}/>
+             </div>
           <span>내가 다녀온 장소, 추천하고 싶다면?</span>
           <div className="button">
             {!token ? (

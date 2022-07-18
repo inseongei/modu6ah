@@ -211,8 +211,11 @@ margin-top:30px;
 }
 
 .ProfileImg {
-    height: 170px;
-    margin-right: 4px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin-left: 10px;
+  cursor: pointer;
 
     img {
       height:50px;
