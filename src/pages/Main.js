@@ -13,6 +13,7 @@ import RCard from "../components/cards/RCard";
 import Footer from "../components/main/Footer";
 import axios from "axios";
 import MainScard from "../components/cards/MainScard";
+import Search from "../components/main/Search";
 
 const Main = () => {
   // React.useEffect(() => {
@@ -36,7 +37,7 @@ const Main = () => {
     <div>
       <Header />
       <Swiper />
-
+      <Search/>
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
         <Container>
           <div className="card_title">
