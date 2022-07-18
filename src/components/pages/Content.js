@@ -1,8 +1,7 @@
 import React from 'react'
-
+import styled from 'styled-components';
 import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
-import styled from 'styled-components';
 
 function Content() {
     return (
@@ -21,7 +20,11 @@ function Content() {
                         서울특별시 성수동 어쩌구 1004번지</p>
                 </div>
                 <div className='info'>
-                    <div className='profile'>ㅎㅇ</div>
+                <Image>
+                  <div className="ProfileImg">
+                    <img  />
+                  </div>
+                </Image>
                     <p className='nickname'>5세맘육아왕</p>
                 </div>
             </div>
@@ -40,26 +43,16 @@ function Content() {
 }
 
 const ContentBox = styled.div`
- width:50%;
- height: 70vh;
- 
-.box_top{
-   height: 45%;
- }
-
- .box_top > div{
-   height: 33.5%;
- }
+ width:500px;
+ margin-top: 60px;
+ margin-left: 20px;
       
 .title{
   display:flex;
-  align-items:center;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 700;
   font-size: 30px;
   line-height: 36px;
-  padding:30px;
+  margin-left: 42px;
  }
 
 .icon{
@@ -73,24 +66,27 @@ const ContentBox = styled.div`
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
+    margin: 7px;
   }
 
   .location{
     display: flex;
-    align-items: center;
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    padding: 30px;
+    margin: 10px 0px 10px 40px;
   }
 
-  .info{
+.info{
     display:flex;
     align-items:center;
-    padding: 30px;
-  }
+    margin-left: 30px;
+
+    p {
+      margin-top: 14px;
+      margin-left: 10px;
+    }
+}
   
   .profile{
     border:1px solid black;
@@ -109,22 +105,20 @@ const ContentBox = styled.div`
   }
 
   .box{
-  height: 55%;
   display:flex;
   align-items:center;
   justify-content:center;
+  margin-top: 20px;
 }
 
 .content{
   border: 2px solid #E4E4E4;
   border-radius: 10px;
-  width:80%;
-  height:90%;
+  width:400px;
+  height:350px;
 }
 
 .content > p {
-font-family: 'Inter';
-font-style: normal;
 font-weight: 400;
 font-size: 20px;
 line-height: 24px;
@@ -160,9 +154,23 @@ height: 80%;
     color:#263238;
     border: none;
     background-color:#c5e1a5; 
-  }
-  
-  
+  }  
 `;
 
-export default Content
+const Image = styled.div`
+.ProfileImg {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin-left: 10px;
+  cursor: pointer;
+  border: 1px solid gray;
+
+    img {
+      height:50px;
+      border-radius:50%;
+    }
+  }
+`;
+
+export default Content;

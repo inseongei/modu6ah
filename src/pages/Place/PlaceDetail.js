@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Header from "../../components/main/Header";
 import Place from "./Place";
 import Comment from "../../components/elements/Comment";
-// import KaKaoMap from './KakaoMap';
+import Map from "../../components/pages/Map";
 
 import data from "../../shared/data";
 import PhotoList from "../../components/pages/PhotoList";
@@ -34,6 +34,7 @@ const PlaceDetail = () => {
           <Content/>
         </div>
       </Container>
+      <Map/>
       <Comment />
     </>
 
@@ -42,14 +43,11 @@ const PlaceDetail = () => {
 
 
 const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-
- 
+ width: 100%;
+  
 .Box{
-  margin: 80px auto;
+  margin: 30px auto;
   width:80%;
-  height: 70vh;
   display:flex;
 }
 `
