@@ -7,12 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { GetMainAxois } from "../../redux/modules/Data";
 import axios from "axios";
 import { getCookie } from "../../shared/Cookie";
-import Swal from "sweetalert2";
 
 function MainScard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [BookMark, setBookMark] = React.useState();
 
   React.useEffect(() => {
     dispatch(GetMainAxois());
@@ -37,53 +35,49 @@ function MainScard() {
                   <div className="card-top">
                     <p>모집완료</p>
                     {item.bookmarkStatus === true ? (
-                      <div className="iconBox">
-                        <BsFillBookmarkFill
-                          className="checkIcon"
-                          onClick={() => {
-                            axios
-                              .put(
-                                "http://dlckdals04.shop/api/recruits/bookmark/" +
-                                  item.recruitPostId,
-                                null,
-                                {
-                                  headers: {
-                                    Authorization: `Bearer ${getCookie(
-                                      "accessToken"
-                                    )}`,
-                                  },
-                                }
-                              )
-                              .then(() => {
-                                window.location.reload();
-                              });
-                          }}
-                        ></BsFillBookmarkFill>
-                      </div>
+                      <BsFillBookmarkFill
+                        className="checkIcon"
+                        onClick={() => {
+                          axios
+                            .put(
+                              "http://dlckdals04.shop/api/recruits/bookmark/" +
+                                item.recruitPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${getCookie(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then(() => {
+                              window.location.reload();
+                            });
+                        }}
+                      ></BsFillBookmarkFill>
                     ) : (
-                      <div className="iconBox">
-                        <BsBookmark
-                          className="icon"
-                          onClick={() => {
-                            axios
-                              .put(
-                                "http://dlckdals04.shop/api/recruits/bookmark/" +
-                                  item.recruitPostId,
-                                null,
-                                {
-                                  headers: {
-                                    Authorization: `Bearer ${getCookie(
-                                      "accessToken"
-                                    )}`,
-                                  },
-                                }
-                              )
-                              .then(() => {
-                                window.location.reload();
-                              });
-                          }}
-                        />
-                      </div>
+                      <BsBookmark
+                        className="icon"
+                        onClick={() => {
+                          axios
+                            .put(
+                              "http://dlckdals04.shop/api/recruits/bookmark/" +
+                                item.recruitPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${getCookie(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then(() => {
+                              window.location.reload();
+                            });
+                        }}
+                      />
                     )}
                   </div>
                   {/* 카드 타이틀 */}
@@ -131,9 +125,6 @@ const Container = styled.div`
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
   }
-  .iconBox {
-    margin-left: 20px;
-  }
   .card-top {
     display: flex;
     margin: 30px 0px 0px 30px;
@@ -153,12 +144,8 @@ const Container = styled.div`
     height: 34px;
     color: black;
     cursor: pointer;
-  }
-  .colorIcon {
-    background-color: #f48fb1;
-    margin-right: 60px;
-    width: 34px;
-    height: 34px;
+    position: relative;
+    top: 0px;
   }
   .title {
     padding: 30px 10px 25px 33px;
@@ -180,6 +167,8 @@ const Container = styled.div`
     width: 34px;
     height: 34px;
     cursor: pointer;
+    position: relative;
+    top: 0px;
     color: #6b4e16;
   }
   .checkIcon:hover {
