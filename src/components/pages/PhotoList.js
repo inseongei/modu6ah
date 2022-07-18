@@ -29,7 +29,7 @@ function PhotoList({ datas, currItem, onView }) {
 
 const PhotoBox = styled.div`
 display: flex;
-width: 55%;
+width: 550px;
 margin-top: 50px;
 
 .picture{
