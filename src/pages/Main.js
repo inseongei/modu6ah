@@ -16,21 +16,6 @@ import MainScard from "../components/cards/MainScard";
 import Search from "../components/main/Search";
 
 const Main = () => {
-  // React.useEffect(() => {
-  //   axios
-  //     .get("http://dlckdals04.shop/api/main", {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // });
-
   const navigate = useNavigate();
 
   return (
