@@ -1,4 +1,4 @@
-//육아템 리뷰 
+//육아템 리뷰
 import React from "react";
 import styled from "styled-components";
 
@@ -8,8 +8,6 @@ import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import RCard from "../../components/cards/RCard";
 import bottle from '../../images/bottle.png';
-
-
 
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +24,7 @@ function Review() {
             <SubTitle>유용한 육아 아이템들을 소개하고 추천해요!</SubTitle>
           </div>
           <div className="image">
-          <img src={bottle}/>
+             <img src={bottle}/>
           </div>
           <span>내가 써본 육아템, 알려주고 싶다면?</span>
           <div className="button">
@@ -34,16 +32,14 @@ function Review() {
               <Btn
                 onClick={() => {
                   navigate(`/login`);
-                }}
-              >
-                후기 작성하기
+                }}>
+                  후기 작성하기
               </Btn>
             ) : (
               <Btn
                 onClick={() => {
                   navigate(`/reviewadd`);
-                }}
-              >
+                }}>
                 후기 작성하기
               </Btn>
             )}
@@ -92,13 +88,13 @@ const TitleBox = styled.div`
   background-color: white;
   padding-top: 50px;
   padding-bottom: 70px;
-  
-  .image {  
+
+  .image {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-  } 
+  }
 `;
 
 const Title = styled.p`
