@@ -7,13 +7,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Provider } from "react-redux";
 import store from './redux/configStore'
 import ScrollToTop from './ScrollToTop';
+import { RenderAfterNavermapsLoaded } from "react-naver-maps";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
     <ScrollToTop />
-    <App />
+    <RenderAfterNavermapsLoaded ncpClientId={"nv4f8xvrjm"}>
+        <App />
+    </RenderAfterNavermapsLoaded>
   </BrowserRouter>
   </Provider>
 );

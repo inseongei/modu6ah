@@ -37,16 +37,16 @@ const Comment = (props) => {
       { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } })
       .then((res) => {
         setState(res.data.recruitComments)
-        console.log(res.data.recruitComments)
+        // console.log(res.data.recruitComments)
       })
       .catch((err) => {
-        console.log(err)
+        // console.log(err)
       });
   }, []);
 
   //댓글 삭제
   const deleteComment = (e) => {
-    console.log(e.target.id);
+    // console.log(e.target.id);
     axios
       .delete('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments/' + e.target.id, {
         headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
@@ -86,7 +86,6 @@ const Comment = (props) => {
 
       {state &&
         state.map((data, index) => {
-          console.log(data);
           return (
             <div className='box'
               key={index}>

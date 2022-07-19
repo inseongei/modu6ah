@@ -12,8 +12,10 @@ function PhotoList({ datas, currItem, onView }) {
     <PhotoBox>
       <div className='picture'>
         <div className='box'>
-          <img className='mainPhoto'
-            src={image} /></div>
+          <img 
+           className='mainPhoto'
+            src={image} />
+            </div>
         <div className='photos'>
           <ul>
             {datas.map(item =>
@@ -29,7 +31,7 @@ function PhotoList({ datas, currItem, onView }) {
 
 const PhotoBox = styled.div`
 display: flex;
-width: 550px;
+width: 650px;
 margin-top: 50px;
 
 .picture{
@@ -39,7 +41,7 @@ margin-top: 50px;
 
 .box{
   height: 380px;
-  display:flex;
+  display: flex;
   align-items:center;
   justify-content:center;
 }
@@ -47,9 +49,9 @@ margin-top: 50px;
 .mainPhoto{
   border:1px solid black;
   margin-left: 35px;
-  margin-bottom: 10px;
-  width:65%;
-  height:300px;
+  margin-bottom: 20px;
+  width:550px;
+  height:350px;
   border-radius: 30px;
 }
 
