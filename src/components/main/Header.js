@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { HiChevronDown } from "react-icons/hi";
-import { useDispatch } from "react-redux";
 import ChatListModal from "../../modal/Chat/ChatListModal";
-import { GoThreeBars, GoX, GoPerson } from "react-icons/go";
+import { HiChevronDown } from "react-icons/hi";
+import chat from "../../images/chat.png";
 import logo from "../../images/logo.png";
+import { GoThreeBars, GoX, GoPerson } from "react-icons/go";
+import chatnew from "../../images/chatnew.png";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeCookie, getCookie } from "../../shared/Cookie";
 import { GetMyPageAxios } from "../../redux/modules/Data";
-import chat from "../../images/chat.png";
 import io from "socket.io-client";
 import { toast } from "react-toastify";
-import chatnew from "../../images/chatnew.png";
-import Swal from "sweetalert2";
+
 
 // 소켓서버 연결
 const socket = io.connect("http://dlckdals04.shop");
@@ -49,6 +50,7 @@ const Header = () => {
         removeCookie("nickname");
         localStorage.removeItem("profileUrl");
         localStorage.removeItem("accessToken");
+        localStorage.removeItem("nickname");
         window.location.reload();
       }
     });
