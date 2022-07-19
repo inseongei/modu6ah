@@ -45,12 +45,9 @@ function MainScard() {
                               null,
                               {
                                 headers: {
-                                  Authorization: `Bearer ${getCookie(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
+                                  Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                                }
+                              })
                             .then(() => {
                               window.location.reload();
                             });
@@ -67,12 +64,9 @@ function MainScard() {
                               null,
                               {
                                 headers: {
-                                  Authorization: `Bearer ${getCookie(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
+                                  Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                                }
+                              })
                             .then(() => {
                               window.location.reload();
                             });
