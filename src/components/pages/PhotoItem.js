@@ -17,14 +17,14 @@ display: flex;
 list-style: none;
 
 img { 
-    width:135px;
-    height:170px;
+    width:140px;
+    height:130px;
     border-radius: 30px;
-    margin-left:15px;
-    margin-right:10px;
+    margin-left:10px;
+    margin-right: 5px;
     border: 1px solid black;
 }
 
 `
 
-export default PhotoItem
+export default PhotoItem;
