@@ -31,7 +31,6 @@ const ChatListModal = ({ open, onClose }) => {
         setChatList(res.data.lastChats);
       })
       .catch((err) => {
-        console.log(err);
       });
   }, []);
 

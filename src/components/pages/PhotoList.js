@@ -4,7 +4,8 @@ import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 import styled from 'styled-components';
 
-function PhotoList({ datas, currItem, onView }) {
+function PhotoList({ datas, currItem, onView, Detail }) {
+  console.log(Detail)
 
   const { image, title } = currItem
 
@@ -13,12 +14,14 @@ function PhotoList({ datas, currItem, onView }) {
       <div className='picture'>
         <div className='box'>
           <img className='mainPhoto'
-            src={image} /></div>
+            src={Detail.imageUrl[0]} alt="사진" /></div>
         <div className='small'>
           <ul>
-            {datas.map(item =>
-              <PhotoItem key={item.id} item={item} onView={onView} />)
-            }
+            {Detail.imageUrl.map((item,idx)=>{
+              return(
+                <PhotoItem key={idx} item={item}/>
+              )
+            })}
           </ul>
         </div>
       </div>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { GetRecruitAxois } from "../../redux/modules/Data";
+import { GetRecruitAxois} from "../../redux/modules/Data";
 import axios from "axios";
 import { getCookie } from "../../shared/Cookie";
 

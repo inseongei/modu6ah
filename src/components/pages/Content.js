@@ -1,19 +1,21 @@
 import React from 'react'
-
-import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
 
 function Content() {
+
+
     return (
         <ContentBox>
             <div className='box_top'>
                 <div className='title'>
-                    <p>국립생태공원</p>
+                    <p></p>
                     <span>
-                        <FaStar className='icon' />
+                       
                     </span>
-                    <span className='starScore'> 4.0점</span>
+
                 </div>
                 <div className='location'>
                     <p>
@@ -21,8 +23,8 @@ function Content() {
                         서울특별시 성수동 어쩌구 1004번지</p>
                 </div>
                 <div className='info'>
-                    <div className='profile'>ㅎㅇ</div>
-                    <p className='nickname'>5세맘육아왕</p>
+                    <div className='profile'></div>
+                    <p className='nickname'></p>
                 </div>
             </div>
             <div className='box'>
@@ -46,7 +48,6 @@ const ContentBox = styled.div`
 .box_top{
    height: 45%;
  }
-
  .box_top > div{
    height: 33.5%;
  }
@@ -61,12 +62,10 @@ const ContentBox = styled.div`
   line-height: 36px;
   padding:30px;
  }
-
 .icon{
     color:#fdd835;
     margin-left:30px;
   }
-
 .starScore{
     color: #A8A8A8;
     font-style: normal;
@@ -74,7 +73,6 @@ const ContentBox = styled.div`
     font-size: 20px;
     line-height: 24px;
   }
-
   .location{
     display: flex;
     align-items: center;
@@ -85,7 +83,6 @@ const ContentBox = styled.div`
     line-height: 24px;
     padding: 30px;
   }
-
   .info{
     display:flex;
     align-items:center;
@@ -93,7 +90,12 @@ const ContentBox = styled.div`
   }
   
   .profile{
-    border:1px solid black;
+    width:70px;
+    height:70px;
+    border-radius: 50%;
+  }
+
+  .profile > img {
     width:70px;
     height:70px;
     border-radius: 50%;
@@ -107,21 +109,18 @@ const ContentBox = styled.div`
   line-height: 29px;
   margin-left:30px;
   }
-
   .box{
   height: 55%;
   display:flex;
   align-items:center;
   justify-content:center;
 }
-
 .content{
   border: 2px solid #E4E4E4;
   border-radius: 10px;
   width:80%;
   height:90%;
 }
-
 .content > p {
 font-family: 'Inter';
 font-style: normal;
@@ -131,12 +130,10 @@ line-height: 24px;
 width:100%;
 height: 80%;
 }
-
 .content > div{
   width:100%;
   height: 20%;
 }
-
 .ParkBtn{
     width:30%;
     height: 50%;

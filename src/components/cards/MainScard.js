@@ -4,21 +4,23 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { GetMainAxois } from "../../redux/modules/Data";
+import { GetMainAxois,GetMainLogin } from "../../redux/modules/Data";
 import axios from "axios";
 import { getCookie } from "../../shared/Cookie";
 
 function MainScard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const token = getCookie('accessToken')
 
+
+  
   React.useEffect(() => {
-    dispatch(GetMainAxois());
+    token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin())
   }, []);
 
   const post = useSelector((state) => state.Data.Profile);
 
-  console.log(post);
 
   if (!post) {
     return <div></div>;

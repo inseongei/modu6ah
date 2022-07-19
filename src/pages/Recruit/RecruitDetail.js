@@ -106,7 +106,6 @@ const RecruitDetail = () => {
                   <span>{detail.time}</span>
                 </div>
                 <div>
-                  {" "}
                   <strong> 위치 </strong>
                   <span>{detail.place}</span>
                 </div>

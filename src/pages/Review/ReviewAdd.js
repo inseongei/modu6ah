@@ -3,10 +3,7 @@ import React, { useState } from "react";
 
 //style
 import styled from "styled-components";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
-import { FaStar } from "react-icons/fa";
 import { AiOutlineFileImage } from "react-icons/ai";
 
 //elements & components
@@ -15,104 +12,76 @@ import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 
 import axios from "axios";
-import io from "socket.io-client";
 import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-// import { createCardDB } from '../../redux/modules/card';
 
-import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { db, storage } from "../../shared/firebase";
-import { getDownloadURL } from "firebase/storage";
+
+
 
 function ReviewAdd() {
   const [title, setTitle] = useState("");
   const [region, setRegion] = useState("");
   const [content, setContent] = useState("");
   const [address, setAddress] = useState("")
-  const [files, setFiles] = useState([]);
-  const [imageSrc, setImageSrc] = React.useState("");
+  const [imageSrc, setImageSrc] = useState([]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  console.log(files)
 
+
+
+  // axios.Post 버튼
   const onSubmit = async (e) =>{
     e.preventDefault();
     e.persist();
-
     let files = e.target.profile_files.files;
     let formData = new FormData();
-
+    // 반복문돌려서 다중 이미지 처리
     for (let i = 0; i < files.length; i++) { 
       formData.append("imageUrl", files[i]);
     }
-    let dataSet = {
-      title : title,
-      content : content,
-      productType : region,
-      url : address,
-    }
 
+    console.log(files.length)
+
+    // 제목,내용,제품종류,사이트 데이터=> 폼데이터 변환
     formData.append('title',title)
     formData.append('content',content)
     formData.append('productType',region)
     formData.append('url',address)
-    formData.append("data", JSON.stringify(dataSet));
 
-    await axios.post(
-      "http://dlckdals04.shop/api/reviews",formData,
-      {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}`,"Content-Type": "multipart/form-data"},
+    if(files.length < 6){
+      await axios.post(
+        "http://dlckdals04.shop/api/reviews",formData,
+        {
+          headers: { Authorization: `Bearer ${getCookie("accessToken")}`,"Content-Type": "multipart/form-data"},
+        })
+      .then((res) => {
+        console.log(res)
       })
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-        console.log(err)
-    });
+      .catch((err) => {
+          console.log(err)
+      });
+    }else{
+      alert('사진은 5개까지만 가능합니다.')
+    }
+    }
+   
+// 이미지 미리보기 
+  const handleImageChange = (e) => {
+    const imageLists = e.target.files;
+    let imageUrlLists = [...imageSrc];
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+      imageUrlLists.push(currentImageUrl);
+    }
+    if (imageUrlLists.length > 5) {
+      imageUrlLists = imageUrlLists.slice(0, 5);
+    }
+    setImageSrc(imageUrlLists);
+  };
 
-    for (const keyValue of formData) console.log(keyValue); 
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 이미지 미리보기에서  삭제 
+const handleDeleteImage = (id) => {
+  setImageSrc(imageSrc.filter((_, index) => index !== id));
+};
 
   return (
     <>
@@ -128,6 +97,7 @@ function ReviewAdd() {
               type="file"
               name="profile_files"
               multiple="multiple"
+              onChange={handleImageChange}
             />
               <button type="submit">제출</button>
             </form>
@@ -139,7 +109,12 @@ function ReviewAdd() {
               </label>
 
               {/* 이미지 미리보기 */}
-              {imageSrc && <img className="img" src={imageSrc} alt="preview-img" />}
+              {imageSrc.map((image, id) => (
+                <div key={id}>
+                  <img src={image} alt={`${image}-${id}`} />
+                  <button onClick={() => handleDeleteImage(id)}>삭제</button>
+                </div>
+              ))}
 
             </div>
             <div className="mainBox">

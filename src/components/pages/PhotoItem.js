@@ -2,12 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 function PhotoItem({ item, onView }) {
-    const { image, title, id } = item
     return (
         <PhotoBox>
-                <li onClick={() => onView(id)}>
-                    <img src={image} />
-                </li>
+        <li>
+            <img src={item} alt="사진" />
+        </li>
         </PhotoBox>
     )
 }

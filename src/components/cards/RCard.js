@@ -5,18 +5,27 @@ import { Reviewdata } from '../../shared/reviewdata';
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import dog from '../../images/dog.jpg'
+import axios from 'axios'
 
 
 function RCard() {
     const navigate = useNavigate();
+    const [Detail,setDetail] = React.useState()
+    React.useEffect(()=>{
+        axios.get('http://dlckdals04.shop/api/reviews')
+        .then((res)=>{
+            console.log(res.data.reviewPosts)
+            setDetail(res.data.reviewPosts)
+        })
+    },[])
     return (
         <Container>
-            {Reviewdata.map((item, index) => (
+            {Detail&&Detail.map((item, index) => (
                 <div className='card'
                     key={index}
                     onClick={() => {
-                        navigate('/reviewdetail'
-                            // + item.placePostId
+                        navigate('/reviewdetail/'
+                            + item.reviewPostId
                         )
                     }}>
 
@@ -29,12 +38,12 @@ function RCard() {
                     {/* 카드 중간 '이미지'*/}
                     <div className='card-body'>
                         <div className='image'>
-                            <img src={item.imageUrl} />
+                            <img src={item.imageUrl[0]} alt="사진" />
                         </div>
                         {/* 카드 아래쪽 '아이디 및 내용물' */}
                         <div className='profile_box'>
                             <div className='detail_profile'>
-                                <img src={dog} alt="프로필" />
+                                <img src={item.profileUrl} alt="프로필" />
                             </div>
                             <strong>{item.nickname}</strong>
                         </div>
@@ -54,8 +63,6 @@ grid-template-columns: repeat(auto-fit, 460px);
 gap: 3.6em;
 justify-content: center;
 align-items: center;
-
-
 .card {
 background: white;
 border-radius: 30px;
@@ -65,16 +72,13 @@ cursor: pointer;
 overflow: hidden;
 height: 570px;
 }
-
 .card-top {
     display: flex;
     margin: 30px 0px 0px 50px;
-
     h3{
         font-weight: 700;
     }
 }
-
 .card-top p {
  display: flex;
  margin-top: 8px;
@@ -82,40 +86,33 @@ height: 570px;
  color: gray;
  
 }
-
 a {
     margin-left: 51px;
 }
-
 .card-body {
     width: 360px;
     margin-left: 30px;
 }
-
 .image{
     border-radius: 25px;
     overflow: hidden;
 }
-
 .card-body img {
     width: 100%;
     height: 270px;
     margin-top: 3px;
     object-fit: cover;
 }
-
 .profile_box{
     display: flex;
     margin-top: 15px;
 }
-
   .detail_profile > img {
     width:45px;
     height:45px;
     border-radius:50%;
     margin-left: 10px;
 }
-
 .detail_profile{
     border-radius:50%;
     /* display:flex; */
@@ -129,12 +126,10 @@ a {
     margin-top: 12px;
     margin-left: 10px;
   }
-
   .card-body p {
     margin-top: 10px;
     margin-left: 5px;
   }
-
   .content { 
     width: 330px;
     height: 80px;
