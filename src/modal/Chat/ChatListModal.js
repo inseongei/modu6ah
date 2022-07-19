@@ -28,7 +28,6 @@ const ChatListModal = ({ open, onClose }) => {
         headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
       })
       .then((res) => {
-        console.log(res);
         setChatList(res.data.lastChats);
       })
       .catch((err) => {
