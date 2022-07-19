@@ -31,12 +31,23 @@ function Content() {
             <div className='box'>
                 <div className='content'>
                     <p>내용</p>
-                    <div className='btnBox'>
+                    {/* <div className='btnBox'>
                         <button className='ParkBtn'>주차가능</button>
                         <button className='KidBtn'>예스키즈존</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
+            <Btn>
+        <button
+          className="btn"
+
+        >
+          수정
+        </button>
+        <button className="btn">
+          삭제
+        </button>
+      </Btn>
         </ContentBox>
 
     )
@@ -45,7 +56,7 @@ function Content() {
 const ContentBox = styled.div`
  width:500px;
  margin-top: 60px;
- margin-left: 20px;
+ margin-left: 40px;
       
 .title{
   display:flex;
@@ -170,6 +181,26 @@ const Image = styled.div`
       height:50px;
       border-radius:50%;
     }
+  }
+`;
+
+const Btn = styled.div`
+  display: flex;
+  margin-left: 50px;
+  margin-right: 40px;
+
+  .btn {
+    width: 300px;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    background-color: #3c3c3c;
+    margin-top: 20px;
+    margin-right: 10px;
+    padding-top: 9px;
+    padding-bottom: 33px;
+    border: 0;
+    outline: 0;
   }
 `;
 
