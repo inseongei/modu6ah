@@ -1,38 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import KakaoMap from './KakaoMap'
 
-import { NaverMap } from 'react-naver-maps'; // 패키지 불러오기
+const { daum } = window
 
 function Map() {
+  const [InputText, setInputText] = useState('')
+  const [Place, setPlace] = useState('')
+
+  const onChange = (e) => {
+    setInputText(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setPlace(InputText)
+
+  }
+
   return (
-   <MapBox>
-<div className='map_container'>
-<NaverMap
-      mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
-      style={{
-        width: '100%', // 네이버지도 가로 길이
-        height: '100%' // 네이버지도 세로 길이
-      }}
-      defaultCenter={{ lat: 37.554722, lng: 126.970833 }} // 지도 초기 위치
-      defaultZoom={13} // 지도 초기 확대 배율
-    />
-</div>
-   </MapBox>
+    <>
+      <form className="inputForm" onSubmit={handleSubmit}>
+      <Position>
+       <strong>위치</strong>
+        <MapSearch
+        placeholder="검색어를 입력하세요"
+         onChange={onChange} 
+         value={InputText} />
+        <button type="submit">검색</button>
+        {/* <input type="text" id="sample5_address" placeholder="주소"/>
+<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"/><br/> */}
+      </Position>
+      </form>
+      <KakaoMap searchPlace={Place} />
+    </>
   )
 }
 
-const MapBox = styled.div`
-height:500px;
-display:flex;
-align-items:center;
-justify-content:center;
+const Position = styled.div`
+margin-left: 28px;
+margin-bottom: 20px;
+ 
+button{ 
+  margin-left: 10px;
+}
+`;
 
-
-.map_container{
-border: 2px solid #E4E4E4;
+const MapSearch = styled.input`
+border: 1px solid #e4e4e4;
 border-radius: 10px;
-width:60%;
-height:90%;
+width: 330px;
+height: 50px;
+margin-left: 20px;
+outline: none;
+
+::placeholder {
+  padding-left: 8px;
 }
 `;
 
