@@ -12,6 +12,7 @@ import { AiOutlineFileImage } from "react-icons/ai";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
+import Map from "../../components/pages/Map";
 
 import axios from "axios";
 import io from "socket.io-client";
@@ -55,6 +56,7 @@ function PlaceAdd() {
   const handleMouseLeave = () => {
     setHoverValue(undefined);
   };
+  
 
   const handleImageChange = (e) => {
     const imageLists = e.target.files;
@@ -99,7 +101,8 @@ function PlaceAdd() {
           region,
           image: image_ref.current?.url,
         },
-        { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } }
+        { headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
       )
 
       .then(function (res) {
@@ -114,6 +117,7 @@ function PlaceAdd() {
         window.location.href = "/placeadd";
       });
   };
+
 
   return (
     <>
@@ -157,13 +161,9 @@ function PlaceAdd() {
                     onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
-                <div className="position">
-                  <strong>위치</strong>
-                  <input
-                    type="text"
-                    onChange={(e) => setContent(e.target.value)}
-                  />
-                </div>
+               
+                  <Map/>
+            
 
                 <div className="star">
                   <strong>별점</strong>
@@ -190,6 +190,7 @@ function PlaceAdd() {
                   <span>4.0점</span>
                 </div>
               </div>
+  
               <div className="card-right">
                 <textarea onChange={(e) => setRegion(e.target.value)} />
                 {/* <span className='btnList'>

@@ -30,8 +30,10 @@ export function GetRecruit(Recruit) {
 export const GetMyPageAxios = (nickname) => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/mypage/profile/" + nickname, {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+      .get("http://dlckdals04.shop/api/mypage/profile/" + nickname,  {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        }
       })
       .then((res) => {
         dispatch(GetMyPage(res.data));
@@ -45,9 +47,13 @@ export const GetMyPageAxios = (nickname) => {
 export const GetMainAxois = () => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/main", {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
-      })
+      .get("http://dlckdals04.shop/api/main",  
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        }
+      }
+      )
       .then((res) => {
         dispatch(GetMain(res.data));
       });
@@ -57,8 +63,10 @@ export const GetMainAxois = () => {
 export const GetRecruitAxois = () => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/recruits", {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+      .get("http://dlckdals04.shop/api/recruits",  {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        }
       })
       .then((res) => {
         dispatch(GetRecruit(res.data));

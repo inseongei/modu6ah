@@ -23,8 +23,10 @@ const ChatListModal = ({ open, onClose }) => {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/chats/rooms", {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+      .get("http://dlckdals04.shop/api/chats/rooms",  {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        }
       })
       .then((res) => {
         console.log(res);
@@ -87,14 +89,11 @@ const ChatListModal = ({ open, onClose }) => {
                         .get(
                           "http://dlckdals04.shop/api/chats/messages/" +
                             data.roomId,
-                          {
-                            headers: {
-                              Authorization: `Bearer ${getCookie(
-                                "accessToken"
-                              )}`,
-                            },
-                          }
-                        )
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                              }
+                            })
                         .then((res) => {
                           console.log(res);
                           setNowRoom(res.data.chatMessageList);
