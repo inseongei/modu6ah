@@ -9,7 +9,6 @@ import chatnew from "../../images/chatnew.png";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeCookie, getCookie } from "../../shared/Cookie";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 import io from "socket.io-client";
 import { toast } from "react-toastify";
@@ -46,8 +45,6 @@ const Header = () => {
       confirmButtonText: "확인",
     }).then((result) => {
       if (result.isConfirmed) {
-        removeCookie("accessToken");
-        removeCookie("nickname");
         localStorage.removeItem("profileUrl");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("nickname");
@@ -68,6 +65,10 @@ const Header = () => {
     navigate("/manager/" + nickname);
     dispatch(GetMyPageAxios(nickname));
   };
+
+  const Bookmark = () =>{
+    navigate("/MyBookmark");
+  }
 
   // 상대방이 보낸 메시지를 알림 이벤트 경로로 데이터를 받음
   React.useEffect(() => {
@@ -280,7 +281,7 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="menuTwo">
-                  <div>
+                  <div onClick={Bookmark}>
                     <p>북마크관리</p>
                   </div>
                 </div>

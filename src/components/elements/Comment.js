@@ -3,12 +3,11 @@ import styled from 'styled-components'
 
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCookie } from "../../shared/Cookie";
 
 const Comment = (props) => {
   const [comment, setComment] = useState('');
   const [state, setState] = useState('');
-  const nickname = getCookie("nickname");
+  const nickname = localStorage.getItem("nickname");
 
   const navigate = useNavigate();
   let { recruitPostId } = useParams();
@@ -20,7 +19,7 @@ const Comment = (props) => {
     }
     axios.post('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments',
       comment_data,
-      { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } })
+      { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
         console.log(res)
         window.alert('댓글 작성 성공')
@@ -34,7 +33,7 @@ const Comment = (props) => {
   // 댓글 조회
   React.useEffect(() => {
     axios.get('http://dlckdals04.shop/api/recruits/' + recruitPostId,
-      { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } })
+      { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
         setState(res.data.recruitComments)
         // console.log(res.data.recruitComments)
@@ -49,7 +48,7 @@ const Comment = (props) => {
     // console.log(e.target.id);
     axios
       .delete('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments/' + e.target.id, {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((response) => {
         console.log(response);

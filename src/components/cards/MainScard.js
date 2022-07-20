@@ -18,12 +18,16 @@ function MainScard() {
   }, []);
 
   const post = useSelector((state) => state.Data.Profile);
-  // const [bookmark,setbookmark] = React.useState(post.recruitPosts.map((item,idx)=>(item.bookmarkStatus)))
-  // console.log(bookmark)
+
+
+
 
   if (!post) {
     return <div></div>;
   }
+
+
+
 
   return (
     <>
@@ -49,7 +53,8 @@ function MainScard() {
                                   Authorization: `Bearer ${localStorage.getItem("accessToken")}`
                                 }
                               })
-                            .then(() => {
+                            .then((res) => {
+                              console.log(res)
                               window.location.reload();
                             })
                         }}
@@ -68,7 +73,8 @@ function MainScard() {
                                   Authorization: `Bearer ${localStorage.getItem("accessToken")}`
                                 }
                               })
-                            .then(() => {
+                            .then((res) => {
+                              console.log(res)
                               window.location.reload();
                             });
                         }}

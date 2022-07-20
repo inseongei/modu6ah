@@ -5,7 +5,6 @@ import logo from "../../images/logo.png";
 import ScrollToBottom from "react-scroll-to-bottom";
 import ChatRoom from "./ChatRoom";
 import "animate.css";
-import { getCookie } from "../../shared/Cookie";
 import axios from "axios";
 import { BsTrash } from "react-icons/bs";
 import io from "socket.io-client";
@@ -13,13 +12,13 @@ import io from "socket.io-client";
 const socket = io.connect("http://dlckdals04.shop");
 
 const ChatListModal = ({ open, onClose }) => {
-  const nickname = getCookie("nickname");
+  const nickname = localStorage.getItem("nickname");
   const [ChatList, setChatList] = React.useState("");
   const [NowRoom, setNowRoom] = React.useState([]);
   const [realroom, setrealroom] = React.useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const profileUrl = localStorage.getItem("profileUrl");
-  const token = getCookie("accessToken");
+  const token = localStorage.getItem("accessToken");
 
   React.useEffect(() => {
     axios

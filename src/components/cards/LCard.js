@@ -37,7 +37,7 @@ function LCard() {
                         {/* 카드 왼쪽 '이미지' */}
                         <div className='card-left'>
                             <div className='image'>
-                                <img src={item.imageUrl} />
+                                <img src={item.imageUrl[0]} alt="사진"/>
                             </div>
 
                         </div>

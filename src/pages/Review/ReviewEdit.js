@@ -1,23 +1,85 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import Header from '../../components/main/Header'
+import axios from 'axios';
+import {useNavigate, useParams } from 'react-router-dom';
 
-const ItemInsert = () => {
+
+
+
+
+
+const ReviewEdit = () => {
+    const [Detail, setDetail] = React.useState()
+    const navigate = useNavigate()
+    let {reviewPostId} = useParams();
+    const content_ref = React.useRef()
+    const url_ref = React.useRef()
+    const title_ref = React.useRef()
+    const productType_ref = React.useRef()
+
+
+    React.useEffect(()=>{
+        axios.get('http://dlckdals04.shop/api/reviews/' + reviewPostId )
+        .then((res)=>{
+          console.log(res.data.reviewDetails)
+          setDetail(res.data.reviewDetails)
+        })
+      },[])
+
+      if (!Detail) {
+        return <div></div>;
+      }
+
+
+const ReviewInsert = () =>{
+    let data= {
+        title :title_ref.current.value,
+        content : content_ref.current.value,
+        url :url_ref.current.value,
+        productType : productType_ref.current.value
+    }
+
+
+
+
+    axios.put('http://dlckdals04.shop//api/reviews/' + reviewPostId,data,{
+        headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+      }).then((res)=>{
+        console.log(res)
+      })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
     <Header/>
     <Review>
-
     <div className='reviewC'>
     <div className='images'><div className='title'>대표이미지</div></div>
+
     <div className='imageBox'>
-        <div className='img'></div>
-        <div className='img'></div>
-        <div className='img'></div>
-        <div className='img'></div>
-        <div className='img'></div>
+    <input type="file"/>
+    {Detail.imageUrl.map((data,idx)=>{
+        return(
+            <div className='img' key={idx}><img src={data} alt="사진"/></div>
+        )
+    })}
+
+
     </div>
 
 
@@ -25,17 +87,17 @@ const ItemInsert = () => {
         <div className='one'>
             <div className='position'>
             <span> 제목</span>
-            <input type="text"/>
+            <input type="text" placeholder={Detail.title} ref={title_ref}/>
             </div>
 
             <div className='position'>
             <span> 주소</span>
-            <input type="text"/>
+            <input type="text" placeholder={Detail.url} ref={url_ref}/>
             </div>
 
             <div className='position'>
             <span> 종류</span>
-            <input type="text"/>
+            <input type="text"  placeholder={Detail.productType} ref={productType_ref}/>
             </div>
 
 
@@ -45,12 +107,12 @@ const ItemInsert = () => {
 
 
         <div className='two'>
-            <div className='contentBox'> 
             <span className='content'>내용</span>
-            <div>
-            </div>
+            <textarea className='contentBox' placeholder={Detail.content} ref={content_ref}/> 
+            
 
-            </div>
+
+
         </div>
     </div>
 
@@ -58,7 +120,7 @@ const ItemInsert = () => {
 
     <div className='btnBox'>
         <button>취소</button>
-        <button>수정완료</button>
+        <button onClick={ReviewInsert}>수정완료</button>
     </div>
 
 
@@ -105,7 +167,7 @@ const Review = styled.div`
 
 .mainBox{
     width:90%;
-    height: 59%;
+    height: 39%;
     margin:auto;
     display:flex;
 }
@@ -124,6 +186,7 @@ const Review = styled.div`
 
 .two{
     width:60%;
+    height: 100%;
     display:flex;
     justify-content: center;
     align-items:center;
@@ -135,6 +198,12 @@ const Review = styled.div`
     border: 1px solid #E4E4E4;
     border-radius: 10px;
     margin-left: 25px;
+}
+
+.img > img {
+    width:300px;
+    height:250px;
+    border-radius: 10px;
 }
 
 .one > div >span {
@@ -162,7 +231,7 @@ const Review = styled.div`
 
 .contentBox{
     width:75%;
-    height: 90%;
+    height: 80%;
     border: 1px solid #E4E4E4;
     border-radius: 10px;
     display:flex;
@@ -221,6 +290,7 @@ color:white;
 width:10%;
 height: 45px;
 margin-right: 80px;
+border: none;
 }
 
 
@@ -229,4 +299,4 @@ margin-right: 80px;
 `
 
 
-export default ItemInsert;
+export default ReviewEdit;

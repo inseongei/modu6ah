@@ -12,7 +12,6 @@ import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 
 import axios from "axios";
-import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
 
 
@@ -45,20 +44,22 @@ function ReviewAdd() {
     formData.append('productType',region)
     formData.append('url',address)
 
-    if(files.length < 6){
+    if(files.length < 4){
       await axios.post(
         "http://dlckdals04.shop/api/reviews",formData,
         {
-          headers: { Authorization: `Bearer ${getCookie("accessToken")}`,"Content-Type": "multipart/form-data"},
+          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}`,"Content-Type": "multipart/form-data"},
         })
       .then((res) => {
         console.log(res)
+        alert('게시글 작성 성공')
+        navigate('/Review')
       })
       .catch((err) => {
           console.log(err)
       });
     }else{
-      alert('사진은 5개까지만 가능합니다.')
+      alert('사진은 3개까지만 가능합니다.')
     }
     }
    
