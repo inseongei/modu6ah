@@ -1,6 +1,7 @@
 //  장소 추천 카드
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
+import axios from 'axios';
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import dog from '../../images/dog.jpg'
@@ -8,55 +9,55 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadPhotoDB } from '../../redux/modules/placepage';
 
 function LCard() {
+
+ const [data, setData] = useState('');
+
  const navigate = useNavigate();
  const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    dispatch(loadPhotoDB());
-  }, []);
-
- const post = useSelector((state) => state.placepage.list);
- console.log(post);
-
- if (!post) {
-    return <div></div>;
-  }
+ React.useEffect(()=>{
+    axios.get('http://dlckdals04.shop/api/places')
+    .then((res)=>{
+        // console.log(res.data)
+        setData(res.data.placePosts)
+    })
+},[])
 
     return (
         <>
             <Container>
-                {post && post.map ((data, index) => (
+                {data && data.map ((item, index) => (
                     <div className='card' 
                     key={index}
                     onClick={() => {
                         navigate('/placedetail/' 
-                        + data.placePostId
+                        + item.placePostId
                         )
                     }}>
                         {/* 카드 왼쪽 '이미지' */}
                         <div className='card-left'>
                             <div className='image'>
-                                <img src={data.imageUrl[0]} />
+                                <img src={item.imageUrl} />
                             </div>
 
                         </div>
                         {/* 카드 오른쪽 '타이틀 및 설명' */}
                         <div className='card-right'>
                             <div className='title'>
-                                <h3>{data.title}</h3>
-                                <p>⭐ {data.star}</p>
+                                <h3>{item.title}</h3>
+                                <p>⭐ {item.star}</p>
                             </div>
-                            <a><MdOutlinePlace/> {data.region}</a>
+                            <a><MdOutlinePlace/> {item.region}</a>
                             <div className='profile_box'>
                             <div className='detail_profile'>
                                 <img 
-                                src={data.profileUrl}
+                                // src={data.imageUrl[0]}
                                  alt="프로필" />
                             </div>
-                                <strong>{data.nickname}</strong>
+                                <strong>{item.nickname}</strong>
                             </div>
                             <div className='content'>
-                                <p>{data.content}</p>
+                                <p>{item.content}</p>
                             </div>
 
                         </div>
