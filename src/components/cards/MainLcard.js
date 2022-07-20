@@ -1,29 +1,40 @@
 //  장소 추천 카드
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import { PlaceData } from '../../shared/placedata';
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
-import dog from '../../images/dog.jpg'
+import axios from 'axios';
 
 function LCard() {
  const navigate = useNavigate();
+ const [data, setData] = useState('');
+
+ React.useEffect(()=>{
+    axios.get('http://dlckdals04.shop/api/main', {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      })
+    .then((res)=>{
+        console.log(res.data)
+        setData(res.data.placePosts)
+    })
+},[])
  
     return (
         <>
             <Container>
-                {PlaceData.map((item,index) => (
+                {data && data.map((item,index) => (
                     <div className='card' 
                     key={index}
                     onClick={() => {
-                        navigate('/placedetail' 
-                        // + item.placePostId
+                        navigate('/placedetail/' 
+                        + item.placePostId
                         )
                     }}>
                         {/* 카드 왼쪽 '이미지' */}
                         <div className='card-left'>
                             <div className='image'>
-                                <img src={item.imageUrl} />
+                                <img src={item.imageUrl[0]} />
                             </div>
 
                         </div>
@@ -33,10 +44,10 @@ function LCard() {
                                 <h3>{item.title}</h3>
                                 <p>⭐ {item.star}</p>
                             </div>
-                            <a><MdOutlinePlace/> {item.url}</a>
+                            <a><MdOutlinePlace/>{item.region}</a>
                             <div className='profile_box'>
                             <div className='detail_profile'>
-                                <img src={dog} alt="프로필" />
+                                <img src={item.profileUrl} alt="프로필" />
                             </div>
                                 <strong>{item.nickname}</strong>
                             </div>
