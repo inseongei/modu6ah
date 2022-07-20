@@ -1,47 +1,62 @@
 //  장소 추천 카드
 import React from 'react'
 import styled from 'styled-components';
-import { PlaceData } from '../../shared/placedata';
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import dog from '../../images/dog.jpg'
+import { useDispatch, useSelector } from 'react-redux';
+import { loadPhotoDB } from '../../redux/modules/placepage';
 
 function LCard() {
  const navigate = useNavigate();
+ const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(loadPhotoDB());
+  }, []);
+
+ const post = useSelector((state) => state.placepage.list);
+ console.log(post);
+
+ if (!post) {
+    return <div></div>;
+  }
  
     return (
         <>
             <Container>
-                {PlaceData.map((item,index) => (
+                {post && post.map ((data, index) => (
                     <div className='card' 
                     key={index}
                     onClick={() => {
-                        navigate('/placedetail' 
-                        // + item.placePostId
+                        navigate('/placedetail/' 
+                        + data.placePostId
                         )
                     }}>
                         {/* 카드 왼쪽 '이미지' */}
                         <div className='card-left'>
                             <div className='image'>
-                                <img src={item.imageUrl} />
+                                <img src={data.imageUrl} />
                             </div>
 
                         </div>
                         {/* 카드 오른쪽 '타이틀 및 설명' */}
                         <div className='card-right'>
                             <div className='title'>
-                                <h3>{item.title}</h3>
-                                <p>⭐ {item.star}</p>
+                                <h3>{data.title}</h3>
+                                <p>⭐ {data.star}</p>
                             </div>
-                            <a><MdOutlinePlace/> {item.url}</a>
+                            <a><MdOutlinePlace/> {data.region}</a>
                             <div className='profile_box'>
                             <div className='detail_profile'>
-                                <img src={dog} alt="프로필" />
+                                <img 
+                                // src={data.imageUrl[0]}
+                                 alt="프로필" />
                             </div>
-                                <strong>{item.nickname}</strong>
+                                <strong>{data.nickname}</strong>
                             </div>
                             <div className='content'>
-                                <p>{item.content}</p>
+                                <p>{data.content}</p>
                             </div>
 
                         </div>
