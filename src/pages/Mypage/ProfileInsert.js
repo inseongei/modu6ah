@@ -7,12 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, getDocs, addDoc, getDoc } from "firebase/firestore";
 import { db, storage } from "../../shared/firebase";
-import { getCookie } from "../../shared/Cookie";
 import axios from "axios";
 import { setCookie } from "../../shared/Cookie";
 
 const ProfileInsert = () => {
-  const nickname = getCookie("nickname");
+  const nickname = localStorage.getItem("nickname");
   React.useEffect(() => {
     dispatch(GetMyPageAxios(nickname));
   }, []);
@@ -54,7 +53,7 @@ const ProfileInsert = () => {
       .put(
         "http://dlckdals04.shop/api/mypage/update",
         { myComment: insert.current.value, profileUrl: fileInput.current?.url },
-        { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } }
+        { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } }
       )
       .then((res) => {
         navigate("/manager/" + nickname);
