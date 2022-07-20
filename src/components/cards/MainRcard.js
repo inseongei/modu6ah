@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import {getCookie} from '../../shared/Cookie'
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 
 function RCard() {
@@ -13,7 +12,7 @@ function RCard() {
     React.useEffect(()=>{
         axios
       .get("http://dlckdals04.shop/api/main", {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((res) => {
         console.log(res)

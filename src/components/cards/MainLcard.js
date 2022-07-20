@@ -8,6 +8,8 @@ import dog from '../../images/dog.jpg'
 
 function LCard() {
  const navigate = useNavigate();
+
+ 
  
     return (
         <>

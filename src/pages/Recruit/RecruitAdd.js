@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Header from '../../components/main/Header'
 import styled from 'styled-components'
-import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import io from "socket.io-client";
@@ -49,7 +48,7 @@ const RecruitAdd = () => {
   // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
     axios.post('http://13.125.241.180/api/chats/rooms/1', null, {
-      headers: { Authorization: `Bearer ${getCookie("accessToken")}` }
+      headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
     })
       .then((res) => {
         console.log(res)

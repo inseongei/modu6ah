@@ -12,7 +12,6 @@ import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 
 import axios from "axios";
-import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
 
 
@@ -49,7 +48,7 @@ function ReviewAdd() {
       await axios.post(
         "http://dlckdals04.shop/api/reviews",formData,
         {
-          headers: { Authorization: `Bearer ${getCookie("accessToken")}`,"Content-Type": "multipart/form-data"},
+          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}`,"Content-Type": "multipart/form-data"},
         })
       .then((res) => {
         console.log(res)

@@ -43,6 +43,8 @@ const KakaoMap = ({ searchPlace }) => {
         infowindow.setContent('<div style="padding:20px 0px 31px 10px;font-size:13px;">' + 
          place.place_name + '<br/>' + place.road_address_name +
         '</div>')
+
+
         infowindow.open(map, marker)
       })
     }

@@ -6,7 +6,6 @@ import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { GetRecruitAxois} from "../../redux/modules/Data";
 import axios from "axios";
-import { getCookie } from "../../shared/Cookie";
 
 function SCard() {
   const navigate = useNavigate();
@@ -64,7 +63,7 @@ function SCard() {
                               null,
                               {
                                 headers: {
-                                  Authorization: `Bearer ${getCookie(
+                                  Authorization: `Bearer ${localStorage.getItem(
                                     "accessToken"
                                   )}`,
                                 },

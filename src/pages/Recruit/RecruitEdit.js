@@ -12,7 +12,6 @@ import { ko } from "date-fns/esm/locale";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePostDB } from "../../redux/modules/post";
 import { useNavigate, useParams } from "react-router-dom";
-import { getCookie } from "../../shared/Cookie";
 import { detailPostDB } from "../../redux/modules/post";
 
 import Grid from "../../components/elements/Grid";
@@ -79,6 +78,7 @@ function RecruitEdit() {
                     onChange={(e) => setTitle(e.target.value)}
                     style={{ width: "450px" }}
                     type="text"
+                    value={detail.title}
                     placeholder={detail.title}
                   />
                 </div>
