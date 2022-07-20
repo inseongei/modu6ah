@@ -9,9 +9,11 @@ function PhotoList({ datas, currItem, onView, Detail }) {
 
   const { image, title } = currItem
 
+  
+
   return (
     <PhotoBox>
-      <div className='picture'>
+      {/* <div className='picture'>
         <div className='box'>
           <img className='mainPhoto'
             src={Detail.imageUrl[0]} alt="사진" /></div>
@@ -24,7 +26,7 @@ function PhotoList({ datas, currItem, onView, Detail }) {
             })}
           </ul>
         </div>
-      </div>
+      </div> */}
     </PhotoBox>
 
   )

@@ -30,6 +30,7 @@ import ProfileInsert from "../pages/Mypage/ProfileInsert";
 import WelcomeModal from "../modal/WelcomeModal";
 // import KaKaoMap from '../pages/Place/KakaoMap';
 import KakaoLogIn from "../pages/User/KakaoLogIn";
+import MyBookmark from '../pages/Mypage/MyBookmark'
 
 function App() {
   return (
@@ -55,10 +56,13 @@ function App() {
         {/* 육아 물품 리뷰 */}
         <Route path="/review" element={<Review />} />
         <Route path="/reviewadd" element={<ReviewAdd />} />
+        <Route path="/ReviewEdit/:reviewPostId" element={<ReviewEdit />} />
         <Route path="/reviewdetail/:reviewPostId" element={<ReviewDetail />} />
 
         <Route path="/manager/:nickname" element={<ProfileManager />} />
         <Route path="/profileinsert/:nickname" element={<ProfileInsert />} />
+        <Route path="/MyBookmark" element={<MyBookmark />} />
+
 
         {/* 이쪽 모달은 추후에 삭제 예정 */}
         <Route path="/welcome" element={<WelcomeModal />} />

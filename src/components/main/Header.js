@@ -69,6 +69,10 @@ const Header = () => {
     dispatch(GetMyPageAxios(nickname));
   };
 
+  const Bookmark = () =>{
+    navigate("/MyBookmark");
+  }
+
   // 상대방이 보낸 메시지를 알림 이벤트 경로로 데이터를 받음
   React.useEffect(() => {
     socket.off("notify").on("notify", (data) => {
@@ -280,7 +284,7 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="menuTwo">
-                  <div>
+                  <div onClick={Bookmark}>
                     <p>북마크관리</p>
                   </div>
                 </div>
