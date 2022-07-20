@@ -15,7 +15,6 @@ import Grid from "../../components/elements/Grid";
 import Map from "../../components/pages/Map";
 
 import axios from "axios";
-import io from "socket.io-client";
 import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
