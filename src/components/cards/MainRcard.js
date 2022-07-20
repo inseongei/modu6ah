@@ -4,11 +4,14 @@ import styled from 'styled-components';
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import {getCookie} from '../../shared/Cookie'
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 
-function RCard() {
-    const navigate = useNavigate();
-    const [Detail,setDetail] = React.useState()
+function MainRcard() {
+const navigate = useNavigate();
+const [Detail,setDetail] = React.useState()
+const Profile = localStorage.getItem("profileUrl");
+
     React.useEffect(()=>{
         axios
       .get("http://dlckdals04.shop/api/main", {
@@ -51,7 +54,7 @@ function RCard() {
                         {/* 카드 아래쪽 '아이디 및 내용물' */}
                         <div className='profile_box'>
                             <div className='detail_profile'>
-                                <img src={item.profileUrl} alt="프로필" />
+                                <img src={Profile} alt="프로필" />
                             </div>
                             <strong>{item.nickname}</strong>
                         </div>
@@ -71,6 +74,7 @@ grid-template-columns: repeat(auto-fit, 460px);
 gap: 3.6em;
 justify-content: center;
 align-items: center;
+
 .card {
 background: white;
 border-radius: 30px;
@@ -79,6 +83,7 @@ box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
 overflow: hidden;
 height: 570px;
 }
+
 .card-top {
     display: flex;
     justify-content: space-between;
@@ -87,6 +92,7 @@ height: 570px;
         font-weight: 700;
     }
 }
+
 .card-top p {
  display: flex;
  margin-top: 8px;
@@ -108,15 +114,18 @@ height: 570px;
 a {
     margin-left: 51px;
 }
+
 .card-body {
     width: 100%;
     cursor: pointer;
     text-align: center;
 }
+
 .image{
     border-radius: 25px;
     overflow: hidden;
 }
+
 .card-body img {
     width: 80%;
     height: 270px;
@@ -124,6 +133,7 @@ a {
     object-fit: cover;
     border-radius: 25px;
 }
+
 .profile_box{
     display: flex;
     margin-top: 15px;
@@ -135,6 +145,7 @@ a {
     border-radius:50%;
     margin-left: 10px;
 }
+
 .detail_profile{
     border-radius:50%;
     /* display:flex; */
@@ -148,10 +159,12 @@ a {
     margin-top: 12px;
     margin-left: 10px;
   }
+
   .card-body p {
     margin-top: 10px;
     margin-left: 5px;
   }
+  
   .content { 
     width: 100%;
     height: 80px;
@@ -163,4 +176,4 @@ a {
 }
 `;
 
-export default RCard
+export default MainRcard;
