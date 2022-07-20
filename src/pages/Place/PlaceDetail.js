@@ -4,17 +4,15 @@ import styled from "styled-components";
 // elements & components
 import Header from "../../components/main/Header";
 import Place from "./Place";
-import Comment from "../../components/pages/Comment";
-import KakaoMap from "../../components/placepage/KakaoMap";
+import PlaceComment from "../../components/pages/PlaceComment";
+import KakaoMap from "../../components/pages/KakaoMap";
 import { GrLocation } from "react-icons/gr";
 
 import axios from "axios";
 import data from "../../shared/data";
-import PhotoList from "../../components/placepage/PhotoList";
-import Content from "../../components/placepage/Content";
 import { useDispatch, useSelector } from "react-redux";
-import { detailPhotoDB } from "../../redux/modules/placepage";
 import { useNavigate, useParams } from "react-router-dom";
+import Footer from "../../components/main/Footer";
 
 
 const PlaceDetail = () => {
@@ -54,7 +52,6 @@ const PlaceDetail = () => {
         </Title>
         <Box>
           <div className='Box'>
-
             <div className='imgBox'>
               <div className='Bigimg'>
                 <img src={detail.imageUrl[0]} alt="사진" />
@@ -101,7 +98,6 @@ const PlaceDetail = () => {
               <Btn>
                 <button
                   className="btn"
-
                 >
                   수정
                 </button>
@@ -112,11 +108,12 @@ const PlaceDetail = () => {
             </ContentBox>
           </div>
           <div className="mapbox">
-            <KakaoMap />
+            <KakaoMap/>
           </div>
         </Box>
-        <Comment />
+        <PlaceComment />
       </Container>
+      <Footer/>
     </>
 
   )
