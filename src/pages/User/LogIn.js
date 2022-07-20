@@ -46,6 +46,7 @@ function LogIn() {
         });
         localStorage.setItem("profileUrl", response.data.profileUrl);
         localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem('nickname',response.data.nickname)
         setCookie("accessToken", response.data.accessToken); // del
         setCookie("nickname", response.data.nickname);
       })

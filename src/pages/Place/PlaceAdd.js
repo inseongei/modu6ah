@@ -12,6 +12,7 @@ import Grid from "../../components/elements/Grid";
 import KakaoMap from '../../components/pages/KakaoMap'
 
 import axios from "axios";
+import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
 import { createPhotoDB } from "../../redux/modules/photoscard";
 import { useDispatch, useSelector } from "react-redux";

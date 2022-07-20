@@ -54,7 +54,6 @@ const PlaceDetail = () => {
         </Title>
         <Box>
           <div className='Box'>
-
             <div className='imgBox'>
               <div className='Bigimg'>
                 <img src={detail.imageUrl[0]} alt="사진" />
