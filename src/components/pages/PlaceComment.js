@@ -229,7 +229,7 @@ margin-top:30px;
   }
 
   .comment_box {
-    margin-top: 9px;
+    margin-top: 15px;
     margin-left: 30px;
   }
 
