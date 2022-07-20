@@ -51,7 +51,7 @@ function App() {
         {/* 장소 추천 */}
         <Route path="/place" element={<Place />} />
         <Route path="/placeadd" element={<PlaceAdd />} />
-        <Route path="/placedetail" element={<PlaceDetail />} />
+        <Route path="/placedetail/:placePostId" element={<PlaceDetail />} />
 
         {/* 육아 물품 리뷰 */}
         <Route path="/review" element={<Review />} />

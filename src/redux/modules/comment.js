@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getCookie } from "../../shared/Cookie";
 
 // Actions
 const CREATE = "comment/CREATE";
@@ -34,7 +33,7 @@ export const createPostDB = (comment_data) => {
   return async function (dispatch) {
     axios
       .post(`http://localhost:5001/posts`, comment, {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((response) => {
         dispatch(createPost(response.data));

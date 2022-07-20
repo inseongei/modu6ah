@@ -9,7 +9,6 @@ import chatnew from "../../images/chatnew.png";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeCookie, getCookie } from "../../shared/Cookie";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 import io from "socket.io-client";
 import { toast } from "react-toastify";
@@ -46,8 +45,6 @@ const Header = () => {
       confirmButtonText: "확인",
     }).then((result) => {
       if (result.isConfirmed) {
-        removeCookie("accessToken");
-        removeCookie("nickname");
         localStorage.removeItem("profileUrl");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("nickname");

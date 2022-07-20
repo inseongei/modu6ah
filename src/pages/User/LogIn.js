@@ -7,7 +7,6 @@ import Header from "../../components/main/Header";
 import Grid from "../../components/elements/Grid";
 
 import axios from "axios";
-import { setCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
 import { REDIRECT_URI, REST_API_KEY } from "../../shared/kakaoData";
 // import KaKaoMap from '../Place/KakaoMap';
@@ -47,8 +46,6 @@ function LogIn() {
         localStorage.setItem("profileUrl", response.data.profileUrl);
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem('nickname',response.data.nickname)
-        setCookie("accessToken", response.data.accessToken); // del
-        setCookie("nickname", response.data.nickname);
       })
       .catch((error) => {
         alert("로그인을 다시 해주세요");

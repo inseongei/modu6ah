@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../../components/main/Header";
-import { getCookie } from "../../shared/Cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 
 const ProfileManager = () => {
   // 사용 변수들 지정
-  const Mynickname = getCookie("nickname");
+  const Mynickname = localStorage.getItem("nickname");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let { nickname } = useParams();

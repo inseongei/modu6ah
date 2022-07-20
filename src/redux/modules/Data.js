@@ -1,6 +1,5 @@
 // Data.js   모듈 안에 있는 리듀서를 묶어서 스토어를 만드는 것
 import axios from "axios";
-import { getCookie } from "../../shared/Cookie";
 import io from "socket.io-client";
 
 const socket = io.connect("http://dlckdals04.shop");
@@ -72,6 +71,8 @@ export const GetMainAxois = () => {
   };
 };
 
+
+
 export const GetMainLogin = () => {
   return function (dispatch) {
     axios
@@ -81,6 +82,12 @@ export const GetMainLogin = () => {
       });
   };
 };
+
+
+
+
+
+
 
 
 export const GetRecruitAxois = () => {
@@ -101,7 +108,7 @@ export const GetReviewAxois = (reviewPostId) => {
   return function (dispatch) {
     axios
       .get("http://dlckdals04.shop/api/reviews/" + reviewPostId , {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((res) => {
         console.log(res)
@@ -111,6 +118,8 @@ export const GetReviewAxois = (reviewPostId) => {
       })
   };
 };
+
+
 
 
 

@@ -6,30 +6,19 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 
-function RCard() {
-    const navigate = useNavigate();
-    const [Detail,setDetail] = React.useState()
-    React.useEffect(()=>{
-        axios
-      .get("http://dlckdals04.shop/api/main", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-      })
-      .then((res) => {
-        console.log(res)
-        setDetail(res.data.reviewPosts)
-      });
-    },[])
+function BookLcard() {
+
     return (
         <Container>
-            {Detail&&Detail.map((item, index) => (
+         
                 <div className='card'
-                    key={index}>
+                  >
 
                     {/* 카드 위쪽 '타이틀' */}
                     <div className='card-top'>
                         <div>
-                        <h3>{item.title}</h3>
-                        <p>{item.productType}</p>
+                        <h3></h3>
+                        <p></p>
                         </div>
 
                         <div>
@@ -37,30 +26,25 @@ function RCard() {
                         </div>
 
                     </div>
-                    <a><MdOutlinePlace /> {item.url}</a>
+                    <a><MdOutlinePlace /> </a>
                     {/* 카드 중간 '이미지'*/}
                     <div className='card-body' 
-                    onClick={() => {
-                        navigate('/reviewdetail/'
-                            + item.reviewPostId
-                        )
-                    }}>
+                    >
                         <div className='image'>
-                            <img src={item.imageUrl[0]} alt="사진" />
+                         
                         </div>
                         {/* 카드 아래쪽 '아이디 및 내용물' */}
                         <div className='profile_box'>
                             <div className='detail_profile'>
-                                <img src={item.profileUrl} alt="프로필" />
+                               
                             </div>
-                            <strong>{item.nickname}</strong>
+                            <strong></strong>
                         </div>
                         <div className='content'>
-                            <p>{item.content}</p>
+                            <p></p>
                         </div>
                     </div>
                 </div>
-            ))}
         </Container>
     )
 }
@@ -163,4 +147,4 @@ a {
 }
 `;
 
-export default RCard
+export default BookLcard;

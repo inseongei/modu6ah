@@ -3,12 +3,11 @@ import Modal from "react-modal";
 import "../../shared/App.css";
 import { BiLogOut } from "react-icons/bi";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { getCookie } from "../../shared/Cookie";
 
 const OneToOneChat = ({ open, onClose, socket }) => {
   const [currentMessage, setCurrentMessage] = React.useState("");
   const input_Ref = React.useRef();
-  const nickname = getCookie("nickname");
+  const nickname = localStorage.getItem("nickname");
   const [NowChat, setNowChat] = React.useState([]);
   const [roomId, setRoomId] = React.useState();
   const Img_Url = localStorage.getItem("profileUrl");
