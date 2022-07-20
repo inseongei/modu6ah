@@ -8,7 +8,6 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, getDocs, addDoc, getDoc } from "firebase/firestore";
 import { db, storage } from "../../shared/firebase";
 import axios from "axios";
-import { setCookie } from "../../shared/Cookie";
 
 const ProfileInsert = () => {
   const nickname = localStorage.getItem("nickname");

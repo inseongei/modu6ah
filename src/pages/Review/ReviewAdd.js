@@ -44,7 +44,7 @@ function ReviewAdd() {
     formData.append('productType',region)
     formData.append('url',address)
 
-    if(files.length < 6){
+    if(files.length < 4){
       await axios.post(
         "http://dlckdals04.shop/api/reviews",formData,
         {
@@ -52,12 +52,14 @@ function ReviewAdd() {
         })
       .then((res) => {
         console.log(res)
+        alert('게시글 작성 성공')
+        navigate('/Review')
       })
       .catch((err) => {
           console.log(err)
       });
     }else{
-      alert('사진은 5개까지만 가능합니다.')
+      alert('사진은 3개까지만 가능합니다.')
     }
     }
    

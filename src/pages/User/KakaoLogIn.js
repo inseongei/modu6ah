@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { REDIRECT_URI, REST_API_KEY } from "../../shared/kakaoData";
 import Swal from "sweetalert2";
-import { setCookie } from "../../shared/Cookie";
 
 const KakaoLogIn = () => {
   const navigate = useNavigate();
@@ -56,7 +55,6 @@ const KakaoLogIn = () => {
                 if (result.isConfirmed) {
                   localStorage.setItem("profileUrl", res.data.profileUrl);
                   localStorage.setItem("accessToken", res.data.accessToken);
-                  setCookie('accessToken',res.data.accessToken)
                   localStorage.setItem("nickname", res.data.nickname);
                   navigate("/");
                   window.location.reload();

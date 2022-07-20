@@ -9,6 +9,19 @@ import axios from "axios";
 
 
 function BookScard() {
+
+    React.useEffect(()=>{
+        axios.get('http://dlckdals04.shop/api/mypage/bookmark',{
+            headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+          }).then((res)=>{
+            console.log(res)
+          }).catch((err)=>{
+            console.log(err)
+          })
+    },[])
+
+
+
  
   return (
     <>
