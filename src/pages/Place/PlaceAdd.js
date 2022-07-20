@@ -2,122 +2,111 @@ import React, { useState } from "react";
 
 //style
 import styled from "styled-components";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
-import { FaStar } from "react-icons/fa";
 import { AiOutlineFileImage } from "react-icons/ai";
 
 //elements & components
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
-import Map from "../../components/pages/Map";
+import KakaoMap from '../../components/pages/KakaoMap'
 
 import axios from "axios";
 import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-// import { createCardDB } from '../../redux/modules/card';
+import { createPhotoDB } from "../../redux/modules/photoscard";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { db, storage } from "../../shared/firebase";
-import { getDownloadURL } from "firebase/storage";
 
 function PlaceAdd() {
   const [title, setTitle] = useState("");
   const [region, setRegion] = useState("");
   const [content, setContent] = useState("");
+  const [address, setAddress] = useState("")
+  const [place, setplace] = useState("");
   const [imageSrc, setImageSrc] = useState([]);
-  const image_ref = useState(null);
-  const image_link_ref = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const colors = {
-    orange: "#FFBA5A",
-    grey: "#a9a9a9",
+  const addPost = () => {
+    const data = {
+      title,
+      content,
+      region,
+    };
+    dispatch(createPhotoDB(data));
+    console.log(data);
   };
 
-  const [currentValue, setCurrentValue] = useState(0);
-  const [hoverValue, setHoverValue] = useState(undefined);
-  const stars = Array(5).fill(0);
+  // axios.Post 버튼
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    e.persist();
+    let files = e.target.profile_files.files;
+    let formData = new FormData();
+    // 반복문 돌려서 다중 이미지 처리
+    for (let i = 0; i < files.length; i++) {
+      formData.append("imageUrl", files[i]);
+    }
 
-  const handleClick = (value) => {
-    setCurrentValue(value);
-  };
+    console.log(files.length)
 
-  const handleMouseOver = (newHoverValue) => {
-    setHoverValue(newHoverValue);
-  };
+    // 제목,내용,제품종류,사이트 데이터 => 폼데이터 변환
+    formData.append('title', title)
+    formData.append('content', content)
+    formData.append('productType', region)
+    formData.append('url', address)
 
-  const handleMouseLeave = () => {
-    setHoverValue(undefined);
-  };
-  
+    if (files.length < 6) {
+      await axios.post(
+        "http://dlckdals04.shop/api/reviews", formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            "Content-Type": "multipart/form-data"
+          },
+        })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+    } else {
+      alert('사진은 5개까지만 가능합니다.')
+    }
+  }
 
+  // 이미지 미리보기 
   const handleImageChange = (e) => {
     const imageLists = e.target.files;
     let imageUrlLists = [...imageSrc];
-
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
-
       imageUrlLists.push(currentImageUrl);
-
-      // console.log("filesArray: ", imageUrlLists);
     }
     if (imageUrlLists.length > 5) {
       imageUrlLists = imageUrlLists.slice(0, 5);
     }
-
     setImageSrc(imageUrlLists);
   };
 
-  //휴지통 아이콘 클릭시 이미지 삭제
+  // 이미지 미리보기에서  삭제 
   const handleDeleteImage = (id) => {
     setImageSrc(imageSrc.filter((_, index) => index !== id));
   };
 
-  const addPost = async (e) => {
-    const upload_file = await uploadBytes(
-      ref(storage, `images/${image_ref.current.files[0].name}`),
-      image_ref.current.files[0]
-    );
-    // console.log(upload_file); // ref 값을 가져옴
 
-    const file_url = await getDownloadURL(upload_file.ref);
-    // console.log(file_url);
-    image_link_ref.current = { url: file_url };
+  const onChange = (e) => {
+    setRegion(e.target.value)
+  }
 
-    axios
-      .post(
-        "http://localhost:5001/posts",
-        {
-          title,
-          content,
-          region,
-          image: image_ref.current?.url,
-        },
-        { headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
-      )
+  const searchPlace = () => {
+    setplace(region)
+  }
 
-      .then(function (res) {
-        // console.log(res.data);
-        window.alert("게시물 작성을 성공했습니다.");
-        // console.log("게시물 성공");
-        window.location.href = "/place";
-      })
-      .catch((error) => {
-        console.log(error.message);
-        window.alert("게시물 작성이 실패했습니다.");
-        window.location.href = "/placeadd";
-      });
-  };
-
-
+  
   return (
     <>
       <Header />
@@ -127,22 +116,21 @@ function PlaceAdd() {
             <div className="images">
               <div className="title">대표이미지</div>
             </div>
-            <input
-              type="file"
-              multiple
-              ref={image_ref}
-              onChange={handleImageChange}
-              accept="image/jpg,image/png,image/jpeg,image/gif"
-              id="profile_img_upload"
-              style={{ display: "none" }}
-            />
+            <form onSubmit={(e) => onSubmit(e)}>
+              <input
+                type="file"
+                name="profile_files"
+                multiple="multiple"
+                onChange={handleImageChange}
+              />
+              <button type="submit">제출</button>
+            </form>
+
             <div className="imageBox">
-              <label for="profile_img_upload">
+              <label htmlFor="profile_img_upload">
                 <AiOutlineFileImage />
               </label>
-              {/* <div className='img'>
-              {renderPhotos(imageSrc)}
-              </div> */}
+
               {/* 이미지 미리보기 */}
               {imageSrc.map((image, id) => (
                 <div key={id}>
@@ -150,6 +138,7 @@ function PlaceAdd() {
                   <button onClick={() => handleDeleteImage(id)}>삭제</button>
                 </div>
               ))}
+
             </div>
             <div className="mainBox">
               <div className="card-left">
@@ -157,45 +146,43 @@ function PlaceAdd() {
                   <strong>제목</strong>
                   <input
                     type="text"
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={(e) => 
+                      setTitle(e.target.value)}
                   />
                 </div>
-               
-                  <Map/>
-            
+                {/* kakaoMap */}
+                <MapSearch>
+                  <strong>위치</strong>
+                  <SearchInput
+                    placeholder="검색어를 입력하세요"
+                    onChange={onChange}
+                    value={region} />
+                  <button
+                    onClick={searchPlace}
+                  >검색</button>
+                </MapSearch>
 
-                <div className="star">
-                  <strong>별점</strong>
-                  {stars.map((_, index) => {
-                    return (
-                      <FaStar
-                        key={index}
-                        size={24}
-                        onClick={() => handleClick(index + 1)}
-                        onMouseOver={() => handleMouseOver(index + 1)}
-                        onMouseLeave={handleMouseLeave}
-                        color={
-                          (hoverValue || currentValue) > index
-                            ? colors.orange
-                            : colors.grey
-                        }
-                        style={{
-                          marginRight: 10,
-                          cursor: "pointer",
-                        }}
-                      />
-                    );
-                  })}
-                  <span>4.0점</span>
-                </div>
+                    {/* <>
+                    <InfoBox>
+                      <div className='place_name'>
+                        장소명: {}
+                      </div>
+                      <div className='address'>
+                        주소: {}
+                      </div>
+                    </InfoBox>
+                  </> */}
+
+                <KakaoMap
+                  searchPlace={place}
+                  
+                />
+                
+
               </div>
-  
               <div className="card-right">
-                <textarea onChange={(e) => setRegion(e.target.value)} />
-                {/* <span className='btnList'>
-                      <button className='ParkBtn'> 주차가능</button>
-                      <button className='KidBtn'> 예스키즈존</button>
-                    </span> */}
+                <textarea onChange={(e) => setContent(e.target.value)} />
+
               </div>
             </div>
             <Btn>
@@ -207,7 +194,9 @@ function PlaceAdd() {
               >
                 취소{" "}
               </button>
-              <button className="btn" onClick={addPost}>
+              <button className="btn" 
+              onClick={addPost}
+              >
                 등록하기
               </button>
             </Btn>
@@ -322,6 +311,32 @@ const Place = styled.div`
   .star > strong {
     margin-right: 15px;
   }
+`;
+
+const MapSearch = styled.div`
+margin-left: 28px;
+margin-bottom: 20px;
+ 
+button{ 
+  margin-left: 10px;
+}
+`;
+
+const SearchInput = styled.input`
+border: 1px solid #e4e4e4;
+border-radius: 10px;
+width: 330px;
+height: 50px;
+margin-left: 20px;
+outline: none;
+
+::placeholder {
+  padding-left: 8px;
+}
+`;
+
+const InfoBox = styled.div`
+margin-bottom: 10px;
 `;
 
 const Btn = styled.div`
