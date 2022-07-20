@@ -4,7 +4,7 @@ import styled from "styled-components";
 // elements & components
 import Header from "../../components/main/Header";
 import Place from "./Place";
-import Comment from "../../components/elements/Comment";
+import Comment from "../../components/pages/Comment";
 import KakaoMap from "../../components/placepage/KakaoMap";
 import { GrLocation } from "react-icons/gr";
 
