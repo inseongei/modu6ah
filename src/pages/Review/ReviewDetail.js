@@ -4,12 +4,13 @@ import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 
 import Header from '../../components/main/Header'
-import Comment from '../../components/elements/Comment'
+import ReviewComment from '../../components/pages/ReviewComment'
 import data from '../../shared/data';
 import PhotoList from '../../components/pages/PhotoList';
 import Content from '../../components/pages/Content';
 import {useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Footer from '../../components/main/Footer';
 
 const ReviewDetail = () => {
 const nickname = localStorage.getItem('nickname')
@@ -91,7 +92,8 @@ const navigate = useNavigate()
         </ContentBox>
         </div>
       </Container>
-      <Comment />
+      <ReviewComment />
+      <Footer/>
     </>
     
   )
@@ -146,37 +148,6 @@ const Container = styled.div`
   height: 100%;
   border-radius: 30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 `
 
 const ContentBox = styled.div`
