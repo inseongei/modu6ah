@@ -4,19 +4,21 @@ import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 
 import Header from '../../components/main/Header'
-import Comment from '../../components/pages/Comment'
+import ReviewComment from '../../components/pages/ReviewComment'
 import data from '../../shared/data';
 import PhotoList from '../../components/pages/PhotoList';
 import Content from '../../components/pages/Content';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import {useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { getCookie } from '../../shared/Cookie';
+import Footer from '../../components/main/Footer';
 
 const ReviewDetail = () => {
 const nickname = getCookie('nickname')
 let {reviewPostId} = useParams();
 const [Detail, setDetail] = React.useState()
 const navigate = useNavigate()
+
   React.useEffect(()=>{
     axios.get('http://dlckdals04.shop/api/reviews/' + reviewPostId )
     .then((res)=>{
@@ -79,8 +81,8 @@ const navigate = useNavigate()
                 <div className='content'>
                     <p>{Detail.content}</p>
                 </div>
-                {nickname ? <div className='btnBox'>
-                  <button>수정</button>
+                {nickname === Detail.nickname? <div className='btnBox'>
+                  <button onClick={()=>{navigate('/ReviewEdit/' + reviewPostId)}}>수정</button>
                   <button onClick={deleteReview}>삭제</button>
                 </div>
                 : 
@@ -91,7 +93,8 @@ const navigate = useNavigate()
         </ContentBox>
         </div>
       </Container>
-      <Comment />
+      <ReviewComment />
+      <Footer/>
     </>
     
   )
@@ -146,37 +149,6 @@ const Container = styled.div`
   height: 100%;
   border-radius: 30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 `
 
 const ContentBox = styled.div`
