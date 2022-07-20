@@ -4,7 +4,7 @@ import styled from "styled-components";
 // elements & components
 import Header from "../../components/main/Header";
 import Place from "./Place";
-import Comment from "../../components/elements/Comment";
+import PlaceComment from "../../components/pages/PlaceComment";
 import KakaoMap from "../../components/pages/KakaoMap";
 import { GrLocation } from "react-icons/gr";
 
@@ -12,6 +12,7 @@ import axios from "axios";
 import data from "../../shared/data";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import Footer from "../../components/main/Footer";
 
 
 const PlaceDetail = () => {
@@ -97,7 +98,6 @@ const PlaceDetail = () => {
               <Btn>
                 <button
                   className="btn"
-
                 >
                   수정
                 </button>
@@ -108,11 +108,12 @@ const PlaceDetail = () => {
             </ContentBox>
           </div>
           <div className="mapbox">
-            <KakaoMap />
+            <KakaoMap/>
           </div>
         </Box>
-        <Comment />
+        <PlaceComment />
       </Container>
+      <Footer/>
     </>
 
   )
