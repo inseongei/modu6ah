@@ -14,9 +14,6 @@ import KakaoMap from '../../components/pages/KakaoMap'
 import axios from "axios";
 import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
-import { createPhotoDB } from "../../redux/modules/photoscard";
-import { useDispatch, useSelector } from "react-redux";
-
 
 function PlaceAdd() {
   const [title, setTitle] = useState("");
@@ -27,17 +24,6 @@ function PlaceAdd() {
   const [imageSrc, setImageSrc] = useState([]);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const addPost = () => {
-    const data = {
-      title,
-      content,
-      region,
-    };
-    dispatch(createPhotoDB(data));
-    console.log(data);
-  };
 
   // axios.Post 버튼
   const onSubmit = async (e) => {
@@ -52,15 +38,17 @@ function PlaceAdd() {
 
     console.log(files.length)
 
-    // 제목,내용,제품종류,사이트 데이터 => 폼데이터 변환
+    // 제목,내용,장소,별점 데이터 => 폼데이터 변환
     formData.append('title', title)
     formData.append('content', content)
-    formData.append('productType', region)
-    formData.append('url', address)
+    formData.append('region', region)
+    formData.append('star', '3')
+    
+    // formData.append('url', address)
 
     if (files.length < 6) {
       await axios.post(
-        "http://dlckdals04.shop/api/reviews", formData,
+        "http://dlckdals04.shop/api/places", formData,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -92,12 +80,12 @@ function PlaceAdd() {
     setImageSrc(imageUrlLists);
   };
 
-  // 이미지 미리보기에서  삭제 
+  // 이미지 미리보기에서 삭제 
   const handleDeleteImage = (id) => {
     setImageSrc(imageSrc.filter((_, index) => index !== id));
   };
 
-
+// KakaoMap 검색
   const onChange = (e) => {
     setRegion(e.target.value)
   }
@@ -106,7 +94,6 @@ function PlaceAdd() {
     setplace(region)
   }
 
-  
   return (
     <>
       <Header />
@@ -123,8 +110,7 @@ function PlaceAdd() {
                 multiple="multiple"
                 onChange={handleImageChange}
               />
-              <button type="submit">제출</button>
-            </form>
+              {/* <button type="submit">제출</button> */}
 
             <div className="imageBox">
               <label htmlFor="profile_img_upload">
@@ -172,12 +158,11 @@ function PlaceAdd() {
                       </div>
                     </InfoBox>
                   </> */}
-
-                <KakaoMap
-                  searchPlace={place}
-                  
-                />
                 
+                   <KakaoMap
+                  searchPlace={place}
+                />
+             
 
               </div>
               <div className="card-right">
@@ -195,11 +180,12 @@ function PlaceAdd() {
                 취소{" "}
               </button>
               <button className="btn" 
-              onClick={addPost}
+              type="submit"
               >
                 등록하기
               </button>
             </Btn>
+             </form>
           </div>
         </Place>
       </Grid>
