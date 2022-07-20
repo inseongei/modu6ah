@@ -90,15 +90,14 @@ a {
     margin-left: 51px;
 }
 .card-body {
-    width: 360px;
-    margin-left: 30px;
+    width: 100%;
 }
 .image{
     border-radius: 25px;
     overflow: hidden;
 }
 .card-body img {
-    width: 100%;
+    width: 90%;
     height: 270px;
     margin-top: 3px;
     object-fit: cover;

@@ -39,8 +39,6 @@ function ReviewAdd() {
       formData.append("imageUrl", files[i]);
     }
 
-    console.log(files.length)
-
     // 제목,내용,제품종류,사이트 데이터=> 폼데이터 변환
     formData.append('title',title)
     formData.append('content',content)

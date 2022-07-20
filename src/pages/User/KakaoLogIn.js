@@ -56,6 +56,7 @@ const KakaoLogIn = () => {
                 if (result.isConfirmed) {
                   localStorage.setItem("profileUrl", res.data.profileUrl);
                   localStorage.setItem("accessToken", res.data.accessToken);
+                  setCookie('accessToken',res.data.accessToken)
                   localStorage.setItem("nickname", res.data.nickname);
                   navigate("/");
                   window.location.reload();

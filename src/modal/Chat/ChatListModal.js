@@ -21,7 +21,6 @@ const ChatListModal = ({ open, onClose }) => {
   const profileUrl = localStorage.getItem("profileUrl");
   const token = getCookie("accessToken");
 
-  console.log(realroom)
   React.useEffect(() => {
     axios
       .get("http://dlckdals04.shop/api/chats/rooms",  {

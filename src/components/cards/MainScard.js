@@ -6,21 +6,20 @@ import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { GetMainAxois,GetMainLogin } from "../../redux/modules/Data";
 import axios from "axios";
-import { getCookie } from "../../shared/Cookie";
+
 
 function MainScard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = getCookie('accessToken')
+  const token = localStorage.getItem('accessToken')
 
-
-  
   React.useEffect(() => {
     token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin())
   }, []);
 
   const post = useSelector((state) => state.Data.Profile);
-
+  // const [bookmark,setbookmark] = React.useState(post.recruitPosts.map((item,idx)=>(item.bookmarkStatus)))
+  // console.log(bookmark)
 
   if (!post) {
     return <div></div>;
@@ -52,7 +51,7 @@ function MainScard() {
                               })
                             .then(() => {
                               window.location.reload();
-                            });
+                            })
                         }}
                       ></BsFillBookmarkFill>
                     ) : (

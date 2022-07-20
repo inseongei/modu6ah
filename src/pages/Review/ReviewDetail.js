@@ -8,15 +8,15 @@ import Comment from '../../components/elements/Comment'
 import data from '../../shared/data';
 import PhotoList from '../../components/pages/PhotoList';
 import Content from '../../components/pages/Content';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { getCookie } from '../../shared/Cookie';
 
 const ReviewDetail = () => {
+const nickname = getCookie('nickname')
 let {reviewPostId} = useParams();
 const [Detail, setDetail] = React.useState()
-const [datas, setDatas] = useState(data)
-const [currItem, setCurrItem] = useState(datas[0])
-
+const navigate = useNavigate()
   React.useEffect(()=>{
     axios.get('http://dlckdals04.shop/api/reviews/' + reviewPostId )
     .then((res)=>{
@@ -29,23 +29,33 @@ const [currItem, setCurrItem] = useState(datas[0])
   //   setCurrItem(datas.find(item => item.id === id))
   // }
 
-
-
+  const deleteReview = () =>{
+  axios.delete('http://dlckdals04.shop/api/reviews/' + reviewPostId ,{
+    headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+  }).then((res)=>{
+    navigate('/review')
+  })
+  .catch((err)=> console.log(err))
+}
   if (!Detail) {
     return <div></div>;
   }
-
-
   return (
     <>
     <Header/>
     <Container>
         <div className='Box'>
-        <PhotoList
-            datas={datas}
-            currItem={currItem}
-            Detail={Detail}
-          />
+          <div className='imgBox'>
+            <div className='Bigimg'><img src={Detail.imageUrl[0]} alt ="사진"/></div>
+            <div className='imgSmall'>
+              {Detail.imageUrl.map((item,idx)=>{
+                return(
+                  <div key={idx}><img src={item} alt ="사진"/></div>
+                )
+              })}
+            </div>
+
+          </div>
           <ContentBox>
             <div className='box_top'>
                 <div className='title'>
@@ -69,6 +79,14 @@ const [currItem, setCurrItem] = useState(datas[0])
                 <div className='content'>
                     <p>{Detail.content}</p>
                 </div>
+                {nickname ? <div className='btnBox'>
+                  <button>수정</button>
+                  <button onClick={deleteReview}>삭제</button>
+                </div>
+                : 
+                null
+                }
+
             </div>
         </ContentBox>
         </div>
@@ -90,6 +108,75 @@ const Container = styled.div`
   height: 70vh;
   display:flex;
 }
+.imgBox{
+  width:50%;
+  display: flex;
+  flex-direction:column;
+}
+
+.Bigimg{
+  width: 50%;
+  height: 50%; 
+  margin: auto;
+  border-radius: 30px;
+}
+
+.Bigimg >img{
+  width:100%;
+  height: 100%;
+  border-radius: 30px;
+}
+
+.imgSmall{
+  height: 30%;
+  display: flex;
+}
+
+
+.imgSmall >div {
+  border: 1px solid black;
+  margin: 20px auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 30px;
+}
+
+.imgSmall >div > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 `
 
 const ContentBox = styled.div`
@@ -97,10 +184,13 @@ const ContentBox = styled.div`
  height: 70vh;
  
 .box_top{
-   height: 45%;
+   height: 25%;
+   position: relative;
+   left:40px;
+
  }
  .box_top > div{
-   height: 33.5%;
+   height: 33%;
  }
       
 .title{
@@ -111,7 +201,7 @@ const ContentBox = styled.div`
   font-weight: 700;
   font-size: 30px;
   line-height: 36px;
-  padding:30px;
+  padding-left:30px;
  }
 
 .title > span {
@@ -173,9 +263,10 @@ const ContentBox = styled.div`
   }
   .box{
   height: 55%;
+  margin-top:50px;
   display:flex;
   align-items:center;
-  justify-content:center;
+  flex-direction:column;
 }
 .content{
   border: 2px solid #E4E4E4;
@@ -206,8 +297,20 @@ height: 80%;
     background-color:#ffa000;
   }
   
-  .btnBox{
-    display:flex;
+  .btnBox > button{
+    background: #3C3C3C;
+    border-radius: 30px;
+    color:#fff;
+    width: 195px;
+    height: 48px;
+    border: none;
+  }
+
+  .btnBox {
+    width: 100%;
+    height: 100px;
+    align-items: center;
+    display: flex;
     justify-content:space-around;
   }
   
@@ -221,42 +324,6 @@ height: 80%;
     background-color:#c5e1a5; 
   }
 `;
-const PhotoBox = styled.div`
-display: flex;
-width: 55%;
 
-.picture{
-  width:100%;
-  height: 800px;
-}
-
-.box{
-  height: 500px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.small{
-  
-  widht: 40px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.small > ul{
-  display: flex;
-}
-
-
-.mainPhoto{
-  border:1px solid black;
-  margin-left: 35px;
-  width:65%;
-  height:400px;
-  border-radius: 30px;
-}
-`;
 
 export default ReviewDetail;
