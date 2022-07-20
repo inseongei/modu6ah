@@ -5,7 +5,7 @@ import Header from "../../components/main/Header";
 import OneToOneChat from "../../modal/Chat/OneToOneChat";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
-import Comment from "../../components/elements/Comment";
+import Comment from "../../components/pages/Comment";
 
 import axios from "axios";
 import io from "socket.io-client";
