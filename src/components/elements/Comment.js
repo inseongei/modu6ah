@@ -1,8 +1,8 @@
-import axios from 'axios';
-import React,{useState} from 'react'
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react'
 import styled from 'styled-components'
+
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getCookie } from "../../shared/Cookie";
 
 const Comment = (props) => {
@@ -11,57 +11,57 @@ const Comment = (props) => {
   const nickname = getCookie("nickname");
 
   const navigate = useNavigate();
-  let { recruitPostId, recruitCommentId } = useParams();
-
-  
+  let { recruitPostId } = useParams();
 
   //댓글 작성
   const addComment = () => {
     const comment_data = {
       comment, nickname
     }
-    
-    axios.post('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments', comment_data
-                , 
-                 { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
-                .then((res) => {
-                  console.log(res)
-                  window.alert('댓글 작성 성공')
-                })
-                .catch((err) => {
-                  // alert("로그인 후 이용 가능한 기능입니다.");
-                    console.log(err.response.data.message);
-                })
+    axios.post('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments',
+      comment_data,
+      { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } })
+      .then((res) => {
+        console.log(res)
+        window.alert('댓글 작성 성공')
+      })
+      .catch((err) => {
+        // alert("로그인 후 이용 가능한 기능입니다.");
+        console.log(err.response.data.message);
+      })
   }
 
+  // 댓글 조회
   React.useEffect(() => {
-    axios.get('http://dlckdals04.shop/api/recruits/' + recruitPostId ,
-    { headers : { Authorization: `Bearer ${getCookie("accessToken")}`}})
-    .then((res) => {
-      setState(res.data.recruitComments)
-      console.log(res.data.recruitComments)
-     })
-    .catch((err) => {
-      console.log(err)
-    });
+    axios.get('http://dlckdals04.shop/api/recruits/' + recruitPostId,
+      { headers: { Authorization: `Bearer ${getCookie("accessToken")}` } })
+      .then((res) => {
+        setState(res.data.recruitComments)
+        // console.log(res.data.recruitComments)
+      })
+      .catch((err) => {
+        // console.log(err)
+      });
   }, []);
 
+  //댓글 삭제
   const deleteComment = (e) => {
-    console.log(e.target.id);
-      axios
-        .delete('http://dlckdals04.shop/api/recruits/'+ recruitPostId + '/comments/' + e.target.id, {
-          headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
-        })
-        .then((response) => {
-          console.log(response);
-          alert("삭제가 완료되었습니다.");
-        })
-        .catch((error) => {
-          alert("게시글을 삭제할 권한이 없습니다.");
-          console.log(error)
+    // console.log(e.target.id);
+    axios
+      .delete('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments/' + e.target.id, {
+        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+      })
+      .then((response) => {
+        console.log(response);
+        alert("삭제가 완료되었습니다.");
+      })
+      .catch((error) => {
+        alert("게시글을 삭제할 권한이 없습니다.");
+        console.log(error)
 
-        });
+      });
   };
+
   return (
     <CommentBox>
       <div className='comment_section'>
@@ -69,64 +69,61 @@ const Comment = (props) => {
           <h1>댓글</h1>
         </div>
         <div className='inputBox'>
-          <input 
-          type="text"
-          onChange={e =>
-            setComment(e.target.value)}
-             />
+          <input
+            type="text"
+            onChange={e =>
+              setComment(e.target.value)}
+          />
         </div>
         <div className='btnBox'>
           <button className='btn'
-          onClick={addComment}
+            onClick={addComment}
           >
             등록
           </button>
         </div>
       </div>
 
-        {state && 
+      {state &&
         state.map((data, index) => {
-          console.log(data);
           return (
-            
-            <div className='box'  
-            key={index}>
-            <div className='chat'>
-             <div className='profile'>
-               <div className="ProfileImg">
-                 <img src=
-                 {data.profileUrl} 
-                 alt="사진" />
-               </div>
-             </div>
-               
-             <div className='name'
-             >
-              {data.nickname}
-             </div>
-             <div className='comment_box'>
-               <div className='comment'
-               >
-                {data.comment}
-               </div>
-               <div className='date'
-               >
-                 {data.createdAt}
-               </div>
-             </div>
-   
-           </div>
-           <button 
-           id={data.recruitCommentId}
-           className='delete'
-           onClick={deleteComment}
-           >
-             삭제
-           </button>
-  </div>
+            <div className='box'
+              key={index}>
+              <div className='chat'>
+                <div className='profile'>
+                  <div className="ProfileImg">
+                    <img src=
+                      {data.profileUrl}
+                      alt="사진" />
+                  </div>
+                </div>
+
+                <div className='name'
+                >
+                  {data.nickname}
+                </div>
+                <div className='comment_box'>
+                  <div className='comment'
+                  >
+                    {data.comment}
+                  </div>
+                  <div className='date'
+                  >
+                    {data.createdAt}
+                  </div>
+                </div>
+
+              </div>
+              <button
+                id={data.recruitCommentId}
+                className='delete'
+                onClick={deleteComment}
+              >
+                삭제
+              </button>
+            </div>
           )
         })}
-       
     </CommentBox>
   )
 }
@@ -213,16 +210,16 @@ margin-top:30px;
 }
 
 .ProfileImg {
-    width: 170px;
-    height: 170px;
-    margin-right: 60px;
-  }
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin-left: 10px;
+  cursor: pointer;
 
-.profile{
-    width: 50px;
-    height:50px;
-    border-radius:50%;
-    border:1px solid black;
+    img {
+      height:50px;
+      border-radius:50%;
+    }
   }
 
   .name{
@@ -250,9 +247,6 @@ margin-top:30px;
     padding-top: 2px;
     border: 0;
     outline: 0;
-
-
   }
-
-`
-export default Comment
+  `
+export default Comment;

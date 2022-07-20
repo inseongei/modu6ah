@@ -14,6 +14,7 @@ import MainRcard from '../components/cards/MainRcard'
 import Footer from "../components/main/Footer";
 import axios from "axios";
 import MainScard from "../components/cards/MainScard";
+import Search from "../components/main/Search";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Main = () => {
     <div>
       <Header />
       <Swiper />
-
+      <Search/>
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
         <Container>
           <div className="card_title">

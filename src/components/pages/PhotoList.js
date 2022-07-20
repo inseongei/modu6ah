@@ -32,41 +32,41 @@ function PhotoList({ datas, currItem, onView, Detail }) {
 
 const PhotoBox = styled.div`
 display: flex;
-width: 55%;
+width: 650px;
+margin-top: 50px;
 
 .picture{
-  width:100%;
-  height: 800px;
+  width: 100%;
+  height: 600px;
 }
 
 .box{
-  height: 500px;
-  display:flex;
+  height: 380px;
+  display: flex;
   align-items:center;
   justify-content:center;
 }
 
-.small{
-  
+.mainPhoto{
+  border:1px solid black;
+  margin-left: 35px;
+  margin-bottom: 20px;
+  width:550px;
+  height:350px;
+  border-radius: 30px;
+}
+
+.photos{
   widht: 40px;
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
-.small > ul{
+.photos > ul{
   display: flex;
-}
-
-
-.mainPhoto{
-  border:1px solid black;
-  margin-left: 35px;
-  width:65%;
-  height:400px;
-  border-radius: 30px;
 }
 `;
 
 
-export default PhotoList
+export default PhotoList;
