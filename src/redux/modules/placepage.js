@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getCookie } from "../../shared/Cookie";
 
 // Actions
 const CREATE = "photo/CREATE";
@@ -9,7 +8,7 @@ const UPDATE = "photo/UPDATE";
 const DELETE = "photo/DELETE";
 
 const initialState = {
-  list: [],
+  list: [{}],
 };
 
 // Action Creators
@@ -34,53 +33,55 @@ export function deletePhoto(photo_list) {
 }
 
 // middleware
-export const createPhotoDB = (data) => {
-  const photo = data;
-  return async function (dispatch) {
-    axios
-      .post(`http://localhost:5001/posts`, photo, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-        }      
-      })
-      .then((response) => {
-        console.log(response.data);
-        dispatch(createPhoto(response.data));
-        window.alert("게시물 작성을 성공했습니다.");
-        console.log("게시물 성공");
-        window.location.href = "/place";
-      })
-      .catch((error) => {
-        console.log(error.message);
-        window.alert("게시물 작성에 실패했습니다.");
-      });
-  };
-};
+// export const createPhotoDB = (data) => {
+//   const photo = data;
+//   return async function (dispatch) {
+//     axios
+//       .post(`http://localhost:5001/posts`, photo, {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+//           "Content-Type": "multipart/form-data"
+//         }      
+//       })
+//       .then((response) => {
+//         console.log(response);
+//         dispatch(createPhoto(response));
+//         window.alert("게시물 작성을 성공했습니다.");
+//         console.log("게시물 성공");
+//         window.location.href = "/place";
+//       })
+//       .catch((error) => {
+//         console.log(error.message);
+//         window.alert("게시물 작성에 실패했습니다.");
+//       });
+//   };
+// };
 
 export const loadPhotoDB = () => {
   return function (dispatch) {
-    axios.get(`http://dlckdals04.shop/api/recruits`, {
+    axios.get(`http://dlckdals04.shop/api/places`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }
     })
     .then((response) => {
       console.log(response.data);
-      dispatch(loadPhoto(response));
+      dispatch(loadPhoto(response.data));
     });
   };
 };
 
-export const detailPhotoDB = (recruitPostId) => {
+export const detailPhotoDB = (placePostId) => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/recruits/" + recruitPostId,  {
+      .get("http://dlckdals04.shop/api/places/" + placePostId,  {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`
         }
       })
       .then((response) => {
-        dispatch(detailPhoto(response.data.recruitDetails));
+        console.log(response)
+        dispatch(detailPhoto(response.data));
       })
       .catch((response) => {
         console.log(response);
@@ -128,30 +129,16 @@ export const deletePhotoDB = (recruitPostId, navigate) => {
 export default function reducer(state = initialState, action = {}) {
   // console.log(action)
   switch (action.type) {
-    // case "post/CREATE": {
-    //   console.log(action);
-    //   const new_post_list = [...state.list, action.post];
-    //   return { list: new_post_list };
-    // }
-
-    case "post/LOAD": {
-      // console.log(action.post_list.data);
-      return { list: action.photo_list.data };
+   
+    case "photo/LOAD": {
+      // console.log(action.photo_list.placePosts);
+      return { list: action.photo_list.placePosts};
     }
 
-    case "post/DETAIL": {
+    case "photo/DETAIL": {
       // console.log(action);
       return { list: action.photo_list };
     }
-
-    // case "post/UPDATE": {
-    //   console.log(action.post_list);
-    //   const new_post_list = state.list.filter((l, idx) => {
-    //     return parseInt(action.post_index) !== idx;
-    //   });
-    //   const new_list = [...new_post_list, action.post];
-    //   return { list: new_list };
-    // }
 
     case "post/DELETE": {
       const empty_list = [];

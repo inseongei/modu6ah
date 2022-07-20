@@ -2,6 +2,8 @@
 import { createStore, combineReducers,applyMiddleware} from "redux";
 import Data from './modules/Data'
 import post from './modules/post'
+import placepage from './modules/placepage'
+
 import thunk from "redux-thunk";
 import photoscard from './modules/photoscard'
 
@@ -9,7 +11,7 @@ import photoscard from './modules/photoscard'
 // 나중에 리듀서를 여러개 만들게 되면 여기에 하나씩 추가해주는 거예요!
 
 const middleware = [thunk];
-const rootReducer = combineReducers({Data, post,photoscard});
+const rootReducer = combineReducers({Data, post, placepage});
 const enhancer = applyMiddleware(...middleware)
 
 // 스토어를 만듭니다.
