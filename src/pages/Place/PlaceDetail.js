@@ -22,89 +22,98 @@ const PlaceDetail = () => {
   const [currItem, setCurrItem] = useState(datas[0]);
   const navigate = useNavigate();
   const [detail, setDetail] = useState('');
-  const {placePostId} = useParams();
+  const { placePostId } = useParams();
 
- React.useEffect(()=>{
-    axios.get("http://dlckdals04.shop/api/places/" + placePostId )
-    .then((res)=>{
+  React.useEffect(() => {
+    axios.get("http://dlckdals04.shop/api/places/" + placePostId)
+      .then((res) => {
         console.log(res.data)
         setDetail(res.data.placeDetails)
-    })
-},[])
+      })
+  }, [])
 
-  const onView = (id) => {
-    setCurrItem(datas.find((item) => item.id === id));
-  };
+  // const onView = (id) => {
+  //   setCurrItem(datas.find((item) => item.id === id));
+  // };
+
+  if (!detail) {
+    return <div></div>;
+  }
 
   return (
     <>
       <Header />
       <Container>
-      <Title>
-        <div className="subject">
-          장소추천
-        </div>
-        <div className="page">
-          <p>상세페이지</p>
-        </div>
-      </Title>
+        <Title>
+          <div className="subject">
+            장소추천
+          </div>
+          <div className="page">
+            <p>상세페이지</p>
+          </div>
+        </Title>
         <Box>
-        <div className='Box'>
-          <PhotoList
-            datas={datas}
-            currItem={currItem}
-            onView={onView}
-          />
-          <ContentBox>
-      <div className='box_top'>
-        <div className='title'>
-          <p>{detail.title}</p>
-          <span>
-        
-          </span>
-        </div>
-        <div className='location'>
-          <p>
-            <GrLocation />
-            {detail.region}
-           </p>
-        </div>
-        <div className='info'>
-          <Image>
-            <div className="ProfileImg">
-              <img src={detail.profileUrl}/>
-            </div>
-          </Image>
-          <p className='nickname'>
-            {detail.nickname}
-            </p>
-        </div>
-      </div>
-      <div className='box'>
-        <div className='content'>
-          <p>{detail.content}</p>
-          {/* <div className='btnBox'>
-                        <button className='ParkBtn'>주차가능</button>
-                        <button className='KidBtn'>예스키즈존</button>
-                    </div> */}
-        </div>
-      </div>
-      <Btn>
-        <button
-          className="btn"
+          <div className='Box'>
 
-        >
-          수정
-        </button>
-        <button className="btn">
-          삭제
-        </button>
-      </Btn>
-    </ContentBox>
-        </div>   
-        <div className="mapbox">
-          <KakaoMap/>
-        </div> 
+            <div className='imgBox'>
+              <div className='Bigimg'>
+                <img src={detail.imageUrl[0]} alt="사진" />
+              </div>
+              <div className='imgSmall'>
+                {detail.imageUrl.map((item, idx) => {
+                  return (
+                    <div key={idx}><img src={item} alt="사진" /></div>
+                  )
+                })}
+              </div>
+            </div>
+
+            <ContentBox>
+              <div className='box_top'>
+                <div className='title'>
+                  <p>{detail.title}</p>
+                  <span>
+
+                  </span>
+                </div>
+                <div className='location'>
+                  <p>
+                    <GrLocation />
+                    {detail.region}
+                  </p>
+                </div>
+                <div className='info'>
+                  <Image>
+                    <div className="ProfileImg">
+                      <img src={detail.profileUrl} />
+                    </div>
+                  </Image>
+                  <p className='nickname'>
+                    {detail.nickname}
+                  </p>
+                </div>
+              </div>
+              <div className='box'>
+                <div className='content'>
+                  <p>{detail.content}</p>
+                </div>
+              </div>
+              <Btn>
+                <button
+                  className="btn"
+
+                >
+                  수정
+                </button>
+                <button className="btn">
+                  삭제
+                </button>
+              </Btn>
+            </ContentBox>
+          </div>
+          <div className="mapbox">
+            <KakaoMap />
+          </div>
         </Box>
         <Comment />
       </Container>
@@ -142,6 +151,51 @@ flex-direction: column;
 
 border: 1px solid lightgray;
 border-radius: 10px;
+
+.Box{
+  margin: 80px auto;
+  width:80%;
+  height: 70vh;
+  display:flex;
+}
+.imgBox{
+  width:50%;
+  display: flex;
+  flex-direction:column;
+}
+
+.Bigimg{
+  width: 50%;
+  height: 50%; 
+  margin: auto;
+  border-radius: 30px;
+}
+
+.Bigimg >img{
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+}
+
+.imgSmall{
+  height: 30%;
+  display: flex;
+}
+
+
+.imgSmall >div {
+  border: 1px solid black;
+  margin: 30px auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 30px;
+}
+
+.imgSmall >div > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+}
 `;
 
 const Container = styled.div`
@@ -161,6 +215,52 @@ const Container = styled.div`
   align-items: center;
 }
 `
+
+const PhotoBox = styled.div`
+display: flex;
+width: 650px;
+margin-top: 50px;
+
+.picture{
+  width: 100%;
+  height: 600px;
+}
+
+.box{
+  height: 380px;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.mainPhoto{
+  border:1px solid black;
+  margin-left: 35px;
+  margin-bottom: 20px;
+  width:550px;
+  height:350px;
+  border-radius: 30px;
+}
+
+.photos{
+  widht: 40px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.photos > ul{
+  display: flex;
+  
+  img{
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+  }
+}
+
+`;
+
 
 const ContentBox = styled.div`
  width:500px;
