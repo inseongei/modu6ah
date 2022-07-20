@@ -51,7 +51,7 @@ function LCard() {
                             <div className='profile_box'>
                             <div className='detail_profile'>
                                 <img 
-                                // src={data.imageUrl[0]}
+                                src={item.profileUrl}
                                  alt="프로필" />
                             </div>
                                 <strong>{item.nickname}</strong>
