@@ -29,7 +29,7 @@ const Header = () => {
   const navigate = useNavigate();
   // 쿠키와 로컬스토리지에 있는 토큰,닉네임,프로필Url
   const UserCheck = localStorage.getItem("accessToken");
-  const nickname = getCookie("nickname");
+  const nickname = localStorage.getItem("nickname");
   const Profile = localStorage.getItem("profileUrl");
   const bell = localStorage.getItem("count");
 
