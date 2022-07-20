@@ -5,7 +5,6 @@ import post from './modules/post'
 import placepage from './modules/placepage'
 
 import thunk from "redux-thunk";
-import photoscard from './modules/photoscard'
 
 // root 리듀서를 만들어줍니다.
 // 나중에 리듀서를 여러개 만들게 되면 여기에 하나씩 추가해주는 거예요!

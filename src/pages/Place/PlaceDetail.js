@@ -5,15 +5,12 @@ import styled from "styled-components";
 import Header from "../../components/main/Header";
 import Place from "./Place";
 import Comment from "../../components/elements/Comment";
-import KakaoMap from "../../components/placepage/KakaoMap";
+import KakaoMap from "../../components/pages/KakaoMap";
 import { GrLocation } from "react-icons/gr";
 
 import axios from "axios";
 import data from "../../shared/data";
-import PhotoList from "../../components/placepage/PhotoList";
-import Content from "../../components/placepage/Content";
 import { useDispatch, useSelector } from "react-redux";
-import { detailPhotoDB } from "../../redux/modules/placepage";
 import { useNavigate, useParams } from "react-router-dom";
 
 
