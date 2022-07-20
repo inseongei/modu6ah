@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 
 import Header from '../../components/main/Header'
-import Comment from '../../components/elements/Comment'
+import Comment from '../../components/pages/Comment'
 import data from '../../shared/data';
 import PhotoList from '../../components/pages/PhotoList';
 import Content from '../../components/pages/Content';
