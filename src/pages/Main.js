@@ -10,6 +10,7 @@ import Swiper from "../components/main/Swiper";
 import SCard from "../components/cards/SCard";
 import LCard from "../components/cards/LCard";
 import RCard from "../components/cards/RCard";
+import MainRcard from '../components/cards/MainRcard'
 import Footer from "../components/main/Footer";
 import axios from "axios";
 import MainScard from "../components/cards/MainScard";
@@ -80,7 +81,7 @@ const Main = () => {
               </Btn>
             </div>
           </div>
-          <RCard />
+          <MainRcard />
         </Container>
       </Grid>
       <Footer />

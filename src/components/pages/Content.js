@@ -4,15 +4,17 @@ import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 
 function Content() {
+
+
     return (
         <ContentBox>
             <div className='box_top'>
                 <div className='title'>
-                    <p>국립생태공원</p>
+                    <p></p>
                     <span>
-                        <FaStar className='icon' />
+                       
                     </span>
-                    <span className='starScore'> 4.0점</span>
+
                 </div>
                 <div className='location'>
                     <p>
@@ -65,12 +67,10 @@ const ContentBox = styled.div`
   line-height: 36px;
   margin-left: 42px;
  }
-
 .icon{
     color:#fdd835;
     margin-left:30px;
   }
-
 .starScore{
     color: #A8A8A8;
     font-style: normal;
@@ -79,7 +79,6 @@ const ContentBox = styled.div`
     line-height: 24px;
     margin: 7px;
   }
-
   .location{
     display: flex;
     font-weight: 400;
@@ -100,7 +99,12 @@ const ContentBox = styled.div`
 }
   
   .profile{
-    border:1px solid black;
+    width:70px;
+    height:70px;
+    border-radius: 50%;
+  }
+
+  .profile > img {
     width:70px;
     height:70px;
     border-radius: 50%;
@@ -114,21 +118,18 @@ const ContentBox = styled.div`
   line-height: 29px;
   margin-left:30px;
   }
-
   .box{
   display:flex;
   align-items:center;
   justify-content:center;
   margin-top: 20px;
 }
-
 .content{
   border: 2px solid #E4E4E4;
   border-radius: 10px;
   width:400px;
   height:350px;
 }
-
 .content > p {
 font-weight: 400;
 font-size: 20px;
@@ -136,12 +137,10 @@ line-height: 24px;
 width:100%;
 height: 80%;
 }
-
 .content > div{
   width:100%;
   height: 20%;
 }
-
 .ParkBtn{
     width:30%;
     height: 50%;

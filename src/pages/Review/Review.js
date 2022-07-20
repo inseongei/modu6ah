@@ -3,13 +3,12 @@ import React from "react";
 import styled from "styled-components";
 
 //  elements & components
-import Grid from "../../components/elements/Grid";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import RCard from "../../components/cards/RCard";
 import bottle from '../../images/bottle.png';
-
 import { useNavigate } from "react-router-dom";
+
 
 function Review() {
   const token = localStorage.getItem("accessToken");

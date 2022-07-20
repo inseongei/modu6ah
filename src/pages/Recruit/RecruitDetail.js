@@ -78,7 +78,7 @@ const RecruitDetail = () => {
         setModalIsOpen(true);
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.response.data.message);
       });
   };
 
@@ -108,7 +108,6 @@ const RecruitDetail = () => {
                   <span>{detail.time}</span>
                 </div>
                 <div>
-                  {" "}
                   <strong> 위치 </strong>
                   <span>{detail.place}</span>
                 </div>

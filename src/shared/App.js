@@ -55,7 +55,7 @@ function App() {
         {/* 육아 물품 리뷰 */}
         <Route path="/review" element={<Review />} />
         <Route path="/reviewadd" element={<ReviewAdd />} />
-        <Route path="/reviewdetail" element={<ReviewDetail />} />
+        <Route path="/reviewdetail/:reviewPostId" element={<ReviewDetail />} />
 
         <Route path="/manager/:nickname" element={<ProfileManager />} />
         <Route path="/profileinsert/:nickname" element={<ProfileInsert />} />
