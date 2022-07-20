@@ -5,7 +5,7 @@ const { kakao } = window
 
 const KakaoMap = ({ searchPlace }) => {
   useEffect(() => {
-    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })
+    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })
     const container = document.getElementById('myMap')
     const options = {
       center: new kakao.maps.LatLng(37.537187, 127.005476),
@@ -15,9 +15,9 @@ const KakaoMap = ({ searchPlace }) => {
 
     const ps = new kakao.maps.services.Places()
 
-    ps.keywordSearch(searchPlace, placesSearchCB)
+    ps.keywordSearch(searchPlace, placesSearchCB);
 
-    function placesSearchCB(data, status, pagination) {
+    function placesSearchCB(data, status) {
       if (status === kakao.maps.services.Status.OK) {
         let bounds = new kakao.maps.LatLngBounds()
 
@@ -26,7 +26,7 @@ const KakaoMap = ({ searchPlace }) => {
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
         }
 
-        map.setBounds(bounds)
+        map.setBounds(bounds);
       }
     }
 
@@ -35,28 +35,32 @@ const KakaoMap = ({ searchPlace }) => {
         map: map,
         position: new kakao.maps.LatLng(place.y, place.x),
       })
-        
+
+      // console.log(marker);
       // 마커에 클릭이벤트를 등록합니다
       kakao.maps.event.addListener(marker, 'click', function () {
         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name  + '</div>')
+        infowindow.setContent('<div style="padding:20px 0px 31px 10px;font-size:13px;">' + 
+         place.place_name + '<br/>' + place.road_address_name +
+        '</div>')
         infowindow.open(map, marker)
       })
     }
   }, [searchPlace])
 
   return (
-     <Map
+    
+    <MapBox
         id="myMap"
         style={{
           width: '480px',
           height: '400px',
-        }}>
-     </Map>
+        }}/>     
+    
   )
 }
 
-const Map = styled.div`
+const MapBox = styled.div`
 border-radius: 10px;
 `;
 
