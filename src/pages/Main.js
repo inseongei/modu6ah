@@ -2,17 +2,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
+
 //  elements & components
 import Grid from "../components/elements/Grid";
 import Header from "../components/main/Header";
 import Swiper from "../components/main/Swiper";
-import SCard from "../components/cards/SCard";
-import LCard from "../components/cards/LCard";
-import RCard from "../components/cards/RCard";
-import MainRcard from '../components/cards/MainRcard'
+import MainLcard from '../components/cards/MainLcard';
+import MainRcard from '../components/cards/MainRcard';
 import Footer from "../components/main/Footer";
-import axios from "axios";
 import MainScard from "../components/cards/MainScard";
 import Search from "../components/main/Search";
 
@@ -64,7 +61,7 @@ const Main = () => {
               </Btn>
             </div>
           </div>
-          <LCard />
+          <MainLcard />
           <hr />
           <div className="card_title">
             <Title style={{ marginTop: "100px" }}>육아템 리뷰</Title>

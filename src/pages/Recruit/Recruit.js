@@ -8,7 +8,7 @@ import Grid from "../../components/elements/Grid";
 import Header from "../../components/main/Header";
 import SCard from "../../components/cards/SCard";
 import Footer from "../../components/main/Footer";
-// import hand from '../../images/hand.png';
+import hand from '../../images/hand.png';
 
 function Recruit() {
   const token = localStorage.getItem("accessToken");
@@ -25,7 +25,9 @@ function Recruit() {
               다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!
             </SubTitle>
           </div>
-          <div className="image">{/* <img src={hand}/> */}</div>
+          <div className="image">
+            <img src={hand}/>
+            </div>
           <span>내가 하는 활동, 함께 할 팀원을 모집하고 싶다면?</span>
           <div className="button">
             {!token ? (
