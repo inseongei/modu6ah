@@ -6,7 +6,6 @@ import styled from "styled-components";
 import Header from "../../components/main/Header";
 import Place from "./Place";
 import Comment from "../../components/elements/Comment";
-import Map from "../../components/pages/Map";
 
 import data from "../../shared/data";
 import PhotoList from "../../components/pages/PhotoList";
@@ -42,7 +41,6 @@ const PlaceDetail = () => {
           />
           <Content /> 
         </div>   
-          <Map />
         </Box>
         <Comment />
       </Container>
