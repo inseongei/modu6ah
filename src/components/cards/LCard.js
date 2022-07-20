@@ -21,7 +21,7 @@ function LCard() {
  if (!post) {
     return <div></div>;
   }
- 
+
     return (
         <>
             <Container>
@@ -36,7 +36,7 @@ function LCard() {
                         {/* 카드 왼쪽 '이미지' */}
                         <div className='card-left'>
                             <div className='image'>
-                                <img src={data.imageUrl} />
+                                <img src={data.imageUrl[0]} />
                             </div>
 
                         </div>
@@ -50,7 +50,7 @@ function LCard() {
                             <div className='profile_box'>
                             <div className='detail_profile'>
                                 <img 
-                                // src={data.imageUrl[0]}
+                                src={data.profileUrl}
                                  alt="프로필" />
                             </div>
                                 <strong>{data.nickname}</strong>
