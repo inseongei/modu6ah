@@ -231,6 +231,7 @@ const Container = styled.div`
     cursor: pointer;
   }
 
+
   .profile {
     width: 50px;
     height: 50px;
@@ -258,7 +259,7 @@ const Container = styled.div`
   }
 
   .card-right p {
-    margin: 0px 10px 0px 5px;
+    margin: 6px 10px 0px 5px;
   }
 
   .content {
