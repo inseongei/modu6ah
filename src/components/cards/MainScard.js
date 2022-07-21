@@ -38,7 +38,12 @@ function MainScard() {
               item != null && (
                 <div className="card" key={idx}>
                   <div className="card-top">
-                    <p>모집완료</p>
+                    {item.status === true ?
+                        <p>모집완료</p>
+                        :
+                        <span>모집중</span>
+                    }
+
                     {item.bookmarkStatus === true ? (
                       <BsFillBookmarkFill
                         className="checkIcon"
@@ -126,13 +131,21 @@ const Container = styled.div`
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
   }
+
+  .card-top > p{
+    margin: 0px 0px 4px 4px;
+    background-color: #A8A8A8;
+    border-radius: 20px;
+    padding: 6px 15px 7px 15px;
+    color: white;
+  }
   .card-top {
     display: flex;
     margin: 30px 0px 0px 30px;
     width: 100%;
     justify-content: space-between;
   }
-  .card-top p {
+  .card-top span {
     margin: 0px 0px 4px 4px;
     background-color: #f4b03e;
     border-radius: 20px;

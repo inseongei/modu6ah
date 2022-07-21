@@ -3,10 +3,49 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { detailPhotoDB } from "../../redux/modules/placepage";
-
 import styled from 'styled-components'
+import styled from "styled-components";
 
-const { kakao } = window
+const { kakao } = window;
+
+const KakaoMap = () => {
+  const [Places, setPlaces] = useState([]);
+  const { placePostId } = useParams();
+  const container = useRef(null);
+  const dispatch = useDispatch();
+
+  // 방법 1. axios 통신
+  React.useEffect(() => {
+    axios
+      .get("http://dlckdals04.shop/api/places/" + placePostId)
+      .then((res) => {
+        console.log(res.data.placeDetails);
+        setPlaces(res.data.placeDetails);
+      });
+  }, []);
+
+  // 방법 2. redux 사용
+  // const detail = useSelector((state) => state.placepage.list.placeDetails);
+  // console.log(detail);
+
+  // React.useEffect(() => {
+  //   dispatch(detailPhotoDB(placePostId));
+  // }, []);
+
+  // 방법 3. async await..
+  // useEffect(() => {
+  //   const fetchPost = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://dlckdals04.shop/api/places/`
+  //         + placePostId);
+  //        setPlaces(response.data.placeDetails)
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   };
+  //   fetchPost()
+  // }, []);
 
 const KakaoMap = () => {
   const [Places, setPlaces] = useState([]);
@@ -107,11 +146,10 @@ const KakaoMap = () => {
 }
 
 const MapBox = styled.div`
-border-radius: 10px;
+  border-radius: 10px;
 `;
 
 const InfoBox = styled.div`
-margin-bottom: 40px;
+  margin-bottom: 40px;
 `;
-
 export default KakaoMap;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { GetRecruitAxois} from "../../redux/modules/Data";
+import { GetRecruitAxois } from "../../redux/modules/Data";
 import axios from "axios";
 
 function SCard() {
@@ -32,7 +32,11 @@ function SCard() {
               item != null && (
                 <div className="card" key={idx}>
                   <div className="card-top">
-                    <p>모집완료</p>
+                    {item.status === true ? (
+                      <p>모집완료</p>
+                    ) : (
+                      <span>모집중</span>
+                    )}
                     {item.bookmarkStatus === true ? (
                       <BsFillBookmarkFill
                         className="checkIcon"
@@ -44,9 +48,12 @@ function SCard() {
                               null,
                               {
                                 headers: {
-                                  Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-                                }
-                              })
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
                             .then(() => {
                               window.location.reload();
                             });
@@ -127,7 +134,15 @@ const Container = styled.div`
     width: 100%;
     justify-content: space-between;
   }
-  .card-top p {
+  .card-top > p {
+    margin: 0px 0px 4px 4px;
+    background-color: #a8a8a8;
+    border-radius: 20px;
+    padding: 6px 15px 7px 15px;
+    color: white;
+  }
+
+  .card-top span {
     margin: 0px 0px 4px 4px;
     background-color: #f4b03e;
     border-radius: 20px;
