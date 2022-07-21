@@ -7,16 +7,19 @@ import { useNavigate } from 'react-router-dom';
 import dog from '../../images/dog.jpg'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadPhotoDB } from '../../redux/modules/placepage';
+import { FaStar } from "react-icons/fa";
+
 
 function LCard() {
-
  const [data, setData] = useState('');
+ const Profile = localStorage.getItem("profileUrl");
 
  const navigate = useNavigate();
- const dispatch = useDispatch();
 
  React.useEffect(()=>{
-    axios.get('http://dlckdals04.shop/api/places')
+    axios.get('http://dlckdals04.shop/api/places', {
+         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      })
     .then((res)=>{
         // console.log(res.data)
         setData(res.data.placePosts)
@@ -37,7 +40,7 @@ function LCard() {
                         {/* 카드 왼쪽 '이미지' */}
                         <div className='card-left'>
                             <div className='image'>
-                                <img src={item.imageUrl[0]} alt="사진"/>
+                                <img src={item.imageUrl[0]} />
                             </div>
 
                         </div>
@@ -45,13 +48,18 @@ function LCard() {
                         <div className='card-right'>
                             <div className='title'>
                                 <h3>{item.title}</h3>
-                                <p>⭐ {item.star}</p>
+                                <FaStar
+                                size={28}   
+                                style={{color:"#FFBA5A",
+                                marginTop:"3px",
+                                marginLeft:"5px"}}/>
+                                <p>{item.star}.0점</p>
                             </div>
-                            <a><MdOutlinePlace/> {item.region}</a>
+                            <a><MdOutlinePlace/>{item.region}</a>
                             <div className='profile_box'>
                             <div className='detail_profile'>
                                 <img 
-                                src={item.profileUrl}
+                                src={Profile}
                                  alt="프로필" />
                             </div>
                                 <strong>{item.nickname}</strong>
@@ -135,7 +143,7 @@ flex-direction: row;
 .profile_box{
     display: flex;
     margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .profile{
@@ -166,7 +174,7 @@ flex-direction: row;
   }
 
   .card-right p {
-    margin: 0px 10px 0px 5px;
+    margin: 6px 10px 0px 5px;
   }
 
   .content { 
