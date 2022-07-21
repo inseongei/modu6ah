@@ -7,6 +7,7 @@ const PlaceComment = () => {
   const [comment, setComment] = useState('');
   const [state, setState] = useState('');
   const nickname = localStorage.getItem("nickname");
+  const Profile = localStorage.getItem("profileUrl");
   const navigate = useNavigate();
   let { placePostId } = useParams();
 
@@ -90,14 +91,14 @@ const PlaceComment = () => {
                 <div className='profile'>
                   <div className="ProfileImg">
                     <img src=
-                      {data.profileUrl}
+                      {Profile}
                       alt="사진" />
                   </div>
                 </div>
 
                 <div className='name'
                 >
-                  {data.nickname}
+                  {nickname}
                 </div>
                 <div className='comment_box'>
                   <div className='comment'
@@ -225,11 +226,10 @@ margin-top:30px;
     align-items:center;
     font-family: 'Noto Sans KR';
     margin-left: 10px;
-    margin-top: 38px;
   }
 
   .comment_box {
-    margin-top:28px;
+    margin-top: 15px;
     margin-left: 30px;
   }
 

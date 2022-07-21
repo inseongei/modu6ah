@@ -6,12 +6,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AiOutlineFileImage } from "react-icons/ai";
 
 //elements & components
+import { FaStar } from "react-icons/fa";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
-import KakaoMap from '../../components/pages/KakaoMap'
+import Modal from "../../modal/Map/Modal";
 
 import axios from "axios";
+import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
 
 function PlaceAdd() {
@@ -20,9 +22,41 @@ function PlaceAdd() {
   const [content, setContent] = useState("");
   const [address, setAddress] = useState("")
   const [place, setplace] = useState("");
+  const [location, setLocation] = useState("");
   const [imageSrc, setImageSrc] = useState([]);
 
   const navigate = useNavigate();
+
+  const colors = {
+    orange: "#FFBA5A",
+    grey: "#a9a9a9"
+  };
+
+  const textList = [
+    '1.0',
+    '2.0',
+    '3.0',
+    '4.0',
+    '5.0',
+  ];
+
+  const [currentValue, setCurrentValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(undefined);
+  const [hovered, setHovered] = useState(null);
+
+  const stars = Array(5).fill(0)
+
+  const handleClick = value => {
+    setCurrentValue(value)
+  }
+
+  const handleMouseOver = newHoverValue => {
+    setHoverValue(newHoverValue)
+  };
+
+  const handleMouseLeave = () => {
+    setHoverValue(undefined)
+  }
 
   // axios.Post 버튼
   const onSubmit = async (e) => {
@@ -41,8 +75,9 @@ function PlaceAdd() {
     formData.append('title', title)
     formData.append('content', content)
     formData.append('region', region)
+    formData.append('location', location)
     formData.append('star', '3')
-    
+
     // formData.append('url', address)
 
     if (files.length < 6) {
@@ -56,6 +91,7 @@ function PlaceAdd() {
         })
         .then((res) => {
           console.log(res)
+          navigate('/place')
         })
         .catch((err) => {
           console.log(err)
@@ -84,14 +120,20 @@ function PlaceAdd() {
     setImageSrc(imageSrc.filter((_, index) => index !== id));
   };
 
-// KakaoMap 검색
-  const onChange = (e) => {
-    setRegion(e.target.value)
-  }
+  //위치 모달
+  const RegionsData = (data) => {
+    // console.log(data);
+    setRegion(data);
+  };
 
-  const searchPlace = () => {
-    setplace(region)
-  }
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -111,80 +153,112 @@ function PlaceAdd() {
               />
               {/* <button type="submit">제출</button> */}
 
-            <div className="imageBox">
-              <label htmlFor="profile_img_upload">
-                <AiOutlineFileImage />
-              </label>
+              <div className="imageBox">
+                <label htmlFor="profile_img_upload">
+                  <AiOutlineFileImage />
+                </label>
 
-              {/* 이미지 미리보기 */}
-              {imageSrc.map((image, id) => (
-                <div key={id}>
-                  <img src={image} alt={`${image}-${id}`} />
-                  <button onClick={() => handleDeleteImage(id)}>삭제</button>
-                </div>
-              ))}
+                {/* 이미지 미리보기 */}
+                {imageSrc.map((image, id) => (
+                  <div key={id}>
+                    <img src={image} alt={`${image}-${id}`} />
+                    <button onClick={() => handleDeleteImage(id)}>삭제</button>
+                  </div>
+                ))}
 
-            </div>
-            <div className="mainBox">
-              <div className="card-left">
-                <div className="position">
-                  <strong>제목</strong>
-                  <input
-                    type="text"
-                    onChange={(e) => 
-                      setTitle(e.target.value)}
+              </div>
+              <div className="mainBox">
+                <div className="card-left">
+                  <div className="position">
+                    <strong>제목</strong>
+                    <input
+                      type="text"
+                      onChange={(e) =>
+                        setTitle(e.target.value)}
+                    />
+                  </div>
+                 
+                  {/* kakaoMap */}
+                  <MapSearch>
+                    <strong>주소</strong>
+                    <SearchInput
+                     id="address"
+                     className="signup-input-form"
+                     type="text"
+                     placeholder="주소를 입력해주세요"
+                     value={region}
+                   />
+                   <div className="address_btn">
+                   <button className="signup-btn-company" 
+                  onClick={openModal}>
+                    주소 검색
+                  </button>
+                  <Modal
+                    open={modalOpen}
+                    close={closeModal}
+                    header="주소 검색"
+                    addressData={RegionsData}
                   />
+                   </div>
+                  </MapSearch>
+
+                  <div className="position">
+                    <strong>장소</strong>
+                    <input
+                      type="text"
+                      placeholder="ex) 뽀로로파크, ㅇㅇㅇ"
+                      onChange={(e) =>
+                        setLocation(e.target.value)}
+                    />
+                  </div>
+                  {/* <KakaoMap
+                    searchPlace={place}
+                  /> */}
+                 
+                  <div className='star'>
+                    <strong>별점</strong>
+                    {stars.map((_, index) => {
+                      return (
+                        <FaStar
+                          key={index}
+                          size={24}
+                          onClick={() => handleClick(index + 1)}
+                          onMouseOver={() => handleMouseOver(index + 1)}
+                          onMouseLeave={handleMouseLeave}
+                          color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                          style={{
+                            marginRight: 10,
+                            cursor: "pointer"
+                          }}
+                        />
+                      )
+                    })}
+                  
+                  </div>
+
                 </div>
-                {/* kakaoMap */}
-                <MapSearch>
-                  <strong>위치</strong>
-                  <SearchInput
-                    placeholder="검색어를 입력하세요"
-                    onChange={onChange}
-                    value={region} />
-                  <button
-                    onClick={searchPlace}
-                  >검색</button>
-                </MapSearch>
-
-                    {/* <>
-                    <InfoBox>
-                      <div className='place_name'>
-                        장소명: {}
-                      </div>
-                      <div className='address'>
-                        주소: {}
-                      </div>
-                    </InfoBox>
-                  </> */}
-                
-                   <KakaoMap
-                  searchPlace={place}
-                />
-             
-
+                <div className="card-right">
+                  <textarea 
+                  onChange={(e) =>
+                 setContent(e.target.value)} />
+                </div>
               </div>
-              <div className="card-right">
-                <textarea onChange={(e) => setContent(e.target.value)} />
-
-              </div>
-            </div>
-            <Btn>
-              <button
-                className="btn"
-                onClick={() => {
-                  navigate(`/`);
-                }}
-              >
-                취소
-              </button>
-              <button className="btn" 
-              type="submit"
-              >
-                등록하기
-              </button>
-            </Btn>
-             </form>
+              <Btn>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    navigate(`/`);
+                  }}
+                >
+                  취소{" "}
+                </button>
+                <button className="btn"
+                  type="submit"
+                >
+                  등록하기
+                </button>
+              </Btn>
+            </form>
           </div>
         </Place>
       </Grid>
@@ -285,7 +359,7 @@ const Place = styled.div`
   }
 
   .position {
-    margin: 40px 0px 30px 30px;
+    margin: 30px 0px 30px 30px;
   }
 
   .star {
@@ -301,9 +375,19 @@ const Place = styled.div`
 const MapSearch = styled.div`
 margin-left: 28px;
 margin-bottom: 20px;
+display:flex;
+
+.address_btn{
+  margin-top: 12px;
+  margin-left: 12px;
+}
+
+strong{
+  margin-top: 13px;
+}
  
 button{ 
-  margin-left: 10px;
+ display:flex;
 }
 `;
 
@@ -341,6 +425,22 @@ const Btn = styled.div`
     border: 0;
     outline: 0;
   }
+`;
+
+const HiddenText = styled.p`
+  // position: absolute;
+  // top: 50px;
+  // left: 50%;
+  // width: 130px;
+  // height: 30px;
+  // padding-top: 7px;
+  // transform: translate(-50%, -50%);
+  // color: white;
+  // background-color: #1f8ce6;
+  // border-radius: 4px;
+  // font-size: 16px;
+
+  ${({ show }) => (show ? `display:block` : `display: none`)}
 `;
 
 export default PlaceAdd;
