@@ -53,7 +53,7 @@ function LCard() {
                                 style={{color:"#FFBA5A",
                                 marginTop:"3px",
                                 marginLeft:"5px"}}/>
-                                <p>{item.star}.0점</p>
+                                <p>{item.star}점</p>
                             </div>
                             <a><MdOutlinePlace/>{item.region}</a>
                             <div className='profile_box'>
