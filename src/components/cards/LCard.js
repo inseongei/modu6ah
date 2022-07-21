@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import dog from '../../images/dog.jpg'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadPhotoDB } from '../../redux/modules/placepage';
+import { FaStar } from "react-icons/fa";
 
 function LCard() {
  const [data, setData] = useState('');
@@ -46,7 +47,12 @@ function LCard() {
                         <div className='card-right'>
                             <div className='title'>
                                 <h3>{item.title}</h3>
-                                <p>⭐ {item.star}</p>
+                                <FaStar
+                                size={28}   
+                                style={{color:"#FFBA5A",
+                                marginTop:"3px",
+                                marginLeft:"5px"}}/>
+                                <p>{item.star}점</p>
                             </div>
                             <a><MdOutlinePlace/>{item.region}</a>
                             <div className='profile_box'>
@@ -136,7 +142,7 @@ flex-direction: row;
 .profile_box{
     display: flex;
     margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .profile{
@@ -167,7 +173,7 @@ flex-direction: row;
   }
 
   .card-right p {
-    margin: 0px 10px 0px 5px;
+    margin: 6px 10px 0px 5px;
   }
 
   .content { 
