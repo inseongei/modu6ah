@@ -8,8 +8,9 @@ import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
 import axios from "axios";
 
 function BookScard() {
+  const navigate = useNavigate();
   const [book, setbook] = React.useState();
-  const [btn, setbtn] = React.useState(true)
+  const [btn, setbtn] = React.useState(true);
 
   React.useEffect(() => {
     axios
@@ -19,7 +20,7 @@ function BookScard() {
         },
       })
       .then((res) => {
-        setbook(res.data.recruitBookmarkList.slice(0,3));
+        setbook(res.data.recruitBookmarkList.slice(0, 3));
       })
       .catch((err) => {
         console.log(err);
@@ -27,27 +28,20 @@ function BookScard() {
   }, []);
 
   const recruitsMore = async () => {
-    await axios.get("http://dlckdals04.shop/api/mypage/bookmark/",
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res)=>{
-      console.log(res)
-      setbtn(!btn)
-      btn ? setbook(res.data.recruitBookmarkList) : setbook(res.data.recruitBookmarkList.slice(0,3)) 
-    })
+    await axios
+      .get("http://dlckdals04.shop/api/mypage/bookmark/", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setbtn(!btn);
+        btn
+          ? setbook(res.data.recruitBookmarkList)
+          : setbook(res.data.recruitBookmarkList.slice(0, 3));
+      });
   };
-
-
-
-
-
-
-
-
-
-
 
   return (
     <>
@@ -57,7 +51,7 @@ function BookScard() {
             return (
               <div className="card" key={idx}>
                 <div className="card-top">
-                  <p>모집완료</p>
+                  {item.status === true ? <p>모집완료</p> : <span>모집중</span>}
                   {item.bookmarkStatus === true ? (
                     <BsFillBookmarkFill
                       className="checkIcon"
@@ -107,11 +101,21 @@ function BookScard() {
                   )}
                 </div>
                 {/* 카드 타이틀 */}
-                <div className="title">
+                <div
+                  className="title"
+                  onClick={() => {
+                    navigate("/recruitdetail/" + item.recruitPostId);
+                  }}
+                >
                   <h1>{item.title}</h1>
                 </div>
                 {/* 카드 내용물 */}
-                <div className="card-bottom">
+                <div
+                  className="card-bottom"
+                  onClick={() => {
+                    navigate("/recruitdetail/" + item.recruitPostId);
+                  }}
+                >
                   <p>{item != null && item.markedAt}</p>
                   <p>{item != null && item.time}</p>
                   <p>{item != null && item.place}</p>
@@ -122,7 +126,9 @@ function BookScard() {
           })}
       </Container>
       <div className="btnBox">
-        <button  className ="MoreBtn" onClick={recruitsMore}>{btn ? "더보기" : "닫기"}</button>
+        <button className="MoreBtn" onClick={recruitsMore}>
+          {btn ? "더보기" : "닫기"}
+        </button>
       </div>
     </>
   );
@@ -148,7 +154,15 @@ const Container = styled.div`
     width: 100%;
     justify-content: space-between;
   }
-  .card-top p {
+  .card-top > p {
+    margin: 0px 0px 4px 4px;
+    background-color: #a8a8a8;
+    border-radius: 20px;
+    padding: 6px 15px 7px 15px;
+    color: white;
+  }
+
+  .card-top span {
     margin: 0px 0px 4px 4px;
     background-color: #f4b03e;
     border-radius: 20px;

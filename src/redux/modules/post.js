@@ -58,25 +58,26 @@ export const createPostDB = (post_data) => {
 
 export const loadPostDB = () => {
   return function (dispatch) {
-    axios.get(`http://dlckdals04.shop/api/recruits`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-      }
-    })
-    .then((response) => {
-      console.log(response.data);
-      dispatch(loadPost(response));
-    });
+    axios
+      .get(`http://dlckdals04.shop/api/recruits`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        dispatch(loadPost(response));
+      });
   };
 };
 
 export const detailPostDB = (recruitPostId) => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/recruits/" + recruitPostId,  {
+      .get("http://dlckdals04.shop/api/recruits/" + recruitPostId, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-        }
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       })
       .then((response) => {
         dispatch(detailPost(response.data.recruitDetails));
@@ -92,7 +93,8 @@ export const updatePostDB = (recruitPostId, newPost) => {
     axios
       .put(`http://dlckdals04.shop/api/recruits/` + recruitPostId, newPost, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       })
       .then((res) => {
         dispatch(updatePost(recruitPostId, res));
@@ -110,7 +112,8 @@ export const deletePostDB = (recruitPostId, navigate) => {
     axios
       .delete("http://dlckdals04.shop/api/recruits/" + recruitPostId, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`},
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       })
       .then((response) => {
         dispatch(deletePost(response.data));

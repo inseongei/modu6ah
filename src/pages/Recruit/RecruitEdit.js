@@ -23,7 +23,7 @@ function RecruitEdit() {
   const dispatch = useDispatch();
   let { recruitPostId } = useParams();
 
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState(true);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState(new Date());
@@ -39,6 +39,7 @@ function RecruitEdit() {
       time,
       place,
       age,
+      status,
     };
     dispatch(updatePostDB(recruitPostId, newPost));
     console.log(recruitPostId, newPost);
@@ -69,7 +70,7 @@ function RecruitEdit() {
                 <label htmlFor="chk1" onClick={inputChange}>
                   <span>선택</span>
                 </label>
-                <p> {!status ? "모집중" : "모집완료"}</p>
+                <p> {status ? "모집완료" : "모집중"}</p>
               </div>
               <div className="input__section">
                 <div style={{ marginBottom: "25px" }}>
@@ -78,7 +79,6 @@ function RecruitEdit() {
                     onChange={(e) => setTitle(e.target.value)}
                     style={{ width: "450px" }}
                     type="text"
-                    value={detail.title}
                     placeholder={detail.title}
                   />
                 </div>

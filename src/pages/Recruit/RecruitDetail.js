@@ -93,8 +93,6 @@ const RecruitDetail = () => {
             <div className="container">
               <div className="card-left">
                 <div className="toggle">
-                  <input className="inputbox" type="checkbox" id="chk1" />
-                  <label htmlFor="chk1" onClick={inputChange}></label>
                   <p> {!on ? "모집중" : "모집완료"} </p>
                 </div>
                 <div>
