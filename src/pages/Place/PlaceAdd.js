@@ -11,6 +11,7 @@ import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 import Modal from "../../modal/Map/Modal";
+import Ratings from "../../components/pages/Ratings";
 
 import axios from "axios";
 import { getCookie } from "../../shared/Cookie";
@@ -24,39 +25,12 @@ function PlaceAdd() {
   const [place, setplace] = useState("");
   const [location, setLocation] = useState("");
   const [imageSrc, setImageSrc] = useState([]);
-
-  const navigate = useNavigate();
-
-  const colors = {
-    orange: "#FFBA5A",
-    grey: "#a9a9a9"
-  };
-
-  const textList = [
-    '1.0',
-    '2.0',
-    '3.0',
-    '4.0',
-    '5.0',
-  ];
-
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const [hovered, setHovered] = useState(null);
+  const [rating, setRating] = useState(0);
 
-  const stars = Array(5).fill(0)
-
-  const handleClick = value => {
-    setCurrentValue(value)
-  }
-
-  const handleMouseOver = newHoverValue => {
-    setHoverValue(newHoverValue)
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(undefined)
-  }
+  const navigate = useNavigate();
 
   // axios.Post 버튼
   const onSubmit = async (e) => {
@@ -76,7 +50,7 @@ function PlaceAdd() {
     formData.append('content', content)
     formData.append('region', region)
     formData.append('location', location)
-    formData.append('star', '3')
+    formData.append('star', rating)
 
     // formData.append('url', address)
 
@@ -135,6 +109,26 @@ function PlaceAdd() {
     setModalOpen(false);
   };
 
+// 별점
+  const stars = Array(5).fill(0)
+  
+  const colors = {
+    yellow: "#FFBA5A",
+    grey: "#a9a9a9"
+  };
+
+  const handleClick = value => {
+    setCurrentValue(value)
+  }
+
+  const handleMouseOver = newHoverValue => {
+    setHoverValue(newHoverValue)
+  };
+
+  const handleMouseLeave = () => {
+    setHoverValue(undefined)
+  }
+
   return (
     <>
       <Header />
@@ -165,7 +159,6 @@ function PlaceAdd() {
                     <button onClick={() => handleDeleteImage(id)}>삭제</button>
                   </div>
                 ))}
-
               </div>
               <div className="mainBox">
                 <div className="card-left">
@@ -178,7 +171,6 @@ function PlaceAdd() {
                     />
                   </div>
                  
-                  {/* kakaoMap */}
                   <MapSearch>
                     <strong>주소</strong>
                     <SearchInput
@@ -211,31 +203,44 @@ function PlaceAdd() {
                         setLocation(e.target.value)}
                     />
                   </div>
-                  {/* <KakaoMap
-                    searchPlace={place}
-                  /> */}
                  
                   <div className='star'>
                     <strong>별점</strong>
-                    {stars.map((_, index) => {
+                    {stars.map((star, index) => {
+                      const ratingValue = index + 1;
                       return (
-                        <FaStar
+                        <label>
+                          <input type="radio" 
+                          name="rating" 
+                          style={{display:"none"}}
+                          value={ratingValue}
+                        onClick={() => setRating(ratingValue)}
+                          />
+
+                          <FaStar
                           key={index}
-                          size={24}
+                          size={28}
                           onClick={() => handleClick(index + 1)}
                           onMouseOver={() => handleMouseOver(index + 1)}
                           onMouseLeave={handleMouseLeave}
-                          color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                          color={(hoverValue || currentValue) > index ? colors.yellow : colors.grey}
                           style={{
                             marginRight: 10,
-                            cursor: "pointer"
+                            cursor: "pointer",
+                            transition: "color 200ms"
                           }}
                         />
+                        </label>   
                       )
                     })}
-                  
+                     <p 
+                  onChange={(e) =>
+                   setRating(e.target.value)}
+                   >
+                    {rating}.0점
+                   </p>
                   </div>
-
+                 
                 </div>
                 <div className="card-right">
                   <textarea 
@@ -363,8 +368,15 @@ const Place = styled.div`
   }
 
   .star {
+    display: flex;
     margin-left: 30px;
     margin-top: 30px;
+
+    p {
+      display: flex;
+      margin-top: 3px;
+      margin-left: 2px;
+    }
   }
 
   .star > strong {
@@ -425,22 +437,6 @@ const Btn = styled.div`
     border: 0;
     outline: 0;
   }
-`;
-
-const HiddenText = styled.p`
-  // position: absolute;
-  // top: 50px;
-  // left: 50%;
-  // width: 130px;
-  // height: 30px;
-  // padding-top: 7px;
-  // transform: translate(-50%, -50%);
-  // color: white;
-  // background-color: #1f8ce6;
-  // border-radius: 4px;
-  // font-size: 16px;
-
-  ${({ show }) => (show ? `display:block` : `display: none`)}
 `;
 
 export default PlaceAdd;
