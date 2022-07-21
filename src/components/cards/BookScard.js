@@ -116,7 +116,7 @@ function BookScard() {
                     navigate("/recruitdetail/" + item.recruitPostId);
                   }}
                 >
-                  <p>{item != null && item.markedAt}</p>
+                  <p>{item != null && item.createdAt}</p>
                   <p>{item != null && item.time}</p>
                   <p>{item != null && item.place}</p>
                   <p>{item != null && item.age}</p>
