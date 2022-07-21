@@ -4,71 +4,132 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { GetMainAxois,GetMainLogin } from "../../redux/modules/Data";
+import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
 import axios from "axios";
 
-
 function BookScard() {
+  const [book, setbook] = React.useState();
+  const [btn, setbtn] = React.useState(true)
 
-    React.useEffect(()=>{
-        axios.get('http://dlckdals04.shop/api/mypage/bookmark',{
-            headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-          }).then((res)=>{
-            console.log(res)
-          }).catch((err)=>{
-            console.log(err)
-          })
-    },[])
+  React.useEffect(() => {
+    axios
+      .get("http://dlckdals04.shop/api/mypage/bookmark/", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setbook(res.data.recruitBookmarkList.slice(0,3));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const recruitsMore = async () => {
+    await axios.get("http://dlckdals04.shop/api/mypage/bookmark/",
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res)=>{
+      console.log(res)
+      setbtn(!btn)
+      btn ? setbook(res.data.recruitBookmarkList) : setbook(res.data.recruitBookmarkList.slice(0,3)) 
+    })
+  };
 
 
 
- 
+
+
+
+
+
+
+
+
   return (
     <>
       <Container>
-    
-                <div className="card">
-                  <div className="card-top">
-                    <p>모집완료</p>
-                  
-                      <BsFillBookmarkFill
-                        className="checkIcon"
-                        
-                      ></BsFillBookmarkFill>
-
-                      <BsBookmark
-                        className="icon"
-                        
-                      />
-
-                  </div>
-                  {/* 카드 타이틀 */}
-                  <div
-                    className="title"
-                    
-                  >
-                    <h1></h1>
-                  </div>
-                  {/* 카드 내용물 */}
-                  <div
-                    className="card-bottom"
-                    
-                  >
-                    {/* <p>{item != null && item.createdAt}</p>
-                    <p>{item != null && item.time}</p>
-                    <p>{item != null && item.place}</p>
-                    <p>{item != null && item.age}</p> */}
-                  </div>
+        {book &&
+          book.map((item, idx) => {
+            return (
+              <div className="card" key={idx}>
+                <div className="card-top">
+                  <p>모집완료</p>
+                  {item.bookmarkStatus === true ? (
+                    <BsFillBookmarkFill
+                      className="checkIcon"
+                      onClick={() => {
+                        axios
+                          .put(
+                            "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              item.recruitPostId,
+                            null,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem(
+                                  "accessToken"
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                          });
+                      }}
+                    />
+                  ) : (
+                    <BsBookmark
+                      className="icon"
+                      onClick={() => {
+                        axios
+                          .put(
+                            "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              item.recruitPostId,
+                            null,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem(
+                                  "accessToken"
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                          });
+                      }}
+                    />
+                  )}
                 </div>
-
+                {/* 카드 타이틀 */}
+                <div className="title">
+                  <h1>{item.title}</h1>
+                </div>
+                {/* 카드 내용물 */}
+                <div className="card-bottom">
+                  <p>{item != null && item.markedAt}</p>
+                  <p>{item != null && item.time}</p>
+                  <p>{item != null && item.place}</p>
+                  <p>{item != null && item.age}</p>
+                </div>
+              </div>
+            );
+          })}
       </Container>
+      <div className="btnBox">
+        <button  className ="MoreBtn" onClick={recruitsMore}>{btn ? "더보기" : "닫기"}</button>
+      </div>
     </>
   );
 }
 const Container = styled.div`
   display: grid;
-  // grid-template-columns: repeat(auto-fit, 380px);
-  grid-template-columns: repeat(auto-fill, minmax(24%, 100px));
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2em;
   justify-content: center;
   align-items: center;
@@ -94,6 +155,7 @@ const Container = styled.div`
     padding: 6px 15px 7px 15px;
     color: white;
   }
+
   .icon {
     margin-right: 60px;
     width: 34px;
