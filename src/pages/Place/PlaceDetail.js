@@ -21,6 +21,8 @@ const PlaceDetail = () => {
   const navigate = useNavigate();
   const [detail, setDetail] = useState('');
   const { placePostId } = useParams();
+  const Profile = localStorage.getItem("profileUrl");
+
 
   React.useEffect(() => {
     axios.get("http://dlckdals04.shop/api/places/" + placePostId)
@@ -82,7 +84,7 @@ const PlaceDetail = () => {
                 <div className='info'>
                   <Image>
                     <div className="ProfileImg">
-                      <img src={detail.profileUrl} />
+                      <img src={Profile} />
                     </div>
                   </Image>
                   <p className='nickname'>
@@ -378,14 +380,15 @@ height: 80%;
 
 const Image = styled.div`
 .ProfileImg {
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-left: 12px;
   margin-top: 6px;
   cursor: pointer;
 
     img {
+      width: 50px;
       height:50px;
       border-radius:50%;
     }
