@@ -9,22 +9,45 @@ import axios from "axios";
 
 function BookScard() {
   const [book, setbook] = React.useState();
+  const [btn, setbtn] = React.useState(true)
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/mypage/bookmark", {
+      .get("http://dlckdals04.shop/api/mypage/bookmark/", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       })
       .then((res) => {
-        console.log(res.data.recruitBookmarkList);
-        setbook(res.data.recruitBookmarkList);
+        setbook(res.data.recruitBookmarkList.slice(0,3));
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  const recruitsMore = async () => {
+    await axios.get("http://dlckdals04.shop/api/mypage/bookmark/",
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res)=>{
+      console.log(res)
+      setbtn(!btn)
+      btn ? setbook(res.data.recruitBookmarkList) : setbook(res.data.recruitBookmarkList.slice(0,3)) 
+    })
+  };
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -36,9 +59,51 @@ function BookScard() {
                 <div className="card-top">
                   <p>모집완료</p>
                   {item.bookmarkStatus === true ? (
-                    <BsFillBookmarkFill className="checkIcon" />
+                    <BsFillBookmarkFill
+                      className="checkIcon"
+                      onClick={() => {
+                        axios
+                          .put(
+                            "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              item.recruitPostId,
+                            null,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem(
+                                  "accessToken"
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                          });
+                      }}
+                    />
                   ) : (
-                    <BsBookmark className="icon" />
+                    <BsBookmark
+                      className="icon"
+                      onClick={() => {
+                        axios
+                          .put(
+                            "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              item.recruitPostId,
+                            null,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem(
+                                  "accessToken"
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                          });
+                      }}
+                    />
                   )}
                 </div>
                 {/* 카드 타이틀 */}
@@ -56,6 +121,9 @@ function BookScard() {
             );
           })}
       </Container>
+      <div className="btnBox">
+        <button  className ="MoreBtn" onClick={recruitsMore}>{btn ? "더보기" : "닫기"}</button>
+      </div>
     </>
   );
 }
@@ -87,6 +155,7 @@ const Container = styled.div`
     padding: 6px 15px 7px 15px;
     color: white;
   }
+
   .icon {
     margin-right: 60px;
     width: 34px;
