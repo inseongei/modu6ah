@@ -21,13 +21,10 @@ function PlaceAdd() {
   const [title, setTitle] = useState("");
   const [region, setRegion] = useState("");
   const [content, setContent] = useState("");
-  const [address, setAddress] = useState("")
-  const [place, setplace] = useState("");
   const [location, setLocation] = useState("");
   const [imageSrc, setImageSrc] = useState([]);
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
-  const [hovered, setHovered] = useState(null);
   const [rating, setRating] = useState(0);
 
   const navigate = useNavigate();
