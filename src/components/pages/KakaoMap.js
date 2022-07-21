@@ -12,16 +12,17 @@ const KakaoMap = () => {
   const [Places, setPlaces] = useState([]);
   const { placePostId } = useParams();
   const container = useRef(null);
-  const dispatch = useDispatch();
 
   // 방법 1. axios 통신
   React.useEffect(() => {
     axios.get("http://dlckdals04.shop/api/places/" + placePostId)
       .then((res) => {
-        console.log(res.data.placeDetails)
+        // console.log(res.data.placeDetails)
         setPlaces(res.data.placeDetails)
       })
   }, []);
+
+  console.log(Places);
 
   // 방법 2. redux 사용
   // const detail = useSelector((state) => state.placepage.list.placeDetails);
@@ -52,7 +53,7 @@ const KakaoMap = () => {
     const options = {
       center: new kakao.maps.LatLng(37.537187, 127.005476),
       level: 4,
-       draggable: false
+      draggable: false
     }
     
     // 지도를 생성합니다 
@@ -60,7 +61,7 @@ const KakaoMap = () => {
 
     // 주소-좌표 변환 객체를 생성합니다
     const geocoder = new kakao.maps.services.Geocoder();
-    console.log(geocoder)
+    // console.log(geocoder)
 
 
     // 주소로 좌표를 검색합니다
@@ -76,6 +77,8 @@ const KakaoMap = () => {
         map: map,
         position: coords
         });
+
+        console.log(coords);
         
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
@@ -88,7 +91,7 @@ const KakaoMap = () => {
         map.setCenter(coords);
       }
     })
-  }, []);
+  });
 
   return (
 
