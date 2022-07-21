@@ -204,10 +204,12 @@ const Container = styled.div`
     margin-top: 12px;
     margin-left: 10px;
   }
+
   .card-body p {
     margin-top: 10px;
     margin-left: 5px;
   }
+
   .content {
     width: 100%;
     height: 80px;
