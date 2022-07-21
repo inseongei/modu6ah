@@ -9,14 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadPhotoDB } from '../../redux/modules/placepage';
 
 function LCard() {
-
  const [data, setData] = useState('');
+ const Profile = localStorage.getItem("profileUrl");
 
  const navigate = useNavigate();
- const dispatch = useDispatch();
 
  React.useEffect(()=>{
-    axios.get('http://dlckdals04.shop/api/places')
+    axios.get('http://dlckdals04.shop/api/places', {
+         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      })
     .then((res)=>{
         // console.log(res.data)
         setData(res.data.placePosts)
@@ -37,7 +38,7 @@ function LCard() {
                         {/* 카드 왼쪽 '이미지' */}
                         <div className='card-left'>
                             <div className='image'>
-                                <img src={item.imageUrl[0]} alt="사진"/>
+                                <img src={item.imageUrl[0]} />
                             </div>
 
                         </div>
@@ -47,11 +48,11 @@ function LCard() {
                                 <h3>{item.title}</h3>
                                 <p>⭐ {item.star}</p>
                             </div>
-                            <a><MdOutlinePlace/> {item.region}</a>
+                            <a><MdOutlinePlace/>{item.region}</a>
                             <div className='profile_box'>
                             <div className='detail_profile'>
                                 <img 
-                                src={item.profileUrl}
+                                src={Profile}
                                  alt="프로필" />
                             </div>
                                 <strong>{item.nickname}</strong>

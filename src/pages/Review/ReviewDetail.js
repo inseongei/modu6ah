@@ -10,12 +10,15 @@ import PhotoList from '../../components/pages/PhotoList';
 import Content from '../../components/pages/Content';
 import {useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { getCookie } from '../../shared/Cookie';
 import Footer from '../../components/main/Footer';
 
 const ReviewDetail = () => {
-const nickname = localStorage.getItem('nickname')
-let {reviewPostId} = useParams();
+const nickname = localStorage.getItem("nickname");
+const Profile = localStorage.getItem("profileUrl");
+const {reviewPostId} = useParams();
 const [Detail, setDetail] = React.useState()
+
 const navigate = useNavigate()
 
   React.useEffect(()=>{
@@ -32,7 +35,7 @@ const navigate = useNavigate()
 
   const deleteReview = () =>{
   axios.delete('http://dlckdals04.shop/api/reviews/' + reviewPostId ,{
-    headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+    headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
   }).then((res)=>{
     navigate('/review')
   })
@@ -72,7 +75,7 @@ const navigate = useNavigate()
                         {Detail.url}</p>
                 </div>
                 <div className='info'>
-                    <div className='profile'><img src={Detail.profileUrl} alt="사진"/></div>
+                    <div className='profile'><img src={Profile} alt="사진"/></div>
                     <p className='nickname'>{Detail.nickname}</p>
                 </div>
             </div>
@@ -230,8 +233,10 @@ const ContentBox = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 29px;
-  margin-left:30px;
+  margin-left: 15px;
+  margin-top: 20px;
   }
+
   .box{
   height: 55%;
   margin-top:50px;

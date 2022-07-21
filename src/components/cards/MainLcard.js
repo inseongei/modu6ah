@@ -6,9 +6,10 @@ import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function LCard() {
+function MainLcard() {
  const navigate = useNavigate();
  const [data, setData] = useState('');
+ const Profile = localStorage.getItem("profileUrl");
 
  React.useEffect(()=>{
     axios.get('http://dlckdals04.shop/api/main', {
@@ -47,7 +48,7 @@ function LCard() {
                             <a><MdOutlinePlace/>{item.region}</a>
                             <div className='profile_box'>
                             <div className='detail_profile'>
-                                <img src={item.profileUrl} alt="프로필" />
+                                <img src={Profile} alt="프로필" />
                             </div>
                                 <strong>{item.nickname}</strong>
                             </div>
@@ -178,4 +179,4 @@ flex-direction: row;
 
 `;
 
-export default LCard;
+export default MainLcard;
