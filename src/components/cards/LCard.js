@@ -24,7 +24,6 @@ function LCard() {
         },
       })
       .then((res) => {
-        // console.log(res.data);
         setData(res.data.placePosts);
       });
   }, []);
@@ -231,7 +230,6 @@ const Container = styled.div`
     margin-bottom: 20px;
     cursor: pointer;
   }
-
 
   .profile {
     width: 50px;

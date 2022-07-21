@@ -11,7 +11,6 @@ import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 import Modal from "../../modal/Map/Modal";
-import Ratings from "../../components/pages/Ratings";
 
 import axios from "axios";
 import { getCookie } from "../../shared/Cookie";
@@ -40,39 +39,38 @@ function PlaceAdd() {
       formData.append("imageUrl", files[i]);
     }
 
-    console.log(files.length)
+    console.log(files.length);
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
-    formData.append('title', title)
-    formData.append('content', content)
-    formData.append('region', region)
-    formData.append('location', location)
-    formData.append('star', rating)
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("region", region);
+    formData.append("location", location);
+    formData.append("star", rating);
 
     // formData.append('url', address)
 
     if (files.length < 6) {
-      await axios.post(
-        "http://dlckdals04.shop/api/places", formData,
-        {
+      await axios
+        .post("http://dlckdals04.shop/api/places", formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
           },
         })
         .then((res) => {
-          console.log(res)
-          navigate('/place')
+          console.log(res);
+          navigate("/place");
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         });
     } else {
-      alert('사진은 5개까지만 가능합니다.')
+      alert("사진은 5개까지만 가능합니다.");
     }
-  }
+  };
 
-  // 이미지 미리보기 
+  // 이미지 미리보기
   const handleImageChange = (e) => {
     const imageLists = e.target.files;
     let imageUrlLists = [...imageSrc];
@@ -86,7 +84,7 @@ function PlaceAdd() {
     setImageSrc(imageUrlLists);
   };
 
-  // 이미지 미리보기에서 삭제 
+  // 이미지 미리보기에서 삭제
   const handleDeleteImage = (id) => {
     setImageSrc(imageSrc.filter((_, index) => index !== id));
   };
@@ -106,25 +104,25 @@ function PlaceAdd() {
     setModalOpen(false);
   };
 
-// 별점
-  const stars = Array(5).fill(0)
-  
+  // 별점
+  const stars = Array(5).fill(0);
+
   const colors = {
     yellow: "#FFBA5A",
-    grey: "#a9a9a9"
+    grey: "#a9a9a9",
   };
 
-  const handleClick = value => {
-    setCurrentValue(value)
-  }
+  const handleClick = (value) => {
+    setCurrentValue(value);
+  };
 
-  const handleMouseOver = newHoverValue => {
-    setHoverValue(newHoverValue)
+  const handleMouseOver = (newHoverValue) => {
+    setHoverValue(newHoverValue);
   };
 
   const handleMouseLeave = () => {
-    setHoverValue(undefined)
-  }
+    setHoverValue(undefined);
+  };
 
   return (
     <>
@@ -163,32 +161,33 @@ function PlaceAdd() {
                     <strong>제목</strong>
                     <input
                       type="text"
-                      onChange={(e) =>
-                        setTitle(e.target.value)}
+                      onChange={(e) => setTitle(e.target.value)}
                     />
                   </div>
-                 
+
                   <MapSearch>
                     <strong>주소</strong>
                     <SearchInput
-                     id="address"
-                     className="signup-input-form"
-                     type="text"
-                     placeholder="주소를 입력해주세요"
-                     value={region}
-                   />
-                   <div className="address_btn">
-                   <button className="signup-btn-company" 
-                  onClick={openModal}>
-                    주소 검색
-                  </button>
-                  <Modal
-                    open={modalOpen}
-                    close={closeModal}
-                    header="주소 검색"
-                    addressData={RegionsData}
-                  />
-                   </div>
+                      id="address"
+                      className="signup-input-form"
+                      type="text"
+                      placeholder="주소를 입력해주세요"
+                      value={region}
+                    />
+                    <div className="address_btn">
+                      <button
+                        className="signup-btn-company"
+                        onClick={openModal}
+                      >
+                        주소 검색
+                      </button>
+                      <Modal
+                        open={modalOpen}
+                        close={closeModal}
+                        header="주소 검색"
+                        addressData={RegionsData}
+                      />
+                    </div>
                   </MapSearch>
 
                   <div className="position">
@@ -196,53 +195,51 @@ function PlaceAdd() {
                     <input
                       type="text"
                       placeholder="ex) 뽀로로파크, ㅇㅇㅇ"
-                      onChange={(e) =>
-                        setLocation(e.target.value)}
+                      onChange={(e) => setLocation(e.target.value)}
                     />
                   </div>
-                 
-                  <div className='star'>
+
+                  <div className="star">
                     <strong>별점</strong>
                     {stars.map((star, index) => {
                       const ratingValue = index + 1;
                       return (
                         <label>
-                          <input type="radio" 
-                          name="rating" 
-                          style={{display:"none"}}
-                          value={ratingValue}
-                        onClick={() => setRating(ratingValue)}
+                          <input
+                            type="radio"
+                            name="rating"
+                            style={{ display: "none" }}
+                            value={ratingValue}
+                            onClick={() => setRating(ratingValue)}
                           />
 
                           <FaStar
-                          key={index}
-                          size={28}
-                          onClick={() => handleClick(index + 1)}
-                          onMouseOver={() => handleMouseOver(index + 1)}
-                          onMouseLeave={handleMouseLeave}
-                          color={(hoverValue || currentValue) > index ? colors.yellow : colors.grey}
-                          style={{
-                            marginRight: 10,
-                            cursor: "pointer",
-                            transition: "color 200ms"
-                          }}
-                        />
-                        </label>   
-                      )
+                            key={index}
+                            size={28}
+                            onClick={() => handleClick(index + 1)}
+                            onMouseOver={() => handleMouseOver(index + 1)}
+                            onMouseLeave={handleMouseLeave}
+                            color={
+                              (hoverValue || currentValue) > index
+                                ? colors.yellow
+                                : colors.grey
+                            }
+                            style={{
+                              marginRight: 10,
+                              cursor: "pointer",
+                              transition: "color 200ms",
+                            }}
+                          />
+                        </label>
+                      );
                     })}
-                     <p 
-                  onChange={(e) =>
-                   setRating(e.target.value)}
-                   >
-                    {rating}점
-                   </p>
+                    <p onChange={(e) => setRating(e.target.value)}>
+                      {rating}점
+                    </p>
                   </div>
-                 
                 </div>
                 <div className="card-right">
-                  <textarea 
-                  onChange={(e) =>
-                 setContent(e.target.value)} />
+                  <textarea onChange={(e) => setContent(e.target.value)} />
                 </div>
               </div>
               <Btn>
@@ -254,9 +251,7 @@ function PlaceAdd() {
                 >
                   취소{" "}
                 </button>
-                <button className="btn"
-                  type="submit"
-                >
+                <button className="btn" type="submit">
                   등록하기
                 </button>
               </Btn>
@@ -382,35 +377,35 @@ const Place = styled.div`
 `;
 
 const MapSearch = styled.div`
-margin-left: 28px;
-margin-bottom: 20px;
-display:flex;
+  margin-left: 28px;
+  margin-bottom: 20px;
+  display: flex;
 
-.address_btn{
-  margin-top: 12px;
-  margin-left: 12px;
-}
+  .address_btn {
+    margin-top: 12px;
+    margin-left: 12px;
+  }
 
-strong{
-  margin-top: 13px;
-}
- 
-button{ 
- display:flex;
-}
+  strong {
+    margin-top: 13px;
+  }
+
+  button {
+    display: flex;
+  }
 `;
 
 const SearchInput = styled.input`
-border: 1px solid #e4e4e4;
-border-radius: 10px;
-width: 330px;
-height: 50px;
-margin-left: 20px;
-outline: none;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  width: 330px;
+  height: 50px;
+  margin-left: 20px;
+  outline: none;
 
-::placeholder {
-  padding-left: 8px;
-}
+  ::placeholder {
+    padding-left: 8px;
+  }
 `;
 
 const Btn = styled.div`
