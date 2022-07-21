@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 //style
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,56 +13,53 @@ import Grid from "../../components/elements/Grid";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 function ReviewAdd() {
   const [title, setTitle] = useState("");
   const [region, setRegion] = useState("");
   const [content, setContent] = useState("");
-  const [address, setAddress] = useState("")
+  const [address, setAddress] = useState("");
   const [imageSrc, setImageSrc] = useState([]);
   const navigate = useNavigate();
 
-
-
   // axios.Post 버튼
-  const onSubmit = async (e) =>{
+  const onSubmit = async (e) => {
     e.preventDefault();
     e.persist();
     let files = e.target.profile_files.files;
     let formData = new FormData();
     // 반복문돌려서 다중 이미지 처리
-    for (let i = 0; i < files.length; i++) { 
+    for (let i = 0; i < files.length; i++) {
       formData.append("imageUrl", files[i]);
     }
 
     // 제목,내용,제품종류,사이트 데이터=> 폼데이터 변환
-    formData.append('title',title)
-    formData.append('content',content)
-    formData.append('productType',region)
-    formData.append('url',address)
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("productType", region);
+    formData.append("url", address);
 
-    if(files.length < 4){
-      await axios.post(
-        "http://dlckdals04.shop/api/reviews",formData,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}`,"Content-Type": "multipart/form-data"},
+    if (files.length < 4) {
+      await axios
+        .post("http://dlckdals04.shop/api/reviews", formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            "Content-Type": "multipart/form-data",
+          },
         })
-      .then((res) => {
-        console.log(res)
-        alert('게시글 작성 성공')
-        navigate('/Review')
-      })
-      .catch((err) => {
-          console.log(err)
-      });
-    }else{
-      alert('사진은 3개까지만 가능합니다.')
+        .then((res) => {
+          console.log(res);
+          alert("게시글 작성 성공");
+          navigate("/Review");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      alert("사진은 3개까지만 가능합니다.");
     }
-    }
-   
-// 이미지 미리보기 
+  };
+
+  // 이미지 미리보기
   const handleImageChange = (e) => {
     const imageLists = e.target.files;
     let imageUrlLists = [...imageSrc];
@@ -77,10 +73,10 @@ function ReviewAdd() {
     setImageSrc(imageUrlLists);
   };
 
-// 이미지 미리보기에서  삭제 
-const handleDeleteImage = (id) => {
-  setImageSrc(imageSrc.filter((_, index) => index !== id));
-};
+  // 이미지 미리보기에서  삭제
+  const handleDeleteImage = (id) => {
+    setImageSrc(imageSrc.filter((_, index) => index !== id));
+  };
 
   return (
     <>
@@ -92,16 +88,14 @@ const handleDeleteImage = (id) => {
               <div className="title">대표이미지</div>
             </div>
             <form onSubmit={(e) => onSubmit(e)}>
-            <input
-              type="file"
-              name="profile_files"
-              multiple="multiple"
-              onChange={handleImageChange}
-            />
+              <input
+                type="file"
+                name="profile_files"
+                multiple="multiple"
+                onChange={handleImageChange}
+              />
               <button type="submit">제출</button>
             </form>
-
-
             <div className="imageBox">
               <label htmlFor="profile_img_upload">
                 <AiOutlineFileImage />
@@ -114,7 +108,6 @@ const handleDeleteImage = (id) => {
                   <button onClick={() => handleDeleteImage(id)}>삭제</button>
                 </div>
               ))}
-
             </div>
             <div className="mainBox">
               <div className="card-left">
@@ -140,11 +133,9 @@ const handleDeleteImage = (id) => {
                     onChange={(e) => setRegion(e.target.value)}
                   />
                 </div>
-
               </div>
               <div className="card-right">
                 <textarea onChange={(e) => setContent(e.target.value)} />
-
               </div>
             </div>
             <Btn>
@@ -156,7 +147,6 @@ const handleDeleteImage = (id) => {
               >
                 취소
               </button>
-
             </Btn>
           </div>
         </Place>

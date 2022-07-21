@@ -176,7 +176,7 @@ function PlaceAdd() {
                   navigate(`/`);
                 }}
               >
-                취소{" "}
+                취소
               </button>
               <button className="btn" 
               type="submit"

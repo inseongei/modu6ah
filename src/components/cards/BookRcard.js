@@ -42,25 +42,6 @@ function BookRcard() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <>
     <Container>
