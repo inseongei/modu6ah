@@ -234,7 +234,7 @@ function PlaceAdd() {
                   onChange={(e) =>
                    setRating(e.target.value)}
                    >
-                    {rating}.0점
+                    {rating}점
                    </p>
                   </div>
                  
@@ -411,10 +411,6 @@ outline: none;
 ::placeholder {
   padding-left: 8px;
 }
-`;
-
-const InfoBox = styled.div`
-margin-bottom: 10px;
 `;
 
 const Btn = styled.div`
