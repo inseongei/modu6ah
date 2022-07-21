@@ -4,8 +4,12 @@ import styled from "styled-components";
 import BookScard from "../../components/cards/BookScard";
 import BookRcard from "../../components/cards/BookRcard";
 import BookLcard from "../../components/cards/BookLcard";
+import Footer from "../../components/main/Footer";
+import axios from "axios";
 
 const MyBookmark = () => {
+
+
   return (
     <>
       <Header />
@@ -24,7 +28,7 @@ const MyBookmark = () => {
           </div>
 
           <div className="cardBox">
-            <BookScard />
+            <BookScard/>
           </div>
 
           <div className="titleOne">
@@ -35,8 +39,9 @@ const MyBookmark = () => {
           </div>
 
           <div className="cardBox">
-            <BookRcard />
+            <BookLcard />
           </div>
+
 
           <div className="titleOne">
             <div className="subtitle">육아템 리뷰</div>
@@ -46,17 +51,17 @@ const MyBookmark = () => {
           </div>
 
           <div className="cardBox">
-            <BookLcard />
+            <BookRcard />
           </div>
         </div>
       </Bookmark>
+      <Footer />
     </>
   );
 };
 
 const Bookmark = styled.div`
   width: 100%;
-  height: 100%;
   background-color: #f5f5f5;
 
   .title {
@@ -84,10 +89,27 @@ const Bookmark = styled.div`
     line-height: 30px;
   }
 
+
+
+  .MoreBtn {
+    border: 2px solid #ddd;
+    width: 70px;
+    height: 30px;
+    position: relative;
+    right: 50px;
+    transition: all 0.25s ease;
+    border-radius: 5px;
+    margin-top: 30px;
+  }
+
+  .MoreBtn:hover {
+    border-color: #111;
+    box-shadow: 1px 2px 4px rgb(0 0 0 / 10%);
+  }
+
   .MainBox {
     border: 1px solid #e4e4e4;
     width: 80%;
-    height: 100%;
     margin: 30px auto;
     border-radius: 10px;
     background: #ffffff;
@@ -119,7 +141,6 @@ const Bookmark = styled.div`
   .cardBox {
     width: 90%;
     margin: auto;
-    border: 1px solid black;
   }
 `;
 

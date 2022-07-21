@@ -17,8 +17,8 @@ function BookRcard() {
         },
       })
       .then((res) => {
-        console.log(res.data.recruitBookmarkList);
-        setbook(res.data.recruitBookmarkList);
+        console.log(res.data.reviewBookmarkList);
+        setbook(res.data.reviewBookmarkList);
       })
       .catch((err) => {
         console.log(err);
@@ -26,42 +26,98 @@ function BookRcard() {
   }, []);
   return (
     <Container>
-      <div className="card">
-        {/* 카드 위쪽 '타이틀' */}
-        <div className="card-top">
-          <div>
-            <h3></h3>
-            <p></p>
-          </div>
+      {book &&
+        book.map((data, idx) => {
+          return (
+            <div className="card" key={idx}>
+              {/* 카드 위쪽 '타이틀' */}
+              <div className="card-top">
+                <div>
+                  <h3>{data.title}</h3>
+                  <p>{data.productType}</p>
+                </div>
 
-          <div>
-            <BsBookmark className="bookmark" />
-          </div>
-        </div>
-        <a>
-          <MdOutlinePlace />{" "}
-        </a>
-        {/* 카드 중간 '이미지'*/}
-        <div className="card-body">
-          <div className="image"></div>
-          {/* 카드 아래쪽 '아이디 및 내용물' */}
-          <div className="profile_box">
-            <div className="detail_profile"></div>
-            <strong></strong>
-          </div>
-          <div className="content">
-            <p></p>
-          </div>
-        </div>
-      </div>
+                <div>
+                  {data.bookmarkStatus === true ? (
+                    <BsFillBookmarkFill
+                      className="bookmark2"
+                      onClick={() => {
+                        axios
+                          .put(
+                            "http://dlckdals04.shop/api/reviews/bookmark/" +
+                              data.reviewPostId,
+                            null,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem(
+                                  "accessToken"
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                          });
+                      }}
+                    />
+                  ) : (
+                    <BsBookmark
+                      className="bookmark"
+                      onClick={() => {
+                        axios
+                          .put(
+                            "http://dlckdals04.shop/api/reviews/bookmark/" +
+                              data.reviewPostId,
+                            null,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem(
+                                  "accessToken"
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                          });
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+              <a href={data.url}>
+                <MdOutlinePlace />
+                {data.url}
+              </a>
+              {/* 카드 중간 '이미지'*/}
+              <div className="card-body">
+                <div className="image">
+                  <img src={data.imageUrl[0]} alt="사진" />
+                </div>
+                {/* 카드 아래쪽 '아이디 및 내용물' */}
+                <div className="profile_box">
+                  <div className="detail_profile">
+                    <img src={data.profileUrl} alt="프로필 이미지" />
+                  </div>
+                  <strong>{data.nickname}</strong>
+                </div>
+                <div className="content">
+                  <p>{data.content}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
     </Container>
   );
 }
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, 460px);
-  gap: 3.6em;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2em;
   justify-content: center;
   align-items: center;
   .card {
@@ -91,10 +147,22 @@ const Container = styled.div`
     display: flex;
   }
 
+  a {
+    text-decoration: none;
+    color: black;
+  }
   .bookmark {
     margin-right: 60px;
     width: 34px;
     height: 34px;
+    cursor: pointer;
+  }
+
+  .bookmark2 {
+    margin-right: 60px;
+    width: 34px;
+    height: 34px;
+    color: #6b4e16;
     cursor: pointer;
   }
 

@@ -11,7 +11,7 @@ function RCard() {
   const [Detail, setDetail] = React.useState();
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/main", {
+      .get("http://dlckdals04.shop/api/reviews", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
