@@ -13,13 +13,12 @@ function BookScard() {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/mypage/bookmark/recruits", {
+      .get("http://dlckdals04.shop/api/mypage/bookmark/", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       })
       .then((res) => {
-        console.log(res.data.recruitBookmarkList);
         setbook(res.data.recruitBookmarkList.slice(0,3));
       })
       .catch((err) => {
@@ -28,7 +27,7 @@ function BookScard() {
   }, []);
 
   const recruitsMore = async () => {
-    await axios.get("http://dlckdals04.shop/api/mypage/bookmark/recruits",
+    await axios.get("http://dlckdals04.shop/api/mypage/bookmark/",
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -2,12 +2,12 @@
 import React from "react";
 import styled from "styled-components";
 import { MdOutlinePlace } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 
 function BookRcard() {
   const [book, setbook] = React.useState();
+  const [btn, setbtn] = React.useState(true)
 
   React.useEffect(() => {
     axios
@@ -17,14 +17,52 @@ function BookRcard() {
         },
       })
       .then((res) => {
-        console.log(res.data.reviewBookmarkList);
-        setbook(res.data.reviewBookmarkList);
+        console.log(res)
+        setbook(res.data.reviewBookmarkList.slice(0,3));
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+
+  const ReviewMore = async () => {
+    await axios.get("http://dlckdals04.shop/api/mypage/bookmark/",
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res)=>{
+      console.log(res)
+      setbtn(!btn)
+      btn ? setbook(res.data.reviewBookmarkList) : setbook(res.data.reviewBookmarkList.slice(0,3)) 
+    })
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
+    <>
     <Container>
       {book &&
         book.map((data, idx) => {
@@ -111,6 +149,10 @@ function BookRcard() {
           );
         })}
     </Container>
+    <div className="btnBox">
+    <button  className ="MoreBtn" onClick={ReviewMore}>{btn ? "더보기" : "닫기"}</button>
+  </div>
+  </>
   );
 }
 
