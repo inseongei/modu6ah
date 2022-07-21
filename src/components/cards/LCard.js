@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadPhotoDB } from '../../redux/modules/placepage';
 import { FaStar } from "react-icons/fa";
 
+
 function LCard() {
  const [data, setData] = useState('');
  const Profile = localStorage.getItem("profileUrl");
