@@ -4,68 +4,64 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { GetMainAxois,GetMainLogin } from "../../redux/modules/Data";
+import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
 import axios from "axios";
 
-
 function BookScard() {
+  const [book, setbook] = React.useState();
 
-    React.useEffect(()=>{
-        axios.get('http://dlckdals04.shop/api/mypage/bookmark',{
-            headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-          }).then((res)=>{
-            console.log(res)
-          }).catch((err)=>{
-            console.log(err)
-          })
-    },[])
+  React.useEffect(() => {
+    axios
+      .get("http://dlckdals04.shop/api/mypage/bookmark", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.recruitBookmarkList);
+        setbook(res.data.recruitBookmarkList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
       <Container>
-    
-                <div className="card">
-                  <div className="card-top">
-                    <p>모집완료</p>
-                  
-                      <BsFillBookmarkFill
-                        className="checkIcon"
-                        
-                      ></BsFillBookmarkFill>
-
-                      <BsBookmark
-                        className="icon"
-                        
-                      />
-
-                  </div>
-                  {/* 카드 타이틀 */}
-                  <div
-                    className="title"
-                    
-                  >
-                    <h1></h1>
-                  </div>
-                  {/* 카드 내용물 */}
-                  <div
-                    className="card-bottom"
-                    
-                  >
-                    {/* <p>{item != null && item.createdAt}</p>
-                    <p>{item != null && item.time}</p>
-                    <p>{item != null && item.place}</p>
-                    <p>{item != null && item.age}</p> */}
-                  </div>
+        {book &&
+          book.map((item, idx) => {
+            return (
+              <div className="card" key={idx}>
+                <div className="card-top">
+                  <p>모집완료</p>
+                  {item.bookmarkStatus === true ? (
+                    <BsFillBookmarkFill className="checkIcon" />
+                  ) : (
+                    <BsBookmark className="icon" />
+                  )}
                 </div>
-
+                {/* 카드 타이틀 */}
+                <div className="title">
+                  <h1>{item.title}</h1>
+                </div>
+                {/* 카드 내용물 */}
+                <div className="card-bottom">
+                  <p>{item != null && item.markedAt}</p>
+                  <p>{item != null && item.time}</p>
+                  <p>{item != null && item.place}</p>
+                  <p>{item != null && item.age}</p>
+                </div>
+              </div>
+            );
+          })}
       </Container>
     </>
   );
 }
 const Container = styled.div`
   display: grid;
-  // grid-template-columns: repeat(auto-fit, 380px);
-  grid-template-columns: repeat(auto-fill, minmax(24%, 100px));
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2em;
   justify-content: center;
   align-items: center;
