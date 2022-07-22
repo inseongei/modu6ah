@@ -98,7 +98,7 @@ function LCard() {
                     }}
                   >
                     <h3>{item.title}</h3>
-                    <p>⭐ {item.star}</p>
+                    <p>⭐{item.star}</p>
                   </div>
 
                   <div>

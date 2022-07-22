@@ -47,6 +47,7 @@ export const GetMyPageAxios = (nickname) => {
         }
       })
       .then((res) => {
+        console.log(res.data)
         dispatch(GetMyPage(res.data));
       })
       .catch((err) => {
