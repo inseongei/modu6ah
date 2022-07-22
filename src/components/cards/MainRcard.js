@@ -12,7 +12,6 @@ function MainRCard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem('accessToken')
-
   React.useEffect(() => {
     token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin())
   }, []);

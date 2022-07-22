@@ -1,33 +1,83 @@
 // 모집 카드
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { GetRecruitAxois } from "../../redux/modules/Data";
 import axios from "axios";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function SCard() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+  const [noMore,setnoMore] = useState(true)
+  const [index , setindex] = useState(1)
+
+  // 배열 자르기 함수 (배열 , 몇개단위)
+  const division = (arr, n) => {
+    const length = arr.length;
+    const divide =
+      Math.floor(length / n) + (Math.floor(length % n) > 0 ? 1 : 0);
+    const newArray = [];
+    // 배열 0부터 n개씩 잘라 새 배열에 넣기
+    for (let i = 0; i <= divide; i++) {
+      newArray.push(arr.splice(0, n));
+    }
+    return newArray;
+  };
 
   React.useEffect(() => {
-    dispatch(GetRecruitAxois());
+    axios
+      .get("http://dlckdals04.shop/api/recruits", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.recruitPosts)
+        let data = res.data.recruitPosts.slice(0,3);
+        setData([...data]);
+      });
   }, []);
 
-  const post = useSelector((state) => state.Data.Recruit);
 
-  console.log(post);
-
-  if (!post) {
-    return <div></div>;
-  }
+  const axiosData = () => {
+    axios
+      .get("http://dlckdals04.shop/api/recruits", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.recruitPosts);
+        let result = division(res.data.recruitPosts,3)
+        if(noMore === true){
+          setData((list) => [...list,result[index]].flat())
+          setindex(index+1)
+        } else if(result.length === data){
+          setnoMore(false)
+        } else{
+          return null
+        }
+      });
+  };
 
   return (
     <>
+    <InfiniteScroll
+        dataLength={data.length}
+        next={axiosData}
+        hasMore={noMore}
+        loader={<h4>Loading...</h4>}
+        scrollableTarget="scrollableDiv"
+        endMessage={
+          <p>여기가 카드 끝이여 </p>
+        }
+      ></InfiniteScroll>
       <Container>
-        {post.recruitPosts &&
-          post.recruitPosts.map((item, idx) => {
+        {data &&
+          data.map((item, idx) => {
             return (
               item != null && (
                 <div className="card" key={idx}>

@@ -11,7 +11,7 @@ import MainLcard from '../components/cards/MainLcard';
 import MainRcard from '../components/cards/MainRcard';
 import Footer from "../components/main/Footer";
 import MainScard from "../components/cards/MainScard";
-import Search from "../components/main/Search";
+import SearchInput from "../components/main/SearchInput";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Main = () => {
     <div>
       <Header />
       <Swiper />
-      <Search/>
+      <SearchInput/>
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
         <Container>
           <div className="card_title">
