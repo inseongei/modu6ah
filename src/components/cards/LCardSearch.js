@@ -7,14 +7,14 @@ import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { GetMainAxois } from "../../redux/modules/search";
 
-function SearchLcard({data, query}) {
+function LCardSearch({lcard, query}) {
   const [btn, setbtn] = React.useState(true);
 
   return (
     <>
       <Container>
-        {data &&
-          data.filter((item) =>
+        {lcard &&
+          lcard.filter((item) =>
             item.title.includes(query) ||
             item.content.includes(query)
           )
@@ -221,4 +221,4 @@ const Container = styled.div`
   }
 `;
 
-export default SearchLcard;
+export default LCardSearch;

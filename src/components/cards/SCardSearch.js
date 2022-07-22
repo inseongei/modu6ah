@@ -9,31 +9,21 @@ import axios from "axios";
 import { useSearchParams} from 'react-router-dom';
 import { GetRecruitAxois } from "../../redux/modules/Data";
 
-function SearchScard({data, query}) {
+function SCardSearch({scard, query}) {
   const navigate = useNavigate();
   const [search, setSearch] = React.useState();
   const [btn, setbtn] = React.useState(true);
 
-  // 매니저님께 여쭤 볼 부분입니다. 지우지 말아주세요 :)
-  // const dispatch = useDispatch();
-
-  // const search = useSelector((state) => state);
-  // console.log(search);
-
-  // React.useEffect(() => {
-  //   dispatch(GetMainAxois());
-  // }, []);
-
   return (
     <>
             <Container>
-              {data &&
-                data.filter((item)=> 
+              {scard &&
+                scard.filter((item)=> 
                    item.title.includes(query) ||
                    item.content.includes(query)
                 ).map((item) => {
                   return (
-                    <div className="card" key={data._id}>
+                    <div className="card" key={item._id}>
                       <div className="card-top">
                         {item.status === true ? <p>모집완료</p> : <span>모집중</span>}
                         {item.bookmarkStatus === true ? (
@@ -198,4 +188,4 @@ const Container = styled.div`
   }
 `;
 
-export default SearchScard;
+export default SCardSearch;
