@@ -1,14 +1,14 @@
 //  장소 추천 카드
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 import dog from "../../images/dog.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { loadPhotoDB } from "../../redux/modules/placepage";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
-
 
 function LCard() {
   const [data, setData] = useState("");
@@ -16,8 +16,10 @@ function LCard() {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
   const [items, setItems] = useState([]);
+  const [real, setreal] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [ref, inView] = useInView();
 
   React.useEffect(() => {
     axios
@@ -31,11 +33,39 @@ function LCard() {
       });
   }, []);
 
+  console.log(items);
+
+  const getItems = useCallback(async () => {
+    setLoading(true);
+    await axios
+      .get("http://dlckdals04.shop/api/places", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setItems((prevState) => [...prevState, res.data.placePosts]);
+      });
+    setLoading(false);
+  }, [page]);
+
+  React.useEffect(() => {
+    getItems();
+  }, [getItems]);
+
+  React.useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView && !loading) {
+      setPage((prevState) => prevState + 1);
+    }
+  }, [inView, loading]);
+
   return (
     <>
       <Container>
-        {data &&
-          data.map((item, index) => (
+        {items &&
+          items.map((item, index) => (
             <div className="card" key={index}>
               {/* 카드 왼쪽 '이미지' */}
               <div
@@ -45,7 +75,7 @@ function LCard() {
                 }}
               >
                 <div className="image">
-                  <img src={item.imageUrl[0]} alt="사진" />
+                  {/* <img src={item.imageUrl[0]} alt="사진" /> */}
                 </div>
               </div>
               {/* 카드 오른쪽 '타이틀 및 설명' */}
