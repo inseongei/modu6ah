@@ -6,28 +6,32 @@ import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
 
 function MainLcard() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [data, setData] = useState("");
-  const Profile = localStorage.getItem("profileUrl");
+
+  const token = localStorage.getItem('accessToken')
 
   React.useEffect(() => {
-    axios
-      .get("http://dlckdals04.shop/api/main", {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      })
-      .then((res) => {
-        console.log(res.data);
-        setData(res.data.placePosts);
-      });
+    token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin())
   }, []);
+
+  const post = useSelector((state) => state.Data.Profile);
+  console.log(post);
+
+  if (!post) {
+    return <div></div>;
+  }
 
   return (
     <>
       <Container>
-        {data &&
-          data.map((item, index) => (
+        {post.placePosts &&
+          post.placePosts.map((item, index) => (
             <div
               className="card"
               key={index}
@@ -105,7 +109,7 @@ function MainLcard() {
                 </a>
                 <div className="profile_box">
                   <div className="detail_profile">
-                    <img src={Profile} alt="프로필" />
+                    <img src={item.profileUrl} alt="프로필" />
                   </div>
                   <strong>{item.nickname}</strong>
                 </div>
@@ -131,7 +135,7 @@ const Container = styled.div`
 
   .card {
     background: white;
-    border-radius: 30px;
+    border-radius: 10px;
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
     cursor: pointer;
