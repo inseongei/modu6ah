@@ -15,22 +15,23 @@ function LCard() {
   const [data, setData] = useState([]);
   const [Items, setItems] = useState([]);
   const [noMore,setnoMore] = useState(true)
+  const [index , setindex] = useState(1)
   const Profile = localStorage.getItem("profileUrl");
   const navigate = useNavigate();
 
-  // const division = (arr, n) => {
-  //   const length = arr.length;
-  //   const divide =
-  //     Math.floor(length / n) + (Math.floor(length % n) > 0 ? 1 : 0);
-  //   const newArray = [];
+  const division = (arr, n) => {
+    const length = arr.length;
+    const divide =
+      Math.floor(length / n) + (Math.floor(length % n) > 0 ? 1 : 0);
+    const newArray = [];
 
-  //   for (let i = 0; i <= divide; i++) {
-  //     // 배열 0부터 n개씩 잘라 새 배열에 넣기
-  //     newArray.push(arr.splice(0, n));
-  //   }
+    for (let i = 0; i <= divide; i++) {
+      // 배열 0부터 n개씩 잘라 새 배열에 넣기
+      newArray.push(arr.splice(0, n));
+    }
 
-  //   return newArray;
-  // };
+    return newArray;
+  };
 
   React.useEffect(() => {
     axios
@@ -40,13 +41,13 @@ function LCard() {
         },
       })
       .then((res) => {
-        console.log(res.data.placePosts);
-        let data = res.data.placePosts.slice(0, res.data.placePosts.length / 2);
+        console.log(res.data.placePosts)
+        let data = res.data.placePosts.slice(0,2);
         setData([...data]);
       });
   }, []);
 
-  console.log(data);
+
 
 
 
@@ -59,18 +60,19 @@ function LCard() {
       })
       .then((res) => {
         console.log(res.data.placePosts);
-        let comment = res.data.placePosts.slice(
-          res.data.placePosts.length / 2,
-          res.data.placePosts.length
-        );
-        setData((list) => [...list,comment].flat())
-
-
+        let result = division(res.data.placePosts,2)
+        if(noMore === true){
+          setData((list) => [...list,result[index]].flat())
+          setindex(index+1)
+        } else if(result.length === data){
+          setnoMore(false)
+        } else{
+          return null
+        }
       });
-
-      setnoMore(false)
   };
-
+  
+  console.log(data);
   return (
     <>
       <InfiniteScroll
