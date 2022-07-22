@@ -32,6 +32,12 @@ import WelcomeModal from "../modal/WelcomeModal";
 import KakaoLogIn from "../pages/User/KakaoLogIn";
 import MyBookmark from '../pages/Mypage/MyBookmark'
 
+//검색 페이지
+import MainSearch from "../pages/Search/MainSearch";
+import RecruitSearch from "../pages/Search/RecruitSearch";
+import PlaceSearch from "../pages/Search/PlaceSearch";
+import ReviewSearch from "../pages/Search/ReviewSearch";
+
 function App() {
   return (
     <>
@@ -67,7 +73,13 @@ function App() {
         {/* 이쪽 모달은 추후에 삭제 예정 */}
         <Route path="/welcome" element={<WelcomeModal />} />
         <Route path="/api/users/kakao/callback" element={<KakaoLogIn />} />
-        {/* <Route path="/map" element={< KaKaoMap />} /> */}
+
+        {/* 검색 페이지 */}
+        <Route path="/api/search" element={<MainSearch/>} />
+        <Route path="/search/recruit" element={<RecruitSearch/>} />
+        <Route path="/search/place" element={<PlaceSearch/>} />
+        <Route path="/search/review" element={<ReviewSearch/>} />
+        
       </Routes>
     </>
   );
