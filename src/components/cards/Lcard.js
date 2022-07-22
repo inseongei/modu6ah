@@ -9,17 +9,28 @@ import dog from "../../images/dog.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { loadPhotoDB } from "../../redux/modules/placepage";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function LCard() {
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
+  const [Items, setItems] = useState([]);
+  const [noMore,setnoMore] = useState(true)
   const Profile = localStorage.getItem("profileUrl");
   const navigate = useNavigate();
-  const token = localStorage.getItem("accessToken");
-  const [items, setItems] = useState([]);
-  const [real, setreal] = useState([]);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [ref, inView] = useInView();
+
+  // const division = (arr, n) => {
+  //   const length = arr.length;
+  //   const divide =
+  //     Math.floor(length / n) + (Math.floor(length % n) > 0 ? 1 : 0);
+  //   const newArray = [];
+
+  //   for (let i = 0; i <= divide; i++) {
+  //     // 배열 0부터 n개씩 잘라 새 배열에 넣기
+  //     newArray.push(arr.splice(0, n));
+  //   }
+
+  //   return newArray;
+  // };
 
   React.useEffect(() => {
     axios
@@ -29,43 +40,52 @@ function LCard() {
         },
       })
       .then((res) => {
-        setData(res.data.placePosts);
+        console.log(res.data.placePosts);
+        let data = res.data.placePosts.slice(0, res.data.placePosts.length / 2);
+        setData([...data]);
       });
   }, []);
 
-  console.log(items);
+  console.log(data);
 
-  const getItems = useCallback(async () => {
-    setLoading(true);
-    await axios
+
+
+  const axiosData = () => {
+    axios
       .get("http://dlckdals04.shop/api/places", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       })
       .then((res) => {
-        console.log(res);
-        setItems((prevState) => [...prevState, res.data.placePosts]);
+        console.log(res.data.placePosts);
+        let comment = res.data.placePosts.slice(
+          res.data.placePosts.length / 2,
+          res.data.placePosts.length
+        );
+        setData((list) => [...list,comment].flat())
+
+
       });
-    setLoading(false);
-  }, [page]);
 
-  React.useEffect(() => {
-    getItems();
-  }, [getItems]);
-
-  React.useEffect(() => {
-    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
-    if (inView && !loading) {
-      setPage((prevState) => prevState + 1);
-    }
-  }, [inView, loading]);
+      setnoMore(false)
+  };
 
   return (
     <>
+      <InfiniteScroll
+        dataLength={data.length}
+        next={axiosData}
+        hasMore={noMore}
+        loader={<h4>Loading...</h4>}
+        scrollableTarget="scrollableDiv"
+        endMessage={
+          <p>여기가 카드 끝이여 </p>
+        }
+      ></InfiniteScroll>
       <Container>
-        {items &&
-          items.map((item, index) => (
+        {data &&
+          data.map((item, index) => (
             <div className="card" key={index}>
               {/* 카드 왼쪽 '이미지' */}
               <div
@@ -75,7 +95,7 @@ function LCard() {
                 }}
               >
                 <div className="image">
-                  {/* <img src={item.imageUrl[0]} alt="사진" /> */}
+                  <img src={item.imageUrl[0]} alt="사진" />
                 </div>
               </div>
               {/* 카드 오른쪽 '타이틀 및 설명' */}
@@ -174,13 +194,11 @@ function LCard() {
 
 const Container = styled.div`
   font-family: "Nanum Gothic";
-
   display: grid;
   grid-template-columns: repeat(auto-fit);
   gap: 3.5em;
   justify-content: center;
   align-items: center;
-
   .card {
     background: white;
     border-radius: 30px;
@@ -192,7 +210,6 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
   }
-
   .card-left {
     display: flex;
     width: 460px;
@@ -212,7 +229,6 @@ const Container = styled.div`
   .titleBox {
     cursor: pointer;
   }
-
   .atag {
     text-decoration: none;
     color: black;
@@ -229,71 +245,59 @@ const Container = styled.div`
     width: 100%;
     overflow: hidden;
   }
-
   .card-left img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-
   .card-right {
     display: flex;
     flex-direction: column;
     margin-top: 40px;
     margin-left: 60px;
   }
-
   .title {
     display: flex;
     justify-content: space-between;
-
     h3 {
       font-weight: 700;
     }
   }
-
   .title p {
     margin-top: 4px;
     margin-left: 10px;
   }
-
   .profile_box {
     display: flex;
     margin-top: 15px;
     margin-bottom: 20px;
     cursor: pointer;
   }
-
   .profile {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     border: 1px solid black;
   }
-
   .detail_profile > img {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     margin-left: 10px;
   }
-
   .detail_profile {
     border-radius: 50%;
     align-items: center;
     display: block;
     justify-content: center;
   }
-
   strong {
     margin-top: 10px;
     margin-left: 10px;
   }
-
   .card-right p {
     margin: 6px 10px 0px 5px;
   }
-
   .content {
     margin-right: 20px;
     width: 420px;
@@ -302,7 +306,6 @@ const Container = styled.div`
     overflow: hidden;
     cursor: pointer;
   }
-
   .content p {
     font-weight: normal;
   }
