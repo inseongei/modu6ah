@@ -58,7 +58,7 @@ function LCard() {
         if(noMore === true){
           setData((list) => [...list,result[index]].flat())
           setindex(index+1)
-        } else if(result.length === data){
+        } else if(result.length === data.length){
           setnoMore(false)
         } else{
           return null
@@ -66,7 +66,6 @@ function LCard() {
       });
   };
   
-  console.log(data);
   return (
     <>
       <InfiniteScroll
