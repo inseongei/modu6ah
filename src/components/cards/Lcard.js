@@ -13,6 +13,7 @@ function LCard() {
   const [index , setindex] = useState(1)
   const Profile = localStorage.getItem("profileUrl");
   const navigate = useNavigate();
+  console.log(data)
 
   // 배열 자르기 함수 (배열 , 몇개단위)
   const division = (arr, n) => {
@@ -41,10 +42,6 @@ function LCard() {
       });
   }, []);
 
-
-
-
-
   const axiosData = () => {
     axios
       .get("http://dlckdals04.shop/api/places", {
@@ -58,10 +55,8 @@ function LCard() {
         if(noMore === true){
           setData((list) => [...list,result[index]].flat())
           setindex(index+1)
-        } else if(result.length === data.length){
-          setnoMore(false)
         } else{
-          return null
+          return null;
         }
       });
   };
