@@ -5,26 +5,29 @@ import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
 
 function MainRCard() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [Detail, setDetail] = React.useState();
+  const token = localStorage.getItem('accessToken')
+
   React.useEffect(() => {
-    axios
-      .get("http://dlckdals04.shop/api/main", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        setDetail(res.data.reviewPosts);
-      });
+    token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin())
   }, []);
+
+  const post = useSelector((state) => state.Data.Profile);
+  console.log(post);
+
+  if (!post) {
+    return <div></div>;
+  }
+
   return (
     <Container>
-      {Detail &&
-        Detail.map((item, index) => (
+      {post.reviewPosts &&
+        post.reviewPosts.map((item, index) => (
           <div className="card" key={index}>
             {/* 카드 위쪽 '타이틀' */}
             <div className="card-top">
@@ -119,9 +122,10 @@ const Container = styled.div`
   gap: 3.6em;
   justify-content: center;
   align-items: center;
+
   .card {
     background: white;
-    border-radius: 30px;
+    border-radius: 10px;
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
     overflow: hidden;
