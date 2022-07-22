@@ -9,34 +9,28 @@ import KakaoMap from "../../components/pages/KakaoMap";
 import { GrLocation } from "react-icons/gr";
 import { FaStar } from "react-icons/fa";
 
-
 import axios from "axios";
 import data from "../../shared/data";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/main/Footer";
 
-
 const PlaceDetail = () => {
   const [datas, setDatas] = useState(data);
   const [currItem, setCurrItem] = useState(datas[0]);
   const navigate = useNavigate();
-  const [detail, setDetail] = useState('');
+  const [detail, setDetail] = useState("");
   const { placePostId } = useParams();
   const Profile = localStorage.getItem("profileUrl");
 
-
   React.useEffect(() => {
-    axios.get("http://dlckdals04.shop/api/places/" + placePostId)
+    axios
+      .get("http://dlckdals04.shop/api/places/" + placePostId)
       .then((res) => {
-        console.log(res.data)
-        setDetail(res.data.placeDetails)
-      })
-  }, [])
-
-  // const onView = (id) => {
-  //   setCurrItem(datas.find((item) => item.id === id));
-  // };
+        console.log(res.data);
+        setDetail(res.data.placeDetails);
+      });
+  }, []);
 
   if (!detail) {
     return <div></div>;
@@ -47,73 +41,66 @@ const PlaceDetail = () => {
       <Header />
       <Container>
         <Title>
-          <div className="subject">
-            장소추천
-          </div>
+          <div className="subject">장소추천</div>
           <div className="page">
             <p>상세페이지</p>
           </div>
         </Title>
         <Box>
-          <div className='Box'>
-            <div className='imgBox'>
-              <div className='Bigimg'>
+          <div className="Box">
+            <div className="imgBox">
+              <div className="Bigimg">
                 <img src={detail.imageUrl[0]} alt="사진" />
               </div>
-              <div className='imgSmall'>
+              <div className="imgSmall">
                 {detail.imageUrl.map((item, idx) => {
                   return (
-                    <div key={idx}><img src={item} alt="사진" /></div>
-                  )
+                    <div key={idx}>
+                      <img src={item} alt="사진" />
+                    </div>
+                  );
                 })}
               </div>
             </div>
 
             <ContentBox>
-              <div className='box_top'>
-                <div className='title'>
+              <div className="box_top">
+                <div className="title">
                   <h2>{detail.title}</h2>
                   <span>
                     <FaStar
                       size={28}
                       style={{
                         color: "#FFBA5A",
-                        marginLeft: "5px"
-                      }} />
+                        marginLeft: "5px",
+                      }}
+                    />
                   </span>
                   <p>{detail.star}점</p>
                 </div>
-                <div className='location'>
+                <div className="location">
                   <p>
                     <GrLocation />
                     {detail.region}
                   </p>
                 </div>
-                <div className='info'>
+                <div className="info">
                   <Image>
                     <div className="ProfileImg">
                       <img src={Profile} />
                     </div>
                   </Image>
-                  <p className='nickname'>
-                    {detail.nickname}
-                  </p>
+                  <p className="nickname">{detail.nickname}</p>
                 </div>
               </div>
-              <div className='box'>
-                <div className='content'>
+              <div className="box">
+                <div className="content">
                   <p>{detail.content}</p>
                 </div>
               </div>
               <Btn>
-                <button
-                  className="btn"
-                >
-                  수정
-                </button>
-                <button className="btn">
-                  삭제
-                </button>
+                <button className="btn">수정</button>
+                <button className="btn">삭제</button>
               </Btn>
             </ContentBox>
           </div>
@@ -125,183 +112,178 @@ const PlaceDetail = () => {
       </Container>
       <Footer />
     </>
-
-  )
-}
+  );
+};
 
 const Title = styled.div`
-padding-top: 40px;
-margin-left: 130px;
+  padding-top: 40px;
+  margin-left: 130px;
 
-.subject {
-color: #A8A8A8;
-}
+  .subject {
+    color: #a8a8a8;
+  }
 
-.page {
-  font-size: 30px;
-  font-weight: 700;
-}
+  .page {
+    font-size: 30px;
+    font-weight: 700;
+  }
 `;
-
 
 const Box = styled.div`
-width: 1200px;
-height: 1300px;
+  width: 1200px;
+  height: 1300px;
 
-background: white;
+  background: white;
 
-margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
-margin-top: 50px;
-margin-bottom: 32px;
-display: flex;
-flex-direction: column;
-
-border: 1px solid lightgray;
-border-radius: 10px;
-
-.Box{
-  margin: 80px auto;
-  width:80%;
-  height: 70vh;
-  display:flex;
-}
-.imgBox{
-  width:50%;
+  margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+  margin-top: 50px;
+  margin-bottom: 32px;
   display: flex;
-  flex-direction:column;
-}
+  flex-direction: column;
 
-.Bigimg{
-  width: 50%;
-  height: 50%; 
-  margin: auto;
-  border-radius: 30px;
-}
+  border: 1px solid lightgray;
+  border-radius: 10px;
 
-.Bigimg >img{
-  width: 100%;
-  height: 100%;
-  border-radius: 30px;
-}
+  .Box {
+    margin: 80px auto;
+    width: 80%;
+    height: 70vh;
+    display: flex;
+  }
+  .imgBox {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
 
-.imgSmall{
-  height: 30%;
-  display: flex;
-}
+  .Bigimg {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    border-radius: 30px;
+  }
 
-
-.imgSmall >div {
-  border: 1px solid black;
-  margin: 30px auto;
-  width: 100px;
-  height: 100px;
-  border-radius: 30px;
-}
-
-.imgSmall >div > img {
-  width: 100%;
-  height: 100%;
-  border-radius: 30px;
-}
-
-.mapbox {
-  margin-top: 200px;
-}
-`;
-
-const Container = styled.div`
- width: 100%;
- background-color: #F5F5F5;
-  
-.Box{
-  margin: 30px auto;
-  justify-content: center;
-  align-items: center;
-  display:flex;
-}
-
-.mapbox {
-  display:flex;
-  justify-content: center;
-  align-items: center;
-}
-`
-
-const PhotoBox = styled.div`
-display: flex;
-width: 650px;
-margin-top: 50px;
-
-.picture{
-  width: 100%;
-  height: 600px;
-}
-
-.box{
-  height: 380px;
-  display: flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.mainPhoto{
-  border:1px solid black;
-  margin-left: 35px;
-  margin-bottom: 20px;
-  width:550px;
-  height:350px;
-  border-radius: 30px;
-}
-
-.photos{
-  widht: 40px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.photos > ul{
-  display: flex;
-  
-  img{
+  .Bigimg > img {
     width: 100%;
     height: 100%;
     border-radius: 30px;
   }
-}
 
+  .imgSmall {
+    height: 30%;
+    display: flex;
+  }
+
+  .imgSmall > div {
+    border: 1px solid black;
+    margin: 30px auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 30px;
+  }
+
+  .imgSmall > div > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+  }
+
+  .mapbox {
+    margin-top: 50px;
+  }
 `;
 
+const Container = styled.div`
+  width: 100%;
+  background-color: #f5f5f5;
+
+  .Box {
+    margin: 30px auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .mapbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+const PhotoBox = styled.div`
+  display: flex;
+  width: 650px;
+  margin-top: 50px;
+
+  .picture {
+    width: 100%;
+    height: 600px;
+  }
+
+  .box {
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mainPhoto {
+    border: 1px solid black;
+    margin-left: 35px;
+    margin-bottom: 20px;
+    width: 550px;
+    height: 350px;
+    border-radius: 30px;
+  }
+
+  .photos {
+    widht: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .photos > ul {
+    display: flex;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+    }
+  }
+`;
 
 const ContentBox = styled.div`
- width: 500px;
- margin-top: 80px;
- margin-left: 40px;
-      
-.title{
-  display:flex;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 36px;
-  margin-left: 42px;
+  width: 500px;
+  margin-top: 80px;
+  margin-left: 40px;
 
-  h2 {
-    margin-top: 2px;
+  .title {
+    display: flex;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 36px;
+    margin-left: 42px;
+
+    h2 {
+      margin-top: 2px;
+    }
+
+    p {
+      margin-left: 7px;
+      margin-top: 3px;
+    }
   }
 
-  p{
-    margin-left: 7px;
-    margin-top: 3px;
-  }
- }
-
-.icon{
-    color:#fdd835;
-    margin-left:30px;
+  .icon {
+    color: #fdd835;
+    margin-left: 30px;
   }
 
-.starScore{
-    color: #A8A8A8;
+  .starScore {
+    color: #a8a8a8;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -309,7 +291,7 @@ const ContentBox = styled.div`
     margin: 7px;
   }
 
-  .location{
+  .location {
     display: flex;
     font-weight: 400;
     font-size: 20px;
@@ -317,104 +299,104 @@ const ContentBox = styled.div`
     margin: 10px 0px 10px 40px;
   }
 
-.info{
-    display:flex;
-    align-items:center;
+  .info {
+    display: flex;
+    align-items: center;
     margin-left: 30px;
 
     p {
       margin-top: 14px;
       margin-left: 10px;
     }
-}
-  
-  .profile{
-    width:70px;
-    height:70px;
+  }
+
+  .profile {
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
   }
 
   .profile > img {
-    width:70px;
-    height:70px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
   }
-  
-  .nickname{
-  font-family: 'Noto Sans KR';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 29px;
-  margin-left:30px;
+
+  .nickname {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    margin-left: 30px;
   }
 
-  .box{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-top: 20px;
-}
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
 
-.content{
-  border: 2px solid #E4E4E4;
-  border-radius: 10px;
-  width:400px;
-  height:350px;
-}
+  .content {
+    border: 2px solid #e4e4e4;
+    border-radius: 10px;
+    width: 400px;
+    height: 350px;
+  }
 
-.content > p {
-font-weight: 400;
-font-size: 20px;
-line-height: 24px;
-width:100%;
-height: 80%;
-}
+  .content > p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    width: 100%;
+    height: 80%;
+  }
 
-.content > div{
-  width:100%;
-  height: 20%;
-}
+  .content > div {
+    width: 100%;
+    height: 20%;
+  }
 
-.ParkBtn{
-    width:30%;
+  .ParkBtn {
+    width: 30%;
     height: 50%;
-    border-radius:15px;
+    border-radius: 15px;
     font-size: 17px;
-    color:#263238;
+    color: #263238;
     border: none;
-    background-color:#ffa000;
+    background-color: #ffa000;
   }
-  
-  .btnBox{
-    display:flex;
-    justify-content:space-around;
+
+  .btnBox {
+    display: flex;
+    justify-content: space-around;
   }
-  
-  .KidBtn{
-    width:30%;
+
+  .KidBtn {
+    width: 30%;
     height: 50%;
-    border-radius:15px;
+    border-radius: 15px;
     font-size: 17px;
-    color:#263238;
+    color: #263238;
     border: none;
-    background-color:#c5e1a5; 
-  }  
+    background-color: #c5e1a5;
+  }
 `;
 
 const Image = styled.div`
-.ProfileImg {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-left: 12px;
-  margin-top: 6px;
-  cursor: pointer;
+  .ProfileImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 12px;
+    margin-top: 6px;
+    cursor: pointer;
 
     img {
       width: 50px;
-      height:50px;
-      border-radius:50%;
+      height: 50px;
+      border-radius: 50%;
     }
   }
 `;
@@ -438,6 +420,5 @@ const Btn = styled.div`
     outline: 0;
   }
 `;
-
 
 export default PlaceDetail;

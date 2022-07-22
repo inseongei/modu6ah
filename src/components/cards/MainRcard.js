@@ -9,6 +9,7 @@ import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 function MainRCard() {
   const navigate = useNavigate();
   const [Detail, setDetail] = React.useState();
+  console.log(Detail);
   React.useEffect(() => {
     axios
       .get("http://dlckdals04.shop/api/main", {

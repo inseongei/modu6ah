@@ -1,10 +1,16 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import search from "../../images/search.png";
 
 function Search() {
-  const searchBtn = () => {
-    console.log("key press");
+  const navigate = useNavigate();
+  // 엔터에만 event Listen을 할수 있게 한다
+  const searchBtn = (event) => {
+    if (event.key === "Enter") {
+      let keyword = event.target.value;
+      navigate(`/?q=${keyword}`);
+    }
   };
 
   return (
