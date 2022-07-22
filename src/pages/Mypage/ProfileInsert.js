@@ -47,9 +47,6 @@ const ProfileInsert = () => {
     let files = e.target.profile_files.files;
     let formData = new FormData();
 
-
-
-
     formData.append("profileUrl", files[0]);
     formData.append("myComment", insert.current.value);
 
