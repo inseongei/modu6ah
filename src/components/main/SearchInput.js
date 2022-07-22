@@ -1,16 +1,12 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import search from "../../images/search.png";
 
-function Search() {
+function SearchInput() {
   const navigate = useNavigate();
-  // 엔터에만 event Listen을 할수 있게 한다
-  const searchBtn = (event) => {
-    if (event.key === "Enter") {
-      let keyword = event.target.value;
-      navigate(`/?q=${keyword}`);
-    }
+  const searchBtn = () => {
+    console.log("key press");
   };
 
   return (
@@ -24,18 +20,21 @@ function Search() {
           onKeyPress={(event) => searchBtn(event)}
         />
       </div>
-      <Btn>확인</Btn>
+      <Btn 
+      onClick={() => {
+        navigate(`/api/search`);
+      }}
+      >확인</Btn>
     </SearchBox>
   );
 }
 
 const SearchBox = styled.div`
   font-family: "Nanum Gothic";
-
   display: flex;
   align-items: center;
   justify-content: center;
-
+  
   img {
     width: 30px;
     height: 30px;
@@ -68,4 +67,4 @@ const Btn = styled.button`
   border-radius: 20px;
 `;
 
-export default Search;
+export default SearchInput;
