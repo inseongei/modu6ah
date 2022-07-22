@@ -1,35 +1,29 @@
 //  장소 추천 카드
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
-import dog from "../../images/dog.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { loadPhotoDB } from "../../redux/modules/placepage";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function LCard() {
   const [data, setData] = useState([]);
-  const [Items, setItems] = useState([]);
   const [noMore,setnoMore] = useState(true)
   const [index , setindex] = useState(1)
   const Profile = localStorage.getItem("profileUrl");
   const navigate = useNavigate();
 
+  // 배열 자르기 함수 (배열 , 몇개단위)
   const division = (arr, n) => {
     const length = arr.length;
     const divide =
       Math.floor(length / n) + (Math.floor(length % n) > 0 ? 1 : 0);
     const newArray = [];
-
+    // 배열 0부터 n개씩 잘라 새 배열에 넣기
     for (let i = 0; i <= divide; i++) {
-      // 배열 0부터 n개씩 잘라 새 배열에 넣기
       newArray.push(arr.splice(0, n));
     }
-
     return newArray;
   };
 

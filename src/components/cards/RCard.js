@@ -1,14 +1,32 @@
 // 육아템 리뷰 카드
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function RCard() {
   const navigate = useNavigate();
-  const [Detail, setDetail] = React.useState();
+  const [data, setData] = useState([]);
+  const [noMore,setnoMore] = useState(true)
+  const [index , setindex] = useState(1)
+
+  // 배열 자르기 함수 (배열 , 몇개단위)
+  const division = (arr, n) => {
+    const length = arr.length;
+    const divide =
+      Math.floor(length / n) + (Math.floor(length % n) > 0 ? 1 : 0);
+    const newArray = [];
+    // 배열 0부터 n개씩 잘라 새 배열에 넣기
+    for (let i = 0; i <= divide; i++) {
+      newArray.push(arr.splice(0, n));
+    }
+    return newArray;
+  };
+
+
   React.useEffect(() => {
     axios
       .get("http://dlckdals04.shop/api/reviews", {
@@ -17,14 +35,49 @@ function RCard() {
         },
       })
       .then((res) => {
-        console.log(res);
-        setDetail(res.data.reviewPosts);
+        console.log(res.data.reviewPosts)
+        let data = res.data.reviewPosts.slice(0,3);
+        setData([...data]);
       });
   }, []);
+
+  // 페이지 스크롤이 하단에 도착할때 실행되는 함수
+  const axiosData = () => {
+    axios
+      .get("http://dlckdals04.shop/api/reviews", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.reviewPosts);
+        let result = division(res.data.reviewPosts,3)
+        if(noMore === true){
+          setData((list) => [...list,result[index]].flat())
+          setindex(index+1)
+        } else if(result.length === data){
+          setnoMore(false)
+        } else{
+          return null
+        }
+      });
+  };
+
   return (
+    <>
+    <InfiniteScroll
+        dataLength={data.length}
+        next={axiosData}
+        hasMore={noMore}
+        loader={<h4>Loading...</h4>}
+        scrollableTarget="scrollableDiv"
+        endMessage={
+          <p>여기가 카드 끝이여 </p>
+        }
+      ></InfiniteScroll>
     <Container>
-      {Detail &&
-        Detail.map((item, index) => (
+      {data &&
+        data.map((item, index) => (
           <div className="card" key={index}>
             {/* 카드 위쪽 '타이틀' */}
             <div className="card-top">
@@ -110,6 +163,7 @@ function RCard() {
           </div>
         ))}
     </Container>
+    </>
   );
 }
 
