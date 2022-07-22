@@ -126,7 +126,7 @@ const Container = styled.div`
     display: flex;
     height: 100%;
     background: white;
-    border-radius: 30px;
+    border-radius: 10px;
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
   }

@@ -1,67 +1,37 @@
-//  장소 추천 카드
-import React, { useState } from "react";
+// 육아템 리뷰 카드
+import React from "react";
 import styled from "styled-components";
-import { PlaceData } from "../../shared/placedata";
 import { MdOutlinePlace } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
 
-function MainLcard() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [data, setData] = useState("");
-
-  const token = localStorage.getItem('accessToken')
-
-  React.useEffect(() => {
-    token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin())
-  }, []);
-
-  const post = useSelector((state) => state.Data.Profile);
-  console.log(post);
-
-  if (!post) {
-    return <div></div>;
-  }
+function SearchLcard() {
+  const [book, setbook] = React.useState();
+  const [btn, setbtn] = React.useState(true);
 
   return (
     <>
       <Container>
-        {post.placePosts &&
-          post.placePosts.map((item, index) => (
-            <div
-              className="card"
-              key={index}
-              onClick={() => {
-                navigate("/placedetail/" + item.placePostId);
-              }}
-            >
-              {/* 카드 왼쪽 '이미지' */}
-              <div className="card-left">
-                <div className="image">
-                  <img src={item.imageUrl[0]} alt="사진" />
-                </div>
-              </div>
-              {/* 카드 오른쪽 '타이틀 및 설명' */}
-              <div className="card-right">
-                <div className="title">
-                  <div className="titleBox">
-                    <h3>{item.title}</h3>
-                    <p>⭐ {item.star}</p>
+        {book &&
+          book.map((data, idx) => {
+            return (
+              <div className="card" key={idx}>
+                {/* 카드 위쪽 '타이틀' */}
+                <div className="card-top">
+                  <div>
+                    <h3>{data.title}</h3>
+                    <p>{data.productType}</p>
                   </div>
 
                   <div>
-                    {item.bookmarkStatus === true ? (
+                    {data.bookmarkStatus === true ? (
                       <BsFillBookmarkFill
                         className="bookmark2"
                         onClick={() => {
                           axios
                             .put(
                               "http://dlckdals04.shop/api/places/bookmark/" +
-                                item.placePostId,
+                                data.placePostId,
                               null,
                               {
                                 headers: {
@@ -84,7 +54,7 @@ function MainLcard() {
                           axios
                             .put(
                               "http://dlckdals04.shop/api/places/bookmark/" +
-                                item.placePostId,
+                                data.placePostId,
                               null,
                               {
                                 headers: {
@@ -103,68 +73,75 @@ function MainLcard() {
                     )}
                   </div>
                 </div>
-                <a href="##" className="atag">
+                <a href={data.url}>
                   <MdOutlinePlace />
-                  {item.region}
+                  {data.url}
                 </a>
-                <div className="profile_box">
-                  <div className="detail_profile">
-                    <img src={item.profileUrl} alt="프로필" />
+                {/* 카드 중간 '이미지'*/}
+                <div className="card-body">
+                  <div className="image">
+                    <img src={data.imageUrl[0]} alt="사진" />
                   </div>
-                  <strong>{item.nickname}</strong>
-                </div>
-                <div className="content">
-                  <p>{item.content}</p>
+                  {/* 카드 아래쪽 '아이디 및 내용물' */}
+                  <div className="profile_box">
+                    <div className="detail_profile">
+                      <img src={data.profileUrl} alt="프로필 이미지" />
+                    </div>
+                    <strong>{data.nickname}</strong>
+                  </div>
+                  <div className="content">
+                    <p>{data.content}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
       </Container>
+      <div className="btnBox">
+        <button className="MoreBtn">
+          {btn ? "더보기" : "닫기"}
+        </button>
+      </div>
     </>
   );
 }
 
 const Container = styled.div`
-  font-family: "Nanum Gothic";
-
   display: grid;
-  grid-template-columns: repeat(auto-fit);
-  gap: 3.5em;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2em;
   justify-content: center;
   align-items: center;
-
   .card {
     background: white;
-    border-radius: 10px;
+    border-radius: 30px;
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
-    cursor: pointer;
     overflow: hidden;
-    width: 980px;
-    height: 360px;
+    height: 570px;
+  }
+  .card-top {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    margin: 30px 0px 0px 50px;
+    h3 {
+      font-weight: 700;
+    }
   }
-
-  .card-left {
+  .card-top p {
     display: flex;
-    width: 460px;
-    height: 300px;
-    margin: 30px 0px 0px 39px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin-top: 8px;
+    margin-left: 10px;
+    color: gray;
   }
 
-  .image {
-    border-radius: 25px;
-    width: 100%;
-    overflow: hidden;
+  .card-top > div {
+    display: flex;
   }
 
-  .atag {
+  a {
     text-decoration: none;
     color: black;
-    margin: 20px 0px 20px 0px;
   }
   .bookmark {
     margin-right: 60px;
@@ -181,57 +158,36 @@ const Container = styled.div`
     cursor: pointer;
   }
 
-  .card-left img {
+  a {
+    margin-left: 51px;
+  }
+  .card-body {
     width: 100%;
-    height: 100%;
+    cursor: pointer;
+    text-align: center;
+  }
+  .image {
+    border-radius: 25px;
+    overflow: hidden;
+  }
+  .card-body img {
+    width: 80%;
+    height: 270px;
+    margin-top: 3px;
     object-fit: cover;
+    border-radius: 25px;
   }
-
-  .card-right {
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
-    margin-left: 60px;
-  }
-
-  .titleBox {
-    display: flex;
-  }
-
-  .title {
-    display: flex;
-    justify-content: space-between;
-
-    h3 {
-      font-weight: 700;
-    }
-  }
-
-  .title p {
-    margin-top: 4px;
-    margin-left: 10px;
-  }
-
   .profile_box {
     display: flex;
     margin-top: 15px;
-    margin-bottom: 20px;
+    padding-left: 30px;
   }
-
-  .profile {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 1px solid black;
-  }
-
   .detail_profile > img {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     margin-left: 10px;
   }
-
   .detail_profile {
     border-radius: 50%;
     /* display:flex; */
@@ -241,25 +197,23 @@ const Container = styled.div`
   }
 
   strong {
-    margin-top: 10px;
+    font-family: "Noto Sans KR";
+    margin-top: 12px;
     margin-left: 10px;
   }
-
-  .card-right p {
-    margin: 0px 10px 0px 5px;
+  .card-body p {
+    margin-top: 10px;
+    margin-left: 5px;
   }
-
   .content {
-    margin-right: 20px;
-    width: 420px;
-    height: 180px;
+    width: 100%;
+    height: 80px;
     box-sizing: border-box;
     overflow: hidden;
-  }
-
-  .content p {
-    font-weight: normal;
+    margin-top: 10px;
+    padding-left: 30px;
+    text-align: left;
   }
 `;
 
-export default MainLcard;
+export default SearchLcard;

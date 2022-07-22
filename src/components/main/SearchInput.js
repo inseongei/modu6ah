@@ -34,14 +34,17 @@ const SearchBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
   img {
     width: 30px;
     height: 30px;
     margin: 42px 10px 0 0;
   }
+
   .search {
     margin-top: 40px;
   }
+
   .search-box {
     background-color: #eee;
     width: 600px;
