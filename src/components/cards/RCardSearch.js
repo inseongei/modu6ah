@@ -5,15 +5,15 @@ import { MdOutlinePlace } from "react-icons/md";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 
-function SearchRcard({ data, query }) {
+function RCardSearch({ rcard, query }) {
 
   const [btn, setbtn] = React.useState(true)
 
   return (
     <>
       <Container>
-        {data &&
-          data.filter((item) =>
+        {rcard &&
+          rcard.filter((item) =>
             item.title.includes(query) ||
             item.content.includes(query)
           ).map((item) => {
@@ -217,4 +217,4 @@ const Container = styled.div`
   }
 `;
 
-export default SearchRcard;
+export default RCardSearch;
