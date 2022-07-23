@@ -10,7 +10,6 @@ import RecruitComment from "../../components/pages/RecruitComment";
 import axios from "axios";
 import io from "socket.io-client";
 
-import { getCookie } from "../../shared/Cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailPostDB, deletePostDB } from "../../redux/modules/post";
@@ -22,7 +21,7 @@ const RecruitDetail = () => {
   const nickname = localStorage.getItem("nickname");
   const Profile = localStorage.getItem("profileUrl");
 
-  const token = getCookie("accessToken");
+  const token = localStorage.getItem("accessToken");
 
   const [modalIsOpen, setModalIsOpen] = useState(false); // 모달창 열고 닫는 State 값
   const [on, setOn] = useState(false); // 상세페이지의 모집중/모집완료 토글버튼 State 값
@@ -67,7 +66,7 @@ const RecruitDetail = () => {
   const GoChat = () => {
     axios
       .post("http://dlckdals04.shop/api/chats/rooms/" + recruitPostId, null, {
-        headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((res) => {
         const JoinData = {
@@ -122,7 +121,7 @@ const RecruitDetail = () => {
                 <div className="profile">
                   <div className="detail_profile">
                     <img
-                      src={Profile}
+                      src={detail.profileUrl}
                       alt="프로필"
                       onClick={() => {
                         navigate("/manager/" + detail.nickname);

@@ -24,7 +24,6 @@ function ReviewAdd() {
   // axios.Post 버튼
   const onSubmit = async (e) => {
     e.preventDefault();
-    e.persist();
     let files = e.target.profile_files.files;
     let formData = new FormData();
     // 반복문돌려서 다중 이미지 처리
@@ -94,13 +93,10 @@ function ReviewAdd() {
                 multiple="multiple"
                 onChange={handleImageChange}
               />
-              <button type="submit">제출</button>
-            </form>
             <div className="imageBox">
               <label htmlFor="profile_img_upload">
                 <AiOutlineFileImage />
               </label>
-
               {/* 이미지 미리보기 */}
               {imageSrc.map((image, id) => (
                 <div key={id}>
@@ -125,7 +121,6 @@ function ReviewAdd() {
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
-
                 <div className="position">
                   <strong>종류</strong>
                   <input
@@ -147,12 +142,22 @@ function ReviewAdd() {
               >
                 취소
               </button>
+
+              <button
+                className="btn"
+               type="submit"
+              >
+                등록
+              </button>
             </Btn>
+            </form>
           </div>
         </Place>
       </Grid>
       <Footer />
-    </>
+      </>
+
+
   );
 }
 

@@ -101,7 +101,6 @@ const RecruitComment = () => {
                         alt="사진" />
                     </div>
                   </div>
-
                   <div className='name'
                   >
                     {data.nickname}

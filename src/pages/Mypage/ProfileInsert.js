@@ -4,9 +4,6 @@ import Header from "../../components/main/Header";
 import { useNavigate } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 import { useDispatch, useSelector } from "react-redux";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, getDocs, addDoc, getDoc } from "firebase/firestore";
-import { db, storage } from "../../shared/firebase";
 import axios from "axios";
 
 const ProfileInsert = () => {
@@ -38,25 +35,31 @@ const ProfileInsert = () => {
     encodeFileToBase64(e.target.files[0]);
   };
 
-  const imageFileFB = async () => {
-    // fileInput.current.files 파일 접근할 때
-    const upload_file = await uploadBytes(
-      ref(storage, `images/${fileInput.current.files[0].name}`),
-      fileInput.current.files[0]
-    );
 
-    const file_url = await getDownloadURL(upload_file.ref);
-    fileInput.current = { url: file_url };
+
+
+
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    let files = e.target.profile_files.files;
+    let formData = new FormData();
+
+    formData.append("profileUrl", files[0]);
+    formData.append("myComment", insert.current.value);
+
 
     await axios
       .put(
         "http://dlckdals04.shop/api/mypage/update",
-        { myComment: insert.current.value, profileUrl: fileInput.current?.url },
+        formData,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } }
       )
       .then((res) => {
+        console.log(res)
         navigate("/manager/" + nickname);
-        localStorage.setItem("profileUrl", file_url);
+        localStorage.setItem("profileUrl", res.data.profileUrl);
       })
       .catch((err) => console.log(err));
   };
@@ -66,10 +69,13 @@ const ProfileInsert = () => {
   }
   return (
     <>
+
       <Header />
       <Profile>
+
         <div className="ProfileContainer">
           <div className="title">프로필수정</div>
+          <form onSubmit={(e) => onSubmit(e)}>
           <div className="ProfileInfo">
             <div className="ProfileImg">
               <div className="ProfileImgTwo">
@@ -79,17 +85,19 @@ const ProfileInsert = () => {
                   alt="사진"
                 />
               </div>
+
               <div>
+
                 <input
                   type="file"
-                  multiple
-                  id="input-file"
-                  accept="img/*"
+                  name="profile_files"
                   ref={fileInput}
                   onChange={fileName}
                 />
               </div>
+
             </div>
+            
 
             <div className="TwoBox">
               <div>
@@ -111,7 +119,10 @@ const ProfileInsert = () => {
                     ref={insert}
                   />
                 </div>
+
               </div>
+
+              
 
               <div className="btn">
                 <button
@@ -119,14 +130,20 @@ const ProfileInsert = () => {
                     navigate("/manager");
                   }}
                 >
-                  {" "}
+               
                   취소
                 </button>
-                <button onClick={imageFileFB}> 수정 완료</button>
+                <button type="submit"> 수정 완료</button>
               </div>
+
             </div>
+            
           </div>
+        </form>
+
         </div>
+        
+
       </Profile>
     </>
   );
