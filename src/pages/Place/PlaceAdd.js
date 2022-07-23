@@ -22,16 +22,17 @@ function PlaceAdd() {
   const [content, setContent] = useState("");
   const [location, setLocation] = useState("");
   const [imageSrc, setImageSrc] = useState([]);
-  const [testimg,settestimg] = useState([])
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const [rating, setRating] = useState(0);
+
 
   const navigate = useNavigate();
 
 
   // axios.Post 버튼
   const onSubmit = async (e) => {
+
     e.preventDefault();
     e.persist();
 
@@ -54,8 +55,6 @@ function PlaceAdd() {
     formData.append("region", region);
     formData.append("location", location);
     formData.append("star", rating);
-
-    // formData.append('url', address)
 
     if (files.length < 6) {
       await axios

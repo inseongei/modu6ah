@@ -35,16 +35,6 @@ const ChatListModal = ({ open, onClose }) => {
   }, []);
 
   const Delete = () => {
-    axios
-      .put("http://dlckdals04.shop/api/chats/rooms/" + realroom, null, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        alert("방에 나갔습니다");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
       axios
       .delete("http://dlckdals04.shop/api/chats/rooms/" + realroom,{
@@ -56,11 +46,6 @@ const ChatListModal = ({ open, onClose }) => {
       .catch((err) => {
         console.log(err);
       });
-
-
-      
-
-
 
   };
 
