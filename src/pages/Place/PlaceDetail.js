@@ -187,10 +187,6 @@ const Box = styled.div`
     height: 100%;
     border-radius: 30px;
   }
-
-  .mapbox {
-    margin-top: 50px;
-  }
 `;
 
 const Container = styled.div`
