@@ -7,10 +7,11 @@ const PlaceComment = () => {
   const [comment, setComment] = useState('');
   const [state, setState] = useState('');
   const nickname = localStorage.getItem("nickname");
-  const Profile = localStorage.getItem("profileUrl");
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  let { placePostId } = useParams();
+  const { placePostId } = useParams();
 
+  console.log(state)
   //댓글 작성
   const addComment = () => {
     const comment_data = {
@@ -20,13 +21,13 @@ const PlaceComment = () => {
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         window.alert('댓글 작성 성공')
         window.location.replace("/placedetail/" + placePostId)
       })
       .catch((err) => {
-        // alert("로그인 후 이용 가능한 기능입니다.");
-        console.log(err.response.data.message);
+        // console.log(err.response.data.message);
+        window.alert("로그인 후 사용해 주세요");
       })
   }
 
@@ -44,7 +45,7 @@ const PlaceComment = () => {
 
   //댓글 삭제
   const deleteComment = (e) => {
-    // console.log(e.target.id);
+    // console.log(e.target);
     axios
       .delete('http://dlckdals04.shop/api/places/' + placePostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
@@ -55,7 +56,7 @@ const PlaceComment = () => {
       })
       .catch((error) => {
         alert("게시글을 삭제할 권한이 없습니다.");
-        console.log(error)
+        // console.log(error)
 
       });
   };
@@ -95,14 +96,14 @@ const PlaceComment = () => {
                   <div className='profile'>
                     <div className="ProfileImg">
                       <img src=
-                        {Profile}
+                        {data.profileUrl}
                         alt="사진" />
                     </div>
                   </div>
 
                   <div className='name'
                   >
-                    {nickname}
+                    {data.nickname}
                   </div>
                   <div className='comment_box'>
                     <div className='comment'
@@ -116,13 +117,17 @@ const PlaceComment = () => {
                   </div>
 
                 </div>
-                <button
+                {nickname === data.nickname 
+                ? ( <button
                   id={data.placeCommentId}
                   className='delete'
                   onClick={deleteComment}
                 >
                   삭제
                 </button>
+                ) : (
+                 <></>
+                )}
               </div>
             )
           })}
@@ -169,10 +174,7 @@ margin-top: 50px;
     height: 57px;
     border-radius: 300px;
     outline: none;
-
-    ::placeholder {
-      padding-left: 15px;
-    }
+    padding-left: 20px;
 }
 
 .btnBox{
