@@ -141,6 +141,7 @@ function LCard() {
       <Container>
         {data &&
           data.map((item, index) => (
+            item &&
             <div className="card" key={index}>
               {/* 카드 왼쪽 '이미지' */}
               <div

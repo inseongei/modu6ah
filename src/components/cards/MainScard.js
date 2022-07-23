@@ -101,7 +101,7 @@ function MainScard() {
                       navigate("/recruitdetail/" + item.recruitPostId);
                     }}
                   >
-                    <p>{item != null && item.createdAt}</p>
+                    <p>{item != null && item.date}</p>
                     <p>{item != null && item.time}</p>
                     <p>{item != null && item.place}</p>
                     <p>{item != null && item.age}</p>
