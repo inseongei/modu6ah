@@ -33,8 +33,8 @@ const PlaceComment = () => {
   // 댓글 조회
   React.useEffect(() => {
     axios.get('http://dlckdals04.shop/api/places/' + placePostId,
-    { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-    .then((res) => {
+      { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
+      .then((res) => {
         setState(res.data.placeComments)
       })
       .catch((err) => {
@@ -46,8 +46,8 @@ const PlaceComment = () => {
   const deleteComment = (e) => {
     // console.log(e.target.id);
     axios
-      .delete('http://dlckdals04.shop/api/places/' + placePostId + '/comments/' + e.target.id, 
-      { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
+      .delete('http://dlckdals04.shop/api/places/' + placePostId + '/comments/' + e.target.id,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
         console.log(response);
         alert("삭제가 완료되었습니다.");
@@ -62,92 +62,85 @@ const PlaceComment = () => {
 
   return (
     <CommentBox>
-      <div className='comment_section'>
-        <div className='h1Box'>
-          <h1>댓글</h1>
-        </div>
-        <div className='inputBox'>
-          <input
-            type="text"
-            onChange={e =>
-              setComment(e.target.value)}
-          />
-        </div>
-        <div className='btnBox'>
-          <button className='btn'
-            onClick={addComment}
-          >
-            등록
-          </button>
-        </div>
-      </div>
-
-      {state &&
-        state.map((data, index) => {
-          return (
-            <div className='box'
-              key={index}>
-              <div className='chat'>
-                <div className='profile'>
-                  <div className="ProfileImg">
-                    <img src=
-                      {Profile}
-                      alt="사진" />
-                  </div>
-                </div>
-
-                <div className='name'
-                >
-                  {nickname}
-                </div>
-                <div className='comment_box'>
-                  <div className='comment'
-                  >
-                    {data.comment}
-                  </div>
-                  <div className='date'
-                  >
-                    {data.createdAt}
-                  </div>
-                </div>
-
-              </div>
-              <button
-                id={data.placeCommentId}
-                className='delete'
-                onClick={deleteComment}
+      <div className='comment'>
+        <div className='comment_section'>
+          <div className='h1Box'>
+            <h1>댓글</h1>
+          </div>
+          <div className='add_comment'>
+            <div className='inputBox'>
+              <input
+                type="text"
+                placeholder='댓글을 입력해주세요'
+                onChange={e =>
+                  setComment(e.target.value)}
+              />
+            </div>
+            <div className='btnBox'>
+              <button className='btn'
+                onClick={addComment}
               >
-                삭제
+                등록
               </button>
             </div>
-          )
-        })}
+          </div>
+        </div>
+
+        {state &&
+          state.map((data, index) => {
+            return (
+              <div className='box'
+                key={index}>
+                <div className='chat'>
+                  <div className='profile'>
+                    <div className="ProfileImg">
+                      <img src=
+                        {Profile}
+                        alt="사진" />
+                    </div>
+                  </div>
+
+                  <div className='name'
+                  >
+                    {nickname}
+                  </div>
+                  <div className='comment_box'>
+                    <div className='comment'
+                    >
+                      {data.comment}
+                    </div>
+                    <div className='date'
+                    >
+                      {data.createdAt}
+                    </div>
+                  </div>
+
+                </div>
+                <button
+                  id={data.placeCommentId}
+                  className='delete'
+                  onClick={deleteComment}
+                >
+                  삭제
+                </button>
+              </div>
+            )
+          })}
+      </div>
     </CommentBox>
   )
 }
 
 const CommentBox = styled.div`
-*{
-  max-width: 100%;
-  height: auto;
-}
-
-margin-top:30px;
+max-width: 100%;
+margin-top: 50px;
 
 .comment_section{
-    display: flex;
-    justify-content: center;
-    width:60%;
-    height:60px;
-    margin-left: 110px;
+  margin-left: 210px;
 }
 
-
 .h1Box{
-    width:15%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    margin-right: 30px;
 }
 
 .h1Box > h1{
@@ -157,27 +150,36 @@ margin-top:30px;
     font-size: 26px;
     line-height: 31px;
     margin-top: 10px;
+    margin-left: 10px;
 }
+
+.add_comment{
+  display: flex;
+}
+
 .inputBox{
-    width:100%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 6px;
+    width: 900px;
+    margin-top: 10px;
 }
 
 .inputBox > input{
-    width:100%;
+    width: 100%;
+    display: flex;
     border: 1px solid #E4E4E4;
-    height: 40px;
+    height: 57px;
     border-radius: 300px;
+    outline: none;
+
+    ::placeholder {
+      padding-left: 15px;
+    }
 }
 
 .btnBox{
-    width:25%;
-    height: 30px;
-    display:flex;
-    margin-top: 16px;
+  display:flex;
+    width:140px;
+    margin-top: 26px;
+    margin-bottom: 10px;
 }
 
 .btn{
@@ -194,15 +196,16 @@ margin-top:30px;
 }
 
 .box{
-    width: 90vh;
+    width: 100vh;
+    display:flex;
     // border: 1px solid lightgray;
     margin-left: 210px;
-    margin-top: 30px;
-    display:flex;
+    margin-top: 20px;
+    padding: 25px;
 }
 
 .chat {
-  width: 770px;
+  width: 100%;
   height: 50px;
   display:flex;
 }
@@ -234,12 +237,12 @@ margin-top:30px;
   }
 
   .delete{
-    width: 13%;
-    height: 30px;
+    width: 100px;
+    height: 20px;
     border-radius: 20px;
     color: white;
     background-color: #E4E4E4;
-    margin-top: 42px;
+    margin-top: 22px;
     padding-bottom: 24px;
     padding-top: 2px;
     border: 0;
