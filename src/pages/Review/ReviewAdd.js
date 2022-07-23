@@ -24,7 +24,6 @@ function ReviewAdd() {
   // axios.Post 버튼
   const onSubmit = async (e) => {
     e.preventDefault();
-    e.persist();
     let files = e.target.profile_files.files;
     let formData = new FormData();
     // 반복문돌려서 다중 이미지 처리

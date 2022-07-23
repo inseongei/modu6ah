@@ -42,7 +42,6 @@ const ProfileInsert = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    e.persist();
 
     let files = e.target.profile_files.files;
     let formData = new FormData();

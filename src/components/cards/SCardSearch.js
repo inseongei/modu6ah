@@ -4,10 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { GetMainAxois } from "../../redux/modules/search";
 import axios from "axios";
-import { useSearchParams} from 'react-router-dom';
-import { GetRecruitAxois } from "../../redux/modules/Data";
 
 function SCardSearch({scard, query}) {
   const navigate = useNavigate();
