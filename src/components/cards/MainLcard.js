@@ -35,12 +35,11 @@ function MainLcard() {
             <div
               className="card"
               key={index}
-              onClick={() => {
-                navigate("/placedetail/" + item.placePostId);
-              }}
             >
               {/* 카드 왼쪽 '이미지' */}
-              <div className="card-left">
+              <div className="card-left"              onClick={() => {
+                navigate("/placedetail/" + item.placePostId);
+              }}>
                 <div className="image">
                   <img src={item.imageUrl[0]} alt="사진" />
                 </div>
@@ -48,7 +47,9 @@ function MainLcard() {
               {/* 카드 오른쪽 '타이틀 및 설명' */}
               <div className="card-right">
                 <div className="title">
-                  <div className="titleBox">
+                  <div className="titleBox"               onClick={() => {
+                navigate("/placedetail/" + item.placePostId);
+              }}>
                     <h3>{item.title}</h3>
                     <p>⭐ {item.star}</p>
                   </div>
@@ -95,9 +96,9 @@ function MainLcard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
+                              console.log(res.data);
                               window.location.reload();
-                            });
+                            }).catch((err)=> console.log(err))
                         }}
                       />
                     )}
@@ -107,8 +108,12 @@ function MainLcard() {
                   <MdOutlinePlace />
                   {item.region}
                 </a>
-                <div className="profile_box">
-                  <div className="detail_profile">
+                <div className="profile_box"               onClick={() => {
+                navigate("/placedetail/" + item.placePostId);
+              }}>
+                  <div className="detail_profile"               onClick={() => {
+                navigate("/placedetail/" + item.placePostId);
+              }}>
                     <img src={item.profileUrl} alt="프로필" />
                   </div>
                   <strong>{item.nickname}</strong>
@@ -138,7 +143,6 @@ const Container = styled.div`
     border-radius: 10px;
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
-    cursor: pointer;
     overflow: hidden;
     width: 980px;
     height: 360px;

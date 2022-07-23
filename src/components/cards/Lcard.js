@@ -13,6 +13,7 @@ function LCard() {
   const [index , setindex] = useState(1)
   const Profile = localStorage.getItem("profileUrl");
   const navigate = useNavigate();
+  const token = localStorage.getItem('accessToken')
   console.log(data)
 
   // 배열 자르기 함수 (배열 , 몇개단위)
@@ -29,26 +30,90 @@ function LCard() {
   };
 
   React.useEffect(() => {
+
+
+
+
+
+
+
+
+
+
+
     axios
-      .get("http://dlckdals04.shop/api/places", {
+      .get("http://dlckdals04.shop/api/places", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
+      } : null)
       .then((res) => {
         console.log(res.data.placePosts)
         let data = res.data.placePosts.slice(0,2);
         setData([...data]);
       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const axiosData = () => {
     axios
-      .get("http://dlckdals04.shop/api/places", {
+      .get("http://dlckdals04.shop/api/places", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
+      } : null)
       .then((res) => {
         console.log(res.data.placePosts);
         let result = division(res.data.placePosts,2)
@@ -162,7 +227,7 @@ function LCard() {
                   }}
                 >
                   <div className="detail_profile">
-                    <img src={Profile} alt="프로필" />
+                    <img src={item.profileUrl} alt="프로필" />
                   </div>
                   <strong>{item.nickname}</strong>
                 </div>
