@@ -22,23 +22,30 @@ function PlaceAdd() {
   const [content, setContent] = useState("");
   const [location, setLocation] = useState("");
   const [imageSrc, setImageSrc] = useState([]);
+  const [testimg,settestimg] = useState([])
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const [rating, setRating] = useState(0);
 
   const navigate = useNavigate();
 
+
   // axios.Post 버튼
   const onSubmit = async (e) => {
     e.preventDefault();
     e.persist();
+
     let files = e.target.profile_files.files;
     let formData = new FormData();
+    console.log(files)
     // 반복문 돌려서 다중 이미지 처리
     for (let i = 0; i < files.length; i++) {
       formData.append("imageUrl", files[i]);
     }
 
+    for(const [key,value] of formData.entries()) {
+      console.log(key, value)
+    }
     console.log(files.length);
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환

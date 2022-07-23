@@ -48,7 +48,7 @@ const Header = () => {
         localStorage.removeItem("profileUrl");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("nickname");
-        window.location.reload();
+        navigate('/')
       }
     });
   };

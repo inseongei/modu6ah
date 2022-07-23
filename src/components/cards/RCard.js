@@ -12,7 +12,9 @@ function RCard() {
   const [data, setData] = useState([]);
   const [noMore,setnoMore] = useState(true)
   const [index , setindex] = useState(1)
+  const token = localStorage.getItem('accessToken')
 
+  console.log(data)
   // 배열 자르기 함수 (배열 , 몇개단위)
   const division = (arr, n) => {
     const length = arr.length;
@@ -29,11 +31,11 @@ function RCard() {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/reviews", {
+      .get("http://dlckdals04.shop/api/reviews", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
+      } : null)
       .then((res) => {
         console.log(res.data.reviewPosts)
         let data = res.data.reviewPosts.slice(0,3);
@@ -44,24 +46,27 @@ function RCard() {
   // 페이지 스크롤이 하단에 도착할때 실행되는 함수
   const axiosData = () => {
     axios
-      .get("http://dlckdals04.shop/api/reviews", {
+      .get("http://dlckdals04.shop/api/reviews",token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
+      } : null)
       .then((res) => {
         console.log(res.data.reviewPosts);
         let result = division(res.data.reviewPosts,3)
         if(noMore === true){
           setData((list) => [...list,result[index]].flat())
           setindex(index+1)
-        } else if(result.length === data){
-          setnoMore(false)
         } else{
-          return null
+          return null;
         }
       });
   };
+
+  if (!data) {
+    return <div></div>;
+  }
+
 
   return (
     <>
@@ -78,6 +83,7 @@ function RCard() {
     <Container>
       {data &&
         data.map((item, index) => (
+          item &&
           <div className="card" key={index}>
             {/* 카드 위쪽 '타이틀' */}
             <div className="card-top">

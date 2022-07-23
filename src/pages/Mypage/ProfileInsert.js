@@ -127,7 +127,7 @@ const ProfileInsert = () => {
               <div className="btn">
                 <button
                   onClick={() => {
-                    navigate("/manager");
+                    navigate("/manager/" + nickname);
                   }}
                 >
                
