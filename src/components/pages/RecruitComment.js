@@ -9,7 +9,7 @@ const RecruitComment = () => {
   const nickname = localStorage.getItem("nickname");
 
   const navigate = useNavigate();
-  let { recruitPostId } = useParams();
+  const { recruitPostId } = useParams();
 
   //댓글 작성
   const addComment = () => {
@@ -20,13 +20,13 @@ const RecruitComment = () => {
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         window.alert('댓글 작성 성공')
         window.location.replace("/recruitdetail/" + recruitPostId)
       })
       .catch((err) => {
-        // alert("로그인 후 이용 가능한 기능입니다.");
-        console.log(err.response.data.message);
+        window.alert("로그인 후 사용해 주세요");
+        // console.log(err.response.data.message);
       })
   }
 
@@ -36,7 +36,7 @@ const RecruitComment = () => {
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
         setState(res.data.recruitComments)
-        // console.log(res.data.recruitComments)
+        console.log(res.data.recruitComments)
 
       })
       .catch((err) => {
@@ -46,9 +46,9 @@ const RecruitComment = () => {
 
   //댓글 삭제
   const deleteComment = (e) => {
-    // console.log(e.target.id);
+    // console.log(e.target);
     axios
-      .delete('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments/' + e.target.id, 
+      .delete('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
 
       .then((response) => {
@@ -64,73 +64,77 @@ const RecruitComment = () => {
 
   return (
     <CommentBox>
-    <div className='comment'>
-      <div className='comment_section'>
-        <div className='h1Box'>
-          <h1>댓글</h1>
-        </div>
-        <div className='add_comment'>
-          <div className='inputBox'>
-            <input
-              type="text"
-              placeholder='댓글을 입력해주세요'
-              onChange={e =>
-                setComment(e.target.value)}
-            />
+      <div className='comment'>
+        <div className='comment_section'>
+          <div className='h1Box'>
+            <h1>댓글</h1>
           </div>
-          <div className='btnBox'>
-            <button className='btn'
-              onClick={addComment}
-            >
-              등록
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {state &&
-        state.map((data, index) => {
-          return (
-            <div className='box'
-              key={index}>
-              <div className='chat'>
-                <div className='profile'>
-                  <div className="ProfileImg">
-                    <img src=
-                      {data.profileUrl}
-                      alt="사진" />
-                  </div>
-                </div>
-
-                <div className='name'
-                >
-                  {nickname}
-                </div>
-                <div className='comment_box'>
-                  <div className='comment'
-                  >
-                    {data.comment}
-                  </div>
-                  <div className='date'
-                  >
-                    {data.createdAt}
-                  </div>
-                </div>
-
-              </div>
-              <button
-                id={data.placeCommentId}
-                className='delete'
-                onClick={deleteComment}
+          <div className='add_comment'>
+            <div className='inputBox'>
+              <input
+                type="text"
+                placeholder='댓글을 입력해주세요'
+                onChange={e =>
+                  setComment(e.target.value)}
+              />
+            </div>
+            <div className='btnBox'>
+              <button className='btn'
+                onClick={addComment}
               >
-                삭제
+                등록
               </button>
             </div>
-          )
-        })}
-    </div>
-  </CommentBox>
-)
+          </div>
+        </div>
+
+        {state &&
+          state.map((data, index) => {
+            return (
+              <div className='box'
+                key={index}>
+                <div className='chat'>
+                  <div className='profile'>
+                    <div className="ProfileImg">
+                      <img src=
+                        {data.profileUrl}
+                        alt="사진" />
+                    </div>
+                  </div>
+
+                  <div className='name'
+                  >
+                    {data.nickname}
+                  </div>
+                  <div className='comment_box'>
+                    <div className='comment'
+                    >
+                      {data.comment}
+                    </div>
+                    <div className='date'
+                    >
+                      {data.createdAt}
+                    </div>
+                  </div>
+
+                </div>
+                {nickname === data.nickname 
+                ? ( <button
+                  id={data.recruitCommentId}
+                  className='delete'
+                  onClick={deleteComment}
+                >
+                  삭제
+                </button>
+                ) : (
+                 <></>
+                )}
+              </div>
+            )
+          })}
+      </div>
+    </CommentBox>
+  )
 }
 
 const CommentBox = styled.div`
@@ -171,10 +175,7 @@ display: flex;
   height: 57px;
   border-radius: 300px;
   outline: none;
-
-  ::placeholder {
-    padding-left: 15px;
-  }
+  padding-left: 20px;
 }
 
 .btnBox{
