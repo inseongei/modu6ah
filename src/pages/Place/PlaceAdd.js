@@ -3,7 +3,6 @@ import React, { useState } from "react";
 //style
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
-import { AiOutlineFileImage } from "react-icons/ai";
 
 //elements & components
 import { FaStar } from "react-icons/fa";
@@ -11,10 +10,12 @@ import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 import Modal from "../../modal/Map/Modal";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import axios from "axios";
 import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
+import PlaceComment from "../../components/pages/PlaceComment";
 
 function PlaceAdd() {
   const [title, setTitle] = useState("");
@@ -127,31 +128,42 @@ function PlaceAdd() {
   return (
     <>
       <Header />
-      <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+         <Container>
+      <Title>
+          <div className="subject">장소 추천</div>
+          <div className="page">
+            <p>작성하기</p>
+          </div>
+        </Title>
+       
         <Place>
           <div className="place">
-            <div className="images">
-              <div className="title">대표이미지</div>
-            </div>
+          
             <form onSubmit={(e) => onSubmit(e)}>
               <input
+              id="input-file"
                 type="file"
                 name="profile_files"
                 multiple="multiple"
+                style={{display:"none"}}
                 onChange={handleImageChange}
               />
-              {/* <button type="submit">제출</button> */}
 
               <div className="imageBox">
-                <label htmlFor="profile_img_upload">
-                  <AiOutlineFileImage />
+                <label for="input-file">
+                  <BsFillPlusCircleFill 
+                  style={{cursor:"pointer",
+                  marginLeft:"40px"}} />
                 </label>
 
                 {/* 이미지 미리보기 */}
                 {imageSrc.map((image, id) => (
-                  <div key={id}>
+                  <div className="img_box_size" key={id}>
                     <img src={image} alt={`${image}-${id}`} />
-                    <button onClick={() => handleDeleteImage(id)}>삭제</button>
+                    <div className="img_btn">
+                    <button onClick={() => handleDeleteImage(id)}>
+                      이미지 삭제</button>
+                      </div>
                   </div>
                 ))}
               </div>
@@ -258,13 +270,46 @@ function PlaceAdd() {
             </form>
           </div>
         </Place>
-      </Grid>
+        </Container>
       <Footer />
     </>
   );
 }
 
+const Title = styled.div`
+  padding-top: 40px;
+  margin-left: 130px;
+
+  .subject {
+    color: #a8a8a8;
+  }
+
+  .page {
+    font-size: 30px;
+    font-weight: 700;
+  }
+`;
+
+const Container = styled.div`
+width: 100%;
+background-color: #f5f5f5;
+  `;
+
 const Place = styled.div`
+width: 1200px;
+  height: 950px;
+
+  background: white;
+
+  margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+  margin-top: 50px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  
   .place {
     width: 100%;
   }
@@ -283,8 +328,7 @@ const Place = styled.div`
   .imageBox {
     min-height: 210px;
     max-height: auto;
-    width: 100%;
-    background-color: lightgray;
+    height: 290px;
     margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -298,7 +342,7 @@ const Place = styled.div`
 
   .img {
     width: 200px;
-    height: 220px;
+    height: 300px;
     border: 1px solid #e4e4e4;
     border-radius: 10px;
     margin: 20px 0px 20px 40px;
@@ -313,7 +357,25 @@ const Place = styled.div`
     height: 220px;
     border: 1px solid #e4e4e4;
     border-radius: 10px;
-    margin: 20px 0px 20px 40px;
+    margin: 10px 0px 15px 40px;
+  }
+
+  .img_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 35px;
+  
+    .img_box_size {
+      padding: 0;
+    }
+   
+    button {
+     border-radius:20px;
+     background-color: transparent !important;
+     border: 1px solid #A8A8A8;
+     color: #A8A8A8;
+    }
   }
 
   .images {
@@ -324,7 +386,7 @@ const Place = styled.div`
 
   .mainBox {
     display: flex;
-    margin-left: 200px;
+    margin-left: 50px;
   }
 
   .card-left > div > input {
@@ -333,18 +395,20 @@ const Place = styled.div`
     width: 330px;
     height: 50px;
     margin-left: 20px;
+    margin-top: 10px;
   }
 
   .card-right {
-    width: 700px;
+    width: 600px;
     height: 440px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 20px;
   }
 
   textarea {
-    width: 500px;
+    width: 530px;
     height: 364px;
     border: 1px solid #e4e4e4;
     border-radius: 10px;
@@ -362,7 +426,7 @@ const Place = styled.div`
   .star {
     display: flex;
     margin-left: 30px;
-    margin-top: 30px;
+    margin-top: 35px;
 
     p {
       display: flex;
@@ -372,22 +436,32 @@ const Place = styled.div`
   }
 
   .star > strong {
+    margin-top: 2px;
     margin-right: 15px;
   }
 `;
 
 const MapSearch = styled.div`
-  margin-left: 28px;
+  margin-left: 30px;
   margin-bottom: 20px;
   display: flex;
 
   .address_btn {
-    margin-top: 12px;
-    margin-left: 12px;
+    margin-top: 22px;
+    margin-left: 16px;
+    
+    button {
+      border-radius:20px;
+      padding: 5px auto;
+      background-color: transparent !important;
+      border: 1px solid #A8A8A8;
+      color: #A8A8A8;
+     }
   }
 
   strong {
-    margin-top: 13px;
+    margin-top: 23px;
+    
   }
 
   button {
