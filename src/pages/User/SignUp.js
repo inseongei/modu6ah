@@ -6,8 +6,14 @@ import axios from "axios";
 import logo from "../../images/logo.png";
 import Header from "../../components/main/Header";
 import { FormGroup } from "react-bootstrap";
+import {useForm} from 'react-hook-form'
 
 const SignUp = () => {
+
+  const { watch} = useForm();
+  console.log(watch('form-input'))
+
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
@@ -43,7 +49,7 @@ const SignUp = () => {
     } else if (email === "") {
       checkOverlapEmail(false);
       setEmailMessage("이메일을 입력해주세요");
-    } else {
+    }  else {
       setEmailMessage("사용 가능한 이메일입니다.");
       setIsEmail(true);
     }
@@ -51,7 +57,7 @@ const SignUp = () => {
 
   // 닉네임 검사
   const onChangeNickname = (event) => {
-    const nickRegEx = /^[0-9a-zA-Z]{2,10}$/;
+    const nickRegEx = /^[가-힣0-9a-zA-Z]{2,10}$/;
     const nicknameCurrent = event.target.value;
     setNickname(nicknameCurrent);
     if (!nickRegEx.test(nicknameCurrent)) {
@@ -97,6 +103,12 @@ const SignUp = () => {
       setIsPasswordConfirm(false);
     }
   };
+
+  //사용 중인 이메일인 경우
+
+
+
+  //사용 중인 닉네임인 경우
 
   // 회원 등록하기
   const register = (e) => {
