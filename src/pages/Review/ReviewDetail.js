@@ -10,7 +10,6 @@ import PhotoList from '../../components/pages/PhotoList';
 import Content from '../../components/pages/Content';
 import {useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { getCookie } from '../../shared/Cookie';
 import Footer from '../../components/main/Footer';
 
 const ReviewDetail = () => {
@@ -35,7 +34,7 @@ const navigate = useNavigate()
 
   const deleteReview = () =>{
   axios.delete('http://dlckdals04.shop/api/reviews/' + reviewPostId ,{
-    headers: { Authorization: `Bearer ${getCookie("accessToken")}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
   }).then((res)=>{
     navigate('/review')
   })
@@ -75,7 +74,7 @@ const navigate = useNavigate()
                         {Detail.url}</p>
                 </div>
                 <div className='info'>
-                    <div className='profile'><img src={Profile} alt="사진"/></div>
+                    <div className='profile'><img src={Detail.profileUrl} alt="사진"/></div>
                     <p className='nickname'>{Detail.nickname}</p>
                 </div>
             </div>

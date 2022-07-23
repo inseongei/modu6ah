@@ -11,6 +11,7 @@ const PlaceComment = () => {
   const navigate = useNavigate();
   let { placePostId } = useParams();
 
+  console.log(state)
   //댓글 작성
   const addComment = () => {
     const comment_data = {
@@ -95,14 +96,14 @@ const PlaceComment = () => {
                   <div className='profile'>
                     <div className="ProfileImg">
                       <img src=
-                        {Profile}
+                        {data.Profile}
                         alt="사진" />
                     </div>
                   </div>
 
                   <div className='name'
                   >
-                    {nickname}
+                    {data.nickname}
                   </div>
                   <div className='comment_box'>
                     <div className='comment'

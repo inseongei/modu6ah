@@ -87,7 +87,7 @@ const PlaceDetail = () => {
                 <div className="info">
                   <Image>
                     <div className="ProfileImg">
-                      <img src={Profile} />
+                      <img src={detail.profileUrl} />
                     </div>
                   </Image>
                   <p className="nickname">{detail.nickname}</p>
