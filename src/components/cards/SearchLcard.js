@@ -5,7 +5,7 @@ import { MdOutlinePlace } from "react-icons/md";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { GetMainAxois } from "../../redux/modules/search";
+
 
 function SearchLcard({data, query}) {
   const [btn, setbtn] = React.useState(true);

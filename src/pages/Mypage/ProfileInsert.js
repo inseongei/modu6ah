@@ -42,13 +42,9 @@ const ProfileInsert = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    e.persist();
 
     let files = e.target.profile_files.files;
     let formData = new FormData();
-
-
-
 
     formData.append("profileUrl", files[0]);
     formData.append("myComment", insert.current.value);
@@ -63,7 +59,7 @@ const ProfileInsert = () => {
       .then((res) => {
         console.log(res)
         navigate("/manager/" + nickname);
-        // localStorage.setItem("profileUrl", );
+        localStorage.setItem("profileUrl", res.data.profileUrl);
       })
       .catch((err) => console.log(err));
   };

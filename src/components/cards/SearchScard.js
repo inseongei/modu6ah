@@ -4,10 +4,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { GetMainAxois } from "../../redux/modules/search";
 import axios from "axios";
 import { useSearchParams} from 'react-router-dom';
-import { GetRecruitAxois } from "../../redux/modules/Data";
 
 function SearchScard({data, query}) {
   const navigate = useNavigate();
@@ -16,10 +14,8 @@ function SearchScard({data, query}) {
 
   // 매니저님께 여쭤 볼 부분입니다. 지우지 말아주세요 :)
   // const dispatch = useDispatch();
-
   // const search = useSelector((state) => state);
   // console.log(search);
-
   // React.useEffect(() => {
   //   dispatch(GetMainAxois());
   // }, []);

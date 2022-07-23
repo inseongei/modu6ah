@@ -13,7 +13,6 @@ import Modal from "../../modal/Map/Modal";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import axios from "axios";
-import { getCookie } from "../../shared/Cookie";
 import { useNavigate } from "react-router-dom";
 import PlaceComment from "../../components/pages/PlaceComment";
 

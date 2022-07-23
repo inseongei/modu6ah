@@ -103,7 +103,7 @@ const ReviewComment = () => {
 
                 <div className='name'
                 >
-                  {nickname}
+                  {data.nickname}
                 </div>
                 <div className='comment_box'>
                   <div className='comment'
