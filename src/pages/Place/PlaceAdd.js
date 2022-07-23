@@ -396,6 +396,7 @@ width: 1200px;
     height: 50px;
     margin-left: 20px;
     margin-top: 10px;
+    padding-left: 15px;
   }
 
   .card-right {
@@ -476,10 +477,6 @@ const SearchInput = styled.input`
   height: 50px;
   margin-left: 20px;
   outline: none;
-
-  ::placeholder {
-    padding-left: 8px;
-  }
 `;
 
 const Btn = styled.div`
