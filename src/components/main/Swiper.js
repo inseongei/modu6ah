@@ -65,7 +65,7 @@ const Item = styled.div`
 
   .subtitle {
     color: #000000;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;

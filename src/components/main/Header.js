@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
-import '../../shared/font/font.css'
 import search from '../../images/search.png'
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet"></link>
 
@@ -360,7 +359,7 @@ const Headers = styled.div`
   .header__menulist > li {
     font-family: 'NanumGothic';
     font-style: normal;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 16px;
     line-height: 18px;
     cursor: pointer;
