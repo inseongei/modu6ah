@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import mainImg from "../../images/mainimg.png";
 import "animate.css";
-import '../../shared/font/font.css'
+import '../../shared/App.css'
 
 const Swiper = () => {
   return (
@@ -55,8 +55,8 @@ const Item = styled.div`
   }
 
   .title {
-    font-family: "NanumGothic";
-    font-weight: 700;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 800;
     font-style: normal;
     font-size: 50px;
     line-height: 57px;
@@ -65,7 +65,8 @@ const Item = styled.div`
 
   .subtitle {
     color: #000000;
-    font-family: "NanumGothic";
+    font-family: 'Nanum Gothic', sans-serif;
+    font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 25px;
