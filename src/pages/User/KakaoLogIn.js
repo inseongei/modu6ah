@@ -29,7 +29,7 @@ const KakaoLogIn = () => {
       //   console.log(access_token);
 
       axios
-        .post("http://dlckdals04.shop/api/users/kakao/member", {
+        .post("https://zhaoxilin.shop/api/users/kakao/member", {
           access_token,
         })
         .then((res) => {
@@ -39,7 +39,7 @@ const KakaoLogIn = () => {
           const user_name = res.data.kakao_account.profile.nickname;
 
           axios
-            .post("http://dlckdals04.shop/api/users/kakao/parsing", {
+            .post("https://zhaoxilin.shop/api/users/kakao/parsing", {
               user_id,
               user_email,
               user_name,

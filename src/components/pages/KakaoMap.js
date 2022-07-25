@@ -15,7 +15,7 @@ const KakaoMap = () => {
   // 방법 1. axios 통신
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/places/" + placePostId)
+      .get("https://zhaoxilin.shop/api/places/" + placePostId)
       .then((res) => {
         // console.log(res.data.placeDetails)
         setPlaces(res.data.placeDetails);
@@ -37,7 +37,7 @@ const KakaoMap = () => {
   //   const fetchPost = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `http://dlckdals04.shop/api/places/`
+  //         `https://zhaoxilin.shop/api/places/`
   //         + placePostId);
   //        setPlaces(response.data.placeDetails)
   //     } catch (e) {

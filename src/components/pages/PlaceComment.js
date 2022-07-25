@@ -17,7 +17,7 @@ const PlaceComment = () => {
     const comment_data = {
       comment, nickname
     }
-    axios.post('http://dlckdals04.shop/api/places/' + placePostId + '/comments',
+    axios.post('https://zhaoxilin.shop/api/places/' + placePostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
@@ -33,7 +33,7 @@ const PlaceComment = () => {
 
   // 댓글 조회
   React.useEffect(() => {
-    axios.get('http://dlckdals04.shop/api/places/' + placePostId,
+    axios.get('https://zhaoxilin.shop/api/places/' + placePostId,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
         setState(res.data.placeComments)
@@ -47,7 +47,7 @@ const PlaceComment = () => {
   const deleteComment = (e) => {
     // console.log(e.target);
     axios
-      .delete('http://dlckdals04.shop/api/places/' + placePostId + '/comments/' + e.target.id,
+      .delete('https://zhaoxilin.shop/api/places/' + placePostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
         console.log(response);

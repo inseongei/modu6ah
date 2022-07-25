@@ -59,7 +59,7 @@ function PlaceAdd() {
 
     if (files.length < 6) {
       await axios
-        .post("http://dlckdals04.shop/api/places", formData, {
+        .post("https://zhaoxilin.shop/api/places", formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             "Content-Type": "multipart/form-data",

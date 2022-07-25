@@ -16,7 +16,7 @@ const RecruitComment = () => {
     const comment_data = {
       comment, nickname
     }
-    axios.post('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments',
+    axios.post('https://zhaoxilin.shop/api/recruits/' + recruitPostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
@@ -32,7 +32,7 @@ const RecruitComment = () => {
 
   // 댓글 조회
   React.useEffect(() => {
-    axios.get('http://dlckdals04.shop/api/recruits/' + recruitPostId,
+    axios.get('https://zhaoxilin.shop/api/recruits/' + recruitPostId,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
         setState(res.data.recruitComments)
@@ -48,7 +48,7 @@ const RecruitComment = () => {
   const deleteComment = (e) => {
     // console.log(e.target);
     axios
-      .delete('http://dlckdals04.shop/api/recruits/' + recruitPostId + '/comments/' + e.target.id,
+      .delete('https://zhaoxilin.shop/api/recruits/' + recruitPostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
 
       .then((response) => {

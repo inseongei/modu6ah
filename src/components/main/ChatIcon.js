@@ -5,15 +5,17 @@ import io from "socket.io-client";
 import { toast } from "react-toastify";
 import ChatListModal from '../../modal/Chat/ChatListModal'
 // 소켓서버 연결
-const socket = io.connect("http://dlckdals04.shop");
+const socket = io.connect("https://zhaoxilin.shop");
 const ChatIcon = () => {
     const [modalIsOpen, setModalIsOpen] = React.useState(false);
     const [notify, setNotify] = React.useState([]);
     const nickname = localStorage.getItem("nickname");
 
+      console.log(notify)
   // 상대방이 보낸 메시지를 알림 이벤트 경로로 데이터를 받음
   React.useEffect(() => {
     socket.off("notify").on("notify", (data) => {
+      console.log(data)
       if (nickname === data.senderNick) {
         return null;
       } else if (nickname !== data.receiverNick) {

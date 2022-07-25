@@ -22,7 +22,7 @@ const [Detail, setDetail] = React.useState()
 const navigate = useNavigate()
 
   React.useEffect(()=>{
-    axios.get('http://dlckdals04.shop/api/reviews/' + reviewPostId )
+    axios.get('https://zhaoxilin.shop/api/reviews/' + reviewPostId )
     .then((res)=>{
       console.log(res.data.reviewDetails)
       setDetail(res.data.reviewDetails)
@@ -34,7 +34,7 @@ const navigate = useNavigate()
   // }
 
   const deleteReview = () =>{
-  axios.delete('http://dlckdals04.shop/api/reviews/' + reviewPostId ,{
+  axios.delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId ,{
     headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
   }).then((res)=>{
     navigate('/review')

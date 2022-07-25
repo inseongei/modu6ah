@@ -42,7 +42,7 @@ function LCard() {
 
 
     axios
-      .get("http://dlckdals04.shop/api/places", token ?{
+      .get("https://zhaoxilin.shop/api/places", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -109,7 +109,7 @@ function LCard() {
 
   const axiosData = () => {
     axios
-      .get("http://dlckdals04.shop/api/places", token ?{
+      .get("https://zhaoxilin.shop/api/places", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -174,7 +174,7 @@ function LCard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/places/bookmark/" +
+                              "https://zhaoxilin.shop/api/places/bookmark/" +
                                 item.placePostId,
                               null,
                               {
@@ -197,7 +197,7 @@ function LCard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/places/bookmark/" +
+                              "https://zhaoxilin.shop/api/places/bookmark/" +
                                 item.placePostId,
                               null,
                               {

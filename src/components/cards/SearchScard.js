@@ -38,7 +38,7 @@ function SearchScard({data, query}) {
                             onClick={() => {
                               axios
                                 .put(
-                                  "http://dlckdals04.shop/api/recruits/bookmark/" +
+                                  "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                   item.recruitPostId,
                                   null,
                                   {
@@ -61,7 +61,7 @@ function SearchScard({data, query}) {
                             onClick={() => {
                               axios
                                 .put(
-                                  "http://dlckdals04.shop/api/recruits/bookmark/" +
+                                  "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                   item.recruitPostId,
                                   null,
                                   {

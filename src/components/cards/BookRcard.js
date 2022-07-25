@@ -11,7 +11,7 @@ function BookRcard() {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/mypage/bookmark", {
+      .get("https://zhaoxilin.shop/api/mypage/bookmark", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -27,7 +27,7 @@ function BookRcard() {
 
 
   const ReviewMore = async () => {
-    await axios.get("http://dlckdals04.shop/api/mypage/bookmark/",
+    await axios.get("https://zhaoxilin.shop/api/mypage/bookmark/",
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -63,7 +63,7 @@ function BookRcard() {
                       onClick={() => {
                         axios
                           .put(
-                            "http://dlckdals04.shop/api/reviews/bookmark/" +
+                            "https://zhaoxilin.shop/api/reviews/bookmark/" +
                               data.reviewPostId,
                             null,
                             {
@@ -86,7 +86,7 @@ function BookRcard() {
                       onClick={() => {
                         axios
                           .put(
-                            "http://dlckdals04.shop/api/reviews/bookmark/" +
+                            "https://zhaoxilin.shop/api/reviews/bookmark/" +
                               data.reviewPostId,
                             null,
                             {

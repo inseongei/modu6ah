@@ -59,7 +59,7 @@ export function deletePhoto(photo_list) {
 
 export const loadPhotoDB = () => {
   return function (dispatch) {
-    axios.get(`http://dlckdals04.shop/api/places`, {
+    axios.get(`https://zhaoxilin.shop/api/places`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }
@@ -74,7 +74,7 @@ export const loadPhotoDB = () => {
 export const detailPhotoDB = (placePostId) => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/places/" + placePostId,  {
+      .get("https://zhaoxilin.shop/api/places/" + placePostId,  {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`
         }
@@ -92,7 +92,7 @@ export const detailPhotoDB = (placePostId) => {
 export const updatePhotoDB = (recruitPostId, newPost) => {
   return function (dispatch) {
     axios
-      .put(`http://dlckdals04.shop/api/recruits/` + recruitPostId, newPost, {
+      .put(`https://zhaoxilin.shop/api/recruits/` + recruitPostId, newPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
@@ -110,7 +110,7 @@ export const updatePhotoDB = (recruitPostId, newPost) => {
 export const deletePhotoDB = (recruitPostId, navigate) => {
   return function (dispatch) {
     axios
-      .delete("http://dlckdals04.shop/api/recruits/" + recruitPostId, {
+      .delete("https://zhaoxilin.shop/api/recruits/" + recruitPostId, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`},
       })

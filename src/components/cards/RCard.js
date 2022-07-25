@@ -31,7 +31,7 @@ function RCard() {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/reviews", token ?{
+      .get("https://zhaoxilin.shop/api/reviews", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -46,7 +46,7 @@ function RCard() {
   // 페이지 스크롤이 하단에 도착할때 실행되는 함수
   const axiosData = () => {
     axios
-      .get("http://dlckdals04.shop/api/reviews",token ?{
+      .get("https://zhaoxilin.shop/api/reviews",token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -99,7 +99,7 @@ function RCard() {
                     onClick={() => {
                       axios
                         .put(
-                          "http://dlckdals04.shop/api/reviews/bookmark/" +
+                          "https://zhaoxilin.shop/api/reviews/bookmark/" +
                             item.reviewPostId,
                           null,
                           {
@@ -122,7 +122,7 @@ function RCard() {
                     onClick={() => {
                       axios
                         .put(
-                          "http://dlckdals04.shop/api/reviews/bookmark/" +
+                          "https://zhaoxilin.shop/api/reviews/bookmark/" +
                             item.reviewPostId,
                           null,
                           {

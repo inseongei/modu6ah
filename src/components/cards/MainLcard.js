@@ -61,7 +61,7 @@ function MainLcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/places/bookmark/" +
+                              "https://zhaoxilin.shop/api/places/bookmark/" +
                                 item.placePostId,
                               null,
                               {
@@ -84,7 +84,7 @@ function MainLcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/places/bookmark/" +
+                              "https://zhaoxilin.shop/api/places/bookmark/" +
                                 item.placePostId,
                               null,
                               {

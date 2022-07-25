@@ -26,7 +26,7 @@ const PlaceDetail = () => {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/places/" + placePostId)
+      .get("https://zhaoxilin.shop/api/places/" + placePostId)
       .then((res) => {
         console.log(res.data);
         setDetail(res.data.placeDetails);

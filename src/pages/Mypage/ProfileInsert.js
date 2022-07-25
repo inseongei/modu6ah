@@ -53,7 +53,7 @@ const ProfileInsert = () => {
 
     await axios
       .put(
-        "http://dlckdals04.shop/api/mypage/update",
+        "https://zhaoxilin.shop/api/mypage/update",
         formData,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } }
       )

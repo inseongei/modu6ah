@@ -9,7 +9,7 @@ import axios from "axios";
 import { BsTrash } from "react-icons/bs";
 import io from "socket.io-client";
 
-const socket = io.connect("http://dlckdals04.shop");
+const socket = io.connect("https://zhaoxilin.shop");
 
 const ChatListModal = ({ open, onClose }) => {
   const nickname = localStorage.getItem("nickname");
@@ -22,7 +22,7 @@ const ChatListModal = ({ open, onClose }) => {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/chats/rooms",  {
+      .get("https://zhaoxilin.shop/api/chats/rooms",  {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`
         }
@@ -37,7 +37,7 @@ const ChatListModal = ({ open, onClose }) => {
   const Delete = () => {
 
       axios
-      .delete("http://dlckdals04.shop/api/chats/rooms/" + realroom,{
+      .delete("https://zhaoxilin.shop/api/chats/rooms/" + realroom,{
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -86,7 +86,7 @@ const ChatListModal = ({ open, onClose }) => {
                       socket.emit("join_room", Joindata);
                       axios
                         .get(
-                          "http://dlckdals04.shop/api/chats/messages/" +
+                          "https://zhaoxilin.shop/api/chats/messages/" +
                             data.roomId,
                             {
                               headers: {

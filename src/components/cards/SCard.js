@@ -30,7 +30,7 @@ function SCard() {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/recruits", token ?{
+      .get("https://zhaoxilin.shop/api/recruits", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -45,7 +45,7 @@ function SCard() {
 
   const axiosData = () => {
     axios
-      .get("http://dlckdals04.shop/api/recruits", token ?{
+      .get("https://zhaoxilin.shop/api/recruits", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -92,7 +92,7 @@ function SCard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                 item.recruitPostId,
                               null,
                               {
@@ -114,7 +114,7 @@ function SCard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                 item.recruitPostId,
                               null,
                               {

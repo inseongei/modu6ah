@@ -17,7 +17,7 @@ const RecruitSearch = () => {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/search", {
+      .get("https://zhaoxilin.shop/api/search", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

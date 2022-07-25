@@ -33,7 +33,7 @@ function SearchRcard({ data, query }) {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/reviews/bookmark/" +
+                              "https://zhaoxilin.shop/api/reviews/bookmark/" +
                               item.reviewPostId,
                               null,
                               {
@@ -56,7 +56,7 @@ function SearchRcard({ data, query }) {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/reviews/bookmark/" +
+                              "https://zhaoxilin.shop/api/reviews/bookmark/" +
                               item.reviewPostId,
                               null,
                               {

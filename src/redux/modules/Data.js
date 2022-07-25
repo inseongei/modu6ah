@@ -2,7 +2,7 @@
 import axios from "axios";
 import io from "socket.io-client";
 
-const socket = io.connect("http://dlckdals04.shop");
+const socket = io.connect("https://zhaoxilin.shop");
 
 // Actions      --> 저장변수 = 프로젝트명 / 모듈 명 (리듀서 명) / 액션
 const GET = "MyPage/GET";
@@ -41,7 +41,7 @@ export function GetReview(Review) {
 export const GetMyPageAxios = (nickname) => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/mypage/profile/" + nickname,  {
+      .get("https://zhaoxilin.shop/api/mypage/profile/" + nickname,  {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`
         }
@@ -59,7 +59,7 @@ export const GetMyPageAxios = (nickname) => {
 export const GetMainAxois = () => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/main",  
+      .get("https://zhaoxilin.shop/api/main",  
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -77,7 +77,7 @@ export const GetMainAxois = () => {
 export const GetMainLogin = () => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/main")
+      .get("https://zhaoxilin.shop/api/main")
       .then((res) => {
         dispatch(GetMain(res.data));
       });
@@ -94,7 +94,7 @@ export const GetMainLogin = () => {
 export const GetRecruitAxois = () => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/recruits",  {
+      .get("https://zhaoxilin.shop/api/recruits",  {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`
         }
@@ -108,7 +108,7 @@ export const GetRecruitAxois = () => {
 export const GetReviewAxois = (reviewPostId) => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/reviews/" + reviewPostId , {
+      .get("https://zhaoxilin.shop/api/reviews/" + reviewPostId , {
         headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((res) => {

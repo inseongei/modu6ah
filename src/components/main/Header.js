@@ -97,7 +97,11 @@ const Header = () => {
           </ul>
 
           {/* User 메뉴 리스트 */}
+
           <ul className="header__right">
+          <li className="bell">
+              <img src={search} alt="검색" className="searchiconlogin"/>
+            </li>
             <li className="LogoOut" onClick={Login}>
               로그인
             </li>
@@ -217,6 +221,11 @@ const Headers = styled.div`
     margin-right: 30px;
   }
 
+  .bellLogin{
+    position: relative;
+    left:200px;
+  }
+
   input[id*="answer"] + label + div {
     max-height: 0;
     transition: all 0.5s;
@@ -236,6 +245,8 @@ const Headers = styled.div`
     position: absolute;
     top: 68px;
   }
+
+
 
   .accordion {
     display: flex;
@@ -310,6 +321,7 @@ const Headers = styled.div`
     font-size: 20px;
     font-weight: 700;
     color: #f4b03e;
+    font-family: 'NanumGothic';
   }
   .logo_container {
     display: flex;

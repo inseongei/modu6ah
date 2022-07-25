@@ -14,7 +14,7 @@ function BookScard() {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/mypage/bookmark/", {
+      .get("https://zhaoxilin.shop/api/mypage/bookmark/", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -29,7 +29,7 @@ function BookScard() {
 
   const recruitsMore = async () => {
     await axios
-      .get("http://dlckdals04.shop/api/mypage/bookmark/", {
+      .get("https://zhaoxilin.shop/api/mypage/bookmark/", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -58,7 +58,7 @@ function BookScard() {
                       onClick={() => {
                         axios
                           .put(
-                            "http://dlckdals04.shop/api/recruits/bookmark/" +
+                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
                               item.recruitPostId,
                             null,
                             {
@@ -81,7 +81,7 @@ function BookScard() {
                       onClick={() => {
                         axios
                           .put(
-                            "http://dlckdals04.shop/api/recruits/bookmark/" +
+                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
                               item.recruitPostId,
                             null,
                             {

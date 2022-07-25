@@ -20,7 +20,7 @@ const ReviewEdit = () => {
 
 
     React.useEffect(()=>{
-        axios.get('http://dlckdals04.shop/api/reviews/' + reviewPostId )
+        axios.get('https://zhaoxilin.shop/api/reviews/' + reviewPostId )
         .then((res)=>{
           console.log(res.data.reviewDetails)
           setDetail(res.data.reviewDetails)
@@ -43,7 +43,7 @@ const ReviewInsert = () =>{
 
 
 
-    axios.put('http://dlckdals04.shop//api/reviews/' + reviewPostId,data,{
+    axios.put('https://zhaoxilin.shop/api/reviews/' + reviewPostId,data,{
         headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       }).then((res)=>{
         console.log(res)
