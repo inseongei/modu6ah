@@ -4,6 +4,7 @@ import Header from "../../components/main/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
+import ChatIcon from '../../components/main/ChatIcon'
 
 const ProfileManager = () => {
   // 사용 변수들 지정
@@ -63,6 +64,7 @@ const ProfileManager = () => {
             </div>
           </div>
         </div>
+        <ChatIcon/>
       </Profile>
     </>
   );

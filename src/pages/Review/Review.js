@@ -1,6 +1,7 @@
 //육아템 리뷰
 import React from "react";
 import styled from "styled-components";
+import ChatIcon from '../../components/main/ChatIcon'
 
 //  elements & components
 import Header from "../../components/main/Header";
@@ -8,6 +9,7 @@ import Footer from "../../components/main/Footer";
 import RCard from "../../components/cards/RCard";
 import bottle from '../../images/bottle.png';
 import { useNavigate } from "react-router-dom";
+
 
 
 function Review() {
@@ -48,6 +50,7 @@ function Review() {
           <RCard />
         </div>
       </Container>
+      <ChatIcon/>
       <Footer />
     </div>
   );

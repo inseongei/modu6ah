@@ -17,6 +17,7 @@ import { detailPostDB } from "../../redux/modules/post";
 import Grid from "../../components/elements/Grid";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
+import ChatIcon from '../../components/main/ChatIcon'
 
 function RecruitEdit() {
   const navigate = useNavigate();
@@ -146,6 +147,7 @@ function RecruitEdit() {
           </div>
         </Detail>
       </Grid>
+      <ChatIcon/>
       <Footer />
     </>
   );

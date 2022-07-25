@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from '../../components/main/Header'
 import axios from 'axios';
 import {useNavigate, useParams } from 'react-router-dom';
-
+import ChatIcon from '../../components/main/ChatIcon'
 
 
 
@@ -126,7 +126,7 @@ const ReviewInsert = () =>{
 
     </div>
 
-    
+    <ChatIcon/>
     </Review>
 
     </>

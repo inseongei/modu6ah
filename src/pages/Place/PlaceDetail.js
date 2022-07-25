@@ -14,6 +14,7 @@ import data from "../../shared/data";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/main/Footer";
+import ChatIcon from '../../components/main/ChatIcon'
 
 const PlaceDetail = () => {
   const [datas, setDatas] = useState(data);
@@ -110,6 +111,7 @@ const PlaceDetail = () => {
         </Box>
         <PlaceComment />
       </Container>
+      <ChatIcon/>
       <Footer />
     </>
   );

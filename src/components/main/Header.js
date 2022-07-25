@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 import io from "socket.io-client";
-import { toast } from "react-toastify";
 
 
 // 소켓서버 연결
@@ -70,26 +69,7 @@ const Header = () => {
     navigate("/MyBookmark");
   }
 
-  // 상대방이 보낸 메시지를 알림 이벤트 경로로 데이터를 받음
-  React.useEffect(() => {
-    socket.off("notify").on("notify", (data) => {
-      if (nickname === data.senderNick) {
-        return null;
-      } else if (nickname !== data.receiverNick) {
-        return null;
-      } else {
-        toast.success(`${data.senderNick}님이 메시지를 보냈습니다`, {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          limit: 3,
-        });
-        setNotify((list) => [...list, data]);
-        localStorage.setItem("count", data.message);
-      }
-    });
-  }, []);
+
 
   return (
     <>

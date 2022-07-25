@@ -6,6 +6,7 @@ import OneToOneChat from "../../modal/Chat/OneToOneChat";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 import RecruitComment from "../../components/pages/RecruitComment";
+import ChatIcon from '../../components/main/ChatIcon'
 
 import axios from "axios";
 import io from "socket.io-client";
@@ -168,6 +169,7 @@ const RecruitDetail = () => {
         onClose={() => setModalIsOpen(false)} // 모달창 닫기
         socket={socket}
       />
+      <ChatIcon/>
       <Footer/>
     </>
   );

@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import ChatIcon from '../../components/main/ChatIcon'
 
 //  elements & components
 import Grid from "../../components/elements/Grid";
@@ -51,6 +52,7 @@ function Recruit() {
           <SCard />
         </div>
       </Container>
+      <ChatIcon/>
       <Footer />
     </div>
   );

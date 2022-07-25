@@ -12,12 +12,13 @@ import MainRcard from '../components/cards/MainRcard';
 import Footer from "../components/main/Footer";
 import MainScard from "../components/cards/MainScard";
 import SearchInput from "../components/main/SearchInput";
-
+import ChatIcon from '../components/main/ChatIcon'
+import '../shared/App.css'
 const Main = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="MainBackGround">
       <Header />
       <Swiper />
       <SearchInput/>
@@ -81,6 +82,7 @@ const Main = () => {
           <MainRcard />
         </Container>
       </Grid>
+      <ChatIcon/>
       <Footer />
     </div>
   );

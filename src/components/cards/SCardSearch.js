@@ -10,6 +10,7 @@ function SCardSearch({scard, query}) {
   const navigate = useNavigate();
   const [search, setSearch] = React.useState();
   const [btn, setbtn] = React.useState(true);
+  const [test,settest] = React.useState()
 
   return (
     <>
