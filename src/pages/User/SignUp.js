@@ -6,11 +6,11 @@ import axios from "axios";
 import logo from "../../images/logo.png";
 import Header from "../../components/main/Header";
 import { FormGroup } from "react-bootstrap";
-import {useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 const SignUp = () => {
 
-  const { watch} = useForm();
+  const { watch } = useForm();
   console.log(watch('form-input'))
 
 
@@ -21,6 +21,7 @@ const SignUp = () => {
   const [passwordCheck, setPwCheck] = useState("");
 
   // 오류 메세지 상태저장
+
   const [emailMessage, setEmailMessage] = useState(null);
   const [nicknameMessage, setNicknameMessage] = useState(null);
   const [passwordMessage, setPasswordMessage] = useState(null);
@@ -37,28 +38,24 @@ const SignUp = () => {
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 
   // 이메일 검사
-  const onChangeEmail = (event) => {
+  const onChangeEmail = (e) => {
     const emailRegEx =
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    const emailCurrent = event.target.value;
-    setEmail(event.target.value);
-
+    const emailCurrent = e.target.value;
+    setEmail(e.target.value);
     if (!emailRegEx.test(emailCurrent)) {
       setEmailMessage("이메일 형식으로 입력해주세요.");
       setIsEmail(false);
-    } else if (email === "") {
-      checkOverlapEmail(false);
-      setEmailMessage("이메일을 입력해주세요");
-    }  else {
-      setEmailMessage("사용 가능한 이메일입니다.");
+    } else {
+      setEmailMessage("이메일 중복 확인을 해주세요.");
       setIsEmail(true);
     }
   };
 
   // 닉네임 검사
-  const onChangeNickname = (event) => {
+  const onChangeNickname = (e) => {
     const nickRegEx = /^[가-힣0-9a-zA-Z]{2,10}$/;
-    const nicknameCurrent = event.target.value;
+    const nicknameCurrent = e.target.value;
     setNickname(nicknameCurrent);
     if (!nickRegEx.test(nicknameCurrent)) {
       setNicknameMessage(
@@ -66,18 +63,18 @@ const SignUp = () => {
       );
       setIsNickname(false);
     } else {
-      setNicknameMessage("사용 가능한 닉네임입니다.");
+      setNicknameMessage("닉네임 중복 확인을 해주세요.");
       setIsNickname(true);
-      setNickname(event.target.value);
+      setNickname(e.target.value);
     }
   };
 
   // 패스워드 검사
-  const onChangePassword = (event) => {
+  const onChangePassword = (e) => {
     // const passwordRegEx = /^(?=.*\\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/;
     const passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,16}$/;
     // /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
-    const passwordCurrent = event.target.value;
+    const passwordCurrent = e.target.value;
     setPw(passwordCurrent);
     if (!passwordRegEx.test(passwordCurrent)) {
       setPasswordMessage(
@@ -87,13 +84,13 @@ const SignUp = () => {
     } else {
       setPasswordMessage("사용 가능한 비밀번호입니다.");
       setIsPassword(true);
-      setPw(event.target.value);
+      setPw(e.target.value);
     }
   };
 
   // 패스워드 확인 검사
-  const onChangePasswordConfirm = (event) => {
-    const passwordConfirmCurrent = event.target.value;
+  const onChangePasswordConfirm = (e) => {
+    const passwordConfirmCurrent = e.target.value;
     setPwCheck(passwordConfirmCurrent);
     if (password === passwordConfirmCurrent) {
       setPasswordConfirmMessage("비밀번호가 일치합니다.");
@@ -105,10 +102,54 @@ const SignUp = () => {
   };
 
   //사용 중인 이메일인 경우
+  const Checkemail = async () => {
+    if (email === "") {
+      checkOverlapEmail(false);
+      setEmailMessage("사용할 이메일을 입력해주세요");
+    }
 
-
+    if (isEmail) {
+      await axios.post("http://dlckdals04.shop/api/users/signup/emailCheck", {
+        email
+      }
+      ).then((res) => {
+        if (res.data.result) {
+          checkOverlapEmail(true);
+          setOverlapEmailMessage("사용 가능한 이메일입니다.");
+        }
+      })
+        .catch((err) => {
+          checkOverlapEmail(false);
+          setIsEmail(false);
+          setEmailMessage("사용 중인 이메일입니다.");
+        });
+    };
+  };
 
   //사용 중인 닉네임인 경우
+  const Checknikname = async () => {
+    if (nickname === "") {
+      checkOverlapNickName(false);
+      setNicknameMessage("사용할 닉네임을 입력해주세요");
+    }
+
+    if (isNickname) {
+      await axios.post("http://dlckdals04.shop/api/users/signup/nicknameCheck", {
+        nickname
+      }
+      ).then((res) => {
+        if (res.data.result) {
+          checkOverlapNickName(true);
+          setOverlapNicknameMessage("사용 가능한 닉네임입니다.");
+        }
+      })
+        .catch((err) => {
+          checkOverlapNickName(false);
+          setIsNickname( false );
+          setNicknameMessage("사용 중인 닉네임입니다.");
+        });
+    };
+  };
 
   // 회원 등록하기
   const register = (e) => {
@@ -126,7 +167,7 @@ const SignUp = () => {
         console.log(response);
       })
       .catch((error) => {
-        alert("회원가입을 다시해주세요");
+        // alert("회원가입을 다시해주세요");
         console.log(error);
         console.log(error.response.data.Message);
       });
@@ -156,9 +197,14 @@ const SignUp = () => {
                           className="form-input"
                           placeholder="이메일을 입력하세요"
                         ></input>
-                        {/* <label className="id_button" onClick={onClickEmailConfirm} >
-                                    Check
-                                </label> */}
+                        <div className="check_btn">
+                          <button
+                            onClick={Checkemail}
+                          >
+                            Check
+                          </button>
+                        </div>
+
                       </div>
                       <div className="message_div">
                         {OverlapEmail ? (
@@ -194,9 +240,14 @@ const SignUp = () => {
                           className="form-input"
                           placeholder="닉네임을 입력하세요"
                         ></input>
-                        {/* <label className="id_button" onClick={onClickNickNameConfirm}>
-                                    Check
-                                </label> */}
+                        <div className="check_btn">
+                          <button
+                           onClick={Checknikname}
+                          >
+                            Check
+                          </button>
+                        </div>
+
                       </div>
                       <div className="message">
                         {OverLapNickName ? (
@@ -355,6 +406,21 @@ const LoginBtn = styled.button`
 `;
 const Box = styled.div`
   margin: 40px 0px 0px 110px;
+  
+  .formbox {
+    display: flex;
+  }
+
+  .check_btn {
+    margin-left: 10px;
+    margin-top: 10px;
+
+    button {
+      border-radius: 10px;
+    }
+    
+  }
+
 `;
 
 export default SignUp;
