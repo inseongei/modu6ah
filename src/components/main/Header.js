@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 import io from "socket.io-client";
+import '../../shared/font/font.css'
 
 
 // 소켓서버 연결
@@ -281,6 +282,7 @@ const Header = () => {
 
 // 헤더 스타일 코드
 const Headers = styled.div`
+  font-family: "NanumGothic";
   max-width: 100%;
   height: 75px;
   display: flex;
@@ -296,7 +298,6 @@ const Headers = styled.div`
     padding: 20px;
     cursor: pointer;
     font-size: 20px;
-    font-family: "Noto Sans KR";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -342,7 +343,6 @@ const Headers = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Noto Sans KR";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -354,7 +354,6 @@ const Headers = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Noto Sans KR";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -434,8 +433,8 @@ const Headers = styled.div`
   }
 
   .header__menulist > li {
-    font-family: "Nanum Gothic";
     font-style: normal;
+    font-family: "NanumGothic";
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
@@ -622,7 +621,6 @@ const ChatBox = styled.div`
 
   .boxOne > span {
     color: white;
-    font-family: "Noto Sans KR";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -633,7 +631,6 @@ const ChatBox = styled.div`
 
   .boxTwo > span {
     color: white;
-    font-family: "Noto Sans KR";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
