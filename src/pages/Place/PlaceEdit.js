@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../../components/main/Header'
 import styled from 'styled-components'
+import ChatIcon from '../../components/main/ChatIcon'
 
 const PlaceEdit = () => {
   return (
@@ -65,7 +66,7 @@ const PlaceEdit = () => {
 
     </div>
 
-    
+    <ChatIcon/>
     </Review>
 
     </>

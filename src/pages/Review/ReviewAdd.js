@@ -15,6 +15,7 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PlaceComment from "../../components/pages/PlaceComment";
+import ChatIcon from '../../components/main/ChatIcon'
 
 function PlaceAdd() {
   const [title, setTitle] = useState("");
@@ -187,6 +188,7 @@ function PlaceAdd() {
           </div>
         </Place>
         </Container>
+        <ChatIcon/>
       <Footer />
     </>
   );

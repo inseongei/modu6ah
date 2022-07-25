@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import SearchLcard from "../../components/cards/SearchLcard";
 import SearchBar from "../../components/pages/SearchBar";
 import search from "../../images/search.png";
-
+import ChatIcon from '../../components/main/ChatIcon'
 
 const PlaceSearch = () => {
   const navigate = useNavigate();
@@ -67,6 +67,7 @@ const PlaceSearch = () => {
           </div>
         </div>
       </SearchBox>
+      <ChatIcon/>
       <Footer />
     </>
   );

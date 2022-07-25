@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import SearchRcard from "../../components/cards/SearchRcard";
 import SearchBar from "../../components/pages/SearchBar";
 import search from "../../images/search.png";
-
+import ChatIcon from '../../components/main/ChatIcon'
 
 const ReviewSearch = () => {
   const navigate = useNavigate();
@@ -70,6 +70,7 @@ const ReviewSearch = () => {
           </div>
         </div>
       </SearchBox>
+      <ChatIcon/>
       <Footer />
     </>
   );

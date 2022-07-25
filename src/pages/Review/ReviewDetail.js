@@ -11,6 +11,7 @@ import Content from '../../components/pages/Content';
 import {useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../../components/main/Footer';
+import ChatIcon from '../../components/main/ChatIcon'
 
 const ReviewDetail = () => {
 const nickname = localStorage.getItem("nickname");
@@ -95,6 +96,7 @@ const navigate = useNavigate()
         </div>
       </Container>
       <ReviewComment />
+      <ChatIcon/>
       <Footer/>
     </>
     

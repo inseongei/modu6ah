@@ -9,6 +9,7 @@ import search from "../../images/search.png";
 import SCardSearch from "../../components/cards/SCardSearch";
 import LCardSearch from "../../components/cards/LCardSearch";
 import RCardSearch from "../../components/cards/RCardSearch";
+import ChatIcon from '../../components/main/ChatIcon'
 
 
 const MainSearch = () => {
@@ -27,7 +28,7 @@ const MainSearch = () => {
       })
       .then((res) => {
         console.log(res)
-        setScard(res.data.resultsInRecruit.slice(0, 6));
+        setScard(res.data.resultsInRecruit);
         setLcard(res.data.resultsInPlace.slice(0, 6));
         setRcard(res.data.resultsInReview.slice(0, 6));
       })
@@ -97,6 +98,7 @@ const MainSearch = () => {
           </div>
         </div>
       </SearchBox>
+      <ChatIcon/>
       <Footer />
     </>
   );
