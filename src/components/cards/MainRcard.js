@@ -17,7 +17,6 @@ function MainRCard() {
   }, []);
 
   const post = useSelector((state) => state.Data.Profile);
-  console.log(post);
 
   if (!post) {
     return <div></div>;

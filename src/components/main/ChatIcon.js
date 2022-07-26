@@ -35,7 +35,7 @@ const ChatIcon = () => {
   }, []);
 
     const messageBtn = () => {
-        setModalIsOpen(true);
+        setModalIsOpen(!modalIsOpen);
         localStorage.removeItem("count");
         setNotify([]);
       };
@@ -72,7 +72,6 @@ z-index: 1;
 
 .chatIconBox{
 display: flex;
-flex-direction: row;
 justify-content: center;
 align-items: center;
 width: 156px;

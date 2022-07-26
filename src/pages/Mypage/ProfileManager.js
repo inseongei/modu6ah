@@ -33,17 +33,17 @@ const ProfileManager = () => {
             <div className="ProfileImg">
               <img src={MyPage.mypageGet.profileUrl} alt="사진" />
             </div>
-            <div className="TwoBox">
-              <div>
+            <div>
+              <div className="TwoBox">
                 <span> 닉네임 </span>
                 <div className="inputBox">{MyPage.mypageGet.nickname}</div>
               </div>
-              <div>
+              <div className="TwoBox">
                 <span> 이메일 </span>
                 <div className="inputBox">{MyPage.mypageGet.email}</div>
               </div>
 
-              <div>
+              <div className="TwoBox">
                 <span> 소개란 </span>
                 <div className="inputBigBox">{MyPage.mypageGet.myComment}</div>
               </div>
@@ -112,7 +112,7 @@ const Profile = styled.div`
     font-weight: 700;
     font-size: 16px;
   }
-  span {
+  .TwoBox > span {
     font-family: "Inter";
     font-style: normal;
     font-weight: 700;

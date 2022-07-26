@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;800&display=swap');
+
 html {
   margin: 0px;
   background-color: #f5f5f5;
 }
 
 *{
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'NanumGothic';
 }
 .MainBackGround {
   background-color: #f5f5f5;
@@ -83,6 +84,61 @@ h4 {
   color: #a8a8a8;
 }
 
+.ChatListBox{
+  width:473px;
+  height: 70px;
+  border-bottom: 1px solid #E4E4E4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ChatListBoxTwo{
+  width:473px;
+  height: 70px;
+  border-bottom: 1px solid #E4E4E4;
+  display: flex;
+  align-items: center;
+}
+
+.ChatListBox > div >  img {
+  margin-left: 15px;
+}
+
+.OneToOne{
+  margin-left:35px;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #3C3C3C;
+}
+
+.twoToOne{
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #3C3C3C;
+}
+
+.cancel{
+  width: 24px;
+  height: 24px;
+  margin-right: 24px;
+  cursor: pointer;
+}
+
+.x{
+  width: 24px;
+  height: 24px;
+  margin-left: 24px;
+  margin-right: 24px;
+  cursor: pointer;
+}
+
 .chat_item {
   width: 100%;
   padding-top: 20px;
@@ -100,14 +156,30 @@ h4 {
   background-color: #fff;
   border: 1px solid #e4e4e4;
   position: absolute;
-  z-index: 00;
   width: 473px;
   height: 770px;
-  right: 0px;
+  right: 20px;
   bottom: 100px;
   box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ChatListContainer{
+  width:425px;
+  height: 80px;
+  border: 1px solid #E4E4E4;
+  border-radius: 10px;
+  margin-top:25px;
+  display: flex;
+  align-items: center;
+}
+
+.ChatListContainer:hover{
+  background: #E4E4E4;
 }
 
 .message-container {
@@ -121,12 +193,87 @@ h4 {
   display: none;
 }
 
+.listC{
+  display: flex;
+  justify-content: center;
+}
 .message-containerTwo {
   width: 100%;
   height: 75%;
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+.firstBox{
+  margin-left: 20px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.SecondBox{
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 10px;
+  width:179px;
+  cursor: pointer;
+}
+
+.firstBox > img{
+  width:32px;
+  height: 32px;
+  border-radius: 50px;
+}
+
+.ChatName {
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 11px;
+  margin-bottom: 5px;
+}
+
+.ThirdBox{
+  margin-left: 7px;
+  position: relative;
+  top:10px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+  cursor: pointer;
+}
+
+.ChatDel > img{
+  width:20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+
+.ChatTime{
+  color: #A8A8A8;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 11px;
+  width: 70px;
+}
+
+.ChatContent{
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+}
+
 
 .message-containerTwo::-webkit-scrollbar {
   display: none;
@@ -212,20 +359,6 @@ h4 {
   right: 60px;
 }
 
-.RoomChat {
-  width: 85%;
-  height: 100px;
-  margin-bottom: 20px;
-  margin-left: 30px;
-  display: flex;
-}
-
-.RoomChatX {
-  width: 85%;
-  height: 100px;
-  margin-left: 70px;
-  display: flex;
-}
 
 .RoomImg {
   width: 15%;
@@ -234,30 +367,8 @@ h4 {
   align-items: center;
 }
 
-.RoomContent {
-  width: 70%;
-  text-align: right;
-}
 
-.RoomContentX {
-  width: 70%;
-  text-align: left;
-}
 
-.RoomTime {
-  width: 15%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 23px;
-  color: #a8a8a8;
-  padding-left: 15px;
-}
 
 .RoomProfile {
   width: 70px;
@@ -271,68 +382,6 @@ h4 {
   border-radius: 50%;
 }
 
-.RoomName {
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 23px;
-  color: #000000;
-  height: 40%;
-  display: flex;
-  align-items: center;
-}
-
-.RoomNameX {
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 23px;
-  color: #000000;
-  height: 40%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.ChatRoomInputX {
-  width: 100%;
-  height: 60px;
-  border-radius: 20px;
-  padding: 20px;
-  border: none;
-  background-color: #e4e4e4;
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 23px;
-  color: #000000;
-  text-align: right;
-}
-
-.ChatRoomInput {
-  width: 100%;
-  height: 60px;
-  border: 1px solid #e4e4e4;
-  border-radius: 20px;
-  font-size: 20px;
-  padding: 20px;
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 23px;
-  color: #000000;
-  text-align: left;
-}
-
-.RoomFake {
-  width: 100px;
-  display: flex;
-}
-
 .me {
   width: 50%;
   text-align: center;
@@ -342,6 +391,160 @@ h4 {
   width: 50%;
   text-align: center;
 }
+
+.MainText{
+  width: 470px;
+  text-align: center;
+  padding: 15px;
+}
+
+.MyChat{
+  margin-right: 37px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.MyContent{
+  background: #E4E4E4;
+  border: 1px solid #E4E4E4;
+  border-radius: 10px;
+  word-wrap:break-word;
+}
+
+.youContent{
+  background: #fff;
+  border: 1px solid #E4E4E4;
+  border-radius: 10px;
+  word-wrap:break-word;
+}
+
+.youContent > span{
+  padding: 10px 15px;
+  height: 35px;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 15px;
+}
+
+.youProfile {
+  width:50px;
+  height: 50px;
+  border: 1px solid #E4E4E4;
+  border-radius: 50%;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.youNickname{
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 11px;
+  margin-bottom: 14px;
+}
+
+
+
+
+
+
+
+.MyContent > span{
+  padding: 10px 15px;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  height: 35px;
+  line-height: 15px;
+}
+
+.MyTime{
+  color: #A8A8A8;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 11px;
+  display: flex;
+  align-items: flex-end;
+  margin-right: 5px;
+}
+
+.youTime{
+  color: #A8A8A8;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 11px;
+  display: flex;
+  align-items: flex-end;
+  margin-left: 5px;
+}
+
+
+
+.SendChat{
+  width:470px;
+  position: relative;
+  left: 35px;
+  bottom: 30px;
+}
+
+.youChat{
+  margin-left: 79px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+
+
+
+
+
+
+.SendChat > input {
+  width: 400px;
+  height: 45px;
+  background: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  border-radius: 10px;
+}
+
+.SendChat > button {
+  position: relative;
+  right: 70px;
+  border: none;
+  background-color: transparent;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #6B4E16;
+}
+
+.SendChat > input:focus{
+  outline: 1px solid #F4B03E;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .circle2 {
   width: 30px;
