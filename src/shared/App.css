@@ -624,7 +624,7 @@ h4 {
   width: 100%;
   text-align: right;
 }
-
+/* 
 .MoreBtn {
   border: 2px solid #ddd;
   width: 70px;
@@ -639,8 +639,14 @@ h4 {
 .MoreBtn:hover {
   border-color: #111;
   box-shadow: 1px 2px 4px rgb(0 0 0 / 10%);
+} */
+
+.Trash{
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
-.hello3{
-  background-color: red;
+.Trash:hover{
+  color:red;
 }

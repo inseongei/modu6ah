@@ -228,7 +228,7 @@ const Headers = styled.div`
     max-height: 0;
     transition: all 0.5s;
     overflow: hidden;
-    background-color: #ffffff;
+    background-color: transparent;
     font-size: 11px;
     position: absolute;
     top: 62px;
