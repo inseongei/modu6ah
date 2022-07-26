@@ -8,6 +8,7 @@ import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
+import { FaStar } from "react-icons/fa";
 
 function MainLcard() {
   const navigate = useNavigate();
@@ -37,8 +38,10 @@ function MainLcard() {
               key={index}
             >
               {/* 카드 왼쪽 '이미지' */}
-              <div className="card-left"              onClick={() => {
-                navigate("/placedetail/" + item.placePostId);
+              <div className="card-left" 
+                onClick={() => {
+                navigate("/placedetail/" + 
+                item.placePostId);
               }}>
                 <div className="image">
                   <img src={item.imageUrl[0]} alt="사진" />
@@ -47,11 +50,22 @@ function MainLcard() {
               {/* 카드 오른쪽 '타이틀 및 설명' */}
               <div className="card-right">
                 <div className="title">
-                  <div className="titleBox"               onClick={() => {
-                navigate("/placedetail/" + item.placePostId);
-              }}>
+                  <div className="titleBox"
+                    onClick={() => {
+                      navigate("/placedetail/" +
+                        item.placePostId);
+                    }}>
                     <h3>{item.title}</h3>
-                    <p>⭐ {item.star}</p>
+                    <span>
+                      <FaStar
+                        size={28}
+                        style={{
+                          color: "#FFBA5A",
+                          marginLeft: "5px",
+                        }}
+                      />
+                    </span>
+                    <p>{item.star}점</p>
                   </div>
 
                   <div>
@@ -62,7 +76,7 @@ function MainLcard() {
                           axios
                             .put(
                               "https://zhaoxilin.shop/api/places/bookmark/" +
-                                item.placePostId,
+                              item.placePostId,
                               null,
                               {
                                 headers: {
@@ -85,7 +99,7 @@ function MainLcard() {
                           axios
                             .put(
                               "https://zhaoxilin.shop/api/places/bookmark/" +
-                                item.placePostId,
+                              item.placePostId,
                               null,
                               {
                                 headers: {
@@ -98,7 +112,7 @@ function MainLcard() {
                             .then((res) => {
                               console.log(res.data);
                               window.location.reload();
-                            }).catch((err)=> console.log(err))
+                            }).catch((err) => console.log(err))
                         }}
                       />
                     )}
@@ -108,12 +122,16 @@ function MainLcard() {
                   <MdOutlinePlace />
                   {item.region}
                 </a>
-                <div className="profile_box"               onClick={() => {
-                navigate("/placedetail/" + item.placePostId);
-              }}>
-                  <div className="detail_profile"               onClick={() => {
-                navigate("/placedetail/" + item.placePostId);
-              }}>
+                <div className="profile_box"
+                  onClick={() => {
+                    navigate("/placedetail/" +
+                      item.placePostId);
+                  }}>
+                  <div className="detail_profile"
+                    onClick={() => {
+                      navigate("/placedetail/" +
+                        item.placePostId);
+                    }}>
                     <img src={item.profileUrl} alt="프로필" />
                   </div>
                   <strong>{item.nickname}</strong>
@@ -131,7 +149,6 @@ function MainLcard() {
 
 const Container = styled.div`
   font-family: "Nanum Gothic";
-
   display: grid;
   grid-template-columns: repeat(auto-fit);
   gap: 3.5em;
@@ -168,8 +185,9 @@ const Container = styled.div`
   .atag {
     text-decoration: none;
     color: black;
-    margin: 20px 0px 20px 0px;
+    margin: 13px 0px 15px 0px;
   }
+
   .bookmark {
     margin-right: 60px;
     width: 34px;
@@ -212,13 +230,14 @@ const Container = styled.div`
   }
 
   .title p {
-    margin-top: 4px;
-    margin-left: 10px;
+    color: #A8A8A8;
+    font-weight: 700;
+    margin: 3px 0px 0px 8px;
   }
 
   .profile_box {
     display: flex;
-    margin-top: 15px;
+    margin-top: 8px;
     margin-bottom: 20px;
   }
 
@@ -233,7 +252,7 @@ const Container = styled.div`
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    margin-left: 10px;
+    margin-left: 2px;
   }
 
   .detail_profile {
@@ -249,14 +268,10 @@ const Container = styled.div`
     margin-left: 10px;
   }
 
-  .card-right p {
-    margin: 0px 10px 0px 5px;
-  }
-
   .content {
     margin-right: 20px;
     width: 420px;
-    height: 180px;
+    height: 120px;
     box-sizing: border-box;
     overflow: hidden;
   }

@@ -1,7 +1,14 @@
-// 메인 페이지
-import React from "react";
+//  장소 추천 카드
+import React, { useState } from "react";
 import styled from "styled-components";
+import { PlaceData } from "../../shared/placedata";
+import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
+import { FaStar } from "react-icons/fa";
 
 //  elements & components
 import Grid from "../components/elements/Grid";
@@ -14,8 +21,24 @@ import MainScard from "../components/cards/MainScard";
 import SearchInput from "../components/main/SearchInput";
 import ChatIcon from '../components/main/ChatIcon'
 import '../shared/App.css'
+
 const Main = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [data, setData] = useState("");
+
+  const token = localStorage.getItem('accessToken')
+
+  React.useEffect(() => {
+    token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin())
+  }, []);
+
+  const post = useSelector((state) => state.Data.Profile);
+  console.log(post);
+
+  if (!post) {
+    return <div></div>;
+  }
 
   return (
     <div className="MainBackGround">
@@ -86,60 +109,140 @@ const Main = () => {
       <Footer />
     </div>
   );
-};
+}
 
 const Container = styled.div`
   font-family: "Nanum Gothic";
-  padding-left: 50px;
-  padding-right: 50px;
-  .card_title {
-    widht: 10px;
-    width: 960px;
-  }
-  .subtitle {
+  display: grid;
+  grid-template-columns: repeat(auto-fit);
+  gap: 3.5em;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    background: white;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
+    overflow: hidden;
+    width: 980px;
+    height: 360px;
     display: flex;
-    margin-left: 171px;
+    flex-direction: row;
   }
-  .subcontent {
+
+  .card-left {
     display: flex;
-    width: 970px;
+    width: 460px;
+    height: 300px;
+    margin: 30px 0px 0px 39px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .image {
+    border-radius: 25px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .atag {
+    text-decoration: none;
+    color: black;
+    margin: 13px 0px 15px 0px;
+  }
+
+  .bookmark {
+    margin-right: 60px;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+  }
+
+  .bookmark2 {
+    margin-right: 60px;
+    width: 34px;
+    height: 34px;
+    color: #6b4e16;
+    cursor: pointer;
+  }
+
+  .card-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-right {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-left: 60px;
+  }
+
+  .titleBox {
+    display: flex;
+  }
+
+  .title {
+    display: flex;
     justify-content: space-between;
+
+    h3 {
+      font-weight: 700;
+    }
   }
-  hr {
-    color: #e4e4e4;
-    height: 2.5px;
-    margin-top: 100px;
+
+  .title p {
+    color: #A8A8A8;
+    font-weight: 700;
+    margin: 3px 0px 0px 8px;
+  }
+
+  .profile_box {
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+
+  .profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+  }
+
+  .detail_profile > img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-left: 2px;
+  }
+
+  .detail_profile {
+    border-radius: 50%;
+    /* display:flex; */
+    align-items: center;
+    display: block;
+    justify-content: center;
+  }
+
+  strong {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  .content {
+    margin-right: 20px;
+    width: 420px;
+    height: 120px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .content p {
+    font-weight: normal;
   }
 `;
 
-const Title = styled.p`
-  display: flex;
-  font-size: 28px;
-  font-weight: 750;
-  margin-top: 95px;
-  margin-left: 170px;
-  margin-bottom: 0px;
-`;
-
-const SubTitle = styled.p`
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 29px;
-  color: #6b4e16;
-  // margin-left: 171px;
-  margin-bottom: 50px;
-  padding-top: 5px;
-`;
-
-const Btn = styled.button`
-  margin-bottom: 50px;
-  padding: 10px 17px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  background: #3c3c3c;
-  color: white;
-  border-radius: 30px;
-  font-weight: 700;
-`;
-
-export default Main;
+export default MainLcard;
