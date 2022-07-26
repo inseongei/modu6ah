@@ -6,6 +6,7 @@ import OneToOneChat from "../../modal/Chat/OneToOneChat";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 import RecruitComment from "../../components/pages/RecruitComment";
+import ChatIcon from '../../components/main/ChatIcon'
 
 import axios from "axios";
 import io from "socket.io-client";
@@ -15,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { detailPostDB, deletePostDB } from "../../redux/modules/post";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 
-const socket = io.connect("http://dlckdals04.shop"); // 1 . 소켓 서버 연결
+const socket = io.connect("https://zhaoxilin.shop"); // 1 . 소켓 서버 연결
 
 const RecruitDetail = () => {
   const nickname = localStorage.getItem("nickname");
@@ -33,7 +34,7 @@ const RecruitDetail = () => {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/recruits/" + recruitPostId)
+      .get("https://zhaoxilin.shop/api/recruits/" + recruitPostId)
       .then((response) => {
         setState(response.data.recruitDetails);
       })
@@ -65,7 +66,7 @@ const RecruitDetail = () => {
   // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
     axios
-      .post("http://dlckdals04.shop/api/chats/rooms/" + recruitPostId, null, {
+      .post("https://zhaoxilin.shop/api/chats/rooms/" + recruitPostId, null, {
         headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((res) => {
@@ -168,6 +169,7 @@ const RecruitDetail = () => {
         onClose={() => setModalIsOpen(false)} // 모달창 닫기
         socket={socket}
       />
+      <ChatIcon/>
       <Footer/>
     </>
   );

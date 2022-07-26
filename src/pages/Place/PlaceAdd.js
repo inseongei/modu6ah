@@ -14,6 +14,7 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ChatIcon from '../../components/main/ChatIcon'
 import PlaceComment from "../../components/pages/PlaceComment";
 
 function PlaceAdd() {
@@ -26,19 +27,27 @@ function PlaceAdd() {
   const [hoverValue, setHoverValue] = useState(undefined);
   const [rating, setRating] = useState(0);
 
+
   const navigate = useNavigate();
+
 
   // axios.Post 버튼
   const onSubmit = async (e) => {
+
     e.preventDefault();
     e.persist();
+
     let files = e.target.profile_files.files;
     let formData = new FormData();
+    console.log(files)
     // 반복문 돌려서 다중 이미지 처리
     for (let i = 0; i < files.length; i++) {
       formData.append("imageUrl", files[i]);
     }
 
+    for(const [key,value] of formData.entries()) {
+      console.log(key, value)
+    }
     console.log(files.length);
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
@@ -48,11 +57,9 @@ function PlaceAdd() {
     formData.append("location", location);
     formData.append("star", rating);
 
-    // formData.append('url', address)
-
     if (files.length < 6) {
       await axios
-        .post("http://dlckdals04.shop/api/places", formData, {
+        .post("https://zhaoxilin.shop/api/places", formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             "Content-Type": "multipart/form-data",
@@ -270,6 +277,7 @@ function PlaceAdd() {
           </div>
         </Place>
         </Container>
+        <ChatIcon/>
       <Footer />
     </>
   );

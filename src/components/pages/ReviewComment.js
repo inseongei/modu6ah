@@ -16,7 +16,7 @@ const ReviewComment = () => {
     const comment_data = {
       comment, nickname
     }
-    axios.post('http://dlckdals04.shop/api/reviews/' + reviewPostId + '/comments',
+    axios.post('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
@@ -32,7 +32,7 @@ const ReviewComment = () => {
 
   // 댓글 조회
   React.useEffect(() => {
-    axios.get('http://dlckdals04.shop/api/reviews/' + reviewPostId,
+    axios.get('https://zhaoxilin.shop/api/reviews/' + reviewPostId,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
         setState(res.data.reviewComments)
@@ -45,7 +45,7 @@ const ReviewComment = () => {
   const deleteComment = (e) => {
     // console.log(e.target.id);
     axios
-      .delete('http://dlckdals04.shop/api/reviews/' + reviewPostId + '/comments/' + e.target.id,
+      .delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
         // console.log(response);

@@ -29,7 +29,7 @@ function LogIn() {
   const submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://dlckdals04.shop/api/users/signin", {
+      .post("https://zhaoxilin.shop/api/users/signin", {
         email,
         password,
       })
@@ -105,7 +105,6 @@ function LogIn() {
                     <Grid margin="32px 0 0 0" height="auto" align="center">
                       <SocialLogin
                         onClick={kakaoURL}
-                        // href='http://dlckdals04.shop/api/users/kakao'
                       >
                         <RiKakaoTalkFill size="30" />
                         <p>Login with KakaoTalk</p>

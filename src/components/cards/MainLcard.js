@@ -38,8 +38,10 @@ function MainLcard() {
               key={index}
             >
               {/* 카드 왼쪽 '이미지' */}
-              <div className="card-left" onClick={() => {
-                navigate("/placedetail/" + item.placePostId);
+              <div className="card-left" 
+                onClick={() => {
+                navigate("/placedetail/" + 
+                item.placePostId);
               }}>
                 <div className="image">
                   <img src={item.imageUrl[0]} alt="사진" />

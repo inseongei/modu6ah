@@ -109,7 +109,7 @@ const SignUp = () => {
     }
 
     if (isEmail) {
-      await axios.post("http://dlckdals04.shop/api/users/signup/emailCheck", {
+      await axios.post("https://zhaoxilin.shop/api/users/signup/emailCheck", {
         email
       }
       ).then((res) => {
@@ -134,7 +134,7 @@ const SignUp = () => {
     }
 
     if (isNickname) {
-      await axios.post("http://dlckdals04.shop/api/users/signup/nicknameCheck", {
+      await axios.post("https://zhaoxilin.shop/api/users/signup/nicknameCheck", {
         nickname
       }
       ).then((res) => {
@@ -155,7 +155,7 @@ const SignUp = () => {
   const register = (e) => {
     e.preventDefault();
     axios
-      .post("http://dlckdals04.shop/api/users/signup", {
+      .post("https://zhaoxilin.shop/api/users/signup", {
         email,
         nickname,
         password,

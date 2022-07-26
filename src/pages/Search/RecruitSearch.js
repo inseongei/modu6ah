@@ -7,7 +7,7 @@ import SearchScard from "../../components/cards/SearchScard";
 import SearchBar from "../../components/pages/SearchBar";
 import search from "../../images/search.png";
 import { useNavigate } from "react-router-dom";
-
+import ChatIcon from '../../components/main/ChatIcon'
 const RecruitSearch = () => {
   const navigate = useNavigate();
   const [data, setData] = React.useState();
@@ -17,7 +17,7 @@ const RecruitSearch = () => {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/search", {
+      .get("https://zhaoxilin.shop/api/search", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -66,6 +66,7 @@ const RecruitSearch = () => {
         </div>
         </div>
       </SearchBox>
+      <ChatIcon/>
       <Footer />
     </>
   );

@@ -10,6 +10,7 @@ function SCardSearch({scard, query}) {
   const navigate = useNavigate();
   const [search, setSearch] = React.useState();
   const [btn, setbtn] = React.useState(true);
+  const [test,settest] = React.useState()
 
   return (
     <>
@@ -29,7 +30,7 @@ function SCardSearch({scard, query}) {
                             onClick={() => {
                               axios
                                 .put(
-                                  "http://dlckdals04.shop/api/recruits/bookmark/" +
+                                  "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                   item.recruitPostId,
                                   null,
                                   {
@@ -52,7 +53,7 @@ function SCardSearch({scard, query}) {
                             onClick={() => {
                               axios
                                 .put(
-                                  "http://dlckdals04.shop/api/recruits/bookmark/" +
+                                  "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                   item.recruitPostId,
                                   null,
                                   {

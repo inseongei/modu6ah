@@ -29,7 +29,7 @@ function MainScard() {
           post.recruitPosts.map((item, idx) => {
             return (
               item != null && (
-                <div className="card" key={idx}>
+                <div className="card animate__animated animate__backInUp" key={idx}>
                   <div className="card-top">
                     {item.status === true ? (
                       <p>모집완료</p>
@@ -43,7 +43,7 @@ function MainScard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                 item.recruitPostId,
                               null,
                               {
@@ -66,7 +66,7 @@ function MainScard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                 item.recruitPostId,
                               null,
                               {
@@ -101,7 +101,7 @@ function MainScard() {
                       navigate("/recruitdetail/" + item.recruitPostId);
                     }}
                   >
-                    <p>{item != null && item.createdAt}</p>
+                    <p>{item != null && item.date}</p>
                     <p>{item != null && item.time}</p>
                     <p>{item != null && item.place}</p>
                     <p>{item != null && item.age}</p>

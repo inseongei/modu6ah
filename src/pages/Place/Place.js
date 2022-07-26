@@ -7,7 +7,7 @@ import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import LCard from "../../components/cards/Lcard";
 import activity from "../../images/activity.png";
-
+import ChatIcon from '../../components/main/ChatIcon'
 import { useNavigate } from "react-router-dom";
 
 function Place() {
@@ -51,6 +51,7 @@ function Place() {
           <LCard />
         </div>
       </Container>
+      <ChatIcon/>
       <Footer />
     </div>
   );

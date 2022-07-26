@@ -5,7 +5,7 @@ import BookScard from "../../components/cards/BookScard";
 import BookRcard from "../../components/cards/BookRcard";
 import BookLcard from "../../components/cards/BookLcard";
 import Footer from "../../components/main/Footer";
-import axios from "axios";
+import ChatIcon from '../../components/main/ChatIcon'
 
 const MyBookmark = () => {
 
@@ -55,6 +55,7 @@ const MyBookmark = () => {
           </div>
         </div>
       </Bookmark>
+      <ChatIcon/>
       <Footer />
     </>
   );

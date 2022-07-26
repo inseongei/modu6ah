@@ -11,7 +11,7 @@ function BookLcard() {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/mypage/bookmark", {
+      .get("https://zhaoxilin.shop/api/mypage/bookmark", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -27,7 +27,7 @@ function BookLcard() {
 
   const PlaceMore = async () => {
     await axios
-      .get("http://dlckdals04.shop/api/mypage/bookmark", {
+      .get("https://zhaoxilin.shop/api/mypage/bookmark", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -62,7 +62,7 @@ function BookLcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/places/bookmark/" +
+                              "https://zhaoxilin.shop/api/places/bookmark/" +
                                 data.placePostId,
                               null,
                               {
@@ -85,7 +85,7 @@ function BookLcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/places/bookmark/" +
+                              "https://zhaoxilin.shop/api/places/bookmark/" +
                                 data.placePostId,
                               null,
                               {

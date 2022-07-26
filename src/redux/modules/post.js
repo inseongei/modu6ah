@@ -37,7 +37,7 @@ export const createPostDB = (post_data) => {
   const post = post_data;
   return function (dispatch) {
     axios
-      .post(`http://dlckdals04.shop/api/recruits`, post, {
+      .post(`https://zhaoxilin.shop/api/recruits`, post, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -59,7 +59,7 @@ export const createPostDB = (post_data) => {
 export const loadPostDB = () => {
   return function (dispatch) {
     axios
-      .get(`http://dlckdals04.shop/api/recruits`, {
+      .get(`https://zhaoxilin.shop/api/recruits`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -74,7 +74,7 @@ export const loadPostDB = () => {
 export const detailPostDB = (recruitPostId) => {
   return function (dispatch) {
     axios
-      .get("http://dlckdals04.shop/api/recruits/" + recruitPostId, {
+      .get("https://zhaoxilin.shop/api/recruits/" + recruitPostId, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -91,7 +91,7 @@ export const detailPostDB = (recruitPostId) => {
 export const updatePostDB = (recruitPostId, newPost) => {
   return function (dispatch) {
     axios
-      .put(`http://dlckdals04.shop/api/recruits/` + recruitPostId, newPost, {
+      .put(`https://zhaoxilin.shop/api/recruits/` + recruitPostId, newPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -110,7 +110,7 @@ export const updatePostDB = (recruitPostId, newPost) => {
 export const deletePostDB = (recruitPostId, navigate) => {
   return function (dispatch) {
     axios
-      .delete("http://dlckdals04.shop/api/recruits/" + recruitPostId, {
+      .delete("https://zhaoxilin.shop/api/recruits/" + recruitPostId, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

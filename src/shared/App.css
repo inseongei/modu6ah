@@ -1,8 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap");
-
-body {
-  font-family: "Noto Sans KR", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;800&display=swap');
+html {
   margin: 0px;
+  background-color: #f5f5f5;
+}
+
+*{
+  font-family: 'Nanum Gothic', sans-serif;
+}
+.MainBackGround {
+  background-color: #f5f5f5;
 }
 
 /* 부트 스트랩 캐러셀 높이 스타일 */
@@ -92,169 +98,21 @@ h4 {
 
 .ChatList {
   background-color: #fff;
-  height: 92vh;
-  width: 40%;
-  margin: 30px auto;
-  z-index: 1;
-  border-radius: 30px;
-}
-
-.One {
-  padding: 20px;
-  text-align: right;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.One > button {
-  width: 70px;
-  height: 70px;
-  background-color: #e4e4e4;
-  border: none;
-  color: #3c3c3c;
-  font-weight: 700;
-  font-size: 35px;
-  border-radius: 10px;
-}
-
-.One > button:hover {
-  transform: scale(1.1);
-}
-
-.ChatListContainer {
-  border: 2px solid #d9d9d9;
-  /* box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1); */
-  border-radius: 10px;
-  width: 90%;
-  height: 85%;
-  margin: auto;
-}
-
-.List {
-  width: 90%;
-  height: 80px;
   border: 1px solid #e4e4e4;
+  position: absolute;
+  z-index: 00;
+  width: 473px;
+  height: 770px;
+  right: 0px;
+  bottom: 100px;
+  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  opacity: 0.8;
-  margin: auto;
-  margin-top: 20px;
-  display: flex;
-}
-
-.List:hover {
-  border: 2px solid yellow;
-}
-
-.ChatImg {
-  width: 15%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.ChatImgOne {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-}
-
-.ChatImgOne > img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-}
-
-.ChatTitle {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 26px;
-  line-height: 31px;
-  color: #000000;
-}
-
-.ChatLogo {
-  width: 70px;
-  height: 70px;
-}
-
-.ChatLogo > img {
-  width: 70px;
-  height: 70px;
-}
-
-.ChatInfo {
-  width: 75%;
-}
-
-.ChatBell {
-  width: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.ChatBell > span {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #e4e4e4;
-  color: #ffffff;
-  font-family: "Noto Sans KR";
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 17px;
-  border: none;
-}
-
-.ChatBell > span:hover {
-  background-color: red;
-}
-
-.Trash {
-  font-size: 19px;
-}
-
-.ChatName {
-  height: 40%;
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 23px;
-  margin-left: 10px;
-}
-
-.ChatContent {
-  height: 35%;
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 17px;
-  margin-left: 10px;
-}
-
-.ChatDate {
-  height: 25%;
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  color: #3c3c3c;
-  float: right;
-  margin-right: 10px;
+  outline: none;
 }
 
 .message-container {
-  width: 100%;
-  height: 100%;
+  width: 473px;
+  height: 770px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -558,8 +416,7 @@ h4 {
   text-align: right;
 }
 
-
-.MoreBtn{
+.MoreBtn {
   border: 2px solid #ddd;
   width: 70px;
   height: 30px;
@@ -567,7 +424,7 @@ h4 {
   border-radius: 5px;
   margin-top: 30px;
   position: relative;
-  left:0px;
+  left: 0px;
 }
 
 .MoreBtn:hover {

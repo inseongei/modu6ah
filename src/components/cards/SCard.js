@@ -13,6 +13,7 @@ function SCard() {
   const [data, setData] = useState([]);
   const [noMore,setnoMore] = useState(true)
   const [index , setindex] = useState(1)
+  const token = localStorage.getItem('accessToken')
 
   // 배열 자르기 함수 (배열 , 몇개단위)
   const division = (arr, n) => {
@@ -29,11 +30,11 @@ function SCard() {
 
   React.useEffect(() => {
     axios
-      .get("http://dlckdals04.shop/api/recruits", {
+      .get("https://zhaoxilin.shop/api/recruits", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
+      } : null)
       .then((res) => {
         console.log(res.data.recruitPosts)
         let data = res.data.recruitPosts.slice(0,3);
@@ -44,21 +45,19 @@ function SCard() {
 
   const axiosData = () => {
     axios
-      .get("http://dlckdals04.shop/api/recruits", {
+      .get("https://zhaoxilin.shop/api/recruits", token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
+      } : null)
       .then((res) => {
         console.log(res.data.recruitPosts);
         let result = division(res.data.recruitPosts,3)
         if(noMore === true){
           setData((list) => [...list,result[index]].flat())
           setindex(index+1)
-        } else if(result.length === data){
-          setnoMore(false)
         } else{
-          return null
+          return null;
         }
       });
   };
@@ -93,7 +92,7 @@ function SCard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                 item.recruitPostId,
                               null,
                               {
@@ -115,7 +114,7 @@ function SCard() {
                         onClick={() => {
                           axios
                             .put(
-                              "http://dlckdals04.shop/api/recruits/bookmark/" +
+                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
                                 item.recruitPostId,
                               null,
                               {

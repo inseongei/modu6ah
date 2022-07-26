@@ -2,27 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ChatListModal from "../../modal/Chat/ChatListModal";
 import { HiChevronDown } from "react-icons/hi";
-import chat from "../../images/chat.png";
 import logo from "../../images/logo.png";
-import { GoThreeBars, GoX, GoPerson } from "react-icons/go";
-import chatnew from "../../images/chatnew.png";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
-import io from "socket.io-client";
-import { toast } from "react-toastify";
+import search from '../../images/search.png'
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet"></link>
 
-
-// 소켓서버 연결
-const socket = io.connect("http://dlckdals04.shop");
 
 const Header = () => {
-  // 모바일처리시 메뉴 , 채팅모달 , 채팅알림 State
-  const [isToggled, setIsToggled] = useState(false);
-  const [userToggled, setUserToggled] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [notify, setNotify] = useState([]);
   // Hook 선언
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,12 +19,6 @@ const Header = () => {
   const UserCheck = localStorage.getItem("accessToken");
   const nickname = localStorage.getItem("nickname");
   const Profile = localStorage.getItem("profileUrl");
-  const bell = localStorage.getItem("count");
-
-  // 로그인 눌렀을때 로그인 페이지로 이동
-  const Login = () => {
-    navigate("/Login");
-  };
 
   // 로그아웃 눌렀을때 쿠키 (토큰 ,닉네임) , 로컬스토리지 (토큰,Url) 삭제후 새로고침
   const logoOut = () => {
@@ -48,16 +31,9 @@ const Header = () => {
         localStorage.removeItem("profileUrl");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("nickname");
-        window.location.reload();
+        navigate('/')
       }
     });
-  };
-
-  // 메시지버튼 눌렀을 때 메시지 모달창open 알림횟수 삭제
-  const messageBtn = () => {
-    setModalIsOpen(true);
-    localStorage.removeItem("count");
-    setNotify([]);
   };
 
   // 프로필 관리를 눌렀을 때 액션 디스패치
@@ -70,47 +46,14 @@ const Header = () => {
     navigate("/MyBookmark");
   }
 
-  // 상대방이 보낸 메시지를 알림 이벤트 경로로 데이터를 받음
-  React.useEffect(() => {
-    socket.off("notify").on("notify", (data) => {
-      if (nickname === data.senderNick) {
-        return null;
-      } else if (nickname !== data.receiverNick) {
-        return null;
-      } else {
-        toast.success(`${data.senderNick}님이 메시지를 보냈습니다`, {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          limit: 3,
-        });
-        setNotify((list) => [...list, data]);
-        localStorage.setItem("count", data.message);
-      }
-    });
-  }, []);
+
 
   return (
     <>
       {/* 로그인할때의 헤더 ============================================================================== */}
 
       {!UserCheck ? (
-        <Headers isToggled={isToggled} userToggled={userToggled}>
-          {/* 햄버거 버튼(bar) */}
-          <div
-            className="toggle"
-            onClick={() => {
-              setIsToggled(!isToggled);
-            }}
-          >
-            {!isToggled ? (
-              <GoThreeBars className="icon"></GoThreeBars>
-            ) : (
-              <GoX className="icon"></GoX>
-            )}
-          </div>
-
+        <Headers>
           <div
             className="logo_container"
             onClick={() => {
@@ -121,20 +64,6 @@ const Header = () => {
               <img src={logo} alt="로고" />
             </div>
             <div className="logo">모두의 육아</div>
-          </div>
-
-          {/* User 버튼 */}
-          <div
-            className="user"
-            onClick={() => {
-              setUserToggled(!userToggled);
-            }}
-          >
-            {!userToggled ? (
-              <GoPerson className="icon"></GoPerson>
-            ) : (
-              <GoX className="icon"></GoX>
-            )}
           </div>
 
           {/* 메뉴 리스트 */}
@@ -163,29 +92,25 @@ const Header = () => {
           </ul>
 
           {/* User 메뉴 리스트 */}
+
           <ul className="header__right">
-            <li className="LogoOut" onClick={Login}>
-              로그인
+          <li className="bell">
+            <a href="/api/search">
+            <img src={search} alt="검색" className="searchiconlogin"/>
+            </a>
+            </li>
+            <li className="Login">
+              <a href="/Login">로그인</a>             
+            </li>
+            <li className="LogoOut">
+            <a href="/Signup">회원가입</a> 
             </li>
           </ul>
         </Headers>
       ) : (
         // 로그인했을때의 헤더 ==============================================================================
 
-        <Headers isToggled={isToggled} userToggled={userToggled}>
-          {/* 햄버거 버튼(bar) */}
-          <div
-            className="toggle"
-            onClick={() => {
-              setIsToggled(!isToggled);
-            }}
-          >
-            {!isToggled ? (
-              <GoThreeBars className="icon"></GoThreeBars>
-            ) : (
-              <GoX className="icon"></GoX>
-            )}
-          </div>
+        <Headers>
 
           <div
             className="logo_container"
@@ -199,19 +124,6 @@ const Header = () => {
             <div className="logo">모두의 육아</div>
           </div>
 
-          {/* User 버튼 */}
-          <div
-            className="user"
-            onClick={() => {
-              setUserToggled(!userToggled);
-            }}
-          >
-            {!userToggled ? (
-              <GoPerson className="icon"></GoPerson>
-            ) : (
-              <GoX className="icon"></GoX>
-            )}
-          </div>
 
           {/* 메뉴 리스트 */}
           <ul className="header__menulist">
@@ -241,40 +153,23 @@ const Header = () => {
           {/* User 메뉴 리스트 */}
           <ul className="header__right">
             <li className="bell">
-              {bell !== null ? (
-                <img
-                  src={chatnew}
-                  alt="사진"
-                  onClick={messageBtn}
-                  className="chaticon"
-                />
-              ) : (
-                <img
-                  src={chat}
-                  alt="사진"
-                  onClick={messageBtn}
-                  className="chaticon"
-                />
-              )}
+              <a href="/api/search">
+              <img src={search} alt="검색" className="searchicon"/>
+              </a>
             </li>
             <li className="profile">
               <img src={Profile} alt="프로필" />
             </li>
-
-            <ChatListModal
-              open={modalIsOpen}
-              onClose={() => setModalIsOpen(false)}
-            />
 
             <li className="accordion">
               <input type="checkbox" id="answer01" />
               <label htmlFor="answer01">
                 {nickname}
                 <em>
-                  <HiChevronDown></HiChevronDown>
+                  <HiChevronDown className="DownDrop"></HiChevronDown>
                 </em>
               </label>
-              <div className="menu">
+              <div className="menu animate__animated animate__fadeInUp">
                 <div className="menuOne">
                   <div onClick={MyProfile}>
                     <p>프로필관리</p>
@@ -289,7 +184,7 @@ const Header = () => {
             </li>
 
             <li className="MyPage">마이페이지</li>
-            <li className="LogoOut" onClick={logoOut}>
+            <li className="LogoOutTwo" onClick={logoOut}>
               로그아웃
             </li>
           </ul>
@@ -301,6 +196,8 @@ const Header = () => {
 
 // 헤더 스타일 코드
 const Headers = styled.div`
+  font-family: "NanumGothic";
+  background-color: #fff;
   max-width: 100%;
   height: 75px;
   display: flex;
@@ -313,19 +210,23 @@ const Headers = styled.div`
   }
   input[id*="answer"] + label {
     display: block;
-    padding: 20px;
     cursor: pointer;
-    font-size: 20px;
-    font-family: "Noto Sans KR";
+    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 29px;
+    font-size: 16px;
+    line-height: 18px;
+    margin-left: 5px;
   }
+
+  .searchicon{
+    margin-right: 30px;
+  }
+
 
   input[id*="answer"] + label + div {
     max-height: 0;
-    transition: all 0.35s;
+    transition: all 0.5s;
     overflow: hidden;
     background-color: #ffffff;
     font-size: 11px;
@@ -343,9 +244,22 @@ const Headers = styled.div`
     top: 68px;
   }
 
+
+
   .accordion {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+  }
+
+  .DownDrop{
+    color: #A8A8A8;
+    width: 30px;
+    height: 30px;
+  }
+
+  .DownDrop:hover{
+    color: black;
   }
 
   .menu {
@@ -362,7 +276,6 @@ const Headers = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Noto Sans KR";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -374,7 +287,6 @@ const Headers = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Noto Sans KR";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -383,7 +295,6 @@ const Headers = styled.div`
 
   a {
     text-decoration: none;
-    color: #a8a8a8;
   }
 
   .menuOne > div > p:hover {
@@ -392,6 +303,12 @@ const Headers = styled.div`
 
   .menuOne > div > p {
     cursor: pointer;
+    color: #A8A8A8;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
   }
 
   .menuTwo > div > p:hover {
@@ -400,23 +317,31 @@ const Headers = styled.div`
 
   .menuTwo > div > p {
     cursor: pointer;
+    color: #A8A8A8;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
   }
 
   .logo {
-    margin: 16px 16px 16px 23px;
+    margin-left: 18px;
     font-size: 20px;
     font-weight: 700;
     color: #f4b03e;
+    font-family: 'NanumGothic';
   }
   .logo_container {
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    margin-left: 18px;
     cursor: pointer;
   }
   .logo_img {
     width: 40px;
     height: 40px;
+    margin:18px;
     display: flex;
     align-items: center;
   }
@@ -424,16 +349,15 @@ const Headers = styled.div`
   .logo_img > img {
     width: 50px;
     height: 50px;
-    margin-right: 20px;
     cursor: pointer;
   }
-  .bell > img {
-    width: 50px;
-    height: 50px;
+  .bell > a >  img {
+    width: 30px;
+    height: 30px;
     cursor: pointer;
   }
   .bell > img:hover {
-    transform: scale(1.15);
+    transform: scale(1.08);
   }
 
   .header__menulist {
@@ -447,6 +371,11 @@ const Headers = styled.div`
     font-size: 35px;
     cursor: pointer;
   }
+  .bell > a{
+    display: flex;
+    align-items: center;
+  }
+
 
   .MyPage {
     display: none;
@@ -454,19 +383,19 @@ const Headers = styled.div`
   }
 
   .header__menulist > li {
-    font-family: "Nanum Gothic";
+    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 23px;
+    font-size: 16px;
+    line-height: 18px;
     cursor: pointer;
     color: #a58646;
-    font-weight: 700;
-    font-size: 20px;
+    height: 34px;
+    width:120px;
+    text-align: center;
   }
 
   .header__menulist > li:hover {
-    transform: scale(1.15);
     color: #6b4e16;
   }
 
@@ -483,7 +412,7 @@ const Headers = styled.div`
   .header__right {
     list-style: none;
     display: flex;
-    margin-right: 30px;
+    align-items: center;
     margin-top: 10px;
   }
 
@@ -499,23 +428,61 @@ const Headers = styled.div`
   }
 
   .profile > img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    border: 1px solid #E4E4E4;
   }
 
-  .LogoOut {
-    font-size: 20px;
+  .LogoOut > a {
+    font-family: 'NanumGothic';
+    font-style: normal;
     font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
     color: #3c3c3c;
     cursor: pointer;
+    margin-right: 62px;
+    margin-left: 32px;
+  }
+
+
+  .LogoOutTwo {
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    color: #3c3c3c;
+    cursor: pointer;
+    margin-right: 62px;
+    margin-left: 30px;
+  }
+
+
+
+
+
+
+
+
+
+  
+
+  .Login > a {
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    color: #3c3c3c;
+    cursor: pointer;
+    margin-left: 32px;
   }
 
   li {
-    padding: 0 1rem;
     display: flex;
     align-items: center;
-    margin-left: 10px;
   }
 
   .toggle {
@@ -535,132 +502,8 @@ const Headers = styled.div`
   .icon {
     font-size: 35px;
   }
-
-  @media screen and (max-width: 1075px) {
-    flex-wrap: wrap;
-
-    .header__right {
-      display: ${(props) => (props.userToggled ? "flex" : "none")};
-      flex-direction: column;
-      width: 100%;
-      margin: 0px;
-      z-index: 1;
-      position: relative;
-      bottom: 10px;
-      padding: 0px 0px 0px 20px;
-      background-color: #e4e4e4;
-    }
-
-    .header__menulist {
-      display: ${(props) => (props.isToggled ? "flex" : "none")};
-      flex-direction: column;
-      width: 100%;
-      margin: 0px;
-      position: relative;
-      bottom: 5px;
-      z-index: 1;
-      background-color: #e4e4e4;
-    }
-
-    .header__menulist li,
-    .header__right li {
-      margin: 1rem 0;
-      padding: 0;
-      color: #3c3c3c;
-    }
-
-    .header__menulist li:hover {
-      transform: scale(1);
-      color: #3c3c3c;
-    }
-
-    .MyPage {
-      display: block;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .toggle {
-      display: block;
-      margin: 0px;
-    }
-
-    .user {
-      display: block;
-      margin: 0px;
-    }
-
-    .profile {
-      display: none;
-    }
-
-    .nick {
-      display: none;
-    }
-
-    .bell {
-      display: none;
-    }
-  }
 `;
 
-const ChatBox = styled.div`
-  width: 12vw;
-  height: 40vh;
-  position: absolute;
-  left: 78%;
-  z-index: 1;
-  visibility: ${(props) => (props.chatBox ? "visibility" : "hidden")};
 
-  .box {
-    display: flex;
-    flex-direction: column;
-    border-radius: 30px;
-    height: 200px;
-    width: 12vw;
-    border: 1px solid white;
-    background-color: white;
-    transition: all 0.3s;
-  }
-
-  .boxOne {
-    width: 100%;
-    height: 50%;
-    border-bottom: 1px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .boxTwo {
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .boxOne > span {
-    color: white;
-    font-family: "Noto Sans KR";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 29px;
-    color: #6b4e16;
-    cursor: pointer;
-  }
-
-  .boxTwo > span {
-    color: white;
-    font-family: "Noto Sans KR";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 29px;
-    color: #6b4e16;
-    cursor: pointer;
-  }
-`;
 
 export default Header;

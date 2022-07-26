@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import ChatIcon from '../../components/main/ChatIcon'
 
 const ProfileInsert = () => {
   const nickname = localStorage.getItem("nickname");
@@ -52,7 +53,7 @@ const ProfileInsert = () => {
 
     await axios
       .put(
-        "http://dlckdals04.shop/api/mypage/update",
+        "https://zhaoxilin.shop/api/mypage/update",
         formData,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } }
       )
@@ -127,7 +128,7 @@ const ProfileInsert = () => {
               <div className="btn">
                 <button
                   onClick={() => {
-                    navigate("/manager");
+                    navigate("/manager/" + nickname);
                   }}
                 >
                
@@ -143,7 +144,7 @@ const ProfileInsert = () => {
 
         </div>
         
-
+        <ChatIcon/>
       </Profile>
     </>
   );

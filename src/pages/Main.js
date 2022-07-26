@@ -10,7 +10,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
 import { FaStar } from "react-icons/fa";
 
-function MainLcard() {
+//  elements & components
+import Grid from "../components/elements/Grid";
+import Header from "../components/main/Header";
+import Swiper from "../components/main/Swiper";
+import MainLcard from '../components/cards/MainLcard';
+import MainRcard from '../components/cards/MainRcard';
+import Footer from "../components/main/Footer";
+import MainScard from "../components/cards/MainScard";
+import SearchInput from "../components/main/SearchInput";
+import ChatIcon from '../components/main/ChatIcon'
+import '../shared/App.css'
+
+const Main = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState("");
@@ -29,119 +41,73 @@ function MainLcard() {
   }
 
   return (
-    <>
-      <Container>
-        {post.placePosts &&
-          post.placePosts.map((item, index) => (
-            <div
-              className="card"
-              key={index}
-            >
-              {/* 카드 왼쪽 '이미지' */}
-              <div className="card-left" onClick={() => {
-                navigate("/placedetail/" + item.placePostId);
-              }}>
-                <div className="image">
-                  <img src={item.imageUrl[0]} alt="사진" />
-                </div>
-              </div>
-              {/* 카드 오른쪽 '타이틀 및 설명' */}
-              <div className="card-right">
-                <div className="title">
-                  <div className="titleBox"
-                    onClick={() => {
-                      navigate("/placedetail/" +
-                        item.placePostId);
-                    }}>
-                    <h3>{item.title}</h3>
-                    <span>
-                      <FaStar
-                        size={28}
-                        style={{
-                          color: "#FFBA5A",
-                          marginLeft: "5px",
-                        }}
-                      />
-                    </span>
-                    <p>{item.star}점</p>
-                  </div>
+    <div className="MainBackGround">
+      <Header />
+      <Swiper />
+      <SearchInput/>
+      <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+        <Container>
+          <div className="card_title">
+            <Title>체험 모집</Title>
+          </div>
+          <div className="subtitle">
+            <div className="subcontent">
+              <SubTitle>
+                다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!{" "}
+              </SubTitle>
 
-                  <div>
-                    {item.bookmarkStatus === true ? (
-                      <BsFillBookmarkFill
-                        className="bookmark2"
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
-                              item.placePostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              console.log(res);
-                              window.location.reload();
-                            });
-                        }}
-                      />
-                    ) : (
-                      <BsBookmark
-                        className="bookmark"
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
-                              item.placePostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              console.log(res.data);
-                              window.location.reload();
-                            }).catch((err) => console.log(err))
-                        }}
-                      />
-                    )}
-                  </div>
-                </div>
-                <a href="##" className="atag">
-                  <MdOutlinePlace />
-                  {item.region}
-                </a>
-                <div className="profile_box"
-                  onClick={() => {
-                    navigate("/placedetail/" +
-                      item.placePostId);
-                  }}>
-                  <div className="detail_profile"
-                    onClick={() => {
-                      navigate("/placedetail/" +
-                        item.placePostId);
-                    }}>
-                    <img src={item.profileUrl} alt="프로필" />
-                  </div>
-                  <strong>{item.nickname}</strong>
-                </div>
-                <div className="content">
-                  <p>{item.content}</p>
-                </div>
-              </div>
+              <Btn
+                onClick={() => {
+                  navigate(`/recruit`);
+                }}
+              >
+                더 보기
+              </Btn>
             </div>
-          ))}
-      </Container>
-    </>
+          </div>
+          <MainScard />
+          <hr />
+          <div className="card_title">
+            <Title style={{ marginTop: "100px" }}>장소 추천</Title>
+          </div>
+          <div className="subtitle">
+            <div className="subcontent">
+              <SubTitle>
+                아이들과 함께 출입이 가능한 키즈존을 공유해요!
+              </SubTitle>
+
+              <Btn
+                onClick={() => {
+                  navigate(`/place`);
+                }}
+              >
+                더 보기
+              </Btn>
+            </div>
+          </div>
+          <MainLcard />
+          <hr />
+          <div className="card_title">
+            <Title style={{ marginTop: "100px" }}>육아템 리뷰</Title>
+          </div>
+          <div className="subtitle">
+            <div className="subcontent">
+              <SubTitle>유용한 육아 아이템들을 소개하고 추천해요!</SubTitle>
+              <Btn
+                onClick={() => {
+                  navigate(`/review`);
+                }}
+              >
+                더 보기
+              </Btn>
+            </div>
+          </div>
+          <MainRcard />
+        </Container>
+      </Grid>
+      <ChatIcon/>
+      <Footer />
+    </div>
   );
 }
 
