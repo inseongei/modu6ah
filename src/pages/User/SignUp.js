@@ -7,12 +7,14 @@ import logo from "../../images/logo.png";
 import Header from "../../components/main/Header";
 import { FormGroup } from "react-bootstrap";
 import { useForm } from 'react-hook-form'
+import EmailAlert from "../../components/alert/EmailAlert";
 
 const SignUp = () => {
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const { watch } = useForm();
-  console.log(watch('form-input'))
-
+  // console.log(watch('form-input'))
+  const [disable, setDisable] = useState(false);
+  const [emailcode, setEmailCode] = useState('');
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -21,7 +23,6 @@ const SignUp = () => {
   const [passwordCheck, setPwCheck] = useState("");
 
   // 오류 메세지 상태저장
-
   const [emailMessage, setEmailMessage] = useState(null);
   const [nicknameMessage, setNicknameMessage] = useState(null);
   const [passwordMessage, setPasswordMessage] = useState(null);
@@ -51,6 +52,7 @@ const SignUp = () => {
       setIsEmail(true);
     }
   };
+
 
   // 닉네임 검사
   const onChangeNickname = (e) => {
@@ -101,7 +103,7 @@ const SignUp = () => {
     }
   };
 
-  //사용 중인 이메일인 경우
+  //이메일 중복 확인
   const Checkemail = async () => {
     if (email === "") {
       checkOverlapEmail(false);
@@ -113,12 +115,14 @@ const SignUp = () => {
         email
       }
       ).then((res) => {
+        console.log(res)
         if (res.data.result) {
           checkOverlapEmail(true);
           setOverlapEmailMessage("사용 가능한 이메일입니다.");
         }
       })
         .catch((err) => {
+          console.log(err)
           checkOverlapEmail(false);
           setIsEmail(false);
           setEmailMessage("사용 중인 이메일입니다.");
@@ -126,7 +130,7 @@ const SignUp = () => {
     };
   };
 
-  //사용 중인 닉네임인 경우
+  //닉네임 중복 확인
   const Checknikname = async () => {
     if (nickname === "") {
       checkOverlapNickName(false);
@@ -145,33 +149,49 @@ const SignUp = () => {
       })
         .catch((err) => {
           checkOverlapNickName(false);
-          setIsNickname( false );
+          setIsNickname(false);
           setNicknameMessage("사용 중인 닉네임입니다.");
         });
     };
   };
 
-  // 회원 등록하기
+
+
+  // 이메일 인증코드 받기
   const register = (e) => {
     e.preventDefault();
-    axios
-      .post("https://zhaoxilin.shop/api/users/signup", {
-        email,
-        nickname,
-        password,
-        passwordCheck,
-      })
-      .then((response) => {
-        alert(`${nickname}님! 회원가입을 축하드립니다.`);
-        navigate("/login");
-        console.log(response);
-      })
-      .catch((error) => {
-        // alert("회원가입을 다시해주세요");
-        console.log(error);
-        console.log(error.response.data.Message);
-      });
-  };
+    if (email && nickname && password && passwordCheck.length > 0 && 
+      OverlapEmail === true && OverLapNickName === true)  {
+      setDisable(true)
+      setModalIsOpen(true)
+      axios
+        .post("https://zhaoxilin.shop/api/users/signup/authMail", {
+          email
+        })
+        .then((response) => {
+          console.log(response);
+          setEmailCode(response.data.authCode)
+        })
+        .catch((error) => {
+          // console.log(error);
+          console.log(error.response.data.Message);
+        });
+    } else {
+      return null
+    }
+  }
+
+  console.log(OverlapEmail, OverLapNickName);
+
+
+  console.log(emailcode);
+
+ const data =  {
+    email,
+    nickname,
+    password,
+    passwordCheck
+  }
 
   return (
     <>
@@ -185,8 +205,7 @@ const SignUp = () => {
                   <Grid align="center" height="50px">
                     <Title>회원가입</Title>
                   </Grid>
-
-                  <form onSubmit={register}>
+                  <div>
                     <Box>
                       {/* 이메일 */}
                       <label className="form-label">이메일</label>
@@ -201,7 +220,7 @@ const SignUp = () => {
                           <button
                             onClick={Checkemail}
                           >
-                            Check
+                            중복 확인
                           </button>
                         </div>
 
@@ -242,9 +261,9 @@ const SignUp = () => {
                         ></input>
                         <div className="check_btn">
                           <button
-                           onClick={Checknikname}
+                            onClick={Checknikname}
                           >
-                            Check
+                            중복 확인
                           </button>
                         </div>
 
@@ -320,10 +339,22 @@ const SignUp = () => {
                     </Box>
                     <Grid height="auto">
                       <Grid margin="10px 22% " height="auto">
-                        <LoginBtn type="submit">회원가입</LoginBtn>
+                        <LoginBtn 
+                          disabled={disable}
+                          onClick={register}
+                        >
+                          회원가입</LoginBtn>
+                        {/* 이메일 인증코드, 데이터 등 EmailAlert으로 넘김 */}
+                        <EmailAlert
+                          emailcode={emailcode}
+                          data={data}
+                          open={modalIsOpen}
+                          onClose={() =>
+                          setModalIsOpen(false)}
+                        />
                       </Grid>
                     </Grid>
-                  </form>
+                  </div>
                 </div>
               </Grid>
             </Grid>
@@ -335,6 +366,7 @@ const SignUp = () => {
 };
 
 const Container = styled.div`
+font-family: "Nanum Gothic";
   width: 100%;
   height: 100%;
   display: flex;
@@ -344,6 +376,8 @@ const Container = styled.div`
 
   .form-label {
     margin-top: 10px;
+    font-weight: bold;
+    color: #3C3C3C;
   }
 
   .form-input {
@@ -351,24 +385,25 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     height: 45px;
-    width: 80%;
+    width: 315px;
     padding: 6px 12px;
     background-color: transparent;
     background-image: none;
     box-sizing: ${(props) => props.boxSizing};
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
     -webkit-transition: border-color ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s;
     cursor: text;
     box-sizing: border-box;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 
     &:focus {
       border: 1px solid #F4B03E;
       outline: none;
     }
   }
+
   .Box {
     box-sizing: border-box;
     width: 500px;
@@ -379,7 +414,6 @@ const Container = styled.div`
 const Title = styled.h1`
   font-size: 28px;
   font-weight: bold;
-  margin: 0 0 8px 0;
 `;
 
 const LoginBtn = styled.button`
@@ -396,7 +430,7 @@ const LoginBtn = styled.button`
   align-items: center;
   border: 1px solid transparent;
   cursor: pointer;
-  margin-top: 40px;
+  margin-top: 30px;
 
   :disabled {
     opacity: 0.7;
@@ -405,7 +439,7 @@ const LoginBtn = styled.button`
   }
 `;
 const Box = styled.div`
-  margin: 40px 0px 0px 110px;
+  margin: 40px 0px 0px 80px;
   
   .formbox {
     display: flex;
@@ -413,10 +447,18 @@ const Box = styled.div`
 
   .check_btn {
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 3px;
+    width: 100px;
+    height: 35px;
+  
 
     button {
-      border-radius: 10px;
+    border-radius: 10px; 
+    font-weight: 600;
+    background: #FAFAFA;
+    color: #3C3C3C;
+    border: 1px solid #A8A8A8;
+    padding: 6px 12px 6px 12px;
     }
     
   }
