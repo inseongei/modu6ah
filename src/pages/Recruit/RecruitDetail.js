@@ -1,3 +1,4 @@
+//체험 모집 
 import React, { useState } from "react";
 import styled from "styled-components";
 
@@ -6,7 +7,9 @@ import OneToOneChat from "../../modal/Chat/OneToOneChat";
 import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 import RecruitComment from "../../components/pages/RecruitComment";
-import ChatIcon from '../../components/main/ChatIcon'
+import ChatIcon from '../../components/main/ChatIcon';
+import chatlist from '../../images/chatlist.png';
+import img_location from '../../images/location.png';
 
 import axios from "axios";
 import io from "socket.io-client";
@@ -20,17 +23,13 @@ const socket = io.connect("https://zhaoxilin.shop"); // 1 . 소켓 서버 연결
 
 const RecruitDetail = () => {
   const nickname = localStorage.getItem("nickname");
-  const Profile = localStorage.getItem("profileUrl");
-
-  const token = localStorage.getItem("accessToken");
-
   const [modalIsOpen, setModalIsOpen] = useState(false); // 모달창 열고 닫는 State 값
   const [on, setOn] = useState(false); // 상세페이지의 모집중/모집완료 토글버튼 State 값
 
   // const [roomId, setRoomId] = useState()  //  서버로 부터 받은 roomId state로 저장
-  const [state, setState] = React.useState("");
+  const [state, setState] = useState("");
   let { recruitPostId } = useParams();
-  const [RroomId, setRroomId] = React.useState();
+  const [RroomId, setRroomId] = useState();
 
   React.useEffect(() => {
     axios
@@ -39,7 +38,7 @@ const RecruitDetail = () => {
         setState(response.data.recruitDetails);
       })
       .catch((response) => {
-        console.log(response);
+        // console.log(response);
       });
   }, []);
 
@@ -53,7 +52,7 @@ const RecruitDetail = () => {
 
   const detail = useSelector((state) => state.post.list);
 
-  console.log(detail);
+  // console.log(detail);
 
   React.useEffect(() => {
     dispatch(detailPostDB(recruitPostId));
@@ -87,9 +86,17 @@ const RecruitDetail = () => {
   return (
     <>
       <Header />
+      <BackGround>
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+        <Title>
+          <div className="subject">체험 모집</div>
+          <div className="page">
+            <p>상세 보기</p>
+          </div>
+        </Title>
         <Detail>
-          <>
+          <Box>
+             {/* 카드 왼쪽: 모집 토글, 제목, 날짜, 시간 등*/} 
             <div className="container">
               <div className="card-left">
                 <div className="toggle">
@@ -117,63 +124,105 @@ const RecruitDetail = () => {
                 </div>
               </div>
 
+              {/* 카드 오른쪽: 작성자 프로필, 버튼, 내용 */}
               <div className="card-right">
-                <div className="card-top"></div>
-                <div className="profile">
-                  <div className="detail_profile">
-                    <img
-                      src={detail.profileUrl}
-                      alt="프로필"
-                      onClick={() => {
-                        navigate("/manager/" + detail.nickname);
-                        dispatch(GetMyPageAxios(detail.nickname));
-                      }}
-                    />
-                  </div>
-                  <div className="detail_username">
-                    <div className="username">{detail.nickname}</div>
-                  </div>
-                </div>
-
-                <div className="content">{detail.content}</div>
-
-                {nickname === detail.nickname ? (
-                  <Btn>
-                    <button
-                      className="btn"
+                <div className="card-top">
+                  {nickname === detail.nickname ? (
+                    <>
+                     <Btn>
+                      <button className="btn"
                       onClick={() => {
                         navigate(`/recruitedit/` + detail.recruitPostId);
-                      }}
-                    >
-                      수정하기
-                    </button>
-                    <button className="btn" onClick={deletePosting}>
-                      삭제하기
-                    </button>
-                  </Btn>
-                ) : (
-                  <BtnTwo>
-                    <button className="btn" onClick={GoChat}>
-                      1:1문의하기
-                    </button>
-                  </BtnTwo>
-                )}
+                      }}>
+                        <img src={img_location} ></img>
+                      </button>
+                     
+                      <button className="btn" onClick={deletePosting}>
+                      <img src={img_location} ></img>
+                      </button>
+                    </Btn>
+                    
+                    <div className="profile">
+                    <div className="detail_profile">
+                      <img
+                        src={detail.profileUrl}
+                        alt="프로필"
+                        onClick={() => {
+                          navigate("/manager/" + detail.nickname);
+                          dispatch(GetMyPageAxios(detail.nickname));
+                        }}
+                      />
+                    </div>
+                    <div className="detail_username">
+                      <div className="username">{detail.nickname}</div>
+                    </div>
+                    </div> 
+                  </>
+                  ) : (
+                    <>
+                    <div className="profile">
+                    <div className="detail_profile">
+                      <img
+                        src={detail.profileUrl}
+                        alt="프로필"
+                        onClick={() => {
+                          navigate("/manager/" + detail.nickname);
+                          dispatch(GetMyPageAxios(detail.nickname));
+                        }}
+                      />
+                    </div>
+                    <div className="detail_username">
+                      <div className="username">{detail.nickname}</div>
+                    </div>
+                   <BtnTwo>
+                      <button className="btn" onClick={GoChat}>
+                        <img src={chatlist}/>
+                         1:1 채팅
+                      </button>
+                    </BtnTwo> 
+                    </div> 
+                  </>
+                 )}
+                </div>
+                <div className="content">
+                  {detail.content}
+                  </div>
               </div>
             </div>
-          </>
+          </Box>
           <RecruitComment />
         </Detail>
       </Grid>
+      </BackGround>
       <OneToOneChat
         open={modalIsOpen} // 모달창 열기
         onClose={() => setModalIsOpen(false)} // 모달창 닫기
         socket={socket}
       />
-      <ChatIcon/>
-      <Footer/>
+      <ChatIcon />
+      <Footer />
     </>
   );
 };
+
+const BackGround = styled.div`
+font-family: "Nanum Gothic";
+background: #F5F5F5;
+`;
+
+const Title = styled.div`
+  padding-top: 40px;
+  margin-left: 160px;
+
+  .subject {
+    color: #a8a8a8;
+  }
+
+  .page {
+    font-size: 30px;
+    font-weight: 700;
+  }
+`;
 
 const Detail = styled.div`
   .container {
@@ -181,11 +230,12 @@ const Detail = styled.div`
   }
 
   .toggle {
-    margin-left: 20px;
     display: flex;
+    margin-left: 20px;
     height: 100px;
+    justify-content: space-between;
   }
-
+  
   .toggle > p {
     margin: 20px 0px 0px 30px;
     font-size: 20px;
@@ -193,7 +243,7 @@ const Detail = styled.div`
 
   .card-left {
     width: 600px;
-    height: 630px;
+    height: 570px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -202,12 +252,13 @@ const Detail = styled.div`
 
   .card-left > div {
     margin: 40px 0px 0px 70px;
+    font-size: 20px;
   }
 
   .card-left > div > span {
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     display: inline-block;
-    width: 340px;
+    width: 365px;
     padding: 10px;
     margin-left: 30px;
     border-radius: 10px;
@@ -260,19 +311,17 @@ const Detail = styled.div`
   }
 
   .card-top {
-    margin: 170px 0px 0px 10px;
+    margin: 80px 0px 0px 10px;
     width: 100%;
   }
 
   .card-top p {
     display: flex;
-    margin-top: 8px;
     color: gray;
   }
 
   .profile {
     display: flex;
-    margin-top: 20px;
   }
 
   .detail_profile > img {
@@ -285,7 +334,6 @@ const Detail = styled.div`
 
   .detail_profile {
     border-radius: 50%;
-
     /* display:flex; */
     align-items: center;
     display: block;
@@ -302,30 +350,41 @@ const Detail = styled.div`
   }
 
   .content {
-    padding: 20px;
-    height: 250px;
-    width: 80%;
-    border: 2px solid #e4e4e4;
-    border-radius: 15px;
+    width: 450px;
+    height: 330px;
+    border: 1px solid #A8A8A8;
+    border-radius: 10px;
     font-size: 20px;
     font-weight: 400;
     margin-top: 20px;
     word-break: normal;
+    padding: 20px;
   }
 `;
+
+const Box = styled.div`
+width: 1100px;
+height: 680px;
+
+background: white;
+
+margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+margin-top: 30px;
+margin-bottom: 32px;
+display: flex;
+flex-direction: column;
+
+border: 1px solid lightgray;
+border-radius: 10px;
+`;
+
 const Btn = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 16px;
+  margin-left: 400px;
 
   .btn {
-    width: 30%;
     height: 30px;
     border-radius: 20px;
-    color: white;
-    background-color: #3c3c3c;
-    margin-top: 20px;
     margin-right: 10px;
     padding-top: 9px;
     padding-bottom: 33px;
@@ -335,23 +394,26 @@ const Btn = styled.div`
 `;
 
 const BtnTwo = styled.div`
-  width: 80%;
+  width: 400px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  margin-left: 15px;
+  margin-top: 6px;
+
+  img {
+    margin-right: 6px;
+  }
 
   .btn {
-    width: 30%;
+    width: 129px;
     height: 30px;
-    border-radius: 20px;
-    color: white;
-    background-color: #3c3c3c;
-    margin-top: 20px;
-    margin-right: 10px;
+    border-radius: 30px;
+    color: #A8A8A8;
     padding-top: 9px;
-    padding-bottom: 33px;
-    border: 0;
+    padding-bottom: 35px;
+    border: 1.5px solid #F4B03E;
     outline: 0;
+    font-weight: bolder;
   }
 `;
 
