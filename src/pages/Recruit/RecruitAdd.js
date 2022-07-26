@@ -113,14 +113,8 @@ const RecruitAdd = () => {
                       timeCaption="Time"
                       dateFormat="h:mm aa"
                       placeholderText="시간을 입력하세요"
-                      locale={ko}
-                    
+                      locale={ko} 
                     />
-                    {/* <input type="text"
-                      onChange={(e) =>
-                        setTime(e.target.value)}
-                      placeholder="시간을 입력하세요"
-                    /> */}
                   </div>
                   <div className="location">
                     <strong>위치</strong>
