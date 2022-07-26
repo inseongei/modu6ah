@@ -14,7 +14,6 @@ import Grid from "../../components/elements/Grid";
 import Footer from "../../components/main/Footer";
 import RecruitEdit from "./RecruitEdit";
 import ChatIcon from '../../components/main/ChatIcon'
-import Timepicker from "../../components/pages/Timepicker";
 
 const RecruitAdd = () => {
   const [on, setOn] = useState(false);
