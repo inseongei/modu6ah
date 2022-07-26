@@ -100,7 +100,7 @@ const RecruitAdd = () => {
                 {/* <Timepicker
                
                 /> */}
-                <input type="text" 
+                <input type="time" 
                 onChange={(e) => 
                   setTime(e.target.value)} 
                 

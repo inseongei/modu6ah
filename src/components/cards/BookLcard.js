@@ -150,15 +150,15 @@ const Container = styled.div`
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
     overflow: hidden;
-    height: 570px;
+    width: 284px;
+    height: 390px;
   }
   .card-top {
     display: flex;
     justify-content: space-between;
-    margin: 30px 0px 0px 50px;
-    h3 {
-      font-weight: 700;
-    }
+    margin: 26px 12px 8px 16px;
+    width: 255.63px;
+    height: 56.48px;
   }
   .card-top p {
     display: flex;
@@ -183,7 +183,7 @@ const Container = styled.div`
   }
 
   .bookmark2 {
-    margin-right: 60px;
+    margin-right: 10px;
     width: 34px;
     height: 34px;
     color: #6b4e16;
