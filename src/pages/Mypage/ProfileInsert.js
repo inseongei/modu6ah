@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import ChatIcon from '../../components/main/ChatIcon'
 import Footer from '../../components/main/Footer'
+import { BsFillPlusCircleFill } from "react-icons/bs";
 
 const ProfileInsert = () => {
   const nickname = localStorage.getItem("nickname");
@@ -32,6 +33,7 @@ const ProfileInsert = () => {
       };
     });
   };
+
 
   // 파일 미리보기
   const fileName = (e) => {
@@ -72,11 +74,27 @@ const ProfileInsert = () => {
         <div className="ProfileContainer">
           <div className="TitleMain">
            <span className="Myprofile"> 마이 프로필</span>
-           <span className="title">프로필관리</span> 
+           <span className="title">프로필 수정하기</span> 
           </div>
+          <form onSubmit={(e) => onSubmit(e)}>
           <div className="ProfileInfo">
             <div className="ProfileImg">
-              <img src={MyPage.mypageGet.profileUrl} alt="사진" />
+            <img className="img"
+                  src={imageSrc === "" ? MyPage.mypageGet.profileUrl : imageSrc}
+                  alt="사진"
+                />
+              <input
+                id="input-file"
+                type="file"
+                name="profile_files"
+                onChange={fileName}
+                style={{display:"none"}}
+              />
+              <label htmlFor="input-file">
+                  <BsFillPlusCircleFill 
+                  style={{cursor:"pointer",
+                  marginLeft:"60px", marginTop:"20px"}} />
+                </label>
             </div>
             <div>
               <div className="TwoBox">
@@ -90,7 +108,14 @@ const ProfileInsert = () => {
 
               <div className="TwoBox">
                 <span> 자기소개 </span>
-                <div className="inputBigBox">{MyPage.mypageGet.myComment}</div>
+                <div>
+                  <textarea
+                    type="text"
+                    className="inputBigBox"
+                    placeholder="나를 소개해주세요 !"
+                    ref={insert}
+                  />
+                </div>
               </div>
 
               <div className="ThisBtn">
@@ -106,6 +131,7 @@ const ProfileInsert = () => {
               </div>
             </div>
           </div>
+          </form>
         </div>
         <ChatIcon/>
       </Profile>
@@ -132,7 +158,7 @@ const Profile = styled.div`
     align-items: center;
   }
 
-  .Myprofile{
+  .Myprofile3{
     color: #A8A8A8;
     font-family: 'NanumGothic';
     font-style: normal;
