@@ -54,84 +54,12 @@ const ChatListModal = ({ open, onClose }) => {
   return (
     <Modal
       isOpen={true}
-      className="ChatList animate__animated animate__backInUp"
+      className="ChatList animate__animated animate__fadeIn animate__slower"
     >
-      <div className="One">
-        <span className="ChatLogo">
-          <img src={logo} alt="로고" />
-        </span>
-        <span className="ChatTitle">{nickname}님의 채팅내역</span>
-        <button onClick={onClose}>X</button>
-      </div>
 
       {/* 대화창 리스트 */}
 
       <ScrollToBottom className="message-container">
-        <div className="ChatListContainer">
-          {ChatList &&
-            ChatList.map((data, idx) => {
-              return (
-                data != null && (
-                  <div
-                    className="List"
-                    key={idx}
-                    onClick={() => {
-                      setModalIsOpen(true);
-                      const Joindata = {
-                        roomId: data.roomId,
-                        senderNick: data.senderNick,
-                        receiverNick: data.receiverNick,
-                        profileUrlTwo: data.profileUrl,
-                      };
-                      socket.emit("join_room", Joindata);
-                      axios
-                        .get(
-                          "https://zhaoxilin.shop/api/chats/messages/" +
-                            data.roomId,
-                            {
-                              headers: {
-                                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-                              }
-                            })
-                        .then((res) => {
-                          console.log(res);
-                          setNowRoom(res.data.chatMessageList);
-                          setrealroom(data.roomId);
-                        });
-                    }}
-                  >
-                    <div className="ChatImg">
-                      <div className="ChatImgOne">
-                        <img
-                          src={
-                            profileUrl === data.profileUrlTwo
-                              ? data.profileUrl
-                              : data.profileUrlTwo
-                          }
-                          alt="사진"
-                        />
-                      </div>
-                    </div>
-                    <div className="ChatInfo">
-                      <div className="ChatName">
-                        {data.receiverNick === nickname
-                          ? data.senderNick
-                          : data.receiverNick}
-                      </div>
-
-                      <div className="ChatContent">{data.message}</div>
-                      <div className="ChatDate">{data.time}</div>
-                    </div>
-                    <div className="ChatBell">
-                      <span>
-                        <BsTrash className="Trash" onClick={Delete}></BsTrash>
-                      </span>
-                    </div>
-                  </div>
-                )
-              );
-            })}
-        </div>
       </ScrollToBottom>
 
       <ChatRoom

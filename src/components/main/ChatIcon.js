@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import chat from '../../images/chat.png'
+import chat from '../../images/chatlist.png'
 import io from "socket.io-client";
 import { toast } from "react-toastify";
 import ChatListModal from '../../modal/Chat/ChatListModal'
@@ -10,8 +10,6 @@ const ChatIcon = () => {
     const [modalIsOpen, setModalIsOpen] = React.useState(false);
     const [notify, setNotify] = React.useState([]);
     const nickname = localStorage.getItem("nickname");
-
-      console.log(notify)
   // 상대방이 보낸 메시지를 알림 이벤트 경로로 데이터를 받음
   React.useEffect(() => {
     socket.off("notify").on("notify", (data) => {
@@ -22,11 +20,13 @@ const ChatIcon = () => {
         return null;
       } else {
         toast.success(`${data.senderNick}님이 메시지를 보냈습니다`, {
-          position: "bottom-right",
+          position: "bottom-left",
           autoClose: 2000,
           hideProgressBar: true,
           closeOnClick: true,
-          limit: 3,
+          newestOnTop:true,
+          rtl : true,
+          limit: 2,
         });
         setNotify((list) => [...list, data]);
         localStorage.setItem("count", data.message);
@@ -44,9 +44,10 @@ const ChatIcon = () => {
   return (
     <>
     <Box>
-    <img src ={chat} alt="채팅" 
-    onClick={messageBtn} 
-    className="chatImg"/>
+    <div className='chatIconBox' onClick={messageBtn} >
+      <span className='ChatBox'>채팅 목록</span>
+      <span><img src ={chat} alt="채팅" className="chatImg"/></span>
+    </div>
     </Box>
     <ChatListModal
     open={modalIsOpen}
@@ -61,11 +62,40 @@ position: fixed;
 right: 0px;
 bottom: 0px;
 padding: 20px;
+z-index: 1;
 
 .chatImg {
-    width:70px;
-    height: 70px;
-    cursor: pointer;
+  width: 30px;
+  height: 30px;
+  color: #F4B03E;
+}
+
+.chatIconBox{
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+width: 156px;
+height: 70px;
+background: #FFFFFF;
+border: 3px solid #F4B03E;
+box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
+border-radius: 50px;
+cursor: pointer;
+}
+
+.ChatBox{
+  width: 81px;
+  height: 23px;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  color: #F4B03E;
+  margin-right: 5px;
 }
 `
 
