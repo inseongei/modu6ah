@@ -1,4 +1,4 @@
-//체험 모집 
+//체험 모집 상세 페이지
 import React, { useState } from "react";
 import styled from "styled-components";
 
