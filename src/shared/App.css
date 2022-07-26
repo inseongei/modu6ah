@@ -502,6 +502,7 @@ h4 {
 
 .youChat{
   margin-left: 79px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: flex-start;
 }
@@ -519,6 +520,7 @@ h4 {
   background: #FFFFFF;
   border: 1px solid #E4E4E4;
   border-radius: 10px;
+  padding-left: 15px;
 }
 
 .SendChat > button {

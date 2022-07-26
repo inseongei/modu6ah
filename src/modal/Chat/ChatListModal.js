@@ -32,6 +32,8 @@ const ChatListModal = ({ open, onClose }) => {
   // modal이라 웹페이지 시작점부터 get 되서 isLoading 처리 안해도 됌
   const {isLoading , data } = useQuery('Chat-List',fetchSuperHeros)
 
+  console.log(data)
+
   // 삭제 버튼 눌렀을때 삭제가 되고 다시 리패치 시켜줌
   const Delete = (e) => {
     console.log(e.target.id)
