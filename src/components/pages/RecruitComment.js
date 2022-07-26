@@ -1,7 +1,9 @@
+// 체험 모집 댓글
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import img_delete from '../../images/delete.png';
 
 const RecruitComment = () => {
   const [comment, setComment] = useState('');
@@ -37,7 +39,6 @@ const RecruitComment = () => {
       .then((res) => {
         setState(res.data.recruitComments)
         console.log(res.data.recruitComments)
-
       })
       .catch((err) => {
         // console.log(err)
@@ -76,9 +77,8 @@ const RecruitComment = () => {
                 placeholder='댓글을 입력해주세요'
                 onChange={e =>
                   setComment(e.target.value)}
-              />
-            </div>
-            <div className='btnBox'>
+              /> 
+              <div className='btnBox'>
               <button className='btn'
                 onClick={addComment}
               >
@@ -86,6 +86,8 @@ const RecruitComment = () => {
               </button>
             </div>
           </div>
+            </div>
+           
         </div>
 
         {state &&
@@ -123,7 +125,7 @@ const RecruitComment = () => {
                   className='delete'
                   onClick={deleteComment}
                 >
-                  삭제
+                  {/* <img style={} src={img_delete}/> */}
                 </button>
                 ) : (
                  <></>
@@ -137,11 +139,13 @@ const RecruitComment = () => {
 }
 
 const CommentBox = styled.div`
+font-family: "Nanum Gothic";
 max-width: 100%;
 margin-top: 50px;
 
 .comment_section{
-margin-left: 210px;
+display: flex;
+margin-left: 150px;
 }
 
 .h1Box{
@@ -163,42 +167,39 @@ display: flex;
 }
 
 .inputBox{
-  width: 900px;
-  margin-top: 10px;
+  width: 1050px;
+  display: flex;
 }
 
 .inputBox > input{
   width: 100%;
   display: flex;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #A8A8A8;
   height: 57px;
-  border-radius: 300px;
+  border-radius: 10px;
   outline: none;
   padding-left: 20px;
 }
 
 .btnBox{
-display:flex;
-  width:140px;
-  margin-top: 26px;
-  margin-bottom: 10px;
+ display:flex;
+ width: 140px;
 }
 
 .btn{
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
-  line-height: 19px;
-  background: #F4B03E;
-  border-radius: 300px;
-  width: 100%;
+  background: #3C3C3C;
+  border-radius: 30px;
+  width: 71px;
   color: #FFFFFF;
+  margin-top: 5px;
   margin-left:30px;
 }
 
 .box{
-  width: 100vh;
+  width: 1000px;
   display:flex;
   // border: 1px solid lightgray;
   margin-left: 210px;
@@ -219,8 +220,8 @@ border-radius: 50%;
 margin-left: 10px;
 cursor: pointer;
 
-  img {
-    height:50px;
+ img {
+    height: 50px;
     border-radius:50%;
   }
 }
@@ -229,23 +230,26 @@ cursor: pointer;
   display: flex;
   justify-content:center;
   align-items:center;
-  font-family: 'Noto Sans KR';
-  margin-left: 10px;
+  margin-left:  12px;
+  font-weight: bolder;
 }
 
 .comment_box {
-  margin-top: 15px;
+  margin-top: 10px;
   margin-left: 30px;
 }
 
+.date {
+  color: #A8A8A8;
+}
+
 .delete{
-  width: 100px;
-  height: 20px;
-  border-radius: 20px;
-  color: white;
-  background-color: #E4E4E4;
-  margin-top: 22px;
-  padding-bottom: 24px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #A8A8A8;
+  margin-top: 10px;
+  padding-bottom: 30px;
   padding-top: 2px;
   border: 0;
   outline: 0;
