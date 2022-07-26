@@ -251,7 +251,7 @@ const Detail = styled.div`
   }
 
   .card-left > div {
-    margin: 40px 0px 0px 70px;
+    margin: 40px 0px 0px 50px;
     font-size: 20px;
   }
 

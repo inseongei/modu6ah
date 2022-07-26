@@ -640,3 +640,13 @@ h4 {
   border-color: #111;
   box-shadow: 1px 2px 4px rgb(0 0 0 / 10%);
 } */
+
+.Trash{
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.Trash:hover{
+  color:red;
+}

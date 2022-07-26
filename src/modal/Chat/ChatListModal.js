@@ -10,6 +10,7 @@ import redtrash from '../../images/Redbin.png'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {useQuery} from 'react-query'
+import { BsTrashFill } from "react-icons/bs";
 
 const socket = io.connect("https://zhaoxilin.shop");
 
@@ -151,7 +152,9 @@ const ChatListModal = ({ open, onClose }) => {
               <div className="ChatTime"id={data.roomId}> {data.time}</div>
               </div>
               <div className="fourBox">
-              <div className="ChatDel"><img src={redtrash} alt="쓰레기통" onClick={Delete} id={data.roomId}/></div>
+              <div className="ChatDel">
+                <BsTrashFill onClick={Delete} id={data.roomId} className="Trash"/>
+              </div>
               </div>
             </div>
             </div>

@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
+import location from '../../images/location.png'
+import time from '../../images/time.png'
+import age from '../../images/age.png'
+import calendar from '../../images/calendar.png'
 import axios from "axios";
 
 function BookScard() {
@@ -102,12 +106,12 @@ function BookScard() {
                 </div>
                 {/* 카드 타이틀 */}
                 <div
-                  className="title"
+                  className="titleTwo"
                   onClick={() => {
                     navigate("/recruitdetail/" + item.recruitPostId);
                   }}
                 >
-                  <h1>{item.title}</h1>
+                  <span>{item.title}</span>
                 </div>
                 {/* 카드 내용물 */}
                 <div
@@ -116,10 +120,10 @@ function BookScard() {
                     navigate("/recruitdetail/" + item.recruitPostId);
                   }}
                 >
-                  <p>{item != null && item.createdAt}</p>
-                  <p>{item != null && item.time}</p>
-                  <p>{item != null && item.place}</p>
-                  <p>{item != null && item.age}</p>
+                  <div><img src={location} alt="사진"/>{item != null && item.place}</div>
+                  <div><img src={time} alt="사진"/>{item != null && item.time}</div>
+                  <div><img src={calendar} alt="사진"/>{item != null && item.createdAt}</div>
+                  <div><img src={age} alt="사진"/>{item != null && item.age}</div>
                 </div>
               </div>
             );
@@ -142,17 +146,19 @@ const Container = styled.div`
   width: 100%;
   .card {
     display: flex;
-    height: 100%;
+    width: 284px;
+    height: 247px;
     background: white;
-    border-radius: 30px;
+    border-radius: 20px;
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
   }
   .card-top {
     display: flex;
-    margin: 30px 0px 0px 30px;
-    width: 100%;
+    width: 284px;
+    height: 30px;
     justify-content: space-between;
+    margin: 20px 20px 25px 20px;
   }
   .card-top > p {
     margin: 0px 0px 4px 4px;
@@ -163,41 +169,64 @@ const Container = styled.div`
   }
 
   .card-top span {
-    margin: 0px 0px 4px 4px;
-    background-color: #f4b03e;
-    border-radius: 20px;
-    padding: 6px 15px 7px 15px;
-    color: white;
+    width: 114px;
+    height: 28px;
+    background: #F4B03E;
+    border: 1px solid #F4B03E;
+    border-radius: 30px;
+    color: #FFFFFF;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
   }
 
   .icon {
     margin-right: 60px;
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     color: black;
     cursor: pointer;
     position: relative;
     top: 0px;
   }
-  .title {
-    padding: 30px 10px 25px 33px;
+  .titleTwo {
+    width: 234px;
+    height: 23px;
     cursor: pointer;
-    h1 {
-      font-size: 25px;
-      font-weight: bold;
-    }
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin: 0px 25px 25px 25px;
   }
   .card-bottom {
     cursor: pointer;
-    margin: 0px 0px 20px 30px;
+    margin: 0px 20px 20px 25px;
+    width: 243px;
+    height: 104px;
   }
-  .card-bottom p {
-    margin: 0px 0px 8px 4px;
+  .card-bottom div {
+    margin-bottom: 8px;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .card-bottom > div > img{
+    margin-right: 8px;
   }
   .checkIcon {
-    margin-right: 60px;
-    width: 34px;
-    height: 34px;
+    margin-right: 40px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     position: relative;
     top: 0px;
