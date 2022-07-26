@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 import ChatIcon from '../../components/main/ChatIcon'
+import Footer from '../../components/main/Footer'
 
 const ProfileManager = () => {
   // 사용 변수들 지정
@@ -28,7 +29,10 @@ const ProfileManager = () => {
       <Header />
       <Profile>
         <div className="ProfileContainer">
-          <div className="title">프로필관리</div>
+          <div className="TitleMain">
+           <span className="Myprofile"> 마이 프로필</span>
+           <span className="title">프로필관리</span> 
+          </div>
           <div className="ProfileInfo">
             <div className="ProfileImg">
               <img src={MyPage.mypageGet.profileUrl} alt="사진" />
@@ -44,20 +48,16 @@ const ProfileManager = () => {
               </div>
 
               <div className="TwoBox">
-                <span> 소개란 </span>
+                <span> 자기소개 </span>
                 <div className="inputBigBox">{MyPage.mypageGet.myComment}</div>
               </div>
 
-              <div className="btn">
+              <div className="ThisBtn">
                 {Mynickname !== MyPage.mypageGet.nickname ? null : (
-                  <button>
-                    <div
-                      onClick={() => {
-                        navigate("/profileinsert/" + Mynickname);
-                      }}
-                    >
-                      프로필 수정
-                    </div>
+                  <button onClick={() => {
+                    navigate("/profileinsert/" + Mynickname);
+                  }}>
+                    수정하기
                   </button>
                 )}
               </div>
@@ -66,6 +66,7 @@ const ProfileManager = () => {
         </div>
         <ChatIcon/>
       </Profile>
+      <Footer/>
     </>
   );
 };
@@ -76,85 +77,115 @@ const Profile = styled.div`
   align-items: center;
   width: 100%;
   height: 92vh;
+  background: #FAFAFA;
+  font-family:"NanumGothic";
+
   .ProfileContainer {
     width: 55%;
     height: 80vh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-  .title {
-    font-family: "Noto Sans KR";
+
+  .Myprofile{
+    color: #A8A8A8;
+    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .title {
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 800;
     font-size: 26px;
-    line-height: 38px;
+    line-height: 30px;
+    margin-bottom: 20px;
+    margin-top: 10px;
   }
   .ProfileInfo {
     display: flex;
     justify-content: center;
     padding: 50px;
+    width: 624px;
+    height: 668px;
+    background-color: #fff;
+    border: 1px solid #E4E4E4;
+    border-radius: 10px;
   }
+
+  .TitleMain{
+    width:624px;
+    display: flex;
+    flex-direction:column;
+  }
+
   .ProfileImg {
     width: 170px;
     height: 170px;
     margin-right: 60px;
   }
   .inputBox {
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
-    width: 22vw;
-    height: 40px;
-    background: #f5f5f5;
+    width: 315px;
+    height: 44px;
+    background: #fff;
     margin-bottom: 15px;
-    padding: 7px;
-    font-family: "Inter";
+    padding: 10px;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
   }
   .TwoBox > span {
-    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
     color: #000000;
     display: inline-block;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
   .inputBigBox {
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
-    width: 22vw;
-    height: 265px;
-    background: #f5f5f5;
+    width: 315px;
+    height: 266px;
+    background: #fff;
     padding: 7px;
-    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
   }
-  .btn {
+  .ThisBtn {
     width: 100%;
     margin-top: 20px;
     text-align: right;
   }
-  .btn > button {
+  .ThisBtn > button {
     background: #3c3c3c;
     border-radius: 30px;
-    width: 35%;
-    height: 35px;
+    width: 150px;
+    height: 40px;
     border: none;
     color: #fff;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
   }
   img {
-    width: 170px;
-    height: 170px;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
     background-size: cover;
   }
   a {
     color: white;
-    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 16px;

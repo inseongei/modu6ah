@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;800&display=swap');
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
+}
 
 html {
   margin: 0px;
-  background-color: #f5f5f5;
+  background: #FAFAFA;
 }
 
 *{
@@ -633,4 +637,8 @@ h4 {
 .MoreBtn:hover {
   border-color: #111;
   box-shadow: 1px 2px 4px rgb(0 0 0 / 10%);
+}
+
+.hello3{
+  background-color: red;
 }

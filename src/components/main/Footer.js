@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="one">
           <div className="one_box">
             <div className="icon_box">
-              <a href="https://github.com/Maiowol/Forkids_Project">
+              <a href="https://github.com/Maiowol/Forkids_Project" target="_blank" rel="noreferrer">
                 <FaGithub></FaGithub>
               </a>
             </div>
@@ -25,7 +25,7 @@ const Footer = () => {
         <div className="two">
           <div className="two_box">
             <div className="icon_box">
-              <a href="https://github.com/changmin97/forkidsProject">
+              <a href="https://github.com/changmin97/forkidsProject" target="_blank" rel="noreferrer">
                 <FaGithub></FaGithub>
               </a>
             </div>
@@ -39,7 +39,7 @@ const Footer = () => {
         <div className="three">
           <div className="three_box">
             <div className="icon_box">
-              <a href="https://www.figma.com/file/6oxe17NH1VuhHdZxdj9X9N/항해99">
+              <a href="https://www.figma.com/file/6oxe17NH1VuhHdZxdj9X9N/항해99" target="_blank" rel="noreferrer">
                 <img src={Figma} alt="이미지" />
               </a>
             </div>
@@ -63,11 +63,10 @@ const FooterContainer = styled.footer`
   color: white;
   padding: 10px;
   height: 130px;
-
   background-color: #3c3c3c;
   position: relative;
-  transform: translateY(300%);
-  font-family: "Noto Sans KR";
+  transform: translateY(0%);
+  font-family: 'NanumGothic';
 
   .one_container {
     height: 80%;
@@ -78,7 +77,7 @@ const FooterContainer = styled.footer`
     height: 20%;
     text-align: center;
     color: #e4e4e4;
-    font-weight: 100;
+    font-weight: 700;
   }
 
   .one {
@@ -126,6 +125,8 @@ const FooterContainer = styled.footer`
     color: #f4b03e;
     font-size: 16px;
     font-weight: 700;
+    margin-left: 40px;
+
   }
 
   .two_box {
