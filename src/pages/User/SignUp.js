@@ -3,9 +3,7 @@ import styled from "styled-components";
 import Grid from "../../components/elements/Grid";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import logo from "../../images/logo.png";
 import Header from "../../components/main/Header";
-import { FormGroup } from "react-bootstrap";
 import { useForm } from 'react-hook-form'
 import EmailAlert from "../../components/alert/EmailAlert";
 
@@ -52,7 +50,6 @@ const SignUp = () => {
       setIsEmail(true);
     }
   };
-
 
   // 닉네임 검사
   const onChangeNickname = (e) => {
@@ -155,8 +152,6 @@ const SignUp = () => {
     };
   };
 
-
-
   // 이메일 인증코드 받기
   const register = (e) => {
     e.preventDefault();
@@ -180,11 +175,6 @@ const SignUp = () => {
       return null
     }
   }
-
-  console.log(OverlapEmail, OverLapNickName);
-
-
-  console.log(emailcode);
 
  const data =  {
     email,
