@@ -1,3 +1,4 @@
+//체험 모집 작성 페이지
 import React, { useState } from "react";
 import Header from "../../components/main/Header";
 import styled from "styled-components";
@@ -47,9 +48,18 @@ const RecruitAdd = () => {
   return (
     <>
       <Header />
+      <BackGround>
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+      <Title>
+          <div className="subject">체험 모집</div>
+          <div className="page">
+            <p>작성하기</p>
+          </div>
+        </Title>
         <Detail>
+        <Box>
           <div className="container">
+            {/* 카드 왼쪽 */}
             <div className="add_input">
               <div className="toggle">
                 <input className="inputbox" type="checkbox" id="chk1" />
@@ -63,8 +73,9 @@ const RecruitAdd = () => {
                   <strong>제목</strong>
                   <input
                     onChange={(e) => setTitle(e.target.value)}
-                    style={{ width: "450px" }}
+                    style={{ width: "400px" }}
                     type="text"
+                    placeholder="제목을 입력하세요"
                   />
                 </div>
                 <div
@@ -84,21 +95,38 @@ const RecruitAdd = () => {
                   />
                 </div>
               </div>
-              <div>
+              <div className="time">
                 <strong>시간</strong>
-                <input type="text" onChange={(e) => setTime(e.target.value)} />
+                {/* <Timepicker
+               
+                /> */}
+                <input type="text" 
+                onChange={(e) => 
+                  setTime(e.target.value)} 
+                
+                  />
               </div>
-              <div>
+              <div className="location">
                 <strong>위치</strong>
-                <input onChange={(e) => setPlace(e.target.value)} type="text" />
+                <input 
+                onChange={(e) => 
+                  setPlace(e.target.value)} 
+                  type="text"
+                  
+                  />
               </div>
-              <div>
+              <div className="age">
                 <strong>연령</strong>
-                <input onChange={(e) => setAge(e.target.value)} type="text" />
+                <input onChange={(e) => 
+                  setAge(e.target.value)} 
+                  type="text" />
               </div>
             </div>
+
+            {/* 카드 오른쪽 */}
             <div className="box">
-              <textarea onChange={(e) => setContent(e.target.value)} />
+              <textarea onChange={(e) => 
+                setContent(e.target.value)} />
               <Btn>
                 <button
                   className="btn"
@@ -114,90 +142,117 @@ const RecruitAdd = () => {
               </Btn>
             </div>
           </div>
+          </Box>
         </Detail>
       </Grid>
+      </BackGround>
       <ChatIcon/>
       <Footer />
     </>
   );
 };
 
+const BackGround = styled.div`
+font-family: "Nanum Gothic";
+background: #F5F5F5;
+`;
+
+const Title = styled.div`
+  padding-top: 40px;
+  margin-left: 160px;
+
+  .subject {
+    color: #a8a8a8;
+  }
+
+  .page {
+    font-size: 30px;
+    font-weight: 700;
+  }
+`;
+
 const Detail = styled.div`
+.container {
+  display: flex;
+}
+
+.add_input {
+  width: 530px;
+  height: 570px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 25px;
+  margin-left: 50px;
+}
+
+.add_input > div {
+  margin: 40px 0px 0px 10px;
+  object-fit: cover;
+}
+
+.add_input > div > input {
+  border: 1px solid #A8A8A8;
+  display: inline-block;
+  width: 400px;
+  padding: 8px;
+  margin-left: 30px;
+  border-radius: 10px;
+}
+
+.add_input {
+  strong {
+    font-size: 20px;
+  }
+}
+
   .toggle {
-    margin-left: 150px;
-    margin-top: 60px;
     display: flex;
+    margin-left: 20px;
+    height: 50px;
   }
-  label {
-    margin-top: 15px;
-  }
+  
   .toggle > p {
     margin: 20px 0px 0px 30px;
     font-size: 20px;
   }
-  .container {
-    display: flex;
-    margin-top: 30px;
-  }
-  .add_input {
-    width: 600px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 25px;
-    box-sizing: border-box;
-    margin-left: 40px;
-  }
-  .add_input > div {
-    margin: 40px 0px 0px 10px;
-    object-fit: cover;
-  }
-  .add_input > div > input {
-    border: 1px solid #e4e4e4;
-    border-radius: 10px;
-    display: inline-block;
-    width: 450px;
-    padding: 10px;
-    margin-left: 30px;
-    outline: none;
-    height: 70px;
-  }
+
   .input__section {
-    width: 600px;
+    margin: 40px 0px 0px 70px;
+    font-size: 20px;
   }
+
   .input__section > div > input {
-    border: 1px solid #e4e4e4;
-    border-radius: 10px;
+    border: 1px solid #A8A8A8;
     display: inline-block;
-    width: 500px;
+    width: 370px;
     padding: 10px;
     margin-left: 30px;
-    margin-bottom: 20px;
-    outline: none;
-    height: 70px;
+    border-radius: 10px;
   }
+
   .box {
-    margin-top: 8%;
-    width: 50%;
-    height: 60vh;
-    margin-left: 40px;
+    margin-top: 120px;
+    width: 404px;
   }
+
   strong {
     padding-top: 30px;
   }
+
   textarea {
-    padding: 20px;
-    margin-top: 73px;
-    height: 500px;
-    width: 610px;
-    border: 1px solid #e4e4e4;
+    width: 450px;
+    height: 425px;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
     font-size: 20px;
     font-weight: 400;
+    margin-top: 20px;
     word-break: normal;
-    outline: none;
+    padding: 20px;
     resize: vertical; /* 상하만 가능 */
   }
+
   .Detail_profile {
     width: 144px;
     height: 144px;
@@ -207,9 +262,11 @@ const Detail = styled.div`
     display: block;
     justify-content: center;
   }
+
   .Detail_username {
     width: 70%;
   }
+  
   .username {
     height: 50%;
     display: flex;
@@ -218,66 +275,91 @@ const Detail = styled.div`
     font-size: 33px;
     width: 100%;
   }
+  
   .inputbox {
     position: absolute;
     left: -1000%;
   }
+
   label {
+    margin-top: 16px;
     position: relative;
     display: block;
-    width: 80px;
-    height: 35px;
+    width: 60px;
+    height: 30px;
     background: #a58646;
     border-radius: 60px;
     transition: background 0.4s;
   }
+
   label:after {
     content: "";
     position: absolute;
     left: 0px;
     top: 48%;
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     border-radius: 100%;
     background-color: #fff;
     transform: translateY(-50%);
     box-shadow: 1px 3px 4px rgba(0, 0, 0.1);
     transition: all 0.4s;
   }
+  
   input:checked + label:after {
-    left: calc(100% - 40.5px);
+    left: calc(100% - 25.0px);
   }
+  
   input:checked + label {
     background-color: #6b4e16;
   }
+  
   label span {
     display: none;
   }
 `;
 
+const Box = styled.div`
+width: 1100px;
+height: 680px;
+
+background: white;
+
+margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+margin-top: 30px;
+margin-bottom: 32px;
+display: flex;
+flex-direction: column;
+
+border: 1px solid lightgray;
+border-radius: 10px;
+`;
+
 const Monat = styled.div`
   display: flex;
   width: 50px;
-  height: 60px;
-  margin-right: 29px;
-  padding-top: 13px;
+  height: 40px;
+  margin-right: 24px;
+  margin-top: 20px;
   font-weight: bold;
 `;
 
 const Input = styled.input`
   border: 1px solid #e4e4e4;
   border-radius: 10px;
-  width: 450px;
-  height: 70px;
+  width: 400px;
+  height: 60px;
   padding: 10px;
   display: flex;
-  margin-bottom: 4px;
+  margin-top: 5px;
+  margin-bottom: -2px;
 `;
 
 const Btn = styled.div`
   display: flex;
-  margin-right: -250px;
+  margin-right: -190px;
   margin-left: 170px;
+
   .btn {
     width: 30%;
     height: 30px;
@@ -285,7 +367,7 @@ const Btn = styled.div`
     color: white;
     background-color: #3c3c3c;
     margin-top: 20px;
-    margin-right: 10px;
+    margin-right: 20px;
     padding-top: 9px;
     padding-bottom: 33px;
     border: 0;
