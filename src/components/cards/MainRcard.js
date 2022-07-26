@@ -120,6 +120,7 @@ const Container = styled.div`
   gap: 3.6em;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 
   .card {
     background: white;
