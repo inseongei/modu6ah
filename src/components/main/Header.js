@@ -20,11 +20,6 @@ const Header = () => {
   const nickname = localStorage.getItem("nickname");
   const Profile = localStorage.getItem("profileUrl");
 
-  // 로그인 눌렀을때 로그인 페이지로 이동
-  const Login = () => {
-    navigate("/Login");
-  };
-
   // 로그아웃 눌렀을때 쿠키 (토큰 ,닉네임) , 로컬스토리지 (토큰,Url) 삭제후 새로고침
   const logoOut = () => {
     Swal.fire({
@@ -100,10 +95,15 @@ const Header = () => {
 
           <ul className="header__right">
           <li className="bell">
-              <img src={search} alt="검색" className="searchiconlogin"/>
+            <a href="/api/search">
+            <img src={search} alt="검색" className="searchiconlogin"/>
+            </a>
             </li>
-            <li className="LogoOut" onClick={Login}>
-              로그인
+            <li className="Login">
+              <a href="/Login">로그인</a>             
+            </li>
+            <li className="LogoOut">
+            <a href="/Signup">회원가입</a> 
             </li>
           </ul>
         </Headers>
@@ -153,7 +153,9 @@ const Header = () => {
           {/* User 메뉴 리스트 */}
           <ul className="header__right">
             <li className="bell">
+              <a href="/api/search">
               <img src={search} alt="검색" className="searchicon"/>
+              </a>
             </li>
             <li className="profile">
               <img src={Profile} alt="프로필" />
@@ -182,7 +184,7 @@ const Header = () => {
             </li>
 
             <li className="MyPage">마이페이지</li>
-            <li className="LogoOut" onClick={logoOut}>
+            <li className="LogoOutTwo" onClick={logoOut}>
               로그아웃
             </li>
           </ul>
@@ -221,10 +223,6 @@ const Headers = styled.div`
     margin-right: 30px;
   }
 
-  .bellLogin{
-    position: relative;
-    left:200px;
-  }
 
   input[id*="answer"] + label + div {
     max-height: 0;
@@ -297,7 +295,6 @@ const Headers = styled.div`
 
   a {
     text-decoration: none;
-    color: #a8a8a8;
   }
 
   .menuOne > div > p:hover {
@@ -306,6 +303,12 @@ const Headers = styled.div`
 
   .menuOne > div > p {
     cursor: pointer;
+    color: #A8A8A8;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
   }
 
   .menuTwo > div > p:hover {
@@ -314,6 +317,12 @@ const Headers = styled.div`
 
   .menuTwo > div > p {
     cursor: pointer;
+    color: #A8A8A8;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
   }
 
   .logo {
@@ -342,7 +351,7 @@ const Headers = styled.div`
     height: 50px;
     cursor: pointer;
   }
-  .bell > img {
+  .bell > a >  img {
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -362,6 +371,11 @@ const Headers = styled.div`
     font-size: 35px;
     cursor: pointer;
   }
+  .bell > a{
+    display: flex;
+    align-items: center;
+  }
+
 
   .MyPage {
     display: none;
@@ -420,7 +434,7 @@ const Headers = styled.div`
     border: 1px solid #E4E4E4;
   }
 
-  .LogoOut {
+  .LogoOut > a {
     font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
@@ -429,6 +443,40 @@ const Headers = styled.div`
     color: #3c3c3c;
     cursor: pointer;
     margin-right: 62px;
+    margin-left: 32px;
+  }
+
+
+  .LogoOutTwo {
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    color: #3c3c3c;
+    cursor: pointer;
+    margin-right: 62px;
+    margin-left: 30px;
+  }
+
+
+
+
+
+
+
+
+
+  
+
+  .Login > a {
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    color: #3c3c3c;
+    cursor: pointer;
     margin-left: 32px;
   }
 
@@ -453,73 +501,6 @@ const Headers = styled.div`
 
   .icon {
     font-size: 35px;
-  }
-
-  @media screen and (max-width: 1075px) {
-    flex-wrap: wrap;
-
-    .header__right {
-      display: ${(props) => (props.userToggled ? "flex" : "none")};
-      flex-direction: column;
-      width: 100%;
-      margin: 0px;
-      z-index: 1;
-      position: relative;
-      bottom: 10px;
-      padding: 0px 0px 0px 20px;
-      background-color: #e4e4e4;
-    }
-
-    .header__menulist {
-      display: ${(props) => (props.isToggled ? "flex" : "none")};
-      flex-direction: column;
-      width: 100%;
-      margin: 0px;
-      position: relative;
-      bottom: 5px;
-      z-index: 1;
-      background-color: #e4e4e4;
-    }
-
-    .header__menulist li,
-    .header__right li {
-      margin: 1rem 0;
-      padding: 0;
-      color: #3c3c3c;
-    }
-
-    .header__menulist li:hover {
-      transform: scale(1);
-      color: #3c3c3c;
-    }
-
-    .MyPage {
-      display: block;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .toggle {
-      display: block;
-      margin: 0px;
-    }
-
-    .user {
-      display: block;
-      margin: 0px;
-    }
-
-    .profile {
-      display: none;
-    }
-
-    .nick {
-      display: none;
-    }
-
-    .bell {
-      display: none;
-    }
   }
 `;
 
