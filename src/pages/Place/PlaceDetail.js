@@ -10,19 +10,16 @@ import { GrLocation } from "react-icons/gr";
 import { FaStar } from "react-icons/fa";
 
 import axios from "axios";
-import data from "../../shared/data";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 
 const PlaceDetail = () => {
-  const [datas, setDatas] = useState(data);
-  const [currItem, setCurrItem] = useState(datas[0]);
-  const navigate = useNavigate();
   const [detail, setDetail] = useState("");
   const { placePostId } = useParams();
-  const Profile = localStorage.getItem("profileUrl");
+  const nickname = localStorage.getItem("nickname");
+
 
   React.useEffect(() => {
     axios
@@ -32,6 +29,21 @@ const PlaceDetail = () => {
         setDetail(res.data.placeDetails);
       });
   }, []);
+
+  const deletePlace = (e) => {
+    // console.log(e.target);
+    axios
+      .delete('https://zhaoxilin.shop/api/places/' + placePostId,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
+      .then((response) => {
+        // console.log(response);
+        alert("삭제가 완료되었습니다.");
+        window.location.replace("/place");
+      })
+      .catch((error) => {
+        alert("게시글을 삭제할 권한이 없습니다.");
+      });
+  };
 
   if (!detail) {
     return <div></div>;
@@ -99,10 +111,17 @@ const PlaceDetail = () => {
                   <p>{detail.content}</p>
                 </div>
               </div>
-              <Btn>
-                <button className="btn">수정</button>
-                <button className="btn">삭제</button>
-              </Btn>
+
+              {nickname === detail.nickname ? (
+                <Btn>
+                  <button className="btn">수정</button>
+                  <button className="btn"
+                  onClick={deletePlace}
+                  >삭제</button>
+                </Btn>
+              ) : (
+                <></>
+              )}
             </ContentBox>
           </div>
           <div className="mapbox">
@@ -111,7 +130,7 @@ const PlaceDetail = () => {
         </Box>
         <PlaceComment />
       </Container>
-      <ChatIcon/>
+      <ChatIcon />
       <Footer />
     </>
   );
