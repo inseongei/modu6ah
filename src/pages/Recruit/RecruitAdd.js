@@ -20,7 +20,7 @@ const RecruitAdd = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState(new Date());
   const [place, setPlace] = useState("");
   const [age, setAge] = useState("");
 
@@ -49,104 +49,122 @@ const RecruitAdd = () => {
     <>
       <Header />
       <BackGround>
-      <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
-      <Title>
-          <div className="subject">체험 모집</div>
-          <div className="page">
-            <p>작성하기</p>
-          </div>
-        </Title>
-        <Detail>
-        <Box>
-          <div className="container">
-            {/* 카드 왼쪽 */}
-            <div className="add_input">
-              <div className="toggle">
-                <input className="inputbox" type="checkbox" id="chk1" />
-                <label htmlFor="chk1" onClick={inputChange}>
-                  <span>선택</span>
-                </label>
-                <p> {!on ? "모집중" : "모집완료"}</p>
-              </div>
-              <div className="input__section">
-                <div style={{ marginBottom: "25px" }}>
-                  <strong>제목</strong>
-                  <input
-                    onChange={(e) => setTitle(e.target.value)}
-                    style={{ width: "400px" }}
-                    type="text"
-                    placeholder="제목을 입력하세요"
-                  />
-                </div>
-                <div
-                  className="date"
+        <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+          <Title>
+            <div className="subject">체험 모집</div>
+            <div className="page">
+              <p>작성하기</p>
+            </div>
+          </Title>
+          <Detail>
+            <Box>
+              <div className="container">
+                {/* 카드 왼쪽 */}
+                <div className="add_input">
+                  <div className="toggle">
+                    <input className="inputbox" type="checkbox" id="chk1" />
+                    <label htmlFor="chk1" onClick={inputChange}>
+                      <span>선택</span>
+                    </label>
+                    <p> {!on ? "모집중" : "모집완료"}</p>
+                  </div>
+                  <div className="input__section">
+                    <div style={{ marginBottom: "34px" }}>
+                      <strong>제목</strong>
+                      <input
+                        onChange={(e) => setTitle(e.target.value)}
+                        style={{ width: "400px" }}
+                        type="text"
+                        placeholder="제목을 입력하세요"
+                      />
+                    </div>
+                    <div
+                      className="date"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Monat>날짜</Monat>
+                      <DatePicker
+                        customInput={<Input />}
+                        selected={date}
+                        onChange={(date) => setDate(date)}
+                        minDate={new Date()}
+                        dateFormat="yyyy년 MM월 dd일"
+                        showDisabledMonthNavigation
+                        locale={ko}
+                      />
+                    </div>
+                  </div>
+                  <div className="time"
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                  }}
-                >
-                  <Monat>날짜</Monat>
-                  <DatePicker
-                    customInput={<Input />}
-                    selected={date}
-                    onChange={(date) => setDate(date)}
-                    locale={ko}
-                    dateFormat="yyyy년 MM월 dd일"
-                  />
+                  }}>
+                    <Time>시간</Time>
+                    <DatePicker
+                     customInput={<Input />}
+                      selected={time}
+                      onChange={(time) => setTime(time)}
+                      showTimeSelect
+                      showTimeSelectOnly
+                      timeIntervals={15}
+                      timeCaption="Time"
+                      dateFormat="h:mm aa"
+                      placeholderText="시간을 입력하세요"
+                      locale={ko}
+                    
+                    />
+                    {/* <input type="text"
+                      onChange={(e) =>
+                        setTime(e.target.value)}
+                      placeholder="시간을 입력하세요"
+                    /> */}
+                  </div>
+                  <div className="location">
+                    <strong>위치</strong>
+                    <input
+                      onChange={(e) =>
+                        setPlace(e.target.value)}
+                      type="text"
+                      placeholder="위치를 입력하세요"
+                    />
+                  </div>
+                  <div className="age">
+                    <strong>연령</strong>
+                    <input onChange={(e) =>
+                      setAge(e.target.value)}
+                      type="text"
+                      placeholder="참여 아동 연령대를 입력하세요"
+                    />
+                  </div>
+                </div>
+
+                {/* 카드 오른쪽 */}
+                <div className="box">
+                  <textarea onChange={(e) =>
+                    setContent(e.target.value)} />
+                  <Btn>
+                    <button
+                      className="btn"
+                      onClick={() => {
+                        navigate(`/recruit`);
+                      }}
+                    >
+                      취소{" "}
+                    </button>
+                    <button className="btn" onClick={addPost}>
+                      등록하기
+                    </button>
+                  </Btn>
                 </div>
               </div>
-              <div className="time">
-                <strong>시간</strong>
-                {/* <Timepicker
-               
-                /> */}
-                <input type="text" 
-                onChange={(e) => 
-                  setTime(e.target.value)} 
-                
-                  />
-              </div>
-              <div className="location">
-                <strong>위치</strong>
-                <input 
-                onChange={(e) => 
-                  setPlace(e.target.value)} 
-                  type="text"
-                  
-                  />
-              </div>
-              <div className="age">
-                <strong>연령</strong>
-                <input onChange={(e) => 
-                  setAge(e.target.value)} 
-                  type="text" />
-              </div>
-            </div>
-
-            {/* 카드 오른쪽 */}
-            <div className="box">
-              <textarea onChange={(e) => 
-                setContent(e.target.value)} />
-              <Btn>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    navigate(`/recruit`);
-                  }}
-                >
-                  취소{" "}
-                </button>
-                <button className="btn" onClick={addPost}>
-                  등록하기
-                </button>
-              </Btn>
-            </div>
-          </div>
-          </Box>
-        </Detail>
-      </Grid>
+            </Box>
+          </Detail>
+        </Grid>
       </BackGround>
-      <ChatIcon/>
+      <ChatIcon />
       <Footer />
     </>
   );
@@ -206,6 +224,18 @@ const Detail = styled.div`
   }
 }
 
+.location {
+  input {
+      outline: none;
+  }
+}
+
+.age {
+ input {
+  outline: none;
+ }
+}
+
   .toggle {
     display: flex;
     margin-left: 20px;
@@ -226,9 +256,40 @@ const Detail = styled.div`
     border: 1px solid #A8A8A8;
     display: inline-block;
     width: 370px;
-    padding: 10px;
+    padding: 14px;
     margin-left: 30px;
     border-radius: 10px;
+    padding-left: 12px;
+    outline: none;
+    font-size: 19px;
+  }
+
+  .location {
+    input {
+      outline: none;
+      padding-left: 16px;
+      font-size: 19px;
+      height: 55px;
+
+      ::placeholder{
+        font-size: 19px;
+        padding-left: 4px;
+      }
+    }
+  }
+
+  .age{
+    input {
+      outline: none;
+      padding-left: 13px;
+      font-size: 19px;
+      height: 55px;
+
+      ::placeholder{
+        font-size: 19px;
+        padding-left: 4px;
+      }
+    }
   }
 
   .box {
@@ -250,6 +311,7 @@ const Detail = styled.div`
     margin-top: 20px;
     word-break: normal;
     padding: 20px;
+    outline: none;
     resize: vertical; /* 상하만 가능 */
   }
 
@@ -344,8 +406,16 @@ const Monat = styled.div`
   font-weight: bold;
 `;
 
+const Time = styled.strong`
+display: flex;
+width: 80px;
+height: 20px;
+margin-right: -2px;
+margin-top: -10px;
+`;
+
 const Input = styled.input`
-  border: 1px solid #e4e4e4;
+  border: 1px solid #A8A8A8;
   border-radius: 10px;
   width: 400px;
   height: 60px;
@@ -353,6 +423,9 @@ const Input = styled.input`
   display: flex;
   margin-top: 5px;
   margin-bottom: -2px;
+  cursor: pointer;
+  outline: none;
+  font-size: 19px;
 `;
 
 const Btn = styled.div`
