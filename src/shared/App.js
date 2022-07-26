@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
+import {QueryClientProvider, QueryClient} from 'react-query'
 // pages
 import Main from "../pages/Main";
 import LogIn from "../pages/User/LogIn";
@@ -38,9 +38,11 @@ import RecruitSearch from "../pages/Search/RecruitSearch";
 import PlaceSearch from "../pages/Search/PlaceSearch";
 import ReviewSearch from "../pages/Search/ReviewSearch";
 
+const queryClient = new QueryClient()
 function App() {
   return (
     <>
+    <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<LogIn />} />
@@ -81,6 +83,7 @@ function App() {
         <Route path="/search/review" element={<ReviewSearch/>} />
         
       </Routes>
+      </QueryClientProvider>
     </>
   );
 }

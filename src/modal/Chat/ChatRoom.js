@@ -5,6 +5,10 @@ import { BiLogOut } from "react-icons/bi";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import cancel from '../../images/cancel.png'
+import back from '../../images/back.png'
+
+
 toast.configure();
 const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
   const input_Ref = React.useRef();
@@ -18,6 +22,7 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
 
   React.useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
+      console.log(data)
       setNowChat((list) => [...list, data]);
     });
   }, [socket]);
@@ -59,94 +64,77 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
   return (
     <>
       <Modal isOpen={true} className="ChatList">
-        <div className="RoomOne">
-          <div className="RoomDate"></div>
-          <button onClick={OutRoom}>
-            <BiLogOut className="icon"></BiLogOut>
-          </button>
+          <div className="ChatListBoxTwo animate__animated animate__fadeIn">
+          <img src = {back} alt="닫기" className="x" onClick={OutRoom}/>
+          {/* <span className="twoToOne"> {info.receiverNick}  님과 대화</span> */}
         </div>
 
-        <ScrollToBottom className="message-containerTwo">
-          <div className="RoomChatList animate__animated animate__zoomIn">
-            {NowRoom &&
-              NowRoom.map((data, idx) => {
-                return nickname === data.senderNick ? (
-                  <div className="RoomChat" key={idx}>
-                    <div className="RoomTime">{data.time}</div>
-                    <div className="RoomContent">
-                      <div className="RoomNameX">{data.senderNick}</div>
-                      <div className="ChatRoomInputX">{data.message}</div>
-                    </div>
-                    <div className="RoomImg">
-                      <div className="RoomProfile">
-                        <img src={Img_Url} alt="사진" />
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="RoomChat" key={idx}>
-                    <div className="RoomImg">
-                      <div className="RoomProfile">
-                        <img src={data.profileUrl} alt="사진" />
-                      </div>
-                    </div>
-                    <div className="RoomContent">
-                      <div className="RoomName">{data.senderNick}</div>
-                      <div className="ChatRoomInput">{data.message}</div>
-                    </div>
-                    <div className="RoomTime">{data.time}</div>
-                  </div>
-                );
-              })}
-
-            {NowChat &&
-              NowChat.map((data, idx) => {
-                return nickname === data.senderNick ? (
-                  <div className="RoomChat" key={idx}>
-                    <div className="RoomTime">{data.time}</div>
-                    <div className="RoomContent">
-                      <div className="RoomNameX">{data.senderNick}</div>
-                      <div className="ChatRoomInputX">{data.message}</div>
-                    </div>
-                    <div className="RoomImg">
-                      <div className="RoomProfile">
-                        <img src={data.profileUrl} alt="사진" />
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="RoomChat" key={idx}>
-                    <div className="RoomImg">
-                      <div className="RoomProfile">
-                        <img src={data.profileUrl} alt="사진" />
-                      </div>
-                    </div>
-                    <div className="RoomContent">
-                      <div className="RoomName">{data.senderNick}</div>
-                      <div className="ChatRoomInput">{data.message}</div>
-                    </div>
-                    <div className="RoomTime">{data.time}</div>
-                  </div>
-                );
-              })}
+        <ScrollToBottom className="message-containerTwo animate__animated animate__fadeIn" >
+        {NowRoom && NowRoom.map((data,idx)=>{
+          return  nickname === data.senderNick ? (
+            <div key={idx}>
+            <div className="MyChat">
+              <div className="MyTime">{data.time}</div>
+              <div className="MyContent">
+              <span>{data.message}</span>
+              </div>
+            </div>
+            </div>
+          )            
+          : 
+          <div>
+          <div>
+            <img src={data.profileUrl} alt="사진" className="youProfile"/>
+            <span className="youNickname">{data.senderNick}</span>
           </div>
-        </ScrollToBottom>
+          <div className="youChat">
+            <div className="youContent">
+            <span>{data.message}</span>
+            </div>
+            <div className="youTime">{data.time}</div>
+          </div>
+          </div>
+        }) }
 
-        <div className="RoomSend">
-          <input
-            type="text"
-            className="RoomInput"
-            ref={input_Ref}
+{NowChat&& NowChat.map((data,idx)=>{
+          return  nickname === data.senderNick ? (
+            <div key={idx}>
+            <div className="MyChat">
+              <div className="MyTime">{data.time}</div>
+              <div className="MyContent">
+              <span>{data.message}</span>
+              </div>
+            </div>
+            </div>
+          )            
+          : 
+          <div>
+          <div>
+            <img src={data.profileUrl} alt="사진" className="youProfile"/>
+            <span className="youNickname">{data.senderNick}</span>
+          </div>
+          <div className="youChat">
+            <div className="youContent">
+            <span>{data.message}</span>
+            </div>
+            <div className="youTime">{data.time}</div>
+          </div>
+          </div>
+  })}
+        </ScrollToBottom>
+        <div className="SendChat animate__animated animate__fadeIn">
+          <input type="text"  ref={input_Ref}
             value={currentMessage}
             onChange={(event) => {
               setCurrentMessage(event.target.value);
             }}
             onKeyPress={(event) => {
               event.key === "Enter" && sendMessage();
-            }}
-          />
+            }}/>
           <button onClick={sendMessage}>보내기</button>
         </div>
+    
+
       </Modal>
     </>
   );

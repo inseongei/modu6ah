@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 //  elements & components
 import Grid from "../components/elements/Grid";
 import Header from "../components/main/Header";
@@ -15,7 +15,6 @@ import ChatIcon from '../components/main/ChatIcon'
 import '../shared/App.css'
 const Main = () => {
   const navigate = useNavigate();
-
   return (
     <div className="MainBackGround">
       <Header />

@@ -100,17 +100,17 @@ const ProfileInsert = () => {
             </div>
             
 
-            <div className="TwoBox">
-              <div>
+            <div>
+              <div className="TwoBox">
                 <span> 닉네임 </span>
                 <div className="inputBox">{MyPage.mypageGet.nickname}</div>
               </div>
-              <div>
+              <div className="TwoBox">
                 <span> 이메일 </span>
                 <div className="inputBox">{MyPage.mypageGet.email}</div>
               </div>
 
-              <div>
+              <div className="TwoBox">
                 <span> 소개란 </span>
                 <div>
                   <input
@@ -198,7 +198,7 @@ const Profile = styled.div`
     font-size: 16px;
   }
 
-  span {
+  .TwoBox > span {
     font-family: "Inter";
     font-style: normal;
     font-weight: 700;

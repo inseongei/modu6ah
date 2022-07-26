@@ -19,7 +19,6 @@ const SignUp = () => {
   const [nickname, setNickname] = useState("");
   const [password, setPw] = useState("");
   const [passwordCheck, setPwCheck] = useState("");
-
   // 오류 메세지 상태저장
   const [emailMessage, setEmailMessage] = useState(null);
   const [nicknameMessage, setNicknameMessage] = useState(null);
@@ -182,6 +181,7 @@ const SignUp = () => {
     password,
     passwordCheck
   }
+
 
   return (
     <>
