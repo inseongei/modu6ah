@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import img_delete from '../../images/deletecomment.png';
 
 const PlaceComment = () => {
   const [comment, setComment] = useState('');
@@ -72,17 +73,18 @@ const PlaceComment = () => {
             <div className='inputBox'>
               <input
                 type="text"
-                placeholder='댓글을 입력해주세요'
+                placeholder='댓글을 입력하세요'
                 onChange={e =>
                   setComment(e.target.value)}
               />
-            </div>
+            
             <div className='btnBox'>
               <button className='btn'
                 onClick={addComment}
               >
                 등록
               </button>
+            </div>
             </div>
           </div>
         </div>
@@ -115,7 +117,6 @@ const PlaceComment = () => {
                       {data.createdAt}
                     </div>
                   </div>
-
                 </div>
                 {nickname === data.nickname 
                 ? ( <button
@@ -123,7 +124,8 @@ const PlaceComment = () => {
                   className='delete'
                   onClick={deleteComment}
                 >
-                  삭제
+                  <img id={data.placeCommentId}
+                  src={img_delete}/>
                 </button>
                 ) : (
                  <></>
@@ -137,118 +139,133 @@ const PlaceComment = () => {
 }
 
 const CommentBox = styled.div`
+font-family: "Nanum Gothic";
 max-width: 100%;
 margin-top: 50px;
+padding-bottom: 100px;
 
 .comment_section{
-  margin-left: 210px;
+display: flex;
+justify-content:center;
+align-items:center;
 }
 
 .h1Box{
-    margin-right: 30px;
+  margin-right: 30px;
 }
 
 .h1Box > h1{
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 31px;
-    margin-top: 10px;
-    margin-left: 10px;
+  font-style: border;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 31px;
+  margin-bottom: 15px;
+  margin-left: 10px;
 }
 
 .add_comment{
-  display: flex;
+display: flex;
 }
 
 .inputBox{
-    width: 900px;
-    margin-top: 10px;
+  width: 1030px;
+  display: flex;
+  margin-bottom: 10px;
 }
 
 .inputBox > input{
-    width: 100%;
-    display: flex;
-    border: 1px solid #E4E4E4;
-    height: 57px;
-    border-radius: 300px;
-    outline: none;
-    padding-left: 20px;
+  width: 100%;
+  display: flex;
+  border: 1px solid #A8A8A8;
+  height: 57px;
+  border-radius: 10px;
+  outline: none;
+  padding-left: 20px;
+
+  ::placeholder {
+    color: lightgray;
+  }
 }
 
 .btnBox{
-  display:flex;
-    width:140px;
-    margin-top: 26px;
-    margin-bottom: 10px;
+ display:flex;
+ width: 140px;
 }
 
 .btn{
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    background: #F4B03E;
-    border-radius: 300px;
-    width: 100%;
-    color: #FFFFFF;
-    margin-left:30px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  background: #3C3C3C;
+  border-radius: 30px;
+  width: 75px;
+  height: 44px;
+  color: #FFFFFF;
+  margin-top: 8px;
+  margin-left: 27px;
 }
 
 .box{
-    width: 100vh;
-    display:flex;
-    // border: 1px solid lightgray;
-    margin-left: 210px;
-    margin-top: 20px;
-    padding: 25px;
+  width: 920px;
+  display:flex;
+  margin-left: 160px;
+  margin-top: 5px;
+  padding: 25px;
+  overflow: hidden;
 }
 
 .chat {
-  width: 100%;
-  height: 50px;
-  display:flex;
+width: 100%;
+height: 50px;
+display:flex;
 }
 
 .ProfileImg {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  margin-left: 10px;
-  cursor: pointer;
+width: 55px;
+height: 55px;
+border-radius: 50%;
+margin-left: 10px;
+cursor: pointer;
 
-    img {
-      height:50px;
-      border-radius:50%;
-    }
+ img {
+    height: 50px;
+    border-radius:50%;
   }
+}
 
-  .name{
-    display: flex;
-    justify-content:center;
-    align-items:center;
-    font-family: 'Noto Sans KR';
-    margin-left: 10px;
-  }
+.name{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  margin-left:  12px;
+  font-weight: bolder;
+}
 
-  .comment_box {
-    margin-top: 15px;
-    margin-left: 30px;
-  }
+.comment_box {
+  margin-top: 10px;
+  margin-left: 30px;
+  
+}
 
-  .delete{
-    width: 100px;
-    height: 20px;
-    border-radius: 20px;
-    color: white;
-    background-color: #E4E4E4;
-    margin-top: 22px;
-    padding-bottom: 24px;
-    padding-top: 2px;
-    border: 0;
-    outline: 0;
+.date {
+  color: #A8A8A8;
+}
+
+.delete{
+  widht:0px;
+  height: 0px;
+  display: hidden;
+  border: 0;
+  outline: 0;
+
+
+  img {
+   width: 35px;
+   height: 35px;
+   border-radius: 50%;
+   margin-top: 13px;
+   position:absolute;
   }
-  `
+}
+`
 export default PlaceComment;
