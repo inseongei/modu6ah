@@ -228,9 +228,10 @@ const Headers = styled.div`
 
   input[id*="answer"] + label + div {
     max-height: 0;
+    width: 140px;
     transition: all 0.5s;
     overflow: hidden;
-    background-color: transparent;
+    background-color: #fff;
     font-size: 11px;
     position: absolute;
     top: 62px;
@@ -243,7 +244,7 @@ const Headers = styled.div`
   input[id*="answer"]:checked + label + div {
     max-height: 500px;
     position: absolute;
-    top: 68px;
+    top: 73px;
   }
 
 
@@ -268,7 +269,7 @@ const Headers = styled.div`
     display: flex;
     flex-direction: column;
     z-index: 2;
-    border-radius: 20px;
+    border-radius: 10px;
     width: 190px;
     height: 130px;
   }
