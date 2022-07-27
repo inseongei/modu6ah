@@ -10,6 +10,8 @@ import RecruitComment from "../../components/pages/RecruitComment";
 import ChatIcon from '../../components/main/ChatIcon';
 import chatlist from '../../images/chatlist.png';
 import img_location from '../../images/location.png';
+import revise from '../../images/revise.png';
+import img_delete from '../../images/delete.png'
 
 import axios from "axios";
 import io from "socket.io-client";
@@ -87,112 +89,118 @@ const RecruitDetail = () => {
     <>
       <Header />
       <BackGround>
-      <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
-        <Title>
-          <div className="subject">체험 모집</div>
-          <div className="page">
-            <p>상세 보기</p>
-          </div>
-        </Title>
-        <Detail>
-          <Box>
-             {/* 카드 왼쪽: 모집 토글, 제목, 날짜, 시간 등*/} 
-            <div className="container">
-              <div className="card-left">
-                <div className="toggle">
-                  <p> {!on ? "모집중" : "모집완료"} </p>
-                </div>
-                <div>
-                  <strong> 제목 </strong>
-                  <span>{detail.title}</span>
-                </div>
-                <div>
-                  <strong> 날짜 </strong>
-                  <span>{detail.date}</span>
-                </div>
-                <div>
-                  <strong> 시간 </strong>
-                  <span>{detail.time}</span>
-                </div>
-                <div>
-                  <strong> 위치 </strong>
-                  <span>{detail.place}</span>
-                </div>
-                <div>
-                  <strong> 연령 </strong>
-                  <span>{detail.age}</span>
-                </div>
-              </div>
-
-              {/* 카드 오른쪽: 작성자 프로필, 버튼, 내용 */}
-              <div className="card-right">
-                <div className="card-top">
-                  {nickname === detail.nickname ? (
-                    <>
-                     <Btn>
-                      <button className="btn"
-                      onClick={() => {
-                        navigate(`/recruitedit/` + detail.recruitPostId);
-                      }}>
-                        <img src={img_location} ></img>
-                      </button>
-                     
-                      <button className="btn" onClick={deletePosting}>
-                      <img src={img_location} ></img>
-                      </button>
-                    </Btn>
-                    
-                    <div className="profile">
-                    <div className="detail_profile">
-                      <img
-                        src={detail.profileUrl}
-                        alt="프로필"
-                        onClick={() => {
-                          navigate("/manager/" + detail.nickname);
-                          dispatch(GetMyPageAxios(detail.nickname));
-                        }}
-                      />
-                    </div>
-                    <div className="detail_username">
-                      <div className="username">{detail.nickname}</div>
-                    </div>
-                    </div> 
-                  </>
-                  ) : (
-                    <>
-                    <div className="profile">
-                    <div className="detail_profile">
-                      <img
-                        src={detail.profileUrl}
-                        alt="프로필"
-                        onClick={() => {
-                          navigate("/manager/" + detail.nickname);
-                          dispatch(GetMyPageAxios(detail.nickname));
-                        }}
-                      />
-                    </div>
-                    <div className="detail_username">
-                      <div className="username">{detail.nickname}</div>
-                    </div>
-                   <BtnTwo>
-                      <button className="btn" onClick={GoChat}>
-                        <img src={chatlist}/>
-                         1:1 채팅
-                      </button>
-                    </BtnTwo> 
-                    </div> 
-                  </>
-                 )}
-                </div>
-                <div className="content">
-                  {detail.content}
-                  </div>
-              </div>
+        <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+          <Title>
+            <div className="subject">체험 모집</div>
+            <div className="page">
+              <p>상세 보기</p>
             </div>
-          </Box>
-          <RecruitComment />
-        </Detail>
-      </Grid>
+          </Title>
+          <Detail>
+            <Box>
+              {/* 카드 왼쪽: 모집 토글, 제목, 날짜, 시간 등*/}
+              <div className="container">
+                <div className="card-left">
+                  <div className="toggle">
+                    <p> {!on ? "모집중" : "모집완료"} </p>
+                  </div>
+                  <div>
+                    <strong> 제목 </strong>
+                    <span>{detail.title}</span>
+                  </div>
+                  <div>
+                    <strong> 날짜 </strong>
+                    <span>{detail.date}</span>
+                  </div>
+                  <div>
+                    <strong> 시간 </strong>
+                    <span>{detail.time}</span>
+                  </div>
+                  <div>
+                    <strong> 위치 </strong>
+                    <span>{detail.place}</span>
+                  </div>
+                  <div>
+                    <strong> 연령 </strong>
+                    <span>{detail.age}</span>
+                  </div>
+                </div>
+
+                {/* 카드 오른쪽: 작성자 프로필, 버튼, 내용 */}
+                <div className="card-right">
+                  <div className="card-top">
+                    {nickname === detail.nickname ? (
+                      <>
+                        <Btn>
+                          <button className="btn"
+                            style={{ marginRight: "-8px" }}
+                            onClick={() => {
+                              navigate(`/recruitedit/` + detail.recruitPostId);
+                            }}>
+                            <img src={revise} ></img>
+                          </button>
+
+                          <button className="btn"
+                            onClick={deletePosting}
+                          >
+                            <img src={img_delete} ></img>
+                          </button>
+                        </Btn>
+
+                        <div className="profile">
+                          <div className="detail_profile">
+                            <img
+                              src={detail.profileUrl}
+                              alt="프로필"
+                              onClick={() => {
+                                navigate("/manager/" + detail.nickname);
+                                dispatch(GetMyPageAxios(detail.nickname));
+                              }}
+                            />
+                          </div>
+                          <div className="detail_username">
+                            <div className="username">{detail.nickname}</div>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="profile">
+                          <div className="detail_profile">
+                            <img
+                              src={detail.profileUrl}
+                              alt="프로필"
+                              onClick={() => {
+                                navigate("/manager/" + detail.nickname);
+                                dispatch(GetMyPageAxios(detail.nickname));
+                              }}
+                            />
+                          </div>
+                          <div className="detail_username">
+                            <div className="username">{detail.nickname}</div>
+                          </div>
+
+                          <BtnTwo>
+                            <button className="btn" onClick={GoChat}>
+                              <img src={chatlist} />
+                              1:1 채팅
+                            </button>
+                          </BtnTwo>
+
+                        </div>
+
+                      </>
+                    )}
+                  </div>
+                  <div className="content">
+                    {detail.content}
+                  </div>
+                </div>
+              </div>
+            </Box>
+            <RecruitComment />
+          </Detail>
+        </Grid>
       </BackGround>
       <OneToOneChat
         open={modalIsOpen} // 모달창 열기
@@ -346,12 +354,12 @@ const Detail = styled.div`
     margin-top: 15px;
     margin-left: 20px;
     font-size: 20px;
-    width: 100%;
+    width: 140px;
   }
 
   .content {
-    width: 450px;
-    height: 330px;
+    width: 480px;
+    height: 384px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
     font-size: 20px;
@@ -381,15 +389,19 @@ border-radius: 10px;
 const Btn = styled.div`
   display: flex;
   margin-left: 400px;
+  margin-right: 100px;
 
   .btn {
     height: 30px;
-    border-radius: 20px;
-    margin-right: 10px;
     padding-top: 9px;
     padding-bottom: 33px;
     border: 0;
-    outline: 0;
+    outline: 0;  
+
+    img {
+      width: 28px;
+     
+    }
   }
 `;
 
