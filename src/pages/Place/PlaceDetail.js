@@ -6,21 +6,22 @@ import Header from "../../components/main/Header";
 import Place from "./Place";
 import PlaceComment from "../../components/pages/PlaceComment";
 import KakaoMap from "../../components/pages/KakaoMap";
-import { GrLocation } from "react-icons/gr";
+import location from '../../images/location.png';
 import { FaStar } from "react-icons/fa";
+import revise from '../../images/revise.png';
+import img_delete from '../../images/delete (1).png'
 
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 
 const PlaceDetail = () => {
+  const navigate = useNavigate();
+  const nickname = localStorage.getItem("nickname");
   const [detail, setDetail] = useState("");
   const { placePostId } = useParams();
-  const nickname = localStorage.getItem("nickname");
-
-
+ 
   React.useEffect(() => {
     axios
       .get("https://zhaoxilin.shop/api/places/" + placePostId)
@@ -54,9 +55,11 @@ const PlaceDetail = () => {
       <Header />
       <Container>
         <Title>
-          <div className="subject">장소추천</div>
+          <div className="subject">
+            장소 추천
+            </div>
           <div className="page">
-            <p>상세페이지</p>
+            <p>상세 보기</p>
           </div>
         </Title>
         <Box>
@@ -75,12 +78,13 @@ const PlaceDetail = () => {
                 })}
               </div>
             </div>
-
             <ContentBox>
+              {/* 카드 오른쪽 위 */}
               <div className="box_top">
                 <div className="title">
+                  <>
                   <h2>{detail.title}</h2>
-                  <span>
+                   <span>
                     <FaStar
                       size={28}
                       style={{
@@ -90,10 +94,32 @@ const PlaceDetail = () => {
                     />
                   </span>
                   <p>{detail.star}점</p>
+                  </>
+                  {nickname === detail.nickname ? (
+                <Btn>
+                  <button className="btn"
+                  style={{ marginRight: "-8px" }}
+                  onClick={() => {
+                    navigate(`/placeedit/` + 
+                    detail.placePostId);
+                  }}
+                  >
+                  <img src={revise} />
+                  </button>
+                  <button className="btn"
+                  onClick={deletePlace}
+                  >
+                <img src={img_delete} />
+                  </button>
+                </Btn>
+              ) : (
+                <></>
+              )}
                 </div>
+                {/* 카드 오른쪽 중간 */}
                 <div className="location">
                   <p>
-                    <GrLocation />
+                  <img src={location}/>
                     {detail.region}
                   </p>
                 </div>
@@ -106,22 +132,12 @@ const PlaceDetail = () => {
                   <p className="nickname">{detail.nickname}</p>
                 </div>
               </div>
+              {/* 카드 내용 */}
               <div className="box">
                 <div className="content">
                   <p>{detail.content}</p>
                 </div>
               </div>
-
-              {nickname === detail.nickname ? (
-                <Btn>
-                  <button className="btn">수정</button>
-                  <button className="btn"
-                  onClick={deletePlace}
-                  >삭제</button>
-                </Btn>
-              ) : (
-                <></>
-              )}
             </ContentBox>
           </div>
           <div className="mapbox">
@@ -138,7 +154,8 @@ const PlaceDetail = () => {
 
 const Title = styled.div`
   padding-top: 40px;
-  margin-left: 130px;
+  
+  margin-left: 10%;
 
   .subject {
     color: #a8a8a8;
@@ -151,71 +168,70 @@ const Title = styled.div`
 `;
 
 const Box = styled.div`
-  width: 1200px;
-  height: 1300px;
+width: 1100px;
+height: 1080px;
 
-  background: white;
+background: white;
 
-  margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
-  margin-top: 50px;
-  margin-bottom: 32px;
-  display: flex;
-  flex-direction: column;
+margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+margin-top: 30px;
+margin-bottom: 32px;
+display: flex;
+flex-direction: column;
 
-  border: 1px solid lightgray;
-  border-radius: 10px;
+border: 1px solid #E4E4E4;
+border-radius: 10px;
 
   .Box {
-    margin: 80px auto;
-    width: 80%;
-    height: 70vh;
     display: flex;
   }
+
   .imgBox {
-    width: 50%;
+    width: 440px;
     display: flex;
     flex-direction: column;
   }
 
   .Bigimg {
-    width: 50%;
-    height: 50%;
-    margin: auto;
-    border-radius: 30px;
+    width: 400px;
+    height: 300px;
+    border-radius: 15px;
   }
 
   .Bigimg > img {
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 15px;
+    margin-left: 17px;
   }
 
   .imgSmall {
-    height: 30%;
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .imgSmall > div {
     border: 1px solid black;
-    margin: 30px auto;
-    width: 100px;
-    height: 100px;
-    border-radius: 30px;
+    margin: 25px 10px;
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
   }
 
   .imgSmall > div > img {
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 15px;
   }
 `;
 
 const Container = styled.div`
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: #F5F5F5;
 
   .Box {
-    margin: 30px auto;
+    padding: 50px 50px 30px 50px;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -228,69 +244,29 @@ const Container = styled.div`
   }
 `;
 
-const PhotoBox = styled.div`
-  display: flex;
-  width: 650px;
-  margin-top: 50px;
-
-  .picture {
-    width: 100%;
-    height: 600px;
-  }
-
-  .box {
-    height: 380px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .mainPhoto {
-    border: 1px solid black;
-    margin-left: 35px;
-    margin-bottom: 20px;
-    width: 550px;
-    height: 350px;
-    border-radius: 30px;
-  }
-
-  .photos {
-    widht: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .photos > ul {
-    display: flex;
-
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 30px;
-    }
-  }
-`;
-
 const ContentBox = styled.div`
   width: 500px;
-  margin-top: 80px;
-  margin-left: 40px;
+  margin-left: 20px;
 
   .title {
     display: flex;
     font-weight: 700;
     font-size: 20px;
     line-height: 36px;
-    margin-left: 42px;
 
     h2 {
       margin-top: 2px;
     }
 
+    span {
+      margin-left: 13px;
+      margin-top: 2px;
+    }
+
     p {
-      margin-left: 7px;
-      margin-top: 3px;
+      color: #A8A8A8;
+      margin-left: 9px;
+      margin-top: 5px;
     }
   }
 
@@ -313,24 +289,23 @@ const ContentBox = styled.div`
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    margin: 10px 0px 10px 40px;
+    margin: 10px 0px 10px 0px;
+
+    img {
+      width: 25px;
+      margin-bottom: 5px;
+      margin-right: 5px;
+    }
   }
 
   .info {
     display: flex;
     align-items: center;
-    margin-left: 30px;
 
     p {
       margin-top: 14px;
       margin-left: 10px;
     }
-  }
-
-  .profile {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
   }
 
   .profile > img {
@@ -352,14 +327,16 @@ const ContentBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 25px;
   }
 
   .content {
     border: 2px solid #e4e4e4;
     border-radius: 10px;
-    width: 400px;
-    height: 350px;
+    width: 500px;
+    height: 220px;
+    overflow: hidden;
+    padding: 10px;
   }
 
   .content > p {
@@ -406,7 +383,6 @@ const Image = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-left: 12px;
     margin-top: 6px;
     cursor: pointer;
 
@@ -420,21 +396,18 @@ const Image = styled.div`
 
 const Btn = styled.div`
   display: flex;
-  margin-left: 50px;
-  margin-right: 40px;
+  position: absolute;
+  padding-left: 416px;
 
   .btn {
-    width: 300px;
-    height: 30px;
+    height: 20px;
     border-radius: 20px;
-    color: white;
-    background-color: #3c3c3c;
-    margin-top: 20px;
-    margin-right: 10px;
-    padding-top: 9px;
-    padding-bottom: 33px;
     border: 0;
     outline: 0;
+  }
+
+  img {
+    width: 28px;
   }
 `;
 
