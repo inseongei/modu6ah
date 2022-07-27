@@ -78,7 +78,7 @@ const ChatListModal = ({ open, onClose }) => {
                           setrealroom(data.roomId);
                         });
                     }}  >
-                <img src={profileUrl === data.profileUrlTwo ? data.profileUrl: data.profileUrlTwo} alt="사진" />
+                <img src={profileUrl === data.profileUrl ? data.profileUrlTwo: data.profileUrl} alt="사진" />
               </div>
     
               <div className="SecondBox" onClick={() => {

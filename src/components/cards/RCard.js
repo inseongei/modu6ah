@@ -52,7 +52,7 @@ function RCard() {
       } : null)
       .then((res) => {
         console.log(res.data.reviewPosts)
-        let data = res.data.reviewPosts.slice(0,3);
+        let data = res.data.reviewPosts.slice(0,2);
         setData([...data]);
       });
   }, []);
@@ -67,7 +67,7 @@ function RCard() {
       } : null)
       .then((res) => {
         console.log(res.data.reviewPosts);
-        let result = division(res.data.reviewPosts,3)
+        let result = division(res.data.reviewPosts,2)
         if(noMore === true){
           setData((list) => [...list,result[index]].flat())
           setindex(index+1)
