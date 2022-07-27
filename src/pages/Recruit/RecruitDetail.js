@@ -9,7 +9,6 @@ import Grid from "../../components/elements/Grid";
 import RecruitComment from "../../components/pages/RecruitComment";
 import ChatIcon from '../../components/main/ChatIcon';
 import chatlist from '../../images/chatlist.png';
-import img_location from '../../images/location.png';
 import revise from '../../images/revise.png';
 import img_delete from '../../images/delete (1).png'
 
@@ -137,13 +136,12 @@ const RecruitDetail = () => {
                             onClick={() => {
                               navigate(`/recruitedit/` + detail.recruitPostId);
                             }}>
-                            <img src={revise} ></img>
+                            <img src={revise} />
                           </button>
 
                           <button className="btn"
-                            onClick={deletePosting}
-                          >
-                            <img src={img_delete} ></img>
+                            onClick={deletePosting}>
+                            <img src={img_delete} />
                           </button>
                         </Btn>
 
@@ -400,7 +398,6 @@ const Btn = styled.div`
 
     img {
       width: 28px;
-     
     }
   }
 `;
