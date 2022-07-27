@@ -160,7 +160,6 @@ const Title = styled.div`
 
   .subject {
     color: #a8a8a8;
-    margin-left: 4px;
     margin-bottom: 2px;
   }
 
