@@ -1,10 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-
+import {QueryClientProvider, QueryClient} from 'react-query'
 // pages
 import Main from "../pages/Main";
 import LogIn from "../pages/User/LogIn";
 import SignUp from "../pages/User/SignUp";
 
+// 카테고리
 import Recruit from "../pages/Recruit/Recruit";
 import Place from "../pages/Place/Place";
 import Review from "../pages/Review/Review";
@@ -27,8 +28,6 @@ import ReviewEdit from "../pages/Review/ReviewEdit";
 //마이 페이지
 import ProfileManager from "../pages/Mypage/ProfileManager";
 import ProfileInsert from "../pages/Mypage/ProfileInsert";
-import WelcomeModal from "../modal/WelcomeModal";
-// import KaKaoMap from '../pages/Place/KakaoMap';
 import KakaoLogIn from "../pages/User/KakaoLogIn";
 import MyBookmark from '../pages/Mypage/MyBookmark'
 
@@ -38,13 +37,16 @@ import RecruitSearch from "../pages/Search/RecruitSearch";
 import PlaceSearch from "../pages/Search/PlaceSearch";
 import ReviewSearch from "../pages/Search/ReviewSearch";
 
+const queryClient = new QueryClient()
 function App() {
   return (
     <>
+    <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/api/users/kakao/callback" element={<KakaoLogIn />} />
 
         {/* 모집 게시글 */}
         <Route path="/recruit" element={<Recruit />} />
@@ -54,10 +56,12 @@ function App() {
           element={<RecruitDetail />}
         />
         <Route path="/recruitedit/:recruitPostId" element={<RecruitEdit />} />
+
         {/* 장소 추천 */}
         <Route path="/place" element={<Place />} />
         <Route path="/placeadd" element={<PlaceAdd />} />
         <Route path="/placedetail/:placePostId" element={<PlaceDetail />} />
+        <Route path="/PlaceEdit/:placePostId" element={<PlaceEdit />} />
 
         {/* 육아 물품 리뷰 */}
         <Route path="/review" element={<Review />} />
@@ -69,18 +73,13 @@ function App() {
         <Route path="/profileinsert/:nickname" element={<ProfileInsert />} />
         <Route path="/MyBookmark" element={<MyBookmark />} />
 
-
-        {/* 이쪽 모달은 추후에 삭제 예정 */}
-        <Route path="/welcome" element={<WelcomeModal />} />
-        <Route path="/api/users/kakao/callback" element={<KakaoLogIn />} />
-
         {/* 검색 페이지 */}
         <Route path="/api/search" element={<MainSearch/>} />
         <Route path="/search/recruit" element={<RecruitSearch/>} />
         <Route path="/search/place" element={<PlaceSearch/>} />
         <Route path="/search/review" element={<ReviewSearch/>} />
-        
       </Routes>
+      </QueryClientProvider>
     </>
   );
 }
