@@ -361,6 +361,8 @@ const Detail = styled.div`
   label span {
     display: none;
   }
+
+
 `;
 
 const Box = styled.div`
