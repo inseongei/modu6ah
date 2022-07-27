@@ -14,7 +14,7 @@ html {
   font-family: 'NanumGothic';
 }
 .MainBackGround {
-  background-color: #f5f5f5;
+  background: #FAFAFA;
 }
 
 /* 부트 스트랩 캐러셀 높이 스타일 */
@@ -249,12 +249,13 @@ h4 {
   height: 80px;
   display: flex;
   align-items: center;
-  margin-right: 100px;
   cursor: pointer;
 }
 
 .ChatDel {
   padding: 20px;
+  position: relative;
+  left:45px;
 }
 
 

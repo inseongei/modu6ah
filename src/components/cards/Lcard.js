@@ -6,15 +6,29 @@ import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { FaStar } from "react-icons/fa";
 
 function LCard() {
   const [data, setData] = useState([]);
   const [noMore,setnoMore] = useState(true)
   const [index , setindex] = useState(1)
-  const Profile = localStorage.getItem("profileUrl");
   const navigate = useNavigate();
   const token = localStorage.getItem('accessToken')
-  console.log(data)
+
+  // 페이지 로드될 때 서버 데이터 요청
+  React.useEffect(() => {
+    axios
+    .get("https://zhaoxilin.shop/api/places", token ?{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    } : null)
+    .then((res) => {
+      console.log(res.data.placePosts)
+      let data = res.data.placePosts.slice(0,2);
+      setData([...data]);
+    });
+  }, []);
 
   // 배열 자르기 함수 (배열 , 몇개단위)
   const division = (arr, n) => {
@@ -22,91 +36,28 @@ function LCard() {
     const divide =
       Math.floor(length / n) + (Math.floor(length % n) > 0 ? 1 : 0);
     const newArray = [];
-    // 배열 0부터 n개씩 잘라 새 배열에 넣기
     for (let i = 0; i <= divide; i++) {
       newArray.push(arr.splice(0, n));
     }
     return newArray;
   };
 
-  React.useEffect(() => {
-
-
-
-
-
-
-
-
-
-
-
+  // 데이터 변경 될 때 새로운 데이터 불러오기
+  const refetch =() =>{
     axios
-      .get("https://zhaoxilin.shop/api/places", token ?{
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      } : null)
-      .then((res) => {
-        console.log(res.data.placePosts)
-        let data = res.data.placePosts.slice(0,2);
-        setData([...data]);
-      });
+    .get("https://zhaoxilin.shop/api/places", token ?{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    } : null)
+    .then((res) => {
+      console.log(res.data.placePosts)
+      let data = res.data.placePosts
+      setData([...data]);
+    });
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  }, []);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // 스크롤 밑으로 내려갈 때 실행될 함수 
   const axiosData = () => {
     axios
       .get("https://zhaoxilin.shop/api/places", token ?{
@@ -134,15 +85,13 @@ function LCard() {
         hasMore={noMore}
         loader={<h4>Loading...</h4>}
         scrollableTarget="scrollableDiv"
-        endMessage={
-          <p>여기가 카드 끝이여 </p>
-        }
+        endMessage={<p>여기가 카드 끝이여</p>}
       ></InfiniteScroll>
       <Container>
         {data &&
           data.map((item, index) => (
             item &&
-            <div className="card" key={index}>
+            <div className="card animate__animated animate__fadeInUp" key={index} >
               {/* 카드 왼쪽 '이미지' */}
               <div
                 className="card-left"
@@ -150,9 +99,7 @@ function LCard() {
                   navigate("/placedetail/" + item.placePostId);
                 }}
               >
-                <div className="image">
                   <img src={item.imageUrl[0]} alt="사진" />
-                </div>
               </div>
               {/* 카드 오른쪽 '타이틀 및 설명' */}
               <div className="card-right">
@@ -163,10 +110,12 @@ function LCard() {
                       navigate("/placedetail/" + item.placePostId);
                     }}
                   >
-                    <h3>{item.title}</h3>
-                    <p>⭐{item.star}</p>
+                    <div className="threebox">
+                        <span className="threeTitle">{item.title}</span>
+                       <span><FaStar size={28} style={{ color: "#FFBA5A", marginLeft: "5px", }}/></span>
+                       <span className="threeStar">{item.star}점</span>
+                    </div>
                   </div>
-
                   <div>
                     {item.bookmarkStatus === true ? (
                       <BsFillBookmarkFill
@@ -186,8 +135,7 @@ function LCard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
-                              window.location.reload();
+                              refetch()
                             });
                         }}
                       />
@@ -209,8 +157,7 @@ function LCard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
-                              window.location.reload();
+                              refetch()
                             });
                         }}
                       />
@@ -238,7 +185,7 @@ function LCard() {
                     navigate("/placedetail/" + item.placePostId);
                   }}
                 >
-                  <p>{item.content}</p>
+                  <span>{item.content}</span>
                 </div>
               </div>
             </div>
@@ -256,27 +203,69 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   .card {
-    background: white;
-    border-radius: 30px;
-    border: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #A8A8A8;
     overflow: hidden;
-    width: 980px;
-    height: 360px;
+    width: 900px;
+    height: 355px;
     display: flex;
     flex-direction: row;
   }
   .card-left {
     display: flex;
-    width: 460px;
-    height: 300px;
-    margin: 30px 0px 0px 39px;
+    width: 465px;
+    height: 335px;
+    padding: 10px;
+    margin: 10px 15px 10px 20px;
     padding-top: 10px;
     padding-bottom: 10px;
     cursor: pointer;
   }
+
+  .threebox{
+    display: flex;
+  }
+
+  .threeStar{
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #A8A8A8;
+    margin-left: 6px;
+  }
+
+  .threeTitle{
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 30px;
+    margin-right: 20px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   .bookmark2 {
-    margin-right: 60px;
     width: 34px;
     height: 34px;
     color: #6b4e16;
@@ -284,45 +273,44 @@ const Container = styled.div`
   }
   .titleBox {
     cursor: pointer;
+    display: flex;
+    align-items:center;
   }
   .atag {
     text-decoration: none;
     color: black;
-    margin: 20px 0px 20px 0px;
   }
   .bookmark {
-    margin-right: 60px;
     width: 34px;
     height: 34px;
     cursor: pointer;
   }
-  .image {
-    border-radius: 25px;
-    width: 100%;
-    overflow: hidden;
+  .image > img {
+    width: 445px;
+    height: 315px;
+    border-radius: 20px;
   }
-  .card-left img {
-    width: 100%;
-    height: 100%;
+  .card-left > img {
+    width: 445px;
+    height: 315px;
+    border-radius: 30px;
     object-fit: cover;
   }
   .card-right {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
-    margin-left: 60px;
+    width: 369px;
+    height: 299px;
+    padding: 0px 10px;
   }
   .title {
     display: flex;
     justify-content: space-between;
-    h3 {
-      font-weight: 700;
-    }
+    width: 361px;
+    height: 50px;
+    margin:28px 29px 10px 0px;
   }
-  .title p {
-    margin-top: 4px;
-    margin-left: 10px;
-  }
+
   .profile_box {
     display: flex;
     margin-top: 15px;
@@ -339,7 +327,6 @@ const Container = styled.div`
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    margin-left: 10px;
   }
   .detail_profile {
     border-radius: 50%;
@@ -356,14 +343,13 @@ const Container = styled.div`
   }
   .content {
     margin-right: 20px;
-    width: 420px;
-    height: 180px;
+    width: 359px;
+    height: 156px;
     box-sizing: border-box;
     overflow: hidden;
     cursor: pointer;
-  }
-  .content p {
-    font-weight: normal;
+    display: flex;
+    justify-content: flex-start;
   }
 `;
 

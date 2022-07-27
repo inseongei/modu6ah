@@ -53,7 +53,6 @@ function Recruit() {
         </div>
       </Container>
       <ChatIcon/>
-      <Footer />
     </div>
   );
 }
@@ -77,7 +76,7 @@ const Container = styled.div`
 
   .card_box {
     padding-top: 70px;
-    background-color: #f5f5f5;
+    background: #FAFAFA;
   }
 
   .button {

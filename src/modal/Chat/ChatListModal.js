@@ -34,21 +34,7 @@ const ChatListModal = ({ open, onClose }) => {
   const {isLoading , data } = useQuery('Chat-List',fetchSuperHeros)
   console.log(data)
 
-  // 삭제 버튼 눌렀을때 삭제가 되고 다시 리패치 시켜줌
-  const Delete = (e) => {
-    console.log(e.target.id)
-    axios
-    .delete("https://zhaoxilin.shop/api/chats/rooms/" + e.target.id,{
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((res) => {
-      console.log(res.data)
-      alert("방에 나갔습니다");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+
 
 
   if (!open) return null;
@@ -91,8 +77,8 @@ const ChatListModal = ({ open, onClose }) => {
                           setNowRoom(res.data.chatMessageList);
                           setrealroom(data.roomId);
                         });
-                    }} id={data.roomId} >
-                <img src={profileUrl === data.profileUrlTwo ? data.profileUrl: data.profileUrlTwo} alt="사진" id={data.roomId}/>
+                    }}  >
+                <img src={profileUrl === data.profileUrlTwo ? data.profileUrl: data.profileUrlTwo} alt="사진" />
               </div>
     
               <div className="SecondBox" onClick={() => {
@@ -118,9 +104,9 @@ const ChatListModal = ({ open, onClose }) => {
                           setNowRoom(res.data.chatMessageList);
                           setrealroom(data.roomId);
                         });
-                    }} id={data.roomId}>
-                <div className="ChatName"id={data.roomId}>{data.receiverNick === nickname ? data.senderNick:data.receiverNick}</div>
-                <div className="ChatContent"id={data.roomId}>{data.message}</div>
+                    }} >
+                <div className="ChatName">{data.receiverNick === nickname ? data.senderNick:data.receiverNick}</div>
+                <div className="ChatContent">{data.message.length > 27 ? data.message.slice(0,27) + '...' : data.message}</div>
               </div>
     
     
@@ -147,12 +133,24 @@ const ChatListModal = ({ open, onClose }) => {
                           setNowRoom(res.data.chatMessageList);
                           setrealroom(data.roomId);
                         });
-                    }}id={data.roomId} >
-              <div className="ChatTime"id={data.roomId}> {data.time}</div>
+                    }} >
+              <div className="ChatTime"> {data.time}</div>
               </div>
               <div className="fourBox">
               <div className="ChatDel">
-                <BsTrashFill onClick={Delete} id={data.roomId} className="Trash"/>
+                <BsTrashFill onClick={()=>{
+                  axios
+                  .delete("https://zhaoxilin.shop/api/chats/rooms/" + data.roomId,{
+                    headers: { Authorization: `Bearer ${token}` },
+                  })
+                  .then((res) => {
+                    console.log(res.data)
+                    alert("방에 나갔습니다");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+                }}  className="Trash"/>
               </div>
               </div>
             </div>

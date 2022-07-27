@@ -64,7 +64,7 @@ function PlaceAdd() {
         })
         .then((res) => {
           console.log(res);
-          navigate("/place");
+          // navigate("/place");
         })
         .catch((err) => {
           console.log(err);
@@ -214,19 +214,19 @@ function PlaceAdd() {
                       placeholder="주소를 입력하세요"
                       value={region}
                     />
-                    <div className="address_btn">
-                      <button
+                    <span className="address_btn">
+                      <span
                         onClick={openModal}
                       >
                         주소 검색
-                      </button>
+                      </span>
                       <Modal
                         open={modalOpen}
                         close={closeModal}
                         header="주소 검색"
                         addressData={RegionsData}
                       />
-                    </div>
+                    </span>
                   </MapSearch>
 
                   <div className="position">
@@ -495,7 +495,7 @@ const MapSearch = styled.div`
     margin-top: 20px;
     width: 100px;
     height: 35px;
-    button {
+    span {
     border-radius: 10px; 
     font-weight: 700;
     background: #FAFAFA;
