@@ -142,7 +142,7 @@ const CommentBox = styled.div`
 font-family: "Nanum Gothic";
 max-width: 100%;
 margin-top: 50px;
-padding-bottom: 280px;
+padding-bottom: 180px;
 
 .comment_section{
 display: flex;
