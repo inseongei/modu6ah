@@ -59,7 +59,6 @@ function MainScard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
                               dispatch(GetMainAxois())
                             });
                         }}
@@ -82,7 +81,6 @@ function MainScard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
                               dispatch(GetMainAxois())
                             });
                         }}
