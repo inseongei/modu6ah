@@ -15,8 +15,8 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ChatIcon from '../../components/main/ChatIcon'
-import PlaceComment from "../../components/pages/PlaceComment";
+import ChatIcon from '../../components/main/ChatIcon';
+import img_delete from '../../images/delete (1).png';
 
 function PlaceAdd() {
   const [title, setTitle] = useState("");
@@ -169,8 +169,6 @@ function PlaceAdd() {
                   </p>
 
                 </div>
-                {/* <div className="img_border"
-                  style={{ marginRight: "100px" }}> */}
                 
                 {/* <div className="img_border"
                  style={{ marginLeft: "10px" }}
@@ -188,7 +186,7 @@ function PlaceAdd() {
                           onClick={() =>
                             handleDeleteImage(id)}>
                           이미지 삭제
-                          {/* <img src={img_delete} /> */}
+                          <img src={img_delete} />
                         </button>
                       </div>
                     </div>
@@ -328,7 +326,7 @@ const Title = styled.div`
 const Container = styled.div`
 width: 100%;
 font-family: "Nanum Gothic";
-background: #F5F5F5;
+background: #FAFAFA;
 padding-bottom: 50px;
 `;
 
@@ -418,17 +416,25 @@ border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 35px;
+    margin-left: 25px;
   
     .img_box_size {
       padding: 0;
     }
    
     button {
-     border-radius:20px;
+     border-radius:10px;
      background-color: transparent !important;
      border: 1px solid #A8A8A8;
-     color: #A8A8A8;
+     padding-left: 15px;
+     color: #3C3C3C;
+    }
+
+    img {
+      width: 16px;
+      height: 17px;
+      border: none;
+      margin: 0px 6px 1px 6px;
     }
   }
 
