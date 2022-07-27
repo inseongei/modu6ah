@@ -94,7 +94,7 @@ function RCard() {
         }
       ></InfiniteScroll>
       <Container>
-      <div className="RcardBox">
+      <div className="RcardBox animate__animated animate__fadeInUp">
         {data &&
           data.map((data, idx) => {
             return (
@@ -201,7 +201,7 @@ const Container = styled.div`
     margin: auto;
     padding: 70px 0px;
     width: 935px;
-    height: 1331px;
+    height: 331px;
   }
   .card {
     background: white;
