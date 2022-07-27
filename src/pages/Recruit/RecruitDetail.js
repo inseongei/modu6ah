@@ -88,7 +88,8 @@ const RecruitDetail = () => {
     <>
       <Header />
       <BackGround>
-        <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+      <div style={{width:"1100px",
+        margin: "0 auto" }}>
           <Title>
             <div className="subject">체험 모집</div>
             <div className="page">
@@ -198,7 +199,7 @@ const RecruitDetail = () => {
             </Box>
             <RecruitComment />
           </Detail>
-        </Grid>
+        </div>
       </BackGround>
       <OneToOneChat
         open={modalIsOpen} // 모달창 열기
@@ -218,10 +219,10 @@ background: #F5F5F5;
 
 const Title = styled.div`
   padding-top: 40px;
-  margin-left: 160px;
 
   .subject {
     color: #a8a8a8;
+    margin-bottom: 2px;
   }
 
   .page {
@@ -317,7 +318,7 @@ const Detail = styled.div`
   }
 
   .card-top {
-    margin: 80px 0px 0px 10px;
+    margin: 96px 0px 0px 10px;
     width: 100%;
   }
 
@@ -357,7 +358,7 @@ const Detail = styled.div`
 
   .content {
     width: 490px;
-    height: 384px;
+    height: 400px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
     font-size: 20px;
@@ -375,7 +376,7 @@ height: 680px;
 background: white;
 
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
-margin-top: 30px;
+margin-top: 27px;
 margin-bottom: 32px;
 display: flex;
 flex-direction: column;
