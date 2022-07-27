@@ -99,7 +99,7 @@ function PlaceAdd() {
     setRegion(data);
   };
 
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -172,13 +172,13 @@ function PlaceAdd() {
                 {/* <div className="img_border"
                   style={{ marginRight: "100px" }}> */}
                 
-                <div className="img_border"
+                {/* <div className="img_border"
                  style={{ marginLeft: "10px" }}
                 /><div className="img_border"
                 style={{ marginLeft: "10px" }}
                /><div className="img_border"
                style={{ marginLeft: "10px" }}
-              />
+              /> */}
                   {/* 이미지 미리보기 */}
                   {imageSrc.map((image, id) => (
                     <div className="img_box_size" key={id}>
@@ -218,11 +218,11 @@ function PlaceAdd() {
                       value={region}
                     />
                     <div className="address_btn">
-                      <button
+                      <span
                         onClick={openModal}
                       >
                         주소 검색
-                      </button>
+                      </span>
                       <Modal
                         open={modalOpen}
                         close={closeModal}
@@ -365,7 +365,7 @@ border-radius: 10px;
   .imageBox {
     min-height: 210px;
     max-height: auto;
-    height: 210px;
+    height: 280px;
     margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
@@ -386,6 +386,7 @@ border-radius: 10px;
     label {
       margin-left: 45px;
       margin-bottom: 15px;
+      cursor: pointer;
     }
 
     p {
@@ -397,7 +398,7 @@ border-radius: 10px;
     display: hidden;
     border: 1px dashed lightgray;
     width: 310px;
-    height: 210px
+    height: 220px
   }
 
   .img_box_size{
@@ -439,7 +440,7 @@ border-radius: 10px;
 
   .mainBox {
     display: flex;
-    margin-top: 90px;
+    margin-top: 30px;
     margin-left: 60px;
   }
 
@@ -521,17 +522,18 @@ const MapSearch = styled.div`
 
   .address_btn {
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 25px;
     width: 100px;
     height: 35px;
 
-    button {
+   span {
     border-radius: 10px; 
     font-weight: 700;
     background: #FAFAFA;
     color: #3C3C3C;
     border: 1px solid #A8A8A8;
     padding: 6px 12px 6px 12px;
+    cursor: pointer;
     }
   }
 
