@@ -1,13 +1,18 @@
 // 육아템 리뷰 카드
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { MdOutlinePlace } from "react-icons/md";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import { FaStar } from "react-icons/fa";
 
 function BookRcard() {
+  const navigate = useNavigate();
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true)
+
+  console.log(book)
 
   React.useEffect(() => {
     axios
@@ -39,101 +44,110 @@ function BookRcard() {
     })
   };
 
-
-
-
   return (
     <>
-    <Container>
-      {book &&
-        book.map((data, idx) => {
-          return (
-            <div className="card" key={idx}>
-              {/* 카드 위쪽 '타이틀' */}
-              <div className="card-top">
+      <Container>
+        {book &&
+          book.map((data, idx) => {
+            return (
+                <div className="card" key={idx}>
+
+                <div className="cardin">
+
+                <div className="cardInto">
+
+                <div className="FirsBookBox">
+                <div className="FirstIn">
                 <div>
-                  <h3>{data.title}</h3>
-                  <p>{data.productType}</p>
+                  <span className="titleCard" onClick={()=>{navigate('/reviewdetail/' + data.reviewPostId)}}>{data.title.length > 8 ? data.title.slice(0,6) + '...': data.title}</span>
+                  <span className="titleStar" onClick={()=>{navigate('/reviewdetail/' + data.reviewPostId)}}>{data.productType.length > 5 ? data.productType.slice(0,4) : data.productType }
+                  </span>
+                </div>
+                
+                <div className="bookpos">
+                    {data.bookmarkStatus === true ? (
+                      <BsFillBookmarkFill
+                        className="bookmark2"
+                        onClick={() => {
+                          axios
+                            .put(
+                              "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                                data.reviewPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              console.log(res);
+                              window.location.reload();
+                            });
+                        }}
+                      />
+                    ) : (
+                      <BsBookmark
+                        className="bookmark"
+                        onClick={() => {
+                          axios
+                            .put(
+                              "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                                data.reviewPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              console.log(res);
+                              window.location.reload();
+                            });
+                        }}
+                      />
+                    )}
+                  </div>
                 </div>
 
-                <div>
-                  {data.bookmarkStatus === true ? (
-                    <BsFillBookmarkFill
-                      className="bookmark2"
-                      onClick={() => {
-                        axios
-                          .put(
-                            "https://zhaoxilin.shop/api/reviews/bookmark/" +
-                              data.reviewPostId,
-                            null,
-                            {
-                              headers: {
-                                Authorization: `Bearer ${localStorage.getItem(
-                                  "accessToken"
-                                )}`,
-                              },
-                            }
-                          )
-                          .then((res) => {
-                            console.log(res);
-                            window.location.reload();
-                          });
-                      }}
-                    />
-                  ) : (
-                    <BsBookmark
-                      className="bookmark"
-                      onClick={() => {
-                        axios
-                          .put(
-                            "https://zhaoxilin.shop/api/reviews/bookmark/" +
-                              data.reviewPostId,
-                            null,
-                            {
-                              headers: {
-                                Authorization: `Bearer ${localStorage.getItem(
-                                  "accessToken"
-                                )}`,
-                              },
-                            }
-                          )
-                          .then((res) => {
-                            console.log(res);
-                            window.location.reload();
-                          });
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-              <a href={data.url}>
+                <div className="BookRegion" >
                 <MdOutlinePlace />
-                {data.url}
-              </a>
-              {/* 카드 중간 '이미지'*/}
-              <div className="card-body">
-                <div className="image">
-                  <img src={data.imageUrl[0]} alt="사진" />
+                {data.url.length >20 ? data.url.slice(0,14) + '...' : data.url}
                 </div>
-                {/* 카드 아래쪽 '아이디 및 내용물' */}
-                <div className="profile_box">
-                  <div className="detail_profile">
-                    <img src={data.profileUrl} alt="프로필 이미지" />
+
+                <div className="image"  onClick={()=>{navigate('/reviewdetail/' + data.reviewPostId)}}>
+                <img src={data.imageUrl[0]} alt="사진" />
+                </div>
+                </div>
+                </div>
+                </div>
+
+                <div className="SecondCard"  onClick={()=>{navigate('/reviewdetail/' + data.reviewPostId)}}>
+                  <div className="SecondIn"  onClick={()=>{navigate('/reviewdetail/' + data.reviewPostId)}}>
+                      <span><img src={data.profileUrl} alt="프로필 이미지" className="BookProfileImg" /></span>
+                      <span className="BookmarkNi">{data.nickname}</span>
                   </div>
-                  <strong>{data.nickname}</strong>
+
+                  <div className="content"  onClick={()=>{navigate('/reviewdetail/' + data.placePostId)}}>
+                    {data.content.length > 17 ? data.content.slice(0,15) + '...' : data.content }
+                    
+                  </div>  
                 </div>
-                <div className="content">
-                  <p>{data.content}</p>
                 </div>
-              </div>
-            </div>
-          );
-        })}
-    </Container>
-    <div className="btnBox">
-    <button  className ="MoreBtn" onClick={ReviewMore}>{btn ? "더보기" : "닫기"}</button>
-  </div>
-  </>
+            );
+          })}
+      </Container>
+      <div className="btnBox">
+        <button className="MoreBtn" onClick={ReviewMore}>
+          {btn ? "더보기" : "닫기"}
+        </button>
+      </div>
+    </>
   );
 }
 
@@ -143,25 +157,136 @@ const Container = styled.div`
   gap: 2em;
   justify-content: center;
   align-items: center;
+
   .card {
     background: white;
-    border-radius: 30px;
-    border: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
+    border-radius: 20px;
+    border: 1px solid #A8A8A8;
     overflow: hidden;
-    height: 570px;
+    width: 284px;
+    height: 390px;
+  }
+
+  .firstT{
+    width: 165.17px;
+    height: 23px;
   }
   .card-top {
     display: flex;
     justify-content: space-between;
-    margin: 30px 0px 0px 50px;
-    h3 {
-      font-weight: 700;
-    }
+    margin: 26px 12px 8px 16px;
+    width: 255.63px;
+    height: 56.48px;
   }
+  .FirsBookBox{
+    width: 268.87px;
+    height: 69.72px;
+    margin:26px 12px 8px 16px;
+  }
+
+.FirstIn{
+  width: 255.63px;
+  height: 31.48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleStar{
+  color: #A8A8A8;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.bookpos{
+  width: 31.48px;
+  height: 31.48px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.BookRegion{
+  width: 255.63px;
+  height: 20px;
+  margin-top: 10px;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #3C3C3C;
+  margin-bottom: 12px;
+}
+
+.SecondCard{
+  width: 262px;
+  height: 104.11px;
+  cursor: pointer;
+}
+
+.SecondIn{
+  width: 262px;
+  height: 35.11px;
+  margin-top: 5px;
+  margin-left:22px;
+  cursor: pointer;
+}
+
+.BookProfileImg{
+  width: 33.11px;
+  height: 35.11px;
+  border: 0.662246px solid #E4E4E4;
+  border-radius: 50%;
+}
+
+.BookmarkNi{
+font-family: 'NanumGothic';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 18px;
+margin-left: 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   .card-top p {
     display: flex;
-    margin-top: 8px;
     margin-left: 10px;
     color: gray;
   }
@@ -170,9 +295,24 @@ const Container = styled.div`
     display: flex;
   }
 
+  .titleCard{
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin-left: 7px;
+    cursor: pointer;
+  }
+
   a {
     text-decoration: none;
     color: black;
+  }
+
+  .cardin{
+    width: 264.43px;
+    height: 280px;
   }
   .bookmark {
     margin-right: 60px;
@@ -182,7 +322,6 @@ const Container = styled.div`
   }
 
   .bookmark2 {
-    margin-right: 60px;
     width: 34px;
     height: 34px;
     color: #6b4e16;
@@ -193,21 +332,28 @@ const Container = styled.div`
     margin-left: 51px;
   }
   .card-body {
-    width: 100%;
+    width: 264.43px;
+    height: 274px;
     cursor: pointer;
     text-align: center;
   }
   .image {
     border-radius: 25px;
     overflow: hidden;
+    position: relative;
+    right:5px;
+    top: 7px;
+    cursor: pointer;
   }
-  .card-body img {
-    width: 80%;
-    height: 270px;
-    margin-top: 3px;
-    object-fit: cover;
-    border-radius: 25px;
+
+  .image > img{
+    width: 258.28px;
+    height: 170.2px;
+    border-radius: 19.8674px;
+    border: 1px solid #E4E4E4;
   }
+
+
   .profile_box {
     display: flex;
     margin-top: 15px;
@@ -237,13 +383,17 @@ const Container = styled.div`
     margin-left: 5px;
   }
   .content {
-    width: 100%;
-    height: 80px;
-    box-sizing: border-box;
-    overflow: hidden;
-    margin-top: 10px;
-    padding-left: 30px;
+    width: 250px;
+    height: 67px;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
     text-align: left;
+    margin: 7px 12px 20px 22px;
+    word-break: break-all;
+    cursor: pointer;
   }
 `;
 
