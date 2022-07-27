@@ -12,22 +12,24 @@ function BookLcard() {
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true);
 
-  console.log(book)
+  const refetch = () =>{
+    axios
+    .get("https://zhaoxilin.shop/api/mypage/bookmark", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      setbook(res.data.placeBookmarkList.slice(0, 3));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 
   React.useEffect(() => {
-    axios
-      .get("https://zhaoxilin.shop/api/mypage/bookmark", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        setbook(res.data.placeBookmarkList.slice(0, 3));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    refetch()
   }, []);
 
   const PlaceMore = async () => {
@@ -38,7 +40,6 @@ function BookLcard() {
         },
       })
       .then((res) => {
-        console.log(res);
         setbtn(!btn);
         btn
           ? setbook(res.data.placeBookmarkList)
@@ -86,7 +87,7 @@ function BookLcard() {
                             )
                             .then((res) => {
                               console.log(res);
-                              window.location.reload();
+                              refetch()
                             });
                         }}
                       />
@@ -110,7 +111,7 @@ function BookLcard() {
                             )
                             .then((res) => {
                               console.log(res);
-                              window.location.reload();
+                              refetch()
                             });
                         }}
                       />
