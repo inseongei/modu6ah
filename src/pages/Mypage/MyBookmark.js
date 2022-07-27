@@ -68,7 +68,7 @@ const Bookmark = styled.div`
 
   .title {
     width: 1014px;
-    height: 180px;  
+    height: 100px;  
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -116,7 +116,6 @@ const Bookmark = styled.div`
   .MainBox {
     border: 1px solid #e4e4e4;
     width: 1014px;
-    height: 3120.02px;
     margin: 30px auto;
     border-radius: 10px;
     background: #ffffff;

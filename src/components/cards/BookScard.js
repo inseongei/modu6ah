@@ -111,7 +111,7 @@ function BookScard() {
                     navigate("/recruitdetail/" + item.recruitPostId);
                   }}
                 >
-                  <span>{item.title}</span>
+                  <span>{item.title.length > 15 ? item.title.slice(0,14) + '...' : item.title}</span>
                 </div>
                 {/* 카드 내용물 */}
                 <div
@@ -134,6 +134,7 @@ function BookScard() {
           {btn ? "더보기" : "닫기"}
         </button>
       </div>
+      <hr className="BookHr"/>
     </>
   );
 }

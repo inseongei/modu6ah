@@ -1,12 +1,14 @@
 // 육아템 리뷰 카드
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { MdOutlinePlace } from "react-icons/md";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 
 function BookLcard() {
+  const navigate = useNavigate();
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true);
 
@@ -44,90 +46,102 @@ function BookLcard() {
       });
   };
 
+
   return (
     <>
       <Container>
         {book &&
           book.map((data, idx) => {
             return (
-                <div className="card">
+                <div className="card" key={idx}>
 
                 <div className="cardin">
 
                 <div className="cardInto">
 
+                <div className="FirsBookBox">
+                <div className="FirstIn">
+                <div>
+                  <span className="titleCard" onClick={()=>{navigate('/placedetail/' + data.placePostId)}}>{data.title.length > 8 ? data.title.slice(0,6) + '...': data.title}</span>
+                  <span className="titleStar" onClick={()=>{navigate('/placedetail/' + data.placePostId)}}><FaStar size={28}style={{color: "#FFBA5A",marginLeft: "5px"}}/>{data.star}점</span>
+                </div>
+                
+                <div className="bookpos">
+                    {data.bookmarkStatus === true ? (
+                      <BsFillBookmarkFill
+                        className="bookmark2"
+                        onClick={() => {
+                          axios
+                            .put(
+                              "https://zhaoxilin.shop/api/places/bookmark/" +
+                                data.placePostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              console.log(res);
+                              window.location.reload();
+                            });
+                        }}
+                      />
+                    ) : (
+                      <BsBookmark
+                        className="bookmark"
+                        id={data.placePostId}
+                        onClick={() => {
+                          axios
+                            .put(
+                              "https://zhaoxilin.shop/api/places/bookmark/" +
+                                data.placePostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              console.log(res);
+                              window.location.reload();
+                            });
+                        }}
+                      />
+                    )}
+                  </div>
                 </div>
 
+                <div className="BookRegion" id={data.placePostId}>
+                <MdOutlinePlace />
+                {data.region.length >20 ? data.region.slice(0,19) + '..' : data.region}
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                <div className="image" id={data.placePostId} onClick={()=>{navigate('/placedetail/' + data.placePostId)}}>
+                <img src={data.imageUrl[0]} alt="사진" />
+                </div>
+                </div>
+                </div>
                 </div>
 
+                <div className="SecondCard" id={data.placePostId} onClick={()=>{navigate('/placedetail/' + data.placePostId)}}>
+                  <div className="SecondIn" id={data.placePostId} onClick={()=>{navigate('/placedetail/' + data.placePostId)}}>
+                      <span><img src={data.profileUrl} alt="프로필 이미지" className="BookProfileImg" id={data.placePostId}/></span>
+                      <span className="BookmarkNi">{data.nickname}</span>
+                  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  <div className="content" id={data.placePostId} onClick={()=>{navigate('/placedetail/' + data.placePostId)}}>
+                    {data.content.length > 17 ? data.content.slice(0,15) + '...' : data.content }
+                    
+                  </div>  
+                </div>
+                </div>
             );
           })}
       </Container>
@@ -136,6 +150,7 @@ function BookLcard() {
           {btn ? "더보기" : "닫기"}
         </button>
       </div>
+      <hr className="BookHr"/>
     </>
   );
 }
@@ -167,6 +182,112 @@ const Container = styled.div`
     width: 255.63px;
     height: 56.48px;
   }
+  .FirsBookBox{
+    width: 268.87px;
+    height: 69.72px;
+    margin:26px 12px 8px 16px;
+  }
+
+.FirstIn{
+  width: 255.63px;
+  height: 31.48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleStar{
+  color: #A8A8A8;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+.bookpos{
+  width: 31.48px;
+  height: 31.48px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.BookRegion{
+  width: 255.63px;
+  height: 20px;
+  margin-top: 10px;
+  font-family: 'NanumGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #3C3C3C;
+  margin-bottom: 12px;
+}
+
+.SecondCard{
+  width: 262px;
+  height: 104.11px;
+  cursor: pointer;
+}
+
+.SecondIn{
+  width: 262px;
+  height: 35.11px;
+  margin-top: 5px;
+  margin-left:22px;
+  cursor: pointer;
+}
+
+.BookProfileImg{
+  width: 33.11px;
+  height: 35.11px;
+  border: 0.662246px solid #E4E4E4;
+  border-radius: 50%;
+}
+
+.BookmarkNi{
+font-family: 'NanumGothic';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 18px;
+margin-left: 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   .card-top p {
     display: flex;
     margin-left: 10px;
@@ -184,6 +305,7 @@ const Container = styled.div`
     font-size: 20px;
     line-height: 23px;
     margin-left: 16px;
+    cursor: pointer;
   }
 
   a {
@@ -193,7 +315,7 @@ const Container = styled.div`
 
   .cardin{
     width: 264.43px;
-    height: 350px;
+    height: 280px;
   }
   .bookmark {
     margin-right: 60px;
@@ -203,7 +325,6 @@ const Container = styled.div`
   }
 
   .bookmark2 {
-    margin-right: 10px;
     width: 34px;
     height: 34px;
     color: #6b4e16;
@@ -222,17 +343,20 @@ const Container = styled.div`
   .image {
     border-radius: 25px;
     overflow: hidden;
+    position: relative;
+    right:5px;
+    top: 7px;
+    cursor: pointer;
   }
 
-
-
-  .card-body img {
-    width: 264.43px;
+  .image > img{
+    width: 258.28px;
     height: 170.2px;
-    margin-top: 3px;
-    object-fit: cover;
-    border-radius: 25px;
+    border-radius: 19.8674px;
+    border: 1px solid #E4E4E4;
   }
+
+
   .profile_box {
     display: flex;
     margin-top: 15px;
@@ -262,13 +386,17 @@ const Container = styled.div`
     margin-left: 5px;
   }
   .content {
-    width: 100%;
-    height: 80px;
-    box-sizing: border-box;
-    overflow: hidden;
-    margin-top: 10px;
-    padding-left: 30px;
+    width: 250px;
+    height: 67px;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
     text-align: left;
+    margin: 7px 12px 20px 22px;
+    word-break: break-all;
+    cursor: pointer;
   }
 `;
 
