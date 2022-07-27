@@ -309,6 +309,13 @@ function PlaceAdd() {
   );
 }
 
+const Container = styled.div`
+width: 100%;
+font-family: "Nanum Gothic";
+background: #f5f5f5;
+padding-bottom: 50px;
+`;
+
 const Title = styled.div`
   padding-top: 40px;
   margin-left: 160px;
@@ -321,13 +328,6 @@ const Title = styled.div`
     font-size: 30px;
     font-weight: 700;
   }
-`;
-
-const Container = styled.div`
-width: 100%;
-font-family: "Nanum Gothic";
-background: #f5f5f5;
-padding-bottom: 50px;
 `;
 
 const Place = styled.div`
