@@ -111,7 +111,7 @@ function LCard() {
                     }}
                   >
                     <div className="threebox">
-                        <span className="threeTitle">{item.title}</span>
+                        <span className="threeTitle">{item.title.length > 8 ? item.title.slice(0,7) + '...':item.title}</span>
                        <span><FaStar size={28} style={{ color: "#FFBA5A", marginLeft: "5px", }}/></span>
                        <span className="threeStar">{item.star}점</span>
                     </div>
@@ -164,10 +164,12 @@ function LCard() {
                     )}
                   </div>
                 </div>
-                <a href="##" className="atag">
+                <div className="atag"  onClick={() => {
+                    navigate("/placedetail/" + item.placePostId);
+                  }}>
                   <MdOutlinePlace />
-                  {item.region}
-                </a>
+                  {item.region.length > 27 ? item.region.slice(0,26) + '...':item.region}
+                </div>
                 <div
                   className="profile_box"
                   onClick={() => {
@@ -185,7 +187,7 @@ function LCard() {
                     navigate("/placedetail/" + item.placePostId);
                   }}
                 >
-                  <span>{item.content}</span>
+                  <span>{item.content.length > 90 ? item.content.slice(0,90) + '...':item.content}</span>
                 </div>
               </div>
             </div>
@@ -206,7 +208,6 @@ const Container = styled.div`
     background: #fff;
     border-radius: 20px;
     border: 1px solid #A8A8A8;
-    overflow: hidden;
     width: 900px;
     height: 355px;
     display: flex;
@@ -279,6 +280,7 @@ const Container = styled.div`
   .atag {
     text-decoration: none;
     color: black;
+    cursor: pointer;
   }
   .bookmark {
     width: 34px;
