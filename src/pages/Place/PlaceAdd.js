@@ -326,7 +326,7 @@ const Title = styled.div`
 const Container = styled.div`
 width: 100%;
 font-family: "Nanum Gothic";
-background: #FAFAFA;
+background: #f5f5f5;
 padding-bottom: 50px;
 `;
 
@@ -342,7 +342,7 @@ margin-bottom: 32px;
 display: flex;
 flex-direction: column;
 
-border: 1px solid lightgray;
+border: 1px solid #E4E4E4;
 border-radius: 10px;
   
   .place {
@@ -455,7 +455,7 @@ border-radius: 10px;
   }
 
   .card-left > div > input {
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
     width: 350px;
     height: 50px;
@@ -475,7 +475,7 @@ border-radius: 10px;
   textarea {
     width: 500px;
     height: 260px;
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
     font-size: 20px;
     font-weight: 400;
@@ -538,7 +538,7 @@ const MapSearch = styled.div`
     background: #FAFAFA;
     color: #3C3C3C;
     border: 1px solid #A8A8A8;
-    padding: 6px 12px 6px 12px;
+    padding: 10px 12px 10px 12px;
     cursor: pointer;
     }
   }
