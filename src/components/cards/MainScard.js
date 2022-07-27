@@ -6,6 +6,10 @@ import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
 import axios from "axios";
+import img_location from '../../images/location.png';
+import img_time from '../../images/time.png';
+import img_calendar from '../../images/calendar.png';
+import img_age from '../../images/age.png';
 
 function MainScard() {
   const navigate = useNavigate();
@@ -101,10 +105,14 @@ function MainScard() {
                       navigate("/recruitdetail/" + item.recruitPostId);
                     }}
                   >
-                    <p>{item != null && item.date}</p>
-                    <p>{item != null && item.time}</p>
-                    <p>{item != null && item.place}</p>
-                    <p>{item != null && item.age}</p>
+                    <p><img src={img_location}/>
+                    {item != null && item.place}</p>
+                    <p><img src={img_time}/>
+                    {item != null && item.date}</p>
+                    <p><img src={img_calendar}/>
+                    {item != null && item.time}</p>
+                    <p><img src={img_age}/>
+                    {item != null && item.age}</p>
                   </div>
                 </div>
               )
@@ -126,9 +134,9 @@ const Container = styled.div`
     display: flex;
     height: 100%;
     background: white;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
+    border-radius: 20px;
+    border: 1px solid lightgray;
+    // box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
   }
 
   .card-top > p {
@@ -166,15 +174,23 @@ const Container = styled.div`
     h1 {
       font-size: 25px;
       font-weight: bold;
+    
     }
   }
+
   .card-bottom {
     cursor: pointer;
     margin: 0px 0px 20px 30px;
   }
+
   .card-bottom p {
-    margin: 0px 0px 8px 4px;
+    margin-bottom: 5px;
+   
+    img {
+      margin-right: 5px;
+    }
   }
+
   .checkIcon {
     margin-right: 60px;
     width: 34px;
@@ -184,9 +200,11 @@ const Container = styled.div`
     top: 0px;
     color: #6b4e16;
   }
+
   .checkIcon:hover {
     transform: scale(1.13);
   }
+
   .icon:hover {
     transform: scale(1.13);
   }
