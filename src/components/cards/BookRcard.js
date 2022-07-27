@@ -5,29 +5,30 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlinePlace } from "react-icons/md";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
-import { FaStar } from "react-icons/fa";
 
 function BookRcard() {
   const navigate = useNavigate();
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true)
 
-  console.log(book)
+  const refetch = () =>{
+    axios
+    .get("https://zhaoxilin.shop/api/mypage/bookmark", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => {
+      console.log(res)
+      setbook(res.data.reviewBookmarkList.slice(0,3));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 
   React.useEffect(() => {
-    axios
-      .get("https://zhaoxilin.shop/api/mypage/bookmark", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        console.log(res)
-        setbook(res.data.reviewBookmarkList.slice(0,3));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    refetch()
   }, []);
 
 
@@ -84,7 +85,7 @@ function BookRcard() {
                             )
                             .then((res) => {
                               console.log(res);
-                              window.location.reload();
+                              refetch()
                             });
                         }}
                       />
@@ -107,7 +108,7 @@ function BookRcard() {
                             )
                             .then((res) => {
                               console.log(res);
-                              window.location.reload();
+                              refetch()
                             });
                         }}
                       />

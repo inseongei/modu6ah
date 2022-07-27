@@ -3,8 +3,6 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
-import { useSelector, useDispatch } from "react-redux";
-import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
 import location from '../../images/location.png'
 import time from '../../images/time.png'
 import age from '../../images/age.png'
@@ -16,19 +14,22 @@ function BookScard() {
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true);
 
-  React.useEffect(() => {
+  const refetch = () =>{
     axios
-      .get("https://zhaoxilin.shop/api/mypage/bookmark/", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        setbook(res.data.recruitBookmarkList.slice(0, 6));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .get("https://zhaoxilin.shop/api/mypage/bookmark/", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => {
+      setbook(res.data.recruitBookmarkList.slice(0, 6));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+  React.useEffect(() => {
+    refetch()
   }, []);
 
   const recruitsMore = async () => {
@@ -75,7 +76,7 @@ function BookScard() {
                           )
                           .then((res) => {
                             console.log(res);
-                            window.location.reload();
+                            refetch()
                           });
                       }}
                     />
@@ -98,7 +99,7 @@ function BookScard() {
                           )
                           .then((res) => {
                             console.log(res);
-                            window.location.reload();
+                            refetch()
                           });
                       }}
                     />
