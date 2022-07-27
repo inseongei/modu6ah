@@ -21,7 +21,7 @@ const Swiper = () => {
           </div>
         </div>
 
-        <div className="imgBox animate__animated animate__fadeInRight animate__slow">
+        <div className="imgBox animate__animated animate__fadeInRight">
           <img src={mainImg} alt="사진" className="mainImg" />
         </div>
       </div>

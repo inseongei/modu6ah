@@ -64,7 +64,7 @@ function PlaceAdd() {
         })
         .then((res) => {
           console.log(res);
-          navigate("/place");
+          // navigate("/place");
         })
         .catch((err) => {
           console.log(err);
@@ -156,7 +156,7 @@ function PlaceAdd() {
               <div className="imageBox">
                 <div className="plus_btn">
                   <label for="input-file">
-                    <img src={plus} />
+                    <img src={plus} alt="추가" className="plusButton"/>
                   </label>
                   <p style={{
                     color: "#3C3C3C"
@@ -216,7 +216,7 @@ function PlaceAdd() {
                       placeholder="주소를 입력하세요"
                       value={region}
                     />
-                    <div className="address_btn">
+                    <span className="address_btn">
                       <span
                         onClick={openModal}
                       >
@@ -228,7 +228,7 @@ function PlaceAdd() {
                         header="주소 검색"
                         addressData={RegionsData}
                       />
-                    </div>
+                    </span>
                   </MapSearch>
 
                   <div className="position">
@@ -320,12 +320,11 @@ padding-bottom: 10px;
 
 const Title = styled.div`
   padding-top: 40px;
-  
+
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
   }
-
   .page {
     font-size: 30px;
     font-weight: 700;
@@ -335,22 +334,18 @@ const Title = styled.div`
 const Place = styled.div`
 width: 1170px;
 height: 750px;
-
 background: white;
-
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
 margin-top: 27px;
 margin-bottom: 32px;
 display: flex;
 flex-direction: column;
-
 border: 1px solid #E4E4E4;
 border-radius: 10px;
   
   .place {
     width: 100%;
   }
-
   .title {
     font-family: "Inter";
     font-style: normal;
@@ -361,7 +356,6 @@ border-radius: 10px;
     margin-left: 70px;
     margin-top: 40px;
   }
-
   .imageBox {
     min-height: 210px;
     max-height: auto;
@@ -371,36 +365,32 @@ border-radius: 10px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
-
     img {
       width: 37px;
       height: 37px;
       border: none;
     }
   }
-
   .plus_btn {
     width: 120px;
     margin-left: 20px;
-
     label {
       margin-left: 45px;
       margin-bottom: 15px;
       cursor: pointer;
     }
-
     p {
     margin-left: 26px;
     }
   }
-
+  .plusButton{
+    cursor: pointer;
+  }
   .img_border{
-    display: hidden;
     border: 1px dashed lightgray;
     width: 310px;
     height: 220px
   }
-
   .img_box_size{
   
     img {
@@ -411,9 +401,7 @@ border-radius: 10px;
       border-radius: 10px;
       margin: 10px 0px 15px 20px;
     }
-
   }
-
   .img_btn {
     display: flex;
     align-items: center;
@@ -439,23 +427,19 @@ border-radius: 10px;
       margin: 0px 6px 1px 6px;
     }
   }
-
   .images {
     width: 90%;
     height: 5%;
     margin: auto;
   }
-
   .mainBox {
     display: flex;
     margin-top: 30px;
     margin-left: 60px;
   }
-
   .card-left {
     width: 513px;
   }
-
   .card-left > div > input {
     border: 1px solid #A8A8A8;
     border-radius: 10px;
@@ -470,7 +454,6 @@ border-radius: 10px;
       color: lightgray;
     }
   }
-
   .card-right {
     width: 530px;
     display: flex;
@@ -478,7 +461,6 @@ border-radius: 10px;
     align-items: center;
     margin-left: 20px;
   }
-
   textarea {
     width: 500px;
     height: 260px;
@@ -492,36 +474,30 @@ border-radius: 10px;
     margin-bottom: 20px;
     padding: 10px;
   }
-
   .position {
     margin-left: 3px;
     font-color: #000000;
-
     input {
       outline: none;
       font-size: 19px;
       height: 55px;
-
       ::placeholder{
         font-size: 16px;
         color: lightgray;
       }
     }
   }
-  }
-
+  
   .star {
     display: flex;
     margin-left: 4px;
     margin-top: 33px;
-
     p {
       display: flex;
       margin-top: 3px;
       margin-left: 2px;
     }
   }
-
   .star > strong {
     margin-top: 2px;
     margin-right: 20px;
@@ -532,13 +508,12 @@ const MapSearch = styled.div`
   margin: 20px 0px 20px 2px;
   display: flex;
  
-
   .address_btn {
     margin-left: 10px;
     margin-top: 25px;
     width: 100px;
     height: 35px;
-
+    
    span {
     border-radius: 10px; 
     font-weight: 700;
@@ -549,12 +524,10 @@ const MapSearch = styled.div`
     cursor: pointer;
     }
   }
-
   strong {
     width: 31px;
     margin-top: 23px;
   }
-
   button {
     display: flex;
   }
@@ -571,7 +544,6 @@ const SearchInput = styled.input`
 const Btn = styled.div`
 display: flex;
 margin-left: 790px;
-
 .btn {
   width: 150px;
   height: 30px;
@@ -583,6 +555,8 @@ margin-left: 790px;
   padding-bottom: 35px;
   border: 0;
   outline: 0;
+  font-weight: 700;
+  font-family: 'NanumGothic';
 }
 `;
 

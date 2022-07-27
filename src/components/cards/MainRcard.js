@@ -17,7 +17,6 @@ function MainRCard() {
   }, []);
 
   const post = useSelector((state) => state.Data.Profile);
-  console.log(post);
 
   if (!post) {
     return <div></div>;
@@ -121,6 +120,7 @@ const Container = styled.div`
   gap: 3.6em;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 
   .card {
     background: white;

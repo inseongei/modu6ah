@@ -253,6 +253,7 @@ const Detail = styled.div`
     border-radius: 10px;
     padding-left: 12px;
     outline: none;
+
     font-size: 18px;
 
     ::placeholder{
@@ -260,13 +261,13 @@ const Detail = styled.div`
       color: #A8A8A8;
     }
   }
+  
   .location {
     input {
       outline: none;
       padding-left: 16px;
       font-size: 19px;
       height: 55px;
-
       ::placeholder{
         font-size: 19px;
         padding-left: 4px;
@@ -274,14 +275,13 @@ const Detail = styled.div`
       }
     }
   }
-
+  
   .age{
     input {
       outline: none;
       padding-left: 13px;
       font-size: 19px;
       height: 55px;
-
       ::placeholder{
         font-size: 19px;
         padding-left: 4px;
@@ -289,16 +289,16 @@ const Detail = styled.div`
       }
     }
   }
-
+  
   .box {
     margin-top: 105px;
     width: 404px;
   }
-
+  
   strong {
     padding-top: 30px;
   }
-
+  
   textarea {
     width: 450px;
     height: 450px;
@@ -312,6 +312,7 @@ const Detail = styled.div`
     outline: none;
     resize: vertical; /* 상하만 가능 */
   }
+  
   .Detail_profile {
     width: 144px;
     height: 144px;
@@ -321,6 +322,7 @@ const Detail = styled.div`
     display: block;
     justify-content: center;
   }
+  
   .Detail_username {
     width: 70%;
   }

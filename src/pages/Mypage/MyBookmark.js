@@ -16,7 +16,7 @@ const MyBookmark = () => {
       <Bookmark>
         <div className="title">
           <div className="mypage">마이페이지</div>
-          <div className="booktitle">북마크</div>
+          <div className="booktitle">북마크 관리</div>
         </div>
 
         <div className="MainBox">
@@ -65,14 +65,19 @@ const Bookmark = styled.div`
   width: 100%;
   background-color: #f5f5f5;
 
+
   .title {
-    width: 80%;
+    width: 1014px;
+    height: 100px;  
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .mypage {
     color: #a8a8a8;
-    font-family: "Nanum Gothic";
+    font-family: "NanumGothic";
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -83,7 +88,7 @@ const Bookmark = styled.div`
 
   .booktitle {
     color: #000000;
-    font-family: "Nanum Gothic";
+    font-family: "NanumGothic";
     font-style: normal;
     font-weight: 700;
     font-size: 26px;
@@ -93,24 +98,24 @@ const Bookmark = styled.div`
 
 
   .MoreBtn {
-    border: 2px solid #ddd;
-    width: 70px;
-    height: 30px;
+    width: 130px;
+    height: 38px;
     position: relative;
     right: 50px;
     transition: all 0.25s ease;
-    border-radius: 5px;
+    border-radius: 30px;
+    background: #3C3C3C;
     margin-top: 30px;
+    color: #fff;
+    border: none;
+    font-family: "NanumGothic";
+    font-weight: 700;
   }
 
-  .MoreBtn:hover {
-    border-color: #111;
-    box-shadow: 1px 2px 4px rgb(0 0 0 / 10%);
-  }
 
   .MainBox {
     border: 1px solid #e4e4e4;
-    width: 80%;
+    width: 1014px;
     margin: 30px auto;
     border-radius: 10px;
     background: #ffffff;
@@ -118,9 +123,9 @@ const Bookmark = styled.div`
 
   .subtitle {
     color: #000000;
-    font-family: "Nanum Gothic";
+    font-family: "NanumGothic";
     font-style: normal;
-    font-weight: 700;
+    font-weight: 900;
     font-size: 26px;
     line-height: 30px;
     margin-bottom: 12px;
@@ -128,7 +133,7 @@ const Bookmark = styled.div`
 
   .subContent {
     color: #6b4e16;
-    font-family: "Nanum Gothic";
+    font-family: "NanumGothic";
     font-style: normal;
     font-weight: 700;
     font-size: 16px;

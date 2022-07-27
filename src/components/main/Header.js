@@ -204,6 +204,8 @@ const Headers = styled.div`
   justify-content: space-between;
   align-items: center;
   color: #3c3c3c;
+  filter: drop-shadow(0px 4px 25px rgba(0, 0, 0, 0.1));
+  
 
   input[id*="answer"] {
     display: none;
@@ -228,7 +230,7 @@ const Headers = styled.div`
     max-height: 0;
     transition: all 0.5s;
     overflow: hidden;
-    background-color: #ffffff;
+    background-color: transparent;
     font-size: 11px;
     position: absolute;
     top: 62px;

@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import axios from "axios";
 import email from '../../images/email.png';
 import Grid from "../elements/Grid";
-import Fin from '../../images/Fin.png';
+import Fin from '../../images/cancel.png';
 
 import { useNavigate } from "react-router-dom";
 

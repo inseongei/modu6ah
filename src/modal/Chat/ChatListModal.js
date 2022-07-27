@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import "../../shared/App.css";
-import logo from "../../images/logo.png";
 import ScrollToBottom from "react-scroll-to-bottom";
 import ChatRoom from "./ChatRoom";
 import "animate.css";
-import axios from "axios";
-import { BsTrash } from "react-icons/bs";
 import io from "socket.io-client";
+import cancel from '../../images/cancel.png'
+import redtrash from '../../images/Redbin.png'
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {useQuery} from 'react-query'
+import { BsTrashFill } from "react-icons/bs";
 
 const socket = io.connect("https://zhaoxilin.shop");
 
@@ -20,48 +23,141 @@ const ChatListModal = ({ open, onClose }) => {
   const profileUrl = localStorage.getItem("profileUrl");
   const token = localStorage.getItem("accessToken");
 
-  React.useEffect(() => {
-    axios
-      .get("https://zhaoxilin.shop/api/chats/rooms",  {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-        }
-      })
-      .then((res) => {
-        setChatList(res.data.lastChats);
-      })
-      .catch((err) => {
-      });
-  }, []);
+  const fetchSuperHeros = () =>{
+    return axios.get("https://zhaoxilin.shop/api/chats/rooms",{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+      }
+    })
+  }
+  // modal이라 웹페이지 시작점부터 get 되서 isLoading 처리 안해도 됌
+  const {isLoading , data } = useQuery('Chat-List',fetchSuperHeros)
+  console.log(data)
 
-  const Delete = () => {
 
-      axios
-      .delete("https://zhaoxilin.shop/api/chats/rooms/" + realroom,{
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        alert("방에 나갔습니다");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
-  };
 
   if (!open) return null;
 
   return (
-    <Modal
-      isOpen={true}
-      className="ChatList animate__animated animate__fadeIn animate__slower"
-    >
+    <Modal isOpen={true} className="ChatList animate__animated animate__fadeIn animate__slow">
+        <div className="ChatListBox">
+          <span className="OneToOne">1:1 채팅 목록</span>
+          <img src = {cancel} alt="닫기" className="cancel" onClick={onClose}/>
+        </div>
+
 
       {/* 대화창 리스트 */}
-
-      <ScrollToBottom className="message-container">
+      <ScrollToBottom className="message-container" mode="top">
+        {data.data.lastChats&& data.data.lastChats.map((data)=>{
+          return(
+            data != null &&
+            <div className="listC animate__animated animate__fadeInDown animate__fast" key={data._id}>
+            <div className="ChatListContainer">
+              <div className="firstBox" onClick={() => {
+                      setModalIsOpen(true);
+                      const Joindata = {
+                        roomId: data.roomId,
+                        senderNick: data.senderNick,
+                        receiverNick: data.receiverNick,
+                        profileUrlTwo: data.profileUrl,
+                      };
+                      socket.emit("join_room", Joindata);
+                      axios
+                        .get(
+                          "https://zhaoxilin.shop/api/chats/messages/" +
+                            data.roomId,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                              }
+                            })
+                        .then((res) => {
+                          console.log(res);
+                          setNowRoom(res.data.chatMessageList);
+                          setrealroom(data.roomId);
+                        });
+                    }}  >
+                <img src={profileUrl === data.profileUrlTwo ? data.profileUrl: data.profileUrlTwo} alt="사진" />
+              </div>
+    
+              <div className="SecondBox" onClick={() => {
+                      setModalIsOpen(true);
+                      const Joindata = {
+                        roomId: data.roomId,
+                        senderNick: data.senderNick,
+                        receiverNick: data.receiverNick,
+                        profileUrlTwo: data.profileUrl,
+                      };
+                      socket.emit("join_room", Joindata);
+                      axios
+                        .get(
+                          "https://zhaoxilin.shop/api/chats/messages/" +
+                            data.roomId,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                              }
+                            })
+                        .then((res) => {
+                          console.log(res);
+                          setNowRoom(res.data.chatMessageList);
+                          setrealroom(data.roomId);
+                        });
+                    }} >
+                <div className="ChatName">{data.receiverNick === nickname ? data.senderNick:data.receiverNick}</div>
+                <div className="ChatContent">{data.message.length > 27 ? data.message.slice(0,27) + '...' : data.message}</div>
+              </div>
+    
+    
+              <div className="ThirdBox" onClick={() => {
+                      setModalIsOpen(true);
+                      const Joindata = {
+                        roomId: data.roomId,
+                        senderNick: data.senderNick,
+                        receiverNick: data.receiverNick,
+                        profileUrlTwo: data.profileUrl,
+                      };
+                      socket.emit("join_room", Joindata);
+                      axios
+                        .get(
+                          "https://zhaoxilin.shop/api/chats/messages/" +
+                            data.roomId,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                              }
+                            })
+                        .then((res) => {
+                          console.log(res);
+                          setNowRoom(res.data.chatMessageList);
+                          setrealroom(data.roomId);
+                        });
+                    }} >
+              <div className="ChatTime"> {data.time}</div>
+              </div>
+              <div className="fourBox">
+              <div className="ChatDel">
+                <BsTrashFill onClick={()=>{
+                  axios
+                  .delete("https://zhaoxilin.shop/api/chats/rooms/" + data.roomId,{
+                    headers: { Authorization: `Bearer ${token}` },
+                  })
+                  .then((res) => {
+                    console.log(res.data)
+                    alert("방에 나갔습니다");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+                }}  className="Trash"/>
+              </div>
+              </div>
+            </div>
+            </div>
+          )
+        })}
       </ScrollToBottom>
-
       <ChatRoom
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
@@ -72,6 +168,7 @@ const ChatListModal = ({ open, onClose }) => {
     </Modal>
   );
 };
+
 
 Modal.setAppElement("#root");
 export default ChatListModal;
