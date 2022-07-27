@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import cancel from '../../images/cancel.png'
 import back from '../../images/back.png'
+import axios from 'axios'
 
 
 toast.configure();
@@ -52,7 +53,16 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
     socket.emit("back", realroom);
     onClose();
     setNowChat([]);
+    refetch()
   };
+
+  const refetch = () =>{
+    axios.get("https://zhaoxilin.shop/api/chats/rooms",{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+      }
+    })
+  }
 
   React.useEffect(() => {
     socket.on("test", (data) => {

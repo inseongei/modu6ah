@@ -52,7 +52,6 @@ function Place() {
         </div>
       </Container>
       <ChatIcon/>
-      <Footer />
     </div>
   );
 }

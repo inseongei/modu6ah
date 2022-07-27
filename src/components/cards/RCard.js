@@ -28,6 +28,20 @@ function RCard() {
     return newArray;
   };
 
+  // 데이터 변경 될 때 새로운 데이터 불러오기
+  const refetch = () =>{
+    axios
+    .get("https://zhaoxilin.shop/api/reviews", token ?{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    } : null)
+    .then((res) => {
+      console.log(res.data.reviewPosts)
+      let data = res.data.reviewPosts
+      setData([...data]);
+    });
+  }
 
   React.useEffect(() => {
     axios
@@ -67,10 +81,9 @@ function RCard() {
     return <div></div>;
   }
 
-
   return (
     <>
-    <InfiniteScroll
+        <InfiniteScroll
         dataLength={data.length}
         next={axiosData}
         hasMore={noMore}
@@ -80,27 +93,30 @@ function RCard() {
           <p>여기가 카드 끝이여 </p>
         }
       ></InfiniteScroll>
-    <Container>
-      {data &&
-        data.map((item, index) => (
-          item &&
-          <div className="card" key={index}>
-            {/* 카드 위쪽 '타이틀' */}
-            <div className="card-top">
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.productType}</p>
-              </div>
+      <Container>
+      <div className="RcardBox">
+        {data &&
+          data.map((data, idx) => {
+            return (
+              data &&
+                <div className="card" key={idx}>
 
-              <div>
-                {item.bookmarkStatus === true ? (
+                <div className="firstTitle">
+                
+                <div className="FirstBox">
+                  <span className="FTitle">{data.title.length > 13 ? data.title.slice(0,8) + '..' : data.title}</span>
+                  <span className="FType">{data.productType.length > 6 ? data.productType.slice(0,6) + '..'  : data.productType}</span>
+                </div>
+
+                <div>
+                {data.bookmarkStatus === true ? (
                   <BsFillBookmarkFill
-                    className="bookmark2"
+                  className={token ? "Fbook2" : "none"}
                     onClick={() => {
                       axios
                         .put(
                           "https://zhaoxilin.shop/api/reviews/bookmark/" +
-                            item.reviewPostId,
+                            data.reviewPostId,
                           null,
                           {
                             headers: {
@@ -111,19 +127,18 @@ function RCard() {
                           }
                         )
                         .then((res) => {
-                          console.log(res);
-                          window.location.reload();
+                          refetch()
                         });
                     }}
                   ></BsFillBookmarkFill>
                 ) : (
                   <BsBookmark
-                    className="bookmark"
+                  className={token ? "Fbook" : "none"}
                     onClick={() => {
                       axios
                         .put(
                           "https://zhaoxilin.shop/api/reviews/bookmark/" +
-                            item.reviewPostId,
+                            data.reviewPostId,
                           null,
                           {
                             headers: {
@@ -134,149 +149,179 @@ function RCard() {
                           }
                         )
                         .then((res) => {
-                          console.log(res);
-                          window.location.reload();
+                          refetch()
                         });
                     }}
                   />
                 )}
               </div>
-            </div>
-            <a>
-              <MdOutlinePlace /> {item.url}
-            </a>
-            {/* 카드 중간 '이미지'*/}
-            <div
-              className="card-body"
-              onClick={() => {
-                navigate("/reviewdetail/" + item.reviewPostId);
-              }}
-            >
-              <div className="image">
-                <img src={item.imageUrl[0]} alt="사진" />
-              </div>
-              {/* 카드 아래쪽 '아이디 및 내용물' */}
-              <div className="profile_box">
-                <div className="detail_profile">
-                  <img src={item.profileUrl} alt="프로필" />
+
                 </div>
-                <strong>{item.nickname}</strong>
-              </div>
-              <div className="content">
-                <p>{item.content}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-    </Container>
+
+                <div className="Furl" onClick={() => {
+                navigate("/reviewdetail/" + data.reviewPostId);
+              }}><MdOutlinePlace/>{data.url.length > 6 ? data.url.slice(0,5) : data.url}</div>
+
+                <div className="RcardImg" onClick={() => {
+                navigate("/reviewdetail/" + data.reviewPostId);
+              }}><img src={data.imageUrl[0]} alt="사진"/></div>
+
+                <div className="RcardProfile" onClick={() => {
+                navigate("/reviewdetail/" + data.reviewPostId);
+              }}>
+                  <div className="Rprofile" onClick={() => {
+                navigate("/reviewdetail/" + data.reviewPostId);
+              }}><img src={data.profileUrl} alt="사진"/></div>
+                  <div className="Rnickname" onClick={() => {
+                navigate("/reviewdetail/" + data.reviewPostId);
+              }}>{data.nickname}</div>
+                </div>
+
+                <div className="content" onClick={() => {
+                navigate("/reviewdetail/" + data.reviewPostId);
+              }}>{data.content.length > 6 ? data.content.slice(0,5) : data.content}</div>
+
+                </div>
+            );
+          })}
+                </div>
+      </Container>
+
     </>
   );
 }
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 460px);
-  gap: 3.6em;
-  justify-content: center;
-  align-items: center;
+
+
+  .RcardBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    gap: 2em;
+    margin: auto;
+    padding: 70px 0px;
+    width: 935px;
+    height: 1331px;
+  }
   .card {
     background: white;
-    border-radius: 30px;
-    border: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
-    overflow: hidden;
-    height: 570px;
+    border-radius: 20px;
+    border: 1px solid #A8A8A8;
+    width: 440px;
+    height: 568px;
+    padding: 30px 25px;
   }
-  .card-top {
+
+  .firstTitle{
+    width: 383px;
+    height: 30px;
     display: flex;
     justify-content: space-between;
-    margin: 30px 0px 0px 50px;
-    h3 {
-      font-weight: 700;
-    }
   }
-  .card-top p {
+
+  .FirstBox{
     display: flex;
-    margin-top: 8px;
-    margin-left: 10px;
-    color: gray;
-  }
-
-  .card-top > div {
-    display: flex;
-  }
-
-  .bookmark {
-    margin-right: 60px;
-    width: 34px;
-    height: 34px;
-    cursor: pointer;
-  }
-
-  .bookmark2 {
-    margin-right: 60px;
-    width: 34px;
-    height: 34px;
-    color: #6b4e16;
-    cursor: pointer;
-  }
-
-  a {
-    margin-left: 51px;
-  }
-  .card-body {
-    width: 100%;
-    cursor: pointer;
-    text-align: center;
-  }
-  .image {
-    border-radius: 25px;
-    overflow: hidden;
-  }
-  .card-body img {
-    width: 80%;
-    height: 270px;
-    margin-top: 3px;
-    object-fit: cover;
-    border-radius: 25px;
-  }
-  .profile_box {
-    display: flex;
-    margin-top: 15px;
-    padding-left: 30px;
-  }
-  .detail_profile > img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    margin-left: 10px;
-  }
-  .detail_profile {
-    border-radius: 50%;
-    /* display:flex; */
     align-items: center;
-    display: block;
-    justify-content: center;
   }
 
-  strong {
-    font-family: "Noto Sans KR";
-    margin-top: 12px;
+  .RcardImg{
+    width: 390px;
+    height: 257px;
+    border-radius: 30px;
+    margin-top: 22px;
+    cursor: pointer;
+  }
+
+  .RcardImg >img {
+    width: 380px;
+    height: 250px;
+    border-radius: 30px;
+  }
+
+  .none{
+    display: none;
+  }
+
+  .RcardProfile{
+    display: flex;
+    margin-top: 22px;
+    cursor: pointer;
+  }
+
+  .content{
+    width: 390px;
+    height: 96px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .FTitle{
+    font-size: 26px;
+  }
+
+  .FType{
+    color: #A8A8A8;
+    font-size: 20px;
+    line-height: 23px;
     margin-left: 10px;
   }
-  .card-body p {
-    margin-top: 10px;
-    margin-left: 5px;
+
+  .Furl{
+    color: #3C3C3C;
+    font-size: 16px;
+    margin-top: 13px;
+    cursor: pointer;
   }
-  .content {
-    width: 100%;
-    height: 80px;
-    box-sizing: border-box;
-    overflow: hidden;
-    margin-top: 10px;
-    padding-left: 30px;
-    text-align: left;
-  }
+
+.Fbook2{
+  font-size: 30px;
+  color: #6b4e16;
+  cursor: pointer;
+}
+.Fbook{
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.Fbook2:hover{
+  transform: scale(1.13);
+}
+.Fbook:hover{
+  transform: scale(1.13);
+}
+
+
+.Rprofile{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.Rprofile > img {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #E4E4E4;
+  border-radius: 50%;
+}
+
+.Rnickname{
+  color: #3C3C3C;
+  font-size: 20px;
+  line-height: 23px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
 `;
 
 export default RCard;
