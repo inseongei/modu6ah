@@ -60,7 +60,7 @@ function MainScard() {
                             )
                             .then((res) => {
                               console.log(res);
-                              window.location.reload();
+                              dispatch(GetMainAxois())
                             });
                         }}
                       ></BsFillBookmarkFill>
@@ -83,7 +83,7 @@ function MainScard() {
                             )
                             .then((res) => {
                               console.log(res);
-                              window.location.reload();
+                              dispatch(GetMainAxois())
                             });
                         }}
                       />
@@ -192,7 +192,7 @@ const Container = styled.div`
   }
 
   .checkIcon {
-    margin-right: 60px;
+    margin-right: 65px;
     width: 34px;
     height: 34px;
     cursor: pointer;
