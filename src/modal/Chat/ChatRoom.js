@@ -18,7 +18,7 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
   const Img_Url = localStorage.getItem("profileUrl");
   const [info, setinfo] = React.useState();
 
-  console.log(NowChat)
+  console.log(info)
 
   React.useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {

@@ -33,6 +33,8 @@ const RecruitDetail = () => {
   let { recruitPostId } = useParams();
   const [RroomId, setRroomId] = useState();
 
+  console.log(state)
+
   React.useEffect(() => {
     axios
       .get("https://zhaoxilin.shop/api/recruits/" + recruitPostId)

@@ -28,9 +28,12 @@ function BookScard() {
       console.log(err);
     });
   }
+
+  
   React.useEffect(() => {
     refetch()
   }, []);
+
 
   const recruitsMore = async () => {
     await axios
@@ -47,6 +50,13 @@ function BookScard() {
           : setbook(res.data.recruitBookmarkList.slice(0, 6));
       });
   };
+
+
+
+
+
+
+
 
   return (
     <>
@@ -112,7 +122,7 @@ function BookScard() {
                     navigate("/recruitdetail/" + item.recruitPostId);
                   }}
                 >
-                  <span>{item.title.length > 15 ? item.title.slice(0,14) + '...' : item.title}</span>
+                  <span>{item.title.length > 12 ? item.title.slice(0,11) + '...' : item.title}</span>
                 </div>
                 {/* 카드 내용물 */}
                 <div
@@ -121,10 +131,10 @@ function BookScard() {
                     navigate("/recruitdetail/" + item.recruitPostId);
                   }}
                 >
-                  <div><img src={location} alt="사진"/>{item != null && item.place}</div>
-                  <div><img src={time} alt="사진"/>{item != null && item.time}</div>
-                  <div><img src={calendar} alt="사진"/>{item != null && item.createdAt}</div>
-                  <div><img src={age} alt="사진"/>{item != null && item.age}</div>
+                  <div><img src={location} alt="사진"/>{item.place.length > 14 ? item.place.slice(0,13) + '...' : item.place}</div>
+                  <div><img src={time} alt="사진"/>{item.time}</div>
+                  <div><img src={calendar} alt="사진"/>{item.createdAt}</div>
+                  <div><img src={age} alt="사진"/>{item.age.length > 14 ? item.age.slice(0,13) + '...' : item.age}</div>
                 </div>
               </div>
             );
@@ -163,11 +173,20 @@ const Container = styled.div`
     margin: 20px 20px 25px 20px;
   }
   .card-top > p {
-    margin: 0px 0px 4px 4px;
+    width: 114px;
+    height: 28px;
     background-color: #a8a8a8;
+    border: 1px solid #a8a8a8;
     border-radius: 20px;
-    padding: 6px 15px 7px 15px;
-    color: white;
+    color: #FFFFFF;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
   }
 
   .card-top span {
