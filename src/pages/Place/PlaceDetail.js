@@ -54,6 +54,8 @@ const PlaceDetail = () => {
     <>
       <Header />
       <Container>
+      <div style={{width:"1100px",
+        margin: "0 auto" }}>
         <Title>
           <div className="subject">
             장소 추천
@@ -145,6 +147,7 @@ const PlaceDetail = () => {
           </div>
         </Box>
         <PlaceComment />
+        </div>
       </Container>
       <ChatIcon />
       <Footer />
@@ -154,11 +157,10 @@ const PlaceDetail = () => {
 
 const Title = styled.div`
   padding-top: 40px;
-  
-  margin-left: 10%;
 
   .subject {
     color: #a8a8a8;
+    margin-bottom: 2px;
   }
 
   .page {
@@ -174,7 +176,7 @@ height: 1080px;
 background: white;
 
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
-margin-top: 30px;
+margin-top: 25px;
 margin-bottom: 32px;
 display: flex;
 flex-direction: column;

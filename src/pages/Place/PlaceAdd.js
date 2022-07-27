@@ -132,6 +132,8 @@ function PlaceAdd() {
     <>
       <Header />
       <Container>
+        <div style={{width:"1170px",
+        margin: "0 auto" }}>
         <Title>
           <div className="subject">장소 추천</div>
           <div className="page">
@@ -167,7 +169,6 @@ function PlaceAdd() {
                   }}>
                     &nbsp;(최대 3장)
                   </p>
-
                 </div>
                 
                 {/* <div className="img_border"
@@ -302,6 +303,7 @@ function PlaceAdd() {
             </form>
           </div>
         </Place>
+        </div>
       </Container>
       <ChatIcon />
       <Footer />
@@ -318,9 +320,10 @@ padding-bottom: 10px;
 
 const Title = styled.div`
   padding-top: 40px;
-  margin-left: 160px;
+
   .subject {
     color: #a8a8a8;
+    margin-bottom: 2px;
   }
   .page {
     font-size: 30px;
@@ -333,7 +336,7 @@ width: 1170px;
 height: 750px;
 background: white;
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
-margin-top: 30px;
+margin-top: 27px;
 margin-bottom: 32px;
 display: flex;
 flex-direction: column;
@@ -445,6 +448,7 @@ border-radius: 10px;
     margin-left: 20px;
     margin-top: 10px;
     padding-left: 15px;
+    font-size: 16px;
 
     ::placeholder{
       color: lightgray;
@@ -462,7 +466,7 @@ border-radius: 10px;
     height: 260px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
     word-break: normal;
     outline: none;

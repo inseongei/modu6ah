@@ -59,8 +59,9 @@ function RecruitEdit() {
     <>
       <Header />
       <BackGround>
-      <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
-      <Title>
+      <div style={{width:"1100px",
+        margin: "0 auto" }}>      
+        <Title>
             <div className="subject">체험 모집</div>
             <div className="page">
               <p>수정하기</p>
@@ -168,7 +169,7 @@ function RecruitEdit() {
           </div>
           </Box>
         </Detail>
-      </Grid>
+      </div>
       </BackGround>
       <ChatIcon/>
       <Footer />
@@ -184,10 +185,10 @@ padding-bottom: 10px;
 
 const Title = styled.div`
   padding-top: 40px;
-  margin-left: 160px;
 
   .subject {
     color: #a8a8a8;
+    margin-bottom: 2px;
   }
 
   .page {
@@ -203,7 +204,7 @@ height: 680px;
 background: white;
 
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
-margin-top: 30px;
+margin-top: 27px;
 margin-bottom: 32px;
 display: flex;
 flex-direction: column;
@@ -239,24 +240,17 @@ const Detail = styled.div`
   padding: 8px;
   margin-left: 30px;
   border-radius: 10px;
+
+  ::placeholder{
+    font-size: 18px;
+    color: #A8A8A8;
+  }
 }
 
 .add_input {
   strong {
     font-size: 20px;
   }
-}
-
-.location {
-  input {
-      outline: none;
-  }
-}
-
-.age {
- input {
-  outline: none;
- }
 }
 
   .toggle {
@@ -285,6 +279,11 @@ const Detail = styled.div`
     padding-left: 12px;
     outline: none;
     font-size: 19px;
+
+    ::placeholder{
+      font-size: 19px;
+      color: #A8A8A8;
+    }
   }
 
 
@@ -298,6 +297,7 @@ const Detail = styled.div`
       ::placeholder{
         font-size: 19px;
         padding-left: 4px;
+        color: #A8A8A8;
       }
     }
   }
@@ -312,12 +312,13 @@ const Detail = styled.div`
       ::placeholder{
         font-size: 19px;
         padding-left: 4px;
+        color: #A8A8A8;
       }
     }
   }
 
   .box {
-    margin-top: 120px;
+    margin-top: 105px;
     width: 404px;
   }
 
@@ -327,7 +328,7 @@ const Detail = styled.div`
 
   textarea {
     width: 450px;
-    height: 425px;
+    height: 450px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
     font-size: 20px;
@@ -336,7 +337,11 @@ const Detail = styled.div`
     word-break: normal;
     padding: 20px;
     outline: none;
-    resize: vertical; /* 상하만 가능 */
+    
+    ::placeholder{
+      font-size: 19px;
+      color: #A8A8A8;
+    }
   }
 
   .Detail_profile {
