@@ -313,7 +313,7 @@ const Container = styled.div`
 width: 100%;
 font-family: "Nanum Gothic";
 background: #f5f5f5;
-padding-bottom: 50px;
+padding-bottom: 10px;
 `;
 
 const Title = styled.div`
@@ -445,6 +445,10 @@ border-radius: 10px;
     margin-left: 20px;
     margin-top: 10px;
     padding-left: 15px;
+
+    ::placeholder{
+      color: lightgray;
+    }
   }
   .card-right {
     width: 530px;
@@ -464,18 +468,18 @@ border-radius: 10px;
     outline: none;
     resize: vertical; /* 상하만 가능 */
     margin-bottom: 20px;
+    padding: 10px;
   }
   .position {
     margin-left: 3px;
     font-color: #000000;
     input {
       outline: none;
-      padding-left: 16px;
       font-size: 19px;
       height: 55px;
       ::placeholder{
         font-size: 16px;
-        padding-left: 4px;
+        color: lightgray;
       }
     }
   }

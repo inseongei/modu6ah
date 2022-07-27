@@ -53,8 +53,7 @@ function RecruitEdit() {
   }, []);
 
   const detail = useSelector((state) => state.post.list);
-
-  console.log(detail);
+  // console.log(detail);
 
   return (
     <>
@@ -121,7 +120,7 @@ function RecruitEdit() {
                       timeIntervals={15}
                       timeCaption="Time"
                       dateFormat="h:mm aa"
-                      placeholderText="시간을 입력하세요"
+                      placeholderText={detail.time}
                       locale={ko}
                     />
                      {/* <input type="time"
@@ -180,7 +179,7 @@ function RecruitEdit() {
 const BackGround = styled.div`
 font-family: "Nanum Gothic";
 background: #F5F5F5;
-padding-bottom: 100px;
+padding-bottom: 10px;
 `;
 
 const Title = styled.div`

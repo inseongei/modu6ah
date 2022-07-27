@@ -74,7 +74,7 @@ const RecruitComment = () => {
             <div className='inputBox'>
               <input
                 type="text"
-                placeholder='댓글을 입력해주세요'
+                placeholder='댓글을 입력하세요'
                 onChange={e =>
                   setComment(e.target.value)}
               /> 
@@ -146,7 +146,9 @@ padding-bottom: 180px;
 
 .comment_section{
 display: flex;
-margin-left: 150px;
+justify-content:center;
+align-items:center;
+margin-left: 10px;
 }
 
 .h1Box{
@@ -154,12 +156,11 @@ margin-left: 150px;
 }
 
 .h1Box > h1{
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 26px;
   line-height: 31px;
-  margin-top: 10px;
+  margin-bottom: 10px;
   margin-left: 10px;
 }
 
@@ -168,7 +169,7 @@ display: flex;
 }
 
 .inputBox{
-  width: 1050px;
+  width: 1030px;
   display: flex;
   margin-bottom: 10px;
 }
@@ -181,6 +182,10 @@ display: flex;
   border-radius: 10px;
   outline: none;
   padding-left: 20px;
+
+  ::placeholder {
+    color: lightgray;
+  }
 }
 
 .btnBox{
@@ -194,10 +199,11 @@ display: flex;
   font-size: 16px;
   background: #3C3C3C;
   border-radius: 30px;
-  width: 71px;
+  width: 75px;
+  height: 44px;
   color: #FFFFFF;
-  margin-top: 5px;
-  margin-left:30px;
+  margin-top: 8px;
+  margin-left: 27px;
 }
 
 .box{
@@ -251,9 +257,8 @@ cursor: pointer;
   border: 0;
   outline: 0;
 
-
   img {
-    width: 35px;
+   width: 35px;
    height: 35px;
    border-radius: 50%;
    margin-top: 15px;
