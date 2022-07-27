@@ -8,23 +8,21 @@ const PlaceComment = () => {
   const [comment, setComment] = useState('');
   const [state, setState] = useState('');
   const nickname = localStorage.getItem("nickname");
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const { placePostId } = useParams();
+  // console.log(state)
 
-  console.log(state)
   //댓글 작성
   const addComment = () => {
+    setComment('')
     const comment_data = {
       comment, nickname
     }
     axios.post('https://zhaoxilin.shop/api/places/' + placePostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-      .then((res) => {
-        // console.log(res)
-        window.alert('댓글 작성 성공')
-        window.location.replace("/placedetail/" + placePostId)
+      .then((res) => { 
+        refetch()
       })
       .catch((err) => {
         // console.log(err.response.data.message);
@@ -32,16 +30,24 @@ const PlaceComment = () => {
       })
   }
 
-  // 댓글 조회
+  //실시간 데이터 반영
+  const refetch = () =>{
+    axios
+    .get('https://zhaoxilin.shop/api/places/' + placePostId, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => {
+      setState(res.data.placeComments)
+    })
+    .catch((err) => {
+      // console.log(err);
+    });
+  }
+
   React.useEffect(() => {
-    axios.get('https://zhaoxilin.shop/api/places/' + placePostId,
-      { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-      .then((res) => {
-        setState(res.data.placeComments)
-      })
-      .catch((err) => {
-        // console.log(err)
-      });
+    refetch()
   }, []);
 
   //댓글 삭제
@@ -51,17 +57,13 @@ const PlaceComment = () => {
       .delete('https://zhaoxilin.shop/api/places/' + placePostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
-        console.log(response);
-        alert("삭제가 완료되었습니다.");
-        window.location.replace("/placedetail/" + placePostId)
+        refetch();
       })
       .catch((error) => {
         alert("게시글을 삭제할 권한이 없습니다.");
         // console.log(error)
-
       });
   };
-
   return (
     <CommentBox>
       <div className='comment'>
@@ -75,7 +77,8 @@ const PlaceComment = () => {
                 type="text"
                 placeholder='댓글을 입력하세요'
                 onChange={e =>
-                  setComment(e.target.value)}
+                setComment(e.target.value)}
+                value={comment}
               />
             
             <div className='btnBox'>
@@ -168,7 +171,7 @@ display: flex;
 }
 
 .inputBox{
-  width: 1030px;
+  width: 1010px;
   display: flex;
   margin-bottom: 10px;
 }
@@ -208,7 +211,7 @@ display: flex;
 .box{
   width: 920px;
   display:flex;
-  margin-left: 160px;
+  margin-left: 85px;
   margin-top: 5px;
   padding: 25px;
   overflow: hidden;
