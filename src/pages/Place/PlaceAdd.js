@@ -15,8 +15,8 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ChatIcon from '../../components/main/ChatIcon'
-import PlaceComment from "../../components/pages/PlaceComment";
+import ChatIcon from '../../components/main/ChatIcon';
+import img_delete from '../../images/delete (1).png';
 
 function PlaceAdd() {
   const [title, setTitle] = useState("");
@@ -169,8 +169,6 @@ function PlaceAdd() {
                   </p>
 
                 </div>
-                {/* <div className="img_border"
-                  style={{ marginRight: "100px" }}> */}
                 
                 {/* <div className="img_border"
                  style={{ marginLeft: "10px" }}
@@ -188,7 +186,7 @@ function PlaceAdd() {
                           onClick={() =>
                             handleDeleteImage(id)}>
                           이미지 삭제
-                          {/* <img src={img_delete} /> */}
+                          <img src={img_delete} />
                         </button>
                       </div>
                     </div>
@@ -311,6 +309,13 @@ function PlaceAdd() {
   );
 }
 
+const Container = styled.div`
+width: 100%;
+font-family: "Nanum Gothic";
+background: #f5f5f5;
+padding-bottom: 50px;
+`;
+
 const Title = styled.div`
   padding-top: 40px;
   margin-left: 160px;
@@ -325,13 +330,6 @@ const Title = styled.div`
   }
 `;
 
-const Container = styled.div`
-width: 100%;
-font-family: "Nanum Gothic";
-background: #F5F5F5;
-padding-bottom: 50px;
-`;
-
 const Place = styled.div`
 width: 1170px;
 height: 750px;
@@ -344,7 +342,7 @@ margin-bottom: 32px;
 display: flex;
 flex-direction: column;
 
-border: 1px solid lightgray;
+border: 1px solid #E4E4E4;
 border-radius: 10px;
   
   .place {
@@ -418,17 +416,25 @@ border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 35px;
+    margin-left: 25px;
   
     .img_box_size {
       padding: 0;
     }
    
     button {
-     border-radius:20px;
+     border-radius:10px;
      background-color: transparent !important;
      border: 1px solid #A8A8A8;
-     color: #A8A8A8;
+     padding-left: 15px;
+     color: #3C3C3C;
+    }
+
+    img {
+      width: 16px;
+      height: 17px;
+      border: none;
+      margin: 0px 6px 1px 6px;
     }
   }
 
@@ -449,7 +455,7 @@ border-radius: 10px;
   }
 
   .card-left > div > input {
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
     width: 350px;
     height: 50px;
@@ -469,7 +475,7 @@ border-radius: 10px;
   textarea {
     width: 500px;
     height: 260px;
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
     font-size: 20px;
     font-weight: 400;
@@ -532,7 +538,7 @@ const MapSearch = styled.div`
     background: #FAFAFA;
     color: #3C3C3C;
     border: 1px solid #A8A8A8;
-    padding: 6px 12px 6px 12px;
+    padding: 10px 12px 10px 12px;
     cursor: pointer;
     }
   }
