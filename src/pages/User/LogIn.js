@@ -1,3 +1,4 @@
+//로그인 페이지
 import React, { useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
@@ -55,10 +56,13 @@ function LogIn() {
 
   return (
     <>
-      <Header />
+      <Header /> 
+      <BackGround>
       <Grid height="100vh" overflowY="hidden">
+       
         <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
-          <Container>
+            <Box> 
+               <Container>
             <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
@@ -111,8 +115,8 @@ function LogIn() {
                       </SocialLogin>
                     </Grid>
                     <Grid margin="42px 0 0 0" height="auto" align="center">
-                      <JoinLink>아이디 찾기 | &nbsp;</JoinLink>
-                      <JoinLink>비밀번호 찾기 | &nbsp;</JoinLink>
+                      {/* <JoinLink>아이디 찾기 | &nbsp;</JoinLink>
+                      <JoinLink>비밀번호 찾기 | &nbsp;</JoinLink> */}
                       <JoinLink
                         onClick={() => {
                           navigate(`/signup`);
@@ -125,9 +129,12 @@ function LogIn() {
                 </form>
               </Grid>
             </Grid>
-          </Container>
+             </Container>
+            </Box>
         </Grid>
+       
       </Grid>
+       </BackGround>
     </>
   );
 }
@@ -139,7 +146,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 5px;
+  margin-top: 70px;
 
   .has-error {
     .form-label {
@@ -156,6 +163,26 @@ const Container = styled.div`
       color: #e25c3d;
     }
   }
+`;
+
+const BackGround = styled.div`
+background: #FAFAFA;
+`;
+
+const Box = styled.div`
+width: 600px;
+height: 700px;
+
+background: white;
+
+margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+margin-top: 80px;
+margin-bottom: 32px;
+display: flex;
+flex-direction: column;
+
+border: 1px solid lightgray;
+border-radius: 10px;
 `;
 
 const LoginTitle = styled.h1`
