@@ -48,7 +48,8 @@ const RecruitAdd = () => {
     <>
       <Header />
       <BackGround>
-        <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+        <div style={{width:"1100px",
+        margin: "0 auto" }}>
           <Title>
             <div className="subject">체험 모집</div>
             <div className="page">
@@ -100,7 +101,7 @@ const RecruitAdd = () => {
                   <div className="time"
                   style={{
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "center"
                   }}>
                     <Time>시간</Time>
                     <DatePicker
@@ -162,7 +163,7 @@ const RecruitAdd = () => {
               </div>
             </Box>
           </Detail>
-        </Grid>
+        </div>
       </BackGround>
       <ChatIcon />
       <Footer />
@@ -178,12 +179,11 @@ padding-bottom: 100px;
 
 const Title = styled.div`
   padding-top: 40px;
-  margin-left: 160px;
 
   .subject {
     color: #a8a8a8;
+    margin-bottom: 2px;
   }
-
   .page {
     font-size: 30px;
     font-weight: 700;
@@ -194,7 +194,6 @@ const Detail = styled.div`
 .container {
   display: flex;
 }
-
 .add_input {
   width: 530px;
   height: 570px;
@@ -204,12 +203,10 @@ const Detail = styled.div`
   font-size: 25px;
   margin-left: 50px;
 }
-
 .add_input > div {
   margin: 40px 0px 0px 10px;
   object-fit: cover;
 }
-
 .add_input > div > input {
   border: 1px solid #A8A8A8;
   display: inline-block;
@@ -218,25 +215,21 @@ const Detail = styled.div`
   margin-left: 30px;
   border-radius: 10px;
 }
-
 .add_input {
   strong {
     font-size: 20px;
   }
 }
-
 .location {
   input {
       outline: none;
   }
 }
-
 .age {
  input {
   outline: none;
  }
 }
-
   .toggle {
     display: flex;
     margin-left: 20px;
@@ -247,12 +240,10 @@ const Detail = styled.div`
     margin: 20px 0px 0px 30px;
     font-size: 20px;
   }
-
   .input__section {
     margin: 40px 0px 0px 70px;
     font-size: 20px;
   }
-
   .input__section > div > input {
     border: 1px solid #A8A8A8;
     display: inline-block;
@@ -262,10 +253,13 @@ const Detail = styled.div`
     border-radius: 10px;
     padding-left: 12px;
     outline: none;
-    font-size: 19px;
+    font-size: 18px;
+
+    ::placeholder{
+      font-size: 19px;
+      color: #A8A8A8;
+    }
   }
-
-
   .location {
     input {
       outline: none;
@@ -276,6 +270,7 @@ const Detail = styled.div`
       ::placeholder{
         font-size: 19px;
         padding-left: 4px;
+        color: #A8A8A8;
       }
     }
   }
@@ -290,12 +285,13 @@ const Detail = styled.div`
       ::placeholder{
         font-size: 19px;
         padding-left: 4px;
+        color: #A8A8A8;
       }
     }
   }
 
   .box {
-    margin-top: 120px;
+    margin-top: 105px;
     width: 404px;
   }
 
@@ -305,7 +301,7 @@ const Detail = styled.div`
 
   textarea {
     width: 450px;
-    height: 425px;
+    height: 450px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
     font-size: 20px;
@@ -316,7 +312,6 @@ const Detail = styled.div`
     outline: none;
     resize: vertical; /* 상하만 가능 */
   }
-
   .Detail_profile {
     width: 144px;
     height: 144px;
@@ -326,7 +321,6 @@ const Detail = styled.div`
     display: block;
     justify-content: center;
   }
-
   .Detail_username {
     width: 70%;
   }
@@ -344,7 +338,6 @@ const Detail = styled.div`
     position: absolute;
     left: -1000%;
   }
-
   label {
     margin-top: 16px;
     position: relative;
@@ -355,7 +348,6 @@ const Detail = styled.div`
     border-radius: 60px;
     transition: background 0.4s;
   }
-
   label:after {
     content: "";
     position: absolute;
@@ -386,15 +378,12 @@ const Detail = styled.div`
 const Box = styled.div`
 width: 1100px;
 height: 680px;
-
 background: white;
-
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
-margin-top: 30px;
+margin-top: 27px;
 margin-bottom: 32px;
 display: flex;
 flex-direction: column;
-
 border: 1px solid lightgray;
 border-radius: 10px;
 `;
@@ -434,7 +423,6 @@ const Btn = styled.div`
   display: flex;
   margin-right: -190px;
   margin-left: 170px;
-
   .btn {
     width: 30%;
     height: 30px;
