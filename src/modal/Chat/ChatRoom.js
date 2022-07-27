@@ -106,7 +106,7 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
           </div>
         }) }
 
-{NowChat&& NowChat.map((data,idx)=>{
+    {NowChat&& NowChat.map((data,idx)=>{
           return  nickname === data.senderNick ? (
             <div key={idx}>
             <div className="MyChat">
