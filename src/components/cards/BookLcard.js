@@ -4,10 +4,13 @@ import styled from "styled-components";
 import { MdOutlinePlace } from "react-icons/md";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import { FaStar } from "react-icons/fa";
 
 function BookLcard() {
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true);
+
+  console.log(book)
 
   React.useEffect(() => {
     axios
@@ -47,85 +50,84 @@ function BookLcard() {
         {book &&
           book.map((data, idx) => {
             return (
-              <div className="card" key={idx}>
-                {/* 카드 위쪽 '타이틀' */}
-                <div className="card-top">
-                  <div>
-                    <h3>{data.title}</h3>
-                    <p>{data.productType}</p>
-                  </div>
+                <div className="card">
 
-                  <div>
-                    {data.bookmarkStatus === true ? (
-                      <BsFillBookmarkFill
-                        className="bookmark2"
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
-                                data.placePostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              console.log(res);
-                              window.location.reload();
-                            });
-                        }}
-                      />
-                    ) : (
-                      <BsBookmark
-                        className="bookmark"
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
-                                data.placePostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              console.log(res);
-                              window.location.reload();
-                            });
-                        }}
-                      />
-                    )}
-                  </div>
+                <div className="cardin">
+
+                <div className="cardInto">
+
                 </div>
-                <a href={data.url}>
-                  <MdOutlinePlace />
-                  {data.url}
-                </a>
-                {/* 카드 중간 '이미지'*/}
-                <div className="card-body">
-                  <div className="image">
-                    <img src={data.imageUrl[0]} alt="사진" />
-                  </div>
-                  {/* 카드 아래쪽 '아이디 및 내용물' */}
-                  <div className="profile_box">
-                    <div className="detail_profile">
-                      <img src={data.profileUrl} alt="프로필 이미지" />
-                    </div>
-                    <strong>{data.nickname}</strong>
-                  </div>
-                  <div className="content">
-                    <p>{data.content}</p>
-                  </div>
+
                 </div>
-              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             );
           })}
       </Container>
@@ -144,14 +146,19 @@ const Container = styled.div`
   gap: 2em;
   justify-content: center;
   align-items: center;
+
   .card {
     background: white;
-    border-radius: 30px;
-    border: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
+    border-radius: 20px;
+    border: 1px solid #A8A8A8;
     overflow: hidden;
     width: 284px;
     height: 390px;
+  }
+
+  .firstT{
+    width: 165.17px;
+    height: 23px;
   }
   .card-top {
     display: flex;
@@ -162,7 +169,6 @@ const Container = styled.div`
   }
   .card-top p {
     display: flex;
-    margin-top: 8px;
     margin-left: 10px;
     color: gray;
   }
@@ -171,9 +177,23 @@ const Container = styled.div`
     display: flex;
   }
 
+  .titleCard{
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin-left: 16px;
+  }
+
   a {
     text-decoration: none;
     color: black;
+  }
+
+  .cardin{
+    width: 264.43px;
+    height: 350px;
   }
   .bookmark {
     margin-right: 60px;
@@ -194,7 +214,8 @@ const Container = styled.div`
     margin-left: 51px;
   }
   .card-body {
-    width: 100%;
+    width: 264.43px;
+    height: 274px;
     cursor: pointer;
     text-align: center;
   }
@@ -202,9 +223,12 @@ const Container = styled.div`
     border-radius: 25px;
     overflow: hidden;
   }
+
+
+
   .card-body img {
-    width: 80%;
-    height: 270px;
+    width: 264.43px;
+    height: 170.2px;
     margin-top: 3px;
     object-fit: cover;
     border-radius: 25px;

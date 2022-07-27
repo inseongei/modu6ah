@@ -24,7 +24,7 @@ function BookScard() {
         },
       })
       .then((res) => {
-        setbook(res.data.recruitBookmarkList.slice(0, 3));
+        setbook(res.data.recruitBookmarkList.slice(0, 6));
       })
       .catch((err) => {
         console.log(err);
@@ -43,7 +43,7 @@ function BookScard() {
         setbtn(!btn);
         btn
           ? setbook(res.data.recruitBookmarkList)
-          : setbook(res.data.recruitBookmarkList.slice(0, 3));
+          : setbook(res.data.recruitBookmarkList.slice(0, 6));
       });
   };
 
@@ -143,7 +143,7 @@ const Container = styled.div`
   gap: 2em;
   justify-content: center;
   align-items: center;
-  width: 100%;
+
   .card {
     display: flex;
     width: 284px;
@@ -151,7 +151,7 @@ const Container = styled.div`
     background: white;
     border-radius: 20px;
     border: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
+    border: 1px solid #A8A8A8;
   }
   .card-top {
     display: flex;
