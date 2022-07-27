@@ -40,6 +40,8 @@ const RecruitAdd = () => {
     console.log(post_data);
   };
 
+  console.log(time, date)
+
   // 모집중 , 모집완료 상태 변경하기
   const inputChange = () => {
     setOn(!on);
@@ -72,7 +74,8 @@ const RecruitAdd = () => {
                     <div style={{ marginBottom: "34px" }}>
                       <strong>제목</strong>
                       <input
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={(e) => 
+                          setTitle(e.target.value)}
                         style={{ width: "400px" }}
                         type="text"
                         placeholder="제목을 입력하세요"
@@ -113,8 +116,15 @@ const RecruitAdd = () => {
                       timeCaption="Time"
                       dateFormat="h:mm aa"
                       placeholderText="시간을 입력하세요"
-                      locale={ko} 
+                      locale={ko}
                     />
+
+                    
+                     {/* <input type="time"
+                      onChange={(e) =>
+                        setTime(e.target.value)}
+                      placeholder="시간을 입력하세요"
+                    />  */}
                   </div>
                   <div className="location">
                     <strong>위치</strong>
@@ -134,35 +144,6 @@ const RecruitAdd = () => {
                     />
                   </div>
                 </div>
-              </div>
-              <div className="time">
-                <strong>시간</strong>
-                {/* <Timepicker
-               
-                /> */}
-                <input type="time" 
-                onChange={(e) => 
-                  setTime(e.target.value)} 
-                
-                  />
-              </div>
-              <div className="location">
-                <strong>위치</strong>
-                <input 
-                onChange={(e) => 
-                  setPlace(e.target.value)} 
-                  type="text"
-                  
-                  />
-              </div>
-              <div className="age">
-                <strong>연령</strong>
-                <input onChange={(e) => 
-                  setAge(e.target.value)} 
-                  type="text" />
-              </div>
-            </div>
-
 
                 {/* 카드 오른쪽 */}
                 <div className="box">
@@ -201,11 +182,9 @@ background: #F5F5F5;
 const Title = styled.div`
   padding-top: 40px;
   margin-left: 160px;
-
   .subject {
     color: #a8a8a8;
   }
-
   .page {
     font-size: 30px;
     font-weight: 700;
@@ -216,7 +195,6 @@ const Detail = styled.div`
 .container {
   display: flex;
 }
-
 .add_input {
   width: 530px;
   height: 570px;
@@ -226,12 +204,10 @@ const Detail = styled.div`
   font-size: 25px;
   margin-left: 50px;
 }
-
 .add_input > div {
   margin: 40px 0px 0px 10px;
   object-fit: cover;
 }
-
 .add_input > div > input {
   border: 1px solid #A8A8A8;
   display: inline-block;
@@ -240,25 +216,21 @@ const Detail = styled.div`
   margin-left: 30px;
   border-radius: 10px;
 }
-
 .add_input {
   strong {
     font-size: 20px;
   }
 }
-
 .location {
   input {
       outline: none;
   }
 }
-
 .age {
  input {
   outline: none;
  }
 }
-
   .toggle {
     display: flex;
     margin-left: 20px;
@@ -269,12 +241,10 @@ const Detail = styled.div`
     margin: 20px 0px 0px 30px;
     font-size: 20px;
   }
-
   .input__section {
     margin: 40px 0px 0px 70px;
     font-size: 20px;
   }
-
   .input__section > div > input {
     border: 1px solid #A8A8A8;
     display: inline-block;
@@ -286,44 +256,37 @@ const Detail = styled.div`
     outline: none;
     font-size: 19px;
   }
-
   .location {
     input {
       outline: none;
       padding-left: 16px;
       font-size: 19px;
       height: 55px;
-
       ::placeholder{
         font-size: 19px;
         padding-left: 4px;
       }
     }
   }
-
   .age{
     input {
       outline: none;
       padding-left: 13px;
       font-size: 19px;
       height: 55px;
-
       ::placeholder{
         font-size: 19px;
         padding-left: 4px;
       }
     }
   }
-
   .box {
     margin-top: 120px;
     width: 404px;
   }
-
   strong {
     padding-top: 30px;
   }
-
   textarea {
     width: 450px;
     height: 425px;
@@ -337,7 +300,6 @@ const Detail = styled.div`
     outline: none;
     resize: vertical; /* 상하만 가능 */
   }
-
   .Detail_profile {
     width: 144px;
     height: 144px;
@@ -347,7 +309,6 @@ const Detail = styled.div`
     display: block;
     justify-content: center;
   }
-
   .Detail_username {
     width: 70%;
   }
@@ -365,7 +326,6 @@ const Detail = styled.div`
     position: absolute;
     left: -1000%;
   }
-
   label {
     margin-top: 16px;
     position: relative;
@@ -376,7 +336,6 @@ const Detail = styled.div`
     border-radius: 60px;
     transition: background 0.4s;
   }
-
   label:after {
     content: "";
     position: absolute;
@@ -407,15 +366,12 @@ const Detail = styled.div`
 const Box = styled.div`
 width: 1100px;
 height: 680px;
-
 background: white;
-
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
 margin-top: 30px;
 margin-bottom: 32px;
 display: flex;
 flex-direction: column;
-
 border: 1px solid lightgray;
 border-radius: 10px;
 `;
@@ -455,7 +411,6 @@ const Btn = styled.div`
   display: flex;
   margin-right: -190px;
   margin-left: 170px;
-
   .btn {
     width: 30%;
     height: 30px;
