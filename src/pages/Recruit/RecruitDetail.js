@@ -11,7 +11,7 @@ import ChatIcon from '../../components/main/ChatIcon';
 import chatlist from '../../images/chatlist.png';
 import img_location from '../../images/location.png';
 import revise from '../../images/revise.png';
-import img_delete from '../../images/delete.png'
+import img_delete from '../../images/delete (1).png'
 
 import axios from "axios";
 import io from "socket.io-client";
@@ -358,7 +358,7 @@ const Detail = styled.div`
   }
 
   .content {
-    width: 480px;
+    width: 490px;
     height: 384px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
@@ -388,7 +388,7 @@ border-radius: 10px;
 
 const Btn = styled.div`
   display: flex;
-  margin-left: 400px;
+  margin-left: 398px;
   margin-right: 100px;
 
   .btn {
