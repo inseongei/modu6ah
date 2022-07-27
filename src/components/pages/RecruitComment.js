@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import img_delete from '../../images/delete.png';
+import img_delete from '../../images/deletecomment.png';
 
 const RecruitComment = () => {
   const [comment, setComment] = useState('');
@@ -121,11 +121,11 @@ const RecruitComment = () => {
                 </div>
                 {nickname === data.nickname 
                 ? ( <button
-                  id={data.recruitCommentId}
                   className='delete'
                   onClick={deleteComment}
                 >
-                  {/* <img style={} src={img_delete}/> */}
+                  <img id={data.recruitCommentId}
+                  src={img_delete}/>
                 </button>
                 ) : (
                  <></>
@@ -142,6 +142,7 @@ const CommentBox = styled.div`
 font-family: "Nanum Gothic";
 max-width: 100%;
 margin-top: 50px;
+padding-bottom: 180px;
 
 .comment_section{
 display: flex;
@@ -169,6 +170,7 @@ display: flex;
 .inputBox{
   width: 1050px;
   display: flex;
+  margin-bottom: 10px;
 }
 
 .inputBox > input{
@@ -199,11 +201,10 @@ display: flex;
 }
 
 .box{
-  width: 1000px;
+  width: 920px;
   display:flex;
-  // border: 1px solid lightgray;
   margin-left: 210px;
-  margin-top: 20px;
+  margin-top: 5px;
   padding: 25px;
 }
 
@@ -244,15 +245,20 @@ cursor: pointer;
 }
 
 .delete{
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background-color: #A8A8A8;
-  margin-top: 10px;
-  padding-bottom: 30px;
-  padding-top: 2px;
+  widht:0px;
+  height: 0px;
+  display: hidden;
   border: 0;
   outline: 0;
+
+
+  img {
+    width: 35px;
+   height: 35px;
+   border-radius: 50%;
+   margin-top: 15px;
+   position:absolute;
+  }
 }
 `
 export default RecruitComment;

@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import Header from "../../components/main/Header";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import io from "socket.io-client";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
@@ -12,7 +10,6 @@ import { useDispatch } from "react-redux";
 import { createPostDB } from "../../redux/modules/post";
 import Grid from "../../components/elements/Grid";
 import Footer from "../../components/main/Footer";
-import RecruitEdit from "./RecruitEdit";
 import ChatIcon from '../../components/main/ChatIcon'
 
 const RecruitAdd = () => {
@@ -118,8 +115,6 @@ const RecruitAdd = () => {
                       placeholderText="시간을 입력하세요"
                       locale={ko}
                     />
-
-                    
                      {/* <input type="time"
                       onChange={(e) =>
                         setTime(e.target.value)}
@@ -158,7 +153,8 @@ const RecruitAdd = () => {
                     >
                       취소{" "}
                     </button>
-                    <button className="btn" onClick={addPost}>
+                    <button className="btn" 
+                    onClick={addPost}>
                       등록하기
                     </button>
                   </Btn>
@@ -177,6 +173,7 @@ const RecruitAdd = () => {
 const BackGround = styled.div`
 font-family: "Nanum Gothic";
 background: #F5F5F5;
+padding-bottom: 100px;
 `;
 
 const Title = styled.div`
