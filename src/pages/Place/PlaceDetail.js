@@ -54,7 +54,7 @@ const PlaceDetail = () => {
     <>
       <Header />
       <Container>
-      <div style={{width:"1170px",
+      <div style={{width:"1100px",
         margin: "0 auto" }}>
         <Title>
           <div className="subject">
@@ -157,7 +157,6 @@ const PlaceDetail = () => {
 
 const Title = styled.div`
   padding-top: 40px;
-  margin-left: 40px;
 
   .subject {
     color: #a8a8a8;
