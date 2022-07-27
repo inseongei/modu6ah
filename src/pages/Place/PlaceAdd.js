@@ -1,3 +1,4 @@
+//장소 추천 작성 페이지
 import React, { useState } from "react";
 
 //style
@@ -8,8 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FaStar } from "react-icons/fa";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
-import Grid from "../../components/elements/Grid";
 import Modal from "../../modal/Map/Modal";
+import plus from "../../images/plus.png";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import axios from "axios";
@@ -26,14 +27,10 @@ function PlaceAdd() {
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const [rating, setRating] = useState(0);
-
-
   const navigate = useNavigate();
-
 
   // axios.Post 버튼
   const onSubmit = async (e) => {
-
     e.preventDefault();
     e.persist();
 
@@ -45,7 +42,7 @@ function PlaceAdd() {
       formData.append("imageUrl", files[i]);
     }
 
-    for(const [key,value] of formData.entries()) {
+    for (const [key, value] of formData.entries()) {
       console.log(key, value)
     }
     console.log(files.length);
@@ -134,52 +131,81 @@ function PlaceAdd() {
   return (
     <>
       <Header />
-         <Container>
-      <Title>
+      <Container>
+        <Title>
           <div className="subject">장소 추천</div>
           <div className="page">
             <p>작성하기</p>
           </div>
         </Title>
-       
         <Place>
+          {/* 카드 위쪽: 이미지 */}
           <div className="place">
-          
             <form onSubmit={(e) => onSubmit(e)}>
               <input
-              id="input-file"
+                id="input-file"
                 type="file"
                 name="profile_files"
                 multiple="multiple"
-                style={{display:"none"}}
+                style={{ display: "none" }}
                 onChange={handleImageChange}
               />
 
               <div className="imageBox">
-                <label for="input-file">
-                  <BsFillPlusCircleFill 
-                  style={{cursor:"pointer",
-                  marginLeft:"40px"}} />
-                </label>
+                <div className="plus_btn">
+                  <label for="input-file">
+                    <img src={plus} />
+                  </label>
+                  <p style={{
+                    color: "#3C3C3C"
+                  }}>
+                    사진 업로드
+                  </p>
+                  <p style={{
+                    color: "#6B4E16",
+                    marginTop: "-13px",
+                  }}>
+                    &nbsp;(최대 3장)
+                  </p>
 
-                {/* 이미지 미리보기 */}
-                {imageSrc.map((image, id) => (
-                  <div className="img_box_size" key={id}>
-                    <img src={image} alt={`${image}-${id}`} />
-                    <div className="img_btn">
-                    <button onClick={() => handleDeleteImage(id)}>
-                      이미지 삭제</button>
+                </div>
+                {/* <div className="img_border"
+                  style={{ marginRight: "100px" }}> */}
+                
+                <div className="img_border"
+                 style={{ marginLeft: "10px" }}
+                /><div className="img_border"
+                style={{ marginLeft: "10px" }}
+               /><div className="img_border"
+               style={{ marginLeft: "10px" }}
+              />
+                  {/* 이미지 미리보기 */}
+                  {imageSrc.map((image, id) => (
+                    <div className="img_box_size" key={id}>
+                      <img src={image} alt={`${image}-${id}`} />
+                      <div className="img_btn">
+                        <button
+                          onClick={() =>
+                            handleDeleteImage(id)}>
+                          이미지 삭제
+                          {/* <img src={img_delete} /> */}
+                        </button>
                       </div>
-                  </div>
-                ))}
+                    </div>
+                  ))}
+            
               </div>
+
+              {/* 카드 왼쪽: 제목, 주소, 장소, 별점 */}
               <div className="mainBox">
                 <div className="card-left">
                   <div className="position">
                     <strong>제목</strong>
                     <input
                       type="text"
-                      onChange={(e) => setTitle(e.target.value)}
+                      onChange={(e) =>
+                        setTitle(e.target.value)}
+                      placeholder="제목을 입력하세요"
                     />
                   </div>
 
@@ -187,14 +213,12 @@ function PlaceAdd() {
                     <strong>주소</strong>
                     <SearchInput
                       id="address"
-                      className="signup-input-form"
                       type="text"
-                      placeholder="주소를 입력해주세요"
+                      placeholder="주소를 입력하세요"
                       value={region}
                     />
                     <div className="address_btn">
                       <button
-                        className="signup-btn-company"
                         onClick={openModal}
                       >
                         주소 검색
@@ -212,8 +236,9 @@ function PlaceAdd() {
                     <strong>장소</strong>
                     <input
                       type="text"
-                      placeholder="ex) 뽀로로파크, ㅇㅇㅇ"
-                      onChange={(e) => setLocation(e.target.value)}
+                      placeholder="장소명을 입력하세요 (예시)뽀로로파크"
+                      onChange={(e) =>
+                        setLocation(e.target.value)}
                     />
                   </div>
 
@@ -230,7 +255,6 @@ function PlaceAdd() {
                             value={ratingValue}
                             onClick={() => setRating(ratingValue)}
                           />
-
                           <FaStar
                             key={index}
                             size={28}
@@ -256,8 +280,11 @@ function PlaceAdd() {
                     </p>
                   </div>
                 </div>
+
+                {/* 카드 오른쪽: textarea, buttons */}
                 <div className="card-right">
-                  <textarea onChange={(e) => setContent(e.target.value)} />
+                  <textarea onChange={(e) =>
+                    setContent(e.target.value)} />
                 </div>
               </div>
               <Btn>
@@ -273,11 +300,12 @@ function PlaceAdd() {
                   등록하기
                 </button>
               </Btn>
+
             </form>
           </div>
         </Place>
-        </Container>
-        <ChatIcon/>
+      </Container>
+      <ChatIcon />
       <Footer />
     </>
   );
@@ -285,7 +313,7 @@ function PlaceAdd() {
 
 const Title = styled.div`
   padding-top: 40px;
-  margin-left: 130px;
+  margin-left: 160px;
 
   .subject {
     color: #a8a8a8;
@@ -299,23 +327,25 @@ const Title = styled.div`
 
 const Container = styled.div`
 width: 100%;
-background-color: #f5f5f5;
-  `;
+font-family: "Nanum Gothic";
+background: #F5F5F5;
+padding-bottom: 50px;
+`;
 
 const Place = styled.div`
-width: 1200px;
-  height: 950px;
+width: 1170px;
+height: 750px;
 
-  background: white;
+background: white;
 
-  margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
-  margin-top: 50px;
-  margin-bottom: 32px;
-  display: flex;
-  flex-direction: column;
+margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+margin-top: 30px;
+margin-bottom: 32px;
+display: flex;
+flex-direction: column;
 
-  border: 1px solid lightgray;
-  border-radius: 10px;
+border: 1px solid lightgray;
+border-radius: 10px;
   
   .place {
     width: 100%;
@@ -335,36 +365,52 @@ width: 1200px;
   .imageBox {
     min-height: 210px;
     max-height: auto;
-    height: 290px;
-    margin-top: 1rem;
+    height: 210px;
+    margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
+
+    img {
+      width: 37px;
+      height: 37px;
+      border: none;
+    }
   }
 
-  .imageBox > label {
+  .plus_btn {
+    width: 120px;
     margin-left: 20px;
+
+    label {
+      margin-left: 45px;
+      margin-bottom: 15px;
+    }
+
+    p {
+    margin-left: 26px;
+    }
   }
 
-  .img {
-    width: 200px;
-    height: 300px;
-    border: 1px solid #e4e4e4;
-    border-radius: 10px;
-    margin: 20px 0px 20px 40px;
-    overflow: hidden;
+  .img_border{
+    display: hidden;
+    border: 1px dashed lightgray;
+    width: 310px;
+    height: 210px
   }
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    width: 200px;
-    height: 220px;
-    border: 1px solid #e4e4e4;
-    border-radius: 10px;
-    margin: 10px 0px 15px 40px;
+  .img_box_size{
+  
+    img {
+      object-fit: cover;
+      width: 300px;
+      height: 210px;
+      border: 1px solid #e4e4e4;
+      border-radius: 10px;
+      margin: 10px 0px 15px 20px;
+    }
+
   }
 
   .img_btn {
@@ -393,13 +439,18 @@ width: 1200px;
 
   .mainBox {
     display: flex;
-    margin-left: 50px;
+    margin-top: 90px;
+    margin-left: 60px;
+  }
+
+  .card-left {
+    width: 513px;
   }
 
   .card-left > div > input {
     border: 1px solid #e4e4e4;
     border-radius: 10px;
-    width: 330px;
+    width: 350px;
     height: 50px;
     margin-left: 20px;
     margin-top: 10px;
@@ -407,8 +458,7 @@ width: 1200px;
   }
 
   .card-right {
-    width: 600px;
-    height: 440px;
+    width: 530px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -416,8 +466,8 @@ width: 1200px;
   }
 
   textarea {
-    width: 530px;
-    height: 364px;
+    width: 500px;
+    height: 260px;
     border: 1px solid #e4e4e4;
     border-radius: 10px;
     font-size: 20px;
@@ -425,16 +475,31 @@ width: 1200px;
     word-break: normal;
     outline: none;
     resize: vertical; /* 상하만 가능 */
+    margin-bottom: 20px;
   }
 
   .position {
-    margin: 30px 0px 30px 30px;
+    margin-left: 3px;
+    font-color: #000000;
+
+    input {
+      outline: none;
+      padding-left: 16px;
+      font-size: 19px;
+      height: 55px;
+
+      ::placeholder{
+        font-size: 16px;
+        padding-left: 4px;
+      }
+    }
+  }
   }
 
   .star {
     display: flex;
-    margin-left: 30px;
-    margin-top: 35px;
+    margin-left: 4px;
+    margin-top: 33px;
 
     p {
       display: flex;
@@ -445,31 +510,34 @@ width: 1200px;
 
   .star > strong {
     margin-top: 2px;
-    margin-right: 15px;
+    margin-right: 20px;
   }
 `;
 
 const MapSearch = styled.div`
-  margin-left: 30px;
-  margin-bottom: 20px;
+  margin: 20px 0px 20px 2px;
   display: flex;
+ 
 
   .address_btn {
-    margin-top: 22px;
-    margin-left: 16px;
-    
+    margin-left: 10px;
+    margin-top: 20px;
+    width: 100px;
+    height: 35px;
+
     button {
-      border-radius:20px;
-      padding: 5px auto;
-      background-color: transparent !important;
-      border: 1px solid #A8A8A8;
-      color: #A8A8A8;
-     }
+    border-radius: 10px; 
+    font-weight: 700;
+    background: #FAFAFA;
+    color: #3C3C3C;
+    border: 1px solid #A8A8A8;
+    padding: 6px 12px 6px 12px;
+    }
   }
 
   strong {
+    width: 31px;
     margin-top: 23px;
-    
   }
 
   button {
@@ -480,29 +548,27 @@ const MapSearch = styled.div`
 const SearchInput = styled.input`
   border: 1px solid #e4e4e4;
   border-radius: 10px;
-  width: 330px;
+  width: 335px;
   height: 50px;
-  margin-left: 20px;
   outline: none;
 `;
 
 const Btn = styled.div`
-  display: flex;
-  margin-left: 800px;
+display: flex;
+margin-left: 790px;
 
-  .btn {
-    width: 30%;
-    height: 30px;
-    border-radius: 20px;
-    color: white;
-    background-color: #3c3c3c;
-    margin-top: 20px;
-    margin-right: 10px;
-    padding-top: 9px;
-    padding-bottom: 33px;
-    border: 0;
-    outline: 0;
-  }
+.btn {
+  width: 150px;
+  height: 30px;
+  border-radius: 30px;
+  color: white;
+  background-color: #3c3c3c;
+  margin-right: 20px;
+  padding-top: 11px;
+  padding-bottom: 35px;
+  border: 0;
+  outline: 0;
+}
 `;
 
 export default PlaceAdd;
