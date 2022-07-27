@@ -93,21 +93,15 @@ const KakaoMap = () => {
   });
 
   return (
-    <MapBox
+    <div
       id="map"
       style={{
-        width: "1110px",
+        width: "1000px",
         height: "480px",
       }}
       ref={container}
     />
   );
 };
-const MapBox = styled.div`
-  border-radius: 10px;
-`;
 
-const InfoBox = styled.div`
-  margin-bottom: 40px;
-`;
 export default KakaoMap;
