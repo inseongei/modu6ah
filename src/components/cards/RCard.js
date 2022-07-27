@@ -94,7 +94,7 @@ function RCard() {
         }
       ></InfiniteScroll>
       <Container>
-      <div className="RcardBox">
+      <div className="RcardBox animate__animated animate__fadeInUp">
         {data &&
           data.map((data, idx) => {
             return (

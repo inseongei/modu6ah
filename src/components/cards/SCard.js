@@ -183,7 +183,7 @@ const Container = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2em;
     width: 914px;
-    height: 1078px;
+    height: 400px;
     margin: auto;
   }
   .card {
