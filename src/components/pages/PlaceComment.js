@@ -30,7 +30,6 @@ const PlaceComment = () => {
       })
   }
 
-  //실시간 데이터 반영
   const refetch = () =>{
     axios
     .get('https://zhaoxilin.shop/api/places/' + placePostId, {
