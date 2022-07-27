@@ -15,8 +15,8 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ChatIcon from '../../components/main/ChatIcon'
-import PlaceComment from "../../components/pages/PlaceComment";
+import ChatIcon from '../../components/main/ChatIcon';
+import img_delete from '../../images/delete (1).png';
 
 function PlaceAdd() {
   const [title, setTitle] = useState("");
@@ -99,7 +99,7 @@ function PlaceAdd() {
     setRegion(data);
   };
 
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -168,14 +168,15 @@ function PlaceAdd() {
                     &nbsp;(최대 3장)
                   </p>
 
-                </div> 
-                <div className="img_border"
-                 style={{ marginLeft: "10px"}}
+                </div>
+                
+                {/* <div className="img_border"
+                 style={{ marginLeft: "10px" }}
                 /><div className="img_border"
                 style={{ marginLeft: "10px" }}
                /><div className="img_border"
                style={{ marginLeft: "10px" }}
-              />
+              /> */}
                   {/* 이미지 미리보기 */}
                   {imageSrc.map((image, id) => (
                     <div className="img_box_size" key={id}>
@@ -185,7 +186,7 @@ function PlaceAdd() {
                           onClick={() =>
                             handleDeleteImage(id)}>
                           이미지 삭제
-                          {/* <img src={img_delete} /> */}
+                          <img src={img_delete} />
                         </button>
                       </div>
                     </div>
@@ -308,6 +309,13 @@ function PlaceAdd() {
   );
 }
 
+const Container = styled.div`
+width: 100%;
+font-family: "Nanum Gothic";
+background: #f5f5f5;
+padding-bottom: 50px;
+`;
+
 const Title = styled.div`
   padding-top: 40px;
   margin-left: 160px;
@@ -320,13 +328,6 @@ const Title = styled.div`
   }
 `;
 
-const Container = styled.div`
-width: 100%;
-font-family: "Nanum Gothic";
-background: #F5F5F5;
-padding-bottom: 50px;
-`;
-
 const Place = styled.div`
 width: 1170px;
 height: 750px;
@@ -336,7 +337,7 @@ margin-top: 30px;
 margin-bottom: 32px;
 display: flex;
 flex-direction: column;
-border: 1px solid lightgray;
+border: 1px solid #E4E4E4;
 border-radius: 10px;
   
   .place {
@@ -355,7 +356,7 @@ border-radius: 10px;
   .imageBox {
     min-height: 210px;
     max-height: auto;
-    height: 210px;
+    height: 280px;
     margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
@@ -373,6 +374,7 @@ border-radius: 10px;
     label {
       margin-left: 45px;
       margin-bottom: 15px;
+      cursor: pointer;
     }
     p {
     margin-left: 26px;
@@ -384,7 +386,7 @@ border-radius: 10px;
   .img_border{
     border: 1px dashed lightgray;
     width: 310px;
-    height: 210px;
+    height: 220px
   }
   .img_box_size{
   
@@ -401,17 +403,25 @@ border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 35px;
+    margin-left: 25px;
   
     .img_box_size {
       padding: 0;
     }
    
     button {
-     border-radius:20px;
+     border-radius:10px;
      background-color: transparent !important;
      border: 1px solid #A8A8A8;
-     color: #A8A8A8;
+     padding-left: 15px;
+     color: #3C3C3C;
+    }
+
+    img {
+      width: 16px;
+      height: 17px;
+      border: none;
+      margin: 0px 6px 1px 6px;
     }
   }
   .images {
@@ -421,14 +431,14 @@ border-radius: 10px;
   }
   .mainBox {
     display: flex;
-    margin-top: 90px;
+    margin-top: 30px;
     margin-left: 60px;
   }
   .card-left {
     width: 513px;
   }
   .card-left > div > input {
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
     width: 350px;
     height: 50px;
@@ -446,7 +456,7 @@ border-radius: 10px;
   textarea {
     width: 500px;
     height: 260px;
-    border: 1px solid #e4e4e4;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
     font-size: 20px;
     font-weight: 400;
@@ -492,16 +502,18 @@ const MapSearch = styled.div`
  
   .address_btn {
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 25px;
     width: 100px;
     height: 35px;
-    span {
+    
+   span {
     border-radius: 10px; 
     font-weight: 700;
     background: #FAFAFA;
     color: #3C3C3C;
     border: 1px solid #A8A8A8;
-    padding: 6px 12px 6px 12px;
+    padding: 10px 12px 10px 12px;
+    cursor: pointer;
     }
   }
   strong {
