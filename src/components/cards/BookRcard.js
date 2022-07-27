@@ -19,7 +19,6 @@ function BookRcard() {
       },
     })
     .then((res) => {
-      console.log(res)
       setbook(res.data.reviewBookmarkList.slice(0,3));
     })
     .catch((err) => {

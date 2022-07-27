@@ -43,7 +43,6 @@ function BookScard() {
         },
       })
       .then((res) => {
-        console.log(res);
         setbtn(!btn);
         btn
           ? setbook(res.data.recruitBookmarkList)

@@ -119,7 +119,7 @@ function LCard() {
                   <div>
                     {item.bookmarkStatus === true ? (
                       <BsFillBookmarkFill
-                        className="bookmark2"
+                      className={token ? "bookmark2" : "none"}
                         onClick={() => {
                           axios
                             .put(
@@ -141,7 +141,7 @@ function LCard() {
                       />
                     ) : (
                       <BsBookmark
-                        className="bookmark"
+                      className={token ? "bookmark" : "none"}
                         onClick={() => {
                           axios
                             .put(
@@ -256,7 +256,9 @@ const Container = styled.div`
 
 
 
-
+  .none {
+    display: none;
+  }
 
 
 

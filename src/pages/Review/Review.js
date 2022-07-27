@@ -27,7 +27,7 @@ function Review() {
           <div className="image">
              <img src={bottle}/>
           </div>
-          <span>내가 써본 육아템, 알려주고 싶다면?</span>
+          <span className="spanstyle">내가 써본 육아템, 알려주고 싶다면?</span>
           <div className="button">
             {!token ? (
               <Btn
@@ -51,7 +51,6 @@ function Review() {
         </div>
       </Container>
       <ChatIcon/>
-      <Footer />
     </div>
   );
 }
@@ -65,7 +64,7 @@ const Container = styled.div`
     align-items: center;
   }
 
-  span {
+  .spanstyle {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -20,7 +20,6 @@ function BookLcard() {
       },
     })
     .then((res) => {
-      console.log(res);
       setbook(res.data.placeBookmarkList.slice(0, 3));
     })
     .catch((err) => {
