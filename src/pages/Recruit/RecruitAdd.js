@@ -40,6 +40,8 @@ const RecruitAdd = () => {
     console.log(post_data);
   };
 
+  console.log(time, date)
+
   // 모집중 , 모집완료 상태 변경하기
   const inputChange = () => {
     setOn(!on);
@@ -72,7 +74,8 @@ const RecruitAdd = () => {
                     <div style={{ marginBottom: "34px" }}>
                       <strong>제목</strong>
                       <input
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={(e) => 
+                          setTitle(e.target.value)}
                         style={{ width: "400px" }}
                         type="text"
                         placeholder="제목을 입력하세요"
@@ -113,8 +116,15 @@ const RecruitAdd = () => {
                       timeCaption="Time"
                       dateFormat="h:mm aa"
                       placeholderText="시간을 입력하세요"
-                      locale={ko} 
+                      locale={ko}
                     />
+
+                    
+                     {/* <input type="time"
+                      onChange={(e) =>
+                        setTime(e.target.value)}
+                      placeholder="시간을 입력하세요"
+                    />  */}
                   </div>
                   <div className="location">
                     <strong>위치</strong>
@@ -258,6 +268,7 @@ const Detail = styled.div`
     font-size: 19px;
   }
 
+
   .location {
     input {
       outline: none;
@@ -373,6 +384,8 @@ const Detail = styled.div`
   label span {
     display: none;
   }
+
+
 `;
 
 const Box = styled.div`
