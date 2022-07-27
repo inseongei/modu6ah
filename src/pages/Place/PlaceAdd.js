@@ -323,8 +323,7 @@ const Title = styled.div`
   
   .subject {
     color: #a8a8a8;
-    margin-left: 2px;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
   .page {
@@ -465,6 +464,7 @@ border-radius: 10px;
     margin-left: 20px;
     margin-top: 10px;
     padding-left: 15px;
+    font-size: 16px;
 
     ::placeholder{
       color: lightgray;
@@ -484,7 +484,7 @@ border-radius: 10px;
     height: 260px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
     word-break: normal;
     outline: none;
