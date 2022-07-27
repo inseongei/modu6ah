@@ -204,6 +204,7 @@ const Headers = styled.div`
   justify-content: space-between;
   align-items: center;
   color: #3c3c3c;
+  filter: drop-shadow(0px 4px 25px rgba(0, 0, 0, 0.1));
 
   input[id*="answer"] {
     display: none;

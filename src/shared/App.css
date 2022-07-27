@@ -252,11 +252,8 @@ h4 {
   cursor: pointer;
 }
 
-.ChatDel > img{
-  width:20px;
-  height: 20px;
-  cursor: pointer;
-  margin-right: 10px;
+.ChatDel {
+  padding: 20px;
 }
 
 

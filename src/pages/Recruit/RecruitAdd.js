@@ -134,6 +134,35 @@ const RecruitAdd = () => {
                     />
                   </div>
                 </div>
+              </div>
+              <div className="time">
+                <strong>시간</strong>
+                {/* <Timepicker
+               
+                /> */}
+                <input type="time" 
+                onChange={(e) => 
+                  setTime(e.target.value)} 
+                
+                  />
+              </div>
+              <div className="location">
+                <strong>위치</strong>
+                <input 
+                onChange={(e) => 
+                  setPlace(e.target.value)} 
+                  type="text"
+                  
+                  />
+              </div>
+              <div className="age">
+                <strong>연령</strong>
+                <input onChange={(e) => 
+                  setAge(e.target.value)} 
+                  type="text" />
+              </div>
+            </div>
+
 
                 {/* 카드 오른쪽 */}
                 <div className="box">

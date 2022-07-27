@@ -16,7 +16,7 @@ const MyBookmark = () => {
       <Bookmark>
         <div className="title">
           <div className="mypage">마이페이지</div>
-          <div className="booktitle">북마크</div>
+          <div className="booktitle">북마크 관리</div>
         </div>
 
         <div className="MainBox">
@@ -67,8 +67,12 @@ const Bookmark = styled.div`
 
 
   .title {
-    width: 80%;
+    width: 1014px;
+    height: 180px;  
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .mypage {
@@ -111,7 +115,8 @@ const Bookmark = styled.div`
 
   .MainBox {
     border: 1px solid #e4e4e4;
-    width: 80%;
+    width: 1014px;
+    height: 3120.02px;
     margin: 30px auto;
     border-radius: 10px;
     background: #ffffff;
