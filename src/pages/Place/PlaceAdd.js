@@ -283,7 +283,11 @@ function PlaceAdd() {
                 {/* 카드 오른쪽: textarea, buttons */}
                 <div className="card-right">
                   <textarea onChange={(e) =>
-                    setContent(e.target.value)} />
+                    setContent(e.target.value)} 
+                    placeholder="장소와 관련한 주요 사항을 상세하게 설명해주세요.&#13;&#10;
+                    예) 주차장 유무 및 금액대, 아기의자, 아기밥, 키즈존, 금액대, 수유실, 놀이방, 아이 전용 화장실 등
+                    "
+                    />
                 </div>
               </div>
               <Btn>
@@ -498,6 +502,11 @@ border-radius: 10px;
     resize: vertical; /* 상하만 가능 */
     margin-bottom: 20px;
     padding: 10px;
+
+    ::placeholder{
+      font-size: 16px;
+      color: lightgray;
+    }
   }
 
   .position {
