@@ -39,6 +39,7 @@ const RecruitComment = () => {
       },
     })
     .then((res) => {
+      console.log(res.data)
       setState(res.data.recruitComments)
     })
     .catch((err) => {

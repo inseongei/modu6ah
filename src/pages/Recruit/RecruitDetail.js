@@ -38,6 +38,7 @@ const RecruitDetail = () => {
     axios
       .get("https://zhaoxilin.shop/api/recruits/" + recruitPostId)
       .then((response) => {
+        console.log(response.data)
         setState(response.data.recruitDetails);
       })
       .catch((response) => {

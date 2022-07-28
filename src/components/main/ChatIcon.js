@@ -10,6 +10,8 @@ const ChatIcon = () => {
     const [modalIsOpen, setModalIsOpen] = React.useState(false);
     const [notify, setNotify] = React.useState([]);
     const nickname = localStorage.getItem("nickname");
+    const token = localStorage.getItem('accessToken')
+    
   // 상대방이 보낸 메시지를 알림 이벤트 경로로 데이터를 받음
   React.useEffect(() => {
     socket.off("notify").on("notify", (data) => {
@@ -44,7 +46,7 @@ const ChatIcon = () => {
   return (
     <>
     <Box>
-    <div className='chatIconBox' onClick={messageBtn} >
+    <div className={token ? 'chatIconBox' : 'none'} onClick={messageBtn} >
       <span className='ChatBox'>채팅 목록</span>
       <span><img src ={chat} alt="채팅" className="chatImg"/></span>
     </div>
@@ -95,6 +97,10 @@ cursor: pointer;
   align-items: center;
   color: #F4B03E;
   margin-right: 5px;
+}
+
+.none{
+  display: none;
 }
 `
 

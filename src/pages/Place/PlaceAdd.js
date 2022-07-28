@@ -64,7 +64,7 @@ function PlaceAdd() {
         })
         .then((res) => {
           console.log(res);
-          // navigate("/place");
+          navigate("/place");
         })
         .catch((err) => {
           console.log(err);
