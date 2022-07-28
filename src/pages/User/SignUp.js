@@ -29,7 +29,7 @@ const SignUp = () => {
 
   // 유효성 검사
   const [isEmail, setIsEmail] = useState(false);
-  const [OverlapEmail, checkOverlapEmail] = useState(false);
+  const [OverLapEmail, checkOverlapEmail] = useState(false);
   const [OverLapNickName, checkOverlapNickName] = useState(false);
   const [isNickname, setIsNickname] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
@@ -155,7 +155,7 @@ const SignUp = () => {
   const register = (e) => {
     e.preventDefault();
     if (email && nickname && password && passwordCheck.length > 0 &&
-      OverlapEmail === true && OverLapNickName === true) {
+      OverLapEmail === true && OverLapNickName === true) {
       setDisable(true)
       setModalIsOpen(true)
       axios
@@ -219,7 +219,7 @@ const SignUp = () => {
 
                         </div>
                         <div className="message_div">
-                          {OverlapEmail ? (
+                          {OverLapEmail ? (
                             <span
                               className="print_message"
                               style={{ color: "#5493f1" }}
@@ -342,7 +342,7 @@ const SignUp = () => {
                             disabled={disable}
                             onClick={register}
                           >
-                            회원가입</LoginBtn>
+                            가입 완료</LoginBtn>
                           {/* 이메일 인증코드, 데이터 등 EmailAlert으로 넘김 */}
                           <EmailAlert
                             emailcode={emailcode}
@@ -351,7 +351,6 @@ const SignUp = () => {
                             onClose={() =>
                               setModalIsOpen(false)}
                           />
-                        
                       </Grid>
                     </div>
                   </div>
@@ -390,6 +389,8 @@ border-radius: 10px;
     margin-top: 10px;
     font-weight: bold;
     color: #3C3C3C;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .form-input {
@@ -430,6 +431,8 @@ border-radius: 10px;
 const Title = styled.h1`
   font-size: 28px;
   font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 `;
 
 const LoginBtn = styled.button`
@@ -440,6 +443,8 @@ const LoginBtn = styled.button`
   background-color: #3c3c3c;
   text-align: center;
   border-radius: 10px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 
   justify-content: center;
   align-items: center;
@@ -468,6 +473,8 @@ const Box = styled.div`
     margin-top: 3px;
     width: 100px;
     height: 35px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   
 
     button {
