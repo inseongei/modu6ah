@@ -167,7 +167,7 @@ const RecruitAdd = () => {
 const BackGround = styled.div`
 font-family: "Nanum Gothic";
 background: #F5F5F5;
-padding-bottom: 100px;
+padding-bottom: 60px;
 `;
 
 const Title = styled.div`
