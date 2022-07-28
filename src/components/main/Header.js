@@ -218,12 +218,12 @@ const Headers = styled.div`
   input[id*="answer"] + label {
     display: block;
     cursor: pointer;
-    font-family: 'NanumGothic';
-    font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
+    font-style: normal;
     font-size: 16px;
     line-height: 18px;
-    margin-left: 5px;
+    margin-left: 4px;
   }
 
   .searchicon{
@@ -338,7 +338,8 @@ const Headers = styled.div`
     font-size: 20px;
     font-weight: 700;
     color: #f4b03e;
-    font-family: 'NanumGothic';
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
   .logo_container {
     display: flex;
@@ -449,7 +450,6 @@ const Headers = styled.div`
   }
 
   .LogoOut > a {
-    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -458,12 +458,13 @@ const Headers = styled.div`
     cursor: pointer;
     margin-right: 62px;
     margin-left: 32px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
 
   .LogoOutTwo {
-    font-family: 'NanumGothic';
-    font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
@@ -484,9 +485,9 @@ const Headers = styled.div`
   
 
   .Login > a {
-    font-family: 'NanumGothic';
-    font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
+    font-style: normal;
     font-size: 16px;
     line-height: 18px;
     color: #3c3c3c;
