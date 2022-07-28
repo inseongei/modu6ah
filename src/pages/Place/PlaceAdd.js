@@ -279,11 +279,14 @@ function PlaceAdd() {
                 </div>
               </div>
               <Btn>
-              <a href="/place">
-                    <button className="cancel">
-                      취소{" "}
-                    </button>
-                    </a>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    navigate(`/place`);
+                  }}
+                >
+                  취소{" "}
+                </button>
                 <button className="btn" type="submit">
                   등록하기
                 </button>
@@ -585,7 +588,6 @@ const SearchInput = styled.input`
 const Btn = styled.div`
 display: flex;
 margin-left: 790px;
-
 .btn {
   width: 150px;
   height: 30px;
@@ -599,20 +601,6 @@ margin-left: 790px;
   outline: 0;
   font-weight: 700;
   font-family: 'NanumGothic';
-}
-
-.cancel {
-  width: 150px;
-  height: 43px;
-  border-radius: 20px;
-  color: white;
-  background-color: #3c3c3c;
-  margin-top: 2px;
-  margin-right: 20px;
-  padding-top: 9px;
-  padding-bottom: 33px;
-  border: 0;
-  outline: 0;
 }
 `;
 
