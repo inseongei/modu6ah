@@ -358,7 +358,7 @@ const Headers = styled.div`
     display: none;
     font-size: 20px;
   }
-
+ 
   .header__left {
     display: flex;
   }

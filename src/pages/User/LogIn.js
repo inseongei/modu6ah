@@ -39,7 +39,7 @@ function LogIn() {
         Swal.fire({
           text: `로그인 성공!`,
           icon: "success",
-          confirmButtonText: "확인",
+          confirmButtonText: "확인", 
         }).then((result) => {
           if (result.isConfirmed) {
             navigate("/");

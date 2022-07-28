@@ -42,7 +42,6 @@ const MainSearch = () => {
     }
   }
 
-
   return (
     <>
       <Header />

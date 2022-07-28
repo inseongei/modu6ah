@@ -1,4 +1,6 @@
 import axios from "axios";
+import Swal from "sweetalert2";
+
 
 // Actions
 const CREATE = "post/CREATE";
@@ -43,10 +45,8 @@ export const createPostDB = (post_data) => {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        alert('게시물 작성에 성공하였습니다.')
         dispatch(createPost(response.data));
-        window.alert("게시물 작성을 성공했습니다.");
-        console.log("게시물 성공");
         window.location.href = "/recruit";
       })
       .catch((error) => {

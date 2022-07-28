@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import plus from "../../images/plus.png";
+import Swal from "sweetalert2";
 
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -61,15 +62,30 @@ function ReviewEdit() {
           },
         })
         .then((res) => {
-        //  console.log(res);
-          alert(res.data.message);
-          navigate('/review')
+          Swal.fire({
+            text: `게시글 수정 완료!`,
+            icon: "success",
+            confirmButtonText: "확인", 
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/reviewdetail/' + reviewPostId )
+            }
+          });
+          
         })
         .catch((error) => {
-        //   console.log(error);
+          Swal.fire({
+            text: `게시글 수정 실패!`,
+            icon: "error",
+            confirmButtonText: "확인", 
+          })
         });
     } else {
-      alert("수정할 내용을 작성해주세요.");
+      Swal.fire({
+        text: `수정할 내용을 적어주세요`,
+        icon: "warning",
+        confirmButtonText: "확인", 
+      })
     }
   };
 

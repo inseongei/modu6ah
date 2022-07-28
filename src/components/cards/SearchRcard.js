@@ -10,6 +10,7 @@ function SearchRcard({searchdata}) {
   const navigate = useNavigate();
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true)
+  const [athis, setathis] = React.useState(6)
 
   const refetch = () =>{
     axios
@@ -26,29 +27,23 @@ function SearchRcard({searchdata}) {
     });
   }
 
-  React.useEffect(() => {
-    refetch()
-  }, []);
 
 
-  const ReviewMore = async () => {
-    await axios.get("https://zhaoxilin.shop/api/mypage/bookmark/",
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res)=>{
-      console.log(res)
-      setbtn(!btn)
-      btn ? setbook(res.data.reviewBookmarkList) : setbook(res.data.reviewBookmarkList.slice(0,3)) 
-    })
+
+  const SearchMore =  () => {
+    setbtn(!btn);
+    if(btn === false){
+      setathis(searchdata.length)
+    } else{
+      setathis(6)
+    }
   };
 
   return (
     <>
       <Container>
-        {searchdata &&
-          searchdata.map((data, idx) => {
+        {searchdata.slice(0,athis) &&
+          searchdata.slice(0,athis).map((data, idx) => {
             return (
                 <div className="card" key={idx}>
 
@@ -64,55 +59,6 @@ function SearchRcard({searchdata}) {
                   </span>
                 </div>
                 
-                <div className="bookpos">
-                    {data.bookmarkStatus === true ? (
-                      <BsFillBookmarkFill
-                        className="bookmark2"
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/reviews/bookmark/" +
-                                data.reviewPostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              console.log(res);
-                              refetch()
-                            });
-                        }}
-                      />
-                    ) : (
-                      <BsBookmark
-                        className="bookmark"
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/reviews/bookmark/" +
-                                data.reviewPostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              console.log(res);
-                              refetch()
-                            });
-                        }}
-                      />
-                    )}
-                  </div>
                 </div>
 
                 <div className="BookRegion" >
@@ -143,7 +89,7 @@ function SearchRcard({searchdata}) {
           })}
       </Container>
       <div className="btnBox">
-        <button className="MoreBtn" onClick={ReviewMore}>
+        <button className="MoreBtn" onClick={SearchMore}>
           {btn ? "더보기" : "닫기"}
         </button>
       </div>
@@ -315,7 +261,7 @@ margin-left: 8px;
     height: 280px;
   }
   .bookmark {
-    margin-right: 60px;
+    margin-right: 30px;
     width: 34px;
     height: 34px;
     cursor: pointer;

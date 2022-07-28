@@ -8,117 +8,49 @@ import time from '../../images/time.png'
 import age from '../../images/age.png'
 import calendar from '../../images/calendar.png'
 import axios from "axios";
-import InfiniteScroll from "react-infinite-scroll-component";
 
-function SearchScard({ searchdata }) {
+function SearchScard({Morerecruit,keyword}) {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [book, setbook] = React.useState();
-  const [btn, setBtn] = useState();
+  const [btn, setBtn] = useState(false);
   const [noMore, setnoMore] = useState(true)
   const [index, setindex] = useState(1)
   const token = localStorage.getItem('accessToken')
+  const [athis, setathis] = React.useState(6)
 
-  // React.useEffect(() => {
-  //   axios
-  //     .get("https://zhaoxilin.shop/api/search", {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //       }
-  //     })
-  //     .then((res) => {
-  //       // console.log(res)
-  //       let data = res.data.resultsInRecruit.slice(0, 6)
-  //       setData([...data])
-  //     });
-  // }, []);
+  console.log(keyword)
 
   const refetch = () =>{
-    axios
-    .get("https://zhaoxilin.shop/api/mypage/bookmark/", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-    .then((res) => {
-      setbook(res.data.recruitBookmarkList.slice(0, 6));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
-
-  const recruitsMore = async () => {
-    await axios
-      .get("https://zhaoxilin.shop/api/search/recruits", {
+      axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`,{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
-      .then((res) => {
-        setBtn(!btn);
-        btn
-          ? searchdata(res.data.resultsInRecruit)
-          : searchdata(res.data.resultsInRecruit.slice(0, 6));
-      });
+      }) 
+      .then((res) => { 
+        console.log(res.data.resultsInRecruit) 
+      }); 
+  }
+
+  // 검색쪽 더보기 기능
+  const SearchMore =  () => {
+    setBtn(!btn);
+    if(btn === false){
+      setathis(Morerecruit.length)
+    } else{
+      setathis(6)
+    }
   };
 
   return (
     <>
       <Container>
-        {searchdata &&
-          searchdata.map((item, idx) => {
+        {Morerecruit.slice(0,athis) &&
+          Morerecruit.slice(0,athis).map((item, idx) => {
             return (
               <div className="card" key={idx}>
                 <div className="card-top">
                   {item.status === true ? <p>모집완료</p> : <span>모집중</span>}
-                  {item.bookmarkStatus === true ? (
-                    <BsFillBookmarkFill
-                      className="checkIcon"
-                      onClick={() => {
-                        axios
-                          .put(
-                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
-                              item.recruitPostId,
-                            null,
-                            {
-                              headers: {
-                                Authorization: `Bearer ${localStorage.getItem(
-                                  "accessToken"
-                                )}`,
-                              },
-                            }
-                          )
-                          .then((res) => {
-                            console.log(res);
-                            refetch()
-                          });
-                      }}
-                    />
-                  ) : (
-                    <BsBookmark
-                      className="icon"
-                      onClick={() => {
-                        axios
-                          .put(
-                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
-                              item.recruitPostId,
-                            null,
-                            {
-                              headers: {
-                                Authorization: `Bearer ${localStorage.getItem(
-                                  "accessToken"
-                                )}`,
-                              },
-                            }
-                          )
-                          .then((res) => {
-                            console.log(res);
-                            refetch()
-                          });
-                      }}
-                    />
-                  )}
                 </div>
                 {/* 카드 타이틀 */}
                 <div
@@ -147,8 +79,8 @@ function SearchScard({ searchdata }) {
       </Container>
       <div className="btnBox">
         <button className="MoreBtn" 
-        onClick={recruitsMore}>
-          {btn ? "더보기" : "닫기"}
+        onClick={SearchMore}>
+          {btn ? "닫기" :"더보기" }
         </button>
       </div>
       <hr className="BookHr"/>
@@ -213,7 +145,7 @@ const Container = styled.div`
   }
 
   .icon {
-    margin-right: 60px;
+    margin-right: 40px;
     width: 30px;
     height: 30px;
     color: black;

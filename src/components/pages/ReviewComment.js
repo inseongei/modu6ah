@@ -18,7 +18,7 @@ const ReviewComment = () => {
     const comment_data = {
       comment, nickname
     }
-    axios.post('https://zhaoxilin.shop/api/places/' + reviewPostId + '/comments',
+    axios.post('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => { 
