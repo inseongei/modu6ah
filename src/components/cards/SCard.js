@@ -162,7 +162,7 @@ function SCard() {
                 >
                   <div><img src={location} alt="사진"/>{item.place.length > 14 ? item.place.slice(0,13) + '...' : item.place}</div>
                   <div><img src={time} alt="사진"/>{item != null && item.time}</div>
-                  <div><img src={calendar} alt="사진"/>{item != null && item.createdAt}</div>
+                  <div><img src={calendar} alt="사진"/>{item != null && item.date}</div>
                   <div><img src={age} alt="사진"/>{item.age.length > 14 ? item.age.slice(0,13) + '...' : item.age}</div>
                 </div>
               </div>
