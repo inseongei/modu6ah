@@ -168,6 +168,8 @@ margin-left: 10px;
   line-height: 31px;
   margin-bottom: 10px;
   margin-left: 10px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 }
 
 .add_comment{
