@@ -31,6 +31,7 @@ function Place() {
               </a>
 
             ) : (
+              
               <a href="/placeadd">
                 <Btn>
                   추천글 작성하기
