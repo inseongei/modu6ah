@@ -66,87 +66,87 @@ function SearchScard({ searchdata }) {
   return (
     <>
       <Container>
-        <div className="test">
-          {searchdata &&
-            searchdata.map((item, idx) => {
-              return (
-                <div className="card animate__animated animate__fadeInUp" key={idx}>
-                  <div className="card-top">
-                    {item.status === true ? <p>모집완료</p> : <span>모집중</span>}
-                    {item.bookmarkStatus === true ? (
-                      <BsFillBookmarkFill
-                        className={token ? "checkIcon" : "none"}
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
+        {searchdata &&
+          searchdata.map((item, idx) => {
+            return (
+              <div className="card" key={idx}>
+                <div className="card-top">
+                  {item.status === true ? <p>모집완료</p> : <span>모집중</span>}
+                  {item.bookmarkStatus === true ? (
+                    <BsFillBookmarkFill
+                      className="checkIcon"
+                      onClick={() => {
+                        axios
+                          .put(
+                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
                               item.recruitPostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              refetch()
-                            });
-                        }}
-                      />
-                    ) : (
-                      <BsBookmark
-                        className={token ? "icon" : "none"}
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
+                            null,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem(
+                                  "accessToken"
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            console.log(res);
+                            refetch()
+                          });
+                      }}
+                    />
+                  ) : (
+                    <BsBookmark
+                      className="icon"
+                      onClick={() => {
+                        axios
+                          .put(
+                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
                               item.recruitPostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              refetch()
-                            });
-                        }}
-                      />
-                    )}
-                  </div>
-                  {/* 카드 타이틀 */}
-                  <div
-                    className="titleTwo"
-                    onClick={() => {
-                      navigate("/recruitdetail/" + item.recruitPostId);
-                    }}
-                  >
-                    <span className="spantitle">{item.title.length > 12 ? item.title.slice(0, 11) + '...' : item.title}</span>
-                  </div>
-                  {/* 카드 내용물 */}
-                  <div
-                    className="card-bottom"
-                    onClick={() => {
-                      navigate("/recruitdetail/" + item.recruitPostId);
-                    }}
-                  >
-                    <div><img src={location} alt="사진" />{item.place.length > 14 ? item.place.slice(0, 13) + '...' : item.place}</div>
-                    <div><img src={time} alt="사진" />{item != null && item.time}</div>
-                    <div><img src={calendar} alt="사진" />{item != null && item.createdAt}</div>
-                    <div><img src={age} alt="사진" />{item.age.length > 14 ? item.age.slice(0, 13) + '...' : item.age}</div>
-                  </div>
+                            null,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${localStorage.getItem(
+                                  "accessToken"
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            console.log(res);
+                            refetch()
+                          });
+                      }}
+                    />
+                  )}
                 </div>
-              );
-            })}
-        </div>
+                {/* 카드 타이틀 */}
+                <div
+                  className="titleTwo"
+                  onClick={() => {
+                    navigate("/recruitdetail/" + item.recruitPostId);
+                  }}
+                >
+                  <span>{item.title.length > 12 ? item.title.slice(0,11) + '...' : item.title}</span>
+                </div>
+                {/* 카드 내용물 */}
+                <div
+                  className="card-bottom"
+                  onClick={() => {
+                    navigate("/recruitdetail/" + item.recruitPostId);
+                  }}
+                >
+                  <div><img src={location} alt="사진"/>{item.place.length > 14 ? item.place.slice(0,13) + '...' : item.place}</div>
+                  <div><img src={time} alt="사진"/>{item.time}</div>
+                  <div><img src={calendar} alt="사진"/>{item.createdAt}</div>
+                  <div><img src={age} alt="사진"/>{item.age.length > 14 ? item.age.slice(0,13) + '...' : item.age}</div>
+                </div>
+              </div>
+            );
+          })}
       </Container>
       <div className="btnBox">
-        <button className="MoreBtn">
+        <button className="MoreBtn" onClick={recruitsMore}>
           {btn ? "더보기" : "닫기"}
         </button>
       </div>
@@ -155,17 +155,12 @@ function SearchScard({ searchdata }) {
   );
 }
 const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2em;
   justify-content: center;
   align-items: center;
 
-  .test{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2em;
-    width: 914px;
-    height: 200px;
-    margin: auto;
-  }
   .card {
     display: flex;
     width: 284px;
@@ -204,7 +199,7 @@ const Container = styled.div`
     height: 28px;
     background: #F4B03E;
     border: 1px solid #F4B03E;
-    border-radius: 20px;
+    border-radius: 30px;
     color: #FFFFFF;
     font-family: 'NanumGothic';
     font-style: normal;
@@ -216,13 +211,8 @@ const Container = styled.div`
     align-items: center;
   }
 
-  .spantitle{
-    display: flex;
-    justify-content: flex-start;
-  }
-
   .icon {
-    margin-right: 35px;
+    margin-right: 60px;
     width: 30px;
     height: 30px;
     color: black;
@@ -268,13 +258,6 @@ const Container = styled.div`
     top: 0px;
     color: #6b4e16;
   }
-
-  .none {
-    display: none;
-  }
-
-
-
   .checkIcon:hover {
     transform: scale(1.13);
   }
