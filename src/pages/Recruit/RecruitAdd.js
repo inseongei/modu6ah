@@ -218,16 +218,6 @@ const Detail = styled.div`
     font-size: 20px;
   }
 }
-.location {
-  input {
-      outline: none;
-  }
-}
-.age {
- input {
-  outline: none;
- }
-}
   .toggle {
     display: flex;
     margin-left: 20px;
