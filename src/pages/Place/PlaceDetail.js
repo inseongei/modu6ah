@@ -161,10 +161,17 @@ const Title = styled.div`
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .page {
     font-size: 30px;
+    font-weight: 700;
+  }
+
+  p {
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
   }
 `;
@@ -258,6 +265,8 @@ const ContentBox = styled.div`
 
     h2 {
       margin-top: 2px;
+     font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
     }
 
     span {
@@ -269,6 +278,8 @@ const ContentBox = styled.div`
       color: #A8A8A8;
       margin-left: 9px;
       margin-top: 5px;
+      font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
     }
   }
 
@@ -305,7 +316,7 @@ const ContentBox = styled.div`
     align-items: center;
 
     p {
-      margin-top: 14px;
+      margin-top: 18px;
       margin-left: 10px;
     }
   }
@@ -317,9 +328,9 @@ const ContentBox = styled.div`
   }
 
   .nickname {
-    font-family: "Noto Sans KR";
-    font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
+    font-style: normal;
     font-size: 20px;
     line-height: 29px;
     margin-left: 30px;
