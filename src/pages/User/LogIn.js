@@ -47,7 +47,7 @@ function LogIn() {
         });
         localStorage.setItem("profileUrl", response.data.profileUrl);
         localStorage.setItem("accessToken", response.data.accessToken);
-        localStorage.setItem('nickname',response.data.nickname)
+        localStorage.setItem('nickname', response.data.nickname)
       })
       .catch((error) => {
         alert("로그인을 다시 해주세요");
@@ -57,83 +57,88 @@ function LogIn() {
 
   return (
     <>
-      <Header /> 
+      <Header />
       <BackGround>
-      <Grid height="100vh" overflowY="hidden">
-        <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
-            <Box> 
-             <Container>
-            <Grid height="700px">
-              <Grid maxWidth="550px" margin="0 auto">
-                <Grid align="center" height="100px" margin="0 0 32 0">
-                  <LoginTitle>로그인</LoginTitle>
-                </Grid>
-                <form onSubmit={submit}>
-                  <FormGroup>
-                    <Grid margin="0 -32px; 0">
-                      <label className="form-label">이메일</label>
+        <Grid height="100vh" overflowY="hidden">
+          <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
+            <Box>
+              <Container>
+                <Grid height="700px">
+                  <Grid maxWidth="550px" margin="0 auto">
+                    <Grid align="center" height="100px" margin="0 0 32 0">
+                      <LoginTitle>로그인</LoginTitle>
                     </Grid>
-                    <Grid margin="0 20% 0">
-                      <input
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="form-input"
-                        name="email"
-                        placeholder="이메일을 입력하세요"
-                        required
-                      />
-                    </Grid>
-                  </FormGroup>
-                  <FormGroup>
-                    <Grid margin="0 -25px; 0">
-                      <label className="form-label">비밀번호</label>
-                    </Grid>
-                    <Grid margin="0 20% 0">
-                      <input
-                        onChange={(e) => setPw(e.target.value)}
-                        className="form-input"
-                        type="password"
-                        name="password"
-                        placeholder="비밀번호를 입력하세요"
-                        maxLength="20"
-                        required
-                      />
-                    </Grid>
-                  </FormGroup>
-                  <Grid height="auto">
-                    <Grid margin="0 20% 0" height="auto">
-                      <LoginBtn type="submit">로그인</LoginBtn>
-                    </Grid>
-                    <Grid height="auto">
-                      <FormSeperator>OR</FormSeperator>
-                    </Grid>
-                    <Grid margin="32px 0 0 0" height="auto" align="center">
-                      <SocialLogin
-                        onClick={kakaoURL}
-                      >
-                        <RiKakaoTalkFill size="30" />
-                        <p>Login with Kakao</p>
-                      </SocialLogin>
-                    </Grid>
-                    <Grid margin="42px 0 0 0" height="auto" align="center">
-                      {/* <JoinLink>아이디 찾기 | &nbsp;</JoinLink>
+                    <form onSubmit={submit}>
+                      <FormGroup>
+                        <Grid margin="0 -32px; 0">
+                          <label className="form-label">이메일</label>
+                        </Grid>
+                        <Grid margin="0 20% 0">
+                          <input
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="form-input"
+                            name="email"
+                            placeholder="이메일을 입력하세요"
+                            required
+                          />
+                        </Grid>
+                      </FormGroup>
+                      <FormGroup>
+                        <Grid margin="0 -25px; 0">
+                          <label className="form-label">비밀번호</label>
+                        </Grid>
+                        <Grid margin="0 20% 0">
+                          <input
+                            onChange={(e) => setPw(e.target.value)}
+                            className="form-input"
+                            type="password"
+                            name="password"
+                            placeholder="비밀번호를 입력하세요"
+                            maxLength="20"
+                            required
+                          />
+                        </Grid>
+                      </FormGroup>
+                      <Grid height="auto">
+                        <Grid margin="0 20% 0" height="auto">
+                          <LoginBtn type="submit">로그인</LoginBtn>
+                        </Grid>
+                        <Grid height="auto">
+                          <FormSeperator>OR</FormSeperator>
+                        </Grid>
+                        <Grid margin="32px 0 0 0" height="auto" align="center">
+                          <SocialLogin
+                            onClick={kakaoURL}
+                          >
+                            <RiKakaoTalkFill size="30" />
+                            <p style={{
+                              fontFamily: 'Nanum Gothic',
+                              fontWeight: "700"
+                            }}>
+                              Login with Kakao
+                            </p>
+                          </SocialLogin>
+                        </Grid>
+                        <Grid margin="42px 0 0 0" height="auto" align="center">
+                          {/* <JoinLink>아이디 찾기 | &nbsp;</JoinLink>
                       <JoinLink>비밀번호 찾기 | &nbsp;</JoinLink> */}
-                      <JoinLink
-                        onClick={() => {
-                          navigate(`/signup`);
-                        }}
-                      >
-                        회원가입 &nbsp;
-                      </JoinLink>
-                    </Grid>
+                          <JoinLink
+                            onClick={() => {
+                              navigate(`/signup`);
+                            }}
+                          >
+                            회원가입 &nbsp;
+                          </JoinLink>
+                        </Grid>
+                      </Grid>
+                    </form>
                   </Grid>
-                </form>
-              </Grid>
-            </Grid>
-             </Container>
+                </Grid>
+              </Container>
             </Box>
+          </Grid>
         </Grid>
-      </Grid>
-       </BackGround>
+      </BackGround>
     </>
   );
 }
@@ -151,6 +156,8 @@ const Container = styled.div`
   .has-error {
     .form-label {
       color: #e25c3d;
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
     }
     .form-input {
       border: 1px solid #e25c3d;
@@ -187,8 +194,9 @@ border-radius: 10px;
 
 const LoginTitle = styled.h1`
   font-size: 28px;
-  font-weight: bold;
   margin: 0 0 8px 0;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 `;
 
 const SocialLogin = styled.a`
@@ -229,6 +237,8 @@ const FormSeperator = styled.p`
   text-align: center;
   margin-top: 20px;
   margin-bottom: -12px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 800;
 `;
 
 const FormGroup = styled.div`
@@ -246,6 +256,8 @@ const FormGroup = styled.div`
     margin-bottom: 6px;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .form-input {
@@ -304,6 +316,8 @@ const JoinLink = styled.a`
     opacity 0.1s ease-in-out;
   cursor: pointer;
   text-decoration: none;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 
   &:hover {
     color: #111111;

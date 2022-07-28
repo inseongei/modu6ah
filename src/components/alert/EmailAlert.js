@@ -5,12 +5,12 @@ import axios from "axios";
 import email from '../../images/email.png';
 import Grid from "../elements/Grid";
 import Fin from '../../images/cancel.png';
-
 import { useNavigate } from "react-router-dom";
 
 const EmailAlert = ({ open, onClose, emailcode, data }) => {
     const navigate = useNavigate();
     const [code, setCode] = useState('');
+    const [newcode, setNewCode] = useState('');
     // console.log(code)
 
     //인증 코드가 input 값과 같으면 회원가입 완료
@@ -21,18 +21,30 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
                 )
                 .then((response) => {
                     alert(`${data.nickname}님! 회원가입을 축하드립니다.`);
-                    navigate('/login');
-                    console.log(response);
+                    navigate('/');
                 })
                 .catch((err) => {
-                    console.log(err);
                 })
         } else {
             return null
         }
     };
 
-    console.log(code);
+    const register = (e) => {
+        e.preventDefault();
+          axios
+            .post("https://zhaoxilin.shop/api/users/signup/authMail",
+              data.email
+            )
+            .then((response) => {
+              console.log(response);
+              setNewCode(response.data.authCode)
+            })
+            .catch((error) => {
+              // console.log(error);
+              console.log(error.response.data.Message);
+            });
+      }
 
     if (!open) return null;
     return (
@@ -48,7 +60,8 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
                     </div>
                     <Logo>
                         <div className="email_img">
-                            <img src={email} alt="로고" />
+                            <img src={email}
+                             alt="로고" />
                         </div>
                     </Logo>
                     <Text>
@@ -63,18 +76,18 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
                         />
                     </div>
 
-                    <LoginBtn
-                    // onClick={() => { navigate(`/login`) }}
+                    <Btn
+                   onClick={register}
                     >
                         번호 재발급
-                    </LoginBtn>
+                    </Btn>
 
-                    <LoginBtn
+                    <Btn
                         onClick={test}
                         style={{ marginLeft: "10px" }}
                     >
                         인증 확인
-                    </LoginBtn>
+                    </Btn>
                 </Grid>
             </DetailContainer>
 
@@ -101,8 +114,9 @@ font-family: "Nanum Gothic";
 
   p {
     color: #6B4E16;
-    font-weight: bolder;
     margin-top: 20px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
 .input_box {
@@ -113,6 +127,11 @@ font-family: "Nanum Gothic";
         border-radius: 10px;
         border: 1px solid #A8A8A8;
         outline: none;
+
+        ::placeholder {
+            color: #A8A8A8;
+          
+        }
     }
 }
 
@@ -142,12 +161,13 @@ const Logo = styled.h1`
 const Text = styled.div`
 margin-top: 20px;
 font-weight: bolder;
+font-family: 'Nanum Gothic', sans-serif;
+font-weight: 700;
 `;
 
-const LoginBtn = styled.button`
+const Btn = styled.button`
 width: 132px;
 height: 40px;
-font-size: 10px;
 color: #ffffff;
 background-color: #3C3C3C;
 text-align: center;
@@ -158,8 +178,9 @@ align-items: center;
 border: 1px solid transparent;
 cursor: pointer;
 margin-top: 27px;
-font-weight: bold;
 font-size: 14px;
+font-family: 'Nanum Gothic', sans-serif;
+font-weight: 700;
 `;
 
 Modal.setAppElement("#root");

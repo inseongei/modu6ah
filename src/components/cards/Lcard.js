@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FaStar } from "react-icons/fa";
+import { GrLocation } from "react-icons/gr";
 
 function LCard() {
   const [data, setData] = useState([]);
@@ -167,7 +167,11 @@ function LCard() {
                 <div className="atag"  onClick={() => {
                     navigate("/placedetail/" + item.placePostId);
                   }}>
-                  <MdOutlinePlace />
+                 <GrLocation
+                    style={{
+                      marginBottom: "3px",
+                      marginRight: "3px"
+                    }} />
                   {item.region.length > 27 ? item.region.slice(0,26) + '...':item.region}
                 </div>
                 <div
@@ -226,6 +230,9 @@ const Container = styled.div`
 
   .threebox{
     display: flex;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    margin-left: 5px;
   }
 
   .threeStar{
@@ -236,7 +243,7 @@ const Container = styled.div`
     line-height: 23px;
     color: #A8A8A8;
     margin-left: 6px;
-    margin-top: 3px;
+    margin-top: 2px;
   }
 
   .threeTitle{
@@ -246,28 +253,12 @@ const Container = styled.div`
     font-size: 26px;
     line-height: 30px;
     margin-right: 20px;
+    margin-top: 2px;
   }
-
-
-
-
-
-
-
-
-
 
   .none {
     display: none;
   }
-
-
-
-
-
-
-
-
 
   .bookmark2 {
     width: 34px;
@@ -284,6 +275,7 @@ const Container = styled.div`
     text-decoration: none;
     color: black;
     cursor: pointer;
+    margin-bottom: 10px;
   }
   .bookmark {
     width: 34px;
@@ -319,7 +311,6 @@ const Container = styled.div`
   .profile_box {
     display: flex;
     margin-top: 15px;
-    margin-bottom: 20px;
     cursor: pointer;
   }
   .profile {
@@ -350,8 +341,8 @@ const Container = styled.div`
   }
   .content {
     margin-right: 20px;
+    margin-top: 18px;
     width: 359px;
-    height: 156px;
     box-sizing: border-box;
     overflow: hidden;
     cursor: pointer;
