@@ -215,7 +215,7 @@ display: flex;
 }
 
 .box{
-  width: 920px;
+  width: 890px;
   display:flex;
   margin-left: 85px;
   margin-top: 5px;
