@@ -35,7 +35,9 @@ function MainScard() {
         <div className="test">
         {post.recruitPosts &&
           post.recruitPosts.map((item, idx) => {
+            
             return (
+              item != null &&
               <div className="card animate__animated animate__fadeInUp" key={idx}>
                 <div className="card-top">
                   {item.status === true ? <p>모집완료</p> : <span>모집중</span>}
