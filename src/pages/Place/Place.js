@@ -74,8 +74,8 @@ const Container = styled.div`
   }
 
   .card_box {
-    padding-top: 70px;
-    background-color: #f5f5f5;
+    padding-top: 50px;
+    background-color: #FAFAFA;
   }
 
   .button {
