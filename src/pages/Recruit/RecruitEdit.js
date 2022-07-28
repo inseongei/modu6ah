@@ -388,8 +388,8 @@ const Detail = styled.div`
   label:after {
     content: "";
     position: absolute;
-    left: 0px;
-    top: 48%;
+    left: 5px;
+    top: 47%;
     width: 20px;
     height: 20px;
     border-radius: 100%;
