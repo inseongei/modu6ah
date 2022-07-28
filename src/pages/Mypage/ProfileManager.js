@@ -173,7 +173,6 @@ const Profile = styled.div`
     height: 40px;
     border: none;
     color: #fff;
-    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
