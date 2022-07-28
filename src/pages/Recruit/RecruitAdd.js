@@ -22,8 +22,8 @@ const RecruitAdd = () => {
   const [place, setPlace] = useState("");
   const [age, setAge] = useState("");
 
- const datemoment = moment(date).format("YYYY-MM-DD")
- const timemoment = moment(time).format("HH:mm")
+  const datemoment = moment(date).format("YYYY-MM-DD")
+  const timemoment = moment(time).format("HH:mm")
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,17 +41,15 @@ const RecruitAdd = () => {
     console.log(post_data);
   };
 
-  // 모집중 , 모집완료 상태 변경하기
-  const inputChange = () => {
-    setOn(!on);
-  };
 
   return (
     <>
       <Header />
       <BackGround>
-        <div style={{width:"1100px",
-        margin: "0 auto" }}>
+        <div style={{
+          width: "1100px",
+          margin: "0 auto"
+        }}>
           <Title>
             <div className="subject">체험 모집</div>
             <div className="page">
@@ -64,17 +62,18 @@ const RecruitAdd = () => {
                 {/* 카드 왼쪽 */}
                 <div className="add_input">
                   <div className="toggle">
-                    <input className="inputbox" type="checkbox" id="chk1" />
-                    <label htmlFor="chk1" onClick={inputChange}>
+                    <input className="inputbox" type="checkbox" id="chk1"
+                     />
+                    <label htmlFor="chk1">
                       <span>선택</span>
                     </label>
-                    <p> {!on ? "모집중" : "모집완료"}</p>
+                    <p>모집중</p>
                   </div>
                   <div className="input__section">
                     <div style={{ marginBottom: "34px" }}>
                       <strong>제목</strong>
                       <input
-                        onChange={(e) => 
+                        onChange={(e) =>
                           setTitle(e.target.value)}
                         style={{ width: "400px" }}
                         type="text"
@@ -101,13 +100,13 @@ const RecruitAdd = () => {
                     </div>
                   </div>
                   <div className="time"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center"
-                  }}>
+                    style={{
+                      display: "flex",
+                      justifyContent: "center"
+                    }}>
                     <Time>시간</Time>
                     <DatePicker
-                     customInput={<Input />}
+                      customInput={<Input />}
                       selected={time}
                       onChange={(time) => setTime(time)}
                       showTimeSelect
@@ -118,11 +117,6 @@ const RecruitAdd = () => {
                       placeholderText="시간을 입력하세요"
                       locale={ko}
                     />
-                     {/* <input type="time"
-                      onChange={(e) =>
-                        setTime(e.target.value)}
-                      placeholder="시간을 입력하세요"
-                    />  */}
                   </div>
                   <div className="location">
                     <strong>위치</strong>
@@ -156,8 +150,8 @@ const RecruitAdd = () => {
                     >
                       취소{" "}
                     </button>
-                    <button className="btn" 
-                    onClick={addPost}>
+                    <button className="btn"
+                      onClick={addPost}>
                       등록하기
                     </button>
                   </Btn>
@@ -239,7 +233,7 @@ const Detail = styled.div`
   }
   
   .toggle > p {
-    margin: 20px 0px 0px 30px;
+    margin: 17px 0px 0px 20px;
     font-size: 20px;
   }
   .input__section {
@@ -342,37 +336,39 @@ const Detail = styled.div`
     position: absolute;
     left: -1000%;
   }
+
   label {
     margin-top: 16px;
     position: relative;
     display: block;
-    width: 60px;
+    width: 59px;
     height: 30px;
-    background: #a58646;
+    background: #F4B03E;
     border-radius: 60px;
     transition: background 0.4s;
   }
+
   label:after {
     content: "";
     position: absolute;
-    left: 0px;
-    top: 48%;
+    left: 33px;
+    top: 47%;
     width: 20px;
     height: 20px;
     border-radius: 100%;
     background-color: #fff;
     transform: translateY(-50%);
-    box-shadow: 1px 3px 4px rgba(0, 0, 0.1);
-    transition: all 0.4s;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0.1);
   }
   
-  input:checked + label:after {
-    left: calc(100% - 25.0px);
-  }
+  // input:checked + label:after {
+  //   left: calc(100% - 25.0px);
+  // }
   
-  input:checked + label {
-    background-color: #6b4e16;
-  }
+
+  // input:checked + label {
+  //   background-color: #F4B03E;
+  // }
   
   label span {
     display: none;

@@ -11,10 +11,10 @@ import { updatePostDB } from "../../redux/modules/post";
 import { useNavigate, useParams } from "react-router-dom";
 import { detailPostDB } from "../../redux/modules/post";
 
-import Grid from "../../components/elements/Grid";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
+import moment from 'moment';
 
 function RecruitEdit() {
   const navigate = useNavigate();
@@ -29,12 +29,15 @@ function RecruitEdit() {
   const [place, setPlace] = useState("");
   const [age, setAge] = useState("");
 
+  const datemoment = moment(date).format("YYYY-MM-DD")
+  const timemoment = moment(time).format("HH:mm")
+
   const upload = () => {
     const newPost = {
       title,
       content,
-      date,
-      time,
+      date: datemoment,
+      time: timemoment,
       place,
       age,
       status,
@@ -59,61 +62,65 @@ function RecruitEdit() {
     <>
       <Header />
       <BackGround>
-      <div style={{width:"1100px",
-        margin: "0 auto" }}>      
-        <Title>
+        <div style={{
+          width: "1100px",
+          margin: "0 auto"
+        }}>
+          <Title>
             <div className="subject">체험 모집</div>
             <div className="page">
               <p>수정하기</p>
             </div>
           </Title>
-        <Detail>
-        <Box>
-          <div className="container">
-            <div className="add_input">
-              <div className="toggle">
-                <input className="inputbox" type="checkbox" id="chk1" />
-                <label htmlFor="chk1" onClick={inputChange}>
-                  <span>선택</span>
-                </label>
-                <p> {status ? "모집완료" : "모집중"}</p>
-              </div>
-              <div className="input__section">
-                <div style={{ marginBottom: "34px" }}>
-                  <strong>제목</strong>
-                  <input
-                    onChange={(e) => 
-                      setTitle(e.target.value)}
-                    style={{ width: "400px" }}
-                    type="text"
-                    placeholder={detail.title}
-                  />
-                </div>
-                <div
-                  className="date"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Monat>날짜</Monat>
-                  <DatePicker
-                    customInput={<Input />}
-                    selected={date}
-                    onChange={(date) => setDate(date)}
-                    locale={ko}
-                    dateFormat="yyyy년 MM월 dd일"
-                  />
-                </div>
-              </div>
-              <div className="time"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}>
+          <Detail>
+            <Box>
+              <div className="container">
+                <div className="add_input">
+                  <div className="toggle">
+                    <input className="inputbox" type="checkbox" id="chk1" />
+                    <label htmlFor="chk1" onClick={inputChange}>
+                      <span>선택</span>
+                    </label>
+                    <p> {status ? "모집완료" : "모집중"}</p>
+                  </div>
+                  <div className="input__section">
+                    <div style={{ marginBottom: "34px" }}>
+                      <strong>제목</strong>
+                      <input
+                        onChange={(e) =>
+                          setTitle(e.target.value)}
+                        style={{ width: "400px" }}
+                        type="text"
+                        placeholder={detail.title}
+                      />
+                    </div>
+                    <div
+                      className="date"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Monat>날짜</Monat>
+                      <DatePicker
+                        customInput={<Input />}
+                        selected={date}
+                        onChange={(date) => setDate(date)}
+                        minDate={new Date()}
+                        dateFormat="yyyy년 MM월 dd일"
+                        showDisabledMonthNavigation
+                        locale={ko}
+                      />
+                    </div>
+                  </div>
+                  <div className="time"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}>
                     <Time>시간</Time>
                     <DatePicker
-                     customInput={<Input />}
+                      customInput={<Input />}
                       selected={time}
                       onChange={(time) => setTime(time)}
                       showTimeSelect
@@ -124,54 +131,49 @@ function RecruitEdit() {
                       placeholderText={detail.time}
                       locale={ko}
                     />
-                     {/* <input type="time"
-                      onChange={(e) =>
-                        setTime(e.target.value)}
-                      placeholder="시간을 입력하세요"
-                    />  */}
                   </div>
-              <div className="location">
-                <strong>위치</strong>
-                <input
-                  onChange={(e) => setPlace(e.target.value)}
-                  type="text"
-                  placeholder={detail.place}
-                />
+                  <div className="location">
+                    <strong>위치</strong>
+                    <input
+                      onChange={(e) => setPlace(e.target.value)}
+                      type="text"
+                      placeholder={detail.place}
+                    />
+                  </div>
+                  <div className="age">
+                    <strong>연령</strong>
+                    <input
+                      onChange={(e) => setAge(e.target.value)}
+                      type="text"
+                      placeholder={detail.age}
+                    />
+                  </div>
+                </div>
+                <div className="box">
+                  <textarea
+                    onChange={(e) => setContent(e.target.value)}
+                    placeholder={detail.content}
+                  />
+                  <Btn>
+                    <button
+                      className="btn"
+                      onClick={() => {
+                        navigate(`/recruit`);
+                      }}
+                    >
+                      취소{" "}
+                    </button>
+                    <button className="btn" onClick={upload}>
+                      등록하기
+                    </button>
+                  </Btn>
+                </div>
               </div>
-              <div className="age">
-                <strong>연령</strong>
-                <input
-                  onChange={(e) => setAge(e.target.value)}
-                  type="text"
-                  placeholder={detail.age}
-                />
-              </div>
-            </div>
-            <div className="box">
-              <textarea
-                onChange={(e) => setContent(e.target.value)}
-                placeholder={detail.content}
-              />
-              <Btn>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    navigate(`/recruit`);
-                  }}
-                >
-                  취소{" "}
-                </button>
-                <button className="btn" onClick={upload}>
-                  등록하기
-                </button>
-              </Btn>
-            </div>
-          </div>
-          </Box>
-        </Detail>
-      </div>
+            </Box>
+          </Detail>
+        </div>
       </BackGround>
-      <ChatIcon/>
+      <ChatIcon />
       <Footer />
     </>
   );
@@ -260,7 +262,7 @@ const Detail = styled.div`
   }
   
   .toggle > p {
-    margin: 20px 0px 0px 30px;
+    margin: 17px 0px 0px 20px;
     font-size: 20px;
   }
 
@@ -376,9 +378,9 @@ const Detail = styled.div`
     margin-top: 16px;
     position: relative;
     display: block;
-    width: 60px;
+    width: 59px;
     height: 30px;
-    background: #a58646;
+    background: #E4E4E4;
     border-radius: 60px;
     transition: background 0.4s;
   }
@@ -386,14 +388,14 @@ const Detail = styled.div`
   label:after {
     content: "";
     position: absolute;
-    left: 0px;
-    top: 48%;
+    left: 5px;
+    top: 47%;
     width: 20px;
     height: 20px;
     border-radius: 100%;
     background-color: #fff;
     transform: translateY(-50%);
-    box-shadow: 1px 3px 4px rgba(0, 0, 0.1);
+    box-shadow: 1px 2px 4px rgba(0, 0, 0.1);
     transition: all 0.4s;
   }
   
@@ -402,7 +404,7 @@ const Detail = styled.div`
   }
   
   input:checked + label {
-    background-color: #6b4e16;
+    background-color: #F4B03E;
   }
   
   label span {
