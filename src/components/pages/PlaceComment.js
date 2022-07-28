@@ -158,11 +158,12 @@ align-items:center;
 
 .h1Box > h1{
   font-style: border;
-  font-weight: 700;
   font-size: 26px;
   line-height: 31px;
   margin-bottom: 15px;
   margin-left: 10px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 }
 
 .add_comment{

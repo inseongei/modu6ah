@@ -229,19 +229,20 @@ const Container = styled.div`
   }
 
   .threeStar{
-    font-family: 'NanumGothic';
-    font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
+    font-style: normal;
     font-size: 20px;
     line-height: 23px;
     color: #A8A8A8;
     margin-left: 6px;
+    margin-top: 3px;
   }
 
   .threeTitle{
-    font-family: 'NanumGothic';
-    font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
+    font-style: normal;
     font-size: 26px;
     line-height: 30px;
     margin-right: 20px;
@@ -341,6 +342,8 @@ const Container = styled.div`
   strong {
     margin-top: 10px;
     margin-left: 10px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 800;
   }
   .card-right p {
     margin: 6px 10px 0px 5px;

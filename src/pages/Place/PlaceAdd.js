@@ -283,7 +283,11 @@ function PlaceAdd() {
                 {/* 카드 오른쪽: textarea, buttons */}
                 <div className="card-right">
                   <textarea onChange={(e) =>
-                    setContent(e.target.value)} />
+                    setContent(e.target.value)} 
+                    placeholder="장소와 관련한 주요 사항을 상세하게 설명해주세요.&#13;&#10;
+                    예) 주차장 유무 및 금액대, 아기의자, 아기밥, 키즈존, 금액대, 수유실, 놀이방, 아이 전용 화장실 등
+                    "
+                    />
                 </div>
               </div>
               <Btn>
@@ -324,10 +328,18 @@ const Title = styled.div`
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
+
   .page {
     font-size: 30px;
     font-weight: 700;
+
+    p {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
   }
 `;
 
@@ -365,12 +377,19 @@ border-radius: 10px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
+
     img {
       width: 37px;
       height: 37px;
       border: none;
     }
+
+    p {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
   }
+
   .plus_btn {
     width: 120px;
     margin-left: 20px;
@@ -383,14 +402,17 @@ border-radius: 10px;
     margin-left: 26px;
     }
   }
+
   .plusButton{
     cursor: pointer;
   }
+
   .img_border{
     border: 1px dashed lightgray;
     width: 310px;
     height: 220px
   }
+
   .img_box_size{
   
     img {
@@ -402,6 +424,7 @@ border-radius: 10px;
       margin: 10px 0px 15px 20px;
     }
   }
+
   .img_btn {
     display: flex;
     align-items: center;
@@ -427,19 +450,23 @@ border-radius: 10px;
       margin: 0px 6px 1px 6px;
     }
   }
+
   .images {
     width: 90%;
     height: 5%;
     margin: auto;
   }
+
   .mainBox {
     display: flex;
     margin-top: 30px;
     margin-left: 60px;
   }
+
   .card-left {
     width: 513px;
   }
+
   .card-left > div > input {
     border: 1px solid #A8A8A8;
     border-radius: 10px;
@@ -454,6 +481,7 @@ border-radius: 10px;
       color: lightgray;
     }
   }
+
   .card-right {
     width: 530px;
     display: flex;
@@ -461,6 +489,7 @@ border-radius: 10px;
     align-items: center;
     margin-left: 20px;
   }
+
   textarea {
     width: 500px;
     height: 260px;
@@ -473,29 +502,50 @@ border-radius: 10px;
     resize: vertical; /* 상하만 가능 */
     margin-bottom: 20px;
     padding: 10px;
+
+    ::placeholder{
+      font-size: 16px;
+      color: lightgray;
+    }
   }
+
   .position {
     margin-left: 3px;
     font-color: #000000;
+
     input {
       outline: none;
       font-size: 19px;
       height: 55px;
+
       ::placeholder{
         font-size: 16px;
         color: lightgray;
-      }
+      } 
     }
+  }
+
+  .position > strong {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
   
   .star {
     display: flex;
     margin-left: 4px;
     margin-top: 33px;
+
     p {
       display: flex;
       margin-top: 3px;
       margin-left: 2px;
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
+
+    strong {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
     }
   }
   .star > strong {
@@ -522,12 +572,18 @@ const MapSearch = styled.div`
     border: 1px solid #A8A8A8;
     padding: 10px 12px 10px 12px;
     cursor: pointer;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
     }
   }
+
   strong {
     width: 31px;
     margin-top: 23px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
+
   button {
     display: flex;
   }
