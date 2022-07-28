@@ -199,7 +199,7 @@ const Container = styled.div`
     grid-template-columns: 1fr 1fr ;
     gap: 2em;
     margin: auto;
-    padding: 70px 0px;
+    padding: 50px 0px;
     width: 935px;
     height: 331px;
   }
