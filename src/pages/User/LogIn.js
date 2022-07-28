@@ -10,6 +10,7 @@ import Grid from "../../components/elements/Grid";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { REDIRECT_URI, REST_API_KEY } from "../../shared/kakaoData";
+import email from '../../images/email.png';
 // import KaKaoMap from '../Place/KakaoMap';
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>;
@@ -17,6 +18,7 @@ import { REDIRECT_URI, REST_API_KEY } from "../../shared/kakaoData";
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPw] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
 
   //카카오톡 로그인
@@ -38,7 +40,7 @@ function LogIn() {
         Swal.fire({
           text: `로그인 성공!`,
           icon: "success",
-          confirmButtonText: "확인",
+          confirmButtonText: "확인", 
         }).then((result) => {
           if (result.isConfirmed) {
             navigate("/");

@@ -14,6 +14,7 @@ import MainScard from "../components/cards/MainScard";
 import ChatIcon from '../components/main/ChatIcon'
 import '../shared/App.css'
 const Main = () => {
+
   const navigate = useNavigate();
   return (
     <div className="MainBackGround">
@@ -80,7 +81,7 @@ const Main = () => {
         </Container>
       </Grid>
       <ChatIcon/>
-      <Footer />
+      <Footer num={200}/>
     </div>
   );
 };
