@@ -10,7 +10,6 @@ import Grid from "../../components/elements/Grid";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { REDIRECT_URI, REST_API_KEY } from "../../shared/kakaoData";
-import email from '../../images/email.png';
 // import KaKaoMap from '../Place/KakaoMap';
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>;

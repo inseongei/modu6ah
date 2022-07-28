@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import styled from 'styled-components'
 import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
+import Swal from "sweetalert2";
 
 import Header from '../../components/main/Header'
 import ReviewComment from '../../components/pages/ReviewComment'
@@ -33,16 +34,55 @@ const navigate = useNavigate()
   }, []);
 
   const deletePlace = () => {
-    axios
-      .delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId,
-        { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-      .then((response) => {
-        alert("삭제가 완료되었습니다.");
-        navigate('/review')
-      })
-      .catch((error) => {
-        alert("게시글을 삭제할 권한이 없습니다.");
-      });
+
+    Swal.fire({
+      title: '게시글을 삭제하시겠습니까 ?',
+      text: "삭제된 게시글은 복구가 불가능합니다",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#ffb300',
+      confirmButtonText: '삭제',
+      cancelButtonText:'취소'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+        .delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId,
+          { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
+        .then((response) => {
+          Swal.fire({
+            text: `게시글 삭제 완료!`,
+            icon: "success",
+            confirmButtonText: "확인", 
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/review')
+            }
+          });
+          
+        })
+        .catch((error) => {
+          alert("게시글을 삭제할 권한이 없습니다.");
+        });
+        
+      }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
   };
 
   if (!detail) {
