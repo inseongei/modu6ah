@@ -37,6 +37,10 @@ import RecruitSearch from "../pages/Search/RecruitSearch";
 import PlaceSearch from "../pages/Search/PlaceSearch";
 import ReviewSearch from "../pages/Search/ReviewSearch";
 
+import Cancel from '../components/alert/Cancel';
+import ConfirmAlert from "../components/alert/ConfirmAlert";
+import Alert from '../components/alert/Alert';
+
 const queryClient = new QueryClient()
 function App() {
   return (
@@ -78,6 +82,9 @@ function App() {
         <Route path="/search/recruit" element={<RecruitSearch/>} />
         <Route path="/search/place" element={<PlaceSearch/>} />
         <Route path="/search/review" element={<ReviewSearch/>} />
+
+        <Route path="/alert" element={<Alert />} />
+
       </Routes>
       </QueryClientProvider>
     </>

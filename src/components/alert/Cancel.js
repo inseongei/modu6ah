@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Modal from "react-modal";
 import Grid from "../elements/Grid";
 import cancel from '../../images/cancel.png';
-import component from '../../images/Component.png';
+import warning from '../../images/warning.png';
 
 import { useNavigate } from "react-router-dom";
 
@@ -11,16 +11,14 @@ const Alert = () => {
     const navigate = useNavigate();
 
     return (
-
             <DetailContainer>
                 <Grid align="center" height="100px" margin="0 0 32 0">
                     <div className="cancel_img">
                         <img src={cancel} alt="로고" />
                     </div>
                     <Logo>
-                
                         <div className="check_img">
-                            <img src={component} alt="로고" />
+                            <img src={warning} alt="로고" />
                         </div>
                     </Logo>
                     <Text>
@@ -34,13 +32,12 @@ const Alert = () => {
                     </LoginBtn>
                 </Grid>
             </DetailContainer>
-
     );
 };
 
 
 const DetailContainer = styled.div`
-  font-family: "Nanum Gothic";
+font-family: "Nanum Gothic";
   width: 300px;
   height: 250px;
   cursor: auto;
