@@ -225,7 +225,7 @@ function ReviewAdd() {
                 <div className="card-right">
                   <textarea onChange={(e) =>
                     setContent(e.target.value)} 
-                    placeholder="상품과 관련한 주요 사항을 상세하게 설명해주세요.
+                    placeholder="상품과 관련한 주요 사항을 상세하게 설명해주세요.&#13;&#10;
                     예) 사용 연령대, 금액, 용도, 구매처(온/오프라인), 할인/행사 여부 등
                     "
                     />
@@ -269,9 +269,17 @@ const Title = styled.div`
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
+
   .page {
     font-size: 30px;
+    font-weight: 700;
+  }
+
+  p {
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
   }
 `;
@@ -310,10 +318,16 @@ border-radius: 10px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
+
     img {
       width: 37px;
       height: 37px;
       border: none;
+    }
+
+    p {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
     }
   }
   .plus_btn {
@@ -418,6 +432,10 @@ border-radius: 10px;
     resize: vertical; /* 상하만 가능 */
     margin-bottom: 20px;
     padding: 10px;
+
+    ::placeholder{
+      color: lightgray;
+    }
   }
   .position {
     margin-left: 3px;
@@ -431,6 +449,11 @@ border-radius: 10px;
         color: lightgray;
       }
     }
+  }
+
+  .position > strong {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
   
   .star {
@@ -472,6 +495,8 @@ const MapSearch = styled.div`
   strong {
     width: 31px;
     margin-top: 23px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
   button {
     display: flex;
@@ -500,8 +525,6 @@ margin-left: 790px;
   padding-bottom: 35px;
   border: 0;
   outline: 0;
-  font-weight: 700;
-  font-family: 'NanumGothic';
 }
 `;
 
