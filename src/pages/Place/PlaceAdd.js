@@ -1,18 +1,12 @@
 //장소 추천 작성 페이지
 import React, { useState } from "react";
-
-//style
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
-
-//elements & components
 import { FaStar } from "react-icons/fa";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import Modal from "../../modal/Map/Modal";
 import plus from "../../images/plus.png";
-import { BsFillPlusCircleFill } from "react-icons/bs";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon';
@@ -37,15 +31,16 @@ function PlaceAdd() {
     let files = e.target.profile_files.files;
     let formData = new FormData();
     console.log(files)
-    // 반복문 돌려서 다중 이미지 처리
+
+    // 다중 이미지 처리
     for (let i = 0; i < files.length; i++) {
       formData.append("imageUrl", files[i]);
     }
 
     for (const [key, value] of formData.entries()) {
-      console.log(key, value)
+      // console.log(key, value)
     }
-    console.log(files.length);
+    // console.log(files.length);
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
     formData.append("title", title);
@@ -63,11 +58,10 @@ function PlaceAdd() {
           },
         })
         .then((res) => {
-          console.log(res);
           navigate("/place");
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     } else {
       alert("사진은 5개까지만 가능합니다.");
@@ -141,6 +135,7 @@ function PlaceAdd() {
           </div>
         </Title>
         <Place>
+
           {/* 카드 위쪽: 이미지 */}
           <div className="place">
             <form onSubmit={(e) => onSubmit(e)}>
@@ -171,13 +166,6 @@ function PlaceAdd() {
                   </p>
                 </div>
                 
-                {/* <div className="img_border"
-                 style={{ marginLeft: "10px" }}
-                /><div className="img_border"
-                style={{ marginLeft: "10px" }}
-               /><div className="img_border"
-               style={{ marginLeft: "10px" }}
-              /> */}
                   {/* 이미지 미리보기 */}
                   {imageSrc.map((image, id) => (
                     <div className="img_box_size" key={id}>
@@ -192,7 +180,6 @@ function PlaceAdd() {
                       </div>
                     </div>
                   ))}
-            
               </div>
 
               {/* 카드 왼쪽: 제목, 주소, 장소, 별점 */}
@@ -274,7 +261,8 @@ function PlaceAdd() {
                         </label>
                       );
                     })}
-                    <p onChange={(e) => setRating(e.target.value)}>
+                    <p onChange={(e) => 
+                      setRating(e.target.value)}>
                       {rating}점
                     </p>
                   </div>
@@ -291,14 +279,11 @@ function PlaceAdd() {
                 </div>
               </div>
               <Btn>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    navigate(`/`);
-                  }}
-                >
-                  취소{" "}
-                </button>
+              <a href="/place">
+                    <button className="cancel">
+                      취소{" "}
+                    </button>
+                    </a>
                 <button className="btn" type="submit">
                   등록하기
                 </button>
@@ -600,6 +585,7 @@ const SearchInput = styled.input`
 const Btn = styled.div`
 display: flex;
 margin-left: 790px;
+
 .btn {
   width: 150px;
   height: 30px;
@@ -613,6 +599,20 @@ margin-left: 790px;
   outline: 0;
   font-weight: 700;
   font-family: 'NanumGothic';
+}
+
+.cancel {
+  width: 150px;
+  height: 43px;
+  border-radius: 20px;
+  color: white;
+  background-color: #3c3c3c;
+  margin-top: 2px;
+  margin-right: 20px;
+  padding-top: 9px;
+  padding-bottom: 33px;
+  border: 0;
+  outline: 0;
 }
 `;
 
