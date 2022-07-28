@@ -239,6 +239,8 @@ const Container = styled.div`
   .spantitle{
     display: flex;
     justify-content: flex-start;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .icon {
