@@ -1,13 +1,13 @@
 // 육아템 리뷰 카드
-import React,{useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
 import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
+import { GrLocation } from "react-icons/gr";
 
 function MainRcard() {
   const dispatch = useDispatch();
@@ -16,10 +16,6 @@ function MainRcard() {
   React.useEffect(() => {
     token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin())
   }, []);
-
- 
-
-  
 
   const post = useSelector((state) => state.Data.Profile);
 
@@ -30,97 +26,103 @@ function MainRcard() {
   return (
     <>
       <Container>
-      <div className="RcardBox animate__animated animate__fadeInUp">
-        {post.reviewPosts &&
-          post.reviewPosts.map((data, idx) => {
-            return (
-              data &&
+        <div className="RcardBox animate__animated animate__fadeInUp">
+          {post.reviewPosts &&
+            post.reviewPosts.map((data, idx) => {
+              return (
+                data &&
                 <div className="card" key={idx}>
 
-                <div className="firstTitle">
-                
-                <div className="FirstBox">
-                  <span className="FTitle">{data.title.length > 13 ? data.title.slice(0,8) + '..' : data.title}</span>
-                  <span className="FType">{data.productType.length > 6 ? data.productType.slice(0,6) + '..'  : data.productType}</span>
+                  <div className="firstTitle">
+
+                    <div className="FirstBox">
+                      <span className="FTitle">{data.title.length > 13 ? data.title.slice(0, 8) + '..' : data.title}</span>
+                      <span className="FType">{data.productType.length > 6 ? data.productType.slice(0, 6) + '..' : data.productType}</span>
+                    </div>
+
+                    <div>
+                      {data.bookmarkStatus === true ? (
+                        <BsFillBookmarkFill
+                          className={token ? "Fbook2" : "none"}
+                          onClick={() => {
+                            axios
+                              .put(
+                                "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                                data.reviewPostId,
+                                null,
+                                {
+                                  headers: {
+                                    Authorization: `Bearer ${localStorage.getItem(
+                                      "accessToken"
+                                    )}`,
+                                  },
+                                }
+                              )
+                              .then((res) => {
+                                dispatch(GetMainAxois())
+                              });
+                          }}
+                        ></BsFillBookmarkFill>
+                      ) : (
+                        <BsBookmark
+                          className={token ? "Fbook" : "none"}
+                          onClick={() => {
+                            axios
+                              .put(
+                                "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                                data.reviewPostId,
+                                null,
+                                {
+                                  headers: {
+                                    Authorization: `Bearer ${localStorage.getItem(
+                                      "accessToken"
+                                    )}`,
+                                  },
+                                }
+                              )
+                              .then((res) => {
+                                dispatch(GetMainAxois())
+                              });
+                          }}
+                        />
+                      )}
+                    </div>
+
+                  </div>
+
+                  <div className="Furl" onClick={() => {
+                    navigate("/reviewdetail/" + data.reviewPostId);
+                  }}>
+                    <GrLocation
+                      style={{
+                        marginBottom: "3px",
+                        marginRight: "3px"
+                      }} />
+                    {data.url.length > 6 ? data.url.slice(0, 5) : data.url}</div>
+
+                  <div className="RcardImg" onClick={() => {
+                    navigate("/reviewdetail/" + data.reviewPostId);
+                  }}><img src={data.imageUrl[0]} alt="사진" /></div>
+
+                  <div className="RcardProfile" onClick={() => {
+                    navigate("/reviewdetail/" + data.reviewPostId);
+                  }}>
+                    <div className="Rprofile" onClick={() => {
+                      navigate("/reviewdetail/" + data.reviewPostId);
+                    }}><img src={data.profileUrl} alt="사진" /></div>
+                    <div className="Rnickname" onClick={() => {
+                      navigate("/reviewdetail/" + data.reviewPostId);
+                    }}>{data.nickname}</div>
+                  </div>
+
+                  <div className="content" onClick={() => {
+                    navigate("/reviewdetail/" + data.reviewPostId);
+                  }}>{data.content.length > 6 ? data.content.slice(0, 5) : data.content}</div>
+
                 </div>
-
-                <div>
-                {data.bookmarkStatus === true ? (
-                  <BsFillBookmarkFill
-                  className={token ? "Fbook2" : "none"}
-                    onClick={() => {
-                      axios
-                        .put(
-                          "https://zhaoxilin.shop/api/reviews/bookmark/" +
-                            data.reviewPostId,
-                          null,
-                          {
-                            headers: {
-                              Authorization: `Bearer ${localStorage.getItem(
-                                "accessToken"
-                              )}`,
-                            },
-                          }
-                        )
-                        .then((res) => {
-                          dispatch(GetMainAxois())
-                        });
-                    }}
-                  ></BsFillBookmarkFill>
-                ) : (
-                  <BsBookmark
-                  className={token ? "Fbook" : "none"}
-                    onClick={() => {
-                      axios
-                        .put(
-                          "https://zhaoxilin.shop/api/reviews/bookmark/" +
-                            data.reviewPostId,
-                          null,
-                          {
-                            headers: {
-                              Authorization: `Bearer ${localStorage.getItem(
-                                "accessToken"
-                              )}`,
-                            },
-                          }
-                        )
-                        .then((res) => {
-                          dispatch(GetMainAxois())
-                        });
-                    }}
-                  />
-                )}
-              </div>
-
-                </div>
-
-                <div className="Furl" onClick={() => {
-                navigate("/reviewdetail/" + data.reviewPostId);
-              }}><MdOutlinePlace/>{data.url.length > 6 ? data.url.slice(0,5) : data.url}</div>
-
-                <div className="RcardImg" onClick={() => {
-                navigate("/reviewdetail/" + data.reviewPostId);
-              }}><img src={data.imageUrl[0]} alt="사진"/></div>
-
-                <div className="RcardProfile" onClick={() => {
-                navigate("/reviewdetail/" + data.reviewPostId);
-              }}>
-                  <div className="Rprofile" onClick={() => {
-                navigate("/reviewdetail/" + data.reviewPostId);
-              }}><img src={data.profileUrl} alt="사진"/></div>
-                  <div className="Rnickname" onClick={() => {
-                navigate("/reviewdetail/" + data.reviewPostId);
-              }}>{data.nickname}</div>
-                </div>
-
-                <div className="content" onClick={() => {
-                navigate("/reviewdetail/" + data.reviewPostId);
-              }}>{data.content.length > 6 ? data.content.slice(0,5) : data.content}</div>
-
-                </div>
-            );
-          })}
-                </div>
+              );
+            })}
+        </div>
       </Container>
 
     </>
@@ -128,8 +130,7 @@ function MainRcard() {
 }
 
 const Container = styled.div`
-
-
+padding-bottom: 250px;
   .RcardBox{
     display: grid;
     grid-template-columns: 1fr 1fr ;
