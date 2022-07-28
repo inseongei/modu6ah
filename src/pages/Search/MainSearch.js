@@ -13,23 +13,35 @@ import axios from "axios";
 const MainSearch = () => {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
-  const [recruit, setRecruit] = useState([]);
-  const [place, setPlace] = useState([]);
-  const [review, setReview] = useState([]);
+  const [Morerecruit, setMorerecruit] = useState([]);
+  const [Moreplace, setMoreplace] = useState([]);
+  const [Morereview, setMorereview] = useState([]);
 
   const search = () => {
     if(keyword.length > 0 ){ 
-      axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`, { }) 
+      axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }) 
       .then((res) => { 
         console.log(res) 
-        setRecruit(res.data.resultsInRecruit) 
-        setPlace(res.data.resultsInPlace) 
-        setReview(res.data.resultsInReview) 
+        setMorerecruit(res.data.resultsInRecruit) 
+        setMoreplace(res.data.resultsInPlace)
+        setMorereview(res.data.resultsInReview)
       }); 
     } else { 
-      alert('검색어를 입력하세요') 
+      alert('검색어를 입력하세요')
     }
   }
+
+  // 엔터 눌러도 검색가능 ^_^
+ const onKeyPress = (e)=>{
+  if(e.key ==='Enter'){
+    search()
+  }
+ }
+
 
   return (
     <>
@@ -51,7 +63,7 @@ const MainSearch = () => {
                 onChange={(e) => {
                   setKeyword(e.target.value)
                 }}
-              onKeyPress={search}
+              onKeyPress={onKeyPress}
               />
               <button className="search_btn"
                onClick={search}
@@ -71,7 +83,9 @@ const MainSearch = () => {
 
           <div className="cardBox">
             <SearchScard
-            searchdata={recruit}
+            Morerecruit={Morerecruit}
+            search = {search}
+            keyword ={keyword}
             />
           </div>
 
@@ -84,7 +98,7 @@ const MainSearch = () => {
 
           <div className="cardBox">
             <SearchLcard 
-            searchdata={place}
+            searchdata={Moreplace}
             />
           </div>
 
@@ -98,7 +112,7 @@ const MainSearch = () => {
 
           <div className="cardBox">
             <SearchRcard
-            searchdata={review}
+            searchdata={Morereview}
             />
           </div>
         </div>
@@ -244,6 +258,7 @@ const InputBox = styled.div`
     width: 75px;
     height: 44px;
     color: #FFFFFF;
+    border: none;
     margin-top: 8px;
     margin-left: 10px;
   }

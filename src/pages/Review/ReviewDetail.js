@@ -185,10 +185,9 @@ border-radius: 10px;
   }
 
   .Bigimg > img {
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 300px;
     border-radius: 15px;
-    margin-left: 17px;
   }
 
   .imgSmall {

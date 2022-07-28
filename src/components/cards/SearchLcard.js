@@ -11,7 +11,8 @@ function SearchLcard({searchdata}) {
   const navigate = useNavigate();
   const [data, setData] = useState();
   const [book, setbook] = useState();
-  const [btn, setbtn] = useState(true);
+  const [btn, setbtn] = useState(false);
+  const [athis, setathis] = React.useState(6)
 
   const refetch = () =>{
     axios
@@ -28,45 +29,25 @@ function SearchLcard({searchdata}) {
     });
   }
 
-  React.useEffect(() => {
-    refetch()
-  }, []);
+  // React.useEffect(() => {
+  //   refetch()
+  // }, []);
 
-  React.useEffect(() => {
-    axios
-      .get("https://zhaoxilin.shop/api/search", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        }
-      })
-      .then((res) => {
-        // console.log(res)
-        let data = res.data.resultsInPlace.slice(0, 6)
-        setData([...data])
-      });
-  }, []);
-
-  // const PlaceMore = async () => {
-  //   await axios
-  //     .get("https://zhaoxilin.shop/api/search", {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setbtn(!btn);
-  //       btn
-  //         ? setbook(res.data.resultsInPlace)
-  //         : setbook(res.data.resultsInPlace.slice(0, 3));
-  //     });
-  // };
+  const SearchMore =  () => {
+    setbtn(!btn);
+    if(btn === false){
+      setathis(searchdata.length)
+    } else{
+      setathis(6)
+    }
+  };
 
 
   return (
     <>
       <Container>
-        {searchdata &&
-          searchdata.map((data, idx) => {
+        {searchdata.slice(0,athis) &&
+          searchdata.slice(0,athis).map((data, idx) => {
             return (
                 <div className="card" key={idx}>
 
@@ -81,56 +62,6 @@ function SearchLcard({searchdata}) {
                   <span className="titleStar" onClick={()=>{navigate('/placedetail/' + data.placePostId)}}><FaStar size={28}style={{color: "#FFBA5A",marginLeft: "5px"}}/>{data.star}점</span>
                 </div>
                 
-                <div className="bookpos">
-                    {data.bookmarkStatus === true ? (
-                      <BsFillBookmarkFill
-                        className="bookmark2"
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
-                                data.placePostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              console.log(res);
-                              refetch()
-                            });
-                        }}
-                      />
-                    ) : (
-                      <BsBookmark
-                        className="bookmark"
-                        id={data.placePostId}
-                        onClick={() => {
-                          axios
-                            .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
-                                data.placePostId,
-                              null,
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "accessToken"
-                                  )}`,
-                                },
-                              }
-                            )
-                            .then((res) => {
-                              console.log(res);
-                              refetch()
-                            });
-                        }}
-                      />
-                    )}
-                  </div>
                 </div>
 
                 <div className="BookRegion" id={data.placePostId}>
@@ -162,9 +93,9 @@ function SearchLcard({searchdata}) {
       </Container>
       <div className="btnBox">
         <button className="MoreBtn" 
-        // onClick={PlaceMore}
+        onClick={SearchMore}
         >
-          {btn ? "더보기" : "닫기"}
+          {btn ? "닫기" :"더보기" }
         </button>
       </div>
       <hr className="BookHr"/>

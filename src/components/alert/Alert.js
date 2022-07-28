@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import axios from "axios";
 import email from '../../images/email.png';
 import Grid from "../elements/Grid";
-import Fin from '../../images/Fin.png';
+import cancel from '../../images/cancel.png';
 
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const Alert = () => {
             <DetailContainer>
                 <Grid align="center" height="100px" margin="0 0 32 0">
                     <div className="cancel_img">
-                        <img src={Fin} alt="로고" />
+                        <img src={cancel} alt="로고" />
                     </div>
                     <Logo>
                         {/* 아이콘 바꿔야 함 */}
