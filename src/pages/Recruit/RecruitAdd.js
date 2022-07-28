@@ -22,8 +22,8 @@ const RecruitAdd = () => {
   const [place, setPlace] = useState("");
   const [age, setAge] = useState("");
 
- const datemoment = moment(date).format("YYYY-MM-DD")
- const timemoment = moment(time).format("HH:mm")
+  const datemoment = moment(date).format("YYYY-MM-DD")
+  const timemoment = moment(time).format("HH:mm")
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,8 +50,10 @@ const RecruitAdd = () => {
     <>
       <Header />
       <BackGround>
-        <div style={{width:"1100px",
-        margin: "0 auto" }}>
+        <div style={{
+          width: "1100px",
+          margin: "0 auto"
+        }}>
           <Title>
             <div className="subject">체험 모집</div>
             <div className="page">
@@ -68,13 +70,13 @@ const RecruitAdd = () => {
                     <label htmlFor="chk1" onClick={inputChange}>
                       <span>선택</span>
                     </label>
-                    <p> {!on ? "모집중" : "모집완료"}</p>
+                    <p> {!on ? "모집완료" : "모집중"}</p>
                   </div>
                   <div className="input__section">
                     <div style={{ marginBottom: "34px" }}>
                       <strong>제목</strong>
                       <input
-                        onChange={(e) => 
+                        onChange={(e) =>
                           setTitle(e.target.value)}
                         style={{ width: "400px" }}
                         type="text"
@@ -101,13 +103,13 @@ const RecruitAdd = () => {
                     </div>
                   </div>
                   <div className="time"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center"
-                  }}>
+                    style={{
+                      display: "flex",
+                      justifyContent: "center"
+                    }}>
                     <Time>시간</Time>
                     <DatePicker
-                     customInput={<Input />}
+                      customInput={<Input />}
                       selected={time}
                       onChange={(time) => setTime(time)}
                       showTimeSelect
@@ -118,11 +120,6 @@ const RecruitAdd = () => {
                       placeholderText="시간을 입력하세요"
                       locale={ko}
                     />
-                     {/* <input type="time"
-                      onChange={(e) =>
-                        setTime(e.target.value)}
-                      placeholder="시간을 입력하세요"
-                    />  */}
                   </div>
                   <div className="location">
                     <strong>위치</strong>
@@ -156,8 +153,8 @@ const RecruitAdd = () => {
                     >
                       취소{" "}
                     </button>
-                    <button className="btn" 
-                    onClick={addPost}>
+                    <button className="btn"
+                      onClick={addPost}>
                       등록하기
                     </button>
                   </Btn>
@@ -239,7 +236,7 @@ const Detail = styled.div`
   }
   
   .toggle > p {
-    margin: 20px 0px 0px 30px;
+    margin: 17px 0px 0px 20px;
     font-size: 20px;
   }
   .input__section {
@@ -342,16 +339,18 @@ const Detail = styled.div`
     position: absolute;
     left: -1000%;
   }
+
   label {
     margin-top: 16px;
     position: relative;
     display: block;
-    width: 60px;
+    width: 59px;
     height: 30px;
-    background: #a58646;
+    background: #E4E4E4;
     border-radius: 60px;
     transition: background 0.4s;
   }
+
   label:after {
     content: "";
     position: absolute;
@@ -362,7 +361,7 @@ const Detail = styled.div`
     border-radius: 100%;
     background-color: #fff;
     transform: translateY(-50%);
-    box-shadow: 1px 3px 4px rgba(0, 0, 0.1);
+    box-shadow: 1px 2px 4px rgba(0, 0, 0.1);
     transition: all 0.4s;
   }
   
@@ -371,7 +370,7 @@ const Detail = styled.div`
   }
   
   input:checked + label {
-    background-color: #6b4e16;
+    background-color: #F4B03E;
   }
   
   label span {
