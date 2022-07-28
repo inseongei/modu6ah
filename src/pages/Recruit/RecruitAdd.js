@@ -41,10 +41,6 @@ const RecruitAdd = () => {
     console.log(post_data);
   };
 
-  // 모집중 , 모집완료 상태 변경하기
-  const inputChange = () => {
-    setOn(!on);
-  };
 
   return (
     <>
@@ -66,11 +62,12 @@ const RecruitAdd = () => {
                 {/* 카드 왼쪽 */}
                 <div className="add_input">
                   <div className="toggle">
-                    <input className="inputbox" type="checkbox" id="chk1" />
-                    <label htmlFor="chk1" onClick={inputChange}>
+                    <input className="inputbox" type="checkbox" id="chk1"
+                     />
+                    <label htmlFor="chk1">
                       <span>선택</span>
                     </label>
-                    <p> {!on ? "모집완료" : "모집중"}</p>
+                    <p>모집중</p>
                   </div>
                   <div className="input__section">
                     <div style={{ marginBottom: "34px" }}>
@@ -346,7 +343,7 @@ const Detail = styled.div`
     display: block;
     width: 59px;
     height: 30px;
-    background: #E4E4E4;
+    background: #F4B03E;
     border-radius: 60px;
     transition: background 0.4s;
   }
@@ -354,24 +351,24 @@ const Detail = styled.div`
   label:after {
     content: "";
     position: absolute;
-    left: 0px;
-    top: 48%;
+    left: 33px;
+    top: 47%;
     width: 20px;
     height: 20px;
     border-radius: 100%;
     background-color: #fff;
     transform: translateY(-50%);
     box-shadow: 1px 2px 4px rgba(0, 0, 0.1);
-    transition: all 0.4s;
   }
   
-  input:checked + label:after {
-    left: calc(100% - 25.0px);
-  }
+  // input:checked + label:after {
+  //   left: calc(100% - 25.0px);
+  // }
   
-  input:checked + label {
-    background-color: #F4B03E;
-  }
+
+  // input:checked + label {
+  //   background-color: #F4B03E;
+  // }
   
   label span {
     display: none;
