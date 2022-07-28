@@ -346,6 +346,7 @@ const Detail = styled.div`
     border-radius: 50%;
     margin-left: 10px;
     cursor: pointer;
+    border: 1px solid #E4E4E4;
   }
 
   .detail_profile {
