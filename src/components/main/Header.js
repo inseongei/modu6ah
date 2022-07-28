@@ -516,8 +516,72 @@ const Headers = styled.div`
   .icon {
     font-size: 35px;
   }
+  @media screen and (max-width: 1075px) {
+    flex-wrap: wrap;
+
+    .header__right {
+      display: ${(props) => (props.userToggled ? "flex" : "none")};
+      flex-direction: column;
+      width: 100%;
+      margin: 0px;
+      z-index: 1;
+      position: relative;
+      bottom: 10px;
+      padding: 0px 0px 0px 20px;
+      background-color: #e4e4e4;
+    }
+
+    .header__menulist {
+      display: ${(props) => (props.isToggled ? "flex" : "none")};
+      flex-direction: column;
+      width: 100%;
+      margin: 0px;
+      position: relative;
+      bottom: 5px;
+      z-index: 1;
+      background-color: #e4e4e4;
+    }
+
+    .header__menulist li,
+    .header__right li {
+      margin: 1rem 0;
+      padding: 0;
+      color: #3c3c3c;
+    }
+
+    .header__menulist li:hover {
+      transform: scale(1);
+      color: #3c3c3c;
+    }
+
+    .MyPage {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .toggle {
+      display: block;
+      margin: 0px;
+    }
+
+    .user {
+      display: block;
+      margin: 0px;
+    }
+
+    .profile {
+      display: none;
+    }
+
+    .nick {
+      display: none;
+    }
+
+    .searchicon{
+      display: none;
+    }
+  }
 `;
-
-
 
 export default Header;
