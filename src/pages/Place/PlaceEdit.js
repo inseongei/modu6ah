@@ -56,7 +56,7 @@ function PlaceEdit() {
     formData.append("location", location);
     formData.append("star", rating);
 
-    if (files.length < 6) {
+    if (files.length < 4) {
       await axios
         .post("https://zhaoxilin.shop/api/places", formData, {
           headers: {
@@ -74,6 +74,27 @@ function PlaceEdit() {
     } else {
       alert("사진은 3개까지만 가능합니다.");
     }
+  };
+
+  const editPost = () => {
+    if(title && region && content && location.length > 0) {
+      axios
+        .put(`https://zhaoxilin.shop/api/places/` + placePostId, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+        //  console.log(res);
+          alert(res.data.message);
+          window.location.href = "/place";
+        })
+        .catch((error) => {
+        //   console.log(error);
+        });
+       }else{
+        alert('수정할 내용을 작성해주세요.')
+       }
   };
 
   // 이미지 미리보기
@@ -134,29 +155,11 @@ function PlaceEdit() {
     axios
       .get("https://zhaoxilin.shop/api/places/" + placePostId)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setDetail(res.data.placeDetails);
       });
   }, []);
-
-  //게시물 수정 axios 요청
-  const editPost = () => {
-      axios
-        .put(`https://zhaoxilin.shop/api/places/` + placePostId, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((res) => {
-        //  console.log(res);
-          alert(res.data.message);
-          window.location.href = "/recruit";
-        })
-        .catch((error) => {
-        //   console.log(error);
-        });
-  };
-
+ 
   return (
     <>
       <Header />
