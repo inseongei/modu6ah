@@ -354,35 +354,38 @@ const Title = styled.div`
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .page {
     font-size: 30px;
     font-weight: 700;
+
+    p {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
   }
 `;
 
 const Place = styled.div`
 width: 1170px;
 height: 750px;
-
 background: white;
-
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
 margin-top: 27px;
 margin-bottom: 32px;
 display: flex;
 flex-direction: column;
-
 border: 1px solid #E4E4E4;
 border-radius: 10px;
   
   .place {
     width: 100%;
   }
-
   .title {
-    font-family: 'NanumGothic';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 26px;
@@ -391,7 +394,6 @@ border-radius: 10px;
     margin-left: 70px;
     margin-top: 40px;
   }
-
   .imageBox {
     min-height: 210px;
     max-height: auto;
@@ -407,25 +409,31 @@ border-radius: 10px;
       height: 37px;
       border: none;
     }
+
+    p {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
   }
 
   .plus_btn {
     width: 120px;
     margin-left: 20px;
-
     label {
       margin-left: 45px;
       margin-bottom: 15px;
       cursor: pointer;
     }
-
     p {
     margin-left: 26px;
     }
   }
 
+  .plusButton{
+    cursor: pointer;
+  }
+
   .img_border{
-    display: hidden;
     border: 1px dashed lightgray;
     width: 310px;
     height: 220px
@@ -441,11 +449,9 @@ border-radius: 10px;
       border-radius: 10px;
       margin: 10px 0px 15px 20px;
     }
-
   }
 
   .img_btn {
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -498,7 +504,6 @@ border-radius: 10px;
     font-size: 16px;
 
     ::placeholder{
-      font-size: 16px;
       color: lightgray;
     }
   }
@@ -516,16 +521,13 @@ border-radius: 10px;
     height: 260px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
     word-break: normal;
     outline: none;
+    resize: vertical; /* 상하만 가능 */
     margin-bottom: 20px;
     padding: 10px;
-    
-    ::placeholder{
-        color: lightgray;
-      }
   }
 
   .position {
@@ -540,10 +542,15 @@ border-radius: 10px;
       ::placeholder{
         font-size: 16px;
         color: lightgray;
-      }
+      } 
     }
   }
 
+  .position > strong {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
+  }
+  
   .star {
     display: flex;
     margin-left: 4px;
@@ -553,9 +560,15 @@ border-radius: 10px;
       display: flex;
       margin-top: 3px;
       margin-left: 2px;
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
+
+    strong {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
     }
   }
-
   .star > strong {
     margin-top: 2px;
     margin-right: 20px;
@@ -566,13 +579,12 @@ const MapSearch = styled.div`
   margin: 20px 0px 20px 2px;
   display: flex;
  
-
   .address_btn {
     margin-left: 10px;
     margin-top: 25px;
     width: 100px;
     height: 35px;
-
+    
    span {
     border-radius: 10px; 
     font-weight: 700;
@@ -581,12 +593,16 @@ const MapSearch = styled.div`
     border: 1px solid #A8A8A8;
     padding: 10px 12px 10px 12px;
     cursor: pointer;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
     }
   }
 
   strong {
     width: 31px;
     margin-top: 23px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   button {
@@ -605,10 +621,7 @@ const SearchInput = styled.input`
 const Btn = styled.div`
 display: flex;
 margin-left: 790px;
-
 .btn {
-  font-family: 'NanumGothic';
-  font-weight: 700;
   width: 150px;
   height: 30px;
   border-radius: 30px;
@@ -621,5 +634,6 @@ margin-left: 790px;
   outline: 0;
 }
 `;
+
 
 export default PlaceEdit;

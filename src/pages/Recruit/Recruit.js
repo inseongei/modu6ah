@@ -75,7 +75,7 @@ const Container = styled.div`
   }
 
   .card_box {
-    padding-top: 70px;
+    padding-top: 50px;
     background: #FAFAFA;
   }
 
@@ -108,6 +108,8 @@ const Title = styled.p`
   font-weight: 750;
   margin-bottom: 0px;
   color: #6b4e16;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 800;
 `;
 
 const SubTitle = styled.p`
@@ -117,6 +119,8 @@ const SubTitle = styled.p`
   color: #3c3c3c;
   margin-bottom: 20px;
   padding-top: 15px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 `;
 
 const Btn = styled.button`

@@ -93,7 +93,7 @@ const navigate = useNavigate()
     <>
       <Header />
       <Container>
-      <div style={{width:"1100px",
+      <div style={{width:"1000px",
         margin: "0 auto" }}>
         <Title>
           <div className="subject">
@@ -185,16 +185,23 @@ const Title = styled.div`
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .page {
     font-size: 30px;
     font-weight: 700;
   }
+
+  p {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
+  }
 `;
 
 const Box = styled.div`
-width: 999px;
+width: 1000px;
 height: 600px;
 
 background: white;
@@ -271,25 +278,18 @@ const Container = styled.div`
 
 const ContentBox = styled.div`
   width: 500px;
-  margin-left: 20px;
+  margin-left: 30px;
 
   .title {
     display: flex;
-    font-weight: 700;
     font-size: 20px;
     line-height: 36px;
 
     span {
-      margin-top: 2px;
-      font-family: 'NanumGothic';
+      margin-top: 5px;
+      font-family: 'Nanum Gothic', sans-serif;
       font-weight: 700;
       font-size: 26px;
-      line-height: 30px;
-    }
-
-    span {
-      margin-left: 13px;
-      margin-top: 2px;
     }
 
     p {
@@ -345,6 +345,7 @@ const ContentBox = styled.div`
 
   .nickname {
     font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
     font-size: 20px;
     line-height: 29px;

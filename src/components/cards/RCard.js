@@ -199,7 +199,7 @@ const Container = styled.div`
     grid-template-columns: 1fr 1fr ;
     gap: 2em;
     margin: auto;
-    padding: 70px 0px;
+    padding: 50px 0px;
     width: 935px;
     height: 331px;
   }
@@ -257,6 +257,8 @@ const Container = styled.div`
 
   .FTitle{
     font-size: 26px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .FType{
@@ -313,15 +315,9 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 }
-
-
-
-
-
-
-
-
 `;
 
 export default RCard;

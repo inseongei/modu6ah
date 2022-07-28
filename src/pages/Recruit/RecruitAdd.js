@@ -39,9 +39,7 @@ const RecruitAdd = () => {
       age,
     };
     dispatch(createPostDB(post_data));
-
   };
-
 
   return (
     <>
@@ -141,7 +139,10 @@ const RecruitAdd = () => {
                 {/* 카드 오른쪽 */}
                 <div className="box">
                   <textarea onChange={(e) =>
-                    setContent(e.target.value)} />
+                    setContent(e.target.value)} 
+                    placeholder="체험과 관련한 주요 사항을 상세하게 설명해주세요.
+                    예) 아이 연령대 및 성향, 육아 스타일, 이동수단, 최소 인원, 준비물, 예상 금액 등"
+                    />
                   <Btn>
                     <button
                       className="btn"
@@ -180,10 +181,18 @@ const Title = styled.div`
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
+
   .page {
     font-size: 30px;
     font-weight: 700;
+
+    p {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
   }
 `;
 
@@ -236,11 +245,15 @@ const Detail = styled.div`
   .toggle > p {
     margin: 17px 0px 0px 20px;
     font-size: 20px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
+
   .input__section {
     margin: 40px 0px 0px 70px;
     font-size: 20px;
   }
+
   .input__section > div > input {
     border: 1px solid #A8A8A8;
     display: inline-block;
@@ -294,6 +307,8 @@ const Detail = styled.div`
   
   strong {
     padding-top: 30px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
   
   textarea {
@@ -308,6 +323,11 @@ const Detail = styled.div`
     padding: 20px;
     outline: none;
     resize: vertical; /* 상하만 가능 */
+
+    ::placeholder{
+      font-size: 19px;
+      color: #A8A8A8;
+    }
   }
   
   .Detail_profile {
@@ -396,6 +416,8 @@ const Monat = styled.div`
   margin-right: 24px;
   margin-top: 20px;
   font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 `;
 
 const Time = styled.strong`

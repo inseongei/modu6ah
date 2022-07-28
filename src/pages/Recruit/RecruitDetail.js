@@ -226,11 +226,18 @@ const Title = styled.div`
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .page {
     font-size: 30px;
     font-weight: 700;
+
+    p {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
   }
 `;
 
@@ -249,6 +256,8 @@ const Detail = styled.div`
   .toggle > p {
     margin: 20px 0px 0px 30px;
     font-size: 20px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .card-left {
@@ -263,6 +272,11 @@ const Detail = styled.div`
   .card-left > div {
     margin: 40px 0px 0px 50px;
     font-size: 20px;
+    
+    strong{
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
   }
 
   .card-left > div > span {
@@ -357,6 +371,8 @@ const Detail = styled.div`
     margin-left: 20px;
     font-size: 20px;
     width: 140px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .content {

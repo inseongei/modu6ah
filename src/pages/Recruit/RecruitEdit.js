@@ -191,11 +191,18 @@ const Title = styled.div`
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .page {
     font-size: 30px;
     font-weight: bolder;
+
+    p{
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 700;
+    }
   }
 `;
 
@@ -233,6 +240,11 @@ const Detail = styled.div`
 .add_input > div {
   margin: 40px 0px 0px 10px;
   object-fit: cover;
+
+  strong{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
+  }
 }
 
 .add_input > div > input {
@@ -264,6 +276,8 @@ const Detail = styled.div`
   .toggle > p {
     margin: 17px 0px 0px 20px;
     font-size: 20px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .input__section {
@@ -418,7 +432,8 @@ width: 50px;
 height: 40px;
 margin-right: 24px;
 margin-top: 20px;
-font-weight: bold;
+font-family: 'Nanum Gothic', sans-serif;
+font-weight: 700;
 `;
 
 const Time = styled.strong`
