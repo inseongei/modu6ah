@@ -141,14 +141,11 @@ const RecruitAdd = () => {
                     예) 아이 연령대 및 성향, 육아 스타일, 이동수단, 최소 인원, 준비물, 예상 금액 등"
                     />
                   <Btn>
-                    <button
-                      className="btn"
-                      onClick={() => {
-                        navigate(`/recruit`);
-                      }}
-                    >
+                  <a href="/recruit">
+                    <button className="cancel">
                       취소{" "}
                     </button>
+                    </a>
                     <button className="btn"
                       onClick={addPost}
                       >
@@ -434,8 +431,23 @@ const Btn = styled.div`
   display: flex;
   margin-right: -190px;
   margin-left: 170px;
+
   .btn {
     width: 30%;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    background-color: #3c3c3c;
+    margin-top: 20px;
+    margin-right: 20px;
+    padding-top: 9px;
+    padding-bottom: 33px;
+    border: 0;
+    outline: 0;
+  }
+
+  .cancel {
+    width: 130px;
     height: 30px;
     border-radius: 20px;
     color: white;
