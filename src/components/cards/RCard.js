@@ -1,11 +1,11 @@
 // 육아템 리뷰 카드
 import React,{useState} from "react";
 import styled from "styled-components";
-import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { GrLocation } from "react-icons/gr";
 
 function RCard() {
   const navigate = useNavigate();
@@ -160,7 +160,13 @@ function RCard() {
 
                 <div className="Furl" onClick={() => {
                 navigate("/reviewdetail/" + data.reviewPostId);
-              }}><MdOutlinePlace/>{data.url.length > 6 ? data.url.slice(0,5) : data.url}</div>
+              }}>
+                <GrLocation
+                    style={{
+                      marginBottom: "3px",
+                      marginRight: "3px"
+                    }} />
+              {data.url.length > 6 ? data.url.slice(0,5) : data.url}</div>
 
                 <div className="RcardImg" onClick={() => {
                 navigate("/reviewdetail/" + data.reviewPostId);
@@ -192,8 +198,6 @@ function RCard() {
 }
 
 const Container = styled.div`
-
-
   .RcardBox{
     display: grid;
     grid-template-columns: 1fr 1fr ;
