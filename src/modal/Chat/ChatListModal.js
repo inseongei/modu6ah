@@ -49,10 +49,10 @@ const ChatListModal = ({ open, onClose }) => {
 
       {/* 대화창 리스트 */}
       <ScrollToBottom className="message-container" mode="top">
-        {data.data.lastChats&& data.data.lastChats.map((data)=>{
+        {data.data.lastChats&& data.data.lastChats.map((data,idx)=>{
           return(
             data != null &&
-            <div className="listC animate__animated animate__fadeInDown animate__fast" key={data._id}>
+            <div className="listC animate__animated animate__fadeInDown animate__fast" key={idx}>
             <div className="ChatListContainer">
               <div className="firstBox" onClick={() => {
                       setModalIsOpen(true);
@@ -60,7 +60,7 @@ const ChatListModal = ({ open, onClose }) => {
                         roomId: data.roomId,
                         senderNick: data.senderNick,
                         receiverNick: data.receiverNick,
-                        profileUrlTwo: data.profileUrl,
+                        profileUrlTwo: nickname === data.senderNick ? data.profileUrlTwo : data.profileUrl
                       };
                       socket.emit("join_room", Joindata);
                       axios
@@ -87,7 +87,7 @@ const ChatListModal = ({ open, onClose }) => {
                         roomId: data.roomId,
                         senderNick: data.senderNick,
                         receiverNick: data.receiverNick,
-                        profileUrlTwo: data.profileUrl,
+                        profileUrlTwo: nickname === data.senderNick ? data.profileUrlTwo : data.profileUrl
                       };
                       socket.emit("join_room", Joindata);
                       axios
@@ -116,7 +116,7 @@ const ChatListModal = ({ open, onClose }) => {
                         roomId: data.roomId,
                         senderNick: data.senderNick,
                         receiverNick: data.receiverNick,
-                        profileUrlTwo: data.profileUrl,
+                        profileUrlTwo: nickname === data.senderNick ? data.profileUrlTwo : data.profileUrl
                       };
                       socket.emit("join_room", Joindata);
                       axios

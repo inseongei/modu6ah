@@ -33,8 +33,8 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
       const messageData = {
         receiverNick:
           info.receiverNick === nickname ? info.senderNick : info.receiverNick,
-        profileUrl: Img_Url,
-        profileUrlTwo: info.profileUrlTwo,
+        profileUrl: Img_Url, // ME
+        profileUrlTwo: info.profileUrlTwo,  // YOU
         roomId: realroom,
         senderNick: nickname, // 보내는 사람
         message: currentMessage,
@@ -45,6 +45,7 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
           "분",
       };
       await socket.emit("send_message", messageData);
+      console.log(messageData)
       setCurrentMessage("");
     }
   };
@@ -66,6 +67,7 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
 
   React.useEffect(() => {
     socket.on("test", (data) => {
+      console.log(data)
       setinfo(data);
     });
   }, [socket]);
