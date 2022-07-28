@@ -35,8 +35,8 @@ const Main = () => {
             </div>
           </div>
           <MainScard />
-
           <hr className="hrz" />
+            
           <div className="card_title">
             <Title style={{ marginTop: "100px" }}>장소 추천</Title>
           </div>
