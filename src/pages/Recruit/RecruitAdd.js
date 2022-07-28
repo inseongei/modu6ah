@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Header from "../../components/main/Header";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
@@ -21,6 +22,7 @@ const RecruitAdd = () => {
   const [age, setAge] = useState("");
   const datemoment = moment(date).format("YYYY-MM-DD")
   const timemoment = moment(time).format("HH:mm")
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const addPost = () => {
@@ -52,7 +54,7 @@ const RecruitAdd = () => {
           <Detail>
             <Box>
               <div className="container">
-                
+
                 {/* 카드 왼쪽 */}
                 <div className="add_input">
                   <div className="toggle">
@@ -139,13 +141,17 @@ const RecruitAdd = () => {
                     예) 아이 연령대 및 성향, 육아 스타일, 이동수단, 최소 인원, 준비물, 예상 금액 등"
                     />
                   <Btn>
-                    <a href="/recruit">
-                    <button className="btn">
+                    <button
+                      className="btn"
+                      onClick={() => {
+                        navigate(`/recruit`);
+                      }}
+                    >
                       취소{" "}
                     </button>
-                    </a>
                     <button className="btn"
-                      onClick={addPost}>
+                      onClick={addPost}
+                      >
                       등록하기
                     </button>
                   </Btn>
