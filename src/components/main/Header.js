@@ -66,7 +66,7 @@ const Header = () => {
             <a href="/recruit">체험 모집</a>
             <a href="/place"
               className="list">장소 추천</a>
-            <a href="/recruit">육아템 리뷰</a>
+            <a href="/review">육아템 리뷰</a>
           </ul>
 
           {/* User 메뉴 리스트 */}
@@ -103,7 +103,7 @@ const Header = () => {
             <a href="/recruit">체험 모집</a>
             <a href="/place"
               className="list">장소 추천</a>
-            <a href="/recruit">육아템 리뷰</a>
+            <a href="/review">육아템 리뷰</a>
           </ul>
 
           {/* User 메뉴 리스트 */}
