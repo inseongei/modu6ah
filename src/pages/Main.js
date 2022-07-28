@@ -126,7 +126,7 @@ const Title = styled.p`
   display: flex;
   font-size: 28px;
   font-family: 'Nanum Gothic', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   margin-top: 95px;
   margin-left: 170px;
   margin-bottom: 0px;

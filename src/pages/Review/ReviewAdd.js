@@ -12,6 +12,7 @@ import Footer from "../../components/main/Footer";
 import Modal from "../../modal/Map/Modal";
 import plus from "../../images/plus.png";
 import { BsFillPlusCircleFill } from "react-icons/bs";
+import Swal from "sweetalert2";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -42,11 +43,6 @@ function ReviewAdd() {
       formData.append("imageUrl", files[i]);
     }
 
-    // for (const [key, value] of formData.entries()) {
-    //   console.log(key, value)
-    // }
-    // console.log(files.length);
-
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
     formData.append("title", title);
     formData.append("content", content);
@@ -62,11 +58,23 @@ function ReviewAdd() {
           },
         })
         .then((res) => {
-          alert("게시글 작성 성공");
-          navigate("/Review");
+          Swal.fire({
+            text: `게시글 작성 완료!`,
+            icon: "success",
+            confirmButtonText: "확인", 
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/Review");
+            }
+          });
+          
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire({
+            text: `게시글 작성 실패!`,
+            icon: "error",
+            confirmButtonText: "확인", 
+          })
         });
     } else {
       alert("사진은 3개까지만 가능합니다.");

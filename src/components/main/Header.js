@@ -402,7 +402,7 @@ const Headers = styled.div`
   }
 
   .header__menulist > li {
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic', sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: 17px;

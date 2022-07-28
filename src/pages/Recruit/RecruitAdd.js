@@ -12,6 +12,7 @@ import Grid from "../../components/elements/Grid";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 import moment from 'moment';
+import Swal from "sweetalert2";
 
 const RecruitAdd = () => {
   const [on, setOn] = useState(false);
@@ -38,7 +39,6 @@ const RecruitAdd = () => {
       age,
     };
     dispatch(createPostDB(post_data));
-    // console.log(post_data);
   };
 
   return (
