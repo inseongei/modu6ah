@@ -8,24 +8,20 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { useDispatch } from "react-redux";
 import { createPostDB } from "../../redux/modules/post";
-import Grid from "../../components/elements/Grid";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 import moment from 'moment';
 import Swal from "sweetalert2";
 
 const RecruitAdd = () => {
-  const [on, setOn] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
   const [place, setPlace] = useState("");
   const [age, setAge] = useState("");
-
   const datemoment = moment(date).format("YYYY-MM-DD")
   const timemoment = moment(time).format("HH:mm")
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -58,6 +54,7 @@ const RecruitAdd = () => {
           <Detail>
             <Box>
               <div className="container">
+
                 {/* 카드 왼쪽 */}
                 <div className="add_input">
                   <div className="toggle">
@@ -144,16 +141,14 @@ const RecruitAdd = () => {
                     예) 아이 연령대 및 성향, 육아 스타일, 이동수단, 최소 인원, 준비물, 예상 금액 등"
                     />
                   <Btn>
-                    <button
-                      className="btn"
-                      onClick={() => {
-                        navigate(`/recruit`);
-                      }}
-                    >
+                  <a href="/recruit">
+                    <button className="cancel">
                       취소{" "}
                     </button>
+                    </a>
                     <button className="btn"
-                      onClick={addPost}>
+                      onClick={addPost}
+                      >
                       등록하기
                     </button>
                   </Btn>
@@ -225,16 +220,6 @@ const Detail = styled.div`
   strong {
     font-size: 20px;
   }
-}
-.location {
-  input {
-      outline: none;
-  }
-}
-.age {
- input {
-  outline: none;
- }
 }
   .toggle {
     display: flex;
@@ -446,8 +431,23 @@ const Btn = styled.div`
   display: flex;
   margin-right: -190px;
   margin-left: 170px;
+
   .btn {
     width: 30%;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    background-color: #3c3c3c;
+    margin-top: 20px;
+    margin-right: 20px;
+    padding-top: 9px;
+    padding-bottom: 33px;
+    border: 0;
+    outline: 0;
+  }
+
+  .cancel {
+    width: 130px;
     height: 30px;
     border-radius: 20px;
     color: white;

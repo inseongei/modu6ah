@@ -1,20 +1,16 @@
 //체험 모집 상세 페이지
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import Header from "../../components/main/Header";
 import OneToOneChat from "../../modal/Chat/OneToOneChat";
 import Footer from "../../components/main/Footer";
-import Grid from "../../components/elements/Grid";
 import RecruitComment from "../../components/pages/RecruitComment";
 import ChatIcon from '../../components/main/ChatIcon';
 import chatlist from '../../images/chatlist.png';
 import revise from '../../images/revise.png';
 import img_delete from '../../images/delete (1).png'
-
 import axios from "axios";
 import io from "socket.io-client";
-
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailPostDB, deletePostDB } from "../../redux/modules/post";
@@ -25,14 +21,12 @@ const socket = io.connect("https://zhaoxilin.shop"); // 1 . 소켓 서버 연결
 const RecruitDetail = () => {
   const nickname = localStorage.getItem("nickname");
   const [modalIsOpen, setModalIsOpen] = useState(false); // 모달창 열고 닫는 State 값
-  const [on, setOn] = useState(false); // 상세페이지의 모집중/모집완료 토글버튼 State 값
-
-  // const [roomId, setRoomId] = useState()  //  서버로 부터 받은 roomId state로 저장
+  const [on, setOn] = useState(false); // 상세 페이지의 모집 중/모집 완료 토글 버튼 State 값
   const [state, setState] = useState("");
-  let { recruitPostId } = useParams();
-  const [RroomId, setRroomId] = useState();
+  const { recruitPostId } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  console.log(state)
 
   React.useEffect(() => {
     axios
@@ -51,9 +45,6 @@ const RecruitDetail = () => {
     setOn(!on);
   };
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const detail = useSelector((state) => state.post.list);
 
   // console.log(detail);
@@ -66,7 +57,7 @@ const RecruitDetail = () => {
     dispatch(deletePostDB(recruitPostId, navigate));
   };
 
-  // 1:1 문의하기 버튼 눌렀을때 채팅방 생성 + 채팅방 입장하기
+  // 1:1 문의하기 버튼 눌렀을 때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
     axios
       .post("https://zhaoxilin.shop/api/chats/rooms/" + recruitPostId, null, {
@@ -101,6 +92,7 @@ const RecruitDetail = () => {
           </Title>
           <Detail>
             <Box>
+              
               {/* 카드 왼쪽: 모집 토글, 제목, 날짜, 시간 등*/}
               <div className="container">
                 <div className="card-left">
@@ -354,6 +346,7 @@ const Detail = styled.div`
     border-radius: 50%;
     margin-left: 10px;
     cursor: pointer;
+    border: 1px solid #E4E4E4;
   }
 
   .detail_profile {

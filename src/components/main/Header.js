@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import ChatListModal from "../../modal/Chat/ChatListModal";
 import { HiChevronDown } from "react-icons/hi";
 import logo from "../../images/logo.png";
 import Swal from "sweetalert2";
@@ -8,20 +7,21 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 import search from '../../images/search.png'
-<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet"></link>
-
 
 const Header = () => {
+
   // Hook 선언
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [color, setcolor] = React.useState(false);
-  // 쿠키와 로컬스토리지에 있는 토큰,닉네임,프로필Url
+
+
+  // 로컬 스토리지에 있는 토큰,닉네임,프로필Url
   const UserCheck = localStorage.getItem("accessToken");
   const nickname = localStorage.getItem("nickname");
   const Profile = localStorage.getItem("profileUrl");
 
-  // 로그아웃 눌렀을때 쿠키 (토큰 ,닉네임) , 로컬스토리지 (토큰,Url) 삭제후 새로고침
+
+  // 로그아웃 눌렀을 때 쿠키 (토큰, 닉네임), 로컬 스토리지 (토큰, Url) 삭제 후 새로고침
   const logoOut = () => {
     Swal.fire({
       text: `로그아웃하였습니다`,
@@ -43,129 +43,79 @@ const Header = () => {
     dispatch(GetMyPageAxios(nickname));
   };
 
-  const Bookmark = () =>{
+  const Bookmark = () => {
     navigate("/MyBookmark");
   }
 
-
-
   return (
     <>
-      {/* 로그인할때의 헤더 ============================================================================== */}
+      {/* 로그인 할 때의 헤더 ============================================================================== */}
 
       {!UserCheck ? (
         <Headers>
-          <div
-            className="logo_container"
-            onClick={() => {
-              navigate(`/`);
-            }}
-          >
+          <a className="logo_container"
+            href="/">
             <div className="logo_img">
               <img src={logo} alt="로고" />
             </div>
             <div className="logo">모두의 육아</div>
-          </div>
+          </a>
 
           {/* 메뉴 리스트 */}
           <ul className="header__menulist">
-            <li
-              onClick={() => {
-                navigate(`/recruit`);
-              }}
-              
-            >
-              체험 모집
-            </li>
-            <li className="li_color"
-              onClick={() => {
-                navigate(`/place`);
-              }}
-            >
-              장소 추천
-            </li>
-            <li
-              onClick={() => {
-                navigate(`/review`);
-              }}
-            >
-              육아템 리뷰
-            </li>
-          </ul>
-
-          {/* User 메뉴 리스트 */}
-
-          <ul className="header__right">
-          <li className="bell">
-            <a href="/api/search">
-            <img src={search} alt="검색" className="searchiconlogin"/>
-            </a>
-            </li>
-            <li className="Login">
-              <a href="/Login">로그인</a>             
-            </li>
-            <li className="LogoOut">
-            <a href="/Signup">회원가입</a> 
-            </li>
-          </ul>
-        </Headers>
-      ) : (
-        // 로그인했을때의 헤더 ==============================================================================
-
-        <Headers>
-
-          <div
-            className="logo_container"
-            onClick={() => {
-              navigate(`/`);
-            }}
-          >
-            <div className="logo_img">
-              <img src={logo} alt="로고" />
-            </div>
-            <div className="logo">모두의 육아</div>
-          </div>
-
-
-          {/* 메뉴 리스트 */}
-          <ul className="header__menulist">
-            <li
-              onClick={() => {
-                navigate(`/recruit`);
-                setcolor(!color)
-              }}
-            >
-              체험 모집
-            </li>
-            <li
-              onClick={() => {
-                navigate(`/place`);
-                setcolor(!color)
-              }}
-            >
-              장소 추천
-            </li>
-            <li
-              onClick={() => {
-                navigate(`/review`);
-                setcolor(!color)
-              }}
-            >
-              육아템 리뷰
-            </li>
+            <a href="/recruit">체험 모집</a>
+            <a href="/place"
+              className="list">장소 추천</a>
+            <a href="/review">육아템 리뷰</a>
           </ul>
 
           {/* User 메뉴 리스트 */}
           <ul className="header__right">
             <li className="bell">
               <a href="/api/search">
-              <img src={search} alt="검색" className="searchicon"/>
+                <img src={search} alt="검색" className="searchiconlogin" />
+              </a>
+            </li>
+            <li className="Login">
+              <a href="/Login">로그인</a>
+            </li>
+            <li className="LogoOut">
+              <a href="/Signup">회원가입</a>
+            </li>
+          </ul>
+        </Headers>
+
+      ) : (
+        
+        // 로그인 했을 때의 헤더 ==============================================================================
+
+        <Headers>
+          <a className="logo_container"
+            href="/">
+            <div className="logo_img">
+              <img src={logo} alt="로고" />
+            </div>
+            <div className="logo">모두의 육아</div>
+          </a>
+
+          {/* 메뉴 리스트 */}
+          <ul className="header__menulist">
+            <a href="/recruit">체험 모집</a>
+            <a href="/place"
+              className="list">장소 추천</a>
+            <a href="/review">육아템 리뷰</a>
+          </ul>
+
+          {/* User 메뉴 리스트 */}
+          <ul className="header__right">
+            <li className="bell">
+              <a href="/api/search">
+                <img src={search} alt="검색" className="searchicon" />
               </a>
             </li>
             <li className="profile">
               <img src={Profile} alt="프로필" />
             </li>
-
             <li className="accordion">
               <input type="checkbox" id="answer01" />
               <label htmlFor="answer01">
@@ -180,7 +130,7 @@ const Header = () => {
                     <p>프로필관리</p>
                   </div>
                 </div>
-           
+                <hr />
                 <div className="menuTwo">
                   <div onClick={Bookmark}>
                     <p>북마크관리</p>
@@ -188,7 +138,6 @@ const Header = () => {
                 </div>
               </div>
             </li>
-
             <li className="MyPage">마이페이지</li>
             <li className="LogoOutTwo" onClick={logoOut}>
               로그아웃
@@ -212,10 +161,10 @@ const Headers = styled.div`
   color: #3c3c3c;
   filter: drop-shadow(0px 4px 25px rgba(0, 0, 0, 0.1));
   
-
   input[id*="answer"] {
     display: none;
   }
+
   input[id*="answer"] + label {
     display: block;
     cursor: pointer;
@@ -230,7 +179,6 @@ const Headers = styled.div`
   .searchicon{
     margin-right: 30px;
   }
-
 
   input[id*="answer"] + label + div {
     max-height: 0;
@@ -308,7 +256,18 @@ const Headers = styled.div`
 
   a {
     text-decoration: none;
+    color: #A58646;
+    font-family: 'Nanum Gothic'
   }
+
+  a:hover {
+    color: #6b4e16;
+  }
+
+.list {
+  margin-left: 60px;
+  margin-right: 60px;
+}
 
   .menuOne > div > p:hover {
     color: #6b4e16;
@@ -322,6 +281,8 @@ const Headers = styled.div`
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
+    margin-top: 12px;
+    margin-bottom: -1px
   }
 
   .menuTwo > div > p:hover {
@@ -384,8 +345,6 @@ const Headers = styled.div`
     font-size: 100px;
   }
 
- 
-
   .bell {
     font-size: 35px;
     cursor: pointer;
@@ -395,29 +354,11 @@ const Headers = styled.div`
     align-items: center;
   }
 
-
   .MyPage {
     display: none;
     font-size: 20px;
   }
-
-  .header__menulist > li {
-    font-family: 'NanumGothic', sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 17px;
-    line-height: 18px;
-    cursor: pointer;
-    color: #a58646;
-    height: 34px;
-    width:120px;
-    text-align: center;
-  }
-
-  .header__menulist > li:hover{
-    color:#6B4E16;
-  }
-
+ 
   .header__left {
     display: flex;
   }

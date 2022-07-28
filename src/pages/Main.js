@@ -1,9 +1,6 @@
 // 메인 페이지
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-//  elements & components
 import Grid from "../components/elements/Grid";
 import Header from "../components/main/Header";
 import Swiper from "../components/main/Swiper";
@@ -13,15 +10,15 @@ import Footer from "../components/main/Footer";
 import MainScard from "../components/cards/MainScard";
 import ChatIcon from '../components/main/ChatIcon'
 import '../shared/App.css'
-const Main = () => {
 
-  const navigate = useNavigate();
+const Main = () => {
   return (
     <div className="MainBackGround">
       <Header />
       <Swiper />
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
         <Container>
+
           <div className="card_title">
             <Title>체험 모집</Title>
           </div>
@@ -30,18 +27,16 @@ const Main = () => {
               <SubTitle>
                 다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!{" "}
               </SubTitle>
-
-              <Btn
-                onClick={() => {
-                  navigate(`/recruit`);
-                }}
-              >
-                더 보기
-              </Btn>
+              <a href="/recruit">
+                <Btn>
+                  더 보기
+                </Btn>
+              </a>
             </div>
           </div>
           <MainScard />
           <hr className="hrz" />
+            
           <div className="card_title">
             <Title style={{ marginTop: "100px" }}>장소 추천</Title>
           </div>
@@ -50,38 +45,34 @@ const Main = () => {
               <SubTitle>
                 아이들과 함께 출입이 가능한 키즈존을 공유해요!
               </SubTitle>
-
-              <Btn
-                onClick={() => {
-                  navigate(`/place`);
-                }}
-              >
-                더 보기
-              </Btn>
+               <a href="/place">
+                <Btn>
+                  더 보기
+                </Btn>
+              </a>
             </div>
           </div>
           <MainLcard />
           <hr />
+
           <div className="card_title">
             <Title style={{ marginTop: "100px" }}>육아템 리뷰</Title>
           </div>
           <div className="subtitle">
             <div className="subcontent">
               <SubTitle>유용한 육아 아이템들을 소개하고 추천해요!</SubTitle>
-              <Btn
-                onClick={() => {
-                  navigate(`/review`);
-                }}
-              >
-                더 보기
-              </Btn>
+               <a href="/review">
+                <Btn>
+                  더 보기
+                </Btn>
+              </a>
             </div>
           </div>
           <MainRcard />
         </Container>
       </Grid>
-      <ChatIcon/>
-      <Footer num={200}/>
+      <ChatIcon />
+      <Footer num={200} />
     </div>
   );
 };
@@ -91,7 +82,6 @@ const Container = styled.div`
   padding-left: 50px;
   padding-right: 50px;
 
-  
   .card_title {
     widht: 10px;
     width: 960px;
@@ -119,7 +109,6 @@ const Container = styled.div`
     height: 2.5px;
     margin-top: 220px;
   }
-
 `;
 
 const Title = styled.p`

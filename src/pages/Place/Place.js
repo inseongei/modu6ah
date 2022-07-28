@@ -1,19 +1,14 @@
+// 장소 추천 페이지
 import React from "react";
 import styled from "styled-components";
-
-//  elements & components
-import Grid from "../../components/elements/Grid";
 import Header from "../../components/main/Header";
-import Footer from "../../components/main/Footer";
 import LCard from "../../components/cards/Lcard";
 import activity from "../../images/activity.png";
 import ChatIcon from '../../components/main/ChatIcon'
-import { useNavigate } from "react-router-dom";
 
 function Place() {
   const token = localStorage.getItem("accessToken");
 
-  const navigate = useNavigate();
   return (
     <div>
       <Header />
@@ -29,21 +24,19 @@ function Place() {
           <span>내가 다녀온 장소, 추천하고 싶다면?</span>
           <div className="button">
             {!token ? (
-              <Btn
-                onClick={() => {
-                  navigate(`/login`);
-                }}
-              >
-                추천글 작성하기
-              </Btn>
+              <a href="/login">
+                <Btn>
+                  추천글 작성하기
+                </Btn>
+              </a>
+
             ) : (
-              <Btn
-                onClick={() => {
-                  navigate(`/placeadd`);
-                }}
-              >
-                추천글 작성하기
-              </Btn>
+              
+              <a href="/placeadd">
+                <Btn>
+                  추천글 작성하기
+                </Btn>
+              </a>
             )}
           </div>
         </TitleBox>
@@ -51,7 +44,7 @@ function Place() {
           <LCard />
         </div>
       </Container>
-      <ChatIcon/>
+      <ChatIcon />
     </div>
   );
 }

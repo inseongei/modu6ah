@@ -248,7 +248,7 @@ const Container = styled.div`
 
   .profile_box {
     display: flex;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
   }
@@ -262,6 +262,7 @@ const Container = styled.div`
     width: 45px;
     height: 45px;
     border-radius: 50%;
+    border: 1px solid #E4E4E4;
   }
   .detail_profile {
     border-radius: 50%;

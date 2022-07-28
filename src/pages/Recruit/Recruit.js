@@ -1,20 +1,16 @@
 // 모집 게시글 페이지
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon'
 
 //  elements & components
-import Grid from "../../components/elements/Grid";
 import Header from "../../components/main/Header";
 import SCard from "../../components/cards/SCard";
-import Footer from "../../components/main/Footer";
 import hand from '../../images/hand.png';
 
 function Recruit() {
   const token = localStorage.getItem("accessToken");
 
-  const navigate = useNavigate();
   return (
     <div>
       <Header />
@@ -26,25 +22,21 @@ function Recruit() {
               다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!
             </SubTitle>
           </div>
-          <div className="image"><img src={hand}/></div>
+          <div className="image"><img src={hand} /></div>
           <span>내가 하는 활동, 함께 할 팀원을 모집하고 싶다면?</span>
           <div className="button">
             {!token ? (
-              <Btn
-                onClick={() => {
-                  navigate(`/login`);
-                }}
-              >
-                모집글 작성하기
-              </Btn>
+              <a href="/login">
+                <Btn>
+                  모집글 작성하기
+                </Btn>
+              </a>
             ) : (
-              <Btn
-                onClick={() => {
-                  navigate(`/recruitadd`);
-                }}
-              >
-                모집글 작성하기
-              </Btn>
+              <a href="/recruitadd">
+                <Btn>
+                  모집글 작성하기
+                </Btn>
+              </a>
             )}
           </div>
         </TitleBox>
@@ -52,7 +44,7 @@ function Recruit() {
           <SCard />
         </div>
       </Container>
-      <ChatIcon/>
+      <ChatIcon />
     </div>
   );
 }
