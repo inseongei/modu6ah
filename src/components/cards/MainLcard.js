@@ -2,13 +2,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
+import { GrLocation } from "react-icons/gr";
 
 function MainLcard() {
   const navigate = useNavigate();
@@ -25,7 +24,7 @@ function MainLcard() {
   if (!post) {
     return <div></div>;
   }
-  
+
   return (
     <>
       <Container>
@@ -40,7 +39,7 @@ function MainLcard() {
                   navigate("/placedetail/" + item.placePostId);
                 }}
               >
-                  <img src={item.imageUrl[0]} alt="사진" />
+                <img src={item.imageUrl[0]} alt="사진" />
               </div>
               {/* 카드 오른쪽 '타이틀 및 설명' */}
               <div className="card-right">
@@ -52,20 +51,20 @@ function MainLcard() {
                     }}
                   >
                     <div className="threebox">
-                        <span className="threeTitle">{item.title.length > 8 ? item.title.slice(0,7) + '...':item.title}</span>
-                       <span><FaStar size={28} style={{ color: "#FFBA5A", marginLeft: "5px", }}/></span>
-                       <span className="threeStar">{item.star}점</span>
+                      <span className="threeTitle">{item.title.length > 8 ? item.title.slice(0, 7) + '...' : item.title}</span>
+                      <span><FaStar size={28} style={{ color: "#FFBA5A", marginLeft: "5px", }} /></span>
+                      <span className="threeStar">{item.star}점</span>
                     </div>
                   </div>
                   <div>
                     {item.bookmarkStatus === true ? (
                       <BsFillBookmarkFill
-                      className={token ? "bookmark2" : "none"}
+                        className={token ? "bookmark2" : "none"}
                         onClick={() => {
                           axios
                             .put(
                               "https://zhaoxilin.shop/api/places/bookmark/" +
-                                item.placePostId,
+                              item.placePostId,
                               null,
                               {
                                 headers: {
@@ -82,12 +81,12 @@ function MainLcard() {
                       />
                     ) : (
                       <BsBookmark
-                      className={token ? "bookmark" : "none"}
+                        className={token ? "bookmark" : "none"}
                         onClick={() => {
                           axios
                             .put(
                               "https://zhaoxilin.shop/api/places/bookmark/" +
-                                item.placePostId,
+                              item.placePostId,
                               null,
                               {
                                 headers: {
@@ -105,11 +104,15 @@ function MainLcard() {
                     )}
                   </div>
                 </div>
-                <div className="atag"  onClick={() => {
-                    navigate("/placedetail/" + item.placePostId);
-                  }}>
-                  <MdOutlinePlace />
-                  {item.region.length > 27 ? item.region.slice(0,26) + '...':item.region}
+                <div className="atag" onClick={() => {
+                  navigate("/placedetail/" + item.placePostId);
+                }}>
+                  <GrLocation
+                    style={{
+                      marginBottom: "3px",
+                      marginRight: "3px"
+                    }} />
+                  {item.region.length > 27 ? item.region.slice(0, 26) + '...' : item.region}
                 </div>
                 <div
                   className="profile_box"
@@ -128,7 +131,7 @@ function MainLcard() {
                     navigate("/placedetail/" + item.placePostId);
                   }}
                 >
-                  <span>{item.content.length > 90 ? item.content.slice(0,90) + '...':item.content}</span>
+                  <span>{item.content.length > 90 ? item.content.slice(0, 90) + '...' : item.content}</span>
                 </div>
               </div>
             </div>
@@ -167,6 +170,8 @@ const Container = styled.div`
 
   .threebox{
     display: flex;
+    margin-bottom: -3px;
+    margin-left: 3px;
   }
 
   .threeStar{
@@ -208,6 +213,7 @@ const Container = styled.div`
     text-decoration: none;
     color: black;
     cursor: pointer;
+    margin-bottom: 10px;
   }
   .bookmark {
     width: 34px;
@@ -243,7 +249,7 @@ const Container = styled.div`
   .profile_box {
     display: flex;
     margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     cursor: pointer;
   }
   .profile {
@@ -274,8 +280,8 @@ const Container = styled.div`
   }
   .content {
     margin-right: 20px;
+    margin-top: 10px;
     width: 359px;
-    height: 156px;
     box-sizing: border-box;
     overflow: hidden;
     cursor: pointer;
