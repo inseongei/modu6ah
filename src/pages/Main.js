@@ -90,6 +90,7 @@ const Container = styled.div`
   font-family: "Nanum Gothic";
   padding-left: 50px;
   padding-right: 50px;
+
   
   .card_title {
     widht: 10px;
@@ -124,7 +125,8 @@ const Container = styled.div`
 const Title = styled.p`
   display: flex;
   font-size: 28px;
-  font-weight: 750;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
   margin-top: 95px;
   margin-left: 170px;
   margin-bottom: 0px;

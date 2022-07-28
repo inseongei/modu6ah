@@ -372,7 +372,7 @@ const Headers = styled.div`
     list-style: none;
     display: flex;
     font-size: 17px;
-    margin-top: 10px;
+    margin-top: 15px;
   }
 
   .li_color{
@@ -397,10 +397,10 @@ const Headers = styled.div`
   }
 
   .header__menulist > li {
-    font-family: 'NanumGothic';
-    font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-style: normal;
+    font-size: 17px;
     line-height: 18px;
     cursor: pointer;
     color: #a58646;

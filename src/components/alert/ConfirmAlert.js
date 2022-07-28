@@ -1,28 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
-import axios from "axios";
-import Redbin from '../../images/Redbin.png';
 import Grid from "../elements/Grid";
-import Fin from '../../images/Fin.png';
+import cancel from '../../images/cancel.png';
+import trash from '../../images/trash.png';
 
 import { useNavigate } from "react-router-dom";
 
 const ConfirmAlert = () => {
     const navigate = useNavigate();
 
-    // if (!open) return null;
     return (
-        // <Modal isOpen={true} >
             <DetailContainer>
                 <Grid align="center" height="100px" margin="0 0 32 0">
                     <div className="cancel_img">
-                        <img src={Fin} alt="로고" />
+                        <img src={cancel} alt="로고" />
                     </div>
                     <Logo>
-                        {/* 아이콘 바꿔야 함 */}
+                   
                         <div className="check_img">
-                            <img src={Redbin} alt="로고" />
+                            <img src={trash} alt="로고" />
                         </div>
                     </Logo>
                     <Text>
@@ -42,8 +39,6 @@ const ConfirmAlert = () => {
                     </LoginBtn>
                 </Grid>
             </DetailContainer>
-
-        // </Modal>
     );
 };
 
