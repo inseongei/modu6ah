@@ -310,7 +310,7 @@ const Container = styled.div`
 
   .profile_box {
     display: flex;
-    margin-top: 15px;
+    margin-top: 10px;
     cursor: pointer;
   }
   .profile {
