@@ -19,19 +19,19 @@ function SearchScard({ searchdata }) {
   const [index, setindex] = useState(1)
   const token = localStorage.getItem('accessToken')
 
-  React.useEffect(() => {
-    axios
-      .get("https://zhaoxilin.shop/api/search", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        }
-      })
-      .then((res) => {
-        // console.log(res)
-        let data = res.data.resultsInRecruit.slice(0, 6)
-        setData([...data])
-      });
-  }, []);
+  // React.useEffect(() => {
+  //   axios
+  //     .get("https://zhaoxilin.shop/api/search", {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //       }
+  //     })
+  //     .then((res) => {
+  //       // console.log(res)
+  //       let data = res.data.resultsInRecruit.slice(0, 6)
+  //       setData([...data])
+  //     });
+  // }, []);
 
   const refetch = () =>{
     axios
@@ -138,7 +138,7 @@ function SearchScard({ searchdata }) {
                 >
                   <div><img src={location} alt="사진"/>{item.place.length > 14 ? item.place.slice(0,13) + '...' : item.place}</div>
                   <div><img src={time} alt="사진"/>{item.time}</div>
-                  <div><img src={calendar} alt="사진"/>{item.createdAt}</div>
+                  <div><img src={calendar} alt="사진"/>{item.date}</div>
                   <div><img src={age} alt="사진"/>{item.age.length > 14 ? item.age.slice(0,13) + '...' : item.age}</div>
                 </div>
               </div>
@@ -146,7 +146,8 @@ function SearchScard({ searchdata }) {
           })}
       </Container>
       <div className="btnBox">
-        <button className="MoreBtn" onClick={recruitsMore}>
+        <button className="MoreBtn" 
+        onClick={recruitsMore}>
           {btn ? "더보기" : "닫기"}
         </button>
       </div>
