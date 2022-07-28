@@ -59,10 +59,9 @@ function LogIn() {
       <Header /> 
       <BackGround>
       <Grid height="100vh" overflowY="hidden">
-       
         <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
             <Box> 
-               <Container>
+             <Container>
             <Grid height="700px">
               <Grid maxWidth="550px" margin="0 auto">
                 <Grid align="center" height="100px" margin="0 0 32 0">
@@ -80,7 +79,7 @@ function LogIn() {
                         name="email"
                         placeholder="이메일을 입력하세요"
                         required
-                      ></input>
+                      />
                     </Grid>
                   </FormGroup>
                   <FormGroup>
@@ -96,7 +95,7 @@ function LogIn() {
                         placeholder="비밀번호를 입력하세요"
                         maxLength="20"
                         required
-                      ></input>
+                      />
                     </Grid>
                   </FormGroup>
                   <Grid height="auto">
@@ -111,7 +110,7 @@ function LogIn() {
                         onClick={kakaoURL}
                       >
                         <RiKakaoTalkFill size="30" />
-                        <p>Login with KakaoTalk</p>
+                        <p>Login with Kakao</p>
                       </SocialLogin>
                     </Grid>
                     <Grid margin="42px 0 0 0" height="auto" align="center">
@@ -132,7 +131,6 @@ function LogIn() {
              </Container>
             </Box>
         </Grid>
-       
       </Grid>
        </BackGround>
     </>
@@ -141,6 +139,7 @@ function LogIn() {
 
 // &nbsp; 공백없는 줄바꿈
 const Container = styled.div`
+  font-family: "Nanum Gothic"; 
   width: 100%;
   height: 100%;
   display: flex;
@@ -170,8 +169,8 @@ background: #FAFAFA;
 `;
 
 const Box = styled.div`
-width: 600px;
-height: 700px;
+width: 550px;
+height: 650px;
 
 background: white;
 
@@ -192,7 +191,7 @@ const LoginTitle = styled.h1`
 `;
 
 const SocialLogin = styled.a`
-  border-radius: 4px;
+  border-radius: 10px;
   display: inline-flex;
   color: #22211a;
   width: 60%;
@@ -211,6 +210,7 @@ const SocialLogin = styled.a`
   p {
     margin-top: 3px;
   }
+  
   svg {
     margin-right: 8px;
   }
@@ -223,11 +223,11 @@ const SocialLogin = styled.a`
 
 const FormSeperator = styled.p`
   display: block;
-  margin: auto;
   font-size: 12px;
   text-transform: uppercase;
   text-align: center;
-  margin: 24px 0;
+  margin-top: 20px;
+  margin-bottom: -12px;
 `;
 
 const FormGroup = styled.div`
@@ -268,6 +268,11 @@ const FormGroup = styled.div`
       border: 1px solid #F4B03E;
       outline: none;
     }
+
+    ::placeholder {
+      font-size: 15px;
+      color: #A8A8A8;
+    } 
   }
 `;
 

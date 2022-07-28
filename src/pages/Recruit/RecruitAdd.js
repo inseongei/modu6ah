@@ -11,6 +11,7 @@ import { createPostDB } from "../../redux/modules/post";
 import Grid from "../../components/elements/Grid";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
+import moment from 'moment';
 
 const RecruitAdd = () => {
   const [on, setOn] = useState(false);
@@ -21,6 +22,9 @@ const RecruitAdd = () => {
   const [place, setPlace] = useState("");
   const [age, setAge] = useState("");
 
+ const datemoment = moment(date).format("YYYY-MM-DD")
+ const timemoment = moment(time).format("HH:mm")
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,16 +32,14 @@ const RecruitAdd = () => {
     const post_data = {
       title,
       content,
-      date,
-      time,
+      date: datemoment,
+      time: timemoment,
       place,
       age,
     };
     dispatch(createPostDB(post_data));
     console.log(post_data);
   };
-
-  console.log(time, date)
 
   // 모집중 , 모집완료 상태 변경하기
   const inputChange = () => {
