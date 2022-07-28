@@ -1,28 +1,26 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
-import axios from "axios";
-import email from '../../images/email.png';
 import Grid from "../elements/Grid";
-import Fin from '../../images/Fin.png';
+import cancel from '../../images/cancel.png';
+import component from '../../images/Component.png';
 
 import { useNavigate } from "react-router-dom";
 
 const Alert = () => {
     const navigate = useNavigate();
 
-    // if (!open) return null;
     return (
-        // <Modal isOpen={true} >
+
             <DetailContainer>
                 <Grid align="center" height="100px" margin="0 0 32 0">
                     <div className="cancel_img">
-                        <img src={Fin} alt="로고" />
+                        <img src={cancel} alt="로고" />
                     </div>
                     <Logo>
-                        {/* 아이콘 바꿔야 함 */}
+                
                         <div className="check_img">
-                            <img src={email} alt="로고" />
+                            <img src={component} alt="로고" />
                         </div>
                     </Logo>
                     <Text>
@@ -37,13 +35,12 @@ const Alert = () => {
                 </Grid>
             </DetailContainer>
 
-        // </Modal>
     );
 };
 
 
 const DetailContainer = styled.div`
-font-family: "Nanum Gothic";
+  font-family: "Nanum Gothic";
   width: 300px;
   height: 250px;
   cursor: auto;
