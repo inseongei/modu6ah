@@ -1,191 +1,280 @@
 // 모집 카드
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
-import { useSelector, useDispatch } from "react-redux";
+import location from '../../images/location.png'
+import time from '../../images/time.png'
+import age from '../../images/age.png'
+import calendar from '../../images/calendar.png'
 import axios from "axios";
-import { useSearchParams} from 'react-router-dom';
+import InfiniteScroll from "react-infinite-scroll-component";
 
-function SearchScard({data, query}) {
+function SearchScard({ searchdata }) {
   const navigate = useNavigate();
-  const [search, setSearch] = React.useState();
-  const [btn, setbtn] = React.useState(true);
+  const [data, setData] = useState([]);
+  const [book, setbook] = React.useState();
+  const [btn, setBtn] = useState();
+  const [noMore, setnoMore] = useState(true)
+  const [index, setindex] = useState(1)
+  const token = localStorage.getItem('accessToken')
 
-  // 매니저님께 여쭤 볼 부분입니다. 지우지 말아주세요 :)
-  // const dispatch = useDispatch();
-  // const search = useSelector((state) => state);
-  // console.log(search);
-  // React.useEffect(() => {
-  //   dispatch(GetMainAxois());
-  // }, []);
+  React.useEffect(() => {
+    axios
+      .get("https://zhaoxilin.shop/api/search", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        }
+      })
+      .then((res) => {
+        // console.log(res)
+        let data = res.data.resultsInRecruit.slice(0, 6)
+        setData([...data])
+      });
+  }, []);
+
+  const refetch = () =>{
+    axios
+    .get("https://zhaoxilin.shop/api/mypage/bookmark/", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => {
+      setbook(res.data.recruitBookmarkList.slice(0, 6));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  const recruitsMore = async () => {
+    await axios
+      .get("https://zhaoxilin.shop/api/search/recruits", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setBtn(!btn);
+        btn
+          ? searchdata(res.data.resultsInRecruit)
+          : searchdata(res.data.resultsInRecruit.slice(0, 6));
+      });
+  };
 
   return (
     <>
-            <Container>
-              {data &&
-                data.filter((item)=> 
-                   item.title.includes(query) ||
-                   item.content.includes(query)
-                ).map((item) => {
-                  return (
-                    <div className="card" key={data._id}>
-                      <div className="card-top">
-                        {item.status === true ? <p>모집완료</p> : <span>모집중</span>}
-                        {item.bookmarkStatus === true ? (
-                          <BsFillBookmarkFill
-                            className="checkIcon"
-                            onClick={() => {
-                              axios
-                                .put(
-                                  "https://zhaoxilin.shop/api/recruits/bookmark/" +
-                                  item.recruitPostId,
-                                  null,
-                                  {
-                                    headers: {
-                                      Authorization: `Bearer ${localStorage.getItem(
-                                        "accessToken"
-                                      )}`,
-                                    },
-                                  }
-                                )
-                                .then((res) => {
-                                  console.log(res);
-                                  window.location.reload();
-                                });
-                            }}
-                          />
-                        ) : (
-                          <BsBookmark
-                            className="icon"
-                            onClick={() => {
-                              axios
-                                .put(
-                                  "https://zhaoxilin.shop/api/recruits/bookmark/" +
-                                  item.recruitPostId,
-                                  null,
-                                  {
-                                    headers: {
-                                      Authorization: `Bearer ${localStorage.getItem(
-                                        "accessToken"
-                                      )}`,
-                                    },
-                                  }
-                                )
-                                .then((res) => {
-                                  console.log(res);
-                                  window.location.reload();
-                                });
-                            }}
-                          />
-                        )}
-                      </div>
-                      {/* 카드 타이틀 */}
-                      <div
-                        className="title"
+      <Container>
+        <div className="test">
+          {searchdata &&
+            searchdata.map((item, idx) => {
+              return (
+                <div className="card animate__animated animate__fadeInUp" key={idx}>
+                  <div className="card-top">
+                    {item.status === true ? <p>모집완료</p> : <span>모집중</span>}
+                    {item.bookmarkStatus === true ? (
+                      <BsFillBookmarkFill
+                        className={token ? "checkIcon" : "none"}
                         onClick={() => {
-                          navigate("/recruitdetail/" + item.recruitPostId);
+                          axios
+                            .put(
+                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
+                              item.recruitPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              refetch()
+                            });
                         }}
-                      >
-                        <h1>{item.title}</h1>
-                      </div>
-                      {/* 카드 내용물 */}
-                      <div
-                        className="card-bottom"
+                      />
+                    ) : (
+                      <BsBookmark
+                        className={token ? "icon" : "none"}
                         onClick={() => {
-                          navigate("/recruitdetail/" + item.recruitPostId);
+                          axios
+                            .put(
+                              "https://zhaoxilin.shop/api/recruits/bookmark/" +
+                              item.recruitPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              refetch()
+                            });
                         }}
-                      >
-                        <p>{item != null && item.createdAt}</p>
-                        <p>{item != null && item.time}</p>
-                        <p>{item != null && item.place}</p>
-                        <p>{item != null && item.age}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-            </Container>
-            <div className="btnBox">
-              <button
-               
-                className="MoreBtn" >
-                더 보기
-              </button>
-            </div>
-          
+                      />
+                    )}
+                  </div>
+                  {/* 카드 타이틀 */}
+                  <div
+                    className="titleTwo"
+                    onClick={() => {
+                      navigate("/recruitdetail/" + item.recruitPostId);
+                    }}
+                  >
+                    <span className="spantitle">{item.title.length > 12 ? item.title.slice(0, 11) + '...' : item.title}</span>
+                  </div>
+                  {/* 카드 내용물 */}
+                  <div
+                    className="card-bottom"
+                    onClick={() => {
+                      navigate("/recruitdetail/" + item.recruitPostId);
+                    }}
+                  >
+                    <div><img src={location} alt="사진" />{item.place.length > 14 ? item.place.slice(0, 13) + '...' : item.place}</div>
+                    <div><img src={time} alt="사진" />{item != null && item.time}</div>
+                    <div><img src={calendar} alt="사진" />{item != null && item.createdAt}</div>
+                    <div><img src={age} alt="사진" />{item.age.length > 14 ? item.age.slice(0, 13) + '...' : item.age}</div>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+      </Container>
+      <div className="btnBox">
+        <button className="MoreBtn">
+          {btn ? "더보기" : "닫기"}
+        </button>
+      </div>
+      <hr className="BookHr"/>
     </>
   );
 }
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2em;
   justify-content: center;
   align-items: center;
-  width: 100%;
+
+  .test{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2em;
+    width: 914px;
+    height: 200px;
+    margin: auto;
+  }
   .card {
     display: flex;
-    height: 100%;
+    width: 284px;
+    height: 247px;
     background: white;
-    border-radius: 30px;
+    border-radius: 20px;
     border: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
+    border: 1px solid #A8A8A8;
   }
   .card-top {
     display: flex;
-    margin: 30px 0px 0px 30px;
-    width: 100%;
+    width: 284px;
+    height: 30px;
     justify-content: space-between;
+    margin: 20px 20px 25px 20px;
   }
   .card-top > p {
-    margin: 0px 0px 4px 4px;
+    width: 114px;
+    height: 28px;
     background-color: #a8a8a8;
+    border: 1px solid #a8a8a8;
     border-radius: 20px;
-    padding: 6px 15px 7px 15px;
-    color: white;
+    color: #FFFFFF;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
   }
 
   .card-top span {
-    margin: 0px 0px 4px 4px;
-    background-color: #f4b03e;
+    width: 114px;
+    height: 28px;
+    background: #F4B03E;
+    border: 1px solid #F4B03E;
     border-radius: 20px;
-    padding: 6px 15px 7px 15px;
-    color: white;
+    color: #FFFFFF;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+  }
+
+  .spantitle{
+    display: flex;
+    justify-content: flex-start;
   }
 
   .icon {
-    margin-right: 60px;
-    width: 34px;
-    height: 34px;
+    margin-right: 35px;
+    width: 30px;
+    height: 30px;
     color: black;
     cursor: pointer;
     position: relative;
     top: 0px;
   }
-  .title {
-    padding: 30px 10px 25px 33px;
+  .titleTwo {
+    width: 234px;
+    height: 23px;
     cursor: pointer;
-    h1 {
-      font-size: 25px;
-      font-weight: bold;
-    }
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin: 0px 25px 25px 25px;
   }
   .card-bottom {
     cursor: pointer;
-    margin: 0px 0px 20px 30px;
+    margin: 0px 20px 20px 25px;
+    width: 243px;
+    height: 104px;
   }
-  .card-bottom p {
-    margin: 0px 0px 8px 4px;
+  .card-bottom div {
+    margin-bottom: 8px;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .card-bottom > div > img{
+    margin-right: 8px;
   }
   .checkIcon {
-    margin-right: 60px;
-    width: 34px;
-    height: 34px;
+    margin-right: 40px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     position: relative;
     top: 0px;
     color: #6b4e16;
   }
+
+  .none {
+    display: none;
+  }
+
+
+
   .checkIcon:hover {
     transform: scale(1.13);
   }
