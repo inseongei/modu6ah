@@ -13,36 +13,59 @@ import axios from "axios";
 const MainSearch = () => {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
-  const [recruit, setRecruit] = useState([]);
-  const [place, setPlace] = useState([]);
-  const [review, setReview] = useState([]);
+  const [Morerecruit, setMorerecruit] = useState([]);
+  const [Moreplace, setMoreplace] = useState([]);
+  const [Morereview, setMorereview] = useState([]);
 
   const search = () => {
-    if(keyword.length > 0 ){ 
-      axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`, { }) 
-      .then((res) => { 
-        console.log(res) 
-        setRecruit(res.data.resultsInRecruit) 
-        setPlace(res.data.resultsInPlace) 
-        setReview(res.data.resultsInReview) 
-      }); 
-    } else { 
-      alert('검색어를 입력하세요') 
+    if (keyword.length > 0) {
+      axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => {
+          console.log(res)
+          setMorerecruit(res.data.resultsInRecruit)
+          setMoreplace(res.data.resultsInPlace)
+          setMorereview(res.data.resultsInReview)
+        });
+    } else {
+      alert('검색어를 입력하세요')
     }
   }
+
+  // enter key로 검색
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      search()
+    }
+  }
+
 
   return (
     <>
       <Header />
       <Search>
         <div className="title">
-          <div className="searchinput">게시글 검색</div>
-          <div className="serchtitle">키워드 검색하기</div>
+          <div className="searchinput"
+            style={{
+              fontFamily: 'Nanum Gothic',
+              fontWeight: '600',
+              color: '#a8a8a8'
+            }}>게시글 검색</div>
+          <div className="serchtitle"
+          style={{
+            fontFamily: 'Nanum Gothic',
+              fontWeight: '700',
+              marginTop: '3px',
+              marginBottom: '-25px'
+          }}
+          >키워드 검색하기</div>
         </div>
 
         <div className="MainBox">
           <InputBox>
-            <img src={img_search} alt="검색" />
             <div className="search">
               <input
                 type="text"
@@ -51,18 +74,16 @@ const MainSearch = () => {
                 onChange={(e) => {
                   setKeyword(e.target.value)
                 }}
-              onKeyPress={search}
+                onKeyPress={onKeyPress}
               />
-              <button className="search_btn"
-               onClick={search}
-                >
-                확인
-              </button>
+              <img src={img_search}
+                onClick={search}
+                alt="검색"
+              />
             </div>
           </InputBox>
+          <Text> "{keyword}"에 대한 검색 결과입니다.</Text>
           <Cards>
-            <div className="text">
-              "{keyword}"에 대한 검색 결과입니다.</div>
             <div className="subtitle">체험 모집</div>
             <div className="subContent">
               다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!
@@ -71,7 +92,9 @@ const MainSearch = () => {
 
           <div className="cardBox">
             <SearchScard
-            searchdata={recruit}
+              Morerecruit={Morerecruit}
+              search={search}
+              keyword={keyword}
             />
           </div>
 
@@ -83,8 +106,8 @@ const MainSearch = () => {
           </Cards>
 
           <div className="cardBox">
-            <SearchLcard 
-            searchdata={place}
+            <SearchLcard
+              searchdata={Moreplace}
             />
           </div>
 
@@ -98,7 +121,7 @@ const MainSearch = () => {
 
           <div className="cardBox">
             <SearchRcard
-            searchdata={review}
+              searchdata={Morereview}
             />
           </div>
         </div>
@@ -125,9 +148,6 @@ const Search = styled.div`
 
   .serchinput {
     color: #a8a8a8;
-    font-family: "NanumGothic";
-    font-style: normal;
-    font-weight: 700;
     font-size: 16px;
     line-height: 18px;
     padding-top: 20px;
@@ -158,7 +178,6 @@ const Search = styled.div`
     font-weight: 700;
   }
 
-
   .MainBox {
     border: 1px solid #e4e4e4;
     width: 1014px;
@@ -173,36 +192,13 @@ const Search = styled.div`
   }
 `;
 
-const Cards = styled.div`
-margin: 64px 0px 35px 85px;
-
-.text {
-  dispaly: flex;
-  margin-left: 300px;
-  margin-bottom: 30px;
-  color: #A8A8A8;
-}
-
-.subtitle {
-  color: #000000;
-  font-family: "NanumGothic";
-  font-style: normal;
-  font-weight: 900;
-  font-size: 26px;
-  line-height: 30px;
-  margin-bottom: 12px;
-}
-
-.subContent {
-  color: #6b4e16;
-  font-family: "NanumGothic";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 18px;
-}
+const Text = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+color: #A8A8A8;
+margin-top: 40px;
 `;
-
 
 const InputBox = styled.div`
   font-family: "Nanum Gothic";
@@ -210,43 +206,53 @@ const InputBox = styled.div`
   align-items: center;
   justify-content: center;
 
-  img {
-    width: 30px;
-    height: 30px;
-    margin: 42px 10px 0 0;
-  }
-
   .search {
-    margin-top: 40px;
-  }
-
-  .search-box {
+    position: relative;
     width: 700px;
-    height: 50px;
-    border-radius: 30px;
-    padding-left: 18px;
-    border: 1.5px solid #3C3C3C;
-    outline: none;
-
+    margin-top: 30px;
+    
     input {
-      ::placeholder{
-        color: #A8A8A8;
-      }
-    }
-  }
-
-  .search_btn {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    background: #3C3C3C;
+    width: 100%;
+    border: 1px solid #3C3C3C;
     border-radius: 30px;
-    width: 75px;
-    height: 44px;
-    color: #FFFFFF;
-    margin-top: 8px;
-    margin-left: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    outline: none;
   }
+  
+  img {
+    position : absolute;
+    width: 23px;
+    top: 10px;
+    right: 16px;
+    margin: 0;
+    cursor: pointer;
+  }
+}
+  
+`;
+
+const Cards = styled.div`
+margin: 44px 0px 80px 85px;
+
+.subtitle {
+  color: #000000;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 26px;
+  line-height: 30px;
+  margin-bottom: 12px;
+}
+
+.subContent {
+  color: #6b4e16;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 18px;
+}
 `;
 
 export default MainSearch;
