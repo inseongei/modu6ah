@@ -1,16 +1,13 @@
 // 체험 모집 수정 페이지
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-
 import { useDispatch, useSelector } from "react-redux";
 import { updatePostDB } from "../../redux/modules/post";
 import { useNavigate, useParams } from "react-router-dom";
 import { detailPostDB } from "../../redux/modules/post";
-
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
@@ -19,7 +16,7 @@ import moment from 'moment';
 function RecruitEdit() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let { recruitPostId } = useParams();
+  const { recruitPostId } = useParams();
 
   const [status, setStatus] = useState(true);
   const [title, setTitle] = useState("");
@@ -43,7 +40,7 @@ function RecruitEdit() {
       status,
     };
     dispatch(updatePostDB(recruitPostId, newPost));
-    console.log(recruitPostId, newPost);
+    // console.log(recruitPostId, newPost);
   };
 
   // 모집중 , 모집완료 상태 변경하기
@@ -155,14 +152,11 @@ function RecruitEdit() {
                     placeholder={detail.content}
                   />
                   <Btn>
-                    <button
-                      className="btn"
-                      onClick={() => {
-                        navigate(`/recruit`);
-                      }}
-                    >
+                    <a href="/recruit">
+                    <button className="cancel">
                       취소{" "}
                     </button>
+                    </a>
                     <button className="btn" onClick={upload}>
                       등록하기
                     </button>
@@ -465,6 +459,20 @@ const Btn = styled.div`
 
   .btn {
     width: 30%;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    background-color: #3c3c3c;
+    margin-top: 20px;
+    margin-right: 20px;
+    padding-top: 9px;
+    padding-bottom: 33px;
+    border: 0;
+    outline: 0;
+  }
+
+  .cancel {
+    width: 130px;
     height: 30px;
     border-radius: 20px;
     color: white;
