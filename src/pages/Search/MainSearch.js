@@ -17,15 +17,18 @@ const MainSearch = () => {
   const [place, setPlace] = useState([]);
   const [review, setReview] = useState([]);
 
-  const search = (e) => {
-        axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`, {
-        })
-          .then((res) => {
-            console.log(res)
-           setRecruit(res.data.resultsInRecruit)
-           setPlace(res.data.resultsInPlace)
-           setReview(res.data.resultsInReview)
-          });
+  const search = () => {
+    if(keyword.length > 0 ){ 
+      axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`, { }) 
+      .then((res) => { 
+        console.log(res) 
+        setRecruit(res.data.resultsInRecruit) 
+        setPlace(res.data.resultsInPlace) 
+        setReview(res.data.resultsInReview) 
+      }); 
+    } else { 
+      alert('검색어를 입력하세요') 
+    }
   }
 
   return (
@@ -46,13 +49,12 @@ const MainSearch = () => {
                 className="search-box"
                 placeholder="키워드를 입력하세요 (예) 체험명, 지역명, 작성자"
                 onChange={(e) => {
-                  setKeyword(e.target.value);
+                  setKeyword(e.target.value)
                 }}
-              onKeyPress={(e) => search(e)}
+              onKeyPress={search}
               />
               <button className="search_btn"
-               onClick={(e) => 
-                {search(e)}} 
+               onClick={search}
                 >
                 확인
               </button>
