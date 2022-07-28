@@ -27,6 +27,8 @@ function MainScard() {
     return <div></div>;
   }
 
+  
+
   return (
     <>
       <Container>
@@ -92,6 +94,7 @@ function MainScard() {
                 >
                   <span className="spantitle">{item.title.length > 12 ? item.title.slice(0,11) + '...' : item.title}</span>
                 </div>
+                
                 {/* 카드 내용물 */}
                 <div
                   className="card-bottom"
@@ -231,7 +234,6 @@ const Container = styled.div`
   .none {
     display: none;
   }
-
 
 
   .checkIcon:hover {

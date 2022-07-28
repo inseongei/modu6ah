@@ -15,6 +15,7 @@ const RecruitComment = () => {
 
   //댓글 작성
   const addComment = () => {
+    setComment('')
     const comment_data = {
       comment, nickname
     }
@@ -22,9 +23,7 @@ const RecruitComment = () => {
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
-        // console.log(res)
-        window.alert('댓글 작성 성공')
-        window.location.replace("/recruitdetail/" + recruitPostId)
+       refetch()
       })
       .catch((err) => {
         window.alert("로그인 후 사용해 주세요");
@@ -32,17 +31,24 @@ const RecruitComment = () => {
       })
   }
 
-  // 댓글 조회
+  const refetch = () =>{
+    axios
+    .get('https://zhaoxilin.shop/api/recruits/' + recruitPostId, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => {
+      console.log(res.data)
+      setState(res.data.recruitComments)
+    })
+    .catch((err) => {
+      // console.log(err);
+    });
+  }
+
   React.useEffect(() => {
-    axios.get('https://zhaoxilin.shop/api/recruits/' + recruitPostId,
-      { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-      .then((res) => {
-        setState(res.data.recruitComments)
-        console.log(res.data.recruitComments)
-      })
-      .catch((err) => {
-        // console.log(err)
-      });
+    refetch()
   }, []);
 
   //댓글 삭제
@@ -53,13 +59,12 @@ const RecruitComment = () => {
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
 
       .then((response) => {
-        console.log(response);
-        alert("삭제가 완료되었습니다.");
-        window.location.replace("/recruitdetail/" + recruitPostId)
+        // console.log(response);
+        refetch()
       })
       .catch((error) => {
         alert("게시글을 삭제할 권한이 없습니다.");
-        console.log(error)
+        // console.log(error)
       });
   };
 
@@ -77,6 +82,7 @@ const RecruitComment = () => {
                 placeholder='댓글을 입력하세요'
                 onChange={e =>
                   setComment(e.target.value)}
+                  value={comment}
               /> 
               <div className='btnBox'>
               <button className='btn'
@@ -142,7 +148,7 @@ const CommentBox = styled.div`
 font-family: "Nanum Gothic";
 max-width: 100%;
 margin-top: 50px;
-padding-bottom: 180px;
+padding-bottom: 100px;
 
 .comment_section{
 display: flex;
@@ -169,7 +175,7 @@ display: flex;
 }
 
 .inputBox{
-  width: 1030px;
+  width: 1000px;
   display: flex;
   margin-bottom: 10px;
 }
@@ -209,7 +215,7 @@ display: flex;
 .box{
   width: 920px;
   display:flex;
-  margin-left: 210px;
+  margin-left: 85px;
   margin-top: 5px;
   padding: 25px;
 }
@@ -256,6 +262,7 @@ cursor: pointer;
   display: hidden;
   border: 0;
   outline: 0;
+  background: #FAFAFA;
 
   img {
    width: 35px;

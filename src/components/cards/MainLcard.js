@@ -1,20 +1,19 @@
 //  장소 추천 카드
 import React, { useState } from "react";
 import styled from "styled-components";
-import { PlaceData } from "../../shared/placedata";
+import axios from "axios";
 import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { GetMainAxois, GetMainLogin } from "../../redux/modules/Data";
-import { FaStar } from "react-icons/fa";
 
 function MainLcard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState("");
-
   const token = localStorage.getItem('accessToken')
 
   React.useEffect(() => {
@@ -26,56 +25,47 @@ function MainLcard() {
   if (!post) {
     return <div></div>;
   }
-
+  
   return (
     <>
       <Container>
         {post.placePosts &&
           post.placePosts.map((item, index) => (
-            <div
-              className="card"
-              key={index}
-            >
+            item &&
+            <div className="card animate__animated animate__fadeInUp" key={index} >
               {/* 카드 왼쪽 '이미지' */}
-              <div className="card-left" 
+              <div
+                className="card-left"
                 onClick={() => {
-                navigate("/placedetail/" + 
-                item.placePostId);
-              }}>
-                <div className="image">
+                  navigate("/placedetail/" + item.placePostId);
+                }}
+              >
                   <img src={item.imageUrl[0]} alt="사진" />
-                </div>
               </div>
               {/* 카드 오른쪽 '타이틀 및 설명' */}
               <div className="card-right">
                 <div className="title">
-                  <div className="titleBox"
+                  <div
+                    className="titleBox"
                     onClick={() => {
-                      navigate("/placedetail/" +
-                        item.placePostId);
-                    }}>
-                    <h3>{item.title}</h3>
-                    <span>
-                      <FaStar
-                        size={28}
-                        style={{
-                          color: "#FFBA5A",
-                          marginLeft: "5px",
-                        }}
-                      />
-                    </span>
-                    <p>{item.star}점</p>
+                      navigate("/placedetail/" + item.placePostId);
+                    }}
+                  >
+                    <div className="threebox">
+                        <span className="threeTitle">{item.title.length > 8 ? item.title.slice(0,7) + '...':item.title}</span>
+                       <span><FaStar size={28} style={{ color: "#FFBA5A", marginLeft: "5px", }}/></span>
+                       <span className="threeStar">{item.star}점</span>
+                    </div>
                   </div>
-
                   <div>
                     {item.bookmarkStatus === true ? (
                       <BsFillBookmarkFill
-                        className="bookmark2"
+                      className={token ? "bookmark2" : "none"}
                         onClick={() => {
                           axios
                             .put(
                               "https://zhaoxilin.shop/api/places/bookmark/" +
-                              item.placePostId,
+                                item.placePostId,
                               null,
                               {
                                 headers: {
@@ -86,19 +76,18 @@ function MainLcard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
-                              window.location.reload();
+                              dispatch(GetMainAxois())
                             });
                         }}
                       />
                     ) : (
                       <BsBookmark
-                        className="bookmark"
+                      className={token ? "bookmark" : "none"}
                         onClick={() => {
                           axios
                             .put(
                               "https://zhaoxilin.shop/api/places/bookmark/" +
-                              item.placePostId,
+                                item.placePostId,
                               null,
                               {
                                 headers: {
@@ -109,34 +98,37 @@ function MainLcard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res.data);
-                              window.location.reload();
-                            }).catch((err) => console.log(err))
+                              dispatch(GetMainAxois())
+                            });
                         }}
                       />
                     )}
                   </div>
                 </div>
-                <a href="##" className="atag">
-                  <MdOutlinePlace />
-                  {item.region}
-                </a>
-                <div className="profile_box"
-                  onClick={() => {
-                    navigate("/placedetail/" +
-                      item.placePostId);
+                <div className="atag"  onClick={() => {
+                    navigate("/placedetail/" + item.placePostId);
                   }}>
-                  <div className="detail_profile"
-                    onClick={() => {
-                      navigate("/placedetail/" +
-                        item.placePostId);
-                    }}>
+                  <MdOutlinePlace />
+                  {item.region.length > 27 ? item.region.slice(0,26) + '...':item.region}
+                </div>
+                <div
+                  className="profile_box"
+                  onClick={() => {
+                    navigate("/placedetail/" + item.placePostId);
+                  }}
+                >
+                  <div className="detail_profile">
                     <img src={item.profileUrl} alt="프로필" />
                   </div>
                   <strong>{item.nickname}</strong>
                 </div>
-                <div className="content">
-                  <p>{item.content}</p>
+                <div
+                  className="content"
+                  onClick={() => {
+                    navigate("/placedetail/" + item.placePostId);
+                  }}
+                >
+                  <span>{item.content.length > 90 ? item.content.slice(0,90) + '...':item.content}</span>
                 </div>
               </div>
             </div>
@@ -153,130 +145,156 @@ const Container = styled.div`
   gap: 3.5em;
   justify-content: center;
   align-items: center;
-
   .card {
-    background: white;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.17);
-    overflow: hidden;
-    width: 980px;
-    height: 360px;
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #A8A8A8;
+    width: 900px;
+    height: 355px;
     display: flex;
     flex-direction: row;
   }
-
   .card-left {
     display: flex;
-    width: 460px;
-    height: 300px;
-    margin: 30px 0px 0px 39px;
+    width: 465px;
+    height: 335px;
+    padding: 10px;
+    margin: 10px 15px 10px 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-  }
-
-  .image {
-    border-radius: 25px;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .atag {
-    text-decoration: none;
-    color: black;
-    margin: 13px 0px 15px 0px;
-  }
-
-  .bookmark {
-    margin-right: 60px;
-    width: 34px;
-    height: 34px;
     cursor: pointer;
   }
 
+  .threebox{
+    display: flex;
+  }
+
+  .threeStar{
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #A8A8A8;
+    margin-left: 6px;
+  }
+
+  .threeTitle{
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 30px;
+    margin-right: 20px;
+  }
+
+
+
+
+
+
+
+
+
+
+  .none {
+    display: none;
+  }
+
+
+
+
+
+
+
+
+
   .bookmark2 {
-    margin-right: 60px;
     width: 34px;
     height: 34px;
     color: #6b4e16;
     cursor: pointer;
   }
-
-  .card-left img {
-    width: 100%;
-    height: 100%;
+  .titleBox {
+    cursor: pointer;
+    display: flex;
+    align-items:center;
+  }
+  .atag {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
+  .bookmark {
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+  }
+  .image > img {
+    width: 445px;
+    height: 315px;
+    border-radius: 20px;
+  }
+  .card-left > img {
+    width: 445px;
+    height: 315px;
+    border-radius: 30px;
     object-fit: cover;
   }
-
   .card-right {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
-    margin-left: 60px;
+    width: 369px;
+    height: 299px;
+    padding: 0px 10px;
   }
-
-  .titleBox {
-    display: flex;
-  }
-
   .title {
     display: flex;
     justify-content: space-between;
-
-    h3 {
-      font-weight: 700;
-    }
-  }
-
-  .title p {
-    color: #A8A8A8;
-    font-weight: 700;
-    margin: 3px 0px 0px 8px;
+    width: 361px;
+    height: 50px;
+    margin:28px 29px 10px 0px;
   }
 
   .profile_box {
     display: flex;
-    margin-top: 8px;
+    margin-top: 15px;
     margin-bottom: 20px;
+    cursor: pointer;
   }
-
   .profile {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     border: 1px solid black;
   }
-
   .detail_profile > img {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    margin-left: 2px;
   }
-
   .detail_profile {
     border-radius: 50%;
-    /* display:flex; */
     align-items: center;
     display: block;
     justify-content: center;
   }
-
   strong {
     margin-top: 10px;
     margin-left: 10px;
   }
-
+  .card-right p {
+    margin: 6px 10px 0px 5px;
+  }
   .content {
     margin-right: 20px;
-    width: 420px;
-    height: 120px;
+    width: 359px;
+    height: 156px;
     box-sizing: border-box;
     overflow: hidden;
-  }
-
-  .content p {
-    font-weight: normal;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
   }
 `;
 

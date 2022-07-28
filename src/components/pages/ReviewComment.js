@@ -2,27 +2,27 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import img_delete from '../../images/deletecomment.png';
 
 const ReviewComment = () => {
   const [comment, setComment] = useState('');
   const [state, setState] = useState('');
   const nickname = localStorage.getItem("nickname");
-
   const navigate = useNavigate();
-  let { reviewPostId } = useParams();
+  const { reviewPostId } = useParams();
+  // console.log(state)
 
-  //댓글 작성 
+  //댓글 작성
   const addComment = () => {
+    setComment('')
     const comment_data = {
       comment, nickname
     }
-    axios.post('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments',
+    axios.post('https://zhaoxilin.shop/api/places/' + reviewPostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-      .then((res) => {
-        // console.log(res)
-        window.alert('댓글 작성 성공')
-        window.location.replace("/reviewdetail/" + reviewPostId)
+      .then((res) => { 
+        refetch()
       })
       .catch((err) => {
         // console.log(err.response.data.message);
@@ -30,35 +30,39 @@ const ReviewComment = () => {
       })
   }
 
-  // 댓글 조회
+  const refetch = () =>{
+    axios
+    .get('https://zhaoxilin.shop/api/reviews/' + reviewPostId, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => {
+      setState(res.data.reviewComments)
+    })
+    .catch((err) => {
+      // console.log(err);
+    });
+  }
+
   React.useEffect(() => {
-    axios.get('https://zhaoxilin.shop/api/reviews/' + reviewPostId,
-      { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-      .then((res) => {
-        setState(res.data.reviewComments)
-      })
-      .catch((err) => {
-      });
+    refetch()
   }, []);
 
   //댓글 삭제
   const deleteComment = (e) => {
-    // console.log(e.target.id);
+    // console.log(e.target);
     axios
-      .delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments/' + e.target.id,
+      .delete('https://zhaoxilin.shop/api/reviews/'+ reviewPostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
-        // console.log(response);
-        alert("삭제가 완료되었습니다.");
-        window.location.replace("/reviewdetail/" + reviewPostId)
+        refetch();
       })
       .catch((error) => {
         alert("게시글을 삭제할 권한이 없습니다.");
         // console.log(error)
-
       });
   };
-
   return (
     <CommentBox>
       <div className='comment'>
@@ -70,17 +74,19 @@ const ReviewComment = () => {
             <div className='inputBox'>
               <input
                 type="text"
-                placeholder='댓글을 입력해주세요'
+                placeholder='댓글을 입력하세요'
                 onChange={e =>
-                  setComment(e.target.value)}
+                setComment(e.target.value)}
+                value={comment}
               />
-            </div>
+            
             <div className='btnBox'>
               <button className='btn'
                 onClick={addComment}
               >
                 등록
               </button>
+            </div>
             </div>
           </div>
         </div>
@@ -98,6 +104,7 @@ const ReviewComment = () => {
                         alt="사진" />
                     </div>
                   </div>
+
                   <div className='name'
                   >
                     {data.nickname}
@@ -112,16 +119,15 @@ const ReviewComment = () => {
                       {data.createdAt}
                     </div>
                   </div>
-
                 </div>
                 {nickname === data.nickname 
-                ? (
-                  <button
-                  id={data.reviewCommentId}
+                ? ( <button
+                  id={data.placeCommentId}
                   className='delete'
                   onClick={deleteComment}
                 >
-                  삭제
+                  <img id={data.placeCommentId}
+                  src={img_delete}/>
                 </button>
                 ) : (
                  <></>
@@ -135,11 +141,15 @@ const ReviewComment = () => {
 }
 
 const CommentBox = styled.div`
+font-family: "Nanum Gothic";
 max-width: 100%;
 margin-top: 50px;
+padding-bottom: 100px;
 
 .comment_section{
-margin-left: 210px;
+display: flex;
+justify-content:center;
+align-items:center;
 }
 
 .h1Box{
@@ -147,12 +157,11 @@ margin-left: 210px;
 }
 
 .h1Box > h1{
-  font-family: 'Inter';
-  font-style: normal;
+  font-style: border;
   font-weight: 700;
   font-size: 26px;
   line-height: 31px;
-  margin-top: 10px;
+  margin-bottom: 15px;
   margin-left: 10px;
 }
 
@@ -161,47 +170,50 @@ display: flex;
 }
 
 .inputBox{
-  width: 900px;
-  margin-top: 10px;
+  width: 1010px;
+  display: flex;
+  margin-bottom: 10px;
 }
 
 .inputBox > input{
   width: 100%;
   display: flex;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #A8A8A8;
   height: 57px;
-  border-radius: 300px;
+  border-radius: 10px;
   outline: none;
   padding-left: 20px;
+
+  ::placeholder {
+    color: lightgray;
+  }
 }
 
 .btnBox{
-display:flex;
-  width:140px;
-  margin-top: 26px;
-  margin-bottom: 10px;
+ display:flex;
+ width: 140px;
 }
 
 .btn{
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
-  line-height: 19px;
-  background: #F4B03E;
-  border-radius: 300px;
-  width: 100%;
+  background: #3C3C3C;
+  border-radius: 30px;
+  width: 75px;
+  height: 44px;
   color: #FFFFFF;
-  margin-left:30px;
+  margin-top: 8px;
+  margin-left: 27px;
 }
 
 .box{
-  width: 100vh;
+  width: 920px;
   display:flex;
-  // border: 1px solid lightgray;
-  margin-left: 210px;
-  margin-top: 20px;
+  margin-left: 85px;
+  margin-top: 5px;
   padding: 25px;
+  overflow: hidden;
 }
 
 .chat {
@@ -217,8 +229,8 @@ border-radius: 50%;
 margin-left: 10px;
 cursor: pointer;
 
-  img {
-    height:50px;
+ img {
+    height: 50px;
     border-radius:50%;
   }
 }
@@ -227,26 +239,35 @@ cursor: pointer;
   display: flex;
   justify-content:center;
   align-items:center;
-  font-family: 'Noto Sans KR';
-  margin-left: 10px;
+  margin-left:  12px;
+  font-weight: bolder;
 }
 
 .comment_box {
-  margin-top: 15px;
+  margin-top: 10px;
   margin-left: 30px;
+  
+}
+
+.date {
+  color: #A8A8A8;
 }
 
 .delete{
-  width: 100px;
-  height: 20px;
-  border-radius: 20px;
-  color: white;
-  background-color: #E4E4E4;
-  margin-top: 22px;
-  padding-bottom: 24px;
-  padding-top: 2px;
+  widht:0px;
+  height: 0px;
+  display: hidden;
   border: 0;
   outline: 0;
+
+
+  img {
+   width: 35px;
+   height: 35px;
+   border-radius: 50%;
+   margin-top: 13px;
+   position:absolute;
+  }
 }
 `
 export default ReviewComment;

@@ -32,8 +32,8 @@ const ChatListModal = ({ open, onClose }) => {
   }
   // modal이라 웹페이지 시작점부터 get 되서 isLoading 처리 안해도 됌
   const {isLoading , data } = useQuery('Chat-List',fetchSuperHeros)
-  console.log(data)
 
+  console.log(data)
 
 
 
@@ -78,7 +78,7 @@ const ChatListModal = ({ open, onClose }) => {
                           setrealroom(data.roomId);
                         });
                     }}  >
-                <img src={profileUrl === data.profileUrlTwo ? data.profileUrl: data.profileUrlTwo} alt="사진" />
+                <img src={profileUrl === data.profileUrl ? data.profileUrlTwo: data.profileUrl} alt="사진" />
               </div>
     
               <div className="SecondBox" onClick={() => {

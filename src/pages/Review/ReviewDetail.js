@@ -12,295 +12,392 @@ import {useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../../components/main/Footer';
 import ChatIcon from '../../components/main/ChatIcon'
+import revise from '../../images/revise.png';
+import img_delete from '../../images/delete (1).png'
+import location from '../../images/location.png';
 
 const ReviewDetail = () => {
 const nickname = localStorage.getItem("nickname");
 const Profile = localStorage.getItem("profileUrl");
 const {reviewPostId} = useParams();
-const [Detail, setDetail] = React.useState()
-
+const [detail, setDetail] = React.useState()
 const navigate = useNavigate()
+ 
+  React.useEffect(() => {
+    axios
+      .get("https://zhaoxilin.shop/api/reviews/" + reviewPostId)
+      .then((res) => {
+        console.log(res.data)
+        setDetail(res.data.reviewDetails);
+      });
+  }, []);
 
-  React.useEffect(()=>{
-    axios.get('https://zhaoxilin.shop/api/reviews/' + reviewPostId )
-    .then((res)=>{
-      console.log(res.data.reviewDetails)
-      setDetail(res.data.reviewDetails)
-    })
-  },[])
+  const deletePlace = () => {
+    axios
+      .delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
+      .then((response) => {
+        alert("삭제가 완료되었습니다.");
+        navigate('/review')
+      })
+      .catch((error) => {
+        alert("게시글을 삭제할 권한이 없습니다.");
+      });
+  };
 
-  // const onView = (id) => {
-  //   setCurrItem(datas.find(item => item.id === id))
-  // }
-
-  const deleteReview = () =>{
-  axios.delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId ,{
-    headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-  }).then((res)=>{
-    navigate('/review')
-  })
-  .catch((err)=> console.log(err))
-}
-  if (!Detail) {
+  if (!detail) {
     return <div></div>;
   }
+
   return (
     <>
-    <Header/>
-    <Container>
-        <div className='Box'>
-          <div className='imgBox'>
-            <div className='Bigimg'><img src={Detail.imageUrl[0]} alt ="사진"/></div>
-            <div className='imgSmall'>
-              {Detail.imageUrl.map((item,idx)=>{
-                return(
-                  <div key={idx}><img src={item} alt ="사진"/></div>
-                )
-              })}
+      <Header />
+      <Container>
+      <div style={{width:"1100px",
+        margin: "0 auto" }}>
+        <Title>
+          <div className="subject">
+            육아템 리뷰
             </div>
-
+          <div className="page">
+            <p>상세 보기</p>
           </div>
-          <ContentBox>
-            <div className='box_top'>
-                <div className='title'>
-                    <p>{Detail.title}</p>
-                    <span>
-                        {Detail.productType}
-                    </span>
-
-                </div>
-                <div className='location'>
-                    <p>
-                        <GrLocation />
-                        {Detail.url}</p>
-                </div>
-                <div className='info'>
-                    <div className='profile'><img src={Detail.profileUrl} alt="사진"/></div>
-                    <p className='nickname'>{Detail.nickname}</p>
-                </div>
+        </Title>
+        <Box>
+          <div className="Box">
+            <div className="imgBox">
+              <div className="Bigimg">
+                <img src={detail.imageUrl[0]} alt="사진" />
+              </div>
+              <div className="imgSmall">
+                {detail.imageUrl.map((item, idx) => {
+                  return (
+                    <div key={idx}>
+                      <img src={item} alt="사진" />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div className='box'>
-                <div className='content'>
-                    <p>{Detail.content}</p>
+            <ContentBox>
+              {/* 카드 오른쪽 위 */}
+              <div className="box_top">
+                <div className="title">
+                  <>
+                  <span>{detail.title}</span>
+                  <p>{detail.productType}</p>
+                  </>
+                  {nickname === detail.nickname ? (
+                <Btn>
+                  <button className="btn"
+                  style={{ marginRight: "-8px" }}
+                  onClick={()=>{navigate('/ReviewEdit/' + reviewPostId)}}
+                  >
+                  <img src={revise} />
+                  </button>
+                  <button className="btn"
+                  onClick={deletePlace}
+                  >
+                <img src={img_delete} />
+                  </button>
+                </Btn>
+              ) : (
+                <></>
+              )}
                 </div>
-                {nickname === Detail.nickname? <div className='btnBox'>
-                  <button onClick={()=>{navigate('/ReviewEdit/' + reviewPostId)}}>수정</button>
-                  <button onClick={deleteReview}>삭제</button>
+                {/* 카드 오른쪽 중간 */}
+                <div className="location">
+                  <p>
+                  <img src={location}/>
+                    {detail.url}
+                  </p>
                 </div>
-                : 
-                null
-                }
-
-            </div>
-        </ContentBox>
+                <div className="info">
+                  <Image>
+                    <div className="ProfileImg">
+                      <img src={detail.profileUrl} />
+                    </div>
+                  </Image>
+                  <p className="nickname">{detail.nickname}</p>
+                </div>
+              </div>
+              {/* 카드 내용 */}
+              <div className="box">
+                <div className="content">
+                  <p>{detail.content}</p>
+                </div>
+              </div>
+            </ContentBox>
+          </div>
+        </Box>
+        <ReviewComment />
         </div>
       </Container>
-      <ReviewComment />
-      <ChatIcon/>
-      <Footer/>
+      <ChatIcon />
+      <Footer />
     </>
-    
-  )
-}
+  );
+};
 
+const Title = styled.div`
+  padding-top: 40px;
+
+  .subject {
+    color: #a8a8a8;
+    margin-bottom: 2px;
+  }
+
+  .page {
+    font-size: 30px;
+    font-weight: 700;
+  }
+`;
+
+const Box = styled.div`
+width: 999px;
+height: 600px;
+
+background: white;
+
+margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+margin-top: 25px;
+margin-bottom: 32px;
+display: flex;
+flex-direction: column;
+
+border: 1px solid #E4E4E4;
+border-radius: 10px;
+
+  .Box {
+    display: flex;
+  }
+
+  .imgBox {
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Bigimg {
+    width: 400px;
+    height: 300px;
+    border-radius: 15px;
+  }
+
+  .Bigimg > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    margin-left: 17px;
+  }
+
+  .imgSmall {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .imgSmall > div {
+    border: 1px solid black;
+    margin: 25px 10px;
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+  }
+
+  .imgSmall > div > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+`;
 
 const Container = styled.div`
-  width:100%;
-  height: 100vh;
- 
-.Box{
-  margin: 80px auto;
-  width:80%;
-  height: 70vh;
-  display:flex;
-}
-.imgBox{
-  width:50%;
-  display: flex;
-  flex-direction:column;
-}
-
-.Bigimg{
-  width: 50%;
-  height: 50%; 
-  margin: auto;
-  border-radius: 30px;
-}
-
-.Bigimg >img{
-  width:100%;
-  height: 100%;
-  border-radius: 30px;
-}
-
-.imgSmall{
-  height: 30%;
-  display: flex;
-}
-
-
-.imgSmall >div {
-  border: 1px solid black;
-  margin: 20px auto;
-  width: 100px;
-  height: 100px;
-  border-radius: 30px;
-}
-
-.imgSmall >div > img {
   width: 100%;
-  height: 100%;
-  border-radius: 30px;
-}
-`
+  background-color: #F5F5F5;
+
+  .Box {
+    padding: 50px 50px 30px 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .mapbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
 const ContentBox = styled.div`
- width:50%;
- height: 70vh;
- 
-.box_top{
-   height: 25%;
-   position: relative;
-   left:40px;
+  width: 500px;
+  margin-left: 20px;
 
- }
- .box_top > div{
-   height: 33%;
- }
-      
-.title{
-  display:flex;
-  align-items:center;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 36px;
-  padding-left:30px;
- }
+  .title {
+    display: flex;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 36px;
 
-.title > span {
-  color: #A8A8A8;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  margin-left: 15px;
-}
- 
-.icon{
-    color:#fdd835;
-    margin-left:30px;
+    span {
+      margin-top: 2px;
+      font-family: 'NanumGothic';
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 30px;
+    }
+
+    span {
+      margin-left: 13px;
+      margin-top: 2px;
+    }
+
+    p {
+      color: #A8A8A8;
+      margin-left: 9px;
+      margin-top: 5px;
+    }
   }
-.starScore{
-    color: #A8A8A8;
+
+  .icon {
+    color: #fdd835;
+    margin-left: 30px;
+  }
+
+  .starScore {
+    color: #a8a8a8;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
+    margin: 7px;
   }
-  .location{
+
+  .location {
     display: flex;
-    align-items: center;
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    padding: 30px;
+    margin: 10px 0px 10px 0px;
+
+    img {
+      width: 25px;
+      margin-bottom: 5px;
+      margin-right: 5px;
+    }
   }
-  .info{
-    display:flex;
-    align-items:center;
-    padding: 30px;
-  }
-  
-  .profile{
-    width:70px;
-    height:70px;
-    border-radius: 50%;
+
+  .info {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-top: 14px;
+      margin-left: 10px;
+    }
   }
 
   .profile > img {
-    width:70px;
-    height:70px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
   }
-  
-  .nickname{
-  font-family: 'Noto Sans KR';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 29px;
-  margin-left: 15px;
-  margin-top: 20px;
+
+  .nickname {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    margin-left: 30px;
   }
 
-  .box{
-  height: 55%;
-  margin-top:50px;
-  display:flex;
-  align-items:center;
-  flex-direction:column;
-}
-.content{
-  border: 2px solid #E4E4E4;
-  border-radius: 10px;
-  width:80%;
-  height:90%;
-}
-.content > p {
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 24px;
-width:100%;
-height: 80%;
-}
-.content > div{
-  width:100%;
-  height: 20%;
-}
-.ParkBtn{
-    width:30%;
-    height: 50%;
-    border-radius:15px;
-    font-size: 17px;
-    color:#263238;
-    border: none;
-    background-color:#ffa000;
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
   }
-  
-  .btnBox > button{
-    background: #3C3C3C;
-    border-radius: 30px;
-    color:#fff;
-    width: 195px;
-    height: 48px;
+
+  .content {
+    border: 2px solid #e4e4e4;
+    border-radius: 10px;
+    width: 500px;
+    height: 220px;
+    overflow: hidden;
+    padding: 10px;
+  }
+
+  .content > p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    width: 100%;
+    height: 80%;
+  }
+
+  .content > div {
+    width: 100%;
+    height: 20%;
+  }
+
+  .ParkBtn {
+    width: 30%;
+    height: 50%;
+    border-radius: 15px;
+    font-size: 17px;
+    color: #263238;
     border: none;
+    background-color: #ffa000;
   }
 
   .btnBox {
-    width: 100%;
-    height: 100px;
-    align-items: center;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
   }
-  
-  .KidBtn{
-    width:30%;
+
+  .KidBtn {
+    width: 30%;
     height: 50%;
-    border-radius:15px;
+    border-radius: 15px;
     font-size: 17px;
-    color:#263238;
+    color: #263238;
     border: none;
-    background-color:#c5e1a5; 
+    background-color: #c5e1a5;
   }
 `;
 
+const Image = styled.div`
+  .ProfileImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 6px;
+    cursor: pointer;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
+`;
+
+const Btn = styled.div`
+  display: flex;
+  position: absolute;
+  padding-left: 416px;
+
+  .btn {
+    height: 20px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+  }
+
+  img {
+    width: 28px;
+  }
+`;
 
 export default ReviewDetail;

@@ -52,7 +52,7 @@ function RCard() {
       } : null)
       .then((res) => {
         console.log(res.data.reviewPosts)
-        let data = res.data.reviewPosts.slice(0,3);
+        let data = res.data.reviewPosts.slice(0,2);
         setData([...data]);
       });
   }, []);
@@ -67,7 +67,7 @@ function RCard() {
       } : null)
       .then((res) => {
         console.log(res.data.reviewPosts);
-        let result = division(res.data.reviewPosts,3)
+        let result = division(res.data.reviewPosts,2)
         if(noMore === true){
           setData((list) => [...list,result[index]].flat())
           setindex(index+1)
@@ -94,7 +94,7 @@ function RCard() {
         }
       ></InfiniteScroll>
       <Container>
-      <div className="RcardBox">
+      <div className="RcardBox animate__animated animate__fadeInUp">
         {data &&
           data.map((data, idx) => {
             return (
@@ -201,7 +201,7 @@ const Container = styled.div`
     margin: auto;
     padding: 70px 0px;
     width: 935px;
-    height: 1331px;
+    height: 331px;
   }
   .card {
     background: white;

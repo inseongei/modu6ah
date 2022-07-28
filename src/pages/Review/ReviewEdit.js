@@ -1,302 +1,507 @@
-import React from 'react'
-import styled from 'styled-components'
-import Header from '../../components/main/Header'
-import axios from 'axios';
-import {useNavigate, useParams } from 'react-router-dom';
-import ChatIcon from '../../components/main/ChatIcon'
+//장소 추천 수정 페이지
+import React, { useState } from "react";
 
+//style
+import styled from "styled-components";
+import "react-datepicker/dist/react-datepicker.css";
 
+//elements & components
+import Header from "../../components/main/Header";
+import Footer from "../../components/main/Footer";
+import plus from "../../images/plus.png";
 
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import ChatIcon from '../../components/main/ChatIcon';
+import img_delete from '../../images/delete (1).png';
 
+function ReviewEdit() {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [region, setRegion] = useState("");
+  const [content, setContent] = useState("");
+  const [location, setLocation] = useState("");
+  const [imageSrc, setImageSrc] = useState([]);
+  const [currentValue, setCurrentValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(undefined);
+  const [rating, setRating] = useState(0);
+  const [detail, setDetail] = useState("");
+  const { reviewPostId } = useParams();
 
-const ReviewEdit = () => {
-    const [Detail, setDetail] = React.useState()
-    const navigate = useNavigate()
-    let {reviewPostId} = useParams();
-    const content_ref = React.useRef()
-    const url_ref = React.useRef()
-    const title_ref = React.useRef()
-    const productType_ref = React.useRef()
+  // axios.Post 버튼
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    e.persist();
 
+    // let files = e.target.profile_files.files;
+    let formData = new FormData();
+    // // console.log(files)
 
-    React.useEffect(()=>{
-        axios.get('https://zhaoxilin.shop/api/reviews/' + reviewPostId )
-        .then((res)=>{
-          console.log(res.data.reviewDetails)
-          setDetail(res.data.reviewDetails)
+    // // 반복문 돌려서 다중 이미지 처리
+    // let files = e.target.profile_files.files;
+    // for (let i = 0; i < files.length; i++) {
+    //   formData.append("imageUrl", files[i]);
+    // }
+
+    // for (const [key, value] of formData.entries()) {
+    // }
+    // console.log(files.length);
+
+    // 제목,내용,장소,별점 데이터 => 폼데이터 변환
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("url", region);
+    formData.append("productType", location);
+
+    // if (files.length < 4) {
+        axios
+        .put(`https://zhaoxilin.shop/api/reviews/` + reviewPostId, formData,  {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
         })
-      },[])
+        .then((res) => {
+        //  console.log(res);
+          alert(res.data.message);
+          navigate('/review')
+        })
+        .catch((error) => {
+        //   console.log(error);
+        });
+    // } else {
+    //   alert("사진은 3개까지만 가능합니다.");
+    // }
+  };
 
-      if (!Detail) {
-        return <div></div>;
-      }
-
-
-const ReviewInsert = () =>{
-    let data= {
-        title :title_ref.current.value,
-        content : content_ref.current.value,
-        url :url_ref.current.value,
-        productType : productType_ref.current.value
+  // 이미지 미리보기
+  const handleImageChange = (e) => {
+    const imageLists = e.target.files;
+    let imageUrlLists = [...imageSrc];
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+      imageUrlLists.push(currentImageUrl);
     }
+    if (imageUrlLists.length > 4) {
+      imageUrlLists = imageUrlLists.slice(0, 3);
+    }
+    setImageSrc(imageUrlLists);
+  };
 
+  // 이미지 미리보기에서 삭제
+  const handleDeleteImage = (id) => {
+    setImageSrc(imageSrc.filter((_, index) => index !== id));
+  };
 
-
-
-    axios.put('https://zhaoxilin.shop/api/reviews/' + reviewPostId,data,{
-        headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-      }).then((res)=>{
-        console.log(res)
-      })
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
+  React.useEffect(() => {
+    axios
+      .get('https://zhaoxilin.shop/api/reviews/' + reviewPostId)
+      .then((res) => {
+        console.log(res.data);
+        setDetail(res.data.placeDetails);
+      });
+  }, []);
 
 
   return (
     <>
-    <Header/>
-    <Review>
-    <div className='reviewC'>
-    <div className='images'><div className='title'>대표이미지</div></div>
+      <Header />
+      {/* <Container> */}
+      <div style={{width:"1170px",
+        margin: "0 auto" }}>
+        <Title>
+          <div className="subject">육아템 리뷰</div>
+          <div className="page">
+            <p>수정하기</p>
+          </div>
+        </Title>
+        <Place>
+          {/* 카드 위쪽: 이미지 */}
+          <div className="place">
+            <form onSubmit={(e) => onSubmit(e)}>
+              <input
+                id="input-file"
+                type="file"
+                name="profile_files"
+                multiple="multiple"
+                style={{ display: "none" }}
+                onChange={handleImageChange}
+              />
 
-    <div className='imageBox'>
-    <input type="file"/>
-    {Detail.imageUrl.map((data,idx)=>{
-        return(
-            <div className='img' key={idx}><img src={data} alt="사진"/></div>
-        )
-    })}
+              <div className="imageBox">
+                <div className="plus_btn">
+                  <label htmlFor="input-file">
+                    <img src={plus} />
+                  </label>
+                  <p style={{
+                    color: "#3C3C3C"
+                  }}>
+                    사진 업로드
+                  </p>
+                  <p style={{
+                    color: "#6B4E16",
+                    marginTop: "-13px",
+                  }}>
+                    &nbsp;(최대 3장)
+                  </p>
 
+                </div>
+                
+                  {/* 이미지 미리보기 */}
+                  {imageSrc.map((image, id) => (
+                    <div className="img_box_size" key={id}>
+                      <img src={image} alt={`${image}-${id}`} />
+                      <div className="img_btn">
+                        <button
+                          onClick={() =>
+                            handleDeleteImage(id)}>
+                          이미지 삭제
+                          <img src={img_delete} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
 
-    </div>
+              {/* 카드 왼쪽: 제목, 주소, 장소, 별점 */}
+              <div className="mainBox">
+                <div className="card-left">
+                  <div className="position">
+                    <strong>제목</strong>
+                    <input
+                      type="text"
+                      onChange={(e) =>
+                        setTitle(e.target.value)}
+                    />
+                  </div>
 
+                  <MapSearch>
+                    <strong>주소</strong>
+                    <SearchInput
+                      id="address"
+                      type="text"
+                      onChange={(e) =>
+                        setRegion(e.target.value)}
+                    />
+                  </MapSearch>
 
-    <div className='mainBox'>
-        <div className='one'>
-            <div className='position'>
-            <span> 제목</span>
-            <input type="text" placeholder={Detail.title} ref={title_ref}/>
-            </div>
+                  <div className="position">
+                    <strong>종류</strong>
+                    <input
+                      type="text"
+                      onChange={(e) =>
+                        setLocation(e.target.value)}
+                    />
+                  </div>
+                </div>
 
-            <div className='position'>
-            <span> 주소</span>
-            <input type="text" placeholder={Detail.url} ref={url_ref}/>
-            </div>
+                {/* 카드 오른쪽: textarea, buttons */}
+                <div className="card-right">
+                  <textarea onChange={(e) =>
+                    setContent(e.target.value)}
+                    />
+                </div>
+              </div>
+              <Btn>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    navigate(`/`);
+                  }}
+                >
+                  취소{" "}
+                </button>
+                <button className="btn" 
+                type="submit"
+                onClick={onSubmit}
+                >
+                  수정하기
+                </button>
+              </Btn>
 
-            <div className='position'>
-            <span> 종류</span>
-            <input type="text"  placeholder={Detail.productType} ref={productType_ref}/>
-            </div>
-
-
-
+            </form>
+          </div>
+        </Place>
         </div>
-
-
-
-        <div className='two'>
-            <span className='content'>내용</span>
-            <textarea className='contentBox' placeholder={Detail.content} ref={content_ref}/> 
-            
-
-
-
-        </div>
-    </div>
-
-
-
-    <div className='btnBox'>
-        <button>취소</button>
-        <button onClick={ReviewInsert}>수정완료</button>
-    </div>
-
-
-    </div>
-
-    <ChatIcon/>
-    </Review>
-
+      {/* </Container> */}
+      <ChatIcon />
+      <Footer />
     </>
-  )
+  );
+}
+
+
+const Title = styled.div`
+  padding-top: 40px;
+
+  .subject {
+    color: #a8a8a8;
+    margin-bottom: 2px;
+  }
+
+  .page {
+    font-size: 30px;
+    font-weight: 700;
+  }
+`;
+
+const Place = styled.div`
+width: 1170px;
+height: 750px;
+
+background: white;
+
+margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+margin-top: 27px;
+margin-bottom: 32px;
+display: flex;
+flex-direction: column;
+
+border: 1px solid #E4E4E4;
+border-radius: 10px;
   
-}
+  .place {
+    width: 100%;
+  }
 
-const Review = styled.div`
-.reviewC{
-    width:100%;
-    height: 93vh;
-}
-
-.title{
-    font-family: 'Inter';
+  .title {
+    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
     font-size: 26px;
     line-height: 31px;
-    padding:10px;
-    margin-left:160px;
-}
+    padding: 10px;
+    margin-left: 70px;
+    margin-top: 40px;
+  }
 
-.images{
-    width:90%;
-    height: 5%;
-    margin:auto; 
-}
+  .imageBox {
+    min-height: 210px;
+    max-height: auto;
+    height: 280px;
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
 
-.imageBox{
-    width:90%;
-    margin:auto;
-    height: 30%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+    img {
+      width: 37px;
+      height: 37px;
+      border: none;
+    }
+  }
 
-.mainBox{
-    width:90%;
-    height: 39%;
-    margin:auto;
-    display:flex;
-}
+  .plus_btn {
+    width: 120px;
+    margin-left: 20px;
 
-.btnBox{
-    width:90%;
-    margin:auto;
-    height: 5%;
-    display:flex;
-    justify-content: flex-end;
-}
+    label {
+      margin-left: 45px;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
 
-.one{
-    width:40%;
-}
+    p {
+    margin-left: 26px;
+    }
+  }
 
-.two{
-    width:60%;
-    height: 100%;
-    display:flex;
+  .img_border{
+    display: hidden;
+    border: 1px dashed lightgray;
+    width: 310px;
+    height: 220px
+  }
+
+  .img_box_size{
+  
+    img {
+      object-fit: cover;
+      width: 300px;
+      height: 210px;
+      border: 1px solid #e4e4e4;
+      border-radius: 10px;
+      margin: 10px 0px 15px 20px;
+    }
+
+  }
+
+  .img_btn {
+
+    display: flex;
+    align-items: center;
     justify-content: center;
-    align-items:center;
-}
-
-.img{
-    width:300px;
-    height:250px;
-    border: 1px solid #E4E4E4;
-    border-radius: 10px;
     margin-left: 25px;
-}
+  
+    .img_box_size {
+      padding: 0;
+    }
+   
+    button {
+     border-radius:10px;
+     background-color: transparent !important;
+     border: 1px solid #A8A8A8;
+     padding-left: 15px;
+     color: #3C3C3C;
+    }
 
-.img > img {
-    width:300px;
-    height:250px;
+    img {
+      width: 16px;
+      height: 17px;
+      border: none;
+      margin: 0px 6px 1px 6px;
+    }
+  }
+
+  .images {
+    width: 90%;
+    height: 5%;
+    margin: auto;
+  }
+
+  .mainBox {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 60px;
+  }
+
+  .card-left {
+    width: 513px;
+  }
+
+  .card-left > div > input {
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
-}
-
-.one > div >span {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 31px;
-}
-
-.one > div > input {
-    border: 1px solid #E4E4E4;
-    border-radius: 10px;
-    width:50%;
+    width: 350px;
     height: 50px;
-}
+    margin-left: 20px;
+    margin-top: 10px;
+    padding-left: 15px;
+    font-size: 16px;
 
-.position{
-    margin:50px 0px 30px 30px;
-}
+    ::placeholder{
+      font-size: 16px;
+      color: lightgray;
+    }
+  }
 
-.position >span{
-    margin-right: 30px;
-}
+  .card-right {
+    width: 530px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+  }
 
-.contentBox{
-    width:75%;
-    height: 80%;
-    border: 1px solid #E4E4E4;
+  textarea {
+    width: 500px;
+    height: 260px;
+    border: 1px solid #A8A8A8;
     border-radius: 10px;
-    display:flex;
-    flex-direction: column;
-    justify-content:space-between;
-}
-
-.contentBox > span {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
     font-size: 20px;
-    line-height: 24px;
+    font-weight: 400;
+    word-break: normal;
+    outline: none;
+    margin-bottom: 20px;
+    padding: 10px;
+    
+    ::placeholder{
+        color: lightgray;
+      }
+  }
+
+  .position {
+    margin-left: 3px;
+    font-color: #000000;
+
+    input {
+      outline: none;
+      font-size: 19px;
+      height: 55px;
+
+      ::placeholder{
+        font-size: 16px;
+        color: lightgray;
+      }
+    }
+  }
+
+  .star {
+    display: flex;
+    margin-left: 4px;
+    margin-top: 33px;
+
+    p {
+      display: flex;
+      margin-top: 3px;
+      margin-left: 2px;
+    }
+  }
+
+  .star > strong {
+    margin-top: 2px;
+    margin-right: 20px;
+  }
+`;
+
+const MapSearch = styled.div`
+  margin: 20px 0px 20px 2px;
+  display: flex;
+ 
+
+  .address_btn {
+    margin-left: 10px;
+    margin-top: 25px;
+    width: 100px;
+    height: 35px;
+
+   span {
+    border-radius: 10px; 
+    font-weight: 700;
+    background: #FAFAFA;
+    color: #3C3C3C;
+    border: 1px solid #A8A8A8;
+    padding: 10px 12px 10px 12px;
+    cursor: pointer;
+    }
+  }
+
+  strong {
+    width: 31px;
+    margin-top: 23px;
+  }
+
+  button {
+    display: flex;
+  }
+`;
+
+const SearchInput = styled.input`
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  width: 335px;
+  height: 50px;
+  outline: none;
+`;
+
+const Btn = styled.div`
+display: flex;
+margin-left: 790px;
+
+.btn {
+  font-family: 'NanumGothic';
+  font-weight: 700;
+  width: 150px;
+  height: 30px;
+  border-radius: 30px;
+  color: white;
+  background-color: #3c3c3c;
+  margin-right: 20px;
+  padding-top: 11px;
+  padding-bottom: 35px;
+  border: 0;
+  outline: 0;
 }
-
-.content{
-    padding:20px;
-}
-
-.btnList{
-    display:flex;
-    justify-content:space-around;
-    margin-bottom:10px;
-}
-
-.ParkBtn{
-  width:20%;
-  height: 50%;
-  border-radius:15px;
-  font-size: 17px;
-  color:#263238;
-  border: none;
-  background-color:#ffa000;
-
-}
-
-.KidBtn{
-  width:20%;
-  height: 50%;
-  border-radius:15px;
-  font-size: 17px;
-  color:#263238;
-  border: none;
-  background-color:#c5e1a5; 
-}
-
-.btnBox > button{
-background: #3C3C3C;
-border-radius: 30px;
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 24px;
-color:white;
-width:10%;
-height: 45px;
-margin-right: 80px;
-border: none;
-}
-
-
-
-
-`
-
+`;
 
 export default ReviewEdit;

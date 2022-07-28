@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import "../../shared/App.css";
 import { BiLogOut } from "react-icons/bi";
 import ScrollToBottom from "react-scroll-to-bottom";
+import back from '../../images/back.png'
 
 const OneToOneChat = ({ open, onClose, socket }) => {
   const [currentMessage, setCurrentMessage] = React.useState("");
@@ -48,13 +49,10 @@ const OneToOneChat = ({ open, onClose, socket }) => {
   if (!open) return null;
   return (
     <Modal isOpen={true} className="ChatList">
-      <div className="RoomOne">
-        <div className="RoomFake"></div>
-        <div className="RoomDate"> 2022년 06월 30일 목요일</div>
-        <button onClick={onClose}>
-          <BiLogOut className="icon"></BiLogOut>
-        </button>
-      </div>
+    <div className="ChatListBoxTwo animate__animated animate__fadeIn">
+    <img src = {back} alt="닫기" className="x" onClick={onClose}/>
+    {/* <span className="twoToOne"> {info.receiverNick}  님과 대화</span> */}
+  </div>
 
       <ScrollToBottom className="message-containerTwo animate__animated animate__fadeIn">
         {NowChat&& NowChat.map((data,idx)=>{
