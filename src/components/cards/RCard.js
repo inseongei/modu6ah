@@ -257,6 +257,8 @@ const Container = styled.div`
 
   .FTitle{
     font-size: 26px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
   }
 
   .FType{
@@ -313,15 +315,9 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 }
-
-
-
-
-
-
-
-
 `;
 
 export default RCard;
