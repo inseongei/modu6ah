@@ -8,22 +8,21 @@ const ReviewComment = () => {
   const [comment, setComment] = useState('');
   const [state, setState] = useState('');
   const nickname = localStorage.getItem("nickname");
-
   const navigate = useNavigate();
-  let { reviewPostId } = useParams();
+  const { reviewPostId } = useParams();
+  // console.log(state)
 
-  //댓글 작성 
+  //댓글 작성
   const addComment = () => {
     setComment('')
     const comment_data = {
       comment, nickname
     }
-    axios.post('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments',
+    axios.post('https://zhaoxilin.shop/api/places/' + reviewPostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-      .then((res) => {
-        // console.log(res)
-       refetch()
+      .then((res) => { 
+        refetch()
       })
       .catch((err) => {
         // console.log(err.response.data.message);
@@ -31,7 +30,6 @@ const ReviewComment = () => {
       })
   }
 
-  // 댓글 실시간 조회
   const refetch = () =>{
     axios
     .get('https://zhaoxilin.shop/api/reviews/' + reviewPostId, {
@@ -46,24 +44,25 @@ const ReviewComment = () => {
       // console.log(err);
     });
   }
- 
+
+  React.useEffect(() => {
+    refetch()
+  }, []);
+
   //댓글 삭제
   const deleteComment = (e) => {
-    // console.log(e.target.id);
+    // console.log(e.target);
     axios
-      .delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments/' + e.target.id,
+      .delete('https://zhaoxilin.shop/api/reviews/'+ reviewPostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
-        // console.log(response);
-       refetch()
+        refetch();
       })
       .catch((error) => {
         alert("게시글을 삭제할 권한이 없습니다.");
         // console.log(error)
-
       });
   };
-
   return (
     <CommentBox>
       <div className='comment'>
@@ -75,18 +74,19 @@ const ReviewComment = () => {
             <div className='inputBox'>
               <input
                 type="text"
-                placeholder='댓글을 입력해주세요'
+                placeholder='댓글을 입력하세요'
                 onChange={e =>
-                  setComment(e.target.value)}
-                  value={comment}
+                setComment(e.target.value)}
+                value={comment}
               />
-            </div>
+            
             <div className='btnBox'>
               <button className='btn'
                 onClick={addComment}
               >
                 등록
               </button>
+            </div>
             </div>
           </div>
         </div>
@@ -104,6 +104,7 @@ const ReviewComment = () => {
                         alt="사진" />
                     </div>
                   </div>
+
                   <div className='name'
                   >
                     {data.nickname}
@@ -118,16 +119,14 @@ const ReviewComment = () => {
                       {data.createdAt}
                     </div>
                   </div>
-
                 </div>
                 {nickname === data.nickname 
-                ? (
-                  <button
-                  id={data.reviewCommentId}
+                ? ( <button
+                  id={data.placeCommentId}
                   className='delete'
                   onClick={deleteComment}
                 >
-                  <img id={data.reviewCommentId}
+                  <img id={data.placeCommentId}
                   src={img_delete}/>
                 </button>
                 ) : (

@@ -40,7 +40,7 @@ const Main = () => {
             </div>
           </div>
           <MainScard />
-          <hr />
+          <hr className="hrz" />
           <div className="card_title">
             <Title style={{ marginTop: "100px" }}>장소 추천</Title>
           </div>
@@ -111,6 +111,13 @@ const Container = styled.div`
     height: 2.5px;
     margin-top: 100px;
   }
+
+.hrz {
+    color: #A8A8A8;
+    height: 2.5px;
+    margin-top: 220px;
+  }
+
 `;
 
 const Title = styled.p`
