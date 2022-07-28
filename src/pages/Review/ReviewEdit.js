@@ -53,7 +53,7 @@ function ReviewEdit() {
     formData.append("url", region);
     formData.append("productType", location);
 
-    // if (files.length < 4) {
+    if(title && region && content && location.length > 0) { 
         axios
         .put(`https://zhaoxilin.shop/api/reviews/` + reviewPostId, formData,  {
           headers: {
@@ -68,9 +68,9 @@ function ReviewEdit() {
         .catch((error) => {
         //   console.log(error);
         });
-    // } else {
-    //   alert("사진은 3개까지만 가능합니다.");
-    // }
+    } else {
+      alert("수정할 내용을 작성해주세요.");
+    }
   };
 
   // 이미지 미리보기
