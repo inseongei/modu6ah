@@ -184,7 +184,7 @@ function PlaceEdit() {
 
               <div className="imageBox">
                 <div className="plus_btn">
-                  <label for="input-file">
+                  <label htmlFor="input-file">
                     <img src={plus} />
                   </label>
                   <p style={{
@@ -243,7 +243,7 @@ function PlaceEdit() {
                       id="address"
                       type="text"
                       placeholder={detail.region}
-                      value={region}
+                      defaultValue={region}
                     />
                     <div className="address_btn">
                       <span
@@ -275,12 +275,12 @@ function PlaceEdit() {
                     {stars.map((star, index) => {
                       const ratingValue = index + 1;
                       return (
-                        <label>
+                        <label key={index}>
                           <input
                             type="radio"
                             name="rating"
                             style={{ display: "none" }}
-                            value={ratingValue}
+                            defaultValue={ratingValue}
                             onClick={() => setRating(ratingValue)}
                           />
                           <FaStar
@@ -330,7 +330,7 @@ function PlaceEdit() {
                 type="submit"
                 onClick={editPost}
                 >
-                  등록하기
+                  수정하기
                 </button>
               </Btn>
 
@@ -386,7 +386,7 @@ border-radius: 10px;
   }
 
   .title {
-    font-family: "Inter";
+    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
     font-size: 26px;
@@ -449,6 +449,7 @@ border-radius: 10px;
   }
 
   .img_btn {
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -610,6 +611,8 @@ display: flex;
 margin-left: 790px;
 
 .btn {
+  font-family: 'NanumGothic';
+  font-weight: 700;
   width: 150px;
   height: 30px;
   border-radius: 30px;
