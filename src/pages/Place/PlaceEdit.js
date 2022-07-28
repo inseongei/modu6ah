@@ -201,13 +201,6 @@ function PlaceEdit() {
 
                 </div>
                 
-                {/* <div className="img_border"
-                 style={{ marginLeft: "10px" }}
-                /><div className="img_border"
-                style={{ marginLeft: "10px" }}
-               /><div className="img_border"
-               style={{ marginLeft: "10px" }}
-              /> */}
                   {/* 이미지 미리보기 */}
                   {imageSrc.map((image, id) => (
                     <div className="img_box_size" key={id}>

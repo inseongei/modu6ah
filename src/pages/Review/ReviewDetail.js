@@ -84,7 +84,7 @@ const navigate = useNavigate()
               <div className="box_top">
                 <div className="title">
                   <>
-                  <h2>{detail.title}</h2>
+                  <span>{detail.title}</span>
                   <p>{detail.productType}</p>
                   </>
                   {nickname === detail.nickname ? (
@@ -240,8 +240,12 @@ const ContentBox = styled.div`
     font-size: 20px;
     line-height: 36px;
 
-    h2 {
+    span {
       margin-top: 2px;
+      font-family: 'NanumGothic';
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 30px;
     }
 
     span {

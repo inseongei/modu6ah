@@ -15,6 +15,7 @@ const Header = () => {
   // Hook 선언
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [color, setcolor] = React.useState(false);
   // 쿠키와 로컬스토리지에 있는 토큰,닉네임,프로필Url
   const UserCheck = localStorage.getItem("accessToken");
   const nickname = localStorage.getItem("nickname");
@@ -72,10 +73,11 @@ const Header = () => {
               onClick={() => {
                 navigate(`/recruit`);
               }}
+              
             >
               체험 모집
             </li>
-            <li
+            <li className="li_color"
               onClick={() => {
                 navigate(`/place`);
               }}
@@ -130,6 +132,7 @@ const Header = () => {
             <li
               onClick={() => {
                 navigate(`/recruit`);
+                setcolor(!color)
               }}
             >
               체험 모집
@@ -137,6 +140,7 @@ const Header = () => {
             <li
               onClick={() => {
                 navigate(`/place`);
+                setcolor(!color)
               }}
             >
               장소 추천
@@ -144,6 +148,7 @@ const Header = () => {
             <li
               onClick={() => {
                 navigate(`/review`);
+                setcolor(!color)
               }}
             >
               육아템 리뷰
@@ -370,6 +375,12 @@ const Headers = styled.div`
     margin-top: 10px;
   }
 
+  .li_color{
+    font-size: 100px;
+  }
+
+ 
+
   .bell {
     font-size: 35px;
     cursor: pointer;
@@ -398,8 +409,8 @@ const Headers = styled.div`
     text-align: center;
   }
 
-  .header__menulist > li:hover {
-    color: #6b4e16;
+  .header__menulist > li:hover{
+    color:#6B4E16;
   }
 
   .header__left {

@@ -38,13 +38,14 @@ function ReviewEdit() {
     // // console.log(files)
 
     // // 반복문 돌려서 다중 이미지 처리
+    // let files = e.target.profile_files.files;
     // for (let i = 0; i < files.length; i++) {
     //   formData.append("imageUrl", files[i]);
     // }
 
     // for (const [key, value] of formData.entries()) {
     // }
-    // // console.log(files.length);
+    // console.log(files.length);
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
     formData.append("title", title);
@@ -62,7 +63,7 @@ function ReviewEdit() {
         .then((res) => {
         //  console.log(res);
           alert(res.data.message);
-          window.location.href = "/recruit";
+          navigate('/review')
         })
         .catch((error) => {
         //   console.log(error);
