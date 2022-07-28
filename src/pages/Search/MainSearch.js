@@ -1,158 +1,168 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Header from "../../components/main/Header";
 import styled from "styled-components";
+import img_search from '../../images/search.png';
+import SearchScard from '../../components/cards/SearchScard';
+import SearchLcard from '../../components/cards/SearchLcard';
+import SearchRcard from '../../components/cards/SearchRcard';
 import Footer from "../../components/main/Footer";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import SearchBar from "../../components/pages/SearchBar";
-import search from "../../images/search.png";
-import SCardSearch from "../../components/cards/SCardSearch";
-import LCardSearch from "../../components/cards/LCardSearch";
-import RCardSearch from "../../components/cards/RCardSearch";
 import ChatIcon from '../../components/main/ChatIcon'
-
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const MainSearch = () => {
   const navigate = useNavigate();
-  const [scard, setScard] = useState();
-  const [lcard, setLcard] = useState();
-  const [rcard, setRcard] = useState();
-  const [query, setQuery] = useState();
+  const [keyword, setKeyword] = useState("");
+  const [recruit, setRecruit] = useState([]);
+  const [place, setPlace] = useState([]);
+  const [review, setReview] = useState([]);
 
-  React.useEffect(() => {
-    axios
-      .get("https://zhaoxilin.shop/api/search", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        console.log(res)
-        setScard(res.data.resultsInRecruit);
-        setLcard(res.data.resultsInPlace.slice(0, 6));
-        setRcard(res.data.resultsInReview.slice(0, 6));
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  }, []);
+  const search = (e) => {
+        axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`, {
+        })
+          .then((res) => {
+            console.log(res)
+           setRecruit(res.data.resultsInRecruit)
+           setPlace(res.data.resultsInPlace)
+           setReview(res.data.resultsInReview)
+          });
+  }
 
   return (
     <>
       <Header />
-      <InputBox>
-        <img src={search} alt="검색" />
-        <div className="search">
-          <input
-            type="text"
-            className="search-box"
-            placeholder="검색어를 입력해주세요"
-            onChange={e => setQuery(e.target.value)}
-          />
+      <Search>
+        <div className="title">
+          <div className="searchinput">게시글 검색</div>
+          <div className="serchtitle">키워드 검색하기</div>
         </div>
-      </InputBox>
-      <SearchBox>
-        <SearchBar />
+
         <div className="MainBox">
-          <div className="titleOne">
+          <InputBox>
+            <img src={img_search} alt="검색" />
+            <div className="search">
+              <input
+                type="text"
+                className="search-box"
+                placeholder="키워드를 입력하세요 (예) 체험명, 지역명, 작성자"
+                onChange={(e) => {
+                  setKeyword(e.target.value);
+                }}
+              onKeyPress={(e) => search(e)}
+              />
+              <button className="search_btn"
+               onClick={(e) => 
+                {search(e)}} 
+                >
+                확인
+              </button>
+            </div>
+          </InputBox>
+          <Cards>
+            <div className="text">
+              "{keyword}"에 대한 검색 결과입니다.</div>
             <div className="subtitle">체험 모집</div>
             <div className="subContent">
               다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!
             </div>
-          </div>
+          </Cards>
 
           <div className="cardBox">
-            <SCardSearch
-            scard={scard}
-            query={query}
+            <SearchScard
+            searchdata={recruit}
             />
           </div>
 
-          <div className="titleOne">
+          <Cards>
             <div className="subtitle">장소 추천</div>
             <div className="subContent">
               아이들과 함께 출입이 가능한 키즈존을 공유해요!
             </div>
-          </div>
+          </Cards>
 
           <div className="cardBox">
-            <LCardSearch 
-            lcard={lcard}
-            query={query}
+            <SearchLcard 
+            searchdata={place}
             />
           </div>
 
 
-          <div className="titleOne">
+          <Cards>
             <div className="subtitle">육아템 리뷰</div>
             <div className="subContent">
               유용한 육아용품들을 소개하고 추천해요!
             </div>
-          </div>
+          </Cards>
 
           <div className="cardBox">
-            <RCardSearch 
-            rcard={rcard}
-            query={query}
+            <SearchRcard
+            searchdata={review}
             />
           </div>
         </div>
-      </SearchBox>
-      <ChatIcon/>
+      </Search>
+      <ChatIcon />
       <Footer />
     </>
   );
 };
 
-const SearchBox = styled.div`
+const Search = styled.div`
   width: 100%;
   background-color: #f5f5f5;
+  padding-bottom: 50px;
 
-  .MoreBtn {
-    border: 2px solid #ddd;
-    width: 70px;
-    height: 30px;
-    position: relative;
-    right: 50px;
-    transition: all 0.25s ease;
-    border-radius: 5px;
-    margin-top: 30px;
+  .title {
+    width: 1014px;
+    height: 100px;  
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  .MoreBtn:hover {
-    border-color: #111;
-    box-shadow: 1px 2px 4px rgb(0 0 0 / 10%);
-  }
-
-  .MainBox {
-    border: 1px solid #e4e4e4;
-    width: 80%;
-    margin: 30px auto;
-    border-radius: 10px;
-    background: #ffffff;
-  }
-
-  .subtitle {
-    color: #000000;
-    font-family: "Nanum Gothic";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 30px;
-    margin-bottom: 12px;
-  }
-
-  .subContent {
-    color: #6b4e16;
-    font-family: "Nanum Gothic";
+  .serchinput {
+    color: #a8a8a8;
+    font-family: "NanumGothic";
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
+    padding-top: 20px;
+    margin-bottom: 10px;
   }
 
-  .titleOne {
-    margin: 64px 0px 35px 85px;
+  .serchtitle {
+    color: #000000;
+    font-family: "NanumGothic";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 30px;
+  }
+
+  .MoreBtn {
+    width: 130px;
+    height: 38px;
+    position: relative;
+    right: 50px;
+    transition: all 0.25s ease;
+    border-radius: 30px;
+    background: #3C3C3C;
+    margin-top: 30px;
+    color: #fff;
+    border: none;
+    font-family: "NanumGothic";
+    font-weight: 700;
+  }
+
+
+  .MainBox {
+    border: 1px solid #e4e4e4;
+    width: 1014px;
+    margin: 30px auto;
+    border-radius: 10px;
+    background: #ffffff;
   }
 
   .cardBox {
@@ -161,9 +171,39 @@ const SearchBox = styled.div`
   }
 `;
 
+const Cards = styled.div`
+margin: 64px 0px 35px 85px;
+
+.text {
+  dispaly: flex;
+  margin-left: 300px;
+  margin-bottom: 30px;
+  color: #A8A8A8;
+}
+
+.subtitle {
+  color: #000000;
+  font-family: "NanumGothic";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 30px;
+  margin-bottom: 12px;
+}
+
+.subContent {
+  color: #6b4e16;
+  font-family: "NanumGothic";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+}
+`;
+
+
 const InputBox = styled.div`
   font-family: "Nanum Gothic";
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,25 +219,32 @@ const InputBox = styled.div`
   }
 
   .search-box {
-    background-color: #eee;
-    width: 600px;
-    height: 40px;
+    width: 700px;
+    height: 50px;
     border-radius: 30px;
-    padding: 9px;
-    border: none;
+    padding-left: 18px;
+    border: 1.5px solid #3C3C3C;
     outline: none;
-  }
-`;
 
-const Btn = styled.button`
-  margin-top: 40px;
-  margin-left: 10px;
-  padding: 7px 17px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  background: gray;
-  color: white;
-  border-radius: 20px;
+    input {
+      ::placeholder{
+        color: #A8A8A8;
+      }
+    }
+  }
+
+  .search_btn {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    background: #3C3C3C;
+    border-radius: 30px;
+    width: 75px;
+    height: 44px;
+    color: #FFFFFF;
+    margin-top: 8px;
+    margin-left: 10px;
+  }
 `;
 
 export default MainSearch;
