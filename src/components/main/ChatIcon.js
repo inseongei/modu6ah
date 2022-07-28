@@ -88,9 +88,9 @@ cursor: pointer;
 .ChatBox{
   width: 81px;
   height: 23px;
-  font-family: 'NanumGothic';
-  font-style: normal;
+  font-family: 'Nanum Gothic', sans-serif;
   font-weight: 700;
+  font-style: normal;
   font-size: 20px;
   line-height: 23px;
   display: flex;
@@ -104,4 +104,4 @@ cursor: pointer;
 }
 `
 
-export default ChatIcon
+export default ChatIcon;
