@@ -65,7 +65,7 @@ const FooterContainer = styled.footer`
   height: 130px;
   background-color: #3c3c3c;
   position: relative;
-  transform: translateY(270%);
+  transform: translateY(0%);
   font-family: 'NanumGothic';
 
   .one_container {
