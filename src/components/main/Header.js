@@ -180,6 +180,7 @@ const Header = () => {
                     <p>프로필관리</p>
                   </div>
                 </div>
+           
                 <div className="menuTwo">
                   <div onClick={Bookmark}>
                     <p>북마크관리</p>
@@ -252,18 +253,22 @@ const Headers = styled.div`
     top: 73px;
   }
 
-
-
   .accordion {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
+  .accordion > label {
+    margin-top: 4px;
+  }
+
   .DownDrop{
     color: #A8A8A8;
     width: 30px;
     height: 30px;
+    margin-left: 2px;
+    margin-top: 3px;
   }
 
   .DownDrop:hover{
@@ -312,8 +317,8 @@ const Headers = styled.div`
   .menuOne > div > p {
     cursor: pointer;
     color: #A8A8A8;
-    font-family: 'NanumGothic';
     font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
@@ -326,8 +331,7 @@ const Headers = styled.div`
   .menuTwo > div > p {
     cursor: pointer;
     color: #A8A8A8;
-    font-family: 'NanumGothic';
-    font-style: normal;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
@@ -428,7 +432,7 @@ const Headers = styled.div`
     list-style: none;
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 16px;
   }
 
   .header__right div {
@@ -460,6 +464,7 @@ const Headers = styled.div`
     margin-left: 32px;
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
+    margin-top: 4px;
   }
 
 
@@ -472,17 +477,8 @@ const Headers = styled.div`
     cursor: pointer;
     margin-right: 62px;
     margin-left: 30px;
+    margin-top: 4px;
   }
-
-
-
-
-
-
-
-
-
-  
 
   .Login > a {
     font-family: 'Nanum Gothic', sans-serif;
@@ -493,6 +489,7 @@ const Headers = styled.div`
     color: #3c3c3c;
     cursor: pointer;
     margin-left: 32px;
+    margin-top: 4px;
   }
 
   li {
