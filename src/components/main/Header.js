@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { HiChevronDown } from "react-icons/hi";
 import logo from "../../images/logo.png";
@@ -13,14 +13,15 @@ const Header = () => {
   // Hook 선언
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [color, setcolor] = React.useState(false);
 
-  // 쿠키와 로컬스토리지에 있는 토큰,닉네임,프로필Url
+
+  // 로컬 스토리지에 있는 토큰,닉네임,프로필Url
   const UserCheck = localStorage.getItem("accessToken");
   const nickname = localStorage.getItem("nickname");
   const Profile = localStorage.getItem("profileUrl");
 
-  // 로그아웃 눌렀을때 쿠키 (토큰 ,닉네임) , 로컬스토리지 (토큰,Url) 삭제후 새로고침
+
+  // 로그아웃 눌렀을 때 쿠키 (토큰, 닉네임), 로컬 스토리지 (토큰, Url) 삭제 후 새로고침
   const logoOut = () => {
     Swal.fire({
       text: `로그아웃하였습니다`,
@@ -46,7 +47,6 @@ const Header = () => {
     navigate("/MyBookmark");
   }
 
-
   return (
     <>
       {/* 로그인할때의 헤더 ============================================================================== */}
@@ -70,7 +70,6 @@ const Header = () => {
           </ul>
 
           {/* User 메뉴 리스트 */}
-
           <ul className="header__right">
             <li className="bell">
               <a href="/api/search">
@@ -85,11 +84,12 @@ const Header = () => {
             </li>
           </ul>
         </Headers>
+
       ) : (
-        // 로그인했을때의 헤더 ==============================================================================
+        
+        // 로그인 했을 때의 헤더 ==============================================================================
 
         <Headers>
-
           <a className="logo_container"
             href="/">
             <div className="logo_img">
@@ -97,7 +97,6 @@ const Header = () => {
             </div>
             <div className="logo">모두의 육아</div>
           </a>
-
 
           {/* 메뉴 리스트 */}
           <ul className="header__menulist">
@@ -117,7 +116,6 @@ const Header = () => {
             <li className="profile">
               <img src={Profile} alt="프로필" />
             </li>
-
             <li className="accordion">
               <input type="checkbox" id="answer01" />
               <label htmlFor="answer01">
@@ -140,7 +138,6 @@ const Header = () => {
                 </div>
               </div>
             </li>
-
             <li className="MyPage">마이페이지</li>
             <li className="LogoOutTwo" onClick={logoOut}>
               로그아웃
@@ -164,10 +161,10 @@ const Headers = styled.div`
   color: #3c3c3c;
   filter: drop-shadow(0px 4px 25px rgba(0, 0, 0, 0.1));
   
-
   input[id*="answer"] {
     display: none;
   }
+
   input[id*="answer"] + label {
     display: block;
     cursor: pointer;
@@ -182,7 +179,6 @@ const Headers = styled.div`
   .searchicon{
     margin-right: 30px;
   }
-
 
   input[id*="answer"] + label + div {
     max-height: 0;
