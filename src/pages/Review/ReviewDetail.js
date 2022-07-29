@@ -185,7 +185,7 @@ const Title = styled.div`
 `;
 
 const Box = styled.div`
-width: 1050px;
+width: 1040px;
 height: 600px;
 
 background: white;
