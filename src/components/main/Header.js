@@ -273,11 +273,11 @@ const Headers = styled.div`
     text-decoration: none;
     color: #A58646;
     font-family: 'Nanum Gothic'
-
   }
 
   a:hover {
     color: #6b4e16;
+    font-weight: bold;
   }
 
 .list {
