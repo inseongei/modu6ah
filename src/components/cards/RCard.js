@@ -210,7 +210,8 @@ const Container = styled.div`
   .card {
     background: white;
     border-radius: 20px;
-    border: 1px solid #A8A8A8;
+    border: 1px solid white;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.09);
     width: 440px;
     height: 568px;
     padding: 30px 25px;
