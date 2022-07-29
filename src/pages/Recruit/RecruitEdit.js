@@ -60,6 +60,7 @@ function RecruitEdit() {
             text: `게시글 수정이 완료되었습니다.`,
             icon: "success",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           }). then((result) => {
             if (result.isConfirmed) {
               navigate("/recruit")
@@ -71,6 +72,7 @@ function RecruitEdit() {
             text: `게시글 수정을 실패했습니다.`,
             icon: "error",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           })
         });
       } else {
@@ -78,6 +80,7 @@ function RecruitEdit() {
           text: `게시글 수정을 실패했습니다.`,
           icon: "error",
           confirmButtonText: "확인", 
+          confirmButtonColor: '#ffb300'
         })
       }
   };
