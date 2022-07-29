@@ -150,6 +150,7 @@ padding-bottom: 100px;
 display: flex;
 justify-content:center;
 align-items:center;
+margin-left: 50px;
 }
 
 .h1Box{
@@ -171,13 +172,12 @@ display: flex;
 }
 
 .inputBox{
-  width: 910px;
   display: flex;
   margin-bottom: 10px;
 }
 
 .inputBox > input{
-  width: 100%;
+  width: 700px;
   display: flex;
   border: 1px solid #A8A8A8;
   height: 57px;
@@ -209,7 +209,7 @@ display: flex;
 }
 
 .box{
-  width: 790px;
+  width: 800px;
   display:flex;
   margin-left: 85px;
   margin-top: 5px;
@@ -252,6 +252,7 @@ cursor: pointer;
 
 .comment {
   margin-bottom: 5px;
+  margin-left: 15px;
 }
 
 .date {
@@ -270,7 +271,7 @@ cursor: pointer;
    width: 35px;
    height: 35px;
    border-radius: 50%;
-   margin-top: 13px;
+   margin-top: 17px;
    position:absolute;
   }
 }
