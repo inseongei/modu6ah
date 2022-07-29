@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 import Header from "../../components/main/Header";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import { useDispatch } from "react-redux";
-import { createPostDB } from "../../redux/modules/post";
+// import { useDispatch } from "react-redux";
+// import { createPostDB } from "../../redux/modules/post";
+import axios from "axios";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 import moment from 'moment';
@@ -22,10 +22,9 @@ const RecruitAdd = () => {
   const [age, setAge] = useState("");
   const datemoment = moment(date).format("YYYY-MM-DD")
   const timemoment = moment(time).format("HH:mm")
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const addPost = () => {
+  // const addPost = () => {
     const post_data = {
       title,
       content,
@@ -34,7 +33,33 @@ const RecruitAdd = () => {
       place,
       age,
     };
-    dispatch(createPostDB(post_data));
+  //   dispatch(createPostDB(post_data));
+  // };
+
+ const addPost = () => {
+    
+      axios
+        .post(`https://zhaoxilin.shop/api/recruits`, post_data, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          Swal.fire({
+            text: `게시글 작성이 완료되었습니다.`,
+            icon: "success",
+            confirmButtonText: "확인", 
+          }). then((result) => {
+             window.location.href('/recruit')
+            })
+        })
+        .catch((err) => {
+          Swal.fire({
+            text: `게시글 작성이 실패했습니다.`,
+            icon: "error",
+            confirmButtonText: "확인", 
+          })
+        });
   };
 
   return (
