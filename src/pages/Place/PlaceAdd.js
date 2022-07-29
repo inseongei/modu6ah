@@ -64,7 +64,9 @@ function PlaceAdd() {
             icon: "success",
             confirmButtonText: "확인", 
           }). then((result) => {
-             navigate("/place");
+            if (result.isConfirmed) {
+              navigate("/place")
+            };
             })
         })
         .catch((err) => {
