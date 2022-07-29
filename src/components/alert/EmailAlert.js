@@ -5,6 +5,7 @@ import axios from "axios";
 import email from '../../images/email.png';
 import Grid from "../elements/Grid";
 import Fin from '../../images/cancel.png';
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const EmailAlert = ({ open, onClose, emailcode, data }) => {
@@ -20,9 +21,17 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
                 .post("https://zhaoxilin.shop/api/users/signup", data
                 )
                 .then((response) => {
-                    alert(`${data.nickname}님! 회원가입을 축하드립니다.`);
-                    navigate('/');
-                })
+                    Swal.fire({
+                        text: `${data.nickname}님! 회원가입을 축하드립니다.`,
+                        icon: "success",
+                        confirmButtonText: "확인", 
+                        confirmButtonColor: '#ffb300'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          navigate("/");
+                        }
+                      })
+                    })
                 .catch((err) => {
                 })
         } else {
