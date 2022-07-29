@@ -65,7 +65,7 @@ function PlaceEdit() {
             icon: "success",
             confirmButtonText: "확인", 
             confirmButtonColor: '#ffb300'
-          }). then((result) => {
+          }).then((result) => {
              navigate("/place");
             })
         })
@@ -91,7 +91,7 @@ function PlaceEdit() {
             icon: "success",
             confirmButtonText: "확인", 
             confirmButtonColor: '#ffb300'
-          }). then((result) => {
+          }).then((result) => {
             alert(result.data.message);
             window.location.href = "/place";
             })
