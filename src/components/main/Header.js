@@ -434,7 +434,7 @@ const Headers = styled.div`
     color: #3c3c3c;
     cursor: pointer;
     margin-right: 62px;
-    margin-left: 30px;
+    margin-left: 15px;
     margin-top: 4px;
   }
 
