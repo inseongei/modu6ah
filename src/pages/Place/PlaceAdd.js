@@ -39,9 +39,8 @@ function PlaceAdd() {
     }
 
     for (const [key, value] of formData.entries()) {
-      // console.log(key, value)
+      
     }
-    // console.log(files.length);
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
     formData.append("title", title);
@@ -71,15 +70,19 @@ function PlaceAdd() {
             })
         })
         .catch((err) => {
-          Swal.fire({
-            text: `게시글 작성을 실패했습니다.`,
-            icon: "error",
-            confirmButtonText: "확인", 
-            confirmButtonColor: '#ffb300'
-          })
+          // Swal.fire({
+          //   text: `게시글 작성을 실패했습니다.`,
+          //   icon: "error",
+          //   confirmButtonText: "확인", 
+          //   confirmButtonColor: '#ffb300'
+          // })
         });
     } else {
-      alert("사진은 3개까지만 가능합니다.");
+      Swal.fire({
+        text: `사진은 3장 이하만 가능합니다.`,
+        icon: "error",
+        confirmButtonText: "확인", 
+      })
     }
   };
 
@@ -348,8 +351,8 @@ const Title = styled.div`
 `;
 
 const Place = styled.div`
-width: 1170px;
-height: 750px;
+width: 1190px;
+height: 730px;
 background: white;
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
 margin-top: 27px;
@@ -360,7 +363,7 @@ border: 1px solid #E4E4E4;
 border-radius: 10px;
   
   .place {
-    width: 1100px;
+    width: 1160px;
     
   }
   .title {
@@ -376,13 +379,15 @@ border-radius: 10px;
   .imageBox {
     min-height: 210px;
     max-height: auto;
+    widht: 1000;
     height: 280px;
-    margin-top: 40px;
+    margin-top: 30px;
+    margin-left: 30px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
-    
+    background: #FAFAFA;
 
     img {
       width: 37px;
@@ -397,7 +402,9 @@ border-radius: 10px;
 
   .plus_btn {
     width: 120px;
-    margin-left: 20px;
+   
+    background: #FAFAFA;
+
     label {
       margin-left: 45px;
       margin-bottom: 15px;
@@ -405,6 +412,8 @@ border-radius: 10px;
     }
     p {
     margin-left: 26px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
     }
   }
 
@@ -464,7 +473,7 @@ border-radius: 10px;
 
   .mainBox {
     display: flex;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-left: 60px;
   }
 
