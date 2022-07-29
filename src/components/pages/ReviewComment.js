@@ -126,7 +126,7 @@ const ReviewComment = () => {
                   className='delete'
                   onClick={deleteComment}
                 >
-                  <img id={data.placeCommentId}
+                  <img id={data.reviewCommentId}
                   src={img_delete}/>
                 </button>
                 ) : (

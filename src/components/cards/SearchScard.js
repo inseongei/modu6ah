@@ -70,15 +70,15 @@ function SearchScard({Morerecruit,keyword}) {
                     navigate("/recruitdetail/" + item.recruitPostId);
                   }}
                 >
-                   <div>          
+                 <div>          
                   <GrLocation style={{marginRight:"8px"}}/>
                   {item.place.length > 14 ? item.place.slice(0,13) + '...' : item.place}</div>
                   <div>
-                  <BiTimeFive style={{marginRight:"8px"}}/>
-                  {item != null && item.time}</div>
                   <div>
                     <AiOutlineCalendar style={{marginRight:"8px"}}/>
                   {item != null && item.date}</div>
+                  <BiTimeFive style={{marginRight:"8px"}}/>
+                  {item != null && item.time}</div>
                   <div>
                     <TbMoodKid style={{marginRight:"8px"}}/>
                     {item.age.length > 14 ? item.age.slice(0,13) + '...' : item.age}</div>
