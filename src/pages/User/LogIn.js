@@ -37,7 +37,6 @@ function LogIn() {
           text: `로그인이 완료되었습니다!`,
           icon: "success",
           confirmButtonText: "확인", 
-          confirmButtonColor: '#ffb300'
         }).then((result) => {
           if (result.isConfirmed) {
             navigate("/");
