@@ -28,26 +28,28 @@ function RecruitEdit() {
   const [time, setTime] = useState("");
   const [place, setPlace] = useState("");
   const [age, setAge] = useState("");
-
   const datemoment = moment(date).format("YYYY-MM-DD")
   const timemoment = moment(time).format("HH:mm")
 
-  // const upload = () => {
+  React.useEffect(() => {
+    dispatch(detailPostDB(recruitPostId));
+  }, []);
+
+  const detail = useSelector((state) => state.post.list);
+
+  
     const newPost = {
-      title,
-      content,
+      title : title.length === 0 ? detail.title : title ,
+      content : content.length === 0 ? detail.content : content ,
       date: datemoment,
-      time: timemoment,
-      place,
-      age,
-      status,
+      time: time.length === 0 ? detail.time : timemoment,
+      place : place.length === 0 ? detail.place : place,
+      age : age.length === 0 ? detail.age : age,
+      status : status.length === 0 ? detail.status : status
     };
-  //   dispatch(updatePostDB(recruitPostId, newPost));
-    // console.log(recruitPostId, newPost);
-  // };
+
 
   const upload = () => {
-    if(title && content && date && time && place && age.length > 0 ) {
       axios
         .put(`https://zhaoxilin.shop/api/recruits/` + recruitPostId, 
         newPost, {
@@ -61,12 +63,12 @@ function RecruitEdit() {
             icon: "success",
             confirmButtonText: "확인", 
             confirmButtonColor: '#ffb300'
-          }). then((result) => {
+          }).then((result) => {
             if (result.isConfirmed) {
               navigate("/recruit")
             };
             })
-        }) .catch((error) => {
+        }).catch((error) => {
           console.log(error)
           Swal.fire({
             text: `게시글 수정을 실패했습니다.`,
@@ -75,14 +77,6 @@ function RecruitEdit() {
             confirmButtonColor: '#ffb300'
           })
         });
-      } else {
-        Swal.fire({
-          text: `게시글 수정을 실패했습니다.`,
-          icon: "error",
-          confirmButtonText: "확인", 
-          confirmButtonColor: '#ffb300'
-        })
-      }
   };
 
   // 모집중 , 모집완료 상태 변경하기
@@ -90,12 +84,9 @@ function RecruitEdit() {
     setStatus(!status);
   };
 
-  React.useEffect(() => {
-    dispatch(detailPostDB(recruitPostId));
-  }, []);
 
-  const detail = useSelector((state) => state.post.list);
-  // console.log(detail);
+
+
 
   return (
     <>

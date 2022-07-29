@@ -1,5 +1,5 @@
 //장소 추천 수정 페이지
-import React, { useState } from "react";
+import React, { startTransition, useState } from "react";
 
 //style
 import styled from "styled-components";
@@ -29,131 +29,67 @@ function ReviewEdit() {
   const [detail, setDetail] = useState("");
   const { reviewPostId } = useParams();
 
-  // axios.Post 버튼
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    e.persist();
+  React.useEffect(() => {
+    axios
+      .get("https://zhaoxilin.shop/api/reviews/" + reviewPostId)
+      .then((res) => {
+        console.log(res.data)
+        setDetail(res.data.reviewDetails);
+      });
+  }, []);
 
-    let files = e.target.profile_files.files;
-    let formData = new FormData();
-    // // console.log(files)
 
-    // // 반복문 돌려서 다중 이미지 처리
-    for (let i = 0; i < files.length; i++) {
-      formData.append("imageUrl", files[i]);
+
+
+
+
+
+
+
+  // 수정버튼
+  const editPost = () => {
+
+    const data = {
+      title : title.length === 0 ? detail.title : title,
+      content: content.length === 0 ? detail.content : content,
+      url: content.length === 0 ? detail.content : content,
+      productType: location.length === 0 ? detail.location : location,
     }
 
-    for (const [key, value] of formData.entries()) {
-    }
-    // console.log(files.length);
 
-    // 제목,내용,장소,별점 데이터 => 폼데이터 변환
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("url", region);
-    formData.append("productType", location);
-
-    if(files.length < 4) { 
-        axios
-        .post(`https://zhaoxilin.shop/api/reviews/`, formData,  {
+  
+      axios
+        .put(`https://zhaoxilin.shop/api/reviews/` + reviewPostId, data, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            "Content-Type": "multipart/form-data"
           },
         })
         .then((res) => {
           Swal.fire({
-            text: `게시글 수정이 완료되었습니다.`,
-            icon: "success",
+            text: '게시글 수정에 완료되었습니다',
+            icon: 'success',
             confirmButtonText: "확인", 
             confirmButtonColor: '#ffb300'
-          }).then((result) => {
-            if (result.isConfirmed) {
+          }).then((result =>{
+            if(result.isConfirmed){
               navigate('/review')
             }
-          });
-        })
-        .catch((error) => {
-          // Swal.fire({
-          //   text: `게시글 수정을 실패했습니다.`,
-          //   icon: "error",
-          //   confirmButtonText: "확인", 
-          // })
-        });
-    } else {
-      Swal.fire({
-        text: `수정할 내용을 작성해주세요.`,
-        icon: "warning",
-        confirmButtonText: "확인", 
-        confirmButtonColor: '#ffb300'
-      })
-    }
-  };
-
-  const editPost = () => {
-    if(title && region && content && location.length > 0) {
-      axios
-        .put(`https://zhaoxilin.shop/api/reviews/` + reviewPostId, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((res) => {
-          Swal.fire({
-            text: `게시글 수정이 완료되었습니다.`,
-            icon: "success",
-            confirmButtonText: "확인", 
-            confirmButtonColor: '#ffb300'
-          }). then((result) => {
-            alert(result.data.message);
-            window.location.href = "/review";
-            })
+          }))
         }).catch((error) => {
         //   console.log(error);
         });
-       }else{
-        Swal.fire({
-          text: `수정할 내용을 작성해 주세요.`,
-          icon: "error",
-          confirmButtonText: "확인", 
-          confirmButtonColor: '#ffb300'
-        })
-       }
   };
 
-  // 이미지 미리보기
-  const handleImageChange = (e) => {
-    const imageLists = e.target.files;
-    let imageUrlLists = [...imageSrc];
-    for (let i = 0; i < imageLists.length; i++) {
-      const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      imageUrlLists.push(currentImageUrl);
-    }
-    if (imageUrlLists.length > 4) {
-      imageUrlLists = imageUrlLists.slice(0, 3);
-    }
-    setImageSrc(imageUrlLists);
-  };
 
-  // 이미지 미리보기에서 삭제
-  const handleDeleteImage = (id) => {
-    setImageSrc(imageSrc.filter((_, index) => index !== id));
-  };
+  if (!detail) {
+    return <div></div>;
+  }
 
-  React.useEffect(() => {
-    axios
-      .get('https://zhaoxilin.shop/api/reviews/' + reviewPostId)
-      .then((res) => {
-        console.log(res.data);
-        setDetail(res.data.placeDetails);
-      });
-  }, []);
 
 
   return (
     <>
       <Header />
-      {/* <Container> */}
       <div style={{width:"1170px",
         margin: "0 auto" }}>
         <Title>
@@ -165,46 +101,25 @@ function ReviewEdit() {
         <Place>
           {/* 카드 위쪽: 이미지 */}
           <div className="place">
-            <form onSubmit={(e) => onSubmit(e)}>
               <input
                 id="input-file"
                 type="file"
                 name="profile_files"
                 multiple="multiple"
                 style={{ display: "none" }}
-                onChange={handleImageChange}
               />
 
               <div className="imageBox">
                 <div className="plus_btn">
-                  <label htmlFor="input-file">
-                    <img src={plus} />
-                  </label>
-                  <p style={{
-                    color: "#3C3C3C"
-                  }}>
-                    사진 업로드
-                  </p>
-                  <p style={{
-                    color: "#6B4E16",
-                    marginTop: "-13px",
-                  }}>
-                    &nbsp;(최대 3장)
-                  </p>
 
                 </div>
                 
                   {/* 이미지 미리보기 */}
-                  {imageSrc.map((image, id) => (
+                  {detail.imageUrl.map((image, id) => (
                     <div className="img_box_size" key={id}>
                       <img src={image} alt={`${image}-${id}`} />
                       <div className="img_btn">
-                        <button
-                          onClick={() =>
-                            handleDeleteImage(id)}>
-                          이미지 삭제
-                          <img src={img_delete} />
-                        </button>
+
                       </div>
                     </div>
                   ))}
@@ -219,6 +134,7 @@ function ReviewEdit() {
                       type="text"
                       onChange={(e) =>
                         setTitle(e.target.value)}
+                        placeholder={detail.title}
                     />
                   </div>
 
@@ -229,6 +145,7 @@ function ReviewEdit() {
                       type="text"
                       onChange={(e) =>
                         setRegion(e.target.value)}
+                        placeholder={detail.url}
                     />
                   </MapSearch>
 
@@ -238,6 +155,7 @@ function ReviewEdit() {
                       type="text"
                       onChange={(e) =>
                         setLocation(e.target.value)}
+                        placeholder={detail.productType}
                     />
                   </div>
                 </div>
@@ -246,6 +164,7 @@ function ReviewEdit() {
                 <div className="card-right">
                   <textarea onChange={(e) =>
                     setContent(e.target.value)}
+                    placeholder={detail.content}
                     />
                 </div>
               </div>
@@ -256,7 +175,7 @@ function ReviewEdit() {
                     navigate(`/`);
                   }}
                 >
-                  취소{" "}
+                  취소
                 </button>
                 <button className="btn" 
                 type="submit"
@@ -265,8 +184,6 @@ function ReviewEdit() {
                   수정하기
                 </button>
               </Btn>
-
-            </form>
           </div>
         </Place>
         </div>
@@ -286,19 +203,16 @@ padding-bottom: 10px;
 
 const Title = styled.div`
   padding-top: 40px;
-
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
   }
-
   .page {
     font-size: 30px;
     font-weight: 700;
   }
-
   p {
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
@@ -339,13 +253,11 @@ border-radius: 10px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
-
     img {
       width: 37px;
       height: 37px;
       border: none;
     }
-
     p {
       font-family: 'Nanum Gothic', sans-serif;
       font-weight: 700;
@@ -399,7 +311,6 @@ border-radius: 10px;
      padding-left: 15px;
      color: #3C3C3C;
     }
-
     img {
       width: 16px;
       height: 17px;
@@ -429,7 +340,6 @@ border-radius: 10px;
     margin-top: 10px;
     padding-left: 15px;
     font-size: 16px;
-
     ::placeholder{
       color: lightgray;
     }
@@ -453,7 +363,6 @@ border-radius: 10px;
     resize: vertical; /* 상하만 가능 */
     margin-bottom: 20px;
     padding: 10px;
-
     ::placeholder{
       color: lightgray;
     }
@@ -471,7 +380,6 @@ border-radius: 10px;
       }
     }
   }
-
   .position > strong {
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
