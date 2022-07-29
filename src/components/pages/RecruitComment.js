@@ -276,7 +276,7 @@ cursor: pointer;
    width: 35px;
    height: 35px;
    border-radius: 50%;
-   margin-top: 15px;
+   margin-top: 17px;
    position:absolute;
   }
 }
