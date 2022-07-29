@@ -8,7 +8,10 @@ import { Provider } from "react-redux";
 import store from './redux/configStore'
 import ScrollToTop from './ScrollToTop';
 import { RenderAfterNavermapsLoaded } from "react-naver-maps";
+import ReactGA from 'react-ga';
 
+const TRACKING_ID = process.env.REACT_APP_GOOGLE_ID;
+ReactGA.initialize(TRACKING_ID);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
