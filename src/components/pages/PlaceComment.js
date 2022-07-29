@@ -270,7 +270,7 @@ cursor: pointer;
    width: 35px;
    height: 35px;
    border-radius: 50%;
-   margin-top: 13px;
+   margin-top: 17px;
    position:absolute;
   }
 }
