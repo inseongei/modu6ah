@@ -9,6 +9,7 @@ import MainRcard from '../components/cards/MainRcard';
 import Footer from "../components/main/Footer";
 import MainScard from "../components/cards/MainScard";
 import ChatIcon from '../components/main/ChatIcon'
+import Baby from '../images/3DBABY.png' 
 import '../shared/App.css'
 
 const Main = () => {
@@ -20,7 +21,11 @@ const Main = () => {
         <Container>
 
           <div className="card_title">
-            <Title>체험 모집</Title>
+            <Title>
+              체험 모집
+              <img src={Baby} alt="사진" className="imgani"/>
+            </Title>
+            
           </div>
           <div className="subtitle">
             <div className="subcontent">
@@ -114,12 +119,52 @@ const Container = styled.div`
 const Title = styled.p`
   display: flex;
   font-size: 28px;
+  align-items: flex-end;
   font-family: 'Nanum Gothic', sans-serif;
   font-weight: 800;
-  margin-top: 95px;
+  /* margin-top: 95px; */
+  height: 137px;
   margin-left: 170px;
   margin-bottom: 0px;
+
+  img{
+    width:150px;
+    height:150px;
+    transform: scaleX(-1);
+    animation-name: jaehee;
+    animation-duration:2s;
+    animation-duration: leaner;
+    animation-iteration-count:3;
+    animation-direction:alternate;
+    animation-fill-mode: forwards;
+  }
+
+  @-webkit-keyframes jaehee {
+  0% {
+    left:100px;
+  }
+  100% {
+    left:300px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 `;
+
+
 
 const SubTitle = styled.p`
   font-size: 20px;

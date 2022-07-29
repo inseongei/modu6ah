@@ -53,7 +53,7 @@ const RecruitAdd = () => {
             icon: "success",
             confirmButtonText: "확인", 
             confirmButtonColor: '#ffb300'
-          }). then((result) => {
+          }).then((result) => {
             if (result.isConfirmed) {
               navigate("/recruit")
             };
