@@ -18,7 +18,7 @@ const PlaceDetail = () => {
   const nickname = localStorage.getItem("nickname");
   const [detail, setDetail] = useState("");
   const { placePostId } = useParams();
- 
+
   React.useEffect(() => {
     axios
       .get("https://zhaoxilin.shop/api/places/" + placePostId)
@@ -29,29 +29,40 @@ const PlaceDetail = () => {
   }, []);
 
   const deletePlace = (e) => {
-    // console.log(e.target);
-    axios
-      .delete('https://zhaoxilin.shop/api/places/' + placePostId,
-        { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-      .then((response) => {
-        Swal.fire({
-          text: `게시글 삭제가 완료되었습니다.`,
-          icon: "success",
-          confirmButtonText: "확인", 
-        }).then((result) => {
-          window.location.replace("/place");
+     Swal.fire({
+      title: '게시글을 삭제하시겠습니까 ?',
+      text: "삭제된 게시글은 복구가 불가능합니다",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#ffb300',
+      confirmButtonText: '삭제',
+      cancelButtonText: '취소'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete('https://zhaoxilin.shop/api/places/' + placePostId,
+            { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
+          .then((response) => {
+            Swal.fire({
+              text: `게시글 삭제가 완료되었습니다!`,
+              icon: "success",
+              confirmButtonText: "확인",
+              confirmButtonColor: '#ffb300'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                 window.location.replace("/place");
+              }
+            });
+
           })
-     
-      })
-      .catch((error) => {
-        Swal.fire({
-          text: `게시글을 삭제할 권한이 없습니다.`,
-          icon: "error",
-          confirmButtonText: "확인", 
-        })
-      })
-      
+          .catch((error) => {
+            alert("게시글을 삭제할 권한이 없습니다.");
+          });
+      }
+    })
   };
+
 
   if (!detail) {
     return <div></div>;
@@ -61,99 +72,101 @@ const PlaceDetail = () => {
     <>
       <Header />
       <Container>
-      <div style={{width:"1100px",
-        margin: "0 auto" }}>
-        <Title>
-          <div className="subject">
-            장소 추천
+        <div style={{
+          width: "1100px",
+          margin: "0 auto"
+        }}>
+          <Title>
+            <div className="subject">
+              장소 추천
             </div>
-          <div className="page">
-            <p>상세 보기</p>
-          </div>
-        </Title>
-        <Box>
-          <div className="Box">
-            <div className="imgBox">
-              <div className="Bigimg">
-                <img src={detail.imageUrl[0]} alt="사진" />
-              </div>
-              <div className="imgSmall">
-                {detail.imageUrl.map((item, idx) => {
-                  return (
-                    <div key={idx}>
-                      <img src={item} alt="사진" />
-                    </div>
-                  );
-                })}
-              </div>
+            <div className="page">
+              <p>상세 보기</p>
             </div>
-            <ContentBox>
-              {/* 카드 오른쪽 위 */}
-              <div className="box_top">
-                <div className="title">
-                  <>
-                  <h2>{detail.title}</h2>
-                   <span>
-                    <FaStar
-                      size={28}
-                      style={{
-                        color: "#FFBA5A",
-                        marginLeft: "5px",
-                      }}
-                    />
-                  </span>
-                  <p>{detail.star}점</p>
-                  </>
-                  {nickname === detail.nickname ? (
-                <Btn>
-                  <button className="btn"
-                  style={{ marginRight: "-8px" }}
-                  onClick={() => {
-                    navigate(`/placeedit/` + 
-                    detail.placePostId);
-                  }}
-                  >
-                  <img src={revise} />
-                  </button>
-                  <button className="btn"
-                  onClick={deletePlace}
-                  >
-                <img src={img_delete} />
-                  </button>
-                </Btn>
-              ) : (
-                <></>
-              )}
+          </Title>
+          <Box>
+            <div className="Box">
+              <div className="imgBox">
+                <div className="Bigimg">
+                  <img src={detail.imageUrl[0]} alt="사진" />
                 </div>
-                {/* 카드 오른쪽 중간 */}
-                <div className="location">
-                  <p>
-                  <img src={location}/>
-                    {detail.region}
-                  </p>
-                </div>
-                <div className="info">
-                  <Image>
-                    <div className="ProfileImg">
-                      <img src={detail.profileUrl} alt="사진" />
-                    </div>
-                  </Image>
-                  <p className="nickname">{detail.nickname}</p>
+                <div className="imgSmall">
+                  {detail.imageUrl.map((item, idx) => {
+                    return (
+                      <div key={idx}>
+                        <img src={item} alt="사진" />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-              {/* 카드 내용 */}
-              <div className="box">
-                <div className="content">
-                  <p>{detail.content}</p>
+              <ContentBox>
+                {/* 카드 오른쪽 위 */}
+                <div className="box_top">
+                  <div className="title">
+                    <>
+                      <h2>{detail.title}</h2>
+                      <span>
+                        <FaStar
+                          size={28}
+                          style={{
+                            color: "#FFBA5A",
+                            marginLeft: "5px",
+                          }}
+                        />
+                      </span>
+                      <p>{detail.star}점</p>
+                    </>
+                    {nickname === detail.nickname ? (
+                      <Btn>
+                        <button className="btn"
+                          style={{ marginRight: "-8px" }}
+                          onClick={() => {
+                            navigate(`/placeedit/` +
+                              detail.placePostId);
+                          }}
+                        >
+                          <img src={revise} />
+                        </button>
+                        <button className="btn"
+                          onClick={deletePlace}
+                        >
+                          <img src={img_delete} />
+                        </button>
+                      </Btn>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  {/* 카드 오른쪽 중간 */}
+                  <div className="location">
+                    <p>
+                      <img src={location} />
+                      {detail.region}
+                    </p>
+                  </div>
+                  <div className="info">
+                    <Image>
+                      <div className="ProfileImg">
+                        <img src={detail.profileUrl} alt="사진" />
+                      </div>
+                    </Image>
+                    <p className="nickname">{detail.nickname}</p>
+                  </div>
                 </div>
-              </div>
-            </ContentBox>
-          </div>
-          <div className="mapbox">
-            <KakaoMap />
-          </div>
-        </Box>
-        <PlaceComment />
+                {/* 카드 내용 */}
+                <div className="box">
+                  <div className="content">
+                    <p>{detail.content}</p>
+                  </div>
+                </div>
+              </ContentBox>
+            </div>
+            <div className="mapbox">
+              <KakaoMap />
+            </div>
+          </Box>
+          <PlaceComment />
         </div>
       </Container>
       <ChatIcon />
