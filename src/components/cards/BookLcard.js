@@ -23,7 +23,6 @@ function BookLcard() {
       setbook(res.data.placeBookmarkList.slice(0, 3));
     })
     .catch((err) => {
-      console.log(err);
     });
   }
 
@@ -85,7 +84,6 @@ function BookLcard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
                               refetch()
                             });
                         }}
@@ -109,7 +107,6 @@ function BookLcard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
                               refetch()
                             });
                         }}

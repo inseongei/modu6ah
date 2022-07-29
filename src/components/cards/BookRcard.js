@@ -22,7 +22,6 @@ function BookRcard() {
       setbook(res.data.reviewBookmarkList.slice(0,3));
     })
     .catch((err) => {
-      console.log(err);
     });
   }
 
@@ -38,7 +37,6 @@ function BookRcard() {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((res)=>{
-      console.log(res)
       setbtn(!btn)
       btn ? setbook(res.data.reviewBookmarkList) : setbook(res.data.reviewBookmarkList.slice(0,3)) 
     })
@@ -83,7 +81,6 @@ function BookRcard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
                               refetch()
                             });
                         }}
@@ -106,7 +103,6 @@ function BookRcard() {
                               }
                             )
                             .then((res) => {
-                              console.log(res);
                               refetch()
                             });
                         }}

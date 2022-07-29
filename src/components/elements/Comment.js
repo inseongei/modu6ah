@@ -21,7 +21,6 @@ const Comment = (props) => {
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
-        console.log(res)
         window.alert('댓글 작성 성공')
       })
       .catch((err) => {
@@ -51,12 +50,10 @@ const Comment = (props) => {
         headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((response) => {
-        console.log(response);
         alert("삭제가 완료되었습니다.");
       })
       .catch((error) => {
         alert("게시글을 삭제할 권한이 없습니다.");
-        console.log(error)
 
       });
   };

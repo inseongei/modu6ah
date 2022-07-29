@@ -12,7 +12,6 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
     const navigate = useNavigate();
     const [code, setCode] = useState('');
     const [newcode, setNewCode] = useState('');
-    // console.log(code)
 
     //인증 코드가 input 값과 같으면 회원가입 완료
     const test = () => {
@@ -46,12 +45,9 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
               data.email
             )
             .then((response) => {
-              console.log(response);
               setNewCode(response.data.authCode)
             })
             .catch((error) => {
-              // console.log(error);
-              console.log(error.response.data.Message);
             });
       }
 

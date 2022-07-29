@@ -31,7 +31,6 @@ function SearchScard({Morerecruit,keyword}) {
         },
       }) 
       .then((res) => { 
-        console.log(res.data.resultsInRecruit) 
       }); 
   }
 

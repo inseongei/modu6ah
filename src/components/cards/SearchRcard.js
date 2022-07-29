@@ -12,20 +12,7 @@ function SearchRcard({searchdata}) {
   const [btn, setbtn] = React.useState(true)
   const [athis, setathis] = React.useState(6)
 
-  // const refetch = () =>{
-  //   axios
-  //   .get("https://zhaoxilin.shop/api/mypage/bookmark", {
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //     },
-  //   })
-  //   .then((res) => {
-  //     setbook(res.data.reviewBookmarkList.slice(0,3));
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-  // }
+
 
 
   const SearchMore =  () => {
