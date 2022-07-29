@@ -24,7 +24,7 @@ const Header = () => {
   // 로그아웃 눌렀을 때 쿠키 (토큰, 닉네임), 로컬 스토리지 (토큰, Url) 삭제 후 새로고침
   const logoOut = () => {
     Swal.fire({
-      text: `로그아웃하였습니다`,
+      text: `로그아웃이 완료되었습니다.`,
       icon: "success",
       confirmButtonText: "확인",
     }).then((result) => {
