@@ -365,7 +365,7 @@ const Detail = styled.div`
   }
 
   .card-top {
-    margin: 96px 0px 0px 10px;
+    margin: 99px 0px 0px 10px;
     width: 100%;
   }
 
@@ -408,7 +408,7 @@ const Detail = styled.div`
 
   .content {
     width: 490px;
-    height: 400px;
+    height: 390px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
     font-size: 20px;
@@ -416,6 +416,7 @@ const Detail = styled.div`
     margin-top: 20px;
     word-break: normal;
     padding: 20px;
+    overflow: hidden;
   }
 `;
 
