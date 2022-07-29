@@ -64,6 +64,7 @@ function PlaceEdit() {
             text: `게시글 수정이 완료되었습니다.`,
             icon: "success",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           }). then((result) => {
              navigate("/place");
             })
@@ -89,6 +90,7 @@ function PlaceEdit() {
             text: `게시글 수정이 완료되었습니다.`,
             icon: "success",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           }). then((result) => {
             alert(result.data.message);
             window.location.href = "/place";
@@ -101,6 +103,7 @@ function PlaceEdit() {
           text: `수정할 내용을 작성해 주세요.`,
           icon: "error",
           confirmButtonText: "확인", 
+          confirmButtonColor: '#ffb300'
         })
        }
   };
