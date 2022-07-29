@@ -51,9 +51,10 @@ const navigate = useNavigate()
           { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
         .then((response) => {
           Swal.fire({
-            text: `게시글 삭제 완료!`,
+            text: `게시글 삭제가 완료되었습니다!`,
             icon: "success",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           }).then((result) => {
             if (result.isConfirmed) {
               navigate('/review')
@@ -64,25 +65,8 @@ const navigate = useNavigate()
         .catch((error) => {
           alert("게시글을 삭제할 권한이 없습니다.");
         });
-        
       }
-    })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
+    })   
   };
 
   if (!detail) {
