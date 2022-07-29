@@ -1,7 +1,6 @@
 // 육아템 리뷰 카드
 import React, { useState } from "react";
 import styled from "styled-components";
-import { MdOutlinePlace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";

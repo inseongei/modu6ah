@@ -12,7 +12,6 @@ import { GrLocation } from "react-icons/gr";
 function MainLcard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [data, setData] = useState("");
   const token = localStorage.getItem('accessToken')
 
   React.useEffect(() => {

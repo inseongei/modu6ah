@@ -2,14 +2,12 @@
 import React,{useState} from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { MdOutlinePlace } from "react-icons/md";
 import axios from "axios";
-import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
+import { GrLocation } from "react-icons/gr";
 
 function SearchLcard({searchdata}) {
   const navigate = useNavigate();
-  const [data, setData] = useState();
   const [book, setbook] = useState();
   const [btn, setbtn] = useState(false);
   const [athis, setathis] = React.useState(6)
@@ -65,7 +63,11 @@ function SearchLcard({searchdata}) {
                 </div>
 
                 <div className="BookRegion" id={data.placePostId}>
-                <MdOutlinePlace />
+                <GrLocation
+                    style={{
+                      marginBottom: "3px",
+                      marginRight: "3px"
+                    }} />
                 {data.region.length >20 ? data.region.slice(0,19) + '..' : data.region}
                 </div>
 
