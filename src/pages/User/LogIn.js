@@ -3,22 +3,19 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { RiKakaoTalkFill } from "react-icons/ri";
-
 import Header from "../../components/main/Header";
 import Grid from "../../components/elements/Grid";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { REDIRECT_URI, REST_API_KEY } from "../../shared/kakaoData";
-// import KaKaoMap from '../Place/KakaoMap';
-
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>;
 
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPw] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
 
   //카카오톡 로그인
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
@@ -37,7 +34,7 @@ function LogIn() {
       })
       .then((response) => {
         Swal.fire({
-          text: `로그인 성공!`,
+          text: `로그인이 완료되었습니다!`,
           icon: "success",
           confirmButtonText: "확인", 
         }).then((result) => {
@@ -51,7 +48,7 @@ function LogIn() {
       })
       .catch((error) => {
         alert("로그인을 다시 해주세요");
-        console.log(error.message);
+        // console.log(error.message);
       });
   };
 
