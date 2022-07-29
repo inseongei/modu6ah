@@ -52,6 +52,7 @@ const RecruitAdd = () => {
             text: `게시글 작성이 완료되었습니다.`,
             icon: "success",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           }). then((result) => {
             if (result.isConfirmed) {
               navigate("/recruit")
@@ -60,9 +61,10 @@ const RecruitAdd = () => {
         })
         .catch((err) => {
           Swal.fire({
-            text: `게시글 작성이 실패했습니다.`,
+            text: `게시글 작성을 실패했습니다.`,
             icon: "error",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           })
         });
   };
