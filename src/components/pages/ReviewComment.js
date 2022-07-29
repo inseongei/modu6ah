@@ -243,6 +243,7 @@ cursor: pointer;
   align-items:center;
   margin-left:  12px;
   font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 }
 
 .comment_box {

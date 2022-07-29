@@ -120,10 +120,12 @@ const Header = () => {
             <li className="accordion">
               <input type="checkbox" id="answer01" />
               <label htmlFor="answer01">
-                {nickname}
+                <div className="nickname">
+                   <p>{nickname}</p>
                 <em>
                   <HiChevronDown className="DownDrop"></HiChevronDown>
                 </em>
+                </div>
               </label>
               <div className="menu animate__animated animate__fadeInUp">
                 <div className="menuOne">
@@ -161,6 +163,8 @@ const Headers = styled.div`
   align-items: center;
   color: #3c3c3c;
   filter: drop-shadow(0px 4px 25px rgba(0, 0, 0, 0.1));
+
+ 
   
   input[id*="answer"] {
     display: none;
@@ -209,7 +213,18 @@ const Headers = styled.div`
   }
 
   .accordion > label {
-    margin-top: 4px;
+    display: flex;
+    margin-top: 15px;
+    font-weight: 700;
+  }
+
+  .nickname {
+    display: flex;
+
+    p {
+      margin-top: 3.5px;
+      margin-right: 2px;
+    }
   }
 
   .DownDrop{
@@ -217,7 +232,7 @@ const Headers = styled.div`
     width: 30px;
     height: 30px;
     margin-left: 2px;
-    margin-top: 3px;
+
   }
 
   .DownDrop:hover{
@@ -279,7 +294,7 @@ const Headers = styled.div`
     color: #A8A8A8;
     font-style: normal;
     font-family: 'NanumGothic', sans-serif;
-    font-weight: 700;
+    font-weight: 700px;
     font-size: 16px;
     line-height: 18px;
     margin-top: 12px;
@@ -300,7 +315,7 @@ const Headers = styled.div`
   }
 
   .logo {
-    margin-left: 18px;
+    margin-left: 15px;
     font-size: 20px;
     font-weight: 700;
     color: #f4b03e;
@@ -386,6 +401,7 @@ const Headers = styled.div`
     height: 50px;
     border-radius: 50%;
     margin: auto;
+    margin-right: -13px;
   }
 
   .profile > img {
