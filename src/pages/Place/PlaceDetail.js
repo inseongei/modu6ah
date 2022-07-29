@@ -12,6 +12,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
+import { GrLocation } from "react-icons/gr";
 
 const PlaceDetail = () => {
   const navigate = useNavigate();
@@ -142,7 +143,10 @@ const PlaceDetail = () => {
                   {/* 카드 오른쪽 중간 */}
                   <div className="location">
                     <p>
-                      <img src={location} />
+                    <GrLocation
+                      style={{
+                        margin: "0px 3px 3px 4px"
+                      }} />
                       {detail.region}
                     </p>
                   </div>
@@ -292,7 +296,6 @@ const ContentBox = styled.div`
     }
 
     span {
-      margin-left: 13px;
       margin-top: 2px;
     }
 
