@@ -15,12 +15,11 @@ import SubHeader from "../components/main/SubHeader";
 const Main = () => {
   return (
     <div className="MainBackGround">
-      <SubHeader/>
       <Header />
+      <SubHeader />
       <Swiper />
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
         <Container>
-
           <div className="card_title">
             <Title>체험 모집</Title>
           </div>
@@ -38,7 +37,7 @@ const Main = () => {
           </div>
           <MainScard />
           <hr className="hrz" />
-            
+
           <div className="card_title">
             <Title style={{ marginTop: "100px" }}>장소 추천</Title>
           </div>
@@ -47,7 +46,7 @@ const Main = () => {
               <SubTitle>
                 아이들과 함께 출입이 가능한 키즈존을 공유해요!
               </SubTitle>
-               <a href="/place">
+              <a href="/place">
                 <Btn>
                   더 보기
                 </Btn>
@@ -63,7 +62,7 @@ const Main = () => {
           <div className="subtitle">
             <div className="subcontent">
               <SubTitle>유용한 육아 아이템들을 소개하고 추천해요!</SubTitle>
-               <a href="/review">
+              <a href="/review">
                 <Btn>
                   더 보기
                 </Btn>
