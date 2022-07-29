@@ -10,9 +10,9 @@ html {
 }
 
 *{
-  font-weight: 700;
   font-family: 'Nanum Gothic';
 }
+
 .MainBackGround {
   background: #FAFAFA;
 }
