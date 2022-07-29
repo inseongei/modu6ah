@@ -50,7 +50,7 @@ function PlaceAdd() {
     formData.append("location", location);
     formData.append("star", rating);
 
-    if (files.length < 6) {
+    if (files.length < 4) {
       await axios
         .post("https://zhaoxilin.shop/api/places", formData, {
           headers: {
@@ -91,8 +91,8 @@ function PlaceAdd() {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
       imageUrlLists.push(currentImageUrl);
     }
-    if (imageUrlLists.length > 5) {
-      imageUrlLists = imageUrlLists.slice(0, 5);
+    if (imageUrlLists.length > 4) {
+      imageUrlLists = imageUrlLists.slice(0, 3);
     }
     setImageSrc(imageUrlLists);
   };
@@ -153,6 +153,7 @@ function PlaceAdd() {
 
           {/* 카드 위쪽: 이미지 */}
           <div className="place">
+
             <form onSubmit={(e) => onSubmit(e)}>
               <input
                 id="input-file"
@@ -359,7 +360,8 @@ border: 1px solid #E4E4E4;
 border-radius: 10px;
   
   .place {
-    width: 100%;
+    width: 1100px;
+    
   }
   .title {
     font-family: "Inter";
