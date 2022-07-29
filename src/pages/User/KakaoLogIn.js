@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { REDIRECT_URI, REST_API_KEY } from "../../shared/kakaoData";
 import Swal from "sweetalert2";
 
 const KakaoLogIn = () => {
@@ -13,6 +12,8 @@ const KakaoLogIn = () => {
 
   const KAKAO_OAUTH_TOKEN_API_URL = "https://kauth.kakao.com/oauth/token";
   const KAKAO_GRANT_TYPE = "authorization_code";
+  const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
 
   axios
     .post(
