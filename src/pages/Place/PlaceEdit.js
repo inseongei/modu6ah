@@ -61,7 +61,7 @@ function PlaceEdit() {
         })
         .then((res) => {
           Swal.fire({
-            text: `게시글 수정이 성공했습니다.`,
+            text: `게시글 수정이 완료되었습니다.`,
             icon: "success",
             confirmButtonText: "확인", 
           }). then((result) => {
@@ -641,5 +641,6 @@ margin-left: 790px;
   outline: 0;
 }
 `;
+
 
 export default PlaceEdit;
