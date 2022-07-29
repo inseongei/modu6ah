@@ -43,7 +43,7 @@ const Main = () => {
           <hr className="hrz" />
 
           <div className="card_title">
-            <Title style={{ marginTop: "100px" }}>장소 추천</Title>
+            <Title>장소 추천</Title>
           </div>
           <div className="subtitle">
             <div className="subcontent">
@@ -61,7 +61,7 @@ const Main = () => {
           <hr />
 
           <div className="card_title">
-            <Title style={{ marginTop: "100px" }}>육아템 리뷰</Title>
+            <Title>육아템 리뷰</Title>
           </div>
           <div className="subtitle">
             <div className="subcontent">
