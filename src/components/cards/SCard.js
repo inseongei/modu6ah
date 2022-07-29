@@ -158,16 +158,20 @@ function SCard() {
                     navigate("/recruitdetail/" + item.recruitPostId);
                   }}
                 >
-                   <div>          
+                  <div>
+                    {/* <img src={location} alt="사진"/> */}
                   <GrLocation style={{marginRight:"8px"}}/>
                   {item.place.length > 14 ? item.place.slice(0,13) + '...' : item.place}</div>
                   <div>
-                  <div>
+                    {/* <img src={calendar} alt="사진"/> */}
                     <AiOutlineCalendar style={{marginRight:"8px"}}/>
                   {item != null && item.date}</div>
+                  <div>
+                    {/* <img src={time} alt="사진"/> */}
                   <BiTimeFive style={{marginRight:"8px"}}/>
                   {item != null && item.time}</div>
                   <div>
+                    {/* <img src={age} alt="사진"/> */}
                     <TbMoodKid style={{marginRight:"8px"}}/>
                     {item.age.length > 14 ? item.age.slice(0,13) + '...' : item.age}</div>
                 </div>
