@@ -63,6 +63,7 @@ function PlaceAdd() {
             text: `게시글 작성이 완료되었습니다.`,
             icon: "success",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           }). then((result) => {
             if (result.isConfirmed) {
               navigate("/place")
@@ -74,6 +75,7 @@ function PlaceAdd() {
             text: `게시글 작성을 실패했습니다.`,
             icon: "error",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           })
         });
     } else {
@@ -378,6 +380,7 @@ border-radius: 10px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
+    
 
     img {
       width: 37px;
@@ -387,7 +390,6 @@ border-radius: 10px;
 
     p {
       font-family: 'Nanum Gothic', sans-serif;
-      font-weight: 700;
     }
   }
 
@@ -415,7 +417,7 @@ border-radius: 10px;
   }
 
   .img_box_size{
-  
+
     img {
       object-fit: cover;
       width: 300px;
