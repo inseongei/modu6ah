@@ -39,9 +39,10 @@ const RecruitAdd = () => {
   // };
 
  const addPost = () => {
-    
       axios
-        .post(`https://zhaoxilin.shop/api/recruits`, post_data, {
+        .post(`https://zhaoxilin.shop/api/recruits`, 
+       post_data
+        , {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
