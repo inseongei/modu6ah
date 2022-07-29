@@ -71,7 +71,7 @@ function PlaceAdd() {
         })
         .catch((err) => {
           Swal.fire({
-            text: `게시글 작성이 실패했습니다.`,
+            text: `게시글 작성을 실패했습니다.`,
             icon: "error",
             confirmButtonText: "확인", 
           })
