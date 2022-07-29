@@ -132,7 +132,10 @@ const navigate = useNavigate()
                 {/* 카드 오른쪽 중간 */}
                 <div className="location">
                   <p>
-                  <img src={location}/>
+                  <GrLocation
+                      style={{
+                        margin: "0px 3px 3px 4px"
+                      }} />
                     {detail.url}
                   </p>
                 </div>
@@ -269,18 +272,18 @@ const ContentBox = styled.div`
     display: flex;
     font-size: 20px;
     line-height: 36px;
+    margin-left: 4px;
 
     span {
       margin-top: 5px;
       font-family: 'Nanum Gothic', sans-serif;
       font-weight: 700;
       font-size: 26px;
-   
     }
 
     p {
       color: #A8A8A8;
-      margin-left: 9px;
+      margin-left: 1px;
       margin-top: 5px;
     }
   }
