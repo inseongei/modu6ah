@@ -1,22 +1,17 @@
 //장소 추천 수정 페이지
 import React, { useState } from "react";
-
-//style
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
-
-//elements & components
 import { FaStar } from "react-icons/fa";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import Modal from "../../modal/Map/Modal";
 import plus from "../../images/plus.png";
-import { BsFillPlusCircleFill } from "react-icons/bs";
-
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon';
 import img_delete from '../../images/delete (1).png';
+import Swal from "sweetalert2";
 
 function PlaceEdit() {
   const navigate = useNavigate();
@@ -65,8 +60,13 @@ function PlaceEdit() {
           },
         })
         .then((res) => {
-        //   console.log(res);
-          navigate("/place");
+          Swal.fire({
+            text: `게시글 수정이 성공했습니다.`,
+            icon: "success",
+            confirmButtonText: "확인", 
+          }). then((result) => {
+             navigate("/place");
+            })
         })
         .catch((err) => {
         //   console.log(err);
@@ -85,15 +85,23 @@ function PlaceEdit() {
           },
         })
         .then((res) => {
-        //  console.log(res);
-          alert(res.data.message);
-          window.location.href = "/place";
-        })
-        .catch((error) => {
+          Swal.fire({
+            text: `게시글 수정이 완료되었습니다.`,
+            icon: "success",
+            confirmButtonText: "확인", 
+          }). then((result) => {
+            alert(result.data.message);
+            window.location.href = "/place";
+            })
+        }).catch((error) => {
         //   console.log(error);
         });
        }else{
-        alert('수정할 내용을 작성해주세요.')
+        Swal.fire({
+          text: `수정할 내용을 작성해 주세요.`,
+          icon: "error",
+          confirmButtonText: "확인", 
+        })
        }
   };
 
@@ -155,7 +163,6 @@ function PlaceEdit() {
     axios
       .get("https://zhaoxilin.shop/api/places/" + placePostId)
       .then((res) => {
-        // console.log(res.data);
         setDetail(res.data.placeDetails);
       });
   }, []);
@@ -634,6 +641,5 @@ margin-left: 790px;
   outline: 0;
 }
 `;
-
 
 export default PlaceEdit;
