@@ -54,6 +54,7 @@ function ReviewAdd() {
             text: `게시글 작성이 완료되었습니다.`,
             icon: "success",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           }).then((result) => {
             if (result.isConfirmed) {
               navigate("/Review");
@@ -66,6 +67,7 @@ function ReviewAdd() {
             text: `게시글을 작성해 주세요.`,
             icon: "error",
             confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
           })
         });
     } else {
