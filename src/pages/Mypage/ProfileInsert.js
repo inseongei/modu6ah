@@ -8,9 +8,11 @@ import axios from "axios";
 import ChatIcon from '../../components/main/ChatIcon'
 import Footer from '../../components/main/Footer'
 import { BsFillPlusCircleFill } from "react-icons/bs";
+import Swal from "sweetalert2";
 
 const ProfileInsert = () => {
   const nickname = localStorage.getItem("nickname");
+  const img = localStorage.getItem('profileUrl')
   React.useEffect(() => {
     dispatch(GetMyPageAxios(nickname));
   }, []);
@@ -46,8 +48,17 @@ const ProfileInsert = () => {
     let files = e.target.profile_files.files;
     let formData = new FormData();
 
+    // if(files.length === 0){
+    //   formData.append("profileUrl", img);
+    //   formData.append("myComment", insert.current.value);
+    // } else{
+
+    // }
+
     formData.append("profileUrl", files[0]);
     formData.append("myComment", insert.current.value);
+
+
 
 
     await axios
@@ -58,10 +69,24 @@ const ProfileInsert = () => {
       )
       .then((res) => {
         console.log(res)
-        navigate("/manager/" + nickname);
-        localStorage.setItem("profileUrl", res.data.profileUrl);
+        Swal.fire({
+          text: `프로필 수정이 완료되었습니다.`,
+          icon: "success",
+          confirmButtonText: "확인", 
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/manager/" + nickname);
+            localStorage.setItem("profileUrl", res.data.profileUrl);
+          }
+        })
       })
-      .catch((err) => console.log(err));
+      .catch((err) => 
+      Swal.fire({
+        text: `프로필 수정 실패.`,
+        icon: "error",
+        confirmButtonText: "확인", 
+      })
+      );
   };
 
   if (!MyPage) {
