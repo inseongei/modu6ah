@@ -42,7 +42,7 @@ const Headers = styled.div`
     margin: 8px 10px 0px 10px;
 
     span {
-    font-family: 'NanumGothic', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
     }
 
