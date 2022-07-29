@@ -2,9 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { MdOutlinePlace } from "react-icons/md";
 import axios from "axios";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import { GrLocation } from "react-icons/gr";
 
 function BookRcard() {
   const navigate = useNavigate();
@@ -116,7 +116,11 @@ function BookRcard() {
                 </div>
 
                 <div className="BookRegion" >
-                <MdOutlinePlace />
+                <GrLocation
+                      style={{
+                        marginBottom: "3px",
+                        marginRight: "3px"
+                      }} />
                 {data.url.length >20 ? data.url.slice(0,14) + '...' : data.url}
                 </div>
 
