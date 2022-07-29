@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { MdOutlinePlace } from "react-icons/md";
 import axios from "axios";
-import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import { GrLocation } from "react-icons/gr";
 
 function SearchRcard({searchdata}) {
   const navigate = useNavigate();
@@ -12,22 +12,20 @@ function SearchRcard({searchdata}) {
   const [btn, setbtn] = React.useState(true)
   const [athis, setathis] = React.useState(6)
 
-  const refetch = () =>{
-    axios
-    .get("https://zhaoxilin.shop/api/mypage/bookmark", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-    .then((res) => {
-      setbook(res.data.reviewBookmarkList.slice(0,3));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
-
-
+  // const refetch = () =>{
+  //   axios
+  //   .get("https://zhaoxilin.shop/api/mypage/bookmark", {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //     },
+  //   })
+  //   .then((res) => {
+  //     setbook(res.data.reviewBookmarkList.slice(0,3));
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  // }
 
 
   const SearchMore =  () => {
@@ -62,7 +60,11 @@ function SearchRcard({searchdata}) {
                 </div>
 
                 <div className="BookRegion" >
-                <MdOutlinePlace />
+                <GrLocation
+                      style={{
+                        marginBottom: "3px",
+                        marginRight: "3px"
+                      }} />
                 {data.url.length >20 ? data.url.slice(0,14) + '...' : data.url}
                 </div>
 
