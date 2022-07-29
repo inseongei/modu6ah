@@ -11,7 +11,7 @@ html {
 
 *{
   font-weight: 700;
-  font-family: 'NanumGothic';
+  font-family: 'Nanum Gothic';
 }
 .MainBackGround {
   background: #FAFAFA;
@@ -59,6 +59,15 @@ h4 {
   font-weight: 700;
   font-size: 26px;
   line-height: 38px;
+}
+.imgani{
+  width:70px;
+  height:55px;
+}
+
+
+.atags{
+  text-decoration: none;
 }
 
 .profile_item {

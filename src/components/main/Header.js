@@ -168,7 +168,7 @@ const Headers = styled.div`
   input[id*="answer"] + label {
     display: block;
     cursor: pointer;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic', sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: 16px;
@@ -257,7 +257,7 @@ const Headers = styled.div`
   a {
     text-decoration: none;
     color: #A58646;
-    font-family: 'Nanum Gothic'
+    font-family: 'NanumGothic'
   }
 
   a:hover {
@@ -277,7 +277,7 @@ const Headers = styled.div`
     cursor: pointer;
     color: #A8A8A8;
     font-style: normal;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic', sans-serif;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
@@ -292,7 +292,7 @@ const Headers = styled.div`
   .menuTwo > div > p {
     cursor: pointer;
     color: #A8A8A8;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic', sans-serif;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
@@ -303,7 +303,7 @@ const Headers = styled.div`
     font-size: 20px;
     font-weight: 700;
     color: #f4b03e;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic', sans-serif;
     font-weight: 700;
   }
   .logo_container {
@@ -403,14 +403,14 @@ const Headers = styled.div`
     cursor: pointer;
     margin-right: 62px;
     margin-left: 32px;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic', sans-serif;
     font-weight: 700;
     margin-top: 4px;
   }
 
 
   .LogoOutTwo {
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic', sans-serif;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
@@ -422,7 +422,7 @@ const Headers = styled.div`
   }
 
   .Login > a {
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic', sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: 16px;
