@@ -338,7 +338,7 @@ function PlaceEdit() {
                 <button
                   className="btn"
                   onClick={() => {
-                    navigate(`/`);
+                    navigate(`/place`);
                   }}
                 >
                   취소{" "}
@@ -392,7 +392,7 @@ const Title = styled.div`
 
 const Place = styled.div`
 width: 1170px;
-height: 750px;
+height: 730px;
 background: white;
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
 margin-top: 27px;
@@ -403,7 +403,7 @@ border: 1px solid #E4E4E4;
 border-radius: 10px;
   
   .place {
-    width: 100%;
+    width: 1135px;
   }
   .title {
     font-family: "Inter";
@@ -420,10 +420,12 @@ border-radius: 10px;
     max-height: auto;
     height: 280px;
     margin-top: 40px;
+    margin-left: 30px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
+    background: #FAFAFA;
 
     img {
       width: 37px;
@@ -438,8 +440,8 @@ border-radius: 10px;
   }
 
   .plus_btn {
-    width: 120px;
-    margin-left: 20px;
+    width: 65px;
+    // margin-left: 20px;
     label {
       margin-left: 45px;
       margin-bottom: 15px;
