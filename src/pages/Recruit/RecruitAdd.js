@@ -12,8 +12,10 @@ import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 import moment from 'moment';
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const RecruitAdd = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState(new Date());
@@ -50,7 +52,9 @@ const RecruitAdd = () => {
             icon: "success",
             confirmButtonText: "확인", 
           }). then((result) => {
-             window.location.href('/recruit')
+            if (result.isConfirmed) {
+              navigate("/recruit")
+            };
             })
         })
         .catch((err) => {
