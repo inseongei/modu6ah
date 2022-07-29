@@ -14,7 +14,6 @@ function RCard() {
   const [index , setindex] = useState(1)
   const token = localStorage.getItem('accessToken')
 
-  console.log(data)
   // 배열 자르기 함수 (배열 , 몇개단위)
   const division = (arr, n) => {
     const length = arr.length;
@@ -37,7 +36,6 @@ function RCard() {
       },
     } : null)
     .then((res) => {
-      console.log(res.data.reviewPosts)
       let data = res.data.reviewPosts
       setData([...data]);
     });
@@ -51,7 +49,6 @@ function RCard() {
         },
       } : null)
       .then((res) => {
-        console.log(res.data.reviewPosts)
         let data = res.data.reviewPosts.slice(0,2);
         setData([...data]);
       });
@@ -66,7 +63,6 @@ function RCard() {
         },
       } : null)
       .then((res) => {
-        console.log(res.data.reviewPosts);
         let result = division(res.data.reviewPosts,2)
         if(noMore === true){
           setData((list) => [...list,result[index]].flat())

@@ -26,7 +26,6 @@ function SCard() {
       },
     } : null)
     .then((res) => {
-      console.log(res.data.recruitPosts)
       let data = res.data.recruitPosts.slice(0,3)
       setData([...data]);
     });
@@ -53,7 +52,6 @@ function SCard() {
       },
     } : null)
     .then((res) => {
-      console.log(res.data.recruitPosts)
       let data = res.data.recruitPosts
       setData([...data]);
     });

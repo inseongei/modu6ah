@@ -25,7 +25,6 @@ function BookScard() {
       setbook(res.data.recruitBookmarkList.slice(0, 6));
     })
     .catch((err) => {
-      console.log(err);
     });
   }
 
@@ -77,7 +76,7 @@ function BookScard() {
                             }
                           )
                           .then((res) => {
-                            console.log(res);
+           
                             refetch()
                           });
                       }}
@@ -100,7 +99,6 @@ function BookScard() {
                             }
                           )
                           .then((res) => {
-                            console.log(res);
                             refetch()
                           });
                       }}

@@ -24,7 +24,6 @@ function LCard() {
       },
     } : null)
     .then((res) => {
-      console.log(res.data.placePosts)
       let data = res.data.placePosts.slice(0,2);
       setData([...data]);
     });
@@ -51,7 +50,6 @@ function LCard() {
       },
     } : null)
     .then((res) => {
-      console.log(res.data.placePosts)
       let data = res.data.placePosts
       setData([...data]);
     });
@@ -66,7 +64,6 @@ function LCard() {
         },
       } : null)
       .then((res) => {
-        console.log(res.data.placePosts);
         let result = division(res.data.placePosts,2)
         if(noMore === true){
           setData((list) => [...list,result[index]].flat())

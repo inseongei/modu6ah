@@ -23,7 +23,6 @@ function SearchLcard({searchdata}) {
       setbook(res.data.placeBookmarkList.slice(0, 3));
     })
     .catch((err) => {
-      console.log(err);
     });
   }
 
