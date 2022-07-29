@@ -27,7 +27,7 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
                         confirmButtonColor: '#ffb300'
                       }).then((result) => {
                         if (result.isConfirmed) {
-                          navigate("/");
+                          navigate("/login");
                         }
                       })
                     })
