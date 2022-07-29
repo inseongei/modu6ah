@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-// elements & components
 import Header from "../../components/main/Header";
-import Place from "./Place";
 import PlaceComment from "../../components/pages/PlaceComment";
 import KakaoMap from "../../components/pages/KakaoMap";
 import location from '../../images/location.png';
 import { FaStar } from "react-icons/fa";
 import revise from '../../images/revise.png';
 import img_delete from '../../images/delete (1).png'
-
+import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/main/Footer";
@@ -37,13 +34,23 @@ const PlaceDetail = () => {
       .delete('https://zhaoxilin.shop/api/places/' + placePostId,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
-        // console.log(response);
-        alert("삭제가 완료되었습니다.");
-        window.location.replace("/place");
+        Swal.fire({
+          text: `게시글 삭제가 완료되었습니다.`,
+          icon: "success",
+          confirmButtonText: "확인", 
+        }).then((result) => {
+          window.location.replace("/place");
+          })
+     
       })
       .catch((error) => {
-        alert("게시글을 삭제할 권한이 없습니다.");
-      });
+        Swal.fire({
+          text: `게시글을 삭제할 권한이 없습니다.`,
+          icon: "error",
+          confirmButtonText: "확인", 
+        })
+      })
+      
   };
 
   if (!detail) {
