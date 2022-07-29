@@ -12,6 +12,9 @@ import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 import moment from 'moment';
+import axios from "axios";
+import Swal from "sweetalert2";
+
 
 function RecruitEdit() {
   const navigate = useNavigate();
@@ -29,7 +32,7 @@ function RecruitEdit() {
   const datemoment = moment(date).format("YYYY-MM-DD")
   const timemoment = moment(time).format("HH:mm")
 
-  const upload = () => {
+  // const upload = () => {
     const newPost = {
       title,
       content,
@@ -39,8 +42,47 @@ function RecruitEdit() {
       age,
       status,
     };
-    dispatch(updatePostDB(recruitPostId, newPost));
+  //   dispatch(updatePostDB(recruitPostId, newPost));
     // console.log(recruitPostId, newPost);
+  // };
+
+  const upload = () => {
+    if(title && content && date && time && place && age.length > 0 ) {
+      axios
+        .put(`https://zhaoxilin.shop/api/recruits/` + recruitPostId, 
+        newPost, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          Swal.fire({
+            text: `게시글 수정이 완료되었습니다.`,
+            icon: "success",
+            confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
+          }). then((result) => {
+            if (result.isConfirmed) {
+              navigate("/recruit")
+            };
+            })
+        }) .catch((error) => {
+          console.log(error)
+          Swal.fire({
+            text: `게시글 수정을 실패했습니다.`,
+            icon: "error",
+            confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
+          })
+        });
+      } else {
+        Swal.fire({
+          text: `게시글 수정을 실패했습니다.`,
+          icon: "error",
+          confirmButtonText: "확인", 
+          confirmButtonColor: '#ffb300'
+        })
+      }
   };
 
   // 모집중 , 모집완료 상태 변경하기

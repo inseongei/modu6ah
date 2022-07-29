@@ -131,7 +131,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-
   .test{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -147,7 +146,9 @@ const Container = styled.div`
     background: white;
     border-radius: 20px;
     border: none;
-    border: 1px solid #A8A8A8;
+    border: 1px solid white;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.09);
+
   }
   .card-top {
     display: flex;
@@ -163,9 +164,7 @@ const Container = styled.div`
     border: 1px solid #a8a8a8;
     border-radius: 20px;
     color: #FFFFFF;
-    font-family: 'NanumGothic';
     font-style: normal;
-    font-weight: 700;
     font-size: 16px;
     line-height: 18px;
     display: flex;
@@ -180,9 +179,7 @@ const Container = styled.div`
     border: 1px solid #F4B03E;
     border-radius: 20px;
     color: #FFFFFF;
-    font-family: 'NanumGothic';
     font-style: normal;
-    font-weight: 700;
     font-size: 16px;
     line-height: 18px;
     display: flex;
@@ -194,7 +191,6 @@ const Container = styled.div`
     display: flex;
     justify-content: flex-start;
     font-family: 'Nanum Gothic', sans-serif;
-    font-weight: 700;
   }
 
   .icon {
@@ -210,9 +206,7 @@ const Container = styled.div`
     width: 234px;
     height: 23px;
     cursor: pointer;
-    font-family: 'NanumGothic';
     font-style: normal;
-    font-weight: 700;
     font-size: 20px;
     line-height: 23px;
     margin: 0px 25px 25px 25px;
@@ -225,9 +219,7 @@ const Container = styled.div`
   }
   .card-bottom div {
     margin-bottom: 8px;
-    font-family: 'NanumGothic';
     font-style: normal;
-    font-weight: 400;
     font-size: 16px;
     line-height: 18px;
   }
@@ -256,7 +248,6 @@ const Container = styled.div`
   .icon:hover {
     transform: scale(1.13);
   }
-
 `;
 
 export default MainScard;

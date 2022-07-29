@@ -2,18 +2,20 @@
 import React, { useState } from "react";
 import Header from "../../components/main/Header";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import { useDispatch } from "react-redux";
-import { createPostDB } from "../../redux/modules/post";
+// import { useDispatch } from "react-redux";
+// import { createPostDB } from "../../redux/modules/post";
+import axios from "axios";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 import moment from 'moment';
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const RecruitAdd = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState(new Date());
@@ -22,10 +24,9 @@ const RecruitAdd = () => {
   const [age, setAge] = useState("");
   const datemoment = moment(date).format("YYYY-MM-DD")
   const timemoment = moment(time).format("HH:mm")
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const addPost = () => {
+  // const addPost = () => {
     const post_data = {
       title,
       content,
@@ -34,7 +35,38 @@ const RecruitAdd = () => {
       place,
       age,
     };
-    dispatch(createPostDB(post_data));
+  //   dispatch(createPostDB(post_data));
+  // };
+
+ const addPost = () => {
+      axios
+        .post(`https://zhaoxilin.shop/api/recruits`, 
+       post_data
+        , {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          Swal.fire({
+            text: `게시글 작성이 완료되었습니다.`,
+            icon: "success",
+            confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
+          }). then((result) => {
+            if (result.isConfirmed) {
+              navigate("/recruit")
+            };
+            })
+        })
+        .catch((err) => {
+          Swal.fire({
+            text: `게시글 작성을 실패했습니다.`,
+            icon: "error",
+            confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
+          })
+        });
   };
 
   return (
@@ -167,7 +199,7 @@ const RecruitAdd = () => {
 const BackGround = styled.div`
 font-family: "Nanum Gothic";
 background: #F5F5F5;
-padding-bottom: 100px;
+padding-bottom: 60px;
 `;
 
 const Title = styled.div`

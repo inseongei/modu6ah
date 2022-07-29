@@ -15,6 +15,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailPostDB, deletePostDB } from "../../redux/modules/post";
 import { GetMyPageAxios } from "../../redux/modules/Data";
+import Swal from "sweetalert2";
 
 const socket = io.connect("https://zhaoxilin.shop"); // 1 . 소켓 서버 연결
 
@@ -53,9 +54,9 @@ const RecruitDetail = () => {
     dispatch(detailPostDB(recruitPostId));
   }, []);
 
-  const deletePosting = () => {
-    dispatch(deletePostDB(recruitPostId, navigate));
-  };
+  // const deletePosting = () => {
+  //   dispatch(deletePostDB(recruitPostId, navigate));
+  // };
 
   // 1:1 문의하기 버튼 눌렀을 때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
@@ -78,12 +79,49 @@ const RecruitDetail = () => {
       });
   };
 
+  const deletePosting = () => {
+    Swal.fire({
+      title: '게시글을 삭제하시겠습니까 ?',
+      text: "삭제된 게시글은 복구가 불가능합니다",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#ffb300',
+      confirmButtonText: '삭제',
+      cancelButtonText: '취소'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete("https://zhaoxilin.shop/api/recruits/" + recruitPostId,
+            { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
+          .then((response) => {
+            Swal.fire({
+              text: `게시글 삭제가 완료되었습니다!`,
+              icon: "success",
+              confirmButtonText: "확인",
+              confirmButtonColor: '#ffb300'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.replace("/recruit");
+              }
+            });
+
+          })
+          .catch((error) => {
+            alert("게시글을 삭제할 권한이 없습니다.");
+          });
+      }
+    })
+  };
+
   return (
     <>
       <Header />
       <BackGround>
-      <div style={{width:"1100px",
-        margin: "0 auto" }}>
+        <div style={{
+          width: "1100px",
+          margin: "0 auto"
+        }}>
           <Title>
             <div className="subject">체험 모집</div>
             <div className="page">
@@ -92,7 +130,7 @@ const RecruitDetail = () => {
           </Title>
           <Detail>
             <Box>
-              
+
               {/* 카드 왼쪽: 모집 토글, 제목, 날짜, 시간 등*/}
               <div className="container">
                 <div className="card-left">

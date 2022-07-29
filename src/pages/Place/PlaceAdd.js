@@ -11,6 +11,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon';
 import img_delete from '../../images/delete (1).png';
+import Swal from "sweetalert2";
 
 function PlaceAdd() {
   const [title, setTitle] = useState("");
@@ -58,13 +59,27 @@ function PlaceAdd() {
           },
         })
         .then((res) => {
-          navigate("/place");
+          Swal.fire({
+            text: `게시글 작성이 완료되었습니다.`,
+            icon: "success",
+            confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
+          }). then((result) => {
+            if (result.isConfirmed) {
+              navigate("/place")
+            };
+            })
         })
         .catch((err) => {
-          // console.log(err);
+          Swal.fire({
+            text: `게시글 작성을 실패했습니다.`,
+            icon: "error",
+            confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
+          })
         });
     } else {
-      alert("사진은 5개까지만 가능합니다.");
+      alert("사진은 3개까지만 가능합니다.");
     }
   };
 
@@ -365,6 +380,7 @@ border-radius: 10px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
+    
 
     img {
       width: 37px;
@@ -374,7 +390,6 @@ border-radius: 10px;
 
     p {
       font-family: 'Nanum Gothic', sans-serif;
-      font-weight: 700;
     }
   }
 
@@ -402,7 +417,7 @@ border-radius: 10px;
   }
 
   .img_box_size{
-  
+
     img {
       object-fit: cover;
       width: 300px;

@@ -215,7 +215,7 @@ display: flex;
 }
 
 .box{
-  width: 920px;
+  width: 890px;
   display:flex;
   margin-left: 85px;
   margin-top: 5px;
@@ -238,6 +238,7 @@ cursor: pointer;
  img {
     height: 50px;
     border-radius:50%;
+    border: 1px solid #E4E4E4
   }
 }
 
@@ -246,12 +247,17 @@ cursor: pointer;
   justify-content:center;
   align-items:center;
   margin-left:  12px;
-  font-weight: bolder;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
 }
 
 .comment_box {
   margin-top: 10px;
   margin-left: 30px;
+}
+
+.comment {
+  margin-bottom: 5px;
 }
 
 .date {

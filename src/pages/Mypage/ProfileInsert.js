@@ -147,7 +147,6 @@ const Profile = styled.div`
   width: 100%;
   height: 92vh;
   background: #FAFAFA;
-  font-family:"NanumGothic";
 
   .ProfileContainer {
     width: 55%;
@@ -158,18 +157,18 @@ const Profile = styled.div`
     align-items: center;
   }
 
-  .Myprofile3{
+  .Myprofile{
     color: #A8A8A8;
-    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
+    font-family: 'Nanum Gothic', sans-serif;
   }
   .title {
-    font-family: 'NanumGothic';
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 26px;
     line-height: 30px;
     margin-bottom: 20px;
@@ -217,6 +216,7 @@ const Profile = styled.div`
     color: #000000;
     display: inline-block;
     margin-bottom: 10px;
+    font-family: 'Nanum Gothic', sans-serif;
   }
   .inputBigBox {
     border: 1px solid #A8A8A8;
@@ -248,12 +248,11 @@ const Profile = styled.div`
     border: none;
     
     color: #fff;
-    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
-    line-height: 18px;
-
+    line-height: 18px;    
+    font-family: 'Nanum Gothic', sans-serif;
 
   }
   img {
@@ -273,4 +272,3 @@ const Profile = styled.div`
 `;
 
 export default ProfileInsert;
-

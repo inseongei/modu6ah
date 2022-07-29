@@ -34,18 +34,17 @@ function ReviewEdit() {
     e.preventDefault();
     e.persist();
 
-    // let files = e.target.profile_files.files;
+    let files = e.target.profile_files.files;
     let formData = new FormData();
     // // console.log(files)
 
     // // 반복문 돌려서 다중 이미지 처리
-    // let files = e.target.profile_files.files;
-    // for (let i = 0; i < files.length; i++) {
-    //   formData.append("imageUrl", files[i]);
-    // }
+    for (let i = 0; i < files.length; i++) {
+      formData.append("imageUrl", files[i]);
+    }
 
-    // for (const [key, value] of formData.entries()) {
-    // }
+    for (const [key, value] of formData.entries()) {
+    }
     // console.log(files.length);
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
@@ -54,39 +53,72 @@ function ReviewEdit() {
     formData.append("url", region);
     formData.append("productType", location);
 
-    if(title && region && content && location.length > 0) { 
+    if(files.length < 4) { 
         axios
-        .put(`https://zhaoxilin.shop/api/reviews/` + reviewPostId, formData,  {
+        .post(`https://zhaoxilin.shop/api/reviews/`, formData,  {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            "Content-Type": "multipart/form-data"
+          },
+        })
+        .then((res) => {
+          Swal.fire({
+            text: `게시글 수정이 완료되었습니다.`,
+            icon: "success",
+            confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/review')
+            }
+          });
+        })
+        .catch((error) => {
+          // Swal.fire({
+          //   text: `게시글 수정을 실패했습니다.`,
+          //   icon: "error",
+          //   confirmButtonText: "확인", 
+          // })
+        });
+    } else {
+      Swal.fire({
+        text: `수정할 내용을 작성해주세요.`,
+        icon: "warning",
+        confirmButtonText: "확인", 
+        confirmButtonColor: '#ffb300'
+      })
+    }
+  };
+
+  const editPost = () => {
+    if(title && region && content && location.length > 0) {
+      axios
+        .put(`https://zhaoxilin.shop/api/reviews/` + reviewPostId, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
         })
         .then((res) => {
           Swal.fire({
-            text: `게시글 수정 완료!`,
+            text: `게시글 수정이 완료되었습니다.`,
             icon: "success",
             confirmButtonText: "확인", 
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate('/reviewdetail/' + reviewPostId )
-            }
-          });
-          
-        })
-        .catch((error) => {
-          Swal.fire({
-            text: `게시글 수정 실패!`,
-            icon: "error",
-            confirmButtonText: "확인", 
-          })
+            confirmButtonColor: '#ffb300'
+          }). then((result) => {
+            alert(result.data.message);
+            window.location.href = "/review";
+            })
+        }).catch((error) => {
+        //   console.log(error);
         });
-    } else {
-      Swal.fire({
-        text: `수정할 내용을 적어주세요`,
-        icon: "warning",
-        confirmButtonText: "확인", 
-      })
-    }
+       }else{
+        Swal.fire({
+          text: `수정할 내용을 작성해 주세요.`,
+          icon: "error",
+          confirmButtonText: "확인", 
+          confirmButtonColor: '#ffb300'
+        })
+       }
   };
 
   // 이미지 미리보기
@@ -228,7 +260,7 @@ function ReviewEdit() {
                 </button>
                 <button className="btn" 
                 type="submit"
-                onClick={onSubmit}
+                onClick={editPost}
                 >
                   수정하기
                 </button>

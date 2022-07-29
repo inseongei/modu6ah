@@ -31,7 +31,7 @@ const ProfileManager = () => {
         <div className="ProfileContainer">
           <div className="TitleMain">
            <span className="Myprofile"> 마이 프로필</span>
-           <span className="title">프로필관리</span> 
+           <span className="title">프로필 관리</span> 
           </div>
           <div className="ProfileInfo">
             <div className="ProfileImg">
@@ -91,16 +91,16 @@ const Profile = styled.div`
 
   .Myprofile{
     color: #A8A8A8;
-    font-family: 'NanumGothic';
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
   }
   .title {
-    font-family: 'NanumGothic';
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 26px;
     line-height: 30px;
     margin-bottom: 20px;
@@ -148,6 +148,7 @@ const Profile = styled.div`
     color: #000000;
     display: inline-block;
     margin-bottom: 10px;
+    font-family: 'Nanum Gothic', sans-serif;
   }
   .inputBigBox {
     border: 1px solid #A8A8A8;
@@ -172,11 +173,11 @@ const Profile = styled.div`
     height: 40px;
     border: none;
     color: #fff;
-    font-family: 'NanumGothic';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
+    font-family: 'Nanum Gothic', sans-serif;
   }
   img {
     width: 150px;

@@ -68,7 +68,6 @@ const FooterContainer = styled.footer`
   transform: translateY(0%);
 
   font-family: 'NanumGothic';
-  margin-top: 100px;
 
   .one_container {
     height: 80%;

@@ -1,19 +1,11 @@
 //장소 추천 작성 페이지
 import React, { useState } from "react";
-
-//style
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
-
-//elements & components
-import { FaStar } from "react-icons/fa";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
-import Modal from "../../modal/Map/Modal";
 import plus from "../../images/plus.png";
-import { BsFillPlusCircleFill } from "react-icons/bs";
 import Swal from "sweetalert2";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon';
@@ -59,7 +51,7 @@ function ReviewAdd() {
         })
         .then((res) => {
           Swal.fire({
-            text: `게시글 작성 완료!`,
+            text: `게시글 작성이 완료되었습니다.`,
             icon: "success",
             confirmButtonText: "확인", 
           }).then((result) => {
@@ -71,13 +63,17 @@ function ReviewAdd() {
         })
         .catch((err) => {
           Swal.fire({
-            text: `게시글 작성 실패!`,
+            text: `게시글을 작성해 주세요.`,
             icon: "error",
             confirmButtonText: "확인", 
           })
         });
     } else {
-      alert("사진은 3개까지만 가능합니다.");
+      Swal.fire({
+        text: `사진은 3장 이하만 가능합니다.`,
+        icon: "error",
+        confirmButtonText: "확인", 
+      })
     }
   };
 
@@ -98,41 +94,6 @@ function ReviewAdd() {
   // 이미지 미리보기에서 삭제
   const handleDeleteImage = (id) => {
     setImageSrc(imageSrc.filter((_, index) => index !== id));
-  };
-
-  //위치 모달
-  const RegionsData = (data) => {
-    // console.log(data);
-    setRegion(data);
-  };
-
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-  // 별점
-  const stars = Array(5).fill(0);
-
-  const colors = {
-    yellow: "#FFBA5A",
-    grey: "#a9a9a9",
-  };
-
-  const handleClick = (value) => {
-    setCurrentValue(value);
-  };
-
-  const handleMouseOver = (newHoverValue) => {
-    setHoverValue(newHoverValue);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(undefined);
   };
 
   return (
