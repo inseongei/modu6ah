@@ -107,10 +107,10 @@ const navigate = useNavigate()
               {/* 카드 오른쪽 위 */}
               <div className="box_top">
                 <div className="title">
-                  <>
+                  <div className='title_box'>
                   <span>{detail.title}</span>
                   <p>{detail.productType}</p>
-                  </>
+                  </div>
                   {nickname === detail.nickname ? (
                 <Btn>
                   <button className="btn"
@@ -185,7 +185,7 @@ const Title = styled.div`
 `;
 
 const Box = styled.div`
-width: 1000px;
+width: 1040px;
 height: 600px;
 
 background: white;
@@ -204,7 +204,7 @@ border-radius: 10px;
   }
 
   .imgBox {
-    width: 440px;
+    width: 400px;
     display: flex;
     flex-direction: column;
   }
@@ -247,7 +247,8 @@ const Container = styled.div`
   background-color: #F5F5F5;
 
   .Box {
-    padding: 50px 50px 30px 50px;
+    padding-top: 50px;
+    padding-right: 80px;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -261,8 +262,8 @@ const Container = styled.div`
 `;
 
 const ContentBox = styled.div`
-  width: 500px;
-  margin-left: 30px;
+  width: 380px;
+  margin-left: 50px;
 
   .title {
     display: flex;
@@ -274,6 +275,7 @@ const ContentBox = styled.div`
       font-family: 'Nanum Gothic', sans-serif;
       font-weight: 700;
       font-size: 26px;
+   
     }
 
     p {

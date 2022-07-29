@@ -29,7 +29,7 @@ const PlaceDetail = () => {
   }, []);
 
   const deletePlace = (e) => {
-     Swal.fire({
+    Swal.fire({
       title: '게시글을 삭제하시겠습니까 ?',
       text: "삭제된 게시글은 복구가 불가능합니다",
       icon: 'warning',
@@ -51,7 +51,7 @@ const PlaceDetail = () => {
               confirmButtonColor: '#ffb300'
             }).then((result) => {
               if (result.isConfirmed) {
-                 window.location.replace("/place");
+                window.location.replace("/place");
               }
             });
 
@@ -104,19 +104,20 @@ const PlaceDetail = () => {
                 {/* 카드 오른쪽 위 */}
                 <div className="box_top">
                   <div className="title">
-                    <>
-                      <h2>{detail.title}</h2>
-                      <span>
+                    <span>
+                    <h2>{detail.title}</h2>
+                      <div className="star_icon">
                         <FaStar
                           size={28}
                           style={{
                             color: "#FFBA5A",
                             marginLeft: "5px",
                           }}
+                          className="yellow_star"
                         />
-                      </span>
-                      <p>{detail.star}점</p>
-                    </>
+                        <p>{detail.star}점</p></div>
+                    </span>
+
                     {nickname === detail.nickname ? (
                       <Btn>
                         <button className="btn"
@@ -284,9 +285,10 @@ const ContentBox = styled.div`
     line-height: 36px;
 
     h2 {
-      margin-top: 2px;
+    margin-top: 2px;
      font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
+    width: 400px;
     }
 
     span {
@@ -294,12 +296,19 @@ const ContentBox = styled.div`
       margin-top: 2px;
     }
 
+    .star_icon {
+      display: flex;
+    }
+
+    .yellow_star {
+      margin-top: 3px;
+    }
+
     p {
       color: #A8A8A8;
-      margin-left: 9px;
-      margin-top: 5px;
+      margin-left: 8px;
       font-family: 'Nanum Gothic', sans-serif;
-    font-weight: 700;
+      display: flex;
     }
   }
 
@@ -322,7 +331,7 @@ const ContentBox = styled.div`
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 4px 0px;
 
     img {
       width: 25px;
@@ -336,7 +345,7 @@ const ContentBox = styled.div`
     align-items: center;
 
     p {
-      margin-top: 18px;
+      margin-top: 25px;
       margin-left: 10px;
     }
   }
@@ -345,6 +354,10 @@ const ContentBox = styled.div`
     width: 70px;
     height: 70px;
     border-radius: 50%;
+  }
+
+  .ProfileImg {
+    border: 1px solid #E4E4E4;
   }
 
   .nickname {
