@@ -11,6 +11,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon';
 import img_delete from '../../images/delete (1).png';
+import Swal from "sweetalert2";
 
 function PlaceAdd() {
   const [title, setTitle] = useState("");
@@ -58,13 +59,23 @@ function PlaceAdd() {
           },
         })
         .then((res) => {
-          navigate("/place");
+          Swal.fire({
+            text: `게시글 작성이 완료되었습니다.`,
+            icon: "success",
+            confirmButtonText: "확인", 
+          }). then((result) => {
+             navigate("/place");
+            })
         })
         .catch((err) => {
-          // console.log(err);
+          Swal.fire({
+            text: `게시글 작성에 실패했습니다.`,
+            icon: "error",
+            confirmButtonText: "확인", 
+          })
         });
     } else {
-      alert("사진은 5개까지만 가능합니다.");
+      alert("사진은 3개까지만 가능합니다.");
     }
   };
 
