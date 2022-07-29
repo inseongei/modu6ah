@@ -26,61 +26,77 @@ function PlaceEdit() {
   const [detail, setDetail] = useState("");
   const { placePostId } = useParams();
 
-  // axios.Post 버튼
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    e.persist();
+  // // axios.Post 버튼
+  // const onSubmit = async (e) => {
+    // e.preventDefault();
+    // e.persist();
 
-    let files = e.target.profile_files.files;
-    let formData = new FormData();
+    // let files = e.target.profile_files.files;
+    // let formData = new FormData();
     // console.log(files)
 
     // 반복문 돌려서 다중 이미지 처리
-    for (let i = 0; i < files.length; i++) {
-      formData.append("imageUrl", files[i]);
-    }
+    // for (let i = 0; i < files.length; i++) {
+    //   formData.append("imageUrl", files[i]);
+    // }
 
-    for (const [key, value] of formData.entries()) {
-    }
+    // for (const [key, value] of formData.entries()) {
+    // }
     // console.log(files.length);
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("region", region);
-    formData.append("location", location);
-    formData.append("star", rating);
+    // formData.append("title", title);
+    // formData.append("content", content);
+    // formData.append("region", region);
+    // formData.append("location", location);
+    // formData.append("star", rating);
 
-    if (files.length < 4) {
-      await axios
-        .post("https://zhaoxilin.shop/api/places", formData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          Swal.fire({
-            text: `게시글 수정이 완료되었습니다.`,
-            icon: "success",
-            confirmButtonText: "확인", 
-            confirmButtonColor: '#ffb300'
-          }). then((result) => {
-             navigate("/place");
-            })
-        })
-        .catch((err) => {
-        //   console.log(err);
-        });
-    } else {
-      alert("사진은 3개까지만 가능합니다.");
-    }
-  };
+
+  //     await axios
+  //       .post("https://zhaoxilin.shop/api/places",  {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       })
+  //       .then((res) => {
+  //         Swal.fire({
+  //           text: `게시글 수정이 완료되었습니다.`,
+  //           icon: "success",
+  //           confirmButtonText: "확인", 
+  //           confirmButtonColor: '#ffb300'
+  //         }). then((result) => {
+  //            navigate("/place");
+  //           })
+  //       })
+  //       .catch((err) => {
+  //       //   console.log(err);
+  //       });
+  // };
+
+  React.useEffect(() => {
+    axios
+      .get("https://zhaoxilin.shop/api/places/" + placePostId)
+      .then((res) => {
+        setDetail(res.data.placeDetails);
+      });
+  }, []);
+
+  // console.log(detail)
+
+  const newPost = {
+    title: title.length === 0 ? detail.title : title,
+    content: content.length === 0 ? detail.content: content,
+    region: region.length === 0 ? detail.region: region,
+    location: location.length === 0 ? detail.location: location,
+    star: currentValue === 0 ? detail.star : currentValue
+  }
+
+// console.log(currentValue)
 
   const editPost = () => {
-    if(title && region && content && location.length > 0) {
       axios
-        .put(`https://zhaoxilin.shop/api/places/` + placePostId, {
+        .put(`https://zhaoxilin.shop/api/places/` + placePostId, newPost, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
@@ -92,20 +108,19 @@ function PlaceEdit() {
             confirmButtonText: "확인", 
             confirmButtonColor: '#ffb300'
           }). then((result) => {
-            alert(result.data.message);
-            window.location.href = "/place";
+            if (result.isConfirmed) {
+              navigate("/place")
+            };
             })
         }).catch((error) => {
-        //   console.log(error);
+          // console.log(error)
+          Swal.fire({
+            text: `게시글 수정에 실패했습니다.`,
+            icon: "error",
+            confirmButtonText: "확인", 
+            confirmButtonColor: '#ffb300'
+          })
         });
-       }else{
-        Swal.fire({
-          text: `수정할 내용을 작성해 주세요.`,
-          icon: "error",
-          confirmButtonText: "확인", 
-          confirmButtonColor: '#ffb300'
-        })
-       }
   };
 
   // 이미지 미리보기
@@ -123,9 +138,9 @@ function PlaceEdit() {
   };
 
   // 이미지 미리보기에서 삭제
-  const handleDeleteImage = (id) => {
-    setImageSrc(imageSrc.filter((_, index) => index !== id));
-  };
+  // const handleDeleteImage = (id) => {
+  //   setImageSrc(imageSrc.filter((_, index) => index !== id));
+  // };
 
   //위치 모달
   const RegionsData = (data) => {
@@ -162,13 +177,9 @@ function PlaceEdit() {
     setHoverValue(undefined);
   };
 
-  React.useEffect(() => {
-    axios
-      .get("https://zhaoxilin.shop/api/places/" + placePostId)
-      .then((res) => {
-        setDetail(res.data.placeDetails);
-      });
-  }, []);
+  if(!detail) {
+    return <div></div>
+  };
  
   return (
     <>
@@ -185,7 +196,7 @@ function PlaceEdit() {
         <Place>
           {/* 카드 위쪽: 이미지 */}
           <div className="place">
-            <form onSubmit={(e) => onSubmit(e)}>
+            {/* <form onSubmit={(e) => onSubmit(e)}> */}
               <input
                 id="input-file"
                 type="file"
@@ -198,9 +209,9 @@ function PlaceEdit() {
               <div className="imageBox">
                 <div className="plus_btn">
                   <label htmlFor="input-file">
-                    <img src={plus} />
+                    {/* <img src={plus} /> */}
                   </label>
-                  <p style={{
+                  {/* <p style={{
                     color: "#3C3C3C"
                   }}>
                     사진 업로드
@@ -210,21 +221,20 @@ function PlaceEdit() {
                     marginTop: "-13px",
                   }}>
                     &nbsp;(최대 3장)
-                  </p>
-
+                  </p> */}
                 </div>
                 
                   {/* 이미지 미리보기 */}
-                  {imageSrc.map((image, id) => (
+                  {detail.imageUrl.map((image, id) => (
                     <div className="img_box_size" key={id}>
                       <img src={image} alt={`${image}-${id}`} />
                       <div className="img_btn">
-                        <button
+                        {/* <button
                           onClick={() =>
                             handleDeleteImage(id)}>
                           이미지 삭제
                           <img src={img_delete} />
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   ))}
@@ -296,7 +306,7 @@ function PlaceEdit() {
                             onMouseOver={() => handleMouseOver(index + 1)}
                             onMouseLeave={handleMouseLeave}
                             color={
-                              (hoverValue || currentValue) > index
+                              ( currentValue || detail.star) > index
                                 ? colors.yellow
                                 : colors.grey
                             }
@@ -310,7 +320,8 @@ function PlaceEdit() {
                       );
                     })}
                     <p onChange={(e) => setRating(e.target.value)}>
-                      {rating}점
+                     {rating ? 
+                     currentValue : detail.star}점
                     </p>
                   </div>
                 </div>
@@ -333,14 +344,14 @@ function PlaceEdit() {
                   취소{" "}
                 </button>
                 <button className="btn" 
-                type="submit"
+                // type="submit"
                 onClick={editPost}
                 >
                   수정하기
                 </button>
               </Btn>
 
-            </form>
+            {/* </form> */}
           </div>
         </Place>
         </div>
