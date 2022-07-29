@@ -4,18 +4,20 @@ import character from '../../images/character.png';
 
 const SubHeader = () => {
 
-
     return (
+        <a href="https://forms.gle/gxhG6sLV6PQhJP1AA" target="_blank" rel="noreferrer" className="atags">
         <Headers>
-            <div className="header">
-            <img src={character} />
+            <div className="header">  
+            <img src={character} alt="사진"/> 
             <div className="text">
                 <span className="front">모두의 육아를 위해,</span>
                 <span className="back"> 설문조사 참여하고 기프티콘 받아가세요! (~8/3 월)</span>
             </div>
-            <img src={character} />
+            <img src={character} alt="사진"/>
             </div>
         </Headers>
+        </a>
+        
     );
 };
 
@@ -27,6 +29,10 @@ const Headers = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  a{
+    text-decoration: none;
+  }
  
   .header {
       display: flex;
@@ -36,7 +42,7 @@ const Headers = styled.div`
     margin: 8px 10px 0px 10px;
 
     span {
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'NanumGothic', sans-serif;
     font-weight: 700;
     }
 
@@ -51,7 +57,7 @@ const Headers = styled.div`
   }
 
   img {
-      widht: 33px;
+      width: 33px;
       height: 33px;
   }
   `;

@@ -24,14 +24,13 @@ const Main = () => {
           <div className="card_title">
             <Title>
               체험 모집
-              <img src={Baby} alt="사진" className="imgani"/>
             </Title>
             
           </div>
           <div className="subtitle">
             <div className="subcontent">
               <SubTitle>
-                다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!{" "}
+                다양한 공동육아 프로그램을 둘러보고, 참여를 신청해요!
               </SubTitle>
               <a href="/recruit">
                 <Btn>
@@ -129,39 +128,10 @@ const Title = styled.p`
   margin-bottom: 0px;
 
   img{
-    width:150px;
-    height:150px;
-    transform: scaleX(-1);
-    animation-name: jaehee;
-    animation-duration:2s;
-    animation-duration: leaner;
-    animation-iteration-count:3;
-    animation-direction:alternate;
-    animation-fill-mode: forwards;
+    width:70px;
+    height:55px;
+
   }
-
-  @-webkit-keyframes jaehee {
-  0% {
-    left:100px;
-  }
-  100% {
-    left:300px;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 `;
 
