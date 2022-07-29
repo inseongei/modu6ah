@@ -118,7 +118,7 @@ const ProfileInsert = () => {
               <label htmlFor="input-file">
                   <BsFillPlusCircleFill 
                   style={{cursor:"pointer",
-                  marginLeft:"60px", marginTop:"20px"}} />
+                  marginLeft:"67px", marginTop:"20px"}} />
                 </label>
             </div>
             <div>
