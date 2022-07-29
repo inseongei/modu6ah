@@ -2,12 +2,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import location from '../../images/location.png'
 import time from '../../images/time.png'
 import age from '../../images/age.png'
 import calendar from '../../images/calendar.png'
 import axios from "axios";
+import { GrLocation } from "react-icons/gr";
+import { BiTimeFive } from "react-icons/bi";
+import { AiOutlineCalendar } from "react-icons/ai";
+import { TbMoodKid } from "react-icons/tb";
 
 function SearchScard({Morerecruit,keyword}) {
   const navigate = useNavigate();
@@ -68,10 +71,18 @@ function SearchScard({Morerecruit,keyword}) {
                     navigate("/recruitdetail/" + item.recruitPostId);
                   }}
                 >
-                  <div><img src={location} alt="사진"/>{item.place.length > 14 ? item.place.slice(0,13) + '...' : item.place}</div>
-                  <div><img src={time} alt="사진"/>{item.time}</div>
-                  <div><img src={calendar} alt="사진"/>{item.date}</div>
-                  <div><img src={age} alt="사진"/>{item.age.length > 14 ? item.age.slice(0,13) + '...' : item.age}</div>
+                   <div>          
+                  <GrLocation style={{marginRight:"8px"}}/>
+                  {item.place.length > 14 ? item.place.slice(0,13) + '...' : item.place}</div>
+                  <div>
+                  <BiTimeFive style={{marginRight:"8px"}}/>
+                  {item != null && item.time}</div>
+                  <div>
+                    <AiOutlineCalendar style={{marginRight:"8px"}}/>
+                  {item != null && item.date}</div>
+                  <div>
+                    <TbMoodKid style={{marginRight:"8px"}}/>
+                    {item.age.length > 14 ? item.age.slice(0,13) + '...' : item.age}</div>
                 </div>
               </div>
             );
