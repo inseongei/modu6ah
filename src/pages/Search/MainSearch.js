@@ -134,7 +134,7 @@ const MainSearch = () => {
 const Search = styled.div`
   width: 100%;
   background-color: #f5f5f5;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 
   .title {
     width: 1014px;
