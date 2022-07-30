@@ -225,7 +225,8 @@ align-items: center;
   line-height: 18px;
   display: flex;
   justify-content:center;
-  align-items: center;
+  align-items: center;  
+  font-weight: 700;
 }
 
 .card-top span {
@@ -235,7 +236,6 @@ align-items: center;
   border: 1px solid #F4B03E;
   border-radius: 20px;
   color: #FFFFFF;
-  font-style: normal;
   font-size: 16px;
   line-height: 18px;
   display: flex;
