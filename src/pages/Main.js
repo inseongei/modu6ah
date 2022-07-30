@@ -86,29 +86,24 @@ const Container = styled.div`
   font-family: "Nanum Gothic";
   padding-left: 50px;
   padding-right: 50px;
-
   .card_title {
     widht: 10px;
     width: 960px;
   }
-
   .subtitle {
     display: flex;
     margin-left: 171px;
   }
-
   .subcontent {
     display: flex;
     width: 970px;
     justify-content: space-between;
   }
-
   hr {
     color: #A8A8A8;
     height: 2.5px;
     margin-top: 100px;
   }
-
 .hrz {
     color: #A8A8A8;
     height: 2.5px;
@@ -126,13 +121,10 @@ const Title = styled.p`
   height: 137px;
   margin-left: 170px;
   margin-bottom: 0px;
-
   img{
     width:70px;
     height:55px;
-
   }
-
 `;
 
 
