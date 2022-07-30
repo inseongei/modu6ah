@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import Header from "../../components/main/Header";
+import Footer from "../../components/main/Footer";
 import Grid from "../../components/elements/Grid";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +39,7 @@ function LogIn() {
         Swal.fire({
           text: `로그인이 완료되었습니다!`,
           icon: "success",
-          confirmButtonText: "확인", 
+          confirmButtonText: "확인",
           confirmButtonColor: '#ffb300'
         }).then((result) => {
           if (result.isConfirmed) {
@@ -137,13 +138,13 @@ function LogIn() {
               </Container>
             </Box>
           </Grid>
-        </Grid>
+        </Grid>  
       </BackGround>
+     <Footer />    
     </>
   );
 }
 
-// &nbsp; 공백없는 줄바꿈
 const Container = styled.div`
   font-family: "Nanum Gothic"; 
   width: 100%;
@@ -174,6 +175,7 @@ const Container = styled.div`
 
 const BackGround = styled.div`
 background: #FAFAFA;
+padding-bottom: 100px;
 `;
 
 const Box = styled.div`

@@ -6,6 +6,7 @@ import axios from "axios";
 import Header from "../../components/main/Header";
 import { useForm } from 'react-hook-form'
 import EmailAlert from "../../components/alert/EmailAlert";
+import Footer from "../../components/main/Footer";
 
 const SignUp = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -360,6 +361,7 @@ const SignUp = () => {
           </Grid>
         </Grid>
       </BackGround>
+      <Footer/>
     </>
   );
 };
@@ -367,12 +369,14 @@ const SignUp = () => {
 
 const BackGround = styled.div`
 background: #FAFAFA;
+padding-bottom: 100px;
 `;
 
 const Container = styled.div`
 font-family: "Nanum Gothic";
 width: 620px;
 height: 800px;
+padding-bottom: 30px;
 
 background: white;
 

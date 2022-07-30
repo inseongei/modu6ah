@@ -426,8 +426,9 @@ const Detail = styled.div`
     align-items: center;
     margin-top: 15px;
     margin-left: 20px;
+    padding-right: 10px;
+    width: 90px;
     font-size: 20px;
-    width: 140px;
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
   }
