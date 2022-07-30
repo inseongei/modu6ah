@@ -221,7 +221,7 @@ const Title = styled.div`
 
 const Place = styled.div`
 width: 1170px;
-height: 750px;
+height: 730px;
 background: white;
 margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
 margin-top: 27px;
@@ -232,7 +232,7 @@ border: 1px solid #E4E4E4;
 border-radius: 10px;
   
   .place {
-    width: 100%;
+    width: 1135px;
   }
   .title {
     font-family: "Inter";
@@ -248,11 +248,14 @@ border-radius: 10px;
     min-height: 210px;
     max-height: auto;
     height: 280px;
-    margin-top: 40px;
+    margin-top: 30px;
+    margin-left: 30px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
+    background: #FAFAFA;
+
     img {
       width: 37px;
       height: 37px;
@@ -325,7 +328,7 @@ border-radius: 10px;
   }
   .mainBox {
     display: flex;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-left: 60px;
   }
   .card-left {
@@ -459,4 +462,4 @@ margin-left: 790px;
 }
 `;
 
-export default ReviewEdit;
+export default ReviewEdit
