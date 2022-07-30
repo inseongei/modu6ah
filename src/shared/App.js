@@ -33,9 +33,6 @@ import MyBookmark from '../pages/Mypage/MyBookmark'
 
 //검색 페이지
 import MainSearch from "../pages/Search/MainSearch";
-import RecruitSearch from "../pages/Search/RecruitSearch";
-import PlaceSearch from "../pages/Search/PlaceSearch";
-import ReviewSearch from "../pages/Search/ReviewSearch";
 
 import Cancel from '../components/alert/Cancel';
 import ConfirmAlert from "../components/alert/ConfirmAlert";
@@ -79,9 +76,6 @@ function App() {
 
         {/* 검색 페이지 */}
         <Route path="/api/search" element={<MainSearch/>} />
-        <Route path="/search/recruit" element={<RecruitSearch/>} />
-        <Route path="/search/place" element={<PlaceSearch/>} />
-        <Route path="/search/review" element={<ReviewSearch/>} />
 
         <Route path="/alert" element={<Alert />} />
 

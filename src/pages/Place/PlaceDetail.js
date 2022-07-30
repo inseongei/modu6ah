@@ -13,9 +13,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 import { GrLocation } from "react-icons/gr";
+import { useSelector, useDispatch } from "react-redux";
+import { GetMyPageAxios } from "../../redux/modules/Data";
 
 const PlaceDetail = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const nickname = localStorage.getItem("nickname");
   const [detail, setDetail] = useState("");
   const { placePostId } = useParams();
@@ -153,10 +156,19 @@ const PlaceDetail = () => {
                   <div className="info">
                     <Image>
                       <div className="ProfileImg">
-                        <img src={detail.profileUrl} alt="사진" />
+                        <img src={detail.profileUrl} alt="사진" 
+                         onClick={() => {
+                          navigate("/manager/" + detail.nickname);
+                          dispatch(GetMyPageAxios(detail.nickname));
+                        }}/>
                       </div>
                     </Image>
-                    <p className="nickname">{detail.nickname}</p>
+                    <p className="nickname"
+                    onClick={() => {
+                      navigate("/manager/" + detail.nickname);
+                      dispatch(GetMyPageAxios(detail.nickname));
+                    }}
+                    >{detail.nickname}</p>
                   </div>
                 </div>
                 {/* 카드 내용 */}
@@ -370,6 +382,7 @@ const ContentBox = styled.div`
     font-size: 20px;
     line-height: 29px;
     margin-left: 30px;
+    cursor: pointer;
   }
 
   .box {

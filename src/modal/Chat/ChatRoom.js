@@ -54,7 +54,6 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
     socket.emit("back", realroom);
     onClose();
     setNowChat([]);
-    refetch()
   };
 
   const refetch = () =>{
