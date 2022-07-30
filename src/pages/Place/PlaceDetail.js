@@ -215,7 +215,6 @@ const Title = styled.div`
 
 const Box = styled.div`
 width: 1100px;
-height: 1080px;
 
 background: white;
 
@@ -269,6 +268,7 @@ border-radius: 10px;
     width: 100%;
     height: 100%;
     border-radius: 15px;
+    cursor: pointer;
   }
 `;
 
@@ -287,6 +287,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 50px;
   }
 `;
 
@@ -302,13 +303,10 @@ const ContentBox = styled.div`
 
     h2 {
     margin-top: 2px;
-     font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
-    width: 400px;
-    }
-
-    span {
-      margin-top: 2px;
+    width: 300px;
+    padding-bottom: 10px;
     }
 
     .star_icon {
