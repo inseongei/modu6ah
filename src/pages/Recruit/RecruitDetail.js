@@ -135,7 +135,7 @@ const RecruitDetail = () => {
               <div className="container">
                 <div className="card-left">
                   <div className="toggle">
-                    <p> {!on ? "모집중" : "모집완료"} </p>
+                    <p> {state.status ?  "모집완료": "모집중"} </p>
                   </div>
                   <div>
                     <strong> 제목 </strong>
