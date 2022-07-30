@@ -166,6 +166,7 @@ align-items: center;
   display: flex;
   justify-content:center;
   align-items: center;
+  font-weight: 700;
 }
 
 .card-top span {
@@ -181,6 +182,7 @@ align-items: center;
   display: flex;
   justify-content:center;
   align-items: center;
+  font-weight: 700;
 }
 
 .spantitle{
