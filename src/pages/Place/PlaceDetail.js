@@ -22,6 +22,7 @@ const PlaceDetail = () => {
   const nickname = localStorage.getItem("nickname");
   const [detail, setDetail] = useState("");
   const { placePostId } = useParams();
+  const [num,setnum] = React.useState(0)
 
   React.useEffect(() => {
     axios
@@ -91,18 +92,21 @@ const PlaceDetail = () => {
           <Box>
             <div className="Box">
               <div className="imgBox">
-                <div className="Bigimg">
-                  <img src={detail.imageUrl[0]} alt="사진" />
-                </div>
-                <div className="imgSmall">
-                  {detail.imageUrl.map((item, idx) => {
-                    return (
-                      <div key={idx}>
-                        <img src={item} alt="사진" />
-                      </div>
-                    );
-                  })}
-                </div>
+              <div className="Bigimg">
+                <img src={detail.imageUrl[num]} alt="사진" />
+              </div>
+              <div className="imgSmall">
+                {detail.imageUrl.map((item, idx) => {
+                  return (
+                    <div key={idx}>
+                      <img src={item} alt="사진" 
+                      onClick={()=>{
+                        setnum(idx)
+                      }} />
+                    </div>
+                  );
+                })}
+              </div>
               </div>
               <ContentBox>
                 {/* 카드 오른쪽 위 */}
@@ -131,12 +135,12 @@ const PlaceDetail = () => {
                               detail.placePostId);
                           }}
                         >
-                          <img src={revise} />
+                          <img src={revise} alt="사진"/>
                         </button>
                         <button className="btn"
                           onClick={deletePlace}
                         >
-                          <img src={img_delete} />
+                          <img src={img_delete} alt="사진"/>
                         </button>
                       </Btn>
                     ) : (
