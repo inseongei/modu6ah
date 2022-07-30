@@ -172,7 +172,7 @@ function ReviewEdit() {
                 <button
                   className="btn"
                   onClick={() => {
-                    navigate(`/`);
+                    navigate(`/review`);
                   }}
                 >
                   취소
