@@ -118,6 +118,7 @@ const SubTitle = styled.p`
 const Btn = styled.button`
   height: 50px;
   font-size: 15px;
+  font-weight: 700;
   width: 330px;
   color: #ffffff;
   background-color: #3c3c3c;
