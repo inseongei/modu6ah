@@ -16,6 +16,8 @@ import ChatIcon from '../../components/main/ChatIcon'
 import revise from '../../images/revise.png';
 import img_delete from '../../images/delete (1).png'
 import location from '../../images/location.png';
+import { useSelector, useDispatch } from "react-redux";
+import { GetMyPageAxios } from "../../redux/modules/Data";
 
 const ReviewDetail = () => {
 const nickname = localStorage.getItem("nickname");
@@ -23,6 +25,7 @@ const Profile = localStorage.getItem("profileUrl");
 const {reviewPostId} = useParams();
 const [detail, setDetail] = React.useState()
 const navigate = useNavigate()
+const dispatch = useDispatch();
  
   React.useEffect(() => {
     axios
@@ -142,10 +145,22 @@ const navigate = useNavigate()
                 <div className="info">
                   <Image>
                     <div className="ProfileImg">
-                      <img src={detail.profileUrl} />
+                      <img src={detail.profileUrl} alt="사진"
+                      onClick={() => {
+                        navigate("/manager/" + detail.nickname);
+                        dispatch(GetMyPageAxios(detail.nickname));
+                      }}
+
+                      />
                     </div>
                   </Image>
-                  <p className="nickname">{detail.nickname}</p>
+                  <p className="nickname"
+                  onClick={() => {
+                    navigate("/manager/" + detail.nickname);
+                    dispatch(GetMyPageAxios(detail.nickname));
+                  }}
+                  
+                  >{detail.nickname}</p>
                 </div>
               </div>
               {/* 카드 내용 */}
@@ -339,6 +354,7 @@ const ContentBox = styled.div`
     font-size: 20px;
     line-height: 29px;
     margin-left: 30px;
+    cursor: pointer;
   }
 
   .box {
