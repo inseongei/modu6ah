@@ -4,14 +4,16 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import img_delete from '../../images/deletecomment.png';
+import Swal from 'sweetalert2'
 
 const RecruitComment = () => {
   const [comment, setComment] = useState('');
   const [state, setState] = useState('');
   const nickname = localStorage.getItem("nickname");
-
+  const token = localStorage.getItem('accessToken')
   const navigate = useNavigate();
   const { recruitPostId } = useParams();
+  
 
   //댓글 작성
   const addComment = () => {
@@ -26,8 +28,20 @@ const RecruitComment = () => {
        refetch()
       })
       .catch((err) => {
-        window.alert("로그인 후 사용해 주세요");
-        // console.log(err.response.data.message);
+        token ? 
+        Swal.fire({
+          text: '댓글을 입력해주세요',
+          icon: 'error',
+          confirmButtonText: "확인", 
+          confirmButtonColor: '#ffb300'
+        })
+        :
+        Swal.fire({
+          text: "로그인 후 사용해 주세요",  
+          icon: 'error',
+          confirmButtonText: "확인", 
+          confirmButtonColor: '#ffb300'
+        }) 
       })
   }
 

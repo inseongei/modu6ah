@@ -97,7 +97,7 @@ function MainRcard() {
                         marginBottom: "3px",
                         marginRight: "3px"
                       }} />
-                    {data.url.length > 6 ? data.url.slice(0, 5) : data.url}</div>
+                    {data.url.length > 20 ? data.url.slice(0,25) : data.url}</div>
 
                   <div className="RcardImg" onClick={() => {
                     navigate("/reviewdetail/" + data.reviewPostId);
@@ -116,7 +116,7 @@ function MainRcard() {
 
                   <div className="content" onClick={() => {
                     navigate("/reviewdetail/" + data.reviewPostId);
-                  }}>{data.content.length > 6 ? data.content.slice(0, 5) : data.content}</div>
+                  }}>{data.content.length > 20 ? data.content.slice(0,100) : data.content}</div>
 
                 </div>
               );

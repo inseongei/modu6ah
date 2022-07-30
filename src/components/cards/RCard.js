@@ -101,7 +101,7 @@ function RCard() {
                 
                 <div className="FirstBox">
                   <span className="FTitle">{data.title.length > 13 ? data.title.slice(0,8) + '..' : data.title}</span>
-                  <span className="FType">{data.productType.length > 6 ? data.productType.slice(0,6) + '..'  : data.productType}</span>
+                  <span className="FType">{data.productType.length > 6 ? data.productType.slice(0,5) + '..'  : data.productType}</span>
                 </div>
 
                 <div>
@@ -162,7 +162,7 @@ function RCard() {
                       marginBottom: "3px",
                       marginRight: "3px"
                     }} />
-              {data.url.length > 6 ? data.url.slice(0,5) : data.url}</div>
+              {data.url.length > 20 ? data.url.slice(0,20) : data.url}</div>
 
                 <div className="RcardImg" onClick={() => {
                 navigate("/reviewdetail/" + data.reviewPostId);
@@ -181,7 +181,7 @@ function RCard() {
 
                 <div className="content" onClick={() => {
                 navigate("/reviewdetail/" + data.reviewPostId);
-              }}>{data.content.length > 6 ? data.content.slice(0,5) : data.content}</div>
+              }}>{data.content.length > 20 ? data.content.slice(0,100) : data.content}</div>
 
                 </div>
             );

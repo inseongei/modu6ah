@@ -121,7 +121,7 @@ function RecruitEdit() {
                           setTitle(e.target.value)}
                         style={{ width: "400px" }}
                         type="text"
-                        placeholder={detail.title}
+                        defaultValue={detail.title}
                       />
                     </div>
                     <div
@@ -167,7 +167,7 @@ function RecruitEdit() {
                     <input
                       onChange={(e) => setPlace(e.target.value)}
                       type="text"
-                      placeholder={detail.place}
+                      defaultValue={detail.place}
                     />
                   </div>
                   <div className="age">
@@ -175,19 +175,19 @@ function RecruitEdit() {
                     <input
                       onChange={(e) => setAge(e.target.value)}
                       type="text"
-                      placeholder={detail.age}
+                      defaultValue={detail.age}
                     />
                   </div>
                 </div>
                 <div className="box">
                   <textarea
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder={detail.content}
+                    defaultValue={detail.content}
                   />
                   <Btn>
                     <a href="/recruit">
                     <button className="cancel">
-                      취소{" "}
+                      취소
                     </button>
                     </a>
                     <button className="btn" onClick={upload}>

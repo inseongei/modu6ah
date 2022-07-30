@@ -107,7 +107,7 @@ function PlaceEdit() {
             icon: "success",
             confirmButtonText: "확인", 
             confirmButtonColor: '#ffb300'
-          }). then((result) => {
+          }).then((result) => {
             if (result.isConfirmed) {
               navigate("/place")
             };
@@ -209,19 +209,8 @@ function PlaceEdit() {
               <div className="imageBox">
                 <div className="plus_btn">
                   <label htmlFor="input-file">
-                    {/* <img src={plus} /> */}
                   </label>
-                  {/* <p style={{
-                    color: "#3C3C3C"
-                  }}>
-                    사진 업로드
-                  </p>
-                  <p style={{
-                    color: "#6B4E16",
-                    marginTop: "-13px",
-                  }}>
-                    &nbsp;(최대 3장)
-                  </p> */}
+
                 </div>
                 
                   {/* 이미지 미리보기 */}
@@ -229,12 +218,6 @@ function PlaceEdit() {
                     <div className="img_box_size" key={id}>
                       <img src={image} alt={`${image}-${id}`} />
                       <div className="img_btn">
-                        {/* <button
-                          onClick={() =>
-                            handleDeleteImage(id)}>
-                          이미지 삭제
-                          <img src={img_delete} />
-                        </button> */}
                       </div>
                     </div>
                   ))}
@@ -249,7 +232,7 @@ function PlaceEdit() {
                       type="text"
                       onChange={(e) =>
                         setTitle(e.target.value)}
-                      placeholder={detail.title}
+                      defaultValue={detail.title}
                     />
                   </div>
 
@@ -258,8 +241,7 @@ function PlaceEdit() {
                     <SearchInput
                       id="address"
                       type="text"
-                      placeholder={detail.region}
-                      defaultValue={region}
+                      defaultValue={detail.region}
                     />
                     <div className="address_btn">
                       <span
@@ -280,7 +262,7 @@ function PlaceEdit() {
                     <strong>장소</strong>
                     <input
                       type="text"
-                      placeholder={detail.location}
+                      defaultValue={detail.location}
                       onChange={(e) =>
                         setLocation(e.target.value)}
                     />
@@ -330,7 +312,7 @@ function PlaceEdit() {
                 <div className="card-right">
                   <textarea onChange={(e) =>
                     setContent(e.target.value)}
-                    placeholder={detail.content}
+                    defaultValue={detail.content}
                     />
                 </div>
               </div>
@@ -555,7 +537,7 @@ border-radius: 10px;
 
   .position {
     margin-left: 3px;
-    font-color: #000000;
+    color: #000000;
 
     input {
       outline: none;

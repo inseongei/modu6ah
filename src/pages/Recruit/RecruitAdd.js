@@ -175,7 +175,7 @@ const RecruitAdd = () => {
                   <Btn>
                   <a href="/recruit">
                     <button className="cancel">
-                      취소{" "}
+                      취소
                     </button>
                     </a>
                     <button className="btn"
