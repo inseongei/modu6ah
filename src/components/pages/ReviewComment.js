@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import img_delete from '../../images/deletecomment.png';
+import Swal from "sweetalert2";
 
 const ReviewComment = () => {
   const [comment, setComment] = useState('');
   const [state, setState] = useState('');
   const nickname = localStorage.getItem("nickname");
+  const token = localStorage.getItem("accessToken");
   const navigate = useNavigate();
   const { reviewPostId } = useParams();
   // console.log(state)
@@ -26,7 +28,17 @@ const ReviewComment = () => {
       })
       .catch((err) => {
         // console.log(err.response.data.message);
-        // window.alert("로그인 후 사용해 주세요");
+        token ? Swal.fire({
+          text: `댓글을 입력해주세요.`,
+          icon: "error",
+          confirmButtonText: "확인",
+          confirmButtonColor: '#ffb300'
+        }) : Swal.fire({
+          text: `로그인 후 사용해주세요.`,
+          icon: "error",
+          confirmButtonText: "확인",
+          confirmButtonColor: '#ffb300'
+        })
       })
   }
 
@@ -98,17 +110,17 @@ const ReviewComment = () => {
                 key={index}>
                 <div className='chat'>
                   <div className='profile_box'>
-                  <div className='profile'>
-                    <div className="ProfileImg">
-                      <img src=
-                        {data.profileUrl}
-                        alt="사진" />
+                    <div className='profile'>
+                      <div className="ProfileImg">
+                        <img src=
+                          {data.profileUrl}
+                          alt="사진" />
+                      </div>
                     </div>
-                  </div>
-                  <div className='name'
-                  >
-                    {data.nickname}
-                  </div>
+                    <div className='name'
+                    >
+                      {data.nickname}
+                    </div>
                   </div>
                   <div className='comment_box'>
                     <div className='comment'
