@@ -127,8 +127,6 @@ const Title = styled.p`
   }
 `;
 
-
-
 const SubTitle = styled.p`
   font-size: 20px;
   font-weight: 700;
