@@ -419,7 +419,7 @@ border-radius: 10px;
     min-height: 210px;
     max-height: auto;
     height: 280px;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: 30px;
     display: flex;
     flex-wrap: wrap;
@@ -508,7 +508,7 @@ border-radius: 10px;
 
   .mainBox {
     display: flex;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-left: 60px;
   }
 
