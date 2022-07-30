@@ -52,7 +52,7 @@ function ReviewEdit() {
     const data = {
       title : title.length === 0 ? detail.title : title,
       content: content.length === 0 ? detail.content : content,
-      url: content.length === 0 ? detail.content : content,
+      url: region.length === 0 ? detail.region : region,
       productType: location.length === 0 ? detail.location : location,
     }
 
@@ -119,7 +119,6 @@ function ReviewEdit() {
                     <div className="img_box_size" key={id}>
                       <img src={image} alt={`${image}-${id}`} />
                       <div className="img_btn">
-
                       </div>
                     </div>
                   ))}
@@ -134,7 +133,7 @@ function ReviewEdit() {
                       type="text"
                       onChange={(e) =>
                         setTitle(e.target.value)}
-                        placeholder={detail.title}
+                        defaultValue={detail.title}
                     />
                   </div>
 
@@ -145,7 +144,7 @@ function ReviewEdit() {
                       type="text"
                       onChange={(e) =>
                         setRegion(e.target.value)}
-                        placeholder={detail.url}
+                        defaultValue={detail.url}
                     />
                   </MapSearch>
 
@@ -155,7 +154,7 @@ function ReviewEdit() {
                       type="text"
                       onChange={(e) =>
                         setLocation(e.target.value)}
-                        placeholder={detail.productType}
+                        defaultValue={detail.productType}
                     />
                   </div>
                 </div>
@@ -164,7 +163,7 @@ function ReviewEdit() {
                 <div className="card-right">
                   <textarea onChange={(e) =>
                     setContent(e.target.value)}
-                    placeholder={detail.content}
+                    defaultValue={detail.content}
                     />
                 </div>
               </div>

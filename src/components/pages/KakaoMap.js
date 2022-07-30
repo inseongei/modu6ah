@@ -7,6 +7,8 @@ import styled from "styled-components";
 
 const { kakao } = window;
 
+console.log(kakao)
+
 const KakaoMap = () => {
   const [Places, setPlaces] = useState([]);
   const { placePostId } = useParams();
@@ -17,12 +19,14 @@ const KakaoMap = () => {
     axios
       .get("https://zhaoxilin.shop/api/places/" + placePostId)
       .then((res) => {
-        // console.log(res.data.placeDetails)
+        console.log(res.data.placeDetails)
         setPlaces(res.data.placeDetails);
       });
   }, []);
 
-  console.log(Places);
+
+
+
 
   // 방법 2. redux 사용
   // const detail = useSelector((state) => state.placepage.list.placeDetails);
@@ -91,6 +95,10 @@ const KakaoMap = () => {
       }
     });
   });
+
+  if (!Places) {
+    return <div></div>;
+  }
 
   return (
     <div

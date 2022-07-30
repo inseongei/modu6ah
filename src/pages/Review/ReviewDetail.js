@@ -26,6 +26,7 @@ const {reviewPostId} = useParams();
 const [detail, setDetail] = React.useState()
 const navigate = useNavigate()
 const dispatch = useDispatch();
+const [num,setnum] = React.useState(0)
  
   React.useEffect(() => {
     axios
@@ -93,18 +94,33 @@ const dispatch = useDispatch();
         <Box>
           <div className="Box">
             <div className="imgBox">
+
+
+
+
               <div className="Bigimg">
-                <img src={detail.imageUrl[0]} alt="사진" />
+                <img src={detail.imageUrl[num]} alt="사진" />
               </div>
               <div className="imgSmall">
                 {detail.imageUrl.map((item, idx) => {
                   return (
                     <div key={idx}>
-                      <img src={item} alt="사진" />
+                      <img src={item} alt="사진" 
+                      onClick={()=>{
+                        setnum(idx)
+                      }} />
                     </div>
                   );
                 })}
               </div>
+
+
+
+
+
+
+
+              
             </div>
             <ContentBox>
               {/* 카드 오른쪽 위 */}
@@ -243,6 +259,7 @@ border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   .imgSmall > div {
