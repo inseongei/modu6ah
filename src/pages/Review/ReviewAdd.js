@@ -206,7 +206,7 @@ function ReviewAdd() {
                 <button
                   className="btn"
                   onClick={() => {
-                    navigate(`/`);
+                    navigate(`/review`);
                   }}
                 >
                   취소{" "}
