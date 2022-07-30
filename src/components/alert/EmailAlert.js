@@ -15,7 +15,7 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
 
     //인증 코드가 input 값과 같으면 회원가입 완료
     const test = () => {
-        if (emailcode == code) {
+        if (emailcode || newcode == code) {
             axios
                 .post("https://zhaoxilin.shop/api/users/signup", data
                 )
@@ -38,14 +38,21 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
         }
     };
 
+    //번호 재발급
     const register = (e) => {
         e.preventDefault();
           axios
             .post("https://zhaoxilin.shop/api/users/signup/authMail",
-              data.email
+              data
             )
             .then((response) => {
               setNewCode(response.data.authCode)
+              Swal.fire({
+                text: `인증 번호가 재발급 되었습니다.`,
+                icon: "success",
+                confirmButtonText: "확인", 
+                confirmButtonColor: '#ffb300'
+              })
             })
             .catch((error) => {
             });
@@ -56,13 +63,6 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
         <Modal isOpen={true} >
             <DetailContainer>
                 <Grid align="center" height="100px" margin="0 0 32 0">
-                    <div className="cancel_img">
-                        <img src={Fin}
-                        style={{cursor:"pointer"}} alt="로고"
-                         onClick={() => {
-                            navigate(`/signup`);
-                          }}/>
-                    </div>
                     <Logo>
                         <div className="email_img">
                             <img src={email}
@@ -151,6 +151,7 @@ const Logo = styled.h1`
  display:flex;
  align-items: center;
  justify-content: center;
+ margin-top: 32px;
 
  .email_img > img {
    width: 40px;
