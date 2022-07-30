@@ -427,7 +427,7 @@ const Detail = styled.div`
     margin-top: 15px;
     margin-left: 20px;
     padding-right: 10px;
-    width: 100px;
+    width: 90px;
     font-size: 20px;
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
