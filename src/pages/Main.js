@@ -12,12 +12,14 @@ import ChatIcon from '../components/main/ChatIcon'
 import Baby from '../images/3DBABY.png' 
 import '../shared/App.css'
 import SubHeader from "../components/main/SubHeader";
+import TwoHeader from "../components/main/TwoHeader";
 
 const Main = () => {
   return (
     <div className="MainBackGround">
       <Header />
       <SubHeader />
+      <TwoHeader/>
       <Swiper />
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
         <Container>
@@ -86,29 +88,24 @@ const Container = styled.div`
   font-family: "Nanum Gothic";
   padding-left: 50px;
   padding-right: 50px;
-
   .card_title {
     widht: 10px;
     width: 960px;
   }
-
   .subtitle {
     display: flex;
     margin-left: 171px;
   }
-
   .subcontent {
     display: flex;
     width: 970px;
     justify-content: space-between;
   }
-
   hr {
     color: #A8A8A8;
     height: 2.5px;
     margin-top: 100px;
   }
-
 .hrz {
     color: #A8A8A8;
     height: 2.5px;
@@ -126,13 +123,10 @@ const Title = styled.p`
   height: 137px;
   margin-left: 170px;
   margin-bottom: 0px;
-
   img{
     width:70px;
     height:55px;
-
   }
-
 `;
 
 
