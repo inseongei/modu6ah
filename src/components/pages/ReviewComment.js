@@ -21,28 +21,28 @@ const ReviewComment = () => {
     axios.post('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
-      .then((res) => { 
+      .then((res) => {
         refetch()
       })
       .catch((err) => {
         // console.log(err.response.data.message);
-        window.alert("로그인 후 사용해 주세요");
+        // window.alert("로그인 후 사용해 주세요");
       })
   }
 
-  const refetch = () =>{
+  const refetch = () => {
     axios
-    .get('https://zhaoxilin.shop/api/reviews/' + reviewPostId, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-    .then((res) => {
-      setState(res.data.reviewComments)
-    })
-    .catch((err) => {
-      // console.log(err);
-    });
+      .get('https://zhaoxilin.shop/api/reviews/' + reviewPostId, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setState(res.data.reviewComments)
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
   }
 
   React.useEffect(() => {
@@ -53,7 +53,7 @@ const ReviewComment = () => {
   const deleteComment = (e) => {
     // console.log(e.target);
     axios
-      .delete('https://zhaoxilin.shop/api/reviews/'+ reviewPostId + '/comments/' + e.target.id,
+      .delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
         refetch();
@@ -76,17 +76,17 @@ const ReviewComment = () => {
                 type="text"
                 placeholder='댓글을 입력하세요'
                 onChange={e =>
-                setComment(e.target.value)}
+                  setComment(e.target.value)}
                 value={comment}
               />
-            
-            <div className='btnBox'>
-              <button className='btn'
-                onClick={addComment}
-              >
-                등록
-              </button>
-            </div>
+
+              <div className='btnBox'>
+                <button className='btn'
+                  onClick={addComment}
+                >
+                  등록
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -97,6 +97,7 @@ const ReviewComment = () => {
               <div className='box'
                 key={index}>
                 <div className='chat'>
+                  <div className='profile_box'>
                   <div className='profile'>
                     <div className="ProfileImg">
                       <img src=
@@ -104,10 +105,10 @@ const ReviewComment = () => {
                         alt="사진" />
                     </div>
                   </div>
-
                   <div className='name'
                   >
                     {data.nickname}
+                  </div>
                   </div>
                   <div className='comment_box'>
                     <div className='comment'
@@ -120,18 +121,18 @@ const ReviewComment = () => {
                     </div>
                   </div>
                 </div>
-                {nickname === data.nickname 
-                ? ( <button
-                  id={data.placeCommentId}
-                  className='delete'
-                  onClick={deleteComment}
-                >
-                  <img id={data.reviewCommentId}
-                  src={img_delete}/>
-                </button>
-                ) : (
-                 <></>
-                )}
+                {nickname === data.nickname
+                  ? (<button
+                    id={data.placeCommentId}
+                    className='delete'
+                    onClick={deleteComment}
+                  >
+                    <img id={data.reviewCommentId}
+                      src={img_delete} />
+                  </button>
+                  ) : (
+                    <></>
+                  )}
               </div>
             )
           })}
@@ -210,6 +211,7 @@ display: flex;
 
 .box{
   width: 800px;
+  height: 110px;
   display:flex;
   margin-left: 85px;
   margin-top: 5px;
@@ -237,11 +239,15 @@ cursor: pointer;
   }
 }
 
+.profile_box {
+  display: flex;
+}
+
 .name{
   display: flex;
   justify-content:center;
   align-items:center;
-  margin-left:  12px;
+  margin-left:  7px;
   font-family: 'Nanum Gothic', sans-serif;
   font-weight: 700;
 }
@@ -253,11 +259,11 @@ cursor: pointer;
 
 .comment {
   margin-bottom: 5px;
-  margin-left: 15px;
 }
 
 .date {
   color: #A8A8A8;
+  margin-left: 1px;
 }
 
 .delete{
