@@ -64,7 +64,7 @@ const MyBookmark = () => {
 const Bookmark = styled.div`
   width: 100%;
   background-color: #f5f5f5;
-
+  padding-bottom: 30px;
 
   .title {
     width: 1014px;
@@ -73,11 +73,13 @@ const Bookmark = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-family: "Nanum Gothic";
+    font-weight: 700;
   }
 
   .mypage {
     color: #a8a8a8;
-    font-family: "NanumGothic";
+    font-family: 'Nanum Gothic'
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -88,7 +90,7 @@ const Bookmark = styled.div`
 
   .booktitle {
     color: #000000;
-    font-family: "NanumGothic";
+    font-family: "Nanum Gothic";
     font-style: normal;
     font-weight: 700;
     font-size: 26px;
@@ -123,9 +125,9 @@ const Bookmark = styled.div`
 
   .subtitle {
     color: #000000;
-    font-family: "NanumGothic";
+    font-family: "Nanum Gothic";
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 26px;
     line-height: 30px;
     margin-bottom: 12px;
