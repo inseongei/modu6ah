@@ -63,7 +63,7 @@ function PlaceAdd() {
             icon: "success",
             confirmButtonText: "확인", 
             confirmButtonColor: '#ffb300'
-          }). then((result) => {
+          }).then((result) => {
             if (result.isConfirmed) {
               navigate("/place")
             };
@@ -190,12 +190,12 @@ function PlaceAdd() {
                     <div className="img_box_size" key={id}>
                       <img src={image} alt={`${image}-${id}`} />
                       <div className="img_btn">
-                        <button
+                        {/* <button
                           onClick={() =>
                             handleDeleteImage(id)}>
                           이미지 삭제
                           <img src={img_delete} />
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   ))}

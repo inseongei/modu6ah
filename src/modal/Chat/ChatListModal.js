@@ -138,7 +138,7 @@ const ChatListModal = ({ open, onClose }) => {
               </div>
               <div className="fourBox">
               <div className="ChatDel">
-                <BsTrashFill onClick={()=>{
+                {/* <BsTrashFill onClick={()=>{
                   axios
                   .delete("https://zhaoxilin.shop/api/chats/rooms/" + data.roomId,{
                     headers: { Authorization: `Bearer ${token}` },
@@ -150,7 +150,7 @@ const ChatListModal = ({ open, onClose }) => {
                   .catch((err) => {
                     console.log(err);
                   });
-                }}  className="Trash"/>
+                }}  className="Trash"/> */}
               </div>
               </div>
             </div>

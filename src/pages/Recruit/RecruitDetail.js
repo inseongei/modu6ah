@@ -135,7 +135,7 @@ const RecruitDetail = () => {
               <div className="container">
                 <div className="card-left">
                   <div className="toggle">
-                    <p> {state.status ?  "모집완료": "모집중"} </p>
+                     {state.status ? <div>모집완료</div>: <p>모집중</p>} 
                   </div>
                   <div>
                     <strong> 제목 </strong>
@@ -285,8 +285,34 @@ const Detail = styled.div`
   
   .toggle > p {
     margin: 20px 0px 0px 30px;
-    font-size: 20px;
-    font-family: 'Nanum Gothic', sans-serif;
+    width: 114px;
+    height: 28px;
+    background: #F4B03E;
+    border: 1px solid #F4B03E;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+  }
+
+  .toggle > div {
+    width: 114px;
+    height: 28px;
+    background-color: #a8a8a8;
+    border: 1px solid #a8a8a8;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: 700;
   }
 
