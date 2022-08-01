@@ -19,6 +19,7 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom,post }) => {
   const url = process.env.REACT_APP_URL;
 
 
+
   React.useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
       console.log(data)
