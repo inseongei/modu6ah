@@ -26,7 +26,6 @@ const url = process.env.REACT_APP_URL;
     axios
       .get(`${url}/api/reviews/` + reviewPostId)
       .then((res) => {
-        console.log(res.data)
         setDetail(res.data.reviewDetails);
       });
   }, []);
@@ -130,7 +129,7 @@ const url = process.env.REACT_APP_URL;
                   style={{ marginRight: "-8px" }}
                   onClick={()=>{navigate('/ReviewEdit/' + reviewPostId)}}
                   >
-                  <img src={revise} />
+                  <img src={revise} alt="사진" />
                   </button>
                   <button className="btn"
                   onClick={deletePlace}

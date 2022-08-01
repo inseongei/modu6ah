@@ -18,7 +18,6 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
   const [info, setinfo] = React.useState();
   const url = process.env.REACT_APP_URL;
 
-  // console.log(info)
 
   React.useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
@@ -80,9 +79,9 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
         </div>
 
         <ScrollToBottom className="message-containerTwo animate__animated animate__fadeIn" >
-        {NowRoom && NowRoom.map((data,idx)=>{
+        {NowRoom && NowRoom.map((data)=>{
           return  nickname === data.senderNick ? (
-            <div key={idx}>
+            <div key={data._id}>
             <div className="MyChat">
               <div className="MyTime">{data.time}</div>
               <div className="MyContent">
