@@ -32,7 +32,6 @@ const [num,setnum] = React.useState(0)
     axios
       .get("https://zhaoxilin.shop/api/reviews/" + reviewPostId)
       .then((res) => {
-        console.log(res.data)
         setDetail(res.data.reviewDetails);
       });
   }, []);
@@ -136,7 +135,7 @@ const [num,setnum] = React.useState(0)
                   style={{ marginRight: "-8px" }}
                   onClick={()=>{navigate('/ReviewEdit/' + reviewPostId)}}
                   >
-                  <img src={revise} />
+                  <img src={revise} alt="사진" />
                   </button>
                   <button className="btn"
                   onClick={deletePlace}

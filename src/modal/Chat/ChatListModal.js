@@ -29,11 +29,11 @@ const ChatListModal = ({ open, onClose }) => {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }
     })
+    
   }
   // modal이라 웹페이지 시작점부터 get 되서 isLoading 처리 안해도 됌
   const {isLoading , data } = useQuery('Chat-List',fetchSuperHeros)
 
-  console.log(data)
 
 
 

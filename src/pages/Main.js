@@ -19,7 +19,6 @@ const Main = () => {
     <div className="MainBackGround">
       <Header />
       <SubHeader />
-      <TwoHeader/>
       <Swiper />
       <Grid maxWidth="1440px" height="100%" margin="0 auto" padding="0 12px">
         <Container>

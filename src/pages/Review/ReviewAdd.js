@@ -20,19 +20,57 @@ function ReviewAdd() {
   const [address, setAddress] = useState("");
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
+ 
+  const fileInput = React.useRef(null);
   const navigate = useNavigate();
+  let array = [];
+  let formData = new FormData();
+
 
   // axios.Post 버튼
   const onSubmit = async (e) => {
     e.preventDefault();
     e.persist();
+    let num = 4
 
-    let files = e.target.profile_files.files;
-    let formData = new FormData();
-    console.log(files)
-    // 반복문 돌려서 다중 이미지 처리
-    for (let i = 0; i < files.length; i++) {
-      formData.append("imageUrl", files[i]);
+
+
+    // // 반복문 돌려서 다중 이미지 처리
+    // for (let i = 0; i < array.length; i++) {
+    //   let files = e.target.profile_files.files[i];
+    //   formData.append("imageUrl", files[i])
+    // }
+    // console.log(array)
+
+      let reader = new FileReader();
+      reader.onload = (e) =>{
+        console.log(e.target.result)
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // FormData의 value 확인
+    for (let value of formData.values()) {
+      console.log(value);
     }
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
@@ -41,7 +79,7 @@ function ReviewAdd() {
     formData.append("productType", location);
     formData.append("url", address);
 
-    if (files.length < 4) {
+    if (array.length < 4) {
       await axios
         .post("https://zhaoxilin.shop/api/reviews", formData, {
           headers: {
@@ -117,6 +155,7 @@ function ReviewAdd() {
               <input
                 id="input-file"
                 type="file"
+                ref = {fileInput}
                 name="profile_files"
                 multiple="multiple"
                 style={{ display: "none" }}
@@ -125,7 +164,7 @@ function ReviewAdd() {
 
               <div className="imageBox">
                 <div className="plus_btn">
-                  <label for="input-file">
+                  <label htmlFor="input-file">
                     <img src={plus} alt="추가" className="plusButton"/>
                   </label>
                   <p style={{
