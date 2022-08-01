@@ -16,11 +16,12 @@ function SCard() {
   const [noMore,setnoMore] = useState(true)
   const [index , setindex] = useState(1)
   const token = localStorage.getItem('accessToken')
+  const url = process.env.REACT_APP_URL;
 
   // 페이지 로드될 때 서버 데이터 요청
   React.useEffect(() => {
     axios
-    .get("https://zhaoxilin.shop/api/recruits", token ?{
+    .get(`${url}/api/recruits`, token ?{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -46,7 +47,7 @@ function SCard() {
   // 데이터 변경 될 때 새로운 데이터 불러오기
   const refetch = () =>{
     axios
-    .get("https://zhaoxilin.shop/api/recruits", token ?{
+    .get(`${url}/api/recruits`, token ?{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -60,7 +61,7 @@ function SCard() {
   // 스크롤 밑으로 내려갈 때 실행될 함수 
   const axiosData = () => {
     axios
-      .get("https://zhaoxilin.shop/api/recruits", token ?{
+      .get(`${url}/api/recruits`, token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -102,7 +103,7 @@ function SCard() {
                       onClick={() => {
                         axios
                           .put(
-                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
+                            `${url}/api/recruits/bookmark/` +
                               item.recruitPostId,
                             null,
                             {
@@ -124,7 +125,7 @@ function SCard() {
                       onClick={() => {
                         axios
                           .put(
-                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
+                            `${url}/api/recruits/bookmark/` +
                               item.recruitPostId,
                             null,
                             {

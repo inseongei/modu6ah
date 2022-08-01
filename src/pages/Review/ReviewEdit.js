@@ -1,20 +1,13 @@
 //장소 추천 수정 페이지
 import React, { startTransition, useState } from "react";
-
-//style
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
-
-//elements & components
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
-import plus from "../../images/plus.png";
 import Swal from "sweetalert2";
-
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon';
-import img_delete from '../../images/delete (1).png';
 
 function ReviewEdit() {
   const navigate = useNavigate();
@@ -22,16 +15,13 @@ function ReviewEdit() {
   const [region, setRegion] = useState("");
   const [content, setContent] = useState("");
   const [location, setLocation] = useState("");
-  const [imageSrc, setImageSrc] = useState([]);
-  const [currentValue, setCurrentValue] = useState(0);
-  const [hoverValue, setHoverValue] = useState(undefined);
-  const [rating, setRating] = useState(0);
   const [detail, setDetail] = useState("");
   const { reviewPostId } = useParams();
+  const url = process.env.REACT_APP_URL;
 
   React.useEffect(() => {
     axios
-      .get("https://zhaoxilin.shop/api/reviews/" + reviewPostId)
+      .get(`${url}/api/reviews/` + reviewPostId)
       .then((res) => {
         console.log(res.data)
         setDetail(res.data.reviewDetails);
@@ -59,7 +49,7 @@ function ReviewEdit() {
 
   
       axios
-        .put(`https://zhaoxilin.shop/api/reviews/` + reviewPostId, data, {
+        .put(`${url}/api/reviews/` + reviewPostId, data, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },

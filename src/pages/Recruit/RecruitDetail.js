@@ -17,7 +17,9 @@ import { detailPostDB, deletePostDB } from "../../redux/modules/post";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 import Swal from "sweetalert2";
 
-const socket = io.connect("https://zhaoxilin.shop"); // 1 . 소켓 서버 연결
+const url = process.env.REACT_APP_URL;
+
+const socket = io.connect(`${url}`); // 1 . 소켓 서버 연결
 
 const RecruitDetail = () => {
   const nickname = localStorage.getItem("nickname");
@@ -28,10 +30,9 @@ const RecruitDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   React.useEffect(() => {
     axios
-      .get("https://zhaoxilin.shop/api/recruits/" + recruitPostId)
+      .get(`${url}/api/recruits/` + recruitPostId)
       .then((response) => {
         console.log(response.data)
         setState(response.data.recruitDetails);
@@ -61,7 +62,7 @@ const RecruitDetail = () => {
   // 1:1 문의하기 버튼 눌렀을 때 채팅방 생성 + 채팅방 입장하기
   const GoChat = () => {
     axios
-      .post("https://zhaoxilin.shop/api/chats/rooms/" + recruitPostId, null, {
+      .post(`${url}/api/chats/rooms/` + recruitPostId, null, {
         headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((res) => {
@@ -92,7 +93,7 @@ const RecruitDetail = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete("https://zhaoxilin.shop/api/recruits/" + recruitPostId,
+          .delete(`${url}/api/recruits/` + recruitPostId,
             { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
           .then((response) => {
             Swal.fire({

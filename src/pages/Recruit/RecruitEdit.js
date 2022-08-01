@@ -5,7 +5,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePostDB } from "../../redux/modules/post";
 import { useNavigate, useParams } from "react-router-dom";
 import { detailPostDB } from "../../redux/modules/post";
 import Header from "../../components/main/Header";
@@ -30,6 +29,7 @@ function RecruitEdit() {
   const [age, setAge] = useState("");
   const datemoment = moment(date).format("YYYY-MM-DD")
   const timemoment = moment(time).format("HH:mm")
+  const url = process.env.REACT_APP_URL;
 
   React.useEffect(() => {
     dispatch(detailPostDB(recruitPostId));
@@ -51,7 +51,7 @@ function RecruitEdit() {
 
   const upload = () => {
       axios
-        .put(`https://zhaoxilin.shop/api/recruits/` + recruitPostId, 
+        .put(`${url}/api/recruits/` + recruitPostId, 
         newPost, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

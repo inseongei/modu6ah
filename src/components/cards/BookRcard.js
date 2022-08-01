@@ -10,10 +10,11 @@ function BookRcard() {
   const navigate = useNavigate();
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true)
+  const url = process.env.REACT_APP_URL;
 
   const refetch = () =>{
     axios
-    .get("https://zhaoxilin.shop/api/mypage/bookmark", {
+    .get(`${url}/api/mypage/bookmark`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -31,7 +32,7 @@ function BookRcard() {
 
 
   const ReviewMore = async () => {
-    await axios.get("https://zhaoxilin.shop/api/mypage/bookmark/",
+    await axios.get(`${url}/api/mypage/bookmark/`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -69,7 +70,7 @@ function BookRcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                              `${url}/api/reviews/bookmark/` +
                                 data.reviewPostId,
                               null,
                               {
@@ -91,7 +92,7 @@ function BookRcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                             `${url}/api/reviews/bookmark/` +
                                 data.reviewPostId,
                               null,
                               {

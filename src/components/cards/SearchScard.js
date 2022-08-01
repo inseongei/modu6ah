@@ -21,11 +21,12 @@ function SearchScard({Morerecruit,keyword}) {
   const [index, setindex] = useState(1)
   const token = localStorage.getItem('accessToken')
   const [athis, setathis] = React.useState(6)
+  const url = process.env.REACT_APP_URL;
 
   console.log(keyword)
 
   const refetch = () =>{
-      axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`,{
+      axios.get(`${url}/api/search?keyword=${keyword}`,{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

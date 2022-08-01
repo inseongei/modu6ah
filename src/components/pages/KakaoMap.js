@@ -1,13 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { detailPhotoDB } from "../../redux/modules/placepage";
-import styled from "styled-components";
 
 const { kakao } = window;
-
-console.log(kakao)
+const url = process.env.REACT_APP_URL;
 
 const KakaoMap = () => {
   const [Places, setPlaces] = useState([]);
@@ -17,15 +13,12 @@ const KakaoMap = () => {
   // 방법 1. axios 통신
   React.useEffect(() => {
     axios
-      .get("https://zhaoxilin.shop/api/places/" + placePostId)
+      .get(`${url}/api/places/` + placePostId)
       .then((res) => {
         console.log(res.data.placeDetails)
         setPlaces(res.data.placeDetails);
       });
   }, []);
-
-
-
 
 
   // 방법 2. redux 사용
@@ -41,7 +34,7 @@ const KakaoMap = () => {
   //   const fetchPost = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `https://zhaoxilin.shop/api/places/`
+  //         `${url}/api/places/`
   //         + placePostId);
   //        setPlaces(response.data.placeDetails)
   //     } catch (e) {

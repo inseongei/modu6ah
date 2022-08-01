@@ -6,13 +6,12 @@ import ChatRoom from "./ChatRoom";
 import "animate.css";
 import io from "socket.io-client";
 import cancel from '../../images/cancel.png'
-import redtrash from '../../images/Redbin.png'
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import {useQuery} from 'react-query'
-import { BsTrashFill } from "react-icons/bs";
 
-const socket = io.connect("https://zhaoxilin.shop");
+const url = process.env.REACT_APP_URL;
+
+const socket = io.connect(`${url}`);
 
 const ChatListModal = ({ open, onClose }) => {
   const nickname = localStorage.getItem("nickname");
@@ -24,7 +23,7 @@ const ChatListModal = ({ open, onClose }) => {
   const token = localStorage.getItem("accessToken");
 
   const fetchSuperHeros = () =>{
-    return axios.get("https://zhaoxilin.shop/api/chats/rooms",{
+    return axios.get(`${url}/api/chats/rooms`,{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }
@@ -65,7 +64,7 @@ const ChatListModal = ({ open, onClose }) => {
                       socket.emit("join_room", Joindata);
                       axios
                         .get(
-                          "https://zhaoxilin.shop/api/chats/messages/" +
+                          `${url}/api/chats/messages/` +
                             data.roomId,
                             {
                               headers: {
@@ -92,7 +91,7 @@ const ChatListModal = ({ open, onClose }) => {
                       socket.emit("join_room", Joindata);
                       axios
                         .get(
-                          "https://zhaoxilin.shop/api/chats/messages/" +
+                          `${url}/api/chats/messages/` +
                             data.roomId,
                             {
                               headers: {
@@ -121,7 +120,7 @@ const ChatListModal = ({ open, onClose }) => {
                       socket.emit("join_room", Joindata);
                       axios
                         .get(
-                          "https://zhaoxilin.shop/api/chats/messages/" +
+                          `${url}/api/chats/messages/` +
                             data.roomId,
                             {
                               headers: {
@@ -140,7 +139,7 @@ const ChatListModal = ({ open, onClose }) => {
               <div className="ChatDel">
                 {/* <BsTrashFill onClick={()=>{
                   axios
-                  .delete("https://zhaoxilin.shop/api/chats/rooms/" + data.roomId,{
+                  .delete(`${url}/api/chats/rooms/` + data.roomId,{
                     headers: { Authorization: `Bearer ${token}` },
                   })
                   .then((res) => {

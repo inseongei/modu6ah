@@ -13,6 +13,7 @@ function MainLcard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = localStorage.getItem('accessToken')
+  const url = process.env.REACT_APP_URL;
 
   React.useEffect(() => {
     token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin())
@@ -62,7 +63,7 @@ function MainLcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
+                              `${url}/api/places/bookmark/` +
                               item.placePostId,
                               null,
                               {
@@ -84,7 +85,7 @@ function MainLcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
+                              `${url}/api/places/bookmark/` +
                               item.placePostId,
                               null,
                               {

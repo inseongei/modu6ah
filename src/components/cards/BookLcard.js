@@ -11,10 +11,11 @@ function BookLcard() {
   const navigate = useNavigate();
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true);
+  const url = process.env.REACT_APP_URL;
 
   const refetch = () =>{
     axios
-    .get("https://zhaoxilin.shop/api/mypage/bookmark", {
+    .get(`${url}/api/mypage/bookmark`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -32,7 +33,7 @@ function BookLcard() {
 
   const PlaceMore = async () => {
     await axios
-      .get("https://zhaoxilin.shop/api/mypage/bookmark", {
+      .get(`${url}/api/mypage/bookmark`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -72,7 +73,7 @@ function BookLcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
+                              `${url}/api/places/bookmark/` +
                                 data.placePostId,
                               null,
                               {
@@ -95,7 +96,7 @@ function BookLcard() {
                         onClick={() => {
                           axios
                             .put(
-                              "https://zhaoxilin.shop/api/places/bookmark/" +
+                              `${url}/api/places/bookmark/` +
                                 data.placePostId,
                               null,
                               {

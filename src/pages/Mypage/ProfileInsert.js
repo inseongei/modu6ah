@@ -13,6 +13,8 @@ import Swal from "sweetalert2";
 const ProfileInsert = () => {
   const nickname = localStorage.getItem("nickname");
   const img = localStorage.getItem('profileUrl')
+  const url = process.env.REACT_APP_URL;
+
   React.useEffect(() => {
     dispatch(GetMyPageAxios(nickname));
   }, []);
@@ -63,7 +65,7 @@ const ProfileInsert = () => {
 
     await axios
       .put(
-        "https://zhaoxilin.shop/api/mypage/update",
+        `${url}/api/mypage/update`,
         formData,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } }
       )

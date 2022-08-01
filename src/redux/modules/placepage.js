@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const url = process.env.REACT_APP_URL;
+
 // Actions
 const CREATE = "photo/CREATE";
 const LOAD = "photo/LOAD";
@@ -59,7 +61,7 @@ export function deletePhoto(photo_list) {
 
 export const loadPhotoDB = () => {
   return function (dispatch) {
-    axios.get(`https://zhaoxilin.shop/api/places`, {
+    axios.get(`${url}/api/places`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }
@@ -74,7 +76,7 @@ export const loadPhotoDB = () => {
 export const detailPhotoDB = (placePostId) => {
   return function (dispatch) {
     axios
-      .get("https://zhaoxilin.shop/api/places/" + placePostId,  {
+      .get(`${url}/api/places/` + placePostId,  {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`
         }
@@ -92,7 +94,7 @@ export const detailPhotoDB = (placePostId) => {
 export const updatePhotoDB = (recruitPostId, newPost) => {
   return function (dispatch) {
     axios
-      .put(`https://zhaoxilin.shop/api/recruits/` + recruitPostId, newPost, {
+      .put(`${url}/api/recruits/` + recruitPostId, newPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
@@ -110,7 +112,7 @@ export const updatePhotoDB = (recruitPostId, newPost) => {
 export const deletePhotoDB = (recruitPostId, navigate) => {
   return function (dispatch) {
     axios
-      .delete("https://zhaoxilin.shop/api/recruits/" + recruitPostId, {
+      .delete(`${url}/api/recruits/` + recruitPostId, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`},
       })

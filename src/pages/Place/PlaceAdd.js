@@ -23,6 +23,7 @@ function PlaceAdd() {
   const [hoverValue, setHoverValue] = useState(undefined);
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_URL;
 
   // axios.Post 버튼
   const onSubmit = async (e) => {
@@ -51,7 +52,7 @@ function PlaceAdd() {
 
     if (files.length < 4) {
       await axios
-        .post("https://zhaoxilin.shop/api/places", formData, {
+        .post(`${url}/api/places`, formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             "Content-Type": "multipart/form-data",

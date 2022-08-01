@@ -12,7 +12,7 @@ const ReviewComment = () => {
   const token = localStorage.getItem("accessToken");
   const navigate = useNavigate();
   const { reviewPostId } = useParams();
-  // console.log(state)
+  const url = process.env.REACT_APP_URL;
 
   //댓글 작성
   const addComment = () => {
@@ -20,7 +20,7 @@ const ReviewComment = () => {
     const comment_data = {
       comment, nickname
     }
-    axios.post('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments',
+    axios.post(`${url}/api/reviews/` + reviewPostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
@@ -44,7 +44,7 @@ const ReviewComment = () => {
 
   const refetch = () => {
     axios
-      .get('https://zhaoxilin.shop/api/reviews/' + reviewPostId, {
+      .get(`${url}/api/reviews/` + reviewPostId, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -65,7 +65,7 @@ const ReviewComment = () => {
   const deleteComment = (e) => {
     // console.log(e.target);
     axios
-      .delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId + '/comments/' + e.target.id,
+      .delete(`${url}/api/reviews/` + reviewPostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
         refetch();

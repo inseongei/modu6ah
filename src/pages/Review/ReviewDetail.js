@@ -1,36 +1,30 @@
-import React,{useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { FaStar } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 import Swal from "sweetalert2";
-
 import Header from '../../components/main/Header'
 import ReviewComment from '../../components/pages/ReviewComment'
-import data from '../../shared/data';
-import PhotoList from '../../components/pages/PhotoList';
-import Content from '../../components/pages/Content';
 import {useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../../components/main/Footer';
 import ChatIcon from '../../components/main/ChatIcon'
 import revise from '../../images/revise.png';
 import img_delete from '../../images/delete (1).png'
-import location from '../../images/location.png';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 
 const ReviewDetail = () => {
 const nickname = localStorage.getItem("nickname");
-const Profile = localStorage.getItem("profileUrl");
 const {reviewPostId} = useParams();
 const [detail, setDetail] = React.useState()
 const navigate = useNavigate()
 const dispatch = useDispatch();
 const [num,setnum] = React.useState(0)
+const url = process.env.REACT_APP_URL;
  
   React.useEffect(() => {
     axios
-      .get("https://zhaoxilin.shop/api/reviews/" + reviewPostId)
+      .get(`${url}/api/reviews/` + reviewPostId)
       .then((res) => {
         console.log(res.data)
         setDetail(res.data.reviewDetails);
@@ -51,7 +45,7 @@ const [num,setnum] = React.useState(0)
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-        .delete('https://zhaoxilin.shop/api/reviews/' + reviewPostId,
+        .delete(`${url}/api/reviews/` + reviewPostId,
           { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
         .then((response) => {
           Swal.fire({

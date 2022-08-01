@@ -5,6 +5,7 @@ import "../../shared/App.css";
 import Figma from "../../images/Figma.png";
 
 const Footer = () => {
+
   return (
     <FooterContainer>
       <div className="one_container">

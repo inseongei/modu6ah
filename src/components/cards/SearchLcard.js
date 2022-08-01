@@ -11,10 +11,11 @@ function SearchLcard({searchdata}) {
   const [book, setbook] = useState();
   const [btn, setbtn] = useState(false);
   const [athis, setathis] = React.useState(6)
+  const url = process.env.REACT_APP_URL;
 
   const refetch = () =>{
     axios
-    .get("https://zhaoxilin.shop/api/mypage/bookmark", {
+    .get(`${url}/api/mypage/bookmark`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

@@ -17,6 +17,7 @@ function MainRcard() {
   }, []);
 
   const post = useSelector((state) => state.Data.Profile);
+  const url = process.env.REACT_APP_URL;
 
   if (!post) {
     return <div></div>;
@@ -46,7 +47,7 @@ function MainRcard() {
                           onClick={() => {
                             axios
                               .put(
-                                "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                                `${url}/api/reviews/bookmark/` +
                                 data.reviewPostId,
                                 null,
                                 {
@@ -68,7 +69,7 @@ function MainRcard() {
                           onClick={() => {
                             axios
                               .put(
-                                "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                                `${url}/api/reviews/bookmark/` +
                                 data.reviewPostId,
                                 null,
                                 {

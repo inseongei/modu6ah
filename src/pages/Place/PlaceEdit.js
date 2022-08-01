@@ -6,11 +6,9 @@ import { FaStar } from "react-icons/fa";
 import Header from "../../components/main/Header";
 import Footer from "../../components/main/Footer";
 import Modal from "../../modal/Map/Modal";
-import plus from "../../images/plus.png";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon';
-import img_delete from '../../images/delete (1).png';
 import Swal from "sweetalert2";
 
 function PlaceEdit() {
@@ -25,6 +23,7 @@ function PlaceEdit() {
   const [rating, setRating] = useState(0);
   const [detail, setDetail] = useState("");
   const { placePostId } = useParams();
+  const url = process.env.REACT_APP_URL;
 
   // // axios.Post 버튼
   // const onSubmit = async (e) => {
@@ -53,7 +52,7 @@ function PlaceEdit() {
 
 
   //     await axios
-  //       .post("https://zhaoxilin.shop/api/places",  {
+  //       .post(`${url}/api/places`,  {
   //         headers: {
   //           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   //           "Content-Type": "multipart/form-data",
@@ -76,7 +75,7 @@ function PlaceEdit() {
 
   React.useEffect(() => {
     axios
-      .get("https://zhaoxilin.shop/api/places/" + placePostId)
+      .get(`${url}/api/places/` + placePostId)
       .then((res) => {
         setDetail(res.data.placeDetails);
       });
@@ -96,7 +95,7 @@ function PlaceEdit() {
 
   const editPost = () => {
       axios
-        .put(`https://zhaoxilin.shop/api/places/` + placePostId, newPost, {
+        .put(`${url}/api/places/` + placePostId, newPost, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },

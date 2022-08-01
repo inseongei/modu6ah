@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Header from "../../components/main/Header";
 import PlaceComment from "../../components/pages/PlaceComment";
 import KakaoMap from "../../components/pages/KakaoMap";
-import location from '../../images/location.png';
 import { FaStar } from "react-icons/fa";
 import revise from '../../images/revise.png';
 import img_delete from '../../images/delete (1).png'
@@ -13,7 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
 import { GrLocation } from "react-icons/gr";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { GetMyPageAxios } from "../../redux/modules/Data";
 
 const PlaceDetail = () => {
@@ -23,10 +22,11 @@ const PlaceDetail = () => {
   const [detail, setDetail] = useState("");
   const { placePostId } = useParams();
   const [num,setnum] = React.useState(0)
+  const url = process.env.REACT_APP_URL;
 
   React.useEffect(() => {
     axios
-      .get("https://zhaoxilin.shop/api/places/" + placePostId)
+      .get(`${url}/api/places/` + placePostId)
       .then((res) => {
         console.log(res.data);
         setDetail(res.data.placeDetails);
@@ -46,7 +46,7 @@ const PlaceDetail = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete('https://zhaoxilin.shop/api/places/' + placePostId,
+          .delete(`${url}/api/places/` + placePostId,
             { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
           .then((response) => {
             Swal.fire({
