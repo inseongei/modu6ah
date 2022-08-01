@@ -12,7 +12,6 @@ import ChatIcon from '../components/main/ChatIcon'
 import Baby from '../images/3DBABY.png' 
 import '../shared/App.css'
 import SubHeader from "../components/main/SubHeader";
-import TwoHeader from "../components/main/TwoHeader";
 
 const Main = () => {
   return (
