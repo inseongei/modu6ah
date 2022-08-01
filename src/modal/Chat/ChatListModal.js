@@ -23,6 +23,7 @@ const ChatListModal = ({ open, onClose }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const profileUrl = localStorage.getItem("profileUrl");
   const token = localStorage.getItem("accessToken");
+  const [post,setpost] = React.useState('')
 
   const fetchSuperHeros = () =>{
     return axios.get(`${url}/api/chats/rooms`,{
@@ -102,10 +103,12 @@ const ChatListModal = ({ open, onClose }) => {
                             })
                         .then((res) => {
                           console.log(res);
+                          setpost(res.data.titleRoom)
                           setNowRoom(res.data.chatMessageList);
                           setrealroom(data.roomId);
                         });
                     }} >
+                <div className="ChatTitle"> {data.postTitle}</div>
                 <div className="ChatName">{data.receiverNick === nickname ? data.senderNick:data.receiverNick}</div>
                 <div className="ChatContent">{data.message.length > 27 ? data.message.slice(0,27) + '...' : data.message}</div>
               </div>
@@ -155,8 +158,6 @@ const ChatListModal = ({ open, onClose }) => {
                   }).catch((err)=>{
                     console.log(err)
                   })
-
-
                 }}  className="Trash"/>
               </div>
               </div>
@@ -171,6 +172,7 @@ const ChatListModal = ({ open, onClose }) => {
         NowRoom={NowRoom}
         socket={socket}
         realroom={realroom}
+        post={post}
       />
     </Modal>
   );
