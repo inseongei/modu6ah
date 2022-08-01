@@ -40,6 +40,14 @@ html {
   color: #6b4e16;
 }
 
+.ChatTitle{
+    font-family: 'NanumGothic';
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 11px;
+    margin-bottom: 9px;
+}
+
 .Menu_item {
   max-width: 80%;
   width: 53%;

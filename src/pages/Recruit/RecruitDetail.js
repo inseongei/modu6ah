@@ -29,6 +29,7 @@ const RecruitDetail = () => {
   const { recruitPostId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [data,setdata] = useState()
 
   React.useEffect(() => {
     axios
@@ -49,7 +50,7 @@ const RecruitDetail = () => {
 
   const detail = useSelector((state) => state.post.list);
 
-  // console.log(detail);
+  console.log(detail);
 
   React.useEffect(() => {
     dispatch(detailPostDB(recruitPostId));
@@ -71,7 +72,9 @@ const RecruitDetail = () => {
           receiverNick: state.nickname,
           senderNick: nickname,
           profileUrlTwo: state.profileUrl,
+          title : detail.title
         };
+        setdata(JoinData)
         socket.emit("join_room", JoinData);
         setModalIsOpen(true);
       })
@@ -79,6 +82,10 @@ const RecruitDetail = () => {
         alert(err.response.data.message);
       });
   };
+
+  console.log(data)
+
+
 
   const deletePosting = () => {
     Swal.fire({
@@ -239,6 +246,7 @@ const RecruitDetail = () => {
         open={modalIsOpen} // 모달창 열기
         onClose={() => setModalIsOpen(false)} // 모달창 닫기
         socket={socket}
+        data={data}
       />
       <ChatIcon />
       <Footer />

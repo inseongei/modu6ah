@@ -10,7 +10,6 @@ import axios from "axios";
 import {useQuery} from 'react-query'
 
 const url = process.env.REACT_APP_URL;
-
 const socket = io.connect(`${url}`);
 
 const ChatListModal = ({ open, onClose }) => {
@@ -21,6 +20,7 @@ const ChatListModal = ({ open, onClose }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const profileUrl = localStorage.getItem("profileUrl");
   const token = localStorage.getItem("accessToken");
+  const [post,setpost] = useState('')
 
   const fetchSuperHeros = () =>{
     return axios.get(`${url}/api/chats/rooms`,{
@@ -32,7 +32,6 @@ const ChatListModal = ({ open, onClose }) => {
   }
   // modal이라 웹페이지 시작점부터 get 되서 isLoading 처리 안해도 됌
   const {isLoading , data } = useQuery('Chat-List',fetchSuperHeros)
-
 
 
 
@@ -100,10 +99,12 @@ const ChatListModal = ({ open, onClose }) => {
                             })
                         .then((res) => {
                           console.log(res);
+                          setpost(res.data.titleRoom)
                           setNowRoom(res.data.chatMessageList);
                           setrealroom(data.roomId);
                         });
                     }} >
+                      <div className="ChatTitle">{data.postTitle}</div>
                 <div className="ChatName">{data.receiverNick === nickname ? data.senderNick:data.receiverNick}</div>
                 <div className="ChatContent">{data.message.length > 27 ? data.message.slice(0,27) + '...' : data.message}</div>
               </div>
@@ -163,6 +164,7 @@ const ChatListModal = ({ open, onClose }) => {
         NowRoom={NowRoom}
         socket={socket}
         realroom={realroom}
+        post={post}
       />
     </Modal>
   );
