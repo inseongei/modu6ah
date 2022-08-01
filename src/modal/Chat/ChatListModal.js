@@ -35,7 +35,6 @@ const ChatListModal = ({ open, onClose }) => {
   // modal이라 웹페이지 시작점부터 get 되서 isLoading 처리 안해도 됌
   const {isLoading , data } = useQuery('Chat-List',fetchSuperHeros)
 
-  console.log(data)
 
 
 
@@ -102,7 +101,6 @@ const ChatListModal = ({ open, onClose }) => {
                               }
                             })
                         .then((res) => {
-                          console.log(res);
                           setpost(res.data.titleRoom)
                           setNowRoom(res.data.chatMessageList);
                           setrealroom(data.roomId);
