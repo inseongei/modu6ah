@@ -8,8 +8,11 @@ import io from "socket.io-client";
 import cancel from '../../images/cancel.png'
 import axios from "axios";
 import {useQuery} from 'react-query'
+import { BsTrashFill } from "react-icons/bs";
+import Swal from 'sweetalert2'
 
 const url = process.env.REACT_APP_URL;
+
 const socket = io.connect(`${url}`);
 
 const ChatListModal = ({ open, onClose }) => {
@@ -20,7 +23,6 @@ const ChatListModal = ({ open, onClose }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const profileUrl = localStorage.getItem("profileUrl");
   const token = localStorage.getItem("accessToken");
-  const [post,setpost] = useState('')
 
   const fetchSuperHeros = () =>{
     return axios.get(`${url}/api/chats/rooms`,{
@@ -28,10 +30,11 @@ const ChatListModal = ({ open, onClose }) => {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }
     })
-    
   }
   // modal이라 웹페이지 시작점부터 get 되서 isLoading 처리 안해도 됌
   const {isLoading , data } = useQuery('Chat-List',fetchSuperHeros)
+
+  console.log(data)
 
 
 
@@ -99,12 +102,10 @@ const ChatListModal = ({ open, onClose }) => {
                             })
                         .then((res) => {
                           console.log(res);
-                          setpost(res.data.titleRoom)
                           setNowRoom(res.data.chatMessageList);
                           setrealroom(data.roomId);
                         });
                     }} >
-                      <div className="ChatTitle">{data.postTitle}</div>
                 <div className="ChatName">{data.receiverNick === nickname ? data.senderNick:data.receiverNick}</div>
                 <div className="ChatContent">{data.message.length > 27 ? data.message.slice(0,27) + '...' : data.message}</div>
               </div>
@@ -138,19 +139,25 @@ const ChatListModal = ({ open, onClose }) => {
               </div>
               <div className="fourBox">
               <div className="ChatDel">
-                {/* <BsTrashFill onClick={()=>{
+                <BsTrashFill onClick={()=>{
+
                   axios
-                  .delete(`${url}/api/chats/rooms/` + data.roomId,{
+                  .put(`${url}/api/chats/rooms/` + data.roomId,null,{
                     headers: { Authorization: `Bearer ${token}` },
                   })
-                  .then((res) => {
-                    console.log(res.data)
-                    alert("방에 나갔습니다");
+                  .then((res)=>{
+                    Swal.fire({
+                      text: `채팅방 삭제완료`,
+                      icon: "success",
+                      confirmButtonText: "확인",
+                      confirmButtonColor: '#ffb300'
+                    })
+                  }).catch((err)=>{
+                    console.log(err)
                   })
-                  .catch((err) => {
-                    console.log(err);
-                  });
-                }}  className="Trash"/> */}
+
+
+                }}  className="Trash"/>
               </div>
               </div>
             </div>
@@ -164,7 +171,6 @@ const ChatListModal = ({ open, onClose }) => {
         NowRoom={NowRoom}
         socket={socket}
         realroom={realroom}
-        post={post}
       />
     </Modal>
   );
