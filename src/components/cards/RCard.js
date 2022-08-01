@@ -13,6 +13,7 @@ function RCard() {
   const [noMore,setnoMore] = useState(true)
   const [index , setindex] = useState(1)
   const token = localStorage.getItem('accessToken')
+  const url = process.env.REACT_APP_URL;
 
   // 배열 자르기 함수 (배열 , 몇개단위)
   const division = (arr, n) => {
@@ -30,7 +31,7 @@ function RCard() {
   // 데이터 변경 될 때 새로운 데이터 불러오기
   const refetch = () =>{
     axios
-    .get("https://zhaoxilin.shop/api/reviews", token ?{
+    .get(`${url}/api/reviews`, token ?{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -43,7 +44,7 @@ function RCard() {
 
   React.useEffect(() => {
     axios
-      .get("https://zhaoxilin.shop/api/reviews", token ?{
+      .get(`${url}/api/reviews`, token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -57,7 +58,7 @@ function RCard() {
   // 페이지 스크롤이 하단에 도착할때 실행되는 함수
   const axiosData = () => {
     axios
-      .get("https://zhaoxilin.shop/api/reviews",token ?{
+      .get(`${url}/api/reviews`,token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -111,7 +112,7 @@ function RCard() {
                     onClick={() => {
                       axios
                         .put(
-                          "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                          `${url}/api/reviews/bookmark/` +
                             data.reviewPostId,
                           null,
                           {
@@ -133,7 +134,7 @@ function RCard() {
                     onClick={() => {
                       axios
                         .put(
-                          "https://zhaoxilin.shop/api/reviews/bookmark/" +
+                          `${url}/api/reviews/bookmark/` +
                             data.reviewPostId,
                           null,
                           {

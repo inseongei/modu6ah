@@ -12,9 +12,6 @@ function SearchRcard({searchdata}) {
   const [btn, setbtn] = React.useState(true)
   const [athis, setathis] = React.useState(6)
 
-
-
-
   const SearchMore =  () => {
     setbtn(!btn);
     if(btn === false){

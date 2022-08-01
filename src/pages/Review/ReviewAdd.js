@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon';
-import img_delete from '../../images/delete (1).png';
 
 function ReviewAdd() {
   const [title, setTitle] = useState("");
@@ -23,9 +22,7 @@ function ReviewAdd() {
  
   const fileInput = React.useRef(null);
   const navigate = useNavigate();
-  let array = [];
-  let formData = new FormData();
-
+  const url = process.env.REACT_APP_URL;
 
   // axios.Post 버튼
   const onSubmit = async (e) => {
@@ -81,7 +78,7 @@ function ReviewAdd() {
 
     if (array.length < 4) {
       await axios
-        .post("https://zhaoxilin.shop/api/reviews", formData, {
+        .post(`${url}/api/reviews`, formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             "Content-Type": "multipart/form-data",

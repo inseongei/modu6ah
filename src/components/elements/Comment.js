@@ -11,13 +11,14 @@ const Comment = (props) => {
 
   const navigate = useNavigate();
   let { recruitPostId } = useParams();
+  const url = process.env.REACT_APP_URL;
 
   //댓글 작성
   const addComment = () => {
     const comment_data = {
       comment, nickname
     }
-    axios.post('https://zhaoxilin.shop/api/recruits/' + recruitPostId + '/comments',
+    axios.post(`${url}/api/recruits/` + recruitPostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
@@ -31,7 +32,7 @@ const Comment = (props) => {
 
   // 댓글 조회
   React.useEffect(() => {
-    axios.get('https://zhaoxilin.shop/api/recruits/' + recruitPostId,
+    axios.get(`${url}/api/recruits/` + recruitPostId,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
         setState(res.data.recruitComments)
@@ -46,7 +47,7 @@ const Comment = (props) => {
   const deleteComment = (e) => {
     // console.log(e.target.id);
     axios
-      .delete('https://zhaoxilin.shop/api/recruits/' + recruitPostId + '/comments/' + e.target.id, {
+      .delete(`${url}/api/recruits/` + recruitPostId + '/comments/' + e.target.id, {
         headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
       })
       .then((response) => {

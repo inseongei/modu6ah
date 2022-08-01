@@ -7,19 +7,19 @@ import SearchLcard from '../../components/cards/SearchLcard';
 import SearchRcard from '../../components/cards/SearchRcard';
 import Footer from "../../components/main/Footer";
 import ChatIcon from '../../components/main/ChatIcon'
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const MainSearch = () => {
-  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const [Morerecruit, setMorerecruit] = useState([]);
   const [Moreplace, setMoreplace] = useState([]);
   const [Morereview, setMorereview] = useState([]);
+  const url = process.env.REACT_APP_URL;
 
   const search = () => {
     if (keyword.length > 0) {
-      axios.get(`https://zhaoxilin.shop/api/search?keyword=${keyword}`, {
+      axios.get(`${url}/api/search?keyword=${keyword}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

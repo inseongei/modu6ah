@@ -20,7 +20,6 @@ const Header = () => {
   const nickname = localStorage.getItem("nickname");
   const Profile = localStorage.getItem("profileUrl");
 
-
   // 로그아웃 눌렀을 때 쿠키 (토큰, 닉네임), 로컬 스토리지 (토큰, Url) 삭제 후 새로고침
   const logoOut = () => {
     Swal.fire({

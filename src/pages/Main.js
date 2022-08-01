@@ -9,7 +9,6 @@ import MainRcard from '../components/cards/MainRcard';
 import Footer from "../components/main/Footer";
 import MainScard from "../components/cards/MainScard";
 import ChatIcon from '../components/main/ChatIcon'
-import Baby from '../images/3DBABY.png' 
 import '../shared/App.css'
 import SubHeader from "../components/main/SubHeader";
 

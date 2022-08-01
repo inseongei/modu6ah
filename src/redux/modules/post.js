@@ -1,6 +1,6 @@
 import axios from "axios";
-import Swal from "sweetalert2";
 
+const url = process.env.REACT_APP_URL;
 
 // Actions
 const CREATE = "post/CREATE";
@@ -39,7 +39,7 @@ export const createPostDB = (post_data) => {
   const post = post_data;
   return function (dispatch) {
     axios
-      .post(`https://zhaoxilin.shop/api/recruits`, post, {
+      .post(`${url}/api/recruits`, post, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -59,7 +59,7 @@ export const createPostDB = (post_data) => {
 export const loadPostDB = () => {
   return function (dispatch) {
     axios
-      .get(`https://zhaoxilin.shop/api/recruits`, {
+      .get(`${url}/api/recruits`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -74,7 +74,7 @@ export const loadPostDB = () => {
 export const detailPostDB = (recruitPostId) => {
   return function (dispatch) {
     axios
-      .get("https://zhaoxilin.shop/api/recruits/" + recruitPostId, {
+      .get(`${url}/api/recruits/` + recruitPostId, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -91,7 +91,7 @@ export const detailPostDB = (recruitPostId) => {
 export const updatePostDB = (recruitPostId, newPost) => {
   return function (dispatch) {
     axios
-      .put(`https://zhaoxilin.shop/api/recruits/` + recruitPostId, newPost, {
+      .put(`${url}/api/recruits/` + recruitPostId, newPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -110,7 +110,7 @@ export const updatePostDB = (recruitPostId, newPost) => {
 export const deletePostDB = (recruitPostId, navigate) => {
   return function (dispatch) {
     axios
-      .delete("https://zhaoxilin.shop/api/recruits/" + recruitPostId, {
+      .delete(`${url}/api/recruits/` + recruitPostId, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

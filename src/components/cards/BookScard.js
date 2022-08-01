@@ -13,10 +13,11 @@ function BookScard() {
   const navigate = useNavigate();
   const [book, setbook] = React.useState();
   const [btn, setbtn] = React.useState(true);
+  const url = process.env.REACT_APP_URL;
 
   const refetch = () =>{
     axios
-    .get("https://zhaoxilin.shop/api/mypage/bookmark/", {
+    .get(`${url}/api/mypage/bookmark/`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -37,7 +38,7 @@ function BookScard() {
 
   const recruitsMore = async () => {
     await axios
-      .get("https://zhaoxilin.shop/api/mypage/bookmark/", {
+      .get(`${url}/api/mypage/bookmark/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -65,7 +66,7 @@ function BookScard() {
                       onClick={() => {
                         axios
                           .put(
-                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
+                            `${url}/api/recruits/bookmark/` +
                               item.recruitPostId,
                             null,
                             {
@@ -88,7 +89,7 @@ function BookScard() {
                       onClick={() => {
                         axios
                           .put(
-                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
+                            `${url}/api/recruits/bookmark/` +
                               item.recruitPostId,
                             null,
                             {

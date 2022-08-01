@@ -4,8 +4,11 @@ import chat from '../../images/chatlist.png'
 import io from "socket.io-client";
 import { toast } from "react-toastify";
 import ChatListModal from '../../modal/Chat/ChatListModal'
+
+const url = process.env.REACT_APP_URL;
+
 // 소켓서버 연결
-const socket = io.connect("https://zhaoxilin.shop");
+const socket = io.connect(`${url}`);
 const ChatIcon = () => {
     const [modalIsOpen, setModalIsOpen] = React.useState(false);
     const [notify, setNotify] = React.useState([]);

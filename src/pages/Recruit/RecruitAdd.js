@@ -25,6 +25,8 @@ const RecruitAdd = () => {
   const datemoment = moment(date).format("YYYY-MM-DD")
   const timemoment = moment(time).format("HH:mm")
   // const dispatch = useDispatch();
+  const url = process.env.REACT_APP_URL;
+
 
   // const addPost = () => {
     const post_data = {
@@ -40,7 +42,7 @@ const RecruitAdd = () => {
 
  const addPost = () => {
       axios
-        .post(`https://zhaoxilin.shop/api/recruits`, 
+        .post(`${url}/api/recruits`, 
        post_data
         , {
           headers: {

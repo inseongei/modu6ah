@@ -1,11 +1,9 @@
 import React from "react";
 import Modal from "react-modal";
 import "../../shared/App.css";
-import { BiLogOut } from "react-icons/bi";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import cancel from '../../images/cancel.png'
 import back from '../../images/back.png'
 import axios from 'axios'
 
@@ -18,9 +16,8 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
   const [currentMessage, setCurrentMessage] = React.useState("");
   const Img_Url = localStorage.getItem("profileUrl");
   const [info, setinfo] = React.useState();
+  const url = process.env.REACT_APP_URL;
 
-  console.log(info)
-  console.log(NowRoom)
 
   React.useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
@@ -58,7 +55,7 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom }) => {
   };
 
   const refetch = () =>{
-    axios.get("https://zhaoxilin.shop/api/chats/rooms",{
+    axios.get(`${url}/api/chats/rooms`,{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }

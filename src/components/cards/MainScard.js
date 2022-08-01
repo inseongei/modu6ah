@@ -15,6 +15,7 @@ function MainScard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = localStorage.getItem("accessToken");
+  const url = process.env.REACT_APP_URL;
 
   React.useEffect(() => {
     token ? dispatch(GetMainAxois()) : dispatch(GetMainLogin());
@@ -45,7 +46,7 @@ function MainScard() {
                       onClick={() => {
                         axios
                           .put(
-                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
+                            `${url}/api/recruits/bookmark/` +
                               item.recruitPostId,
                             null,
                             {
@@ -67,7 +68,7 @@ function MainScard() {
                       onClick={() => {
                         axios
                           .put(
-                            "https://zhaoxilin.shop/api/recruits/bookmark/" +
+                            `${url}/api/recruits/bookmark/` +
                               item.recruitPostId,
                             null,
                             {

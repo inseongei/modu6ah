@@ -13,11 +13,13 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
     const [code, setCode] = useState('');
     const [newcode, setNewCode] = useState('');
 
+    const url = process.env.REACT_APP_URL;
+
     //인증 코드가 input 값과 같으면 회원가입 완료
     const test = () => {
         if (emailcode || newcode == code) {
             axios
-                .post("https://zhaoxilin.shop/api/users/signup", data
+                .post(`${url}/api/users/signup`, data
                 )
                 .then((response) => {
                     Swal.fire({
@@ -42,7 +44,7 @@ const EmailAlert = ({ open, onClose, emailcode, data }) => {
     const register = (e) => {
         e.preventDefault();
           axios
-            .post("https://zhaoxilin.shop/api/users/signup/authMail",
+            .post(`${url}/api/users/signup/authMail`,
               data
             )
             .then((response) => {

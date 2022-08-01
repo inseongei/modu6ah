@@ -13,7 +13,7 @@ const RecruitComment = () => {
   const token = localStorage.getItem('accessToken')
   const navigate = useNavigate();
   const { recruitPostId } = useParams();
-  
+  const url = process.env.REACT_APP_URL;
 
   //댓글 작성
   const addComment = () => {
@@ -21,7 +21,7 @@ const RecruitComment = () => {
     const comment_data = {
       comment, nickname
     }
-    axios.post('https://zhaoxilin.shop/api/recruits/' + recruitPostId + '/comments',
+    axios.post(`${url}/api/recruits/` + recruitPostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => {
@@ -47,7 +47,7 @@ const RecruitComment = () => {
 
   const refetch = () =>{
     axios
-    .get('https://zhaoxilin.shop/api/recruits/' + recruitPostId, {
+    .get(`${url}/api/recruits/` + recruitPostId, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -69,7 +69,7 @@ const RecruitComment = () => {
   const deleteComment = (e) => {
     // console.log(e.target);
     axios
-      .delete('https://zhaoxilin.shop/api/recruits/' + recruitPostId + '/comments/' + e.target.id,
+      .delete(`${url}/api/recruits/` + recruitPostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
 
       .then((response) => {

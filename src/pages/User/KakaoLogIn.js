@@ -14,6 +14,7 @@ const KakaoLogIn = () => {
   const KAKAO_GRANT_TYPE = "authorization_code";
   const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+  const url = process.env.REACT_APP_URL;
 
   axios
     .post(
@@ -30,7 +31,7 @@ const KakaoLogIn = () => {
       //   console.log(access_token);
 
       axios
-        .post("https://zhaoxilin.shop/api/users/kakao/member", {
+        .post(`${url}/api/users/kakao/member`, {
           access_token,
         })
         .then((res) => {
@@ -40,7 +41,7 @@ const KakaoLogIn = () => {
           const user_name = res.data.kakao_account.profile.nickname;
 
           axios
-            .post("https://zhaoxilin.shop/api/users/kakao/parsing", {
+            .post(`${url}/api/users/kakao/parsing`, {
               user_id,
               user_email,
               user_name,

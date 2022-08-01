@@ -1,21 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Grid from "../../components/elements/Grid";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/main/Header";
-import { useForm } from 'react-hook-form'
 import EmailAlert from "../../components/alert/EmailAlert";
 import Footer from "../../components/main/Footer";
 
 const SignUp = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { watch } = useForm();
-  // console.log(watch('form-input'))
   const [disable, setDisable] = useState(false);
   const [emailcode, setEmailCode] = useState('');
 
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPw] = useState("");
@@ -35,6 +30,8 @@ const SignUp = () => {
   const [isNickname, setIsNickname] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+
+  const url = process.env.REACT_APP_URL;
 
   // 이메일 검사
   const onChangeEmail = (e) => {
@@ -108,7 +105,7 @@ const SignUp = () => {
     }
 
     if (isEmail) {
-      await axios.post("https://zhaoxilin.shop/api/users/signup/emailCheck", {
+      await axios.post(`${url}/api/users/signup/emailCheck`, {
         email
       }
       ).then((res) => {
@@ -135,7 +132,7 @@ const SignUp = () => {
     }
 
     if (isNickname) {
-      await axios.post("https://zhaoxilin.shop/api/users/signup/nicknameCheck", {
+      await axios.post(`${url}/api/users/signup/nicknameCheck`, {
         nickname
       }
       ).then((res) => {
@@ -160,7 +157,7 @@ const SignUp = () => {
       setDisable(true)
       setModalIsOpen(true)
       axios
-        .post("https://zhaoxilin.shop/api/users/signup/authMail", {
+        .post(`${url}/api/users/signup/authMail`, {
           email
         })
         .then((response) => {

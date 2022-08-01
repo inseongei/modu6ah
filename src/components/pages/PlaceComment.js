@@ -12,7 +12,7 @@ const PlaceComment = () => {
   const token = localStorage.getItem("accessToken");
   const navigate = useNavigate();
   const { placePostId } = useParams();
-  // console.log(state)
+  const url = process.env.REACT_APP_URL;
 
   //댓글 작성
   const addComment = () => {
@@ -20,7 +20,7 @@ const PlaceComment = () => {
     const comment_data = {
       comment, nickname
     }
-    axios.post('https://zhaoxilin.shop/api/places/' + placePostId + '/comments',
+    axios.post(`${url}/api/places/` + placePostId + '/comments',
       comment_data,
       { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((res) => { 
@@ -44,7 +44,7 @@ const PlaceComment = () => {
 
   const refetch = () =>{
     axios
-    .get('https://zhaoxilin.shop/api/places/' + placePostId, {
+    .get(`${url}/api/places/` + placePostId, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -65,7 +65,7 @@ const PlaceComment = () => {
   const deleteComment = (e) => {
     // console.log(e.target);
     axios
-      .delete('https://zhaoxilin.shop/api/places/' + placePostId + '/comments/' + e.target.id,
+      .delete(`${url}/api/places/` + placePostId + '/comments/' + e.target.id,
         { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } })
       .then((response) => {
         refetch();
