@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from '../../components/main/ChatIcon';
+import img_delete from '../../images/delete (1).png';
 
 function ReviewAdd() {
   const [title, setTitle] = useState("");
@@ -19,8 +20,6 @@ function ReviewAdd() {
   const [address, setAddress] = useState("");
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
- 
-  const fileInput = React.useRef(null);
   const navigate = useNavigate();
   const url = process.env.REACT_APP_URL;
 
@@ -28,46 +27,15 @@ function ReviewAdd() {
   const onSubmit = async (e) => {
     e.preventDefault();
     e.persist();
-    let num = 4
 
+    let files = e.target.profile_files.files;
+    let formData = new FormData();
+    console.log(files)
 
-
-    // // 반복문 돌려서 다중 이미지 처리
-    // for (let i = 0; i < array.length; i++) {
-    //   let files = e.target.profile_files.files[i];
-    //   formData.append("imageUrl", files[i])
-    // }
-    // console.log(array)
-
-      let reader = new FileReader();
-      reader.onload = (e) =>{
-        console.log(e.target.result)
-
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log(value);
+    
+    // 반복문 돌려서 다중 이미지 처리
+    for (let i = 0; i < files.length; i++) {
+      formData.append("imageUrl", files[i]);
     }
 
     // 제목,내용,장소,별점 데이터 => 폼데이터 변환
@@ -76,7 +44,7 @@ function ReviewAdd() {
     formData.append("productType", location);
     formData.append("url", address);
 
-    if (array.length < 4) {
+    if (files.length < 4) {
       await axios
         .post(`${url}/api/reviews`, formData, {
           headers: {
@@ -152,7 +120,6 @@ function ReviewAdd() {
               <input
                 id="input-file"
                 type="file"
-                ref = {fileInput}
                 name="profile_files"
                 multiple="multiple"
                 style={{ display: "none" }}
@@ -272,19 +239,16 @@ padding-bottom: 10px;
 
 const Title = styled.div`
   padding-top: 40px;
-
   .subject {
     color: #a8a8a8;
     margin-bottom: 2px;
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
   }
-
   .page {
     font-size: 30px;
     font-weight: 700;
   }
-
   p {
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
@@ -327,13 +291,11 @@ border-radius: 10px;
     align-items: center;
     justify-content: left;
     background: #FAFAFA;
-
     img {
       width: 37px;
       height: 37px;
       border: none;
     }
-
     p {
       font-family: 'Nanum Gothic', sans-serif;
       font-weight: 700;
@@ -387,7 +349,6 @@ border-radius: 10px;
      padding-left: 15px;
      color: #3C3C3C;
     }
-
     img {
       width: 16px;
       height: 17px;
@@ -417,7 +378,6 @@ border-radius: 10px;
     margin-top: 10px;
     padding-left: 15px;
     font-size: 16px;
-
     ::placeholder{
       color: lightgray;
     }
@@ -441,7 +401,6 @@ border-radius: 10px;
     resize: vertical; /* 상하만 가능 */
     margin-bottom: 20px;
     padding: 10px;
-
     ::placeholder{
       color: lightgray;
     }
@@ -459,7 +418,6 @@ border-radius: 10px;
       }
     }
   }
-
   .position > strong {
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
