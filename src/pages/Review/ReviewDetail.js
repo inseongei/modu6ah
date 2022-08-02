@@ -26,11 +26,11 @@ const url = process.env.REACT_APP_URL;
  
   React.useEffect(() => {
     axios
-      .get(`${url}/api/reviews/` + reviewPostId,{
+      .get(`${url}/api/reviews/` + reviewPostId,token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
+      } : null)
       .then((res) => {
         setDetail(res.data.reviewDetails);
       });
@@ -38,11 +38,11 @@ const url = process.env.REACT_APP_URL;
 
   const refetch = () =>{
     axios
-    .get(`${url}/api/reviews/` + reviewPostId,{
+    .get(`${url}/api/reviews/` + reviewPostId,token ?{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    })
+    } : null)
     .then((res) => {
       setDetail(res.data.reviewDetails);
     });
