@@ -82,6 +82,12 @@ const RecruitComment = () => {
       });
   };
 
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      addComment()
+    }
+  }
+
   return (
     <CommentBox>
       <div className='comment'>
@@ -97,6 +103,7 @@ const RecruitComment = () => {
                 onChange={e =>
                   setComment(e.target.value)}
                   value={comment}
+                  onKeyPress={onKeyPress}
               /> 
               <div className='btnBox'>
               <button className='btn'
