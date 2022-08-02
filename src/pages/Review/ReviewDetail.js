@@ -12,6 +12,7 @@ import revise from '../../images/revise.png';
 import img_delete from '../../images/delete (1).png'
 import { useDispatch } from "react-redux";
 import { GetMyPageAxios } from "../../redux/modules/Data";
+import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 
 const ReviewDetail = () => {
 const nickname = localStorage.getItem("nickname");
@@ -20,6 +21,7 @@ const [detail, setDetail] = React.useState()
 const navigate = useNavigate()
 const dispatch = useDispatch();
 const [num,setnum] = React.useState(0)
+const token = localStorage.getItem('accessToken')
 const url = process.env.REACT_APP_URL;
  
   React.useEffect(() => {
@@ -29,6 +31,19 @@ const url = process.env.REACT_APP_URL;
         setDetail(res.data.reviewDetails);
       });
   }, []);
+
+  const refetch = () =>{
+    axios
+    .get(`${url}/api/reviews/` + reviewPostId)
+    .then((res) => {
+      setDetail(res.data.reviewDetails);
+    });
+  }
+
+
+
+
+
 
   const deletePlace = () => {
 
@@ -120,7 +135,89 @@ const url = process.env.REACT_APP_URL;
               <div className="box_top">
                 <div className="title">
                   <div className='title_box'>
-                  <span>{detail.title}</span>
+                  <span className='onespan'>
+                    <span>{detail.title}</span>
+                    <span className={detail.nickname === nickname ? 'none' : 's'}>
+                    {detail.bookmarkStatus === true ? (
+                      <BsFillBookmarkFill
+                        className={token ? "iconbook2" : "none"}
+                        onClick={() => {
+                          axios
+                            .put(
+                              `${url}/api/reviews/bookmark/` +
+                              detail.reviewPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              console.log(res.data)
+                              refetch()
+                            });
+                        }}
+                      />
+                    ) : (
+                      <BsBookmark
+                        className={token ? "iconbook" : "none"}
+                        onClick={() => {
+                          axios
+                            .put(
+                              `${url}/api/reviews/bookmark/` +
+                              detail.reviewPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              console.log(res.data)
+                              refetch()
+                            });
+                        }}
+                      />
+                    )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </span>
+                  </span>
                   <p>{detail.productType}</p>
                   </div>
                   {nickname === detail.nickname ? (
@@ -136,6 +233,91 @@ const url = process.env.REACT_APP_URL;
                   >
                 <img src={img_delete} />
                   </button>
+
+
+                  {detail.bookmarkStatus === true ? (
+                      <BsFillBookmarkFill
+                        className={token ? "iconbook3" : "none"}
+                        onClick={() => {
+                          axios
+                            .put(
+                              `${url}/api/reviews/bookmark/` +
+                              detail.reviewPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              console.log(res.data)
+                              refetch()
+                            });
+                        }}
+                      />
+                    ) : (
+                      <BsBookmark
+                        className={token ? "iconbook4" : "none"}
+                        onClick={() => {
+                          axios
+                            .put(
+                              `${url}/api/reviews/bookmark/` +
+                              detail.reviewPostId,
+                              null,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "accessToken"
+                                  )}`,
+                                },
+                              }
+                            )
+                            .then((res) => {
+                              console.log(res.data)
+                              refetch()
+                            });
+                        }}
+                      />
+                    )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </Btn>
               ) : (
                 <></>
@@ -294,6 +476,55 @@ const ContentBox = styled.div`
   width: 380px;
   margin-left: 50px;
 
+  .onespan{
+    display: flex;
+    justify-content: space-between;
+    width: 450px;
+  }
+
+  .s{
+    position: relative;
+    bottom: 2px;
+  }
+
+  .none{
+    display: none;
+  }
+
+  .iconbook{
+    width: 30px;
+    height:30px;
+    cursor: pointer;
+  }
+
+  .iconbook2{
+    width: 30px;
+    height:30px;
+    cursor: pointer;
+    color: #6b4e16;
+  }
+
+  .iconbook3{
+    width: 30px;
+    height:30px;
+    position: relative;
+    top:5px;
+    color: #6b4e16;
+    cursor: pointer;
+  }
+
+  .iconbook4{
+    width: 30px;
+    height:30px;
+    position: relative;
+    top:5px;
+    cursor: pointer;
+
+  }
+
+
+
+
   .title {
     display: flex;
     font-size: 20px;
@@ -442,7 +673,7 @@ const Image = styled.div`
 const Btn = styled.div`
   display: flex;
   position: absolute;
-  padding-left: 416px;
+  padding-left: 380px;
 
   .btn {
     height: 20px;
