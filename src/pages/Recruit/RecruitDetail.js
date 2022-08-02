@@ -228,7 +228,7 @@ const RecruitDetail = () => {
                             )
                             .then((res) => {
                               console.log(res.data)
-                              refetch()
+                              dispatch(detailPostDB(recruitPostId))
                             });
                         }}
                       />
@@ -251,7 +251,7 @@ const RecruitDetail = () => {
                             )
                             .then((res) => {
                               console.log(res.data)
-                              refetch()
+                              dispatch(detailPostDB(recruitPostId))
                             });
                         }}
                       />
@@ -352,7 +352,7 @@ const RecruitDetail = () => {
                             )
                             .then((res) => {
                               console.log(res.data)
-                              refetch()
+                              dispatch(detailPostDB(recruitPostId))
                             });
                         }}
                       />
@@ -375,7 +375,7 @@ const RecruitDetail = () => {
                             )
                             .then((res) => {
                               console.log(res.data)
-                              refetch()
+                              dispatch(detailPostDB(recruitPostId))
                             });
                         }}
                       />
