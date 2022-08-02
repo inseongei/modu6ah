@@ -28,11 +28,11 @@ const PlaceDetail = () => {
 
   React.useEffect(() => {
     axios
-      .get(`${url}/api/places/` + placePostId,{
+      .get(`${url}/api/places/` + placePostId,token ?{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
+      } : null)
       .then((res) => {
         console.log(res.data);
         setDetail(res.data.placeDetails);
@@ -41,11 +41,11 @@ const PlaceDetail = () => {
 
   const refetch = () =>{
     axios
-    .get(`${url}/api/places/` + placePostId,{
+    .get(`${url}/api/places/` + placePostId,token ?{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    })
+    } : null)
     .then((res) => {
       console.log(res.data);
       setDetail(res.data.placeDetails);

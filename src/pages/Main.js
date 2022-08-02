@@ -39,7 +39,7 @@ const Main = () => {
               </a>
             </div>
           </div>
-          <MainScard />
+          <MainScard/>
           <hr className="hrz" />
 
           <div className="card_title">

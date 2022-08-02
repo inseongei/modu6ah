@@ -35,7 +35,11 @@ const RecruitDetail = () => {
 
   React.useEffect(() => {
     axios
-      .get(`${url}/api/recruits/` + recruitPostId)
+      .get(`${url}/api/recruits/` + recruitPostId,token ?{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      } : null)
       .then((response) => {
         console.log(response.data)
         setState(response.data.recruitDetails);
@@ -46,9 +50,15 @@ const RecruitDetail = () => {
   }, []);
 
 
+
+
   const refetch = () =>{
     axios
-      .get(`${url}/api/recruits/` + recruitPostId)
+      .get(`${url}/api/recruits/` + recruitPostId,token ?{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      } : null)
       .then((response) => {
         console.log(response.data)
         setState(response.data.recruitDetails);
@@ -58,7 +68,9 @@ const RecruitDetail = () => {
       });
   }
 
-
+  // React.useEffect(() => {
+  //   dispatch(detailPostDB(recruitPostId));
+  // }, []);
 
 
 
@@ -70,13 +82,11 @@ const RecruitDetail = () => {
     setOn(!on);
   };
 
-  const detail = useSelector((state) => state.post.list);
+  // const detail = useSelector((state) => state.post.list);
 
-  console.log(detail);
+  // console.log(detail);
 
-  React.useEffect(() => {
-    dispatch(detailPostDB(recruitPostId));
-  }, []);
+
 
   // const deletePosting = () => {
   //   dispatch(deletePostDB(recruitPostId, navigate));
@@ -94,7 +104,7 @@ const RecruitDetail = () => {
           receiverNick: state.nickname,
           senderNick: nickname,
           profileUrlTwo: state.profileUrl,
-          title : detail.title
+          title : state.title
         };
         setdata(JoinData)
         socket.emit("join_room", JoinData);
@@ -169,23 +179,23 @@ const RecruitDetail = () => {
                   </div>
                   <div>
                     <strong> 제목 </strong>
-                    <span>{detail.title}</span>
+                    <span>{state.title}</span>
                   </div>
                   <div>
                     <strong> 날짜 </strong>
-                    <span>{detail.date}</span>
+                    <span>{state.date}</span>
                   </div>
                   <div>
                     <strong> 시간 </strong>
-                    <span>{detail.time}</span>
+                    <span>{state.time}</span>
                   </div>
                   <div>
                     <strong> 위치 </strong>
-                    <span>{detail.place}</span>
+                    <span>{state.place}</span>
                   </div>
                   <div>
                     <strong> 연령 </strong>
-                    <span>{detail.age}</span>
+                    <span>{state.age}</span>
                   </div>
                 </div>
 
@@ -193,13 +203,13 @@ const RecruitDetail = () => {
                 <div className="card-right">
 
                   <div className="card-top">
-                    {nickname === detail.nickname ? (
+                    {nickname === state.nickname ? (
                       <>
                         <Btn>
                           <button className="btn"
                             style={{ marginRight: "-8px" }}
                             onClick={() => {
-                              navigate(`/recruitedit/` + detail.recruitPostId);
+                              navigate(`/recruitedit/` + state.recruitPostId);
                             }}>
                             <img src={revise} />
                           </button>
@@ -209,14 +219,14 @@ const RecruitDetail = () => {
                             <img src={img_delete} />
                           </button>
 
-                          {detail.bookmarkStatus === true ? (
+                          {state.bookmarkStatus === true ? (
                       <BsFillBookmarkFill
                         className={token ? "iconbook2" : "none"}
                         onClick={() => {
                           axios
                             .put(
                               `${url}/api/recruits/bookmark/` +
-                              detail.recruitPostId,
+                              state.recruitPostId,
                               null,
                               {
                                 headers: {
@@ -228,7 +238,7 @@ const RecruitDetail = () => {
                             )
                             .then((res) => {
                               console.log(res.data)
-                              dispatch(detailPostDB(recruitPostId))
+                              refetch()
                             });
                         }}
                       />
@@ -239,7 +249,7 @@ const RecruitDetail = () => {
                           axios
                             .put(
                               `${url}/api/recruits/bookmark/` +
-                              detail.recruitPostId,
+                              state.recruitPostId,
                               null,
                               {
                                 headers: {
@@ -251,62 +261,26 @@ const RecruitDetail = () => {
                             )
                             .then((res) => {
                               console.log(res.data)
-                              dispatch(detailPostDB(recruitPostId))
+                              refetch()
                             });
                         }}
                       />
                     )}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </Btn>
 
                         <div className="profile">
                           <div className="detail_profile">
                             <img
-                              src={detail.profileUrl}
+                              src={state.profileUrl}
                               alt="프로필"
                               onClick={() => {
-                                navigate("/manager/" + detail.nickname);
-                                dispatch(GetMyPageAxios(detail.nickname));
+                                navigate("/manager/" + state.nickname);
+                                dispatch(GetMyPageAxios(state.nickname));
                               }}
                             />
                           </div>
                           <div className="detail_username">
-                            <div className="username">{detail.nickname}</div>
+                            <div className="username">{state.nickname}</div>
                           </div>
                         </div>
                       </>
@@ -315,16 +289,16 @@ const RecruitDetail = () => {
                         <div className="profile">
                           <div className="detail_profile">
                             <img
-                              src={detail.profileUrl}
+                              src={state.profileUrl}
                               alt="프로필"
                               onClick={() => {
-                                navigate("/manager/" + detail.nickname);
-                                dispatch(GetMyPageAxios(detail.nickname));
+                                navigate("/manager/" + state.nickname);
+                                dispatch(GetMyPageAxios(state.nickname));
                               }}
                             />
                           </div>
                           <div className="detail_username">
-                            <div className="username">{detail.nickname}</div>
+                            <div className="username">{state.nickname}</div>
                           </div>
 
                           <BtnTwo>
@@ -333,14 +307,14 @@ const RecruitDetail = () => {
                               1:1 채팅
                             </button>
                             
-                            {detail.bookmarkStatus === true ? (
+                            {state.bookmarkStatus === true ? (
                       <BsFillBookmarkFill
                         className={token ? "iconbook2" : "none"}
                         onClick={() => {
                           axios
                             .put(
                               `${url}/api/recruits/bookmark/` +
-                              detail.recruitPostId,
+                              state.recruitPostId,
                               null,
                               {
                                 headers: {
@@ -352,7 +326,7 @@ const RecruitDetail = () => {
                             )
                             .then((res) => {
                               console.log(res.data)
-                              dispatch(detailPostDB(recruitPostId))
+                              refetch()
                             });
                         }}
                       />
@@ -363,7 +337,7 @@ const RecruitDetail = () => {
                           axios
                             .put(
                               `${url}/api/recruits/bookmark/` +
-                              detail.recruitPostId,
+                              state.recruitPostId,
                               null,
                               {
                                 headers: {
@@ -375,7 +349,7 @@ const RecruitDetail = () => {
                             )
                             .then((res) => {
                               console.log(res.data)
-                              dispatch(detailPostDB(recruitPostId))
+                              refetch()
                             });
                         }}
                       />
@@ -413,7 +387,7 @@ const RecruitDetail = () => {
                     )}
                   </div>
                   <div className="content">
-                    {detail.content}
+                    {state.content}
                   </div>
                 </div>
               </div>
