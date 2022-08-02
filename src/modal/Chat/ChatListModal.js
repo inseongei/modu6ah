@@ -33,7 +33,32 @@ const ChatListModal = ({ open, onClose }) => {
     })
   }
   // modal이라 웹페이지 시작점부터 get 되서 isLoading 처리 안해도 됌
-  const {isLoading , data } = useQuery('Chat-List',fetchSuperHeros)
+  const {isLoading , data, isError,error } = useQuery('Chat-List',fetchSuperHeros)
+
+
+  if(isError){
+    // return <h2>{error.message}</h2>
+    // console.log(error)
+    // alert('로그인 후 사용해 주세요')
+    // Swal.fire({
+    //   text: `프로필 수정이 완료되었습니다.`,
+    //   icon: "success",
+    //   confirmButtonText: "확인", 
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     navigate("/manager/" + nickname);
+    //     localStorage.setItem("profileUrl", res.data.profileUrl);
+    //   }
+    // })
+  }
+
+
+
+
+
+
+
+
 
 
 
@@ -147,12 +172,7 @@ const ChatListModal = ({ open, onClose }) => {
                     headers: { Authorization: `Bearer ${token}` },
                   })
                   .then((res)=>{
-                    Swal.fire({
-                      text: `채팅방 삭제완료`,
-                      icon: "success",
-                      confirmButtonText: "확인",
-                      confirmButtonColor: '#ffb300'
-                    })
+                    alert('삭제되었습니다')
                   }).catch((err)=>{
                     console.log(err)
                   })

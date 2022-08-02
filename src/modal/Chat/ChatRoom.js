@@ -22,7 +22,6 @@ const ChatRoom = ({ open, onClose, NowRoom, socket, realroom,post }) => {
 
   React.useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
-      console.log(data)
       setNowChat((list) => [...list, data]);
     });
   }, [socket]);
