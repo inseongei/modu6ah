@@ -13,6 +13,7 @@ import '../shared/App.css'
 import SubHeader from "../components/main/SubHeader";
 
 const Main = () => {
+
   return (
     <div className="MainBackGround">
       <Header />
@@ -76,7 +77,7 @@ const Main = () => {
         </Container>
       </Grid>
       <ChatIcon />
-      <Footer num={200} />
+      <Footer />
     </div>
   );
 };

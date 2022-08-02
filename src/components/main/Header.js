@@ -79,9 +79,6 @@ const Header = () => {
             <li className="Login">
               <a href="/Login">로그인</a>
             </li>
-            <li className="LogoOut">
-              <a href="/Signup">회원가입</a>
-            </li>
           </ul>
         </Headers>
 
@@ -389,6 +386,7 @@ const Headers = styled.div`
     display: flex;
     align-items: center;
     margin-top: 16px;
+    margin-right: 80px;
   }
 
   .header__right div {
