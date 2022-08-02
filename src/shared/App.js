@@ -33,7 +33,7 @@ import MyBookmark from '../pages/Mypage/MyBookmark'
 
 //검색 페이지
 import MainSearch from "../pages/Search/MainSearch";
-import HomePage from '../pages/HomePage'
+import HomePage from '../../src/shared/HomePage'
 import Cancel from '../components/alert/Cancel';
 import ConfirmAlert from "../components/alert/ConfirmAlert";
 import Alert from '../components/alert/Alert';
