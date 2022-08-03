@@ -66,7 +66,7 @@ socket.io를 이용해서 1:1 실시간 채팅으로 유저들간의 소통을 �
 
 
 <details>
-<summary>카카오 맵을 통한 장소 조회</summary>
+<summary>kakao map</summary>
 <div markdown="1">       
 
  카카오 맵을 통한 장소 조회
