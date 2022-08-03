@@ -25,8 +25,7 @@
 이메일 인증을 통한 회원가입 또는 카카오 소셜 로그인으로 쉽게 로그인 할 수 있습니다.
   
   <br/>
- 
-<img width="348" alt="스크린샷 2022-08-03 오전 11 11 30" src="https://user-images.githubusercontent.com/103277726/182509573-ca72b71a-1f25-4df9-91b9-468022ed113d.png">
+ <img width="481" alt="스크린샷 2022-08-03 오전 11 09 05" src="https://user-images.githubusercontent.com/103277726/182511780-7814ae31-e065-49d8-bc70-2b333a1e27f5.png">
 <img width="321" alt="스크린샷 2022-08-03 오전 11 19 11" src="https://user-images.githubusercontent.com/103277726/182510077-344ad586-b3b6-4857-9ee5-60b0fad96182.png">
 
 </div>
@@ -66,7 +65,7 @@ socket.io를 이용해서 1:1 실시간 채팅으로 유저들간의 소통을 �
 
 
 <details>
-<summary>kakao map</summary>
+<summary>카카오 맵을 통한 장소 조회</summary>
 <div markdown="1">       
 
  카카오 맵을 통한 장소 조회
