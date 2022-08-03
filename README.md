@@ -30,10 +30,9 @@
 <details>
 <summary>유저간의 소통을 위한 서비스</summary>
 <div markdown="1">       
- 
+  <br/>
 socket.io를 이용해서 1:1 실시간 채팅 <br/>
 카테고리별 게시글 crud (다중 이미지 & 별점 포함), 댓글 작성을 통한 소통 활성화 했습니다.
-  
   <br/>
 </div>
 </details>
@@ -42,9 +41,8 @@ socket.io를 이용해서 1:1 실시간 채팅 <br/>
 <details>
 <summary>북마크 기능</summary>
 <div markdown="1">       
- 
-북마크 기능을 활용한 마이페이지 북마크 정보 조회
-  
+  <br/>
+북마크 기능을 활용한 마이페이지 북마크 정보 조회가 가능합니다.
   <br/>
 </div>
 </details>
@@ -53,9 +51,8 @@ socket.io를 이용해서 1:1 실시간 채팅 <br/>
 <details>
 <summary>카카오 맵을 통한 장소 조회</summary>
 <div markdown="1">       
-
- 카카오 맵을 통한 장소 조회
-  
+ <br/>
+ 카카오 맵을 통한 장소 조회로 위치를 파악할 수 있습니다.
   <br/>
 </div>
 </details>
@@ -64,9 +61,8 @@ socket.io를 이용해서 1:1 실시간 채팅 <br/>
 <details>
 <summary>무한 스크롤</summary>
 <div markdown="1">       
-
+  <br/>
 각 카테고리별로 게시글을 쉽게 볼 수 있도록 무한 스크롤을 사용했습니다.
-  
   <br/>
 </div>
 </details>
@@ -74,10 +70,9 @@ socket.io를 이용해서 1:1 실시간 채팅 <br/>
 <details>
 <summary>키워드 검색 </summary>
 <div markdown="1">       
-
-게시글의 키워드를 이용해서 검색을 할 수 있습니다.
-  
-  <br/>
+ <br/>
+키워드를 이용해 게시글 검색이 용이하도록 했습니다.
+ <br/>
 </div>
 </details>
 
