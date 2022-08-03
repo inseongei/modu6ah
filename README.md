@@ -39,18 +39,62 @@
 socket.io를 이용해서 1:1 실시간 채팅으로 유저들간의 소통을 활성화 했습니다.
   
   <br/>
-  <img width="760" alt="스크린샷 2022-08-03 오전 11 28 14" src="https://user-images.githubusercontent.com/103277726/182511126-0f5ac5b4-5cdc-4842-ba4f-aa80ec7c0647.png">
-<img width="295" alt="스크린샷 2022-08-03 오전 11 25 08" src="https://user-images.githubusercontent.com/103277726/182510783-2a8340fc-f306-4b6c-96ea-1f028a91b3e0.png">
+</div>
+</details>
+
+<details>
+<summary>게시글 crud & 댓글</summary>
+<div markdown="1">       
+ 
+카테고리별 게시글 crud (다중 이미지 & 별점 포함)
+댓글 작성을 통한 소통 활성화
+  
+  <br/>
 </div>
 </details>
 
 
-#### 카테고리별 게시글 crud (다중 이미지 & 별점 포함)
-#### 댓글 작성을 통한 소통 활성화
-#### 북마크 기능을 활용한 마이페이지 북마크 정보 조회
-#### 카카오 맵을 통한 장소 조회
-#### 무한 스크롤
-#### 키워드 검색 기능
+<details>
+<summary>북마크 기능</summary>
+<div markdown="1">       
+ 
+북마크 기능을 활용한 마이페이지 북마크 정보 조회
+  
+  <br/>
+</div>
+</details>
+
+
+<details>
+<summary>카카오 맵을 통한 장소 조회</summary>
+<div markdown="1">       
+
+ 카카오 맵을 통한 장소 조회
+  
+  <br/>
+</div>
+</details>
+
+
+<details>
+<summary>무한 스크롤</summary>
+<div markdown="1">       
+ 
+socket.io를 이용해서 1:1 실시간 채팅으로 유저들간의 소통을 활성화 했습니다.
+  
+  <br/>
+</div>
+</details>
+
+<details>
+<summary>키워드 검색 </summary>
+<div markdown="1">       
+ 
+socket.io를 이용해서 1:1 실시간 채팅으로 유저들간의 소통을 활성화 했습니다.
+  
+  <br/>
+</div>
+</details>
 
 <br/>
 
