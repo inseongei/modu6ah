@@ -32,21 +32,11 @@
 </details>
 
 <details>
-<summary>1:1 실시간 채팅</summary>
+<summary>유저간의 소통을 위한 서비스</summary>
 <div markdown="1">       
  
-socket.io를 이용해서 1:1 실시간 채팅으로 유저들간의 소통을 활성화 했습니다.
-  
-  <br/>
-</div>
-</details>
-
-<details>
-<summary>게시글 crud & 댓글</summary>
-<div markdown="1">       
- 
-카테고리별 게시글 crud (다중 이미지 & 별점 포함)
-댓글 작성을 통한 소통 활성화
+socket.io를 이용해서 1:1 실시간 채팅
+카테고리별 게시글 crud (다중 이미지 & 별점 포함), 댓글 작성을 통한 소통 활성화 했습니다.
   
   <br/>
 </div>
