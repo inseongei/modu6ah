@@ -22,9 +22,10 @@
 <summary>로그인 & 회원가입</summary>
 <div markdown="1">       
 이메일 인증을 통한 회원가입 또는 카카오 소셜 로그인으로 쉽게 로그인 할 수 있습니다.
+  
   <br/>
   <img width="348" alt="스크린샷 2022-08-03 오전 11 11 30" src="https://user-images.githubusercontent.com/103277726/182509573-ca72b71a-1f25-4df9-91b9-468022ed113d.png">
-<img width="274" alt="스크린샷 2022-08-03 오전 11 11 46" src="https://user-images.githubusercontent.com/103277726/182509586-43f1c8ab-5ad6-41bf-aeb4-84d033ca13e4.png">
+  <img width="339" alt="스크린샷 2022-08-03 오전 11 16 26" src="https://user-images.githubusercontent.com/103277726/182509754-13425dab-d215-42d3-beb5-82d5c4487101.png">
 </div>
 </details>
 
