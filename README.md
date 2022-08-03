@@ -95,8 +95,10 @@
 </div>
 </details>
 
-
-
+## 🎨 와이어 프레임 
+⭐ [Figma](https://www.figma.com/file/6oxe17NH1VuhHdZxdj9X9N/%ED%95%AD%ED%95%B499_v1?node-id=0%3A1)  
+ 
+ 
 
 
 
