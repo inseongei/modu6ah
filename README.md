@@ -17,6 +17,16 @@
 <br/>
 
 ## ✨ 주요 기능
+
+<details>
+<summary>여기를 눌러주세요</summary>
+<div markdown="1">       
+
+😎숨겨진 내용😎
+
+</div>
+</details>
+
 #### 이메일 인증을 통한 회원가입 
 #### 카카오 소셜 로그인
 #### socket.io를 이용한 1:1 실시간 채팅
