@@ -39,6 +39,7 @@
 socket.io를 이용해서 1:1 실시간 채팅으로 유저들간의 소통을 활성화 했습니다.
   
   <br/>
+  <img width="760" alt="스크린샷 2022-08-03 오전 11 28 14" src="https://user-images.githubusercontent.com/103277726/182511126-0f5ac5b4-5cdc-4842-ba4f-aa80ec7c0647.png">
 <img width="295" alt="스크린샷 2022-08-03 오전 11 25 08" src="https://user-images.githubusercontent.com/103277726/182510783-2a8340fc-f306-4b6c-96ea-1f028a91b3e0.png">
 </div>
 </details>
