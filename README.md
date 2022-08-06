@@ -156,10 +156,53 @@ socket.off로 이벤트에 대한 리스너를 제거해주면 채팅 중복 문
 <details>
 <summary><b> 유저 피드백 1번 ( 채팅창 개선 )</summary>
 <div markdown="1">
+ 
+![image](https://user-images.githubusercontent.com/87432361/183235211-67948800-2d6e-401e-b535-e71f5d5e7609.png) <br/>
+ 한명의 사용자의 여러 게시글에 채팅을 했을 때 구별할수 없는 문제  -> 게시글 제목도 불러와서 문제 해결
+</div>
+</details>
+ 
+ <details>
+<summary><b> 개발자 피드백 2번 ( a태그와 Link태그 ) 웹페이지 전환 속도 증가</summary>
+<div markdown="1">
+ 처음 프로젝트의 모든 웹페이지 이동은 a태그와 useNavigate를 사용하였다
+ 
+ 하지만 피드백의 내용은 리엑트로 만들었는데 페이지를 이동시 페이지가 다시 dom부터 로드 되는 것이였다 
+ SPA (React)에서의 라우트 이동하는 방법은 a태그가 아닌 Link 태그였다 <br/>
+ 
+ 👉 a태그는 페이지를 아예 새롭게 불러오게 된다 그래서 리액트 앱이 지니고 있는 상태도 초기화 되서 새로 렌더링을 하게 된다는 것
+     따라서 상태 값이 유지 되지도 못할뿐더러 속도도 저하된다
+ 
+ 👉 Link 태그는 브라우저의 주소만 바꿀뿐, 페이지를 새로 불러오지 않는다는 점
+ 
+ 👉 useNavigate는 페이지 전환시 추가로 처리해야 하는 로직이 있을 경우에 사용된다
+ 
+ 👊 Link 태그와 조건이 충족할때 페이지를 이동시켜야 한다면 useNavigate 를 잘 나누어서 사용해야함
+ 
+</div>
+</details>
+  
+ <details>
+<summary><b> 유저 피드백 3번 ( 클릭하면 큰 이미지박스 에 나오도록 설정 )</summary>
+<div markdown="1">
+  <br/>
+  유저 피드백 : 사진 하나를 제외 한 나머지 사진은 너무 작아서 볼수가 없다 <br/>
+ 
+
+https://user-images.githubusercontent.com/87432361/183236360-b4052dfa-8e2c-41c3-a82d-dc69b272e8cc.mp4
+
+
+ 해결 : 서버에서 주는 이미지 배열의 인덱스를 useState를 이용하여 아래 작은 사진을 클릭할 때 state 값을 변경 해줌으써 변경해주었다
+
+
 
 </div>
 </details>
 
+ 
+  
+ 
+ 
 ## 🎨 와이어 프레임 
 ⭐ [Figma](https://www.figma.com/file/6oxe17NH1VuhHdZxdj9X9N/%ED%95%AD%ED%95%B499_v1?node-id=0%3A1)  
  
