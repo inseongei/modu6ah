@@ -95,6 +95,71 @@
 </div>
 </details>
 
+## 💢 트러블 슈팅
+<details>
+<summary><b> Socket.io 특정 사용자에게 데이터가 오지 않는 문제 </summary>
+<div markdown="1">
+<br/>
+🔴 문제 상황 <br/>
+<br/>
+Client 가 특정 경로로 보낸(emit) 메시지를 Server 측에서 특정 경로로 받고(on) 다시 다른 경로로  전송(emit)해주는데 
+전체로 돌려주게 되면<br/> 데이터가 들어오지만 특정 사람(user_id 또는 nickname)을 지정하면특정 사람에게 데이터가 오지 않는 문제 발생 <br/>
+<br/>
+
+🟠 발생 원인 및 해결 시도 <br/>
+<br/>
+![스크린샷 2022-08-04 오후 3 53 15](https://user-images.githubusercontent.com/87432361/182876213-247f64d1-3951-429f-82b5-41f8e1720ee4.png) <br/>
+
+사진속 io.emit으로 코드를 짜기전 아래의 5가지의 특정 조건을 붙혔다<br/>
+- io.to(‘user’).emit ( X )
+- io.in(‘user’).emit ( X )
+- socket.to(‘user’).emit ( X )
+- socket.broadcast.to.emit ( X )
+- socket.broadcast.in.emit ( X )
+-> 발신자를 제외한 모두 , 한명의 사용자만이 가지고 있는 고유한 소켓ID 로 데이터를 보낼려 했으나 실패
+<br/>
+
+🟢 문제 해결 <br/>
+
+소켓 라이브러리의 버그로 판단하여 io.emit으로 전체로 데이터 값을 받은 뒤 프론트에서 필터링 하기로 결정<br/>
+
+![image](https://user-images.githubusercontent.com/87432361/182880035-d1183188-9a75-40c7-8e30-0eba0b497a5f.png) <br/>
+- 하나의 메시지에는 이러한 데이터가 포함 되어 있다 이 데이터를 이용하여 전체로 받은뒤 2가지 조건을 걸어 필터링<br/>
+
+1 . 데이터를 보낸 사람과 나의 닉네임이 다를 경우에만 알림 토스트를 생성하여 자신에게 알림이 오는것을 막음<br/>
+2 . 데이터를 받는 사람과 나의 닉네임이 같은 경우에만 알림 토스트를 생성하여 해당 유저에게만 알림이 가도록 설정
+</div>
+</details>
+
+<details>
+<summary><b> socket.io 채팅 중복 문제 </summary>
+<div markdown="1">
+🔴 문제 상황 <br/>
+
+실시간 채팅을 하게 되면 한번 작성한 채팅이 2번 또는 4번 .. 8번 .. 으로 찍히는 문제 발생  <br/>
+
+🟠 발생 원인 및 해결 시도 <br/>
+
+- 특정 이벤트 경로로 이벤트를 발생 시키고 데이터를 받고 보내게 되는데 발생한 이벤트를 제거해주지 않았던 것이였다
+- 따라서 적을 때마다 계속 랜더링이 되고 그 이벤트는 계속 쌓이게 된다
+
+🟢 문제 해결 <br/>
+
+![image](https://user-images.githubusercontent.com/87432361/182883795-28f1ec6a-2185-46e2-a08b-ed04683e1d61.png) <br/>
+socket.off로 이벤트에 대한 리스너를 제거해주면 채팅 중복 문제가 해결 된다
+
+
+</div>
+</details>
+
+## 🎧 유저 & 개발자 피드백 
+<details>
+<summary><b> 유저 피드백 1번 ( 채팅창 개선 )</summary>
+<div markdown="1">
+
+</div>
+</details>
+
 ## 🎨 와이어 프레임 
 ⭐ [Figma](https://www.figma.com/file/6oxe17NH1VuhHdZxdj9X9N/%ED%95%AD%ED%95%B499_v1?node-id=0%3A1)  
  
