@@ -134,7 +134,8 @@ Client 가 특정 경로로 보낸(emit) 메시지를 Server 측에서 특정 �
 <details>
 <summary><b> 서버 데이터 실시간 갱신 이슈 ( State 값 바꾸기 ) </summary>
 <div markdown="1">
-[서버 데이터 실시간 갱신 이슈 ( State 값 바꾸기 )] (https://inseongcoding.tistory.com/65)
+(https://inseongcoding.tistory.com/65)
+ 
 
 </div>
 </details>
