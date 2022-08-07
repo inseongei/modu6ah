@@ -132,22 +132,9 @@ Client 가 특정 경로로 보낸(emit) 메시지를 Server 측에서 특정 �
 </details>
 
 <details>
-<summary><b> socket.io 채팅 중복 문제 </summary>
+<summary><b> 서버 데이터 실시간 갱신 이슈 ( State 값 바꾸기 ) </summary>
 <div markdown="1">
-🔴 문제 상황 <br/>
-
-실시간 채팅을 하게 되면 한번 작성한 채팅이 2번 또는 4번 .. 8번 .. 으로 찍히는 문제 발생  <br/>
-
-🟠 발생 원인 및 해결 시도 <br/>
-
-- 특정 이벤트 경로로 이벤트를 발생 시키고 데이터를 받고 보내게 되는데 발생한 이벤트를 제거해주지 않았던 것이였다
-- 따라서 적을 때마다 계속 랜더링이 되고 그 이벤트는 계속 쌓이게 된다
-
-🟢 문제 해결 <br/>
-
-![image](https://user-images.githubusercontent.com/87432361/182883795-28f1ec6a-2185-46e2-a08b-ed04683e1d61.png) <br/>
-socket.off로 이벤트에 대한 리스너를 제거해주면 채팅 중복 문제가 해결 된다
-
+[서버 데이터 실시간 갱신 이슈 ( State 값 바꾸기 )](https://inseongcoding.tistory.com/65)
 
 </div>
 </details>
